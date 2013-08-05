@@ -1,0 +1,26 @@
+Usage:
+
+  {bold}{green}{appname}{/green}{/bold}
+
+    Show a menu to interactively select an adventure.
+ 
+  {bold}{green}{appname}{/green} list{/bold}
+
+    Show a newline-separated list of all the adventures.
+
+  {bold}{green}{appname}{/green} select NAME{/bold}
+
+    Select an adventure.
+
+  {bold}{green}{appname}{/green} current{/bold}
+
+    Show the currently selected adventure.
+
+  {bold}{green}{appname}{/green} run program.js{/bold}
+
+    Run your program against the selected input.
+
+  {bold}{green}{appname}{/green} verify program.js{/bold}
+
+    Verify your program against the expected output.
+
