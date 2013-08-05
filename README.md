@@ -2,6 +2,8 @@
 
 **An intro to Node.js via a set of self-guided workshops.**
 
+**NOTE: This is a work in progress! Ought to be relatively complete by this weekend for [CampJS](http://campjs.com/).**
+
 [![NPM](https://nodei.co/npm/learnyounode.png?compact=true)](https://nodei.co/npm/learnyounode/) 
 
   1. Install [Node.js](http://nodejs.org/)
