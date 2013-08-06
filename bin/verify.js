@@ -3,7 +3,6 @@ const spawn   = require('child_process').spawn
     , through = require('through')
     , split   = require('split')
     , path    = require('path')
-    , x256    = require('x256')
 
 const wrap    = require('./term-util').wrap
     , red     = require('./term-util').red
@@ -13,7 +12,7 @@ const wrap    = require('./term-util').wrap
 function verify (acmd, bcmd, opts) {
   if (!opts) opts = {}
 
-  var a    = spawn(process.execPath, acmd)
+  var a = spawn(process.execPath, acmd)
     , b
     , c
     , tr
@@ -82,7 +81,14 @@ function compare (actual, expected, opts) {
       }
     , end    = function () {
         this.queue(null)
-        this.emit(equal ? 'pass' : 'fail')
+        if (!equal)
+          return this.emit('fail')
+        if (typeof opts.custom != 'function')
+          return this.emit('pass')
+
+        opts.custom(function (err) {
+          this.emit(!err ? 'pass' : 'fail')
+        }.bind(this))
       }
     , output = through(write, end).pause()
 

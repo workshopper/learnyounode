@@ -67,14 +67,32 @@ if (argv._[0] === 'verify' || argv._[0] === 'run') {
   })
 }
 
+function runArgs (setup) {
+  var exec
+
+  if (setup.modUseTrack) {
+    exec =[
+        require.resolve('./exec-wrapper')
+      , require.resolve('./module-use-tracker')
+      , setup.modUseTrack
+      , argv._[1]
+    ]
+  } else {
+    exec = [ argv._[1] ]
+  }
+
+  return exec.concat(setup.args || [])
+}
+
 function runSetup (setup, dir, current) {
-  var a = [ argv._[1] ].concat(setup.args || [])
+  var a = runArgs(setup)
     , b = [ dir + '/solution.js' ].concat(setup.args || [])
     , v = verify(a, b, {
-          a    : setup.a
-        , b    : setup.b
-        , long : setup.long
-        , run  : argv._[0] === 'run'
+          a      : setup.a
+        , b      : setup.b
+        , long   : setup.long
+        , run    : argv._[0] === 'run'
+        , custom : setup.verify
       })
 
   v.on('pass', onpass.bind(null, setup, dir, current))
@@ -124,11 +142,14 @@ function onpass (setup, dir, current) {
     setup.close()
 }
 
-function onfail (setup) {
+function onfail (setup, dir, current) {
   if (setup.close) setup.close()
   
   console.log(bold(red('# FAIL')))
-  console.log('\nYour solution didn\'t match the expected output. Try again!')
+  if (typeof setup.verify == 'function')
+    console.log('\nYour solution to ' + current + ' didn\'t pass. Try again!')
+  else
+    console.log('\nYour solution to ' + current + ' didn\'t match the expected output.\nTry again!')
 }
 
 function onselect (name) {
