@@ -32,17 +32,55 @@ function verify (trackFile, callback) {
       if (err)
         return callback(err)
 
-      if (required.length > 1)
-        return callback() // win!
+      if (required.length == 1) {
+        console.log('\nYou got the correct answer but only used ' + bold('one') + ' file:')
+        console.log('\t' + bold(red(required[0])))
+        console.log(
+            '\nThis problem requires you to use '
+          + bold('one additional')
+          + ' module file.\n'
+        )
 
-      console.log('\nYou got the correct answer but only used ' + bold('one') + ' file:')
-      console.log('\t' + bold(red(required[0])))
-      console.log(
-          '\nThis problem requires you to use at least '
-        + bold('one additional')
-        + ' module file.\n'
-      )
-      callback('bzzt!')
+        return callback('bzzt!')
+      }
+
+      var modfile = required.filter(function (r) { return r != main })[0]
+        , mod     = require(modfile)
+
+      if (typeof mod != 'function') {
+        console.log('\nYour additional module file:')
+        console.log('\t' + modfile)
+        console.log('does not export a ' + bold('single function') + '.')
+        console.log('\nYou must use the `module.exports = function () {}` pattern\n')
+
+        return callback('bzzt!')
+      }
+
+      fs.$readdir = fs.readdir
+      var error = new Error('testing')
+      fs.readdir = function (dir, callback) {
+        callback(error)
+      }
+
+      function noerr () {
+        console.log('\nYour additional module file:')
+        console.log('\t' + modfile)
+        console.log('does not appear to pass back an error received from `fs.readdir()`')
+        console.log('\nUse the following idiomatic Node.js pattern inside your callback to `fs.readdir()`:')
+        console.log('\tif (err)\n\t  return callback(err)\n')
+
+        return callback('bzzt!')        
+      }
+
+      try {
+        mod('/foo/bar/', 'wheee', function (err) {
+          if (err != error)
+            return noerr()
+          callback() // win!
+        })
+      } catch (e) {
+        noerr()
+      }
     })
   })
 }

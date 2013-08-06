@@ -1,9 +1,8 @@
 This problem is the same as the previous but introduces the concept of modules.
 
 Create a program that prints a list of files in a given directory, filtered
-by the extension of the files. You will be provided a directory name as the
-first argument to your program and a file extension to filter by as the second
-argument. The list of files should be printed to the console, one file per line.
+by the extension of the files. The first argument is the directory name and the
+second argument is the extension filter. Print the list of files to the console.
 You {bold}must{/bold} use asynchronous I/O.
 
 Your program must use a {italic}module{/italic} to do most of the work. The
