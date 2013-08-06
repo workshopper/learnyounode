@@ -12,7 +12,6 @@
     "terminal-menu": "0.0.0",
     "mkdirp": "~0.3.5",
     "optimist": "~0.6.0",
-    "x256": "0.0.1",
     "split": "~0.2.6",
     "through": "~2.3.4",
     "tuple-stream": "0.0.2",
