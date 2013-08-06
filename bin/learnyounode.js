@@ -204,7 +204,8 @@ function onselect (name) {
   })
 
   printText(appname, file, function () {
-    console.log('\nTo verify your program, run: `' + appname + ' verify program.js`.\n')
+    console.log(bold('\n * To print these instructions again, run: `' + appname + ' print`'))
+    console.log(bold(' * To verify your program, run: `' + appname + ' verify program.js`.\n'))
   })
 }
 
