@@ -1,7 +1,11 @@
 const fs = require('fs')
 
-var data = []
+var data = { calls: [] }
   , on   = true
+
+function writeData (outfile) {
+  fs.writeFileSync(outfile, JSON.stringify(data))
+}
 
 function track (outfile, fn, args, stack) {
   on = false
@@ -12,12 +16,17 @@ function track (outfile, fn, args, stack) {
       return '<Buffer>'
     return a
   })
-  data.push({ module: 'fs', fn: fn, args: _args, stack: stack })
-  fs.__writeFileSync(outfile, JSON.stringify(data))
+  data.calls.push({ module: 'fs', fn: fn, args: _args, stack: stack })
+  data.required = Object.keys(require.cache)
+  writeData(outfile)
   on = true
 }
 
 function init (outfile) {
+  data.argv = process.argv
+  data.cwd  = process.cwd()
+  writeData(outfile)
+
   Object.keys(fs).forEach(function (fn) {
     var err, stack
 
