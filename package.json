@@ -1,6 +1,6 @@
 {
   "name": "learnyounode",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Learn You The Node.js For Much Win! An intro to Node.js via a set of self-guided workshops.",
   "author": "Rod Vagg <rod@vagg.org> (https://github.com/rvagg)",
   "repository": {
@@ -16,7 +16,9 @@
     "through": "~2.3.4",
     "tuple-stream": "0.0.2",
     "boganipsum": "0.0.0",
-    "colors-tmpl": "~0.1.0"
+    "colors-tmpl": "~0.1.0",
+    "pygmentize-bundled": "~1.2.0",
+    "map-async": "~0.1.1"
   },
   "bin": "./bin/learnyounode.js",
   "preferGlobal": true

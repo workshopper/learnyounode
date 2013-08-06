@@ -3,11 +3,13 @@
 const appname  = 'learnyounode'
     , width    = 65
 
-const argv     = require('optimist').argv
-    , fs       = require('fs')
-    , path     = require('path')
-    , mkdirp   = require('mkdirp')
-    , dataDir  = path.join(
+const argv       = require('optimist').argv
+    , fs         = require('fs')
+    , path       = require('path')
+    , mkdirp     = require('mkdirp')
+    , map        = require('map-async')
+    , pygmentize = require('pygmentize-bundled')
+    , dataDir    = path.join(
           process.env.HOME || process.env.USERPROFILE
         , '.config'
         , appname
@@ -37,8 +39,12 @@ if (argv._[0] === 'list') {
 if (argv._[0] === 'current')
   return console.log(getData('current'))
 
-if (argv._[0] === 'select')
-  return onselect(argv._.slice(1).join(' '))
+if (argv._[0] === 'select' || argv._[0] === 'print') {
+  return onselect(argv._.length > 1
+    ? argv._.slice(1).join(' ')
+    : getData('current')
+  )
+}
 
 if (argv._[0] === 'verify' || argv._[0] === 'run') {
   var current = getData('current')
@@ -71,7 +77,7 @@ function runArgs (setup) {
   var exec
 
   if (setup.modUseTrack) {
-    exec =[
+    exec = [
         require.resolve('./exec-wrapper')
       , require.resolve('./module-use-tracker')
       , setup.modUseTrack
@@ -113,33 +119,66 @@ function onpass (setup, dir, current) {
   console.log(bold(green('# PASS')))
   console.log('\nYour solution to ' + current + ' passed!')
   console.log('\nHere\'s what the official solution is if you want to compare notes:\n')
-  var src = fs.readFileSync(path.join(dir, 'solution.js'), 'utf8')
+
+  var solutions = fs.readdirSync(dir).filter(function (file) {
+        return (/^solution.*\.js/).test(file)
+      }).map(function (file) {
+        return {
+            name: file
+          , content: fs.readFileSync(path.join(dir, file), 'utf8')
+              .toString()
+              .replace(/^/gm, '  ')
+        }
+      })
     , completed
     , remaining
 
-  src.split('\n').forEach(function (line) {
-    console.log('  ' + line)
-  })
-  console.log()
-  
-  updateData('completed', function (xs) {
-    if (!xs) xs = []
-    var ix = xs.indexOf(current)
-    return ix >= 0 ? xs : xs.concat(current)
-  })
-  
-  completed = getData('completed') || []
-  
-  remaining = problems.length - completed.length
-  if (remaining === 0) {
-    console.log('You\'ve finished all the challenges! Hooray!\n')
-  } else {
-    console.log('You have ' + remaining + ' challenges left.')
-    console.log('Type `' + appname + '` to show the menu.\n')
-  }
-  
-  if (setup.close)
-    setup.close()
+  map(
+      solutions
+    , function (file, i, callback) {
+        pygmentize(
+            { lang: 'js', format: 'terminal256' }
+          , file.content
+          , function (err, content) {
+              if (!err)
+                file.content = content.toString()
+              callback(null, file)
+            }
+        )
+      }
+    , function (err, solutions) {
+        if (err)
+          throw err
+
+        solutions.forEach(function (file, i) {
+          console.log(repeat('-', width) + '\n')
+          if (solutions.length > 1)
+            console.log(bold(file.name) + ':\n')
+          console.log(file.content)
+          if (i == solutions.length - 1)
+            console.log(repeat('-', width) + '\n')
+        })
+        
+        updateData('completed', function (xs) {
+          if (!xs) xs = []
+          var ix = xs.indexOf(current)
+          return ix >= 0 ? xs : xs.concat(current)
+        })
+        
+        completed = getData('completed') || []
+        
+        remaining = problems.length - completed.length
+        if (remaining === 0) {
+          console.log('You\'ve finished all the challenges! Hooray!\n')
+        } else {
+          console.log('You have ' + remaining + ' challenges left.')
+          console.log('Type `' + appname + '` to show the menu.\n')
+        }
+        
+        if (setup.close)
+          setup.close()
+      }
+  )
 }
 
 function onfail (setup, dir, current) {
