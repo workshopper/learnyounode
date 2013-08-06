@@ -12,18 +12,18 @@ function verify (trackFile, callback) {
           && call.stack[0].file != 'module.js'
           && call.stack[0].file != 'fs.js'
       })
-    , async = fscalls.filter(function (call) {
-        return !/Sync$/.test(call.fn)
+    , sync = fscalls.filter(function (call) {
+        return /Sync$/.test(call.fn)
       })
 
-  if (!async.length)
+  if (!sync.length)
     return callback() // yay!
 
-  console.log('\nYou got the correct answer but used the following ' + bold('asynchronous') + ' calls:')
-  async.forEach(function (call) {
+  console.log('\nYou got the correct answer but used the following ' + bold('synchronous') + ' calls:')
+  sync.forEach(function (call) {
     console.log('\t' + bold(red('fs.' + call.fn + '()')))
   })
-  console.log('\nThis problem requires you to only use ' + bold('synchronous') + ' calls.\n')
+  console.log('\nThis problem requires you to only use ' + bold('asynchronous') + ' calls.\n')
   callback('bzzt!')
 }
 
