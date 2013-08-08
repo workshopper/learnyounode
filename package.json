@@ -14,11 +14,13 @@
     "optimist": "~0.6.0",
     "split": "~0.2.6",
     "through": "~2.3.4",
-    "tuple-stream": "0.0.2",
-    "boganipsum": "0.0.0",
+    "tuple-stream": "~0.0.2",
+    "boganipsum": "~0.1.0",
     "colors-tmpl": "~0.1.0",
     "pygmentize-bundled": "~1.2.0",
-    "map-async": "~0.1.1"
+    "map-async": "~0.1.1",
+    "concat-stream": "~1.0.0",
+    "bl": "~0.4.1"
   },
   "bin": "./bin/learnyounode.js",
   "preferGlobal": true
