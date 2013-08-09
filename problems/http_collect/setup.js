@@ -1,6 +1,5 @@
-const http = require('http')
+const http  = require('http')
     , words = require('boganipsum')({ paragraphs: 1, sentenceMax: 1 }).split(' ')
-
 
 module.exports = function () {
   var server = http.createServer(function (req, res) {
