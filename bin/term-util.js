@@ -8,11 +8,11 @@ function wrap (s_, n) {
 }
 
 function center (width, s) {
-  var n = (width + 2 - s.length) / 2
+  var n = (width - s.length) / 2
   return '  ##'
     + repeat(' ', Math.floor(n))
     + yellow(bold(s))
-    + repeat(' ', Math.floor(n))
+    + repeat(' ', Math.ceil(n))
     + '##'
 }
 

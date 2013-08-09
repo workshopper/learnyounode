@@ -1,42 +1,48 @@
-Write a program that performs an HTTP GET request to a URL provided to you as
-the first command-line argument. Collect all data from the server and then
-write two lines to the console (stdout): line one should contain an integer
-representing the number of characters received from the server and line two
-should contain the complete String of characters sent by the server.
+Write a program that performs an HTTP GET request to a URL provided to
+you as the first command-line argument. Collect all data from the
+server and then write two lines to the console (stdout): line one
+should contain an integer representing the number of characters
+received from the server and line two should contain the complete
+String of characters sent by the server.
 
---------------------------------------------------------------------------------
+----------------------------------------------------------------------
 HINTS:
 
 There are two approaches you can take to this problem: 
 
-1) Collect data across multiple "data" events and append the results together
-prior to printing the output. Use the "end" event to determine when the stream
-is finished and you can write the output.
+{bold}1){/bold} Collect data across multiple "data" events and append the results
+together prior to printing the output. Use the "end" event to
+determine when the stream is finished and you can write the output.
 
-2) Use a third-party module to abstract the difficulties involved in collecting
-an entire stream of data. Two different modules provide a useful API for solving
-this problem: `bl` (Buffer List) and `concat-stream`; take your pick!
+{bold}1){/bold} Use a third-party module to abstract the difficulties involved in
+collecting an entire stream of data. Two different modules provide a
+useful API for solving this problem: `bl` (Buffer List) and
+`concat-stream`; take your pick!
   http://npm.im/bl
   http://npm.im/concat-stream
 
-To install a Node module, use the Node Package Manager `npm`. Simply type:
+To install a Node module, use the Node Package Manager `npm`. Simply
+type:
   npm install bl
-And it will download and install the latest version of the module into a
-subdirectory named `node_modules`. Any modules in this subdirectory under your
-main program file can be loaded with the `require` syntax:
+And it will download and install the latest version of the module into
+a subdirectory named `node_modules`. Any modules in this subdirectory
+under your main program file can be loaded with the `require` syntax:
   var bl = require('bl')
-Node will first look in the core modules and then in the `node_modules`
-directory where your program is located.
+Node will first look in the core modules and then in the
+`node_modules` directory where your program is located.
 
-If you don't have an Internet connection, simply make a `node_modules` directory
-and copy the entire directory for the module you want to use from inside
-the {appname} installation directory:
+If you don't have an Internet connection, simply make a `node_modules`
+directory and copy the entire directory for the module you want to use
+from inside the {appname} installation directory:
   {rootdir}/node_modules/bl
   {rootdir}/node_modules/concat-stream
 
-Both `bl` and `concat-stream` can have a stream {italic}pipeed{/italic} in to them and
-they will collect the data for you. Once the stream has ended, a callback will
-be fired with the data:
+Both `bl` and `concat-stream` can have a stream {italic}pipeed{/italic} in to
+them and they will collect the data for you. Once the stream has
+ended, a callback will be fired with the data:
   request.pipe(bl(function (err, data) { ... }))
 
-Note that you will probably need to `data.toString()` to convert from a Buffer.
+Note that you will probably need to `data.toString()` to convert from
+a Buffer.
+
+----------------------------------------------------------------------

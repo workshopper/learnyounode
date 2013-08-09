@@ -7,7 +7,7 @@ const printText = require('./print-text')
     , repeat    = require('./term-util').repeat
     , bold      = require('./term-util').bold
 
-const title        = 'LEARN YOU NODE FOR MUCH WIN!'
+const title        = 'LEARN YOU THE NODE.JS FOR MUCH WIN!'
 
 function showMenu (opts) {
   var emitter  = new EventEmitter()
@@ -16,7 +16,7 @@ function showMenu (opts) {
 
   menu.reset()
   menu.write(bold(title) + '\n')
-  menu.write(repeat('-', opts.width - 1) + '\n')
+  menu.write(repeat('-', opts.width) + '\n')
     
   problems.forEach(function (name, i) {
     var isDone = opts.completed.indexOf(name) >= 0
@@ -30,7 +30,7 @@ function showMenu (opts) {
       menu.add(name)
   })
 
-  menu.write(repeat('-', opts.width - 1) + '\n')
+  menu.write(repeat('-', opts.width) + '\n')
   menu.add(bold('HELP'))
   menu.add(bold('EXIT'))
   

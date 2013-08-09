@@ -192,9 +192,9 @@ function onfail (setup, dir, current) {
 }
 
 function onselect (name) {
-  console.log('\n  ' + repeat('#', 70))
+  console.log('\n  ' + repeat('#', 69))
   console.log(center(width, '~~  ' + name + '  ~~'))
-  console.log('  ' + repeat('#', 70) + '\n')
+  console.log('  ' + repeat('#', 69) + '\n')
   
   var dir  = dirFromName(name)
     , file = path.resolve(dir, 'problem.txt')
