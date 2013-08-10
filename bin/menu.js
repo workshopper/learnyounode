@@ -25,7 +25,7 @@ function showMenu (opts) {
     name = name
 
     if (isDone)
-      return menu.add(bold('»') + ' ' + name + Array(65 - m.length - name.length + 1).join(' ') + m)
+      return menu.add(bold('»') + ' ' + name + Array(63 - m.length - name.length + 1).join(' ') + m)
     else
       menu.add(bold('»') + ' ' + name)
   })
