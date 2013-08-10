@@ -1,0 +1,28 @@
+Write an HTTP {bold}server{/bold} that serves json file from /api/parsetime url,
+taking time in ISO format as querystring argument with name "iso". Return only
+hour/minute/second fields.
+Example response:
+{
+  "hour": 14
+  "minute": 23
+  "second": 15
+}
+
+Add another endpoint `/api/unixtime` which accepts same `iso` parameter and return
+it's unixtime value in response:
+{
+  "unixtime": 1234567890
+}
+
+Your server should listen on {bold}port 8000{/bold}.
+
+----------------------------------------------------------------------
+HINTS:
+
+request parameter in your http server handler has a `url` property.
+You can parse url and querystring parameters using `url` core module.
+Use `url.parse(urlstring, true)` to parse content of urlstring and querystring
+parameters. For example result of `require('url').parse('/test?q=1')` has
+pathname property set to '/test' and query property set to `{q: 1}`.
+
+----------------------------------------------------------------------
