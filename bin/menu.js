@@ -22,12 +22,12 @@ function showMenu (opts) {
     var isDone = opts.completed.indexOf(name) >= 0
       , m      = '[COMPLETED]'
 
-    name = (i + 1) + '. ' + name
+    name = name
 
     if (isDone)
-      return menu.add(name + Array(65 - m.length - name.length + 1).join(' ') + m)
+      return menu.add(bold('»') + ' ' + name + Array(65 - m.length - name.length + 1).join(' ') + m)
     else
-      menu.add(name)
+      menu.add(bold('»') + ' ' + name)
   })
 
   menu.write(repeat('-', opts.width) + '\n')
@@ -35,7 +35,7 @@ function showMenu (opts) {
   menu.add(bold('EXIT'))
   
   menu.on('select', function (label) {
-    var name = label.replace(/(^\d+\. )|(\s{2}.*)/g, '')
+    var name = label.replace(/(^[^»]+»[^\s]+ )|(\s{2}.*)/g, '')
     
     menu.close()
 
