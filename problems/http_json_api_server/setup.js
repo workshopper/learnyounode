@@ -1,23 +1,38 @@
-const through = require('through')
-  , hyperquest = require('hyperquest')
+const through    = require('through')
+    , hyperquest = require('hyperquest')
+    , bl         = require('bl')
 
-module.exports = function () {
+    , date       = new Date(Date.now() - 100000)
+
+function fetch (port) {
+  var output = through()
+  hyperquest.get('http://localhost:' + port + '/api/parsetime?iso=' + date.toISOString())
+    .pipe(bl(function (err, data) {
+      if (err)
+        return output.emit('error', err)
+      output.write(data.toString() + '\n')
+
+      hyperquest.get('http://localhost:' + port + '/api/unixtime?iso=' + date.toISOString())
+        .pipe(bl(function (err, data) {
+          if (err)
+            return output.emit('error', err)
+
+          output.write(data.toString() + '\n')
+          output.end()
+        }))
+
+    }))
+  return output
+}
+
+module.exports = function (run) {
   var outputA = through()
     , outputB = through()
 
   setTimeout(function () {
-    var hqa
-      , hqb
-
-    var query='?iso=2013-08-10T09:36:12.371Z';
-    ['parse'].forEach(function(endpoint) {
-      hqa = hyperquest.get('http://localhost:8000/api/' + endpoint+ query);
-      hqa.pipe(outputA);
-
-      hqb = hyperquest.get('http://localhost:8001/api/' + endpoint + query);
-      hqb.pipe(outputB);
-    });
-
+    fetch(8000).pipe(outputA)
+    if (!run)
+      fetch(8001).pipe(outputB)
   }, 500)
 
   return {

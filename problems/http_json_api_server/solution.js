@@ -1,28 +1,34 @@
-var http = require('http');
-var urlparse = require('url').parse;
+var http = require('http')
+var url = require('url')
 
-function json(res, obj) {
-  res.writeHead(200, {'Content-Type': 'application/json'});
-  res.end(JSON.stringify(obj));
+function parsetime (time) {
+  return {
+    hour: time.getHours(),
+    minute: time.getMinutes(),
+    second: time.getSeconds()
+  }
+}
+
+function unixtime (time) {
+  return { unixtime : time.getTime() }
 }
 
 var server = http.createServer(function (req, res) {
-  var url = urlparse(req.url, true);
-  var time = new Date(url.query.iso);
-  var obj;
+  var parsedUrl = url.parse(req.url, true)
+  var time = new Date(parsedUrl.query.iso)
+  var result
 
-  if (url.pathname === '/api/parse') {
-    obj = {
-      hour: time.getHours(),
-      minute: time.getMinutes(),
-      second: time.getSeconds()
-    };
-    return json(res, obj);
+  if (/^\/api\/parsetime/.test(req.url))
+    result = parsetime(time, res)
+  else if (/^\/api\/unixtime/.test(req.url))
+    result = unixtime(time, res)
+
+  if (result) {
+    res.writeHead(200, { 'Content-Type': 'application/json' })
+    res.end(JSON.stringify(result))
+  } else {
+    res.writeHead(404)
+    res.end()
   }
-  if (url.pathname === '/api/unixtime')
-    return json(res, {unixtime: +time});
-
-  res.writeHead(404);
-  res.end();
-});
-server.listen(8001);
+})
+server.listen(8001)
