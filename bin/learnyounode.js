@@ -30,6 +30,9 @@ const showMenu  = require('./menu')
 if (argv.h || argv.help || argv._[0] == 'help')
   return printText(appname, path.join(__dirname, '/usage.txt'))
 
+if (argv.v || argv.version || argv._[0] == 'version')
+  return console.log(appname + '@' + require('../package.json').version)
+
 if (argv._[0] == 'list') {
   return problems.forEach(function (name) {
     console.log(name)
