@@ -20,7 +20,8 @@
     "pygmentize-bundled": "~1.2.0",
     "map-async": "~0.1.1",
     "concat-stream": "~1.0.0",
-    "bl": "~0.4.1"
+    "bl": "~0.4.1",
+    "hyperquest": "~0.1.7"
   },
   "bin": "./bin/learnyounode.js",
   "preferGlobal": true

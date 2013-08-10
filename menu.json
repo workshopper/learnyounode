@@ -8,4 +8,5 @@
   , "HTTP CLIENT"
   , "HTTP COLLECT"
   , "JUGGLING ASYNC"
+  , "HTTP SERVER"
 ]
