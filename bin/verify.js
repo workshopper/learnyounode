@@ -17,14 +17,15 @@ function verify (acmd, bcmd, opts) {
     , c
     , tr
     , kill = function () {
-        if (a.kill)
+        if (a && a.kill)
           a.kill()
-        if (b.kill)
+        if (b && b.kill)
           b.kill()
       }
 
   if (opts.run) {
-    (opts.a || a.stdout).pipe(process.stdout)
+    ;(opts.a || a.stdout).pipe(process.stdout)
+    ;(opts.a || a.stdout).on('end', kill)
     if (a.stderr) a.stderr.pipe(process.stderr)
     return opts.a || a.stdin
   }

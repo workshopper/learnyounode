@@ -5,7 +5,7 @@ const through    = require('through')
         .sort(function () { return 0.5 - Math.random() })
         .slice(0, 10)
 
-module.exports = function () {
+module.exports = function (run) {
   var outputA = through()
     , outputB = through()
     , inputA  = through().pause()
@@ -14,14 +14,9 @@ module.exports = function () {
     , iv
 
   setTimeout(function () {
-    var hqa
-      , hqb
-
-    hqa = hyperquest.post('http://localhost:8000')
-    inputA.pipe(hqa).pipe(outputA)
-
-    hqb = hyperquest.post('http://localhost:8001')
-    inputB.pipe(hqb).pipe(outputB)
+    inputA.pipe(hyperquest.post('http://localhost:8000')).pipe(outputA)
+    if (!run)
+      inputB.pipe(hyperquest.post('http://localhost:8001')).pipe(outputB)
   }, 500)
 
   iv = setInterval(function () {

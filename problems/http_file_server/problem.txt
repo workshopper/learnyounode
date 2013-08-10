@@ -3,7 +3,7 @@ it receives.
 
 You will be provided with the location of the file to serve as the
 first command-line argument. You {bold}must{/bold} use the `fs.createReadStream()`
-to stream the file contents to the response.
+method to stream the file contents to the response.
 
 Your server should listen on {bold}port 8000{/bold}.
 

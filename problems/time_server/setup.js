@@ -2,7 +2,7 @@ const through    = require('through')
     , net        = require('net')
     , bl         = require('bl')
 
-module.exports = function () {
+module.exports = function (run) {
   var outputA = through()
     , outputB = through()
 
@@ -13,8 +13,10 @@ module.exports = function () {
     hqa = net.connect(8000)
     hqa.pipe(outputA)
 
-    hqb = net.connect(8001)
-    hqb.pipe(outputB)
+    if (!run) {
+      hqb = net.connect(8001)
+      hqb.pipe(outputB)
+    }
   }, 500)
 
   return {

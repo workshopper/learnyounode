@@ -1,16 +1,19 @@
 Write a program that prints the text "HELLO WORLD" to the console
 (stdout). When you are done, you must run:
-   `{appname} verify program.js`
+
+   {appname} verify myprogram.js
+
 to proceed.
 
 ----------------------------------------------------------------------
 HINTS:
 
 To make Node.js program, create a new file with a `.js` extension and
-start writing JavaScript! You can execute your program by running it
-with the `node` command. e.g. `node myprogram.js`
+start writing JavaScript! Execute your program by running it with the
+`node` command. e.g. `node myprogram.js`
 
 You can write to the console in the same way as in the browser:
-  `console.log("text")`
+
+  console.log("text")
 
 ----------------------------------------------------------------------

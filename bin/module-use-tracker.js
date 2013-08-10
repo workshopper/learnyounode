@@ -4,7 +4,11 @@ var data = { calls: [] }
   , on   = true
 
 function writeData (outfile) {
-  fs.writeFileSync(outfile, JSON.stringify(data))
+  try {
+    fs.writeFileSync(outfile, JSON.stringify(data))
+  } catch(e) {
+    console.error('Internal error!', e)
+  }
 }
 
 function track (outfile, fn, args, stack) {

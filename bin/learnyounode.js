@@ -27,27 +27,28 @@ const showMenu  = require('./menu')
     , center    = require('./term-util').center
     , problems  = require('../menu.json')
 
-if (argv.h || argv.help || argv._[0] === 'help')
+if (argv.h || argv.help || argv._[0] == 'help')
   return printText(appname, path.join(__dirname, '/usage.txt'))
 
-if (argv._[0] === 'list') {
+if (argv._[0] == 'list') {
   return problems.forEach(function (name) {
     console.log(name)
   })
 }
 
-if (argv._[0] === 'current')
+if (argv._[0] == 'current')
   return console.log(getData('current'))
 
-if (argv._[0] === 'select' || argv._[0] === 'print') {
+if (argv._[0] == 'select' || argv._[0] == 'print') {
   return onselect(argv._.length > 1
     ? argv._.slice(1).join(' ')
     : getData('current')
   )
 }
 
-if (argv._[0] === 'verify' || argv._[0] === 'run') {
+if (argv._[0] == 'verify' || argv._[0] == 'run') {
   var current = getData('current')
+    , run     = argv._[0] == 'run'
     , dir
     , setup
 
@@ -57,7 +58,7 @@ if (argv._[0] === 'verify' || argv._[0] === 'run') {
   }
   
   dir   = dirFromName(current)
-  setup = require(dir + '/setup.js')()
+  setup = require(dir + '/setup.js')(run)
 
   setTimeout(runSetup.bind(null, setup, dir, current), setup.wait || 1)
 } else {
@@ -91,19 +92,23 @@ function runArgs (setup) {
 }
 
 function runSetup (setup, dir, current) {
-  var a = runArgs(setup)
-    , b = [ dir + '/solution.js' ].concat(setup.args || [])
-    , v = verify(a, b, {
+  var run = argv._[0] == 'run'
+    , a   = runArgs(setup)
+    , b   = [ dir + '/solution.js' ].concat(setup.args || [])
+    , v   = verify(a, b, {
           a      : setup.a
         , b      : setup.b
         , long   : setup.long
-        , run    : argv._[0] === 'run'
+        , run    : run
         , custom : setup.verify
       })
 
   v.on('pass', onpass.bind(null, setup, dir, current))
   v.on('fail', onfail.bind(null, setup, dir, current))
-  
+
+  if (run && setup.close)
+    v.on('end', setup.close)
+
   if (setup.stdin) {
     setup.stdin.pipe(v)
     setup.stdin.resume()
@@ -168,10 +173,16 @@ function onpass (setup, dir, current) {
         completed = getData('completed') || []
         
         remaining = problems.length - completed.length
-        if (remaining === 0) {
+        if (remaining == 0) {
           console.log('You\'ve finished all the challenges! Hooray!\n')
         } else {
-          console.log('You have ' + remaining + ' challenges left.')
+          console.log(
+              'You have '
+            + remaining
+            + ' challenge'
+            + (remaining != 1 ? 's' : '')
+            + ' left.'
+          )
           console.log('Type `' + appname + '` to show the menu.\n')
         }
         
@@ -204,8 +215,9 @@ function onselect (name) {
   })
 
   printText(appname, file, function () {
-    console.log(bold('\n * To print these instructions again, run: `' + appname + ' print`'))
-    console.log(bold(' * To verify your program, run: `' + appname + ' verify program.js`.\n'))
+    console.log(bold('\n » To print these instructions again, run: `' + appname + ' print`.'))
+    console.log(bold(' » To execute your program in a test environment, run:\n   `' + appname + ' run program.js`.'))
+    console.log(bold(' » To verify your program, run: `' + appname + ' verify program.js`.\n'))
   })
 }
 

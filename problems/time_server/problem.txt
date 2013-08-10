@@ -36,10 +36,12 @@ A typical Node TCP server looks like this:
 The `socket` object contains a lot of meta-data regarding the
 connection, but it is also a Node duplex Stream, in that it can be
 both read from, and written to. For this exercise we only need to
-write data and then close the socket. Use `socket.write(data)` to
-write data to the socket and `socket.end()` to close the socket.
-Alternatively, the `.end()` method also takes a data object so you
-can simplify to just: `socket.end(data)`.
+write data and then close the socket.
+
+Use `socket.write(data)` to write data to the socket and
+`socket.end()` to close the socket. Alternatively, the `.end()` method
+also takes a data object so you can simplify to just:
+`socket.end(data)`.
 
 Documentation on the `net` module can be found by pointing your
 browser here:
