@@ -4,8 +4,8 @@ const through    = require('through')
     , fs         = require('fs')
     , path       = require('path')
     , os         = require('os')
-    , bold       = require('../../bin/term-util').bold
-    , red        = require('../../bin/term-util').red
+    , bold       = require('workshopper/term-util').bold
+    , red        = require('workshopper/term-util').red
 
 function verify (trackFile, callback) {
   var track   = require(trackFile)

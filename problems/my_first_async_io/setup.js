@@ -2,7 +2,7 @@ const boganipsum = require('boganipsum')
     , fs         = require('fs')
     , path       = require('path')
     , os         = require('os')
-    , onlyAsync  = require('../../lib/verify-calls').verifyOnlyAsync
+    , onlyAsync  = require('workshopper/verify-calls').verifyOnlyAsync
 
 module.exports = function () {
   var lines     = Math.ceil(Math.random() * 50)

@@ -2,7 +2,7 @@ const boganipsum = require('boganipsum')
     , fs         = require('fs')
     , path       = require('path')
     , os         = require('os')
-    , onlySync  = require('../../lib/verify-calls').verifyOnlySync
+    , onlySync   = require('workshopper/verify-calls').verifyOnlySync
 
 module.exports = function () {
   var lines     = Math.ceil(Math.random() * 50)

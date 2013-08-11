@@ -1,10 +1,10 @@
 const fs        = require('fs')
     , path      = require('path')
     , os        = require('os')
-    , onlyAsync = require('../../lib/verify-calls').verifyOnlyAsync
-    , requires  = require('../../lib/fetch-requires')
-    , bold = require('../../bin/term-util').bold
-    , red  = require('../../bin/term-util').red
+    , onlyAsync = require('workshopper/verify-calls').verifyOnlyAsync
+    , requires  = require('workshopper/fetch-requires')
+    , bold = require('workshopper/term-util').bold
+    , red  = require('workshopper/term-util').red
 
     , files = [
           'learnyounode.dat'
