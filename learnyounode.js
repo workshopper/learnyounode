@@ -6,5 +6,5 @@ const Workshopper = require('workshopper')
 Workshopper({
     name   : 'learnyounode'
   , title  : 'LEARN YOU THE NODE.JS FOR MUCH WIN!'
-  , appDir : path.join(__dirname, '..')
+  , appDir : path.join(__dirname, '.')
 }).init()
