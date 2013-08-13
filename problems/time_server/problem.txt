@@ -51,8 +51,8 @@ To create the date, you'll need to create a custom format from a
 `new Date()` object. The methods that will be useful are:
 
   date.getFullYear()
-  date.getMonth()
-  date.getDay()
+  date.getMonth()     (starts at 0)
+  date.getDate()      (returns the day of month)
   date.getHours()
   date.getMinutes()
 
