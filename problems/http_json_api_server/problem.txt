@@ -16,10 +16,10 @@ properties. For example:
 
 Add second endpoint for the path '/api/unixtime' which accepts the
 same query string but returns UNIX epoch time under the property
-'unixtime'. For example:
+'unixtime', {bold}rounded down to the nearest second{/bold}. For example:
 
   {
-    "unixtime": 1234567890
+    "unixtime": 1234567000
   }
 
 Your server should listen on {bold}port 8000{/bold}.

@@ -10,7 +10,8 @@ function parsetime (time) {
 }
 
 function unixtime (time) {
-  return { unixtime : time.getTime() }
+  var ts = Math.floor(time.getTime() / 1000) * 1000
+  return { unixtime : ts }
 }
 
 var server = http.createServer(function (req, res) {
