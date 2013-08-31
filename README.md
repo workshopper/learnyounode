@@ -2,7 +2,7 @@
 
 **An intro to Node.js via a set of self-guided workshops.**
 
-[![NPM](https://nodei.co/npm/learnyounode.png)](https://nodei.co/npm/learnyounode/) 
+[![NPM](https://nodei.co/npm/learnyounode.png?downloads=true&stars=true)](https://nodei.co/npm/learnyounode/) [![NPM](https://nodei.co/npm-dl/learnyounode.png?months=3)](https://nodei.co/npm/learnyounode/)
 
 ![Learn You The Node.js For Much Win!](./learnyounode.png)
 
