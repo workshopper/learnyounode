@@ -4,7 +4,7 @@
 
 [![NPM](https://nodei.co/npm/learnyounode.png?downloads=true&stars=true)](https://nodei.co/npm/learnyounode/) [![NPM](https://nodei.co/npm-dl/learnyounode.png?months=3)](https://nodei.co/npm/learnyounode/)
 
-![Learn You The Node.js For Much Win!](./learnyounode.png)
+![Learn You The Node.js For Much Win!](https://raw.github.com/rvagg/learnyounode/master/learnyounode.png)
 
   1. Install [Node.js](http://nodejs.org/)
   2. Run `npm install learnyounode -g`
