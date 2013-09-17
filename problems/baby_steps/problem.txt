@@ -13,7 +13,7 @@ the second element is {italic}always{/italic} the path to your program.js file. 
 will need to start at the 3rd element (index 2) when looking for
 additional command-line arguments.
 
-As an experiment. Try making a program that simply conains:
+As an experiment. Try making a program that simply contains:
   console.log(process.argv)
 and then run it with `node myprogram.js` and any number of additional
 arguments.
