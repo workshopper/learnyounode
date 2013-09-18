@@ -1,6 +1,6 @@
 {
   "name": "learnyounode",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Learn You The Node.js For Much Win! An intro to Node.js via a set of self-guided workshops.",
   "author": "Rod Vagg <rod@vagg.org> (https://github.com/rvagg)",
   "contributors": [
@@ -20,7 +20,7 @@
     "hyperquest": "~0.1.7",
     "bl": "~0.4.1",
     "through2-map": "~1.1.0",
-    "workshopper": "~0.2.0"
+    "workshopper": "~0.3.0"
   },
   "bin": "./learnyounode.js",
   "preferGlobal": true
