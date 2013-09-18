@@ -19,9 +19,9 @@ var server = http.createServer(function (req, res) {
   var result
 
   if (/^\/api\/parsetime/.test(req.url))
-    result = parsetime(time, res)
+    result = parsetime(time)
   else if (/^\/api\/unixtime/.test(req.url))
-    result = unixtime(time, res)
+    result = unixtime(time)
 
   if (result) {
     res.writeHead(200, { 'Content-Type': 'application/json' })
