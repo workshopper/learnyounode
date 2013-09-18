@@ -97,7 +97,10 @@ module.exports = function () {
   return {
       args        : [ dir, 'md' ]
     , stdin       : null
-    , modUseTrack : trackFile
+    , modUseTrack : {
+          trackFile : trackFile
+        , modules   : [ 'fs' ]
+      }
     , verify      : verify.bind(null, trackFile)
   }
 }

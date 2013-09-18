@@ -35,10 +35,20 @@ module.exports = function (run) {
     , outputA   = through()
     , outputB   = through()
 
+  function error (url, out, err) {
+    out.write('Error connecting to ' + url + ': ' + err.message)
+    out.end()
+  }
+
   setTimeout(function () {
-    hyperquest.get('http://localhost:8000').pipe(outputA)
-    if (!run)
-      hyperquest.get('http://localhost:8001').pipe(outputB)
+    hyperquest.get('http://localhost:8000')
+      .on('error', error.bind(null, 'http://localhost:8000', outputA))
+      .pipe(outputA)
+    if (!run) {
+      hyperquest.get('http://localhost:8001')
+        .on('error', error.bind(null, 'http://localhost:8001', outputB))
+        .pipe(outputB)
+    }
   }, 500)
 
   fs.writeFileSync(file, bogan({ paragraphs: 1, sentenceMax: 1 }), 'utf8')
@@ -47,7 +57,10 @@ module.exports = function (run) {
       args        : [ file ]
     , a           : outputA
     , b           : outputB
-    , modUseTrack : trackFile
+    , modUseTrack : {
+          trackFile : trackFile
+        , modules   : [ 'fs' ]
+      }
     , verify      : verify.bind(null, trackFile)
     , long        : true
   }

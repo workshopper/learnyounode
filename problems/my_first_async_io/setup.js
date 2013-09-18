@@ -15,7 +15,10 @@ module.exports = function () {
   return {
       args        : [ file ]
     , stdin       : null
-    , modUseTrack : trackFile
+    , modUseTrack : {
+          trackFile : trackFile
+        , modules   : [ 'fs' ]
+      }
     , verify      : onlyAsync.bind(null, trackFile)
   }
 }

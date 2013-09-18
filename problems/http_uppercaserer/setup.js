@@ -13,10 +13,20 @@ module.exports = function (run) {
     , count   = 0
     , iv
 
+  function error (url, out, err) {
+    out.write('Error connecting to ' + url + ': ' + err.message)
+    out.end()
+  }
+
   setTimeout(function () {
-    inputA.pipe(hyperquest.post('http://localhost:8000')).pipe(outputA)
-    if (!run)
-      inputB.pipe(hyperquest.post('http://localhost:8001')).pipe(outputB)
+    inputA.pipe(hyperquest.post('http://localhost:8000')
+      .on('error', error.bind(null, 'http://localhost:8000', outputA)))
+        .pipe(outputA)
+    if (!run) {
+      inputB.pipe(hyperquest.post('http://localhost:8001')
+        .on('error', error.bind(null, 'http://localhost:8001', outputB)))
+          .pipe(outputB)
+    }
   }, 500)
 
   iv = setInterval(function () {

@@ -29,7 +29,10 @@ module.exports = function () {
   return {
       args        : [ dir, 'dat' ]
     , stdin       : null
-    , modUseTrack : trackFile
+    , modUseTrack : {
+          trackFile : trackFile
+        , modules   : [ 'fs' ]
+      }
     , verify      : onlyAsync.bind(null, trackFile)
   }
 }
