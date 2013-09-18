@@ -23,7 +23,7 @@ end with 'Sync'. To read a file, you'll need to use
 
 Documentation on the `fs` module can be found by pointing your browser
 here:
-  {rootdir}/node_apidoc/fs.html
+  {rootdir:/node_apidoc/fs.html}
 
 `Buffer` objects are Node's way of efficiently representing arbitrary
 arrays of data, whether it be ascii, binary or some other format.
@@ -31,7 +31,7 @@ arrays of data, whether it be ascii, binary or some other format.
 `toString()` method on them. e.g. `var str = buf.toString()`.
 
 Documentation on `Buffer`s can be found by pointing your browser here:
-  {rootdir}/node_apidoc/buffer.html
+  {rootdir:/node_apidoc/buffer.html}
 
 If you're looking for an easy way to count the number of lines in a
 string, recall that a JavaScript `String` can be `.split()` into an

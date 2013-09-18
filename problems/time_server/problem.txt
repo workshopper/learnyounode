@@ -45,7 +45,7 @@ also takes a data object so you can simplify to just:
 
 Documentation on the `net` module can be found by pointing your
 browser here:
-  {rootdir}/node_apidoc/net.html
+  {rootdir:/node_apidoc/net.html}
 
 To create the date, you'll need to create a custom format from a
 `new Date()` object. The methods that will be useful are:

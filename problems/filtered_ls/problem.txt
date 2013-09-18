@@ -22,7 +22,7 @@ where `list` is an array of filename strings.
 
 Documentation on the `fs` module can be found by pointing your browser
 here:
-  {rootdir}/node_apidoc/fs.html
+  {rootdir:/node_apidoc/fs.html}
 
 You may also find the standard JavaScript `RegExp` class helpful here.
 

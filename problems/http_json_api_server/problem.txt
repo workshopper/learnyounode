@@ -37,7 +37,7 @@ For example, on the command prompt, type:
 
 Documentation on the `url` module can be found by pointing your
 browser here:
-  {rootdir}/node_apidoc/url.html
+  {rootdir:/node_apidoc/url.html}
 
 You should also be a good web citizen and set the Content-Type
 properly:

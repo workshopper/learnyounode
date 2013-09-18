@@ -42,7 +42,7 @@ A typical Node HTTP server looks like this:
 
 Documentation on the `http` module can be found by pointing your
 browser here:
-  {rootdir}/node_apidoc/http.html
+  {rootdir:/node_apidoc/http.html}
 
 The `fs` core module also has some streaming APIs for files. You will
 need to use the `fs.createReadStream()` method to create a stream

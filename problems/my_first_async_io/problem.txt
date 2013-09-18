@@ -28,6 +28,6 @@ argument and you will get a `String` instead of a `Buffer`.
 
 Documentation on the `fs` module can be found by pointing your browser
 here:
-  {rootdir}/node_apidoc/fs.html
+  {rootdir:/node_apidoc/fs.html}
 
 ----------------------------------------------------------------------

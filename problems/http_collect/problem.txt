@@ -42,8 +42,8 @@ Node will first look in the core modules and then in the
 If you don't have an Internet connection, simply make a `node_modules`
 directory and copy the entire directory for the package you want to
 use from inside the {appname} installation directory:
-  {rootdir}/node_modules/bl
-  {rootdir}/node_modules/concat-stream
+  {rootdir:/node_modules/bl}
+  {rootdir:/node_modules/concat-stream}
 
 Both `bl` and `concat-stream` can have a stream {italic}piped{/italic} in to them
 and they will collect the data for you. Once the stream has ended, a
