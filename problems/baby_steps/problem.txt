@@ -8,19 +8,22 @@ You can access command-line arguments via the in-built `process`
 object. The `process` object has an `argv` property which is an array
 containing the complete command-line. i.e. `process.argv`.
 
-However, the first element of this array is {italic}always{/italic} 'node' and
-the second element is {italic}always{/italic} the path to your program.js file. So you
-will need to start at the 3rd element (index 2) when looking for
-additional command-line arguments.
-
-As an experiment. Try making a program that simply contains:
+To get things started, write a program that simply contains:
   console.log(process.argv)
-and then run it with `node myprogram.js` and any number of additional
-arguments.
+Run it with `node myprogram.js` and a few numbers as arguments. For example:
+  $ node myprogram.js 1 2 3
+In which case the output would be an array looking something like:
+  [ 'node', '/home/yourname/learnyounode/test.js', '1', '2', '3' ]
+  
+You'll need to think about how to loop through the number arguments so you 
+can output their sum. The first element of the process.argv array is {italic}always{/italic} 'node' 
+and the second element is {italic}always{/italic} the path to your program.js file, so you need 
+to start at the 3rd element (index 2), adding each item to the total until
+you reach the end of the array.
 
 Also be aware that all elements of `process.argv` are strings and you
-may need to {italic}coerce{/italic} them into numbers. You can do this by prefixing the
-property with `+` or passing it to `Number()`. e.g. `+process.argv[2]`
+may need to {italic}coerce{/italic} them into numbers. You can do this by prefixing 
+the property with `+` or passing it to `Number()`. e.g. `+process.argv[2]`
 or `Number(process.argv[2])`.
 
 ----------------------------------------------------------------------
