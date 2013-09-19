@@ -15,6 +15,11 @@ Run it with `node myprogram.js` and numbers as arguments. For example:
 In which case the output would be an array looking something like:
   [ 'node', '/path/to/your/program.js', '1', '2', '3' ]
   
+Keep in mind that you won't be adding those arguments when you run
+your program with 'learnyounode run program.js' or 
+'learnyounode verify program.js' because the test environment will be
+generating the arguments.
+  
 You'll need to think about how to loop through the number arguments so 
 you can output their sum. The first element of the process.argv array
 is always 'node', and the second element is always the path to your 
