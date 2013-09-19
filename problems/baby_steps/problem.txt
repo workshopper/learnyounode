@@ -13,7 +13,7 @@ To get things started, write a program that simply contains:
 Run it with `node myprogram.js` and a few numbers as arguments. For example:
   $ node myprogram.js 1 2 3
 In which case the output would be an array looking something like:
-  [ 'node', '/home/yourname/learnyounode/test.js', '1', '2', '3' ]
+  [ 'node', '/path/to/your/program.js', '1', '2', '3' ]
   
 You'll need to think about how to loop through the number arguments so you 
 can output their sum. The first element of the process.argv array is {italic}always{/italic} 'node' 
