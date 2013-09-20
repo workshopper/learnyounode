@@ -12,7 +12,7 @@ HINTS:
 
 Because we need to create an HTTP server for this exercise rather than
 a generic TCP server, we should use the `http` module from Node core.
-Line the `net` module, `http` also has a method named named
+Like the `net` module, `http` also has a method named named
 `http.createServer()` but this one creates a server that can talk
 HTTP.
 
