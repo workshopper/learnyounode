@@ -22,6 +22,9 @@ Once you have finished <b><code>learnyounode</code></b>, graduate to <b><code>[s
 <table><tbody>
 <tr><th align="left">Rod Vagg</th><td><a href="https://github.com/rvagg">GitHub/rvagg</a></td><td><a href="http://twitter.com/rvagg">Twitter/@rvagg</a></td></tr>
 <tr><th align="left">Andrey Sidorov</th><td><a href="https://github.com/sidorares">GitHub/sidorares</a></td><td><a href="http://twitter.com/sidorares">Twitter/@sidorares</a></td></tr>
+<tr><th align="left">Julián Duque</th><td><a href="https://github.com/julianduque">GitHub/julianduque</a></td><td><a href="http://twitter.com/julian_duque">Twitter/@julian_duque</a></td></tr>
+<tr><th align="left">Lars-Magnus Skog</th><td><a href="https://github.com/ralphtheninja">GitHub/ralphtheninja</a></td><td><a href="http://twitter.com/ralphtheninja">Twitter/@ralphtheninja</a></td></tr>
+<tr><th align="left">Tim Inman</th><td><a href="https://github.com/thehack">GitHub/thehack</a></td><td><a href="http://twitter.com/timinman">Twitter/@timinman</a></td></tr>
 </tbody></table>
 
 ## License
