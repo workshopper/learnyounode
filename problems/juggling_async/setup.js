@@ -7,8 +7,10 @@ const http  = require('http')
       ]
 
 function writeWords(i, delay, res) {
-  words[i].forEach(function (w) { res.write(w + ' ') })
-  res.end()
+  setTimeout(function () {
+    words[i].forEach(function (w) { res.write(w + ' ') })
+    res.end()
+  }, delay)
 }
 
 function server (i, delay, port) {
