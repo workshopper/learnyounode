@@ -22,7 +22,7 @@ streams:
   var map = require('through2-map')
   inStream.pipe(map(function (chunk) {
     return chunk.toString().split('').reverse().join('')
-  }).pipe(outStream)
+  })).pipe(outStream)
 
 In the above example, the incoming data from `inStream` is converted
 to a String (if it isn't already), the characters are reversed and the
