@@ -10,11 +10,15 @@ Your server should listen on {bold}port 8000{/bold}.
 ----------------------------------------------------------------------
 HINTS:
 
-The `http` core module has a method named `http.createServer()` that
-takes a callback function. Unlike most callbacks in Node, the callback
-used by `createServer()` is called more than once. Every connection
-received by your server triggers another call to the callback. The
-callback function has the signature:
+Because we need to create an HTTP server for this exercise rather than
+a generic TCP server, we should use the `http` module from Node core.
+Line the `net` module, `http` also has a method named named
+`http.createServer()` but this one creates a server that can talk
+HTTP.
+
+`http.createServer()` takes a callback that is called once for each
+connection received by your server. The callback function has the
+signature:
 
   function (request, response) { ... }
 
