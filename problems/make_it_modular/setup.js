@@ -1,6 +1,7 @@
 const fs        = require('fs')
     , path      = require('path')
     , os        = require('os')
+    , util      = require('util')
     , onlyAsync = require('workshopper/verify-calls').verifyOnlyAsync
     , requires  = require('workshopper/fetch-requires')
     , bold      = require('workshopper/term-util').bold
@@ -36,15 +37,6 @@ function verify (trackFile, callback) {
       if (err)
         return callback(err)
 
-      var returned  = false
-        , _callback = callback
-        , callbackUsed
-
-      callback = function () {
-        returned = true
-        _callback.apply(this, arguments)
-      }
-
       if (required.length == 1) {
         console.log('\nYou got the correct answer but only used ' + bold('one') + ' file:')
         console.log('\t' + bold(red(required[0])))
@@ -57,44 +49,53 @@ function verify (trackFile, callback) {
         return callback('bzzt!')
       }
 
-      var modfile = required.filter(function (r) { return r != main })[0]
-        , mod     = require(modfile)
+      var modfile   = required.filter(function (r) { return r != main })[0]
+        , mod       = require(modfile)
+        , error     = new Error('testing')
+        , returned  = false
+        , _callback = callback
+        , callbackUsed
 
-      if (typeof mod != 'function') {
+      callback = function () {
+        returned = true
+        _callback.apply(this, arguments)
+      }
+
+      function modfileError (txt) {
         console.log('\nYour additional module file:')
         console.log('\t' + modfile)
-        console.log('does not export a ' + bold('single function') + '.')
-        console.log('\nYou must use the `module.exports = function () {}` pattern\n')
+        console.log(txt + '\n')
+        callback ('bzzt!')
+      }
 
-        return callback('bzzt!')
+      if (typeof mod != 'function') {
+        return modfileError(
+            'does not export a ' + bold('single function') + '.'
+          + '\n\nYou must use the `module.exports = function () {}` pattern.'
+        )
       }
 
       if (mod.length < 3) {
-        console.log('\nYour additional module file:')
-        console.log('\t' + modfile)
-        console.log('exports a function that takes fewer than ' + bold('three') + ' arguments.')
-        console.log('\nYou must accept a directory, a filter and a ' + bold('callback') + '.\n')
-
-        return callback('bzzt!')
+        return modfileError(
+            'exports a function that takes fewer than ' + bold('three') + ' arguments.'
+          + '\n\nYou must accept a directory, a filter and a ' + bold('callback') + '.'
+        )
       }
 
       fs.$readdir = fs.readdir
-      var error = new Error('testing')
       fs.readdir = function (dir, callback) {
         callback(error)
       }
 
       function noerr () {
-        console.log('\nYour additional module file:')
-        console.log('\t' + modfile)
-        console.log('does not appear to pass back an error received from `fs.readdir()`')
-        console.log('\nUse the following idiomatic Node.js pattern inside your callback to `fs.readdir()`:')
-        console.log('\tif (err)\n\t  return callback(err)\n')
-
-        return callback('bzzt!')        
+        modfileError(
+            'does not appear to pass back an error received from `fs.readdir()`'
+          + '\n\nUse the following idiomatic Node.js pattern inside your callback to `fs.readdir()`:'
+          + '\n\tif (err)\n\t  return callback(err)'
+        )
       }
 
-      var callbackUsed = false
+      callbackUsed = false
       try {
         mod('/foo/bar/', 'wheee', function (err) {
           if (err !== error)
@@ -110,12 +111,8 @@ function verify (trackFile, callback) {
         if (returned)
           return
 
-        if (!callbackUsed) {
-          console.log('\nYour additional module file:')
-          console.log('\t' + modfile)
-          console.log('did not call the callback argument')
-          return callback('bzzt!')
-        }
+        if (!callbackUsed)
+          return modfileError('did not call the callback argument.')
 
         fs.readdir = fs.$readdir
 
@@ -123,16 +120,15 @@ function verify (trackFile, callback) {
         try {
           mod(dir, 'md', function (err, list) {
             if (err) {
-              console.log('\nYour additional module file:')
-              console.log('\t' + modfile)
-              console.log('returned an error on its callback:')
-              console.log(err)
-              return callback('bzzt!')
+              return modfileError(
+                  'returned an error on its callback:'
+                + '\n\t' + util.inspect(err)
+              )
             }
 
             callbackUsed = true
 
-            var exp = files.filter(function (f) { return /\.md$/.test(f) })
+            var exp = files.filter(function (f) { return (/\.md$/).test(f) })
               , m   = Array.isArray(list) && exp.length === list.length
               , i   = 0
               , j
@@ -148,36 +144,29 @@ function verify (trackFile, callback) {
             }
 
             if (!m) {
-              console.log('\nYour additional module file:')
-              console.log('\t' + modfile)
-              console.log('did not return the correct list of files in an array as the second arugment of the callback')
-              return callback('bzzt!')
+              return modfileError(
+                'did not return the correct list of files in an array as the second argument of the callback.'
+              )
             }
 
             //WIN!!
             callback()
           })
         } catch (e) {
-          console.log('\nYour additional module file:')
-          console.log('\t' + modfile)
-          console.log('threw an error:')
-          console.log(e)
-
-          return callback('bzzt!')        
+            return modfileError(
+                'threw an error:'
+              + '\n\t' + util.inspect(e)
+            )
         }
 
         setTimeout(function () {
           if (returned)
             return
 
-          if (!callbackUsed) {
-            console.log('\nYour additional module file:')
-            console.log('\t' + modfile)
-            console.log('did not call the callback argument')
-            return callback('bzzt!')
-          }
-        }, 500)
-      }, 500)
+          if (!callbackUsed)
+            return modfileError('did not call the callback argument.')
+        }, 300)
+      }, 300)
     })
   })
 }
