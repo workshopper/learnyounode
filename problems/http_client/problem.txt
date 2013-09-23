@@ -18,9 +18,9 @@ the URL you want to GET, provide a callback as the second argument.
 
 Unlike other callback functions, this one has the signature:
 
-  function (request) { ... }
+  function (response) { ... }
 
-Where the `request` object is a Node {bold}Stream{/bold} object. You can treat Node
+Where the `response` object is a Node {bold}Stream{/bold} object. You can treat Node
 Streams as objects that emit events, the three events that are of most
 interest are: "data", "error" and "end". You listen to an event like
 so:
@@ -31,7 +31,7 @@ The "data" is emitted when a chunk of data is available and can be
 processed. The size of the chunk depends upon the underlying data
 source.
 
-The `request` object / Stream that you get from `http.get()` also has
+The `response` object / Stream that you get from `http.get()` also has
 a `setEncoding()` method. If you call this method with "utf8", the
 "data" events will emit Strings rather than the standard Node `Buffer`
 objects which you have to explicitly convert to Strings.

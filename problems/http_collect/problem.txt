@@ -49,7 +49,7 @@ Both `bl` and `concat-stream` can have a stream {italic}piped{/italic} in to the
 and they will collect the data for you. Once the stream has ended, a
 callback will be fired with the data:
 
-  request.pipe(bl(function (err, data) { ... }))
+  response.pipe(bl(function (err, data) { ... }))
 
 Note that you will probably need to `data.toString()` to convert from
 a Buffer.
