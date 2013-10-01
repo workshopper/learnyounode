@@ -3,7 +3,7 @@ Write a {bold}TCP time server{/bold}!
 Your server should listen to TCP connections on {bold}port 8000{/bold}. For each
 connection you must write the current date & time in the format:
 
-  YYYY-MM-DD HH:MM
+  YYYY-MM-DD HH:mm
 
 followed by a {bold}newline{/bold} character. Month, day, hour and minute must be
 {italic}zero-filled{/italic} to 2 integers. For example:
