@@ -1,5 +1,6 @@
+var fs = require('fs')
+
 module.exports = function (dir, filterStr, callback) {
-  var fs = require('fs')
   var regex = new RegExp('\\.' + filterStr + '$')
 
   fs.readdir(dir, function (err, list) {
