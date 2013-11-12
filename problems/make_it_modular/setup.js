@@ -126,27 +126,37 @@ function verify (trackFile, callback) {
               )
             }
 
-            callbackUsed = true
-
-            var exp = files.filter(function (f) { return (/\.md$/).test(f) })
-              , m   = Array.isArray(list) && exp.length === list.length
-              , i   = 0
-              , j
-              , f
-
-            for (; m && i < exp.length; i++) {
-              f = false
-              for (j = 0; m && !f && j < list.length; j++)
-                if (list[j] === exp[i])
-                  f = true
-              if (!f)
-                m = false
+            if (arguments.length < 2) {
+              return modfileError(
+                'did not return two arguments on the callback function (expected `null` and an Array of filenames)'
+              )
             }
 
-            if (!m) {
+            if (!Array.isArray(list)) {
               return modfileError(
-                'did not return the correct list of files in an array as the second argument of the callback.'
+                'did not return an Array object as the second argument of the callback'
               )
+            }
+
+            var exp = files.filter(function (f) { return (/\.md$/).test(f) })
+              , i
+
+            if (exp.length !== list.length) {
+              return modfileError(
+                'did not return an Array with the correct number of elements as the second argument of the callback'
+              )
+            }
+
+            callbackUsed = true
+
+            exp.sort()
+            list.sort()
+            for (i = 0; i < exp.length; i++) {
+              if (list[i] !== exp[i]) {
+                return modfileError(
+                  'did not return the correct list of files as the second argument of the callback.'
+                )
+              }
             }
 
             //WIN!!
