@@ -10,7 +10,7 @@ Your program must use a {italic}module{/italic} to do most of the work. The modu
 must {italic}export{/italic} a single function that takes {bold}three{/bold} arguments: the
 directory name, the filter string and a callback function.
 
-The callback must return an error, and only an error, as the first
+The callback must be called with an error, and only an error, as the first
 argument if one is passed from your call to `fs.readdir()`. If there
 are no errors then the first argument to the callback must be null and
 the second must be your filtered list of files in an array.
