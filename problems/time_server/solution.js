@@ -17,3 +17,6 @@ var server = net.createServer(function (socket) {
   socket.end(now() + '\n')
 })
 server.listen(8001)
+
+// note the port above is 8001 because of a software limitation. 
+// your solution should listen on port 8000.
