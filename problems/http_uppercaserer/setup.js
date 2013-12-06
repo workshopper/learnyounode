@@ -5,11 +5,14 @@ const through    = require('through')
         .sort(function () { return 0.5 - Math.random() })
         .slice(0, 10)
 
+
 module.exports = function (run) {
   var outputA = through()
     , outputB = through()
     , inputA  = through().pause()
     , inputB  = through().pause()
+    , portA = 1024 + Math.floor(Math.random() * 65535)
+    , portB = portA+1
     , count   = 0
     , iv
 
@@ -19,12 +22,12 @@ module.exports = function (run) {
   }
 
   setTimeout(function () {
-    inputA.pipe(hyperquest.post('http://localhost:8000')
-      .on('error', error.bind(null, 'http://localhost:8000', outputA)))
+    inputA.pipe(hyperquest.post('http://localhost:' + portA)
+      .on('error', error.bind(null, 'http://localhost:' + portA, outputA)))
         .pipe(outputA)
     if (!run) {
-      inputB.pipe(hyperquest.post('http://localhost:8001')
-        .on('error', error.bind(null, 'http://localhost:8001', outputB)))
+      inputB.pipe(hyperquest.post('http://localhost:' + portB)
+        .on('error', error.bind(null, 'http://localhost:' + portB, outputB)))
           .pipe(outputB)
     }
   }, 500)
@@ -40,9 +43,10 @@ module.exports = function (run) {
       inputB.end()
     }
   }, 50)
-    
+
   return {
-      args: []
+      submissionArgs : [portA]
+    , solutionArgs : [portB]
     , a: duplexer(inputA, outputA)
     , b: duplexer(inputB, outputB)
   }

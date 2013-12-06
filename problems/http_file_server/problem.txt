@@ -1,11 +1,12 @@
 Write an HTTP {bold}server{/bold} that serves the same text file for each request
 it receives.
 
-You will be provided with the location of the file to serve as the
-first command-line argument. You {bold}must{/bold} use the `fs.createReadStream()`
-method to stream the file contents to the response.
+Your server should listen on the port provided by the first argument
+to your program.
 
-Your server should listen on {bold}port 8000{/bold}.
+You will be provided with the location of the file to serve as the
+second command-line argument. You {bold}must{/bold} use the `fs.createReadStream()`
+method to stream the file contents to the response.
 
 ----------------------------------------------------------------------
 HINTS:

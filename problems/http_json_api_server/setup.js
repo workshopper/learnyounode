@@ -36,15 +36,18 @@ function fetch (port) {
 module.exports = function (run) {
   var outputA = through()
     , outputB = through()
+    , portA = 1024 + Math.floor(Math.random() * 65535)
+    , portB = portA+1
 
   setTimeout(function () {
-    fetch(8000).pipe(outputA)
+    fetch(portA).pipe(outputA)
     if (!run)
-      fetch(8001).pipe(outputB)
+      fetch(portB).pipe(outputB)
   }, 500)
 
   return {
-      args : []
+      submissionArgs : [portA]
+    , solutionArgs : [portB]
     , a    : outputA
     , b    : outputB
     , long : true
