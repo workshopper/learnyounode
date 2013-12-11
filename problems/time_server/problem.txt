@@ -38,6 +38,9 @@ A typical Node TCP server looks like this:
   })
   server.listen(8000)
 
+Remember to use the port number supplied to you as the first
+command-line argument.
+
 The `socket` object contains a lot of meta-data regarding the
 connection, but it is also a Node duplex Stream, in that it can be
 both read from, and written to. For this exercise we only need to
@@ -50,6 +53,7 @@ also takes a data object so you can simplify to just:
 
 Documentation on the `net` module can be found by pointing your
 browser here:
+
   {rootdir:/node_apidoc/net.html}
 
 To create the date, you'll need to create a custom format from a
