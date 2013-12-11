@@ -16,4 +16,4 @@ function now () {
 var server = net.createServer(function (socket) {
   socket.end(now() + '\n')
 })
-server.listen(8001)
+server.listen(Number(process.argv[2]))

@@ -34,6 +34,8 @@ module.exports = function (run) {
     , trackFile = path.join(os.tmpDir(), 'learnyounode_' + process.pid + '.json')
     , outputA   = through()
     , outputB   = through()
+    , portA = 1024 + Math.floor(Math.random() * 65535)
+    , portB = portA+1
 
   function error (url, out, err) {
     out.write('Error connecting to ' + url + ': ' + err.message)
@@ -41,12 +43,12 @@ module.exports = function (run) {
   }
 
   setTimeout(function () {
-    hyperquest.get('http://localhost:8000')
-      .on('error', error.bind(null, 'http://localhost:8000', outputA))
+    hyperquest.get('http://localhost:' + portA)
+      .on('error', error.bind(null, 'http://localhost:' + portA, outputA))
       .pipe(outputA)
     if (!run) {
-      hyperquest.get('http://localhost:8001')
-        .on('error', error.bind(null, 'http://localhost:8001', outputB))
+      hyperquest.get('http://localhost:' + portB)
+        .on('error', error.bind(null, 'http://localhost:' + portB, outputB))
         .pipe(outputB)
     }
   }, 500)
@@ -54,7 +56,8 @@ module.exports = function (run) {
   fs.writeFileSync(file, bogan({ paragraphs: 1, sentenceMax: 1 }), 'utf8')
 
   return {
-      args        : [ file ]
+      submissionArgs : [portA, file]
+    , solutionArgs : [portB, file]
     , a           : outputA
     , b           : outputB
     , modUseTrack : {

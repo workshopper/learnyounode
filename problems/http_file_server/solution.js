@@ -2,6 +2,6 @@ var http = require('http')
 var fs = require('fs')
 
 var server = http.createServer(function (req, res) {
-  fs.createReadStream(process.argv[2]).pipe(res)
+  fs.createReadStream(process.argv[3]).pipe(res)
 })
-server.listen(8001)
+server.listen(Number(process.argv[2]))
