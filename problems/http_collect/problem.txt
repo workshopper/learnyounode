@@ -50,6 +50,8 @@ and they will collect the data for you. Once the stream has ended, a
 callback will be fired with the data:
 
   response.pipe(bl(function (err, data) { ... }))
+  // or
+  response.pipe(concatStream(function (data) { ... }))
 
 Note that you will probably need to `data.toString()` to convert from
 a Buffer.

@@ -16,14 +16,14 @@
   },
   "license": "MIT",
   "dependencies": {
-    "concat-stream": "~1.0.0",
+    "concat-stream": "~1.2.1",
     "duplexer": "~0.1.1",
     "through": "~2.3.4",
     "boganipsum": "~0.1.0",
-    "hyperquest": "~0.1.7",
-    "bl": "~0.4.1",
-    "through2-map": "~1.1.0",
-    "workshopper": "~0.3.0"
+    "hyperquest": "~0.1.8",
+    "bl": "~0.6.0",
+    "through2-map": "~1.2.0",
+    "workshopper": "~0.4.3"
   },
   "bin": "./learnyounode.js",
   "preferGlobal": true
