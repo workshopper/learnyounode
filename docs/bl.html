@@ -1,0 +1,477 @@
+<!doctype html>
+<!-- Created with GFM2HTML: https://github.com/rvagg/gfm2html -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="created-with" content="https://github.com/rvagg/gfm2html">
+
+    <style type="text/css">
+/* most of normalize.css */
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block;}[hidden],template{display:none;}html{font-family:sans-serif;/*1*/-ms-text-size-adjust:100%;/*2*/-webkit-text-size-adjust:100%;/*2*/}body{margin:0;}a{background:transparent;}a:focus{outline:thindotted;}a:active,a:hover{outline:0;}h1{font-size:2em;margin:0.67em0;}abbr[title]{border-bottom:1pxdotted;}b,strong{font-weight:bold;}dfn{font-style:italic;}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0;}mark{background:#ff0;color:#000;}code,kbd,pre,samp{font-family:monospace,serif;font-size:1em;}pre{white-space:pre-wrap;}q{quotes:"\201C""\201D""\2018""\2019";}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em;}sub{bottom:-0.25em;}img{border:0;}svg:not(:root){overflow:hidden;}table{border-collapse:collapse;border-spacing:0;}
+
+html {
+  font: 14px 'Helvetica Neue', Helvetica, arial, freesans, clean, sans-serif;
+}
+
+.container {
+  line-height: 1.6;
+  color: #333;
+  background: #eee;
+  border-radius: 3px;
+  padding: 3px;
+  width: 790px;
+  margin: 10px auto;
+}
+
+.body-content {
+  background-color: #fff;
+  border: 1px solid #CACACA;
+  padding: 30px;
+}
+
+.body-content > *:first-child {
+  margin-top: 0 !important;
+}
+
+a, a:visited {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+  .markdown-body h1
+, .markdown-body h2
+, .markdown-body h3
+, .markdown-body h4
+, .markdown-body h5
+, .markdown-body h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #000;
+  border-bottom: 1px solid #ddd;
+}
+
+h2 {
+  font-size: 2em;
+  border-bottom: 1px solid #eee;
+  color: #000;
+}
+
+img {
+  max-width: 100%;
+}
+
+hr {
+  background: transparent url("/img/hr.png") repeat-x 0 0;
+  border: 0 none;
+  color: #ccc;
+  height: 4px;
+  padding: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+td, th {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+th {
+  font-weight: bold;
+}
+
+blockquote {
+  border-left: 4px solid #ddd;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote > :last-child, blockquote > :first-child {
+  margin-bottom: 0px;
+}
+
+pre, code {
+  font-size: 13px;
+  font-family: 'UbuntuMono', monospace;
+  white-space: nowrap;
+  margin: 0 2px;
+  padding: 0px 5px;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre > code {
+  white-space: pre;
+}
+
+pre {
+  overflow-x: auto;
+  white-space: pre;
+  padding: 10px;
+  line-height: 150%;
+  background-color: #f8f8f8;
+  border-color: #ccc;
+}
+
+pre code, pre tt {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  border: none;
+}
+
+  .highlight .c
+, .highlight .cm
+, .highlight .cp
+, .highlight .c1 {
+    color:#999988;
+    font-style:italic;
+}
+
+.highlight .err {
+  color:#a61717;
+  background-color:#e3d2d2
+}
+
+  .highlight .o
+, .highlight .gs
+, .highlight .kc
+, .highlight .kd
+, .highlight .kn
+, .highlight .kp
+, .highlight .kr {
+    font-weight:bold
+}
+
+.highlight .cs {
+  color:#999999;
+  font-weight:bold;
+  font-style:italic
+}
+
+.highlight .gd {
+  color:#000000;
+  background-color:#ffdddd
+}
+
+.highlight .gd .x {
+  color:#000000;
+  background-color:#ffaaaa
+}
+
+.highlight .ge {
+  font-style:italic
+}
+
+  .highlight .gr
+, .highlight .gt {
+    color:#aa0000
+}
+
+  .highlight .gh
+, .highlight .bp {
+    color:#999999
+}
+
+.highlight .gi {
+  color:#000000;
+  background-color:#ddffdd
+}
+
+.highlight .gi .x {
+  color:#000000;
+  background-color:#aaffaa
+}
+
+.highlight .go {
+  color:#888888
+}
+
+  .highlight .gp
+, .highlight .nn {
+    color:#555555
+}
+
+
+.highlight .gu {
+  color:#800080;
+  font-weight:bold
+}
+
+
+.highlight .kt {
+  color:#445588;
+  font-weight:bold
+}
+
+  .highlight .m
+, .highlight .mf
+, .highlight .mh
+, .highlight .mi
+, .highlight .mo
+, .highlight .il {
+    color:#009999
+}
+
+  .highlight .s
+, .highlight .sb
+, .highlight .sc
+, .highlight .sd
+, .highlight .s2
+, .highlight .se
+, .highlight .sh
+, .highlight .si
+, .highlight .sx
+, .highlight .s1 {
+    color:#d14
+}
+
+.highlight .n {
+  color:#333333
+}
+
+  .highlight .na
+, .highlight .no
+, .highlight .nv
+, .highlight .vc
+, .highlight .vg
+, .highlight .vi
+, .highlight .nb {
+    color:#0086B3
+}
+
+.highlight .nc {
+  color:#445588;
+  font-weight:bold
+}
+
+.highlight .ni {
+  color:#800080
+}
+
+  .highlight .ne
+, .highlight .nf {
+    color:#990000;
+    font-weight:bold
+}
+
+.highlight .nt {
+  color:#000080
+}
+
+.highlight .ow {
+  font-weight:bold
+}
+
+.highlight .w {
+  color:#bbbbbb
+}
+
+.highlight .sr {
+  color:#009926
+}
+
+.highlight .ss {
+  color:#990073
+}
+
+.highlight .gc {
+  color:#999;
+  background-color:#EAF2F5
+}</style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="body-content"><h1 id="bl-bufferlist-">bl <em>(BufferList)</em></h1>
+<p><a href="http://travis-ci.org/rvagg/bl"><img src="https://secure.travis-ci.org/rvagg/bl.png" alt="Build Status"></a></p>
+<p><strong>A Node.js Buffer list collector, reader and streamer thingy.</strong></p>
+<p><strong>bl</strong> is a storage object for collections of Node Buffers, exposing them with the main Buffer readable API. Also works as a duplex stream so you can collect buffers from a stream that emits them and emit buffers to a stream that consumes them!</p>
+<p>The original buffers are kept intact and copies are only done as necessary. Any reads that require the use of a single original buffer will return a slice of that buffer only (which references the same memory as the original buffer). Reads that span buffers perform concatenation as required and return the results transparently.</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">BufferList</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bl&#39;</span><span class="p">)</span>
+
+<span class="kd">var</span> <span class="nx">bl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BufferList</span><span class="p">()</span>
+<span class="nx">bl</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="s1">&#39;abcd&#39;</span><span class="p">))</span>
+<span class="nx">bl</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="s1">&#39;efg&#39;</span><span class="p">))</span>
+<span class="nx">bl</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>                     <span class="c1">// bl will also accept &amp; convert Strings</span>
+<span class="nx">bl</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">))</span>
+<span class="nx">bl</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">new</span> <span class="nx">Buffer</span><span class="p">([</span> <span class="mh">0x3</span><span class="p">,</span> <span class="mh">0x4</span> <span class="p">]))</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bl</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="c1">// 12</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bl</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span> <span class="c1">// &#39;abcdefghij&#39;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bl</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span> <span class="c1">// &#39;defghij&#39;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bl</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>  <span class="c1">// &#39;def&#39;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bl</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>  <span class="c1">// &#39;defgh&#39;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bl</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span> <span class="c1">// &#39;fghij&#39;</span>
+
+<span class="c1">// or just use toString!</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bl</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>               <span class="c1">// &#39;abcdefghij\u0003\u0004&#39;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bl</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>  <span class="c1">// &#39;defgh&#39;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bl</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="c1">// &#39;fghij&#39;</span>
+
+<span class="c1">// other standard Buffer readables</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bl</span><span class="p">.</span><span class="nx">readUInt16BE</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="c1">// 0x0304</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bl</span><span class="p">.</span><span class="nx">readUInt16LE</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="c1">// 0x0403</span>
+</pre></div>
+
+<p>Give it a callback in the constructor and use it just like <strong><a href="https://github.com/maxogden/node-concat-stream">concat-stream</a></strong>:</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">bl</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bl&#39;</span><span class="p">)</span>
+    <span class="p">,</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">)</span>
+
+<span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s1">&#39;README.md&#39;</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">bl</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// note &#39;new&#39; isn&#39;t strictly required</span>
+    <span class="c1">// `data` is a complete Buffer object containing the full data</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+  <span class="p">})</span>
+</pre></div>
+
+<p>Note that when you use the <em>callback</em> method like this, the resulting <code>data</code> parameter is a concatenation of all <code>Buffer</code> objects in the list. If you want to avoid the overhead of this concatenation (in cases of extreme performance consciousness), then avoid the <em>callback</em> method and just listen to <code>&#39;end&#39;</code> instead, like a standard Stream.</p>
+<p>Or to fetch a URL using <a href="https://github.com/substack/hyperquest">hyperquest</a> (should work with <a href="http://github.com/mikeal/request">request</a> and even plain Node http too!):</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">hyperquest</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;hyperquest&#39;</span><span class="p">)</span>
+    <span class="p">,</span> <span class="nx">bl</span>         <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bl&#39;</span><span class="p">)</span>
+    <span class="p">,</span> <span class="nx">url</span>        <span class="o">=</span> <span class="s1">&#39;https://raw.github.com/rvagg/bl/master/README.md&#39;</span>
+
+<span class="nx">hyperquest</span><span class="p">(</span><span class="nx">url</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">bl</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+<span class="p">}))</span>
+</pre></div>
+
+<p>Or, use it as a readable stream to recompose a list of Buffers to an output source:</p>
+<div class="highlight"><pre><span class="kr">const</span> <span class="nx">BufferList</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bl&#39;</span><span class="p">)</span>
+    <span class="p">,</span> <span class="nx">fs</span>         <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">)</span>
+
+<span class="kd">var</span> <span class="nx">bl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BufferList</span><span class="p">()</span>
+<span class="nx">bl</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="s1">&#39;abcd&#39;</span><span class="p">))</span>
+<span class="nx">bl</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="s1">&#39;efg&#39;</span><span class="p">))</span>
+<span class="nx">bl</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">))</span>
+<span class="nx">bl</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">))</span>
+
+<span class="nx">bl</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createWriteStream</span><span class="p">(</span><span class="s1">&#39;gibberish.txt&#39;</span><span class="p">))</span>
+</pre></div>
+
+<h2 id="api">API</h2>
+<ul>
+<li><a href="#ctor"><code><b>new BufferList([ callback ])</b></code></a></li>
+<li><a href="#length"><code>bl.<b>length</b></code></a></li>
+<li><a href="#append"><code>bl.<b>append(buffer)</b></code></a></li>
+<li><a href="#get"><code>bl.<b>get(index)</b></code></a></li>
+<li><a href="#slice"><code>bl.<b>slice([ start[, end ] ])</b></code></a></li>
+<li><a href="#copy"><code>bl.<b>copy(dest, [ destStart, [ srcStart [, srcEnd ] ] ])</b></code></a></li>
+<li><a href="#duplicate"><code>bl.<b>duplicate()</b></code></a></li>
+<li><a href="#consume"><code>bl.<b>consume(bytes)</b></code></a></li>
+<li><a href="#toString"><code>bl.<b>toString([encoding, [ start, [ end ]]])</b></code></a></li>
+<li><a href="#readXX"><code>bl.<b>readDoubleBE()</b></code>, <code>bl.<b>readDoubleLE()</b></code>, <code>bl.<b>readFloatBE()</b></code>, <code>bl.<b>readFloatLE()</b></code>, <code>bl.<b>readInt32BE()</b></code>, <code>bl.<b>readInt32LE()</b></code>, <code>bl.<b>readUInt32BE()</b></code>, <code>bl.<b>readUInt32LE()</b></code>, <code>bl.<b>readInt16BE()</b></code>, <code>bl.<b>readInt16LE()</b></code>, <code>bl.<b>readUInt16BE()</b></code>, <code>bl.<b>readUInt16LE()</b></code>, <code>bl.<b>readInt8()</b></code>, <code>bl.<b>readUInt8()</b></code></a></li>
+<li><a href="#streams">Streams</a></li>
+</ul>
+<hr>
+<p><a name="ctor"></a></p>
+<h3 id="new-bufferlist-callback-buffer-buffer-array-">new BufferList([ callback | buffer | buffer array ])</h3>
+<p>The constructor takes an optional callback, if supplied, the callback will be called with an error argument followed by a reference to the <strong>bl</strong> instance, when <code>bl.end()</code> is called (i.e. from a piped stream). This is a convenient method of collecting the entire contents of a stream, particularly when the stream is <em>chunky</em>, such as a network stream.</p>
+<p>Normally, no arguments are required for the constructor, but you can initialise the list by passing in a single <code>Buffer</code> object or an array of <code>Buffer</code> object.</p>
+<p><code>new</code> is not strictly required, if you don&#39;t instantiate a new object, it will be done automatically for you so you can create a new instance simply with:</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">bl</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bl&#39;</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">myinstance</span> <span class="o">=</span> <span class="nx">bl</span><span class="p">()</span>
+
+<span class="c1">// equivilant to:</span>
+
+<span class="kd">var</span> <span class="nx">BufferList</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bl&#39;</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">myinstance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BufferList</span><span class="p">()</span>
+</pre></div>
+
+<hr>
+<p><a name="length"></a></p>
+<h3 id="bl-length">bl.length</h3>
+<p>Get the length of the list in bytes. This is the sum of the lengths of all of the buffers contained in the list, minus any initial offset for a semi-consumed buffer at the beginning. Should accurately represent the total number of bytes that can be read from the list.</p>
+<hr>
+<p><a name="append"></a></p>
+<h3 id="bl-append-buffer-">bl.append(buffer)</h3>
+<p><code>append(buffer)</code> adds an additional buffer to the internal list.</p>
+<hr>
+<p><a name="get"></a></p>
+<h3 id="bl-get-index-">bl.get(index)</h3>
+<p><code>get()</code> will return the byte at the specified index.</p>
+<hr>
+<p><a name="slice"></a></p>
+<h3 id="bl-slice-start-end-">bl.slice([ start, [ end ] ])</h3>
+<p><code>slice()</code> returns a new <code>Buffer</code> object containing the bytes within the range specified. Both <code>start</code> and <code>end</code> are optional and will default to the beginning and end of the list respectively.</p>
+<p>If the requested range spans a single internal buffer then a slice of that buffer will be returned which shares the original memory range of that Buffer. If the range spans multiple buffers then copy operations will likely occur to give you a uniform Buffer.</p>
+<hr>
+<p><a name="copy"></a></p>
+<h3 id="bl-copy-dest-deststart-srcstart-srcend-">bl.copy(dest, [ destStart, [ srcStart [, srcEnd ] ] ])</h3>
+<p><code>copy()</code> copies the content of the list in the <code>dest</code> buffer, starting from <code>destStart</code> and containing the bytes within the range specified with <code>srcStart</code> to <code>srcEnd</code>. <code>destStart</code>, <code>start</code> and <code>end</code> are optional and will default to the beginning of the <code>dest</code> buffer, and the beginning and end of the list respectively.</p>
+<hr>
+<p><a name="duplicate"></a></p>
+<h3 id="bl-duplicate-">bl.duplicate()</h3>
+<p><code>duplicate()</code> performs a <strong>shallow-copy</strong> of the list. The internal Buffers remains the same, so if you change the underlying Buffers, the change will be reflected in both the original and the duplicate. This method is needed if you want to call <code>consume()</code> or <code>pipe()</code> and still keep the original list.Example:</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">bl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BufferList</span><span class="p">()</span>
+
+<span class="nx">bl</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="nx">bl</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39; world&#39;</span><span class="p">)</span>
+<span class="nx">bl</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">)</span>
+
+<span class="nx">bl</span><span class="p">.</span><span class="nx">duplicate</span><span class="p">().</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">,</span> <span class="p">{</span> <span class="nx">end</span><span class="o">:</span> <span class="kc">false</span> <span class="p">})</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bl</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+</pre></div>
+
+<hr>
+<p><a name="consume"></a></p>
+<h3 id="bl-consume-bytes-">bl.consume(bytes)</h3>
+<p><code>consume()</code> will shift bytes <em>off the start of the list</em>. The number of bytes consumed don&#39;t need to line up with the sizes of the internal Buffers&mdash;initial offsets will be calculated accordingly in order to give you a consistent view of the data.</p>
+<hr>
+<p><a name="toString"></a></p>
+<h3 id="bl-tostring-encoding-start-end-">bl.toString([encoding, [ start, [ end ]]])</h3>
+<p><code>toString()</code> will return a string representation of the buffer. The optional <code>start</code> and <code>end</code> arguments are passed on to <code>slice()</code>, while the <code>encoding</code> is passed on to <code>toString()</code> of the resulting Buffer. See the <a href="http://nodejs.org/docs/latest/api/buffer.html#buffer_buf_tostring_encoding_start_end">Buffer#toString()</a> documentation for more information.</p>
+<hr>
+<p><a name="readXX"></a></p>
+<h3 id="-code-bl-readdoublebe-code-code-bl-readdoublele-code-code-bl-readfloatbe-code-code-bl-readfloatle-code-code-bl-readint32be-code-code-bl-readint32le-code-code-bl-readuint32be-code-code-bl-readuint32le-code-code-bl-readint16be-code-code-bl-readint16le-code-code-bl-readuint16be-code-code-bl-readuint16le-code-code-bl-readint8-code-code-bl-readuint8-code-"><code>bl.readDoubleBE()</code>, <code>bl.readDoubleLE()</code>, <code>bl.readFloatBE()</code>, <code>bl.readFloatLE()</code>, <code>bl.readInt32BE()</code>, <code>bl.readInt32LE()</code>, <code>bl.readUInt32BE()</code>, <code>bl.readUInt32LE()</code>, <code>bl.readInt16BE()</code>, <code>bl.readInt16LE()</code>, <code>bl.readUInt16BE()</code>, <code>bl.readUInt16LE()</code>, <code>bl.readInt8()</code>, <code>bl.readUInt8()</code></h3>
+<p>All of the standard byte-reading methods of the <code>Buffer</code> interface are implemented and will operate across internal Buffer boundaries transparently.</p>
+<p>See the <b><code><a href="http://nodejs.org/docs/latest/api/buffer.html">Buffer</a></code></b> documentation for how these work.</p>
+<hr>
+<p><a name="streams"></a></p>
+<h3 id="streams">Streams</h3>
+<p><strong>bl</strong> is a Node <strong><a href="http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_duplex">Duplex Stream</a></strong>, so it can be read from and written to like a standard Node stream. You can also <code>pipe()</code> to and from a <strong>bl</strong> instance.</p>
+<hr>
+<h2 id="contributors">Contributors</h2>
+<p><strong>bl</strong> is brought to you by the following hackers:</p>
+<ul>
+<li><a href="https://github.com/rvagg">Rod Vagg</a></li>
+<li><a href="https://github.com/mcollina">Matteo Collina</a></li>
+</ul>
+<p>=======</p>
+<h2 id="license">License</h2>
+<p><strong>bl</strong> is Copyright (c) 2013 Rod Vagg <a href="https://twitter.com/rvagg">@rvagg</a> and licenced under the MIT licence. All rights not explicitly granted in the MIT license are reserved. See the included LICENSE file for more details.</p>
+</div>
+    </div>
+  </body>
+</html>

@@ -32,11 +32,19 @@ character reverser! Remember though that the chunk size is determined
 up-stream and you have little control over it for incoming data.
 
 To install `through2-map` type:
+
   npm install through2-map
 
 If you don't have an Internet connection, simply make a `node_modules`
 directory and copy the entire directory for the module you want to use
 from inside the {appname} installation directory:
+
   {rootdir:/node_modules/through2-map}
+
+Documentation for through2-map has been installed along with
+{appname} on your system and you can read them by pointing your
+browser here:
+
+  {rootdir:/docs/through2-map.html}
 
 ----------------------------------------------------------------------

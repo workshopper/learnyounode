@@ -42,6 +42,7 @@ Node will first look in the core modules and then in the
 If you don't have an Internet connection, simply make a `node_modules`
 directory and copy the entire directory for the package you want to
 use from inside the {appname} installation directory:
+
   {rootdir:/node_modules/bl}
   {rootdir:/node_modules/concat-stream}
 
@@ -55,5 +56,12 @@ callback will be fired with the data:
 
 Note that you will probably need to `data.toString()` to convert from
 a Buffer.
+
+Documentation for both of these modules has been installed along with
+{appname} on your system and you can read them by pointing your
+browser here:
+
+  {rootdir:/docs/bl.html}
+  {rootdir:/docs/concat-stream.html}
 
 ----------------------------------------------------------------------
