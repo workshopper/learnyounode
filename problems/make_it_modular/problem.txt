@@ -7,7 +7,7 @@ directory name and the second argument is the extension filter. Print
 the list of files (one file per line) to the console. You {bold}must{/bold}
 use asynchronous I/O.
 
-Your program write a {italic}module{/italic} file to do most of the work.
+You must write a {italic}module{/italic} file to do most of the work.
 The module must {italic}export{/italic} a single function that takes
 {bold}three{/bold} arguments: the directory name, the filter string and a
 callback function.
