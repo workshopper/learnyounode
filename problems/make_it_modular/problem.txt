@@ -50,11 +50,13 @@ function you can call!
 Also keep in mind that it is idiomatic to check for errors and do early-returns
 within callback functions:
 
-  foo(function (err, data) {
-    if (err)
-      return callback(err)
+  function bar (callback) {
+    foo(function (err, data) {
+      if (err)
+        return callback(err) // early return
 
-    ... // continue when no-error
-  })
+      ... // continue when no-error
+    })
+  }
 
 ----------------------------------------------------------------------
