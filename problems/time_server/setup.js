@@ -5,7 +5,7 @@ const through    = require('through')
 module.exports = function (run) {
   var outputA = through()
     , outputB = through()
-    , portA = 1024 + Math.floor(Math.random() * 65535)
+    , portA = 1024 + Math.floor(Math.random() * 64511)
     , portB = portA+1
 
   function error (url, out, err) {
