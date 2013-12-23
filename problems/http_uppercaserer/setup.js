@@ -11,7 +11,7 @@ module.exports = function (run) {
     , outputB = through()
     , inputA  = through().pause()
     , inputB  = through().pause()
-    , portA = 1024 + Math.floor(Math.random() * 65535)
+    , portA = 1024 + Math.floor(Math.random() * 64511)
     , portB = portA+1
     , count   = 0
     , iv
