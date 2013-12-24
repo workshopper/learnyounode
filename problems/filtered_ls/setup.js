@@ -15,6 +15,7 @@ const fs        = require('fs')
         , 'w00t.dat'
         , 'w00t.txt'
         , 'wrrrrongdat'
+        , 'dat'
       ]
 
 module.exports = function () {
