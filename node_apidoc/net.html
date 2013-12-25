@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>net Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>net Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/net.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -218,7 +218,7 @@ client.on(&#39;end&#39;, function() {
 changed to
 
 </p>
-<pre><code>var client = net.connect({path: &#39;/tmp/echo.sock&#39;},</code></pre>
+<pre><code>var client = net.connect({path: &#39;/tmp/echo.sock&#39;});</code></pre>
 <h2>net.connect(port, [host], [connectListener])<span><a class="mark" href="#net_net_connect_port_host_connectlistener" id="net_net_connect_port_host_connectlistener">#</a></span></h2>
 <h2>net.createConnection(port, [host], [connectListener])<span><a class="mark" href="#net_net_createconnection_port_host_connectlistener" id="net_net_createconnection_port_host_connectlistener">#</a></span></h2>
 <p>Creates a TCP connection to <code>port</code> on <code>host</code>. If <code>host</code> is omitted,
@@ -236,7 +236,6 @@ The <code>connectListener</code> parameter will be added as an listener for the
 </p>
 <h2>Class: net.Server<span><a class="mark" href="#net_class_net_server" id="net_class_net_server">#</a></span></h2>
 <p>This class is used to create a TCP or UNIX server.
-A server is a <code>net.Socket</code> that can listen for new incoming connections.
 
 </p>
 <h3>server.listen(port, [host], [backlog], [callback])<span><a class="mark" href="#net_server_listen_port_host_backlog_callback" id="net_server_listen_port_host_backlog_callback">#</a></span></h3>
@@ -419,11 +418,13 @@ and passed to the user through the <code>&#39;connection&#39;</code> event of a 
 
 </p>
 <pre><code>{ fd: null
-  type: null
-  allowHalfOpen: false
+  allowHalfOpen: false,
+  readable: false,
+  writable: false
 }</code></pre>
-<p><code>fd</code> allows you to specify the existing file descriptor of socket. <code>type</code>
-specified underlying protocol. It can be <code>&#39;tcp4&#39;</code>, <code>&#39;tcp6&#39;</code>, or <code>&#39;unix&#39;</code>.
+<p><code>fd</code> allows you to specify the existing file descriptor of socket.
+Set <code>readable</code> and/or <code>writable</code> to <code>true</code> to allow reads and/or writes on this
+socket (NOTE: Works only when <code>fd</code> is passed).
 About <code>allowHalfOpen</code>, refer to <code>createServer()</code> and <code>&#39;end&#39;</code> event.
 
 </p>
@@ -696,7 +697,7 @@ returns 4 for IP version 4 addresses, and returns 6 for IP version 6 addresses.
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

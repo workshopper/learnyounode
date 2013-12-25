@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>process Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>process Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/process.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -54,6 +54,7 @@
 <li><a href="#process_process_stdin">process.stdin</a></li>
 <li><a href="#process_process_argv">process.argv</a></li>
 <li><a href="#process_process_execpath">process.execPath</a></li>
+<li><a href="#process_process_execargv">process.execArgv</a></li>
 <li><a href="#process_process_abort">process.abort()</a></li>
 <li><a href="#process_process_chdir_directory">process.chdir(directory)</a></li>
 <li><a href="#process_process_cwd">process.cwd()</a></li>
@@ -153,10 +154,10 @@ Nine out of ten times nothing happens - but the 10th time, your system is bust.
 </p>
 <h2>Signal Events<span><a class="mark" href="#process_signal_events" id="process_signal_events">#</a></span></h2>
 <!--type=event-->
-<!--name=SIGINT, SIGUSR1, etc.-->
+<!--name=SIGINT, SIGHUP, etc.-->
 
 <p>Emitted when the processes receives a signal. See sigaction(2) for a list of
-standard POSIX signal names such as SIGINT, SIGUSR1, etc.
+standard POSIX signal names such as SIGINT, SIGHUP, etc.
 
 </p>
 <p>Example of listening for <code>SIGINT</code>:
@@ -171,8 +172,37 @@ process.on(&#39;SIGINT&#39;, function() {
 <p>An easy way to send the <code>SIGINT</code> signal is with <code>Control-C</code> in most terminal
 programs.
 
+</p>
+<p>Note:
 
 </p>
+<ul>
+<li><code>SIGUSR1</code> is reserved by node.js to start the debugger.  It&#39;s possible to
+install a listener but that won&#39;t stop the debugger from starting.</li>
+<li><code>SIGTERM</code> and <code>SIGINT</code> have default handlers on non-Windows platforms that resets
+the terminal mode before exiting with code <code>128 + signal number</code>. If one of
+these signals has a listener installed, its default behaviour will be removed
+(node will no longer exit).</li>
+<li><code>SIGPIPE</code> is ignored by default, it can have a listener installed.</li>
+<li><code>SIGHUP</code> is generated on Windows when the console window is closed, and on other
+platforms under various similar conditions, see signal(7). It can have a
+listener installed, however node will be unconditionally terminated by Windows
+about 10 seconds later. On non-Windows platforms, the default behaviour of
+<code>SIGHUP</code> is to terminate node, but once a listener has been installed its
+default behaviour will be removed.</li>
+<li><code>SIGTERM</code> is not supported on Windows, it can be listened on.</li>
+<li><code>SIGINT</code> is supported on all platforms, and can usually be generated with
+<code>CTRL+C</code> (though this may be configurable). It is not generated when terminal
+raw mode is enabled.</li>
+<li><code>SIGBREAK</code> is delivered on Windows when <code>CTRL+BREAK</code> is pressed, on non-Windows
+platforms it can be listened on, but there is no way to send or generate it.</li>
+<li><code>SIGWINCH</code> is delivered when the console has been resized. On Windows, this will
+only happen on write to the console when the cursor is being moved, or when a
+readable tty is used in raw mode.</li>
+<li><code>SIGKILL</code> cannot have a listener installed, it will unconditionally terminate
+node on all platforms.</li>
+<li><code>SIGSTOP</code> cannot have a listener installed.</li>
+</ul>
 <h2>process.stdout<span><a class="mark" href="#process_process_stdout" id="process_process_stdout">#</a></span></h2>
 <p>A <code>Writable Stream</code> to <code>stdout</code>.
 
@@ -261,6 +291,27 @@ process.argv.forEach(function(val, index, array) {
 
 </p>
 <pre><code>/usr/local/bin/node</code></pre>
+<h2>process.execArgv<span><a class="mark" href="#process_process_execargv" id="process_process_execargv">#</a></span></h2>
+<p>This is the set of node-specific command line options from the
+executable that started the process.  These options do not show up in
+<code>process.argv</code>, and do not include the node executable, the name of
+the script, or any options following the script name. These options
+are useful in order to spawn child processes with the same execution
+environment as the parent.
+
+</p>
+<p>Example:
+
+</p>
+<pre><code>$ node --harmony script.js --version</code></pre>
+<p>results in process.execArgv:
+
+</p>
+<pre><code>[&#39;--harmony&#39;]</code></pre>
+<p>and process.argv:
+
+</p>
+<pre><code>[&#39;/usr/local/bin/node&#39;, &#39;script.js&#39;, &#39;--version&#39;]</code></pre>
 <h2>process.abort()<span><a class="mark" href="#process_process_abort" id="process_process_abort">#</a></span></h2>
 <p>This causes node to emit an abort. This will cause node to exit and
 generate a core file.
@@ -456,8 +507,12 @@ the &quot;config.gypi&quot; file that was produced when running the <code>./conf
 <h2>process.kill(pid, [signal])<span><a class="mark" href="#process_process_kill_pid_signal" id="process_process_kill_pid_signal">#</a></span></h2>
 <p>Send a signal to a process. <code>pid</code> is the process id and <code>signal</code> is the
 string describing the signal to send.  Signal names are strings like
-&#39;SIGINT&#39; or &#39;SIGUSR1&#39;.  If omitted, the signal will be &#39;SIGTERM&#39;.
+&#39;SIGINT&#39; or &#39;SIGHUP&#39;.  If omitted, the signal will be &#39;SIGTERM&#39;.
 See kill(2) for more information.
+
+</p>
+<p>Will throw an error if target does not exist, and as a special case, a signal of
+<code>0</code> can be used to test for the existence of a process.
 
 </p>
 <p>Note that just because the name of this function is <code>process.kill</code>, it is
@@ -478,6 +533,10 @@ setTimeout(function() {
 }, 100);
 
 process.kill(process.pid, &#39;SIGHUP&#39;);</code></pre>
+<p>Note: When SIGUSR1 is received by Node.js it starts the debugger, see
+<a href="#process_signal_events">Signal Events</a>.
+
+</p>
 <h2>process.pid<span><a class="mark" href="#process_process_pid" id="process_process_pid">#</a></span></h2>
 <p>The PID of the process.
 
@@ -673,7 +732,7 @@ setTimeout(function() {
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

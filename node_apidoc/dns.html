@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>DNS Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>DNS Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/dns.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -68,7 +68,7 @@
 <pre class="api_stability_3">Stability: 3 - Stable</pre><p>Use <code>require(&#39;dns&#39;)</code> to access this module. All methods in the dns module
 use C-Ares except for <code>dns.lookup</code> which uses <code>getaddrinfo(3)</code> in a thread
 pool. C-Ares is much faster than <code>getaddrinfo</code> but the system resolver is
-more constant with how other programs operate. When a user does
+more consistent with how other programs operate. When a user does
 <code>net.connect(80, &#39;google.com&#39;)</code> or <code>http.get({ host: &#39;google.com&#39; })</code> the
 <code>dns.lookup</code> method is used. Users who need to do a large number of lookups
 quickly should use the methods that go through C-Ares.
@@ -237,7 +237,7 @@ one of the error codes listed below.
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>File System Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>File System Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/fs.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -346,8 +346,8 @@ the completion callback.
 <h2>fs.symlink(srcpath, dstpath, [type], callback)<span><a class="mark" href="#fs_fs_symlink_srcpath_dstpath_type_callback" id="fs_fs_symlink_srcpath_dstpath_type_callback">#</a></span></h2>
 <p>Asynchronous symlink(2). No arguments other than a possible exception are given
 to the completion callback.
-<code>type</code> argument can be either <code>&#39;dir&#39;</code>, <code>&#39;file&#39;</code>, or <code>&#39;junction&#39;</code> (default is <code>&#39;file&#39;</code>).  It is only 
-used on Windows (ignored on other platforms).
+The <code>type</code> argument can be set to <code>&#39;dir&#39;</code>, <code>&#39;file&#39;</code>, or <code>&#39;junction&#39;</code> (default
+is <code>&#39;file&#39;</code>) and is only available on Windows (ignored on other platforms).
 Note that Windows junction points require the destination path to be absolute.  When using
 <code>&#39;junction&#39;</code>, the <code>destination</code> argument will automatically be normalized to absolute path.
 
@@ -446,7 +446,7 @@ An exception occurs if the file does not exist.</p>
 system to bypass the local file system cache.</p>
 <p>This is primarily useful for opening files on NFS mounts as it allows you to
 skip the potentially stale local cache. It has a very real impact on I/O
-performance so don&#39;t use this mode unless you need it.</p>
+performance so don&#39;t use this flag unless you need it.</p>
 <p>Note that this doesn&#39;t turn <code>fs.open()</code> into a synchronous blocking call.
 If that&#39;s what you want then you should be using <code>fs.openSync()</code></p>
 </li>
@@ -456,30 +456,35 @@ synchronously. See notes for <code>&#39;rs&#39;</code> about using this with cau
 <li><p><code>&#39;w&#39;</code> - Open file for writing.
 The file is created (if it does not exist) or truncated (if it exists).</p>
 </li>
-<li><p><code>&#39;wx&#39;</code> - Like <code>&#39;w&#39;</code> but opens the file in exclusive mode.</p>
+<li><p><code>&#39;wx&#39;</code> - Like <code>&#39;w&#39;</code> but fails if <code>path</code> exists.</p>
 </li>
 <li><p><code>&#39;w+&#39;</code> - Open file for reading and writing.
 The file is created (if it does not exist) or truncated (if it exists).</p>
 </li>
-<li><p><code>&#39;wx+&#39;</code> - Like <code>&#39;w+&#39;</code> but opens the file in exclusive mode.</p>
+<li><p><code>&#39;wx+&#39;</code> - Like <code>&#39;w+&#39;</code> but fails if <code>path</code> exists.</p>
 </li>
 <li><p><code>&#39;a&#39;</code> - Open file for appending.
 The file is created if it does not exist.</p>
 </li>
-<li><p><code>&#39;ax&#39;</code> - Like <code>&#39;a&#39;</code> but opens the file in exclusive mode.</p>
+<li><p><code>&#39;ax&#39;</code> - Like <code>&#39;a&#39;</code> but fails if <code>path</code> exists.</p>
 </li>
 <li><p><code>&#39;a+&#39;</code> - Open file for reading and appending.
 The file is created if it does not exist.</p>
 </li>
-<li><p><code>&#39;ax+&#39;</code> - Like <code>&#39;a+&#39;</code> but opens the file in exclusive mode.</p>
+<li><p><code>&#39;ax+&#39;</code> - Like <code>&#39;a+&#39;</code> but fails if <code>path</code> exists.</p>
 </li>
 </ul>
-<p><code>mode</code> defaults to <code>0666</code>. The callback gets two arguments <code>(err, fd)</code>.
+<p><code>mode</code> sets the file mode (permission and sticky bits), but only if the file was
+created. It defaults to <code>0666</code>, readable and writeable.
 
 </p>
-<p>Exclusive mode (<code>O_EXCL</code>) ensures that <code>path</code> is newly created. <code>fs.open()</code>
-fails if a file by that name already exists. On POSIX systems, symlinks are
-not followed. Exclusive mode may or may not work with network file systems.
+<p>The callback gets two arguments <code>(err, fd)</code>.
+
+</p>
+<p>The exclusive flag <code>&#39;x&#39;</code> (<code>O_EXCL</code> flag in open(2)) ensures that <code>path</code> is newly
+created. On POSIX systems, <code>path</code> is considered to exist even if it is a symlink
+to a non-existent file. The exclusive flag may or may not work with network file
+systems.
 
 </p>
 <p>On Linux, positional writes don&#39;t work when the file is opened in append mode.
@@ -488,7 +493,7 @@ the end of the file.
 
 </p>
 <h2>fs.openSync(path, flags, [mode])<span><a class="mark" href="#fs_fs_opensync_path_flags_mode" id="fs_fs_opensync_path_flags_mode">#</a></span></h2>
-<p>Synchronous open(2).
+<p>Synchronous version of <code>fs.open()</code>.
 
 </p>
 <h2>fs.utimes(path, atime, mtime, callback)<span><a class="mark" href="#fs_fs_utimes_path_atime_mtime_callback" id="fs_fs_utimes_path_atime_mtime_callback">#</a></span></h2>
@@ -549,7 +554,7 @@ the end of the file.
 <p><code>buffer</code> is the buffer that the data will be written to.
 
 </p>
-<p><code>offset</code> is offset within the buffer where reading will start.
+<p><code>offset</code> is the offset in the buffer to start writing at.
 
 </p>
 <p><code>length</code> is an integer specifying the number of bytes to read.
@@ -767,6 +772,16 @@ Then call the <code>callback</code> argument with either true or false.  Example
 <pre><code>fs.exists(&#39;/etc/passwd&#39;, function (exists) {
   util.debug(exists ? &quot;it&#39;s there&quot; : &quot;no passwd!&quot;);
 });</code></pre>
+<p><code>fs.exists()</code> is an anachronism and exists only for historical reasons.
+There should almost never be a reason to use it in your own code.
+
+</p>
+<p>In particular, checking if a file exists before opening it is an anti-pattern
+that leaves you vulnerable to race conditions: another process may remove the
+file between the calls to <code>fs.exists()</code> and <code>fs.open()</code>.  Just open the file
+and handle the error when it&#39;s not there.
+
+</p>
 <h2>fs.existsSync(path)<span><a class="mark" href="#fs_fs_existssync_path" id="fs_fs_existssync_path">#</a></span></h2>
 <p>Synchronous version of <code>fs.exists</code>.
 
@@ -928,7 +943,7 @@ See more details in <a href="#fs_fs_watch_filename_options_listener">fs.watch</a
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

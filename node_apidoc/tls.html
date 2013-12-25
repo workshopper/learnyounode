@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>TLS (SSL) Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>TLS (SSL) Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/tls.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -205,9 +205,9 @@ PEM format. (Required)</p>
 <li><p><code>cert</code>: A string or <code>Buffer</code> containing the certificate key of the server in
 PEM format. (Required)</p>
 </li>
-<li><p><code>ca</code>: An array of strings or <code>Buffer</code>s of trusted certificates. If this is
-omitted several well known &quot;root&quot; CAs will be used, like VeriSign.
-These are used to authorize connections.</p>
+<li><p><code>ca</code>: An array of strings or <code>Buffer</code>s of trusted certificates in PEM
+format. If this is omitted several well known &quot;root&quot; CAs will be used,
+like VeriSign. These are used to authorize connections.</p>
 </li>
 <li><p><code>crl</code> : Either a string or list of strings of PEM encoded CRLs (Certificate
 Revocation List)</p>
@@ -361,16 +361,16 @@ PEM format.</p>
 <li><p><code>cert</code>: A string or <code>Buffer</code> containing the certificate key of the client in
 PEM format.</p>
 </li>
-<li><p><code>ca</code>: An array of strings or <code>Buffer</code>s of trusted certificates. If this is
-omitted several well known &quot;root&quot; CAs will be used, like VeriSign.
-These are used to authorize connections.</p>
+<li><p><code>ca</code>: An array of strings or <code>Buffer</code>s of trusted certificates in PEM
+format. If this is omitted several well known &quot;root&quot; CAs will be used,
+like VeriSign. These are used to authorize connections.</p>
 </li>
 <li><p><code>rejectUnauthorized</code>: If <code>true</code>, the server certificate is verified against
 the list of supplied CAs. An <code>&#39;error&#39;</code> event is emitted if verification
 fails. Default: <code>true</code>.</p>
 </li>
-<li><p><code>NPNProtocols</code>: An array of string or <code>Buffer</code> containing supported NPN
-protocols. <code>Buffer</code> should have following format: <code>0x05hello0x05world</code>,
+<li><p><code>NPNProtocols</code>: An array of strings or <code>Buffer</code>s containing supported NPN
+protocols. <code>Buffer</code>s should have following format: <code>0x05hello0x05world</code>,
 where first byte is next protocol name&#39;s length. (Passing array should
 usually be much simpler: <code>[&#39;hello&#39;, &#39;world&#39;]</code>.)</p>
 </li>
@@ -699,7 +699,7 @@ object with three properties, e.g.
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

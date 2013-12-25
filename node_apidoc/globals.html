@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Global Objects Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>Global Objects Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/globals.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -208,8 +208,11 @@ to that module file.
 <li>{Object}</li>
 </ul>
 <p>A reference to the current module. In particular
-<code>module.exports</code> is the same as the <code>exports</code> object.
-<code>module</code> isn&#39;t actually a global but rather local to each module.
+<code>module.exports</code> is used for defining what a module exports and makes
+available through <code>require()</code>.
+
+</p>
+<p><code>module</code> isn&#39;t actually a global but rather local to each module.
 
 </p>
 <p>See the <a href="modules.html">module system documentation</a> for more information.
@@ -218,11 +221,12 @@ to that module file.
 <h2>exports<span><a class="mark" href="#globals_exports" id="globals_exports">#</a></span></h2>
 <!-- type=var -->
 
-<p>A reference to the <code>module.exports</code> object which is shared between all
-instances of the current module and made accessible through <code>require()</code>.
+<p>A reference to the <code>module.exports</code> that is shorter to type.
 See <a href="modules.html">module system documentation</a> for details on when to use <code>exports</code> and
 when to use <code>module.exports</code>.
-<code>exports</code> isn&#39;t actually a global but rather local to each module.
+
+</p>
+<p><code>exports</code> isn&#39;t actually a global but rather local to each module.
 
 </p>
 <p>See the <a href="modules.html">module system documentation</a> for more information.
@@ -292,7 +296,7 @@ will not execute.
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

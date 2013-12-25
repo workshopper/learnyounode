@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Cluster Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>Cluster Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/cluster.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -73,6 +73,7 @@
 <li><a href="#cluster_event_listening_1">Event: &#39;listening&#39;</a></li>
 <li><a href="#cluster_event_disconnect_1">Event: &#39;disconnect&#39;</a></li>
 <li><a href="#cluster_event_exit_1">Event: &#39;exit&#39;</a></li>
+<li><a href="#cluster_event_error">Event: &#39;error&#39;</a></li>
 </ul>
 </li>
 </ul>
@@ -88,7 +89,7 @@ multi-core systems the user will sometimes want to launch a cluster of Node
 processes to handle the load.
 
 </p>
-<p>The cluster module allows you to easily create a network of processes that
+<p>The cluster module allows you to easily create child processes that
 all share server ports.
 
 </p>
@@ -142,7 +143,7 @@ arguments and passes the request to the master process.  If the master
 process already has a listening server matching the worker&#39;s
 requirements, then it passes the handle to the worker.  If it does not
 already have a listening server matching that requirement, then it will
-create one, and pass the handle to the child.
+create one, and pass the handle to the worker.
 
 </p>
 <p>This causes potentially surprising behavior in three edge cases:
@@ -183,7 +184,9 @@ the worker pool for your application&#39;s needs.
 <h2>cluster.settings<span><a class="mark" href="#cluster_cluster_settings" id="cluster_cluster_settings">#</a></span></h2>
 <div class="signature"><ul>
 <li><span class="type">Object</span><ul>
-<li><code>exec</code> <span class="type">String</span> file path to worker file.  (Default=<code>__filename</code>)</li>
+<li><code>execArgv</code> <span class="type">Array</span> list of string arguments passed to the node executable. 
+(Default=<code>process.execArgv</code>)</li>
+<li><code>exec</code> <span class="type">String</span> file path to worker file.  (Default=<code>process.argv[1]</code>)</li>
 <li><code>args</code> <span class="type">Array</span> string arguments passed to worker.
 (Default=<code>process.argv.slice(2)</code>)</li>
 <li><code>silent</code> <span class="type">Boolean</span> whether or not to send output to parent&#39;s stdio.
@@ -191,8 +194,15 @@ the worker pool for your application&#39;s needs.
 </ul>
 </li>
 </div></ul>
-<p>All settings set by the <code>.setupMaster</code> is stored in this settings object.
-This object is not supposed to be changed or set manually, by you.
+<p>After calling <code>.setupMaster()</code> (or <code>.fork()</code>) this settings object will contain
+the settings, including the default values.
+
+</p>
+<p>It is effectively frozen after being set, because <code>.setupMaster()</code> can
+only be called once.
+
+</p>
+<p>This object is not supposed to be changed or set manually, by you.
 
 </p>
 <h2>cluster.isMaster<span><a class="mark" href="#cluster_cluster_ismaster" id="cluster_cluster_ismaster">#</a></span></h2>
@@ -208,9 +218,7 @@ undefined, then <code>isMaster</code> is <code>true</code>.
 <div class="signature"><ul>
 <li><span class="type">Boolean</span></li>
 </div></ul>
-<p>This boolean flag is true if the process is a worker forked from a master.
-If the <code>process.env.NODE_UNIQUE_ID</code> is set to a value, then
-<code>isWorker</code> is <code>true</code>.
+<p>True if the process is not a master (it is the negation of <code>cluster.isMaster</code>).
 
 </p>
 <h2>Event: &#39;fork&#39;<span><a class="mark" href="#cluster_event_fork" id="cluster_event_fork">#</a></span></h2>
@@ -240,11 +248,10 @@ cluster.on(&#39;exit&#39;, function(worker, code, signal) {
 <div class="signature"><ul>
 <li><code>worker</code> <span class="type">Worker object</span></li>
 </div></ul>
-<p>After forking a new worker, the worker should respond with a online message.
-When the master receives a online message it will emit such event.
+<p>After forking a new worker, the worker should respond with an online message.
+When the master receives an online message it will emit this event.
 The difference between &#39;fork&#39; and &#39;online&#39; is that fork is emitted when the
-master tries to fork a worker, and &#39;online&#39; is emitted when the worker is
-being executed.
+master forks a worker, and &#39;online&#39; is emitted when the worker is running.
 
 </p>
 <pre><code>cluster.on(&#39;online&#39;, function(worker) {
@@ -255,9 +262,8 @@ being executed.
 <li><code>worker</code> <span class="type">Worker object</span></li>
 <li><code>address</code> <span class="type">Object</span></li>
 </div></ul>
-<p>When calling <code>listen()</code> from a worker, a &#39;listening&#39; event is automatically assigned
-to the server instance. When the server is listening a message is send to the master
-where the &#39;listening&#39; event is emitted.
+<p>After calling <code>listen()</code> from a worker, when the &#39;listening&#39; event is emitted on
+the server, a listening event will also be emitted on <code>cluster</code> in the master.
 
 </p>
 <p>The event handler is executed with two arguments, the <code>worker</code> contains the worker
@@ -269,19 +275,27 @@ on more than one address.
 <pre><code>cluster.on(&#39;listening&#39;, function(worker, address) {
   console.log(&quot;A worker is now connected to &quot; + address.address + &quot;:&quot; + address.port);
 });</code></pre>
+<p>The <code>addressType</code> is one of:
+
+</p>
+<ul>
+<li><code>4</code> (TCPv4)</li>
+<li><code>6</code> (TCPv6)</li>
+<li><code>-1</code> (unix domain socket)</li>
+<li><code>&quot;udp4&quot;</code> or <code>&quot;udp6&quot;</code> (UDP v4 or v6)</li>
+</ul>
 <h2>Event: &#39;disconnect&#39;<span><a class="mark" href="#cluster_event_disconnect" id="cluster_event_disconnect">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>worker</code> <span class="type">Worker object</span></li>
 </div></ul>
-<p>When a workers IPC channel has disconnected this event is emitted.
-This will happen when the worker dies, usually after calling
-<code>.kill()</code>.
+<p>Emitted after the worker IPC channel has disconnected. This can occur when a
+worker exits gracefully, is killed, or is disconnected manually (such as with
+worker.disconnect()).
 
 </p>
-<p>When calling <code>.disconnect()</code>, there may be a delay between the
-<code>disconnect</code> and <code>exit</code> events.  This event can be used to detect if
-the process is stuck in a cleanup or if there are long-living
-connections.
+<p>There may be a delay between the <code>disconnect</code> and <code>exit</code> events.  These events
+can be used to detect if the process is stuck in a cleanup or if there are
+long-living connections.
 
 </p>
 <pre><code>cluster.on(&#39;disconnect&#39;, function(worker) {
@@ -295,27 +309,27 @@ connections.
 the process to be killed.</li>
 </div></ul>
 <p>When any of the workers die the cluster module will emit the &#39;exit&#39; event.
-This can be used to restart the worker by calling <code>fork()</code> again.
+
+</p>
+<p>This can be used to restart the worker by calling <code>.fork()</code> again.
 
 </p>
 <pre><code>cluster.on(&#39;exit&#39;, function(worker, code, signal) {
-  var exitCode = worker.process.exitCode;
-  console.log(&#39;worker &#39; + worker.process.pid + &#39; died (&#39;+exitCode+&#39;). restarting...&#39;);
+  console.log(&#39;worker %d died (%s). restarting...&#39;,
+    worker.process.pid, signal || code);
   cluster.fork();
 });</code></pre>
+<p>See <a href="child_process.html#child_process_event_exit">child_process event: &#39;exit&#39;</a>.
+
+</p>
 <h2>Event: &#39;setup&#39;<span><a class="mark" href="#cluster_event_setup" id="cluster_event_setup">#</a></span></h2>
-<div class="signature"><ul>
-<li><code>worker</code> <span class="type">Worker object</span></li>
-</div></ul>
-<p>When the <code>.setupMaster()</code> function has been executed this event emits.
-If <code>.setupMaster()</code> was not executed before <code>fork()</code> this function will
-call <code>.setupMaster()</code> with no arguments.
+<p>Emitted the first time that <code>.setupMaster()</code> is called.
 
 </p>
 <h2>cluster.setupMaster([settings])<span><a class="mark" href="#cluster_cluster_setupmaster_settings" id="cluster_cluster_setupmaster_settings">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>settings</code> <span class="type">Object</span><ul>
-<li><code>exec</code> <span class="type">String</span> file path to worker file.  (Default=<code>__filename</code>)</li>
+<li><code>exec</code> <span class="type">String</span> file path to worker file.  (Default=<code>process.argv[1]</code>)</li>
 <li><code>args</code> <span class="type">Array</span> string arguments passed to worker.
 (Default=<code>process.argv.slice(2)</code>)</li>
 <li><code>silent</code> <span class="type">Boolean</span> whether or not to send output to parent&#39;s stdio.
@@ -323,10 +337,22 @@ call <code>.setupMaster()</code> with no arguments.
 </ul>
 </li>
 </div></ul>
-<p><code>setupMaster</code> is used to change the default &#39;fork&#39; behavior. The new settings
-are effective immediately and permanently, they cannot be changed later on.
+<p><code>setupMaster</code> is used to change the default &#39;fork&#39; behavior. Once called,
+the settings will be present in <code>cluster.settings</code>.
 
 </p>
+<p>Note that:
+
+</p>
+<ul>
+<li>Only the first call to <code>.setupMaster()</code> has any effect, subsequent calls are
+ignored</li>
+<li>That because of the above, the <em>only</em> attribute of a worker that may be
+customized per-worker is the <code>env</code> passed to <code>.fork()</code></li>
+<li><code>.fork()</code> calls <code>.setupMaster()</code> internally to establish the defaults, so to
+have any effect, <code>.setupMaster()</code> must be called <em>before</em> any calls to
+<code>.fork()</code></li>
+</ul>
 <p>Example:
 
 </p>
@@ -337,24 +363,36 @@ cluster.setupMaster({
   silent : true
 });
 cluster.fork();</code></pre>
+<p>This can only be called from the master process.
+
+</p>
 <h2>cluster.fork([env])<span><a class="mark" href="#cluster_cluster_fork_env" id="cluster_cluster_fork_env">#</a></span></h2>
 <div class="signature"><ul>
-<li><code>env</code> <span class="type">Object</span> Key/value pairs to add to child process environment.</li>
+<li><code>env</code> <span class="type">Object</span> Key/value pairs to add to worker process environment.</li>
 <li>return <span class="type">Worker object</span></li>
 </div></ul>
-<p>Spawn a new worker process. This can only be called from the master process.
+<p>Spawn a new worker process.
+
+</p>
+<p>This can only be called from the master process.
 
 </p>
 <h2>cluster.disconnect([callback])<span><a class="mark" href="#cluster_cluster_disconnect_callback" id="cluster_cluster_disconnect_callback">#</a></span></h2>
 <div class="signature"><ul>
-<li><code>callback</code> <span class="type">Function</span> called when all workers are disconnected and handlers are closed</li>
+<li><code>callback</code> <span class="type">Function</span> called when all workers are disconnected and handles are
+closed</li>
 </div></ul>
-<p>When calling this method, all workers will commit a graceful suicide. When they are
-disconnected all internal handlers will be closed, allowing the master process to
-die graceful if no other event is waiting.
+<p>Calls <code>.disconnect()</code> on each worker in <code>cluster.workers</code>.
+
+</p>
+<p>When they are disconnected all internal handles will be closed, allowing the
+master process to die gracefully if no other event is waiting.
 
 </p>
 <p>The method takes an optional callback argument which will be called when finished.
+
+</p>
+<p>This can only be called from the master process.
 
 </p>
 <h2>cluster.worker<span><a class="mark" href="#cluster_cluster_worker" id="cluster_cluster_worker">#</a></span></h2>
@@ -380,6 +418,10 @@ if (cluster.isMaster) {
 <p>A hash that stores the active worker objects, keyed by <code>id</code> field. Makes it
 easy to loop through all the workers. It is only available in the master
 process.
+
+</p>
+<p>A worker is removed from cluster.workers just before the <code>&#39;disconnect&#39;</code> or
+<code>&#39;exit&#39;</code> event is emitted.
 
 </p>
 <pre><code>// Go through all workers
@@ -421,21 +463,37 @@ cluster.workers
 <li><span class="type">ChildProcess object</span></li>
 </div></ul>
 <p>All workers are created using <code>child_process.fork()</code>, the returned object
-from this function is stored in process.
+from this function is stored as <code>.process</code>. In a worker, the global <code>process</code>
+is stored.
 
 </p>
-<p>See: <a href="child_process.html">Child Process module</a>
+<p>See: <a href="child_process.html#child_process_child_process_fork_modulepath_args_options">Child Process module</a>
+
+</p>
+<p>Note that workers will call <code>process.exit(0)</code> if the <code>&#39;disconnect&#39;</code> event occurs
+on <code>process</code> and <code>.suicide</code> is not <code>true</code>. This protects against accidental
+disconnection.
 
 </p>
 <h3>worker.suicide<span><a class="mark" href="#cluster_worker_suicide" id="cluster_worker_suicide">#</a></span></h3>
 <div class="signature"><ul>
 <li><span class="type">Boolean</span></li>
 </div></ul>
-<p>This property is a boolean. It is set when a worker dies after calling
-<code>.kill()</code> or immediately after calling the <code>.disconnect()</code> method.
-Until then it is <code>undefined</code>.
+<p>Set by calling <code>.kill()</code> or <code>.disconnect()</code>, until then it is <code>undefined</code>.
 
 </p>
+<p>The boolean <code>worker.suicide</code> lets you distinguish between voluntary and accidental
+exit, the master may choose not to respawn a worker based on this value.
+
+</p>
+<pre><code>cluster.on(&#39;exit&#39;, function(worker, code, signal) {
+  if (worker.suicide === true) {
+    console.log(&#39;Oh, it was just suicide\&#39; – no need to worry&#39;).
+  }
+});
+
+// kill worker
+worker.kill();</code></pre>
 <h3>worker.send(message, [sendHandle])<span><a class="mark" href="#cluster_worker_send_message_sendhandle" id="cluster_worker_send_message_sendhandle">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>message</code> <span class="type">Object</span></li>
@@ -443,8 +501,10 @@ Until then it is <code>undefined</code>.
 </div></ul>
 <p>This function is equal to the send methods provided by
 <code>child_process.fork()</code>.  In the master you should use this function to
-send a message to a specific worker.  However in a worker you can also use
-<code>process.send(message)</code>, since this is the same function.
+send a message to a specific worker.
+
+</p>
+<p>In a worker you can also use <code>process.send(message)</code>, it is the same function.
 
 </p>
 <p>This example will echo back all messages from the master:
@@ -464,36 +524,53 @@ send a message to a specific worker.  However in a worker you can also use
 <li><code>signal</code> <span class="type">String</span> Name of the kill signal to send to the worker
 process.</li>
 </div></ul>
-<p>This function will kill the worker, and inform the master to not spawn a
-new worker.  The boolean <code>suicide</code> lets you distinguish between voluntary
-and accidental exit.
+<p>This function will kill the worker. In the master, it does this by disconnecting
+the <code>worker.process</code>, and once disconnected, killing with <code>signal</code>. In the
+worker, it does it by disconnecting the channel, and then exiting with code <code>0</code>.
 
 </p>
-<pre><code>cluster.on(&#39;exit&#39;, function(worker, code, signal) {
-  if (worker.suicide === true) {
-    console.log(&#39;Oh, it was just suicide\&#39; – no need to worry&#39;).
-  }
-});
+<p>Causes <code>.suicide</code> to be set.
 
-// kill worker
-worker.kill();</code></pre>
-<p>This method is aliased as <code>worker.destroy()</code> for backwards
-compatibility.
+</p>
+<p>This method is aliased as <code>worker.destroy()</code> for backwards compatibility.
+
+</p>
+<p>Note that in a worker, <code>process.kill()</code> exists, but it is not this function,
+it is <a href="process.html#process_process_kill_pid_signal">kill</a>.
 
 </p>
 <h3>worker.disconnect()<span><a class="mark" href="#cluster_worker_disconnect" id="cluster_worker_disconnect">#</a></span></h3>
-<p>When calling this function the worker will no longer accept new connections, but
-they will be handled by any other listening worker. Existing connection will be
-allowed to exit as usual. When no more connections exist, the IPC channel to the worker
-will close allowing it to die graceful. When the IPC channel is closed the <code>disconnect</code>
-event will emit, this is then followed by the <code>exit</code> event, there is emitted when
-the worker finally die.
+<p>In a worker, this function will close all servers, wait for the &#39;close&#39; event on
+those servers, and then disconnect the IPC channel.
 
 </p>
-<p>Because there might be long living connections, it is useful to implement a timeout.
-This example ask the worker to disconnect and after 2 seconds it will destroy the
-server. An alternative would be to execute <code>worker.kill()</code> after 2 seconds, but
-that would normally not allow the worker to do any cleanup if needed.
+<p>In the master, an internal message is sent to the worker causing it to call
+<code>.disconnect()</code> on itself.
+
+</p>
+<p>Causes <code>.suicide</code> to be set.
+
+</p>
+<p>Note that after a server is closed, it will no longer accept new connections,
+but connections may be accepted by any other listening worker. Existing
+connections will be allowed to close as usual. When no more connections exist,
+see <a href="net.html#net_event_close">server.close()</a>, the IPC channel to the worker
+will close allowing it to die gracefully.
+
+</p>
+<p>The above applies <em>only</em> to server connections, client connections are not
+automatically closed by workers, and disconnect does not wait for them to close
+before exiting.
+
+</p>
+<p>Note that in a worker, <code>process.disconnect</code> exists, but it is not this function,
+it is <a href="child_process.html#child_process_child_disconnect">disconnect</a>.
+
+</p>
+<p>Because long living server connections may block workers from disconnecting, it
+may be useful to send a message, so application specific actions may be taken to
+close them. It also may be useful to implement a timeout, killing a worker if
+the <code>disconnect</code> event has not been emitted after some time.
 
 </p>
 <pre><code>if (cluster.isMaster) {
@@ -501,9 +578,10 @@ that would normally not allow the worker to do any cleanup if needed.
   var timeout;
 
   worker.on(&#39;listening&#39;, function(address) {
+    worker.send(&#39;shutdown&#39;);
     worker.disconnect();
     timeout = setTimeout(function() {
-      worker.send(&#39;force kill&#39;);
+      worker.kill();
     }, 2000);
   });
 
@@ -514,18 +592,14 @@ that would normally not allow the worker to do any cleanup if needed.
 } else if (cluster.isWorker) {
   var net = require(&#39;net&#39;);
   var server = net.createServer(function(socket) {
-    // connection never end
+    // connections never end
   });
 
   server.listen(8000);
 
-  server.on(&#39;close&#39;, function() {
-    // cleanup
-  });
-
   process.on(&#39;message&#39;, function(msg) {
-    if (msg === &#39;force kill&#39;) {
-      server.close();
+    if(msg === &#39;shutdown&#39;) {
+      // initiate graceful close of any connections to server
     }
   });
 }</code></pre>
@@ -534,8 +608,9 @@ that would normally not allow the worker to do any cleanup if needed.
 <li><code>message</code> <span class="type">Object</span></li>
 </div></ul>
 <p>This event is the same as the one provided by <code>child_process.fork()</code>.
-In the master you should use this event, however in a worker you can also use
-<code>process.on(&#39;message&#39;)</code>
+
+</p>
+<p>In a worker you can also use <code>process.on(&#39;message&#39;)</code>.
 
 </p>
 <p>As an example, here is a cluster that keeps count of the number of requests
@@ -582,27 +657,30 @@ if (cluster.isMaster) {
   }).listen(8000);
 }</code></pre>
 <h3>Event: &#39;online&#39;<span><a class="mark" href="#cluster_event_online_1" id="cluster_event_online_1">#</a></span></h3>
-<p>Same as the <code>cluster.on(&#39;online&#39;)</code> event, but emits only when the state change
-on the specified worker.
+<p>Similar to the <code>cluster.on(&#39;online&#39;)</code> event, but specific to this worker.
 
 </p>
 <pre><code>cluster.fork().on(&#39;online&#39;, function() {
   // Worker is online
 });</code></pre>
+<p>It is not emitted in the worker.
+
+</p>
 <h3>Event: &#39;listening&#39;<span><a class="mark" href="#cluster_event_listening_1" id="cluster_event_listening_1">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>address</code> <span class="type">Object</span></li>
 </div></ul>
-<p>Same as the <code>cluster.on(&#39;listening&#39;)</code> event, but emits only when the state change
-on the specified worker.
+<p>Similar to the <code>cluster.on(&#39;listening&#39;)</code> event, but specific to this worker.
 
 </p>
 <pre><code>cluster.fork().on(&#39;listening&#39;, function(address) {
   // Worker is listening
 });</code></pre>
+<p>It is not emitted in the worker.
+
+</p>
 <h3>Event: &#39;disconnect&#39;<span><a class="mark" href="#cluster_event_disconnect_1" id="cluster_event_disconnect_1">#</a></span></h3>
-<p>Same as the <code>cluster.on(&#39;disconnect&#39;)</code> event, but emits only when the state change
-on the specified worker.
+<p>Similar to the <code>cluster.on(&#39;disconnect&#39;)</code> event, but specfic to this worker.
 
 </p>
 <pre><code>cluster.fork().on(&#39;disconnect&#39;, function() {
@@ -614,8 +692,7 @@ on the specified worker.
 <li><code>signal</code> <span class="type">String</span> the name of the signal (eg. <code>&#39;SIGHUP&#39;</code>) that caused
 the process to be killed.</li>
 </div></ul>
-<p>Emitted by the individual worker instance, when the underlying child process
-is terminated.  See <a href="child_process.html#child_process_event_exit">child_process event: &#39;exit&#39;</a>.
+<p>Similar to the <code>cluster.on(&#39;exit&#39;)</code> event, but specific to this worker.
 
 </p>
 <pre><code>var worker = cluster.fork();
@@ -628,6 +705,12 @@ worker.on(&#39;exit&#39;, function(code, signal) {
     console.log(&quot;worker success!&quot;);
   }
 });</code></pre>
+<h3>Event: &#39;error&#39;<span><a class="mark" href="#cluster_event_error" id="cluster_event_error">#</a></span></h3>
+<p>This event is the same as the one provided by <code>child_process.fork()</code>.
+
+</p>
+<p>In a worker you can also use <code>process.on(&#39;error&#39;)</code>.
+</p>
 
           </div>
         </div>
@@ -647,7 +730,7 @@ worker.on(&#39;exit&#39;, function(code, signal) {
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

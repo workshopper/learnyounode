@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>About this Documentation Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>About this Documentation Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/all.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -106,7 +106,10 @@
 </ul>
 </li>
 <li><a href="#all_the_module_object">The <code>module</code> Object</a><ul>
-<li><a href="#all_module_exports">module.exports</a></li>
+<li><a href="#all_module_exports">module.exports</a><ul>
+<li><a href="#all_exports_alias">exports alias</a></li>
+</ul>
+</li>
 <li><a href="#all_module_require_id">module.require(id)</a></li>
 <li><a href="#all_module_id">module.id</a></li>
 <li><a href="#all_module_filename">module.filename</a></li>
@@ -144,6 +147,7 @@
 <li><a href="#all_process_stdin">process.stdin</a></li>
 <li><a href="#all_process_argv">process.argv</a></li>
 <li><a href="#all_process_execpath">process.execPath</a></li>
+<li><a href="#all_process_execargv">process.execArgv</a></li>
 <li><a href="#all_process_abort">process.abort()</a></li>
 <li><a href="#all_process_chdir_directory">process.chdir(directory)</a></li>
 <li><a href="#all_process_cwd">process.cwd()</a></li>
@@ -227,6 +231,8 @@
 <li><a href="#all_example_1">Example</a></li>
 </ul>
 </li>
+<li><a href="#all_domain_enter">domain.enter()</a></li>
+<li><a href="#all_domain_exit">domain.exit()</a></li>
 <li><a href="#all_domain_dispose">domain.dispose()</a></li>
 </ul>
 </li>
@@ -308,6 +314,7 @@
 <li><a href="#all_event_finish">Event: &#39;finish&#39;</a></li>
 <li><a href="#all_event_pipe">Event: &#39;pipe&#39;</a></li>
 <li><a href="#all_event_unpipe">Event: &#39;unpipe&#39;</a></li>
+<li><a href="#all_event_error_1">Event: &#39;error&#39;</a></li>
 </ul>
 </li>
 <li><a href="#all_class_stream_duplex">Class: stream.Duplex</a></li>
@@ -558,7 +565,7 @@
 <li><a href="#all_class_fs_fswatcher">Class: fs.FSWatcher</a><ul>
 <li><a href="#all_watcher_close">watcher.close()</a></li>
 <li><a href="#all_event_change">Event: &#39;change&#39;</a></li>
-<li><a href="#all_event_error_1">Event: &#39;error&#39;</a></li>
+<li><a href="#all_event_error_2">Event: &#39;error&#39;</a></li>
 </ul>
 </li>
 </ul>
@@ -597,7 +604,7 @@
 <li><a href="#all_event_listening">Event: &#39;listening&#39;</a></li>
 <li><a href="#all_event_connection">Event: &#39;connection&#39;</a></li>
 <li><a href="#all_event_close_1">Event: &#39;close&#39;</a></li>
-<li><a href="#all_event_error_2">Event: &#39;error&#39;</a></li>
+<li><a href="#all_event_error_3">Event: &#39;error&#39;</a></li>
 </ul>
 </li>
 <li><a href="#all_class_net_socket">Class: net.Socket</a><ul>
@@ -628,7 +635,7 @@
 <li><a href="#all_event_end_1">Event: &#39;end&#39;</a></li>
 <li><a href="#all_event_timeout">Event: &#39;timeout&#39;</a></li>
 <li><a href="#all_event_drain_1">Event: &#39;drain&#39;</a></li>
-<li><a href="#all_event_error_3">Event: &#39;error&#39;</a></li>
+<li><a href="#all_event_error_4">Event: &#39;error&#39;</a></li>
 <li><a href="#all_event_close_2">Event: &#39;close&#39;</a></li>
 </ul>
 </li>
@@ -643,7 +650,7 @@
 <li><a href="#all_event_message">Event: &#39;message&#39;</a></li>
 <li><a href="#all_event_listening_1">Event: &#39;listening&#39;</a></li>
 <li><a href="#all_event_close_3">Event: &#39;close&#39;</a></li>
-<li><a href="#all_event_error_4">Event: &#39;error&#39;</a></li>
+<li><a href="#all_event_error_5">Event: &#39;error&#39;</a></li>
 <li><a href="#all_socket_send_buf_offset_length_port_address_callback">socket.send(buf, offset, length, port, address, [callback])</a></li>
 <li><a href="#all_socket_bind_port_address_callback">socket.bind(port, [address], [callback])</a></li>
 <li><a href="#all_socket_close">socket.close()</a></li>
@@ -697,6 +704,7 @@
 </li>
 <li><a href="#all_class_http_serverresponse">Class: http.ServerResponse</a><ul>
 <li><a href="#all_event_close_5">Event: &#39;close&#39;</a></li>
+<li><a href="#all_event_finish_1">Event: &#39;finish&#39;</a></li>
 <li><a href="#all_response_writecontinue">response.writeContinue()</a></li>
 <li><a href="#all_response_writehead_statuscode_reasonphrase_headers">response.writeHead(statusCode, [reasonPhrase], [headers])</a></li>
 <li><a href="#all_response_settimeout_msecs_callback">response.setTimeout(msecs, callback)</a></li>
@@ -711,8 +719,8 @@
 <li><a href="#all_response_end_data_encoding">response.end([data], [encoding])</a></li>
 </ul>
 </li>
-<li><a href="#all_http_request_options_callback">http.request(options, callback)</a></li>
-<li><a href="#all_http_get_options_callback">http.get(options, callback)</a></li>
+<li><a href="#all_http_request_options_callback">http.request(options, [callback])</a></li>
+<li><a href="#all_http_get_options_callback">http.get(options, [callback])</a></li>
 <li><a href="#all_class_http_agent">Class: http.Agent</a><ul>
 <li><a href="#all_agent_maxsockets">agent.maxSockets</a></li>
 <li><a href="#all_agent_sockets">agent.sockets</a></li>
@@ -842,7 +850,7 @@
 </li>
 <li><a href="#all_child_process">Child Process</a><ul>
 <li><a href="#all_class_childprocess">Class: ChildProcess</a><ul>
-<li><a href="#all_event_error_5">Event:  &#39;error&#39;</a></li>
+<li><a href="#all_event_error_6">Event:  &#39;error&#39;</a></li>
 <li><a href="#all_event_exit_2">Event:  &#39;exit&#39;</a></li>
 <li><a href="#all_event_close_8">Event: &#39;close&#39;</a></li>
 <li><a href="#all_event_disconnect">Event: &#39;disconnect&#39;</a></li>
@@ -851,6 +859,7 @@
 <li><a href="#all_child_stdout">child.stdout</a></li>
 <li><a href="#all_child_stderr">child.stderr</a></li>
 <li><a href="#all_child_pid">child.pid</a></li>
+<li><a href="#all_child_connected">child.connected</a></li>
 <li><a href="#all_child_kill_signal">child.kill([signal])</a></li>
 <li><a href="#all_child_send_message_sendhandle">child.send(message, [sendHandle])</a><ul>
 <li><a href="#all_example_sending_server_object">Example: sending server object</a></li>
@@ -988,6 +997,7 @@
 <li><a href="#all_event_listening_3">Event: &#39;listening&#39;</a></li>
 <li><a href="#all_event_disconnect_2">Event: &#39;disconnect&#39;</a></li>
 <li><a href="#all_event_exit_4">Event: &#39;exit&#39;</a></li>
+<li><a href="#all_event_error_7">Event: &#39;error&#39;</a></li>
 </ul>
 </li>
 </ul>
@@ -1220,8 +1230,11 @@ to that module file.
 <li>{Object}</li>
 </ul>
 <p>A reference to the current module. In particular
-<code>module.exports</code> is the same as the <code>exports</code> object.
-<code>module</code> isn&#39;t actually a global but rather local to each module.
+<code>module.exports</code> is used for defining what a module exports and makes
+available through <code>require()</code>.
+
+</p>
+<p><code>module</code> isn&#39;t actually a global but rather local to each module.
 
 </p>
 <p>See the <a href="modules.html">module system documentation</a> for more information.
@@ -1230,11 +1243,12 @@ to that module file.
 <h2>exports<span><a class="mark" href="#all_exports" id="all_exports">#</a></span></h2>
 <!-- type=var -->
 
-<p>A reference to the <code>module.exports</code> object which is shared between all
-instances of the current module and made accessible through <code>require()</code>.
+<p>A reference to the <code>module.exports</code> that is shorter to type.
 See <a href="modules.html">module system documentation</a> for details on when to use <code>exports</code> and
 when to use <code>module.exports</code>.
-<code>exports</code> isn&#39;t actually a global but rather local to each module.
+
+</p>
+<p><code>exports</code> isn&#39;t actually a global but rather local to each module.
 
 </p>
 <p>See the <a href="modules.html">module system documentation</a> for more information.
@@ -1453,29 +1467,37 @@ exports.circumference = function (r) {
   return 2 * PI * r;
 };</code></pre>
 <p>The module <code>circle.js</code> has exported the functions <code>area()</code> and
-<code>circumference()</code>.  To export an object, add to the special <code>exports</code>
-object.
+<code>circumference()</code>.  To add functions and objects to the root of your module,
+you can add them to the special <code>exports</code> object.
 
 </p>
-<p>Note that <code>exports</code> is a reference to <code>module.exports</code> making it suitable
-for augmentation only. If you are exporting a single item such as a
-constructor you will want to use <code>module.exports</code> directly instead.
+<p>Variables local to the module will be private, as though the module was wrapped
+in a function. In this example the variable <code>PI</code> is private to <code>circle.js</code>.
 
 </p>
-<pre><code>function MyConstructor (opts) {
-  //...
-}
-
-// BROKEN: Does not modify exports
-exports = MyConstructor;
-
-// exports the constructor properly
-module.exports = MyConstructor;</code></pre>
-<p>Variables
-local to the module will be private. In this example the variable <code>PI</code> is
-private to <code>circle.js</code>.
+<p>If you want the root of your module&#39;s export to be a function (such as a
+constructor) or if you want to export a complete object in one assignment
+instead of building it one property at a time, assign it to <code>module.exports</code>
+instead of <code>exports</code>.
 
 </p>
+<p>Below, <code>bar.js</code> makes use of the <code>square</code> module, which exports a constructor:
+
+</p>
+<pre><code>var square = require(&#39;./square.js&#39;);
+var mySquare = square(2);
+console.log(&#39;The area of my square is &#39; + mySquare.area());</code></pre>
+<p>The <code>square</code> module is defined in <code>square.js</code>:
+
+</p>
+<pre><code>// assigning to exports will not modify module, must use module.exports
+module.exports = function(width) {
+  return {
+    area: function() {
+      return width * width;
+    }
+  };
+}</code></pre>
 <p>The module system is implemented in the <code>require(&quot;module&quot;)</code> module.
 
 </p>
@@ -1681,9 +1703,9 @@ would resolve to different files.
 <li>{Object}</li>
 </ul>
 <p>In each module, the <code>module</code> free variable is a reference to the object
-representing the current module.  In particular
-<code>module.exports</code> is accessible via the <code>exports</code> module-global.
-<code>module</code> isn&#39;t actually a global but rather local to each module.
+representing the current module.  For convenience, <code>module.exports</code> is
+also accessible via the <code>exports</code> module-global. <code>module</code> isn&#39;t actually
+a global but rather local to each module.
 
 </p>
 <h3>module.exports<span><a class="mark" href="#all_module_exports" id="all_module_exports">#</a></span></h3>
@@ -1691,9 +1713,13 @@ representing the current module.  In particular
 <li><span class="type">Object</span></li>
 </div></ul>
 <p>The <code>module.exports</code> object is created by the Module system. Sometimes this is not
-acceptable, many want their module to be an instance of some class. To do this
-assign the desired export object to <code>module.exports</code>. For example suppose we
-were making a module called <code>a.js</code>
+acceptable; many want their module to be an instance of some class. To do this
+assign the desired export object to <code>module.exports</code>. Note that assigning the
+desired object to <code>exports</code> will simply rebind the local <code>exports</code> variable,
+which is probably not what you want to do.
+
+</p>
+<p>For example suppose we were making a module called <code>a.js</code>
 
 </p>
 <pre><code>var EventEmitter = require(&#39;events&#39;).EventEmitter;
@@ -1727,6 +1753,30 @@ done in any callbacks.  This does not work:
 </p>
 <pre><code>var x = require(&#39;./x&#39;);
 console.log(x.a);</code></pre>
+<h4>exports alias<span><a class="mark" href="#all_exports_alias" id="all_exports_alias">#</a></span></h4>
+<p>The <code>exports</code> variable that is available within a module starts as a reference
+to <code>module.exports</code>. As with any variable, if you assign a new value to it, it
+is no longer bound to the previous value.
+
+</p>
+<p>To illustrate the behaviour, imagine this hypothetical implementation of
+<code>require()</code>:
+
+</p>
+<pre><code>function require(...) {
+  // ...
+  function (module, exports) {
+    // Your module code here
+    exports = some_func;        // re-assigns exports, exports is no longer
+                                // a shortcut, and nothing is exported.
+    module.exports = some_func; // makes your module export 0
+  } (module, module.exports);
+  return module;
+}</code></pre>
+<p>As a guideline, if the relationship between <code>exports</code> and <code>module.exports</code>
+seems like magic to you, ignore <code>exports</code> and only use <code>module.exports</code>.
+
+</p>
 <h3>module.require(id)<span><a class="mark" href="#all_module_require_id" id="all_module_require_id">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>id</code> <span class="type">String</span></li>
@@ -2270,12 +2320,13 @@ class MyObject : public node::ObjectWrap {
   static void Init(v8::Handle&lt;v8::Object&gt; exports);
 
  private:
-  MyObject();
+  explicit MyObject(double value = 0);
   ~MyObject();
 
   static v8::Handle&lt;v8::Value&gt; New(const v8::Arguments&amp; args);
   static v8::Handle&lt;v8::Value&gt; PlusOne(const v8::Arguments&amp; args);
-  double counter_;
+  static v8::Persistent&lt;v8::Function&gt; constructor;
+  double value_;
 };
 
 #endif</code></pre>
@@ -2290,8 +2341,13 @@ prototype:
 
 using namespace v8;
 
-MyObject::MyObject() {};
-MyObject::~MyObject() {};
+Persistent&lt;Function&gt; MyObject::constructor;
+
+MyObject::MyObject(double value) : value_(value) {
+}
+
+MyObject::~MyObject() {
+}
 
 void MyObject::Init(Handle&lt;Object&gt; exports) {
   // Prepare constructor template
@@ -2301,28 +2357,34 @@ void MyObject::Init(Handle&lt;Object&gt; exports) {
   // Prototype
   tpl-&gt;PrototypeTemplate()-&gt;Set(String::NewSymbol(&quot;plusOne&quot;),
       FunctionTemplate::New(PlusOne)-&gt;GetFunction());
-
-  Persistent&lt;Function&gt; constructor = Persistent&lt;Function&gt;::New(tpl-&gt;GetFunction());
+  constructor = Persistent&lt;Function&gt;::New(tpl-&gt;GetFunction());
   exports-&gt;Set(String::NewSymbol(&quot;MyObject&quot;), constructor);
 }
 
 Handle&lt;Value&gt; MyObject::New(const Arguments&amp; args) {
   HandleScope scope;
 
-  MyObject* obj = new MyObject();
-  obj-&gt;counter_ = args[0]-&gt;IsUndefined() ? 0 : args[0]-&gt;NumberValue();
-  obj-&gt;Wrap(args.This());
-
-  return args.This();
+  if (args.IsConstructCall()) {
+    // Invoked as constructor: `new MyObject(...)`
+    double value = args[0]-&gt;IsUndefined() ? 0 : args[0]-&gt;NumberValue();
+    MyObject* obj = new MyObject(value);
+    obj-&gt;Wrap(args.This());
+    return args.This();
+  } else {
+    // Invoked as plain function `MyObject(...)`, turn into construct call.
+    const int argc = 1;
+    Local&lt;Value&gt; argv[argc] = { args[0] };
+    return scope.Close(constructor-&gt;NewInstance(argc, argv));
+  }
 }
 
 Handle&lt;Value&gt; MyObject::PlusOne(const Arguments&amp; args) {
   HandleScope scope;
 
   MyObject* obj = ObjectWrap::Unwrap&lt;MyObject&gt;(args.This());
-  obj-&gt;counter_ += 1;
+  obj-&gt;value_ += 1;
 
-  return scope.Close(Number::New(obj-&gt;counter_));
+  return scope.Close(Number::New(obj-&gt;value_));
 }</code></pre>
 <p>Test it with:
 
@@ -2379,13 +2441,13 @@ class MyObject : public node::ObjectWrap {
   static v8::Handle&lt;v8::Value&gt; NewInstance(const v8::Arguments&amp; args);
 
  private:
-  MyObject();
+  explicit MyObject(double value = 0);
   ~MyObject();
 
-  static v8::Persistent&lt;v8::Function&gt; constructor;
   static v8::Handle&lt;v8::Value&gt; New(const v8::Arguments&amp; args);
   static v8::Handle&lt;v8::Value&gt; PlusOne(const v8::Arguments&amp; args);
-  double counter_;
+  static v8::Persistent&lt;v8::Function&gt; constructor;
+  double value_;
 };
 
 #endif</code></pre>
@@ -2398,10 +2460,13 @@ class MyObject : public node::ObjectWrap {
 
 using namespace v8;
 
-MyObject::MyObject() {};
-MyObject::~MyObject() {};
-
 Persistent&lt;Function&gt; MyObject::constructor;
+
+MyObject::MyObject(double value) : value_(value) {
+}
+
+MyObject::~MyObject() {
+}
 
 void MyObject::Init() {
   // Prepare constructor template
@@ -2411,18 +2476,24 @@ void MyObject::Init() {
   // Prototype
   tpl-&gt;PrototypeTemplate()-&gt;Set(String::NewSymbol(&quot;plusOne&quot;),
       FunctionTemplate::New(PlusOne)-&gt;GetFunction());
-
   constructor = Persistent&lt;Function&gt;::New(tpl-&gt;GetFunction());
 }
 
 Handle&lt;Value&gt; MyObject::New(const Arguments&amp; args) {
   HandleScope scope;
 
-  MyObject* obj = new MyObject();
-  obj-&gt;counter_ = args[0]-&gt;IsUndefined() ? 0 : args[0]-&gt;NumberValue();
-  obj-&gt;Wrap(args.This());
-
-  return args.This();
+  if (args.IsConstructCall()) {
+    // Invoked as constructor: `new MyObject(...)`
+    double value = args[0]-&gt;IsUndefined() ? 0 : args[0]-&gt;NumberValue();
+    MyObject* obj = new MyObject(value);
+    obj-&gt;Wrap(args.This());
+    return args.This();
+  } else {
+    // Invoked as plain function `MyObject(...)`, turn into construct call.
+    const int argc = 1;
+    Local&lt;Value&gt; argv[argc] = { args[0] };
+    return scope.Close(constructor-&gt;NewInstance(argc, argv));
+  }
 }
 
 Handle&lt;Value&gt; MyObject::NewInstance(const Arguments&amp; args) {
@@ -2439,9 +2510,9 @@ Handle&lt;Value&gt; MyObject::PlusOne(const Arguments&amp; args) {
   HandleScope scope;
 
   MyObject* obj = ObjectWrap::Unwrap&lt;MyObject&gt;(args.This());
-  obj-&gt;counter_ += 1;
+  obj-&gt;value_ += 1;
 
-  return scope.Close(Number::New(obj-&gt;counter_));
+  return scope.Close(Number::New(obj-&gt;value_));
 }</code></pre>
 <p>Test it with:
 
@@ -2483,7 +2554,7 @@ Handle&lt;Value&gt; Add(const Arguments&amp; args) {
   MyObject* obj2 = node::ObjectWrap::Unwrap&lt;MyObject&gt;(
       args[1]-&gt;ToObject());
 
-  double sum = obj1-&gt;Val() + obj2-&gt;Val();
+  double sum = obj1-&gt;Value() + obj2-&gt;Value();
   return scope.Close(Number::New(sum));
 }
 
@@ -2512,15 +2583,15 @@ class MyObject : public node::ObjectWrap {
  public:
   static void Init();
   static v8::Handle&lt;v8::Value&gt; NewInstance(const v8::Arguments&amp; args);
-  double Val() const { return val_; }
+  double Value() const { return value_; }
 
  private:
-  MyObject();
+  explicit MyObject(double value = 0);
   ~MyObject();
 
-  static v8::Persistent&lt;v8::Function&gt; constructor;
   static v8::Handle&lt;v8::Value&gt; New(const v8::Arguments&amp; args);
-  double val_;
+  static v8::Persistent&lt;v8::Function&gt; constructor;
+  double value_;
 };
 
 #endif</code></pre>
@@ -2533,28 +2604,37 @@ class MyObject : public node::ObjectWrap {
 
 using namespace v8;
 
-MyObject::MyObject() {};
-MyObject::~MyObject() {};
-
 Persistent&lt;Function&gt; MyObject::constructor;
+
+MyObject::MyObject(double value) : value_(value) {
+}
+
+MyObject::~MyObject() {
+}
 
 void MyObject::Init() {
   // Prepare constructor template
   Local&lt;FunctionTemplate&gt; tpl = FunctionTemplate::New(New);
   tpl-&gt;SetClassName(String::NewSymbol(&quot;MyObject&quot;));
   tpl-&gt;InstanceTemplate()-&gt;SetInternalFieldCount(1);
-
   constructor = Persistent&lt;Function&gt;::New(tpl-&gt;GetFunction());
 }
 
 Handle&lt;Value&gt; MyObject::New(const Arguments&amp; args) {
   HandleScope scope;
 
-  MyObject* obj = new MyObject();
-  obj-&gt;val_ = args[0]-&gt;IsUndefined() ? 0 : args[0]-&gt;NumberValue();
-  obj-&gt;Wrap(args.This());
-
-  return args.This();
+  if (args.IsConstructCall()) {
+    // Invoked as constructor: `new MyObject(...)`
+    double value = args[0]-&gt;IsUndefined() ? 0 : args[0]-&gt;NumberValue();
+    MyObject* obj = new MyObject(value);
+    obj-&gt;Wrap(args.This());
+    return args.This();
+  } else {
+    // Invoked as plain function `MyObject(...)`, turn into construct call.
+    const int argc = 1;
+    Local&lt;Value&gt; argv[argc] = { args[0] };
+    return scope.Close(constructor-&gt;NewInstance(argc, argv));
+  }
 }
 
 Handle&lt;Value&gt; MyObject::NewInstance(const Arguments&amp; args) {
@@ -2642,10 +2722,10 @@ Nine out of ten times nothing happens - but the 10th time, your system is bust.
 </p>
 <h2>Signal Events<span><a class="mark" href="#all_signal_events" id="all_signal_events">#</a></span></h2>
 <!--type=event-->
-<!--name=SIGINT, SIGUSR1, etc.-->
+<!--name=SIGINT, SIGHUP, etc.-->
 
 <p>Emitted when the processes receives a signal. See sigaction(2) for a list of
-standard POSIX signal names such as SIGINT, SIGUSR1, etc.
+standard POSIX signal names such as SIGINT, SIGHUP, etc.
 
 </p>
 <p>Example of listening for <code>SIGINT</code>:
@@ -2660,8 +2740,37 @@ process.on(&#39;SIGINT&#39;, function() {
 <p>An easy way to send the <code>SIGINT</code> signal is with <code>Control-C</code> in most terminal
 programs.
 
+</p>
+<p>Note:
 
 </p>
+<ul>
+<li><code>SIGUSR1</code> is reserved by node.js to start the debugger.  It&#39;s possible to
+install a listener but that won&#39;t stop the debugger from starting.</li>
+<li><code>SIGTERM</code> and <code>SIGINT</code> have default handlers on non-Windows platforms that resets
+the terminal mode before exiting with code <code>128 + signal number</code>. If one of
+these signals has a listener installed, its default behaviour will be removed
+(node will no longer exit).</li>
+<li><code>SIGPIPE</code> is ignored by default, it can have a listener installed.</li>
+<li><code>SIGHUP</code> is generated on Windows when the console window is closed, and on other
+platforms under various similar conditions, see signal(7). It can have a
+listener installed, however node will be unconditionally terminated by Windows
+about 10 seconds later. On non-Windows platforms, the default behaviour of
+<code>SIGHUP</code> is to terminate node, but once a listener has been installed its
+default behaviour will be removed.</li>
+<li><code>SIGTERM</code> is not supported on Windows, it can be listened on.</li>
+<li><code>SIGINT</code> is supported on all platforms, and can usually be generated with
+<code>CTRL+C</code> (though this may be configurable). It is not generated when terminal
+raw mode is enabled.</li>
+<li><code>SIGBREAK</code> is delivered on Windows when <code>CTRL+BREAK</code> is pressed, on non-Windows
+platforms it can be listened on, but there is no way to send or generate it.</li>
+<li><code>SIGWINCH</code> is delivered when the console has been resized. On Windows, this will
+only happen on write to the console when the cursor is being moved, or when a
+readable tty is used in raw mode.</li>
+<li><code>SIGKILL</code> cannot have a listener installed, it will unconditionally terminate
+node on all platforms.</li>
+<li><code>SIGSTOP</code> cannot have a listener installed.</li>
+</ul>
 <h2>process.stdout<span><a class="mark" href="#all_process_stdout" id="all_process_stdout">#</a></span></h2>
 <p>A <code>Writable Stream</code> to <code>stdout</code>.
 
@@ -2750,6 +2859,27 @@ process.argv.forEach(function(val, index, array) {
 
 </p>
 <pre><code>/usr/local/bin/node</code></pre>
+<h2>process.execArgv<span><a class="mark" href="#all_process_execargv" id="all_process_execargv">#</a></span></h2>
+<p>This is the set of node-specific command line options from the
+executable that started the process.  These options do not show up in
+<code>process.argv</code>, and do not include the node executable, the name of
+the script, or any options following the script name. These options
+are useful in order to spawn child processes with the same execution
+environment as the parent.
+
+</p>
+<p>Example:
+
+</p>
+<pre><code>$ node --harmony script.js --version</code></pre>
+<p>results in process.execArgv:
+
+</p>
+<pre><code>[&#39;--harmony&#39;]</code></pre>
+<p>and process.argv:
+
+</p>
+<pre><code>[&#39;/usr/local/bin/node&#39;, &#39;script.js&#39;, &#39;--version&#39;]</code></pre>
 <h2>process.abort()<span><a class="mark" href="#all_process_abort" id="all_process_abort">#</a></span></h2>
 <p>This causes node to emit an abort. This will cause node to exit and
 generate a core file.
@@ -2945,8 +3075,12 @@ the &quot;config.gypi&quot; file that was produced when running the <code>./conf
 <h2>process.kill(pid, [signal])<span><a class="mark" href="#all_process_kill_pid_signal" id="all_process_kill_pid_signal">#</a></span></h2>
 <p>Send a signal to a process. <code>pid</code> is the process id and <code>signal</code> is the
 string describing the signal to send.  Signal names are strings like
-&#39;SIGINT&#39; or &#39;SIGUSR1&#39;.  If omitted, the signal will be &#39;SIGTERM&#39;.
+&#39;SIGINT&#39; or &#39;SIGHUP&#39;.  If omitted, the signal will be &#39;SIGTERM&#39;.
 See kill(2) for more information.
+
+</p>
+<p>Will throw an error if target does not exist, and as a special case, a signal of
+<code>0</code> can be used to test for the existence of a process.
 
 </p>
 <p>Note that just because the name of this function is <code>process.kill</code>, it is
@@ -2967,6 +3101,10 @@ setTimeout(function() {
 }, 100);
 
 process.kill(process.pid, &#39;SIGHUP&#39;);</code></pre>
+<p>Note: When SIGUSR1 is received by Node.js it starts the debugger, see
+<a href="#process_signal_events">Signal Events</a>.
+
+</p>
 <h2>process.pid<span><a class="mark" href="#all_process_pid" id="all_process_pid">#</a></span></h2>
 <p>The PID of the process.
 
@@ -3144,7 +3282,7 @@ setTimeout(function() {
   // benchmark took 1000000527 nanoseconds
 }, 1000);</code></pre>
 <h1>util<span><a class="mark" href="#all_util" id="all_util">#</a></span></h1>
-<pre class="api_stability_5">Stability: 5 - Locked</pre><p>These functions are in the module <code>&#39;util&#39;</code>. Use <code>require(&#39;util&#39;)</code> to access
+<pre class="api_stability_4">Stability: 4 - API Frozen</pre><p>These functions are in the module <code>&#39;util&#39;</code>. Use <code>require(&#39;util&#39;)</code> to access
 them.
 
 
@@ -3885,6 +4023,45 @@ d.on(&#39;error&#39;, function(er) {
   // if we throw it now, it will crash the program
   // with the normal line number and stack message.
 });</code></pre>
+<h3>domain.enter()<span><a class="mark" href="#all_domain_enter" id="all_domain_enter">#</a></span></h3>
+<p>The <code>enter</code> method is plumbing used by the <code>run</code>, <code>bind</code>, and <code>intercept</code>
+methods to set the active domain. It sets <code>domain.active</code> and <code>process.domain</code>
+to the domain, and implicitly pushes the domain onto the domain stack managed
+by the domain module (see <code>domain.exit()</code> for details on the domain stack). The
+call to <code>enter</code> delimits the beginning of a chain of asynchronous calls and I/O
+operations bound to a domain.
+
+</p>
+<p>Calling <code>enter</code> changes only the active domain, and does not alter the domain
+itself. <code>Enter</code> and <code>exit</code> can be called an arbitrary number of times on a
+single domain.
+
+</p>
+<p>If the domain on which <code>enter</code> is called has been disposed, <code>enter</code> will return
+without setting the domain.
+
+</p>
+<h3>domain.exit()<span><a class="mark" href="#all_domain_exit" id="all_domain_exit">#</a></span></h3>
+<p>The <code>exit</code> method exits the current domain, popping it off the domain stack.
+Any time execution is going to switch to the context of a different chain of
+asynchronous calls, it&#39;s important to ensure that the current domain is exited.
+The call to <code>exit</code> delimits either the end of or an interruption to the chain
+of asynchronous calls and I/O operations bound to a domain.
+
+</p>
+<p>If there are multiple, nested domains bound to the current execution context,
+<code>exit</code> will exit any domains nested within this domain.
+
+</p>
+<p>Calling <code>exit</code> changes only the active domain, and does not alter the domain
+itself. <code>Enter</code> and <code>exit</code> can be called an arbitrary number of times on a
+single domain.
+
+</p>
+<p>If the domain on which <code>exit</code> is called has been disposed, <code>exit</code> will return
+without exiting the domain.
+
+</p>
 <h3>domain.dispose()<span><a class="mark" href="#all_domain_dispose" id="all_domain_dispose">#</a></span></h3>
 <p>The dispose method destroys a domain, and makes a best effort attempt to
 clean up any and all IO that is associated with the domain.  Streams are
@@ -5155,7 +5332,7 @@ the <code>drain</code> event before writing more data.
 
 </p>
 <h4>Event: &#39;drain&#39;<span><a class="mark" href="#all_event_drain" id="all_event_drain">#</a></span></h4>
-<p>If a [<code>writable.write(chunk)</code>][] call returns false, then the <code>drain</code>
+<p>If a <a href="#stream_writable_write_chunk_encoding_callback"><code>writable.write(chunk)</code></a> call returns false, then the <code>drain</code>
 event will indicate when it is appropriate to begin writing more data
 to the stream.
 
@@ -5214,7 +5391,7 @@ for (var i = 0; i &lt; 100; i ++) {
   writer.write(&#39;hello, #&#39; + i + &#39;!\n&#39;);
 }
 writer.end(&#39;this is the end\n&#39;);
-write.on(&#39;finish&#39;, function() {
+writer.on(&#39;finish&#39;, function() {
   console.error(&#39;all writes are now complete.&#39;);
 });</code></pre>
 <h4>Event: &#39;pipe&#39;<span><a class="mark" href="#all_event_pipe" id="all_event_pipe">#</a></span></h4>
@@ -5248,6 +5425,10 @@ writer.on(&#39;unpipe&#39;, function(src) {
 });
 reader.pipe(writer);
 reader.unpipe(writer);</code></pre>
+<h4>Event: &#39;error&#39;<span><a class="mark" href="#all_event_error_1" id="all_event_error_1">#</a></span></h4>
+<p>Emitted if there was an error when writing or piping data.
+
+</p>
 <h3>Class: stream.Duplex<span><a class="mark" href="#all_class_stream_duplex" id="all_class_stream_duplex">#</a></span></h3>
 <p>Duplex streams are streams that implement both the <a href="#stream_class_stream_readable">Readable</a> and
 <a href="#stream_class_stream_writable">Writable</a> interfaces.  See above for usage.
@@ -5514,7 +5695,7 @@ resource.  Default=16kb</li>
 strings using the specified encoding.  Default=null</li>
 <li><code>objectMode</code> <span class="type">Boolean</span> Whether this stream should behave
 as a stream of objects. Meaning that stream.read(n) returns
-a single value instead of a Buffer of size n</li>
+a single value instead of a Buffer of size n.  Default=false</li>
 </ul>
 </li>
 </div></ul>
@@ -5732,8 +5913,8 @@ connected in some way to the input, such as a <a href="zlib.html">zlib</a> strea
 <p>There is no requirement that the output be the same size as the input,
 the same number of chunks, or arrive at the same time.  For example, a
 Hash stream will only ever have a single chunk of output which is
-provided when the input is ended.  A zlib stream will either produce
-much smaller or much larger than its input.
+provided when the input is ended.  A zlib stream will produce output
+that is either much smaller or much larger than its input.
 
 </p>
 <p>Rather than implement the <a href="#stream_readable_read_size_1"><code>_read()</code></a> and <a href="#stream_writable_write_chunk_encoding_callback_1"><code>_write()</code></a> methods, Transform
@@ -5834,7 +6015,7 @@ approach.
 
 </p>
 <pre><code class="javascript">var util = require(&#39;util&#39;);
-var Transform = require(&#39;stream&#39;).Transform);
+var Transform = require(&#39;stream&#39;).Transform;
 util.inherits(SimpleProtocol, Transform);
 
 function SimpleProtocol(options) {
@@ -6152,8 +6333,6 @@ modify them.
 
 
 </p>
-<p>[<code>writable.write(chunk)</code>]
-</p>
 <h1>Crypto<span><a class="mark" href="#all_crypto" id="all_crypto">#</a></span></h1>
 <pre class="api_stability_2">Stability: 2 - Unstable; API changes are being discussed for
 future versions.  Breaking changes will be minimized.  See below.</pre><p>Use <code>require(&#39;crypto&#39;)</code> to access this module.
@@ -6259,7 +6438,9 @@ digest.  The legacy <code>update</code> and <code>digest</code> methods are also
 <h3>hash.update(data, [input_encoding])<span><a class="mark" href="#all_hash_update_data_input_encoding" id="all_hash_update_data_input_encoding">#</a></span></h3>
 <p>Updates the hash content with the given <code>data</code>, the encoding of which
 is given in <code>input_encoding</code> and can be <code>&#39;utf8&#39;</code>, <code>&#39;ascii&#39;</code> or
-<code>&#39;binary&#39;</code>.  If no encoding is provided, then a buffer is expected.
+<code>&#39;binary&#39;</code>.  If no encoding is provided and the input is a string an
+encoding of <code>&#39;binary&#39;</code> is enforced. If <code>data</code> is a <code>Buffer</code> then
+<code>input_encoding</code> is ignored.
 
 </p>
 <p>This can be called many times with new data as it is streamed.
@@ -6362,6 +6543,7 @@ methods are also supported.
 <p>Updates the cipher with <code>data</code>, the encoding of which is given in
 <code>input_encoding</code> and can be <code>&#39;utf8&#39;</code>, <code>&#39;ascii&#39;</code> or <code>&#39;binary&#39;</code>.  If no
 encoding is provided, then a buffer is expected.
+If <code>data</code> is a <code>Buffer</code> then <code>input_encoding</code> is ignored.
 
 </p>
 <p>The <code>output_encoding</code> specifies the output format of the enciphered
@@ -6419,6 +6601,7 @@ plain-text data on the the readable side.  The legacy <code>update</code> and
 <p>Updates the decipher with <code>data</code>, which is encoded in <code>&#39;binary&#39;</code>,
 <code>&#39;base64&#39;</code> or <code>&#39;hex&#39;</code>.  If no encoding is provided, then a buffer is
 expected.
+If <code>data</code> is a <code>Buffer</code> then <code>input_encoding</code> is ignored.
 
 </p>
 <p>The <code>output_decoding</code> specifies in what format to return the
@@ -6651,7 +6834,14 @@ try {
   console.log(&#39;Have %d bytes of random data: %s&#39;, buf.length, buf);
 } catch (ex) {
   // handle error
+  // most likely, entropy sources are drained
 }</code></pre>
+<p>NOTE: Will throw error or invoke callback with error, if there is not enough
+accumulated entropy to generate cryptographically strong data. In other words,
+<code>crypto.randomBytes</code> without callback will not block even if all entropy sources
+are drained.
+
+</p>
 <h2>crypto.pseudoRandomBytes(size, [callback])<span><a class="mark" href="#all_crypto_pseudorandombytes_size_callback" id="all_crypto_pseudorandombytes_size_callback">#</a></span></h2>
 <p>Generates <em>non</em>-cryptographically strong pseudo-random data. The data
 returned will be unique if it is sufficiently long, but is not
@@ -6822,9 +7012,9 @@ PEM format. (Required)</p>
 <li><p><code>cert</code>: A string or <code>Buffer</code> containing the certificate key of the server in
 PEM format. (Required)</p>
 </li>
-<li><p><code>ca</code>: An array of strings or <code>Buffer</code>s of trusted certificates. If this is
-omitted several well known &quot;root&quot; CAs will be used, like VeriSign.
-These are used to authorize connections.</p>
+<li><p><code>ca</code>: An array of strings or <code>Buffer</code>s of trusted certificates in PEM
+format. If this is omitted several well known &quot;root&quot; CAs will be used,
+like VeriSign. These are used to authorize connections.</p>
 </li>
 <li><p><code>crl</code> : Either a string or list of strings of PEM encoded CRLs (Certificate
 Revocation List)</p>
@@ -6978,16 +7168,16 @@ PEM format.</p>
 <li><p><code>cert</code>: A string or <code>Buffer</code> containing the certificate key of the client in
 PEM format.</p>
 </li>
-<li><p><code>ca</code>: An array of strings or <code>Buffer</code>s of trusted certificates. If this is
-omitted several well known &quot;root&quot; CAs will be used, like VeriSign.
-These are used to authorize connections.</p>
+<li><p><code>ca</code>: An array of strings or <code>Buffer</code>s of trusted certificates in PEM
+format. If this is omitted several well known &quot;root&quot; CAs will be used,
+like VeriSign. These are used to authorize connections.</p>
 </li>
 <li><p><code>rejectUnauthorized</code>: If <code>true</code>, the server certificate is verified against
 the list of supplied CAs. An <code>&#39;error&#39;</code> event is emitted if verification
 fails. Default: <code>true</code>.</p>
 </li>
-<li><p><code>NPNProtocols</code>: An array of string or <code>Buffer</code> containing supported NPN
-protocols. <code>Buffer</code> should have following format: <code>0x05hello0x05world</code>,
+<li><p><code>NPNProtocols</code>: An array of strings or <code>Buffer</code>s containing supported NPN
+protocols. <code>Buffer</code>s should have following format: <code>0x05hello0x05world</code>,
 where first byte is next protocol name&#39;s length. (Passing array should
 usually be much simpler: <code>[&#39;hello&#39;, &#39;world&#39;]</code>.)</p>
 </li>
@@ -7526,8 +7716,8 @@ the completion callback.
 <h2>fs.symlink(srcpath, dstpath, [type], callback)<span><a class="mark" href="#all_fs_symlink_srcpath_dstpath_type_callback" id="all_fs_symlink_srcpath_dstpath_type_callback">#</a></span></h2>
 <p>Asynchronous symlink(2). No arguments other than a possible exception are given
 to the completion callback.
-<code>type</code> argument can be either <code>&#39;dir&#39;</code>, <code>&#39;file&#39;</code>, or <code>&#39;junction&#39;</code> (default is <code>&#39;file&#39;</code>).  It is only 
-used on Windows (ignored on other platforms).
+The <code>type</code> argument can be set to <code>&#39;dir&#39;</code>, <code>&#39;file&#39;</code>, or <code>&#39;junction&#39;</code> (default
+is <code>&#39;file&#39;</code>) and is only available on Windows (ignored on other platforms).
 Note that Windows junction points require the destination path to be absolute.  When using
 <code>&#39;junction&#39;</code>, the <code>destination</code> argument will automatically be normalized to absolute path.
 
@@ -7626,7 +7816,7 @@ An exception occurs if the file does not exist.</p>
 system to bypass the local file system cache.</p>
 <p>This is primarily useful for opening files on NFS mounts as it allows you to
 skip the potentially stale local cache. It has a very real impact on I/O
-performance so don&#39;t use this mode unless you need it.</p>
+performance so don&#39;t use this flag unless you need it.</p>
 <p>Note that this doesn&#39;t turn <code>fs.open()</code> into a synchronous blocking call.
 If that&#39;s what you want then you should be using <code>fs.openSync()</code></p>
 </li>
@@ -7636,30 +7826,35 @@ synchronously. See notes for <code>&#39;rs&#39;</code> about using this with cau
 <li><p><code>&#39;w&#39;</code> - Open file for writing.
 The file is created (if it does not exist) or truncated (if it exists).</p>
 </li>
-<li><p><code>&#39;wx&#39;</code> - Like <code>&#39;w&#39;</code> but opens the file in exclusive mode.</p>
+<li><p><code>&#39;wx&#39;</code> - Like <code>&#39;w&#39;</code> but fails if <code>path</code> exists.</p>
 </li>
 <li><p><code>&#39;w+&#39;</code> - Open file for reading and writing.
 The file is created (if it does not exist) or truncated (if it exists).</p>
 </li>
-<li><p><code>&#39;wx+&#39;</code> - Like <code>&#39;w+&#39;</code> but opens the file in exclusive mode.</p>
+<li><p><code>&#39;wx+&#39;</code> - Like <code>&#39;w+&#39;</code> but fails if <code>path</code> exists.</p>
 </li>
 <li><p><code>&#39;a&#39;</code> - Open file for appending.
 The file is created if it does not exist.</p>
 </li>
-<li><p><code>&#39;ax&#39;</code> - Like <code>&#39;a&#39;</code> but opens the file in exclusive mode.</p>
+<li><p><code>&#39;ax&#39;</code> - Like <code>&#39;a&#39;</code> but fails if <code>path</code> exists.</p>
 </li>
 <li><p><code>&#39;a+&#39;</code> - Open file for reading and appending.
 The file is created if it does not exist.</p>
 </li>
-<li><p><code>&#39;ax+&#39;</code> - Like <code>&#39;a+&#39;</code> but opens the file in exclusive mode.</p>
+<li><p><code>&#39;ax+&#39;</code> - Like <code>&#39;a+&#39;</code> but fails if <code>path</code> exists.</p>
 </li>
 </ul>
-<p><code>mode</code> defaults to <code>0666</code>. The callback gets two arguments <code>(err, fd)</code>.
+<p><code>mode</code> sets the file mode (permission and sticky bits), but only if the file was
+created. It defaults to <code>0666</code>, readable and writeable.
 
 </p>
-<p>Exclusive mode (<code>O_EXCL</code>) ensures that <code>path</code> is newly created. <code>fs.open()</code>
-fails if a file by that name already exists. On POSIX systems, symlinks are
-not followed. Exclusive mode may or may not work with network file systems.
+<p>The callback gets two arguments <code>(err, fd)</code>.
+
+</p>
+<p>The exclusive flag <code>&#39;x&#39;</code> (<code>O_EXCL</code> flag in open(2)) ensures that <code>path</code> is newly
+created. On POSIX systems, <code>path</code> is considered to exist even if it is a symlink
+to a non-existent file. The exclusive flag may or may not work with network file
+systems.
 
 </p>
 <p>On Linux, positional writes don&#39;t work when the file is opened in append mode.
@@ -7668,7 +7863,7 @@ the end of the file.
 
 </p>
 <h2>fs.openSync(path, flags, [mode])<span><a class="mark" href="#all_fs_opensync_path_flags_mode" id="all_fs_opensync_path_flags_mode">#</a></span></h2>
-<p>Synchronous open(2).
+<p>Synchronous version of <code>fs.open()</code>.
 
 </p>
 <h2>fs.utimes(path, atime, mtime, callback)<span><a class="mark" href="#all_fs_utimes_path_atime_mtime_callback" id="all_fs_utimes_path_atime_mtime_callback">#</a></span></h2>
@@ -7729,7 +7924,7 @@ the end of the file.
 <p><code>buffer</code> is the buffer that the data will be written to.
 
 </p>
-<p><code>offset</code> is offset within the buffer where reading will start.
+<p><code>offset</code> is the offset in the buffer to start writing at.
 
 </p>
 <p><code>length</code> is an integer specifying the number of bytes to read.
@@ -7947,6 +8142,16 @@ Then call the <code>callback</code> argument with either true or false.  Example
 <pre><code>fs.exists(&#39;/etc/passwd&#39;, function (exists) {
   util.debug(exists ? &quot;it&#39;s there&quot; : &quot;no passwd!&quot;);
 });</code></pre>
+<p><code>fs.exists()</code> is an anachronism and exists only for historical reasons.
+There should almost never be a reason to use it in your own code.
+
+</p>
+<p>In particular, checking if a file exists before opening it is an anti-pattern
+that leaves you vulnerable to race conditions: another process may remove the
+file between the calls to <code>fs.exists()</code> and <code>fs.open()</code>.  Just open the file
+and handle the error when it&#39;s not there.
+
+</p>
 <h2>fs.existsSync(path)<span><a class="mark" href="#all_fs_existssync_path" id="all_fs_existssync_path">#</a></span></h2>
 <p>Synchronous version of <code>fs.exists</code>.
 
@@ -8083,7 +8288,7 @@ for writing.
 See more details in <a href="#fs_fs_watch_filename_options_listener">fs.watch</a>.
 
 </p>
-<h3>Event: &#39;error&#39;<span><a class="mark" href="#all_event_error_1" id="all_event_error_1">#</a></span></h3>
+<h3>Event: &#39;error&#39;<span><a class="mark" href="#all_event_error_2" id="all_event_error_2">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>error</code> <span class="type">Error object</span></li>
 </div></ul>
@@ -8379,7 +8584,7 @@ client.on(&#39;end&#39;, function() {
 changed to
 
 </p>
-<pre><code>var client = net.connect({path: &#39;/tmp/echo.sock&#39;},</code></pre>
+<pre><code>var client = net.connect({path: &#39;/tmp/echo.sock&#39;});</code></pre>
 <h2>net.connect(port, [host], [connectListener])<span><a class="mark" href="#all_net_connect_port_host_connectlistener" id="all_net_connect_port_host_connectlistener">#</a></span></h2>
 <h2>net.createConnection(port, [host], [connectListener])<span><a class="mark" href="#all_net_createconnection_port_host_connectlistener" id="all_net_createconnection_port_host_connectlistener">#</a></span></h2>
 <p>Creates a TCP connection to <code>port</code> on <code>host</code>. If <code>host</code> is omitted,
@@ -8397,7 +8602,6 @@ The <code>connectListener</code> parameter will be added as an listener for the
 </p>
 <h2>Class: net.Server<span><a class="mark" href="#all_class_net_server" id="all_class_net_server">#</a></span></h2>
 <p>This class is used to create a TCP or UNIX server.
-A server is a <code>net.Socket</code> that can listen for new incoming connections.
 
 </p>
 <h3>server.listen(port, [host], [backlog], [callback])<span><a class="mark" href="#all_server_listen_port_host_backlog_callback" id="all_server_listen_port_host_backlog_callback">#</a></span></h3>
@@ -8557,7 +8761,7 @@ when sockets were sent to forks.
 event is not emitted until all connections are ended.
 
 </p>
-<h3>Event: &#39;error&#39;<span><a class="mark" href="#all_event_error_2" id="all_event_error_2">#</a></span></h3>
+<h3>Event: &#39;error&#39;<span><a class="mark" href="#all_event_error_3" id="all_event_error_3">#</a></span></h3>
 <div class="signature"><ul>
 <li><span class="type">Error Object</span></li>
 </div></ul>
@@ -8580,11 +8784,13 @@ and passed to the user through the <code>&#39;connection&#39;</code> event of a 
 
 </p>
 <pre><code>{ fd: null
-  type: null
-  allowHalfOpen: false
+  allowHalfOpen: false,
+  readable: false,
+  writable: false
 }</code></pre>
-<p><code>fd</code> allows you to specify the existing file descriptor of socket. <code>type</code>
-specified underlying protocol. It can be <code>&#39;tcp4&#39;</code>, <code>&#39;tcp6&#39;</code>, or <code>&#39;unix&#39;</code>.
+<p><code>fd</code> allows you to specify the existing file descriptor of socket.
+Set <code>readable</code> and/or <code>writable</code> to <code>true</code> to allow reads and/or writes on this
+socket (NOTE: Works only when <code>fd</code> is passed).
 About <code>allowHalfOpen</code>, refer to <code>createServer()</code> and <code>&#39;end&#39;</code> event.
 
 </p>
@@ -8807,7 +9013,7 @@ the socket has been idle. The user must manually close the connection.
 <p>See also: the return values of <code>socket.write()</code>
 
 </p>
-<h3>Event: &#39;error&#39;<span><a class="mark" href="#all_event_error_3" id="all_event_error_3">#</a></span></h3>
+<h3>Event: &#39;error&#39;<span><a class="mark" href="#all_event_error_4" id="all_event_error_4">#</a></span></h3>
 <div class="signature"><ul>
 <li><span class="type">Error object</span></li>
 </div></ul>
@@ -8902,7 +9108,7 @@ are created.
 on this socket.
 
 </p>
-<h3>Event: &#39;error&#39;<span><a class="mark" href="#all_event_error_4" id="all_event_error_4">#</a></span></h3>
+<h3>Event: &#39;error&#39;<span><a class="mark" href="#all_event_error_5" id="all_event_error_5">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>exception</code> Error object</li>
 </div></ul>
@@ -8914,22 +9120,28 @@ on this socket.
 <li><code>buf</code> Buffer object.  Message to be sent</li>
 <li><code>offset</code> Integer. Offset in the buffer where the message starts.</li>
 <li><code>length</code> Integer. Number of bytes in the message.</li>
-<li><code>port</code> Integer. destination port</li>
-<li><code>address</code> String. destination IP</li>
-<li><code>callback</code> Function. Callback when message is done being delivered.
-Optional.</li>
+<li><code>port</code> Integer. Destination port.</li>
+<li><code>address</code> String. Destination hostname or IP address.</li>
+<li><code>callback</code> Function. Called when the message has been sent. Optional.</li>
 </div></ul>
-<p>For UDP sockets, the destination port and IP address must be specified.  A string
-may be supplied for the <code>address</code> parameter, and it will be resolved with DNS.  An
-optional callback may be specified to detect any DNS errors and when <code>buf</code> may be
-re-used.  Note that DNS lookups will delay the time that a send takes place, at
-least until the next tick.  The only way to know for sure that a send has taken place
-is to use the callback.
+<p>For UDP sockets, the destination port and address must be specified.  A string
+may be supplied for the <code>address</code> parameter, and it will be resolved with DNS.
 
 </p>
-<p>If the socket has not been previously bound with a call to <code>bind</code>, it&#39;s
-assigned a random port number and bound to the &quot;all interfaces&quot; address
-(0.0.0.0 for <code>udp4</code> sockets, ::0 for <code>udp6</code> sockets).
+<p>If the address is omitted or is an empty string, <code>&#39;0.0.0.0&#39;</code> or <code>&#39;::0&#39;</code> is used
+instead.  Depending on the network configuration, those defaults may or may not
+work; it&#39;s best to be explicit about the destination address.
+
+</p>
+<p>If the socket has not been previously bound with a call to <code>bind</code>, it gets
+assigned a random port number and is bound to the &quot;all interfaces&quot; address
+(<code>&#39;0.0.0.0&#39;</code> for <code>udp4</code> sockets, <code>&#39;::0&#39;</code> for <code>udp6</code> sockets.)
+
+</p>
+<p>An optional callback may be specified to detect DNS errors or for determining
+when it&#39;s safe to reuse the <code>buf</code> object.  Note that DNS lookups delay the time
+to send for at least one tick.  The only way to know for sure that the datagram
+has been sent is by using a callback.
 
 </p>
 <p>Example of sending a UDP packet to a random port on <code>localhost</code>;
@@ -8975,14 +9187,23 @@ informing the source that the data did not reach its intended recipient).
 <div class="signature"><ul>
 <li><code>port</code> Integer</li>
 <li><code>address</code> String, Optional</li>
-<li><code>callback</code> Function, Optional</li>
+<li><code>callback</code> Function with no parameters, Optional. Callback when
+binding is done.</li>
 </div></ul>
-<p>For UDP sockets, listen for datagrams on a named <code>port</code> and optional <code>address</code>.
-If <code>address</code> is not specified, the OS will try to listen on all addresses.
+<p>For UDP sockets, listen for datagrams on a named <code>port</code> and optional
+<code>address</code>. If <code>address</code> is not specified, the OS will try to listen on
+all addresses.  After binding is done, a &quot;listening&quot; event is emitted
+and the <code>callback</code>(if specified) is called. Specifying both a
+&quot;listening&quot; event listener and <code>callback</code> is not harmful but not very
+useful.
 
 </p>
-<p>The <code>callback</code> argument, if provided, is added as a one-shot <code>&#39;listening&#39;</code>
-event listener.
+<p>A bound datagram socket keeps the node process running to receive
+datagrams.
+
+</p>
+<p>If binding fails, an &quot;error&quot; event is generated. In rare case (e.g.
+binding a closed socket), an <code>Error</code> may be thrown by this method.
 
 </p>
 <p>Example of a UDP server listening on port 41234:
@@ -8991,6 +9212,11 @@ event listener.
 <pre><code>var dgram = require(&quot;dgram&quot;);
 
 var server = dgram.createSocket(&quot;udp4&quot;);
+
+server.on(&quot;error&quot;, function (err) {
+  console.log(&quot;server error:\n&quot; + err.stack);
+  server.close();
+});
 
 server.on(&quot;message&quot;, function (msg, rinfo) {
   console.log(&quot;server got: &quot; + msg + &quot; from &quot; +
@@ -9102,7 +9328,7 @@ the socket is <code>ref</code>d calling <code>ref</code> again will have no effe
 <pre class="api_stability_3">Stability: 3 - Stable</pre><p>Use <code>require(&#39;dns&#39;)</code> to access this module. All methods in the dns module
 use C-Ares except for <code>dns.lookup</code> which uses <code>getaddrinfo(3)</code> in a thread
 pool. C-Ares is much faster than <code>getaddrinfo</code> but the system resolver is
-more constant with how other programs operate. When a user does
+more consistent with how other programs operate. When a user does
 <code>net.connect(80, &#39;google.com&#39;)</code> or <code>http.get({ host: &#39;google.com&#39; })</code> the
 <code>dns.lookup</code> method is used. Users who need to do a large number of lookups
 quickly should use the methods that go through C-Ares.
@@ -9313,8 +9539,8 @@ connected to.
 </p>
 <p>Emitted each time there is a request. Note that there may be multiple requests
 per connection (in the case of keep-alive connections).
- <code>request</code> is an instance of <code>http.IncomingMessage</code> and <code>response</code> is
- an instance of <code>http.ServerResponse</code>
+ <code>request</code> is an instance of <a href="#http_http_incomingmessage">http.IncomingMessage</a> and <code>response</code> is
+an instance of <a href="#http_class_http_serverresponse">http.ServerResponse</a>.
 
 </p>
 <h3>Event: &#39;connection&#39;<span><a class="mark" href="#all_event_connection_1" id="all_event_connection_1">#</a></span></h3>
@@ -9344,7 +9570,7 @@ If this event isn&#39;t listened for, the server will automatically respond
 with a 100 Continue as appropriate.
 
 </p>
-<p>Handling this event involves calling <code>response.writeContinue</code> if the client
+<p>Handling this event involves calling <a href="#http_response_writecontinue">response.writeContinue()</a> if the client
 should continue to send the request body, or generating an appropriate HTTP
 response (e.g., 400 Bad Request) if the client should not continue to send the
 request body.
@@ -9519,7 +9745,20 @@ passed as the second parameter to the <code>&#39;request&#39;</code> event.
 
 </p>
 <p>Indicates that the underlying connection was terminated before
-<code>response.end()</code> was called or able to flush.
+<a href="#http_response_end_data_encoding">response.end()</a> was called or able to flush.
+
+</p>
+<h3>Event: &#39;finish&#39;<span><a class="mark" href="#all_event_finish_1" id="all_event_finish_1">#</a></span></h3>
+<p><code>function () { }</code>
+
+</p>
+<p>Emitted when the response has been sent. More specifically, this event is
+emitted when the last segment of the response headers and body have been
+handed off to the operating system for transmission over the network. It
+does not imply that the client has received anything yet.
+
+</p>
+<p>After this event, no more events will be emitted on the response object.
 
 </p>
 <h3>response.writeContinue()<span><a class="mark" href="#all_response_writecontinue" id="all_response_writecontinue">#</a></span></h3>
@@ -9542,10 +9781,10 @@ response.writeHead(200, {
   &#39;Content-Length&#39;: body.length,
   &#39;Content-Type&#39;: &#39;text/plain&#39; });</code></pre>
 <p>This method must only be called once on a message and it must
-be called before <code>response.end()</code> is called.
+be called before <a href="#http_response_end_data_encoding">response.end()</a> is called.
 
 </p>
-<p>If you call <code>response.write()</code> or <code>response.end()</code> before calling this, the
+<p>If you call <a href="#http_response_write_chunk_encoding">response.write()</a> or <a href="#http_response_end_data_encoding">response.end()</a> before calling this, the
 implicit/mutable headers will be calculated and call this function for you.
 
 </p>
@@ -9575,9 +9814,9 @@ sockets.
 
 </p>
 <h3>response.statusCode<span><a class="mark" href="#all_response_statuscode" id="all_response_statuscode">#</a></span></h3>
-<p>When using implicit headers (not calling <code>response.writeHead()</code> explicitly), this property
-controls the status code that will be sent to the client when the headers get
-flushed.
+<p>When using implicit headers (not calling <a href="#http_response_writehead_statuscode_reasonphrase_headers">response.writeHead()</a> explicitly),
+this property controls the status code that will be sent to the client when
+the headers get flushed.
 
 </p>
 <p>Example:
@@ -9607,7 +9846,7 @@ here if you need to send multiple headers with the same name.
 
 </p>
 <h3>response.sendDate<span><a class="mark" href="#all_response_senddate" id="all_response_senddate">#</a></span></h3>
-<p>When true, the Date header will be automatically generated and sent in 
+<p>When true, the Date header will be automatically generated and sent in
 the response if it is not already present in the headers. Defaults to true.
 
 </p>
@@ -9634,8 +9873,8 @@ implicitly flushed.
 </p>
 <pre><code>response.removeHeader(&quot;Content-Encoding&quot;);</code></pre>
 <h3>response.write(chunk, [encoding])<span><a class="mark" href="#all_response_write_chunk_encoding" id="all_response_write_chunk_encoding">#</a></span></h3>
-<p>If this method is called and <code>response.writeHead()</code> has not been called, it will
-switch to implicit header mode and flush the implicit headers.
+<p>If this method is called and <a href="#http_response_writehead_statuscode_reasonphrase_headers">response.writeHead()</a> has not been called,
+it will switch to implicit header mode and flush the implicit headers.
 
 </p>
 <p>This sends a chunk of the response body. This method may
@@ -9694,7 +9933,7 @@ followed by <code>response.end()</code>.
 
 
 </p>
-<h2>http.request(options, callback)<span><a class="mark" href="#all_http_request_options_callback" id="all_http_request_options_callback">#</a></span></h2>
+<h2>http.request(options, [callback])<span><a class="mark" href="#all_http_request_options_callback" id="all_http_request_options_callback">#</a></span></h2>
 <p>Node maintains several connections per server to make HTTP requests.
 This function allows one to transparently issue requests.
 
@@ -9728,7 +9967,11 @@ default to <code>Connection: keep-alive</code>. Possible values:<ul>
 </ul>
 </li>
 </ul>
-<p><code>http.request()</code> returns an instance of the <code>http.ClientRequest</code>
+<p>The optional <code>callback</code> parameter will be added as a one time listener for
+the <a href="#http_event_response">&#39;response&#39;</a> event.
+
+</p>
+<p><code>http.request()</code> returns an instance of the <a href="#http_class_http_clientrequest">http.ClientRequest</a>
 class. The <code>ClientRequest</code> instance is a writable stream. If one needs to
 upload a file with a POST request, then write to the <code>ClientRequest</code> object.
 
@@ -9788,7 +10031,7 @@ information.</p>
 to compute basic authentication.</p>
 </li>
 </ul>
-<h2>http.get(options, callback)<span><a class="mark" href="#all_http_get_options_callback" id="all_http_get_options_callback">#</a></span></h2>
+<h2>http.get(options, [callback])<span><a class="mark" href="#all_http_get_options_callback" id="all_http_get_options_callback">#</a></span></h2>
 <p>Since most requests are GET requests without bodies, Node provides this
 convenience method. The only difference between this method and <code>http.request()</code>
 is that it sets the method to GET and calls <code>req.end()</code> automatically.
@@ -9836,17 +10079,17 @@ pool you can do something along the lines of:
   // Do stuff
 })</code></pre>
 <h3>agent.maxSockets<span><a class="mark" href="#all_agent_maxsockets" id="all_agent_maxsockets">#</a></span></h3>
-<p>By default set to 5. Determines how many concurrent sockets the agent can have 
+<p>By default set to 5. Determines how many concurrent sockets the agent can have
 open per host.
 
 </p>
 <h3>agent.sockets<span><a class="mark" href="#all_agent_sockets" id="all_agent_sockets">#</a></span></h3>
-<p>An object which contains arrays of sockets currently in use by the Agent. Do not 
+<p>An object which contains arrays of sockets currently in use by the Agent. Do not
 modify.
 
 </p>
 <h3>agent.requests<span><a class="mark" href="#all_agent_requests" id="all_agent_requests">#</a></span></h3>
-<p>An object which contains queues of requests that have not yet been assigned to 
+<p>An object which contains queues of requests that have not yet been assigned to
 sockets. Do not modify.
 
 </p>
@@ -9867,7 +10110,7 @@ data chunk or when closing the connection.
 <p>To get the response, add a listener for <code>&#39;response&#39;</code> to the request object.
 <code>&#39;response&#39;</code> will be emitted from the request object when the response
 headers have been received.  The <code>&#39;response&#39;</code> event is executed with one
-argument which is an instance of <code>http.IncomingMessage</code>.
+argument which is an instance of <a href="#http_http_incomingmessage">http.IncomingMessage</a>.
 
 </p>
 <p>During the <code>&#39;response&#39;</code> event, one can add listeners to the
@@ -9879,7 +10122,9 @@ entirely discarded.  However, if you add a <code>&#39;response&#39;</code> event
 then you <strong>must</strong> consume the data from the response object, either by
 calling <code>response.read()</code> whenever there is a <code>&#39;readable&#39;</code> event, or
 by adding a <code>&#39;data&#39;</code> handler, or by calling the <code>.resume()</code> method.
-Until the data is consumed, the <code>&#39;end&#39;</code> event will not fire.
+Until the data is consumed, the <code>&#39;end&#39;</code> event will not fire.  Also, until
+the data is read it will consume memory that can eventually lead to a
+&#39;process out of memory&#39; error.
 
 </p>
 <p>Note: Node does not check whether Content-Length and the length of the body
@@ -9895,7 +10140,7 @@ which has been transmitted are equal or not.
 
 </p>
 <p>Emitted when a response is received to this request. This event is emitted only
-once. The <code>response</code> argument will be an instance of <code>http.IncomingMessage</code>.
+once. The <code>response</code> argument will be an instance of <a href="#http_http_incomingmessage">http.IncomingMessage</a>.
 
 </p>
 <p>Options:
@@ -10083,9 +10328,10 @@ chunked, this will send the terminating <code>&#39;0\r\n\r\n&#39;</code>.
 
 </p>
 <h2>http.IncomingMessage<span><a class="mark" href="#all_http_incomingmessage" id="all_http_incomingmessage">#</a></span></h2>
-<p>An <code>IncomingMessage</code> object is created by <code>http.Server</code> or <code>http.ClientRequest</code>
-and passed as the first argument to the <code>&#39;request&#39;</code> and <code>&#39;response&#39;</code> event
-respectively. It may be used to access response status, headers and data.
+<p>An <code>IncomingMessage</code> object is created by <a href="#http_class_http_server">http.Server</a> or
+<a href="#http_class_http_clientrequest">http.ClientRequest</a> and passed as the first argument to the <code>&#39;request&#39;</code>
+and <code>&#39;response&#39;</code> event respectively. It may be used to access response status,
+headers and data.
 
 </p>
 <p>It implements the <a href="stream.html#stream_readable_stream">Readable Stream</a> interface, as well as the
@@ -10096,12 +10342,8 @@ following additional events, methods, and properties.
 <p><code>function () { }</code>
 
 </p>
-<p>Indicates that the underlaying connection was terminated before
-<code>response.end()</code> was called or able to flush.
-
-</p>
-<p>Just like <code>&#39;end&#39;</code>, this event occurs only once per response. See
-[http.ServerResponse][]&#39;s <code>&#39;close&#39;</code> event for more information.
+<p>Indicates that the underlaying connection was closed.
+Just like <code>&#39;end&#39;</code>, this event occurs only once per response.
 
 </p>
 <h3>message.httpVersion<span><a class="mark" href="#all_message_httpversion" id="all_message_httpversion">#</a></span></h3>
@@ -10141,7 +10383,7 @@ console.log(request.headers);</code></pre>
 
 </p>
 <h3>message.method<span><a class="mark" href="#all_message_method" id="all_message_method">#</a></span></h3>
-<p><strong>Only valid for request obtained from <code>http.Server</code>.</strong>
+<p><strong>Only valid for request obtained from <a href="#http_class_http_server">http.Server</a>.</strong>
 
 </p>
 <p>The request method as a string. Read only. Example:
@@ -10149,7 +10391,7 @@ console.log(request.headers);</code></pre>
 
 </p>
 <h3>message.url<span><a class="mark" href="#all_message_url" id="all_message_url">#</a></span></h3>
-<p><strong>Only valid for request obtained from <code>http.Server</code>.</strong>
+<p><strong>Only valid for request obtained from <a href="#http_class_http_server">http.Server</a>.</strong>
 
 </p>
 <p>Request URL string. This contains only the URL that is
@@ -11385,7 +11627,7 @@ which can be piped to and from.
 <code>spawn()</code> or <code>fork()</code> methods to create a Child Process instance.
 
 </p>
-<h3>Event:  &#39;error&#39;<span><a class="mark" href="#all_event_error_5" id="all_event_error_5">#</a></span></h3>
+<h3>Event:  &#39;error&#39;<span><a class="mark" href="#all_event_error_6" id="all_event_error_6">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>err</code> <span class="type">Error Object</span> the error.</li>
 </div></ul>
@@ -11397,6 +11639,11 @@ which can be piped to and from.
 <li>The process could not be killed, or</li>
 <li>Sending a message to the child process failed for whatever reason.</li>
 </ol>
+<p>Note that the <code>exit</code>-event may or may not fire after an error has occured. If
+you are listening on both events to fire a function, remember to guard against
+calling your function twice.
+
+</p>
 <p>See also <a href="#child_process_child_kill_signal"><code>ChildProcess#kill()</code></a> and
 <a href="#child_process_child_send_message_sendhandle"><code>ChildProcess#send()</code></a>.
 
@@ -11416,6 +11663,10 @@ of the signal, otherwise <code>null</code>.
 <p>Note that the child process stdio streams might still be open.
 
 </p>
+<p>Also, note that node establishes signal handlers for <code>&#39;SIGINT&#39;</code> and <code>&#39;SIGTERM</code>&#39;,
+so it will not terminate due to receipt of those signals, it will exit.
+
+</p>
 <p>See <code>waitpid(2)</code>.
 
 </p>
@@ -11431,10 +11682,9 @@ might share the same stdio streams.
 
 </p>
 <h3>Event: &#39;disconnect&#39;<span><a class="mark" href="#all_event_disconnect" id="all_event_disconnect">#</a></span></h3>
-<p>This event is emitted after using the <code>.disconnect()</code> method in the parent or
-in the child. After disconnecting it is no longer possible to send messages.
-An alternative way to check if you can send messages is to see if the
-<code>child.connected</code> property is <code>true</code>.
+<p>This event is emitted after calling the <code>.disconnect()</code> method in the parent
+or in the child. After disconnecting it is no longer possible to send messages,
+and the <code>.connected</code> property is false.
 
 </p>
 <h3>Event: &#39;message&#39;<span><a class="mark" href="#all_event_message_1" id="all_event_message_1">#</a></span></h3>
@@ -11495,6 +11745,13 @@ not be set.
 
 console.log(&#39;Spawned child pid: &#39; + grep.pid);
 grep.stdin.end();</code></pre>
+<h3>child.connected<span><a class="mark" href="#all_child_connected" id="all_child_connected">#</a></span></h3>
+<div class="signature"><ul>
+<li><span class="type">Boolean</span> Set to false after `.disconnect&#39; is called</li>
+</div></ul>
+<p>If <code>.connected</code> is false, it is no longer possible to send messages.
+
+</p>
 <h3>child.kill([signal])<span><a class="mark" href="#all_child_kill_signal" id="all_child_kill_signal">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>signal</code> <span class="type">String</span></li>
@@ -11647,12 +11904,17 @@ It is also recommended not to use <code>.maxConnections</code> in this condition
 
 </p>
 <h3>child.disconnect()<span><a class="mark" href="#all_child_disconnect" id="all_child_disconnect">#</a></span></h3>
-<p>To close the IPC connection between parent and child use the
-<code>child.disconnect()</code> method. This allows the child to exit gracefully since
-there is no IPC channel keeping it alive. When calling this method the
-<code>disconnect</code> event will be emitted in both parent and child, and the
-<code>connected</code> flag will be set to <code>false</code>. Please note that you can also call
-<code>process.disconnect()</code> in the child process.
+<p>Close the IPC channel between parent and child, allowing the child to exit
+gracefully once there are no other connections keeping it alive. After calling
+this method the <code>.connected</code> flag will be set to <code>false</code> in both the parent and
+child, and it is no longer possible to send messages.
+
+</p>
+<p>The &#39;disconnect&#39; event will be emitted when there are no messages in the process
+of being received, most likely immediately.
+
+</p>
+<p>Note that you can also call <code>process.disconnect()</code> in the child process.
 
 </p>
 <h2>child_process.spawn(command, [args], [options])<span><a class="mark" href="#all_child_process_spawn_command_args_options" id="all_child_process_spawn_command_args_options">#</a></span></h2>
@@ -11860,7 +12122,7 @@ Use at your own risk.
 <li><code>env</code> <span class="type">Object</span> Environment key-value pairs</li>
 <li><code>encoding</code> <span class="type">String</span> (Default: &#39;utf8&#39;)</li>
 <li><code>timeout</code> <span class="type">Number</span> (Default: 0)</li>
-<li><code>maxBuffer</code> <span class="type">Number</span> (Default: 200*1024)</li>
+<li><code>maxBuffer</code> <span class="type">Number</span> (Default: <code>200*1024</code>)</li>
 <li><code>killSignal</code> <span class="type">String</span> (Default: &#39;SIGTERM&#39;)</li>
 </ul>
 </li>
@@ -11946,6 +12208,10 @@ leaner than <code>child_process.exec</code>. It has the same options.
 <li><code>env</code> <span class="type">Object</span> Environment key-value pairs</li>
 <li><code>encoding</code> <span class="type">String</span> (Default: &#39;utf8&#39;)</li>
 <li><code>execPath</code> <span class="type">String</span> Executable used to create the child process</li>
+<li><code>execArgv</code> <span class="type">Array</span> List of string arguments passed to the executable
+(Default: <code>process.execArgv</code>)</li>
+<li><code>silent</code> <span class="type">Boolean</span> If true, prevent stdout and stderr in the spawned node
+process from being associated with the parent&#39;s (default is false)</li>
 </ul>
 </li>
 <li>Return: ChildProcess object</li>
@@ -11954,15 +12220,6 @@ leaner than <code>child_process.exec</code>. It has the same options.
 processes. In addition to having all the methods in a normal ChildProcess
 instance, the returned object has a communication channel built-in. See
 <code>child.send(message, [sendHandle])</code> for details.
-
-</p>
-<p>By default the spawned Node process will have the stdout, stderr associated
-with the parent&#39;s. To change this behavior set the <code>silent</code> property in the
-<code>options</code> object to <code>true</code>.
-
-</p>
-<p>The child process does not automatically exit once it&#39;s done, you need to call
-<code>process.exit()</code> explicitly. This limitation may be lifted in the future.
 
 </p>
 <p>These child Nodes are still whole new instances of V8. Assume at least 30ms
@@ -12549,6 +12806,16 @@ events.
 <p>Returns an array containing the 1, 5, and 15 minute load averages.
 
 </p>
+<p>The load average is a measure of system activity, calculated by the operating
+system and expressed as a fractional number.  As a rule of thumb, the load
+average should ideally be less than the number of logical CPUs in the system.
+
+</p>
+<p>The load average is a very UNIX-y concept; there is no real equivalent on
+Windows platforms.  That is why this function always returns <code>[0, 0, 0]</code> on
+Windows.
+
+</p>
 <h2>os.totalmem()<span><a class="mark" href="#all_os_totalmem" id="all_os_totalmem">#</a></span></h2>
 <p>Returns the total amount of system memory in bytes.
 
@@ -12825,7 +13092,7 @@ multi-core systems the user will sometimes want to launch a cluster of Node
 processes to handle the load.
 
 </p>
-<p>The cluster module allows you to easily create a network of processes that
+<p>The cluster module allows you to easily create child processes that
 all share server ports.
 
 </p>
@@ -12879,7 +13146,7 @@ arguments and passes the request to the master process.  If the master
 process already has a listening server matching the worker&#39;s
 requirements, then it passes the handle to the worker.  If it does not
 already have a listening server matching that requirement, then it will
-create one, and pass the handle to the child.
+create one, and pass the handle to the worker.
 
 </p>
 <p>This causes potentially surprising behavior in three edge cases:
@@ -12920,7 +13187,9 @@ the worker pool for your application&#39;s needs.
 <h2>cluster.settings<span><a class="mark" href="#all_cluster_settings" id="all_cluster_settings">#</a></span></h2>
 <div class="signature"><ul>
 <li><span class="type">Object</span><ul>
-<li><code>exec</code> <span class="type">String</span> file path to worker file.  (Default=<code>__filename</code>)</li>
+<li><code>execArgv</code> <span class="type">Array</span> list of string arguments passed to the node executable. 
+(Default=<code>process.execArgv</code>)</li>
+<li><code>exec</code> <span class="type">String</span> file path to worker file.  (Default=<code>process.argv[1]</code>)</li>
 <li><code>args</code> <span class="type">Array</span> string arguments passed to worker.
 (Default=<code>process.argv.slice(2)</code>)</li>
 <li><code>silent</code> <span class="type">Boolean</span> whether or not to send output to parent&#39;s stdio.
@@ -12928,8 +13197,15 @@ the worker pool for your application&#39;s needs.
 </ul>
 </li>
 </div></ul>
-<p>All settings set by the <code>.setupMaster</code> is stored in this settings object.
-This object is not supposed to be changed or set manually, by you.
+<p>After calling <code>.setupMaster()</code> (or <code>.fork()</code>) this settings object will contain
+the settings, including the default values.
+
+</p>
+<p>It is effectively frozen after being set, because <code>.setupMaster()</code> can
+only be called once.
+
+</p>
+<p>This object is not supposed to be changed or set manually, by you.
 
 </p>
 <h2>cluster.isMaster<span><a class="mark" href="#all_cluster_ismaster" id="all_cluster_ismaster">#</a></span></h2>
@@ -12945,9 +13221,7 @@ undefined, then <code>isMaster</code> is <code>true</code>.
 <div class="signature"><ul>
 <li><span class="type">Boolean</span></li>
 </div></ul>
-<p>This boolean flag is true if the process is a worker forked from a master.
-If the <code>process.env.NODE_UNIQUE_ID</code> is set to a value, then
-<code>isWorker</code> is <code>true</code>.
+<p>True if the process is not a master (it is the negation of <code>cluster.isMaster</code>).
 
 </p>
 <h2>Event: &#39;fork&#39;<span><a class="mark" href="#all_event_fork" id="all_event_fork">#</a></span></h2>
@@ -12977,11 +13251,10 @@ cluster.on(&#39;exit&#39;, function(worker, code, signal) {
 <div class="signature"><ul>
 <li><code>worker</code> <span class="type">Worker object</span></li>
 </div></ul>
-<p>After forking a new worker, the worker should respond with a online message.
-When the master receives a online message it will emit such event.
+<p>After forking a new worker, the worker should respond with an online message.
+When the master receives an online message it will emit this event.
 The difference between &#39;fork&#39; and &#39;online&#39; is that fork is emitted when the
-master tries to fork a worker, and &#39;online&#39; is emitted when the worker is
-being executed.
+master forks a worker, and &#39;online&#39; is emitted when the worker is running.
 
 </p>
 <pre><code>cluster.on(&#39;online&#39;, function(worker) {
@@ -12992,9 +13265,8 @@ being executed.
 <li><code>worker</code> <span class="type">Worker object</span></li>
 <li><code>address</code> <span class="type">Object</span></li>
 </div></ul>
-<p>When calling <code>listen()</code> from a worker, a &#39;listening&#39; event is automatically assigned
-to the server instance. When the server is listening a message is send to the master
-where the &#39;listening&#39; event is emitted.
+<p>After calling <code>listen()</code> from a worker, when the &#39;listening&#39; event is emitted on
+the server, a listening event will also be emitted on <code>cluster</code> in the master.
 
 </p>
 <p>The event handler is executed with two arguments, the <code>worker</code> contains the worker
@@ -13006,19 +13278,27 @@ on more than one address.
 <pre><code>cluster.on(&#39;listening&#39;, function(worker, address) {
   console.log(&quot;A worker is now connected to &quot; + address.address + &quot;:&quot; + address.port);
 });</code></pre>
+<p>The <code>addressType</code> is one of:
+
+</p>
+<ul>
+<li><code>4</code> (TCPv4)</li>
+<li><code>6</code> (TCPv6)</li>
+<li><code>-1</code> (unix domain socket)</li>
+<li><code>&quot;udp4&quot;</code> or <code>&quot;udp6&quot;</code> (UDP v4 or v6)</li>
+</ul>
 <h2>Event: &#39;disconnect&#39;<span><a class="mark" href="#all_event_disconnect_1" id="all_event_disconnect_1">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>worker</code> <span class="type">Worker object</span></li>
 </div></ul>
-<p>When a workers IPC channel has disconnected this event is emitted.
-This will happen when the worker dies, usually after calling
-<code>.kill()</code>.
+<p>Emitted after the worker IPC channel has disconnected. This can occur when a
+worker exits gracefully, is killed, or is disconnected manually (such as with
+worker.disconnect()).
 
 </p>
-<p>When calling <code>.disconnect()</code>, there may be a delay between the
-<code>disconnect</code> and <code>exit</code> events.  This event can be used to detect if
-the process is stuck in a cleanup or if there are long-living
-connections.
+<p>There may be a delay between the <code>disconnect</code> and <code>exit</code> events.  These events
+can be used to detect if the process is stuck in a cleanup or if there are
+long-living connections.
 
 </p>
 <pre><code>cluster.on(&#39;disconnect&#39;, function(worker) {
@@ -13032,27 +13312,27 @@ connections.
 the process to be killed.</li>
 </div></ul>
 <p>When any of the workers die the cluster module will emit the &#39;exit&#39; event.
-This can be used to restart the worker by calling <code>fork()</code> again.
+
+</p>
+<p>This can be used to restart the worker by calling <code>.fork()</code> again.
 
 </p>
 <pre><code>cluster.on(&#39;exit&#39;, function(worker, code, signal) {
-  var exitCode = worker.process.exitCode;
-  console.log(&#39;worker &#39; + worker.process.pid + &#39; died (&#39;+exitCode+&#39;). restarting...&#39;);
+  console.log(&#39;worker %d died (%s). restarting...&#39;,
+    worker.process.pid, signal || code);
   cluster.fork();
 });</code></pre>
+<p>See <a href="child_process.html#child_process_event_exit">child_process event: &#39;exit&#39;</a>.
+
+</p>
 <h2>Event: &#39;setup&#39;<span><a class="mark" href="#all_event_setup" id="all_event_setup">#</a></span></h2>
-<div class="signature"><ul>
-<li><code>worker</code> <span class="type">Worker object</span></li>
-</div></ul>
-<p>When the <code>.setupMaster()</code> function has been executed this event emits.
-If <code>.setupMaster()</code> was not executed before <code>fork()</code> this function will
-call <code>.setupMaster()</code> with no arguments.
+<p>Emitted the first time that <code>.setupMaster()</code> is called.
 
 </p>
 <h2>cluster.setupMaster([settings])<span><a class="mark" href="#all_cluster_setupmaster_settings" id="all_cluster_setupmaster_settings">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>settings</code> <span class="type">Object</span><ul>
-<li><code>exec</code> <span class="type">String</span> file path to worker file.  (Default=<code>__filename</code>)</li>
+<li><code>exec</code> <span class="type">String</span> file path to worker file.  (Default=<code>process.argv[1]</code>)</li>
 <li><code>args</code> <span class="type">Array</span> string arguments passed to worker.
 (Default=<code>process.argv.slice(2)</code>)</li>
 <li><code>silent</code> <span class="type">Boolean</span> whether or not to send output to parent&#39;s stdio.
@@ -13060,10 +13340,22 @@ call <code>.setupMaster()</code> with no arguments.
 </ul>
 </li>
 </div></ul>
-<p><code>setupMaster</code> is used to change the default &#39;fork&#39; behavior. The new settings
-are effective immediately and permanently, they cannot be changed later on.
+<p><code>setupMaster</code> is used to change the default &#39;fork&#39; behavior. Once called,
+the settings will be present in <code>cluster.settings</code>.
 
 </p>
+<p>Note that:
+
+</p>
+<ul>
+<li>Only the first call to <code>.setupMaster()</code> has any effect, subsequent calls are
+ignored</li>
+<li>That because of the above, the <em>only</em> attribute of a worker that may be
+customized per-worker is the <code>env</code> passed to <code>.fork()</code></li>
+<li><code>.fork()</code> calls <code>.setupMaster()</code> internally to establish the defaults, so to
+have any effect, <code>.setupMaster()</code> must be called <em>before</em> any calls to
+<code>.fork()</code></li>
+</ul>
 <p>Example:
 
 </p>
@@ -13074,24 +13366,36 @@ cluster.setupMaster({
   silent : true
 });
 cluster.fork();</code></pre>
+<p>This can only be called from the master process.
+
+</p>
 <h2>cluster.fork([env])<span><a class="mark" href="#all_cluster_fork_env" id="all_cluster_fork_env">#</a></span></h2>
 <div class="signature"><ul>
-<li><code>env</code> <span class="type">Object</span> Key/value pairs to add to child process environment.</li>
+<li><code>env</code> <span class="type">Object</span> Key/value pairs to add to worker process environment.</li>
 <li>return <span class="type">Worker object</span></li>
 </div></ul>
-<p>Spawn a new worker process. This can only be called from the master process.
+<p>Spawn a new worker process.
+
+</p>
+<p>This can only be called from the master process.
 
 </p>
 <h2>cluster.disconnect([callback])<span><a class="mark" href="#all_cluster_disconnect_callback" id="all_cluster_disconnect_callback">#</a></span></h2>
 <div class="signature"><ul>
-<li><code>callback</code> <span class="type">Function</span> called when all workers are disconnected and handlers are closed</li>
+<li><code>callback</code> <span class="type">Function</span> called when all workers are disconnected and handles are
+closed</li>
 </div></ul>
-<p>When calling this method, all workers will commit a graceful suicide. When they are
-disconnected all internal handlers will be closed, allowing the master process to
-die graceful if no other event is waiting.
+<p>Calls <code>.disconnect()</code> on each worker in <code>cluster.workers</code>.
+
+</p>
+<p>When they are disconnected all internal handles will be closed, allowing the
+master process to die gracefully if no other event is waiting.
 
 </p>
 <p>The method takes an optional callback argument which will be called when finished.
+
+</p>
+<p>This can only be called from the master process.
 
 </p>
 <h2>cluster.worker<span><a class="mark" href="#all_cluster_worker" id="all_cluster_worker">#</a></span></h2>
@@ -13117,6 +13421,10 @@ if (cluster.isMaster) {
 <p>A hash that stores the active worker objects, keyed by <code>id</code> field. Makes it
 easy to loop through all the workers. It is only available in the master
 process.
+
+</p>
+<p>A worker is removed from cluster.workers just before the <code>&#39;disconnect&#39;</code> or
+<code>&#39;exit&#39;</code> event is emitted.
 
 </p>
 <pre><code>// Go through all workers
@@ -13158,21 +13466,37 @@ cluster.workers
 <li><span class="type">ChildProcess object</span></li>
 </div></ul>
 <p>All workers are created using <code>child_process.fork()</code>, the returned object
-from this function is stored in process.
+from this function is stored as <code>.process</code>. In a worker, the global <code>process</code>
+is stored.
 
 </p>
-<p>See: <a href="child_process.html">Child Process module</a>
+<p>See: <a href="child_process.html#child_process_child_process_fork_modulepath_args_options">Child Process module</a>
+
+</p>
+<p>Note that workers will call <code>process.exit(0)</code> if the <code>&#39;disconnect&#39;</code> event occurs
+on <code>process</code> and <code>.suicide</code> is not <code>true</code>. This protects against accidental
+disconnection.
 
 </p>
 <h3>worker.suicide<span><a class="mark" href="#all_worker_suicide" id="all_worker_suicide">#</a></span></h3>
 <div class="signature"><ul>
 <li><span class="type">Boolean</span></li>
 </div></ul>
-<p>This property is a boolean. It is set when a worker dies after calling
-<code>.kill()</code> or immediately after calling the <code>.disconnect()</code> method.
-Until then it is <code>undefined</code>.
+<p>Set by calling <code>.kill()</code> or <code>.disconnect()</code>, until then it is <code>undefined</code>.
 
 </p>
+<p>The boolean <code>worker.suicide</code> lets you distinguish between voluntary and accidental
+exit, the master may choose not to respawn a worker based on this value.
+
+</p>
+<pre><code>cluster.on(&#39;exit&#39;, function(worker, code, signal) {
+  if (worker.suicide === true) {
+    console.log(&#39;Oh, it was just suicide\&#39; – no need to worry&#39;).
+  }
+});
+
+// kill worker
+worker.kill();</code></pre>
 <h3>worker.send(message, [sendHandle])<span><a class="mark" href="#all_worker_send_message_sendhandle" id="all_worker_send_message_sendhandle">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>message</code> <span class="type">Object</span></li>
@@ -13180,8 +13504,10 @@ Until then it is <code>undefined</code>.
 </div></ul>
 <p>This function is equal to the send methods provided by
 <code>child_process.fork()</code>.  In the master you should use this function to
-send a message to a specific worker.  However in a worker you can also use
-<code>process.send(message)</code>, since this is the same function.
+send a message to a specific worker.
+
+</p>
+<p>In a worker you can also use <code>process.send(message)</code>, it is the same function.
 
 </p>
 <p>This example will echo back all messages from the master:
@@ -13201,36 +13527,53 @@ send a message to a specific worker.  However in a worker you can also use
 <li><code>signal</code> <span class="type">String</span> Name of the kill signal to send to the worker
 process.</li>
 </div></ul>
-<p>This function will kill the worker, and inform the master to not spawn a
-new worker.  The boolean <code>suicide</code> lets you distinguish between voluntary
-and accidental exit.
+<p>This function will kill the worker. In the master, it does this by disconnecting
+the <code>worker.process</code>, and once disconnected, killing with <code>signal</code>. In the
+worker, it does it by disconnecting the channel, and then exiting with code <code>0</code>.
 
 </p>
-<pre><code>cluster.on(&#39;exit&#39;, function(worker, code, signal) {
-  if (worker.suicide === true) {
-    console.log(&#39;Oh, it was just suicide\&#39; – no need to worry&#39;).
-  }
-});
+<p>Causes <code>.suicide</code> to be set.
 
-// kill worker
-worker.kill();</code></pre>
-<p>This method is aliased as <code>worker.destroy()</code> for backwards
-compatibility.
+</p>
+<p>This method is aliased as <code>worker.destroy()</code> for backwards compatibility.
+
+</p>
+<p>Note that in a worker, <code>process.kill()</code> exists, but it is not this function,
+it is <a href="process.html#process_process_kill_pid_signal">kill</a>.
 
 </p>
 <h3>worker.disconnect()<span><a class="mark" href="#all_worker_disconnect" id="all_worker_disconnect">#</a></span></h3>
-<p>When calling this function the worker will no longer accept new connections, but
-they will be handled by any other listening worker. Existing connection will be
-allowed to exit as usual. When no more connections exist, the IPC channel to the worker
-will close allowing it to die graceful. When the IPC channel is closed the <code>disconnect</code>
-event will emit, this is then followed by the <code>exit</code> event, there is emitted when
-the worker finally die.
+<p>In a worker, this function will close all servers, wait for the &#39;close&#39; event on
+those servers, and then disconnect the IPC channel.
 
 </p>
-<p>Because there might be long living connections, it is useful to implement a timeout.
-This example ask the worker to disconnect and after 2 seconds it will destroy the
-server. An alternative would be to execute <code>worker.kill()</code> after 2 seconds, but
-that would normally not allow the worker to do any cleanup if needed.
+<p>In the master, an internal message is sent to the worker causing it to call
+<code>.disconnect()</code> on itself.
+
+</p>
+<p>Causes <code>.suicide</code> to be set.
+
+</p>
+<p>Note that after a server is closed, it will no longer accept new connections,
+but connections may be accepted by any other listening worker. Existing
+connections will be allowed to close as usual. When no more connections exist,
+see <a href="net.html#net_event_close">server.close()</a>, the IPC channel to the worker
+will close allowing it to die gracefully.
+
+</p>
+<p>The above applies <em>only</em> to server connections, client connections are not
+automatically closed by workers, and disconnect does not wait for them to close
+before exiting.
+
+</p>
+<p>Note that in a worker, <code>process.disconnect</code> exists, but it is not this function,
+it is <a href="child_process.html#child_process_child_disconnect">disconnect</a>.
+
+</p>
+<p>Because long living server connections may block workers from disconnecting, it
+may be useful to send a message, so application specific actions may be taken to
+close them. It also may be useful to implement a timeout, killing a worker if
+the <code>disconnect</code> event has not been emitted after some time.
 
 </p>
 <pre><code>if (cluster.isMaster) {
@@ -13238,9 +13581,10 @@ that would normally not allow the worker to do any cleanup if needed.
   var timeout;
 
   worker.on(&#39;listening&#39;, function(address) {
+    worker.send(&#39;shutdown&#39;);
     worker.disconnect();
     timeout = setTimeout(function() {
-      worker.send(&#39;force kill&#39;);
+      worker.kill();
     }, 2000);
   });
 
@@ -13251,18 +13595,14 @@ that would normally not allow the worker to do any cleanup if needed.
 } else if (cluster.isWorker) {
   var net = require(&#39;net&#39;);
   var server = net.createServer(function(socket) {
-    // connection never end
+    // connections never end
   });
 
   server.listen(8000);
 
-  server.on(&#39;close&#39;, function() {
-    // cleanup
-  });
-
   process.on(&#39;message&#39;, function(msg) {
-    if (msg === &#39;force kill&#39;) {
-      server.close();
+    if(msg === &#39;shutdown&#39;) {
+      // initiate graceful close of any connections to server
     }
   });
 }</code></pre>
@@ -13271,8 +13611,9 @@ that would normally not allow the worker to do any cleanup if needed.
 <li><code>message</code> <span class="type">Object</span></li>
 </div></ul>
 <p>This event is the same as the one provided by <code>child_process.fork()</code>.
-In the master you should use this event, however in a worker you can also use
-<code>process.on(&#39;message&#39;)</code>
+
+</p>
+<p>In a worker you can also use <code>process.on(&#39;message&#39;)</code>.
 
 </p>
 <p>As an example, here is a cluster that keeps count of the number of requests
@@ -13319,27 +13660,30 @@ if (cluster.isMaster) {
   }).listen(8000);
 }</code></pre>
 <h3>Event: &#39;online&#39;<span><a class="mark" href="#all_event_online_1" id="all_event_online_1">#</a></span></h3>
-<p>Same as the <code>cluster.on(&#39;online&#39;)</code> event, but emits only when the state change
-on the specified worker.
+<p>Similar to the <code>cluster.on(&#39;online&#39;)</code> event, but specific to this worker.
 
 </p>
 <pre><code>cluster.fork().on(&#39;online&#39;, function() {
   // Worker is online
 });</code></pre>
+<p>It is not emitted in the worker.
+
+</p>
 <h3>Event: &#39;listening&#39;<span><a class="mark" href="#all_event_listening_3" id="all_event_listening_3">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>address</code> <span class="type">Object</span></li>
 </div></ul>
-<p>Same as the <code>cluster.on(&#39;listening&#39;)</code> event, but emits only when the state change
-on the specified worker.
+<p>Similar to the <code>cluster.on(&#39;listening&#39;)</code> event, but specific to this worker.
 
 </p>
 <pre><code>cluster.fork().on(&#39;listening&#39;, function(address) {
   // Worker is listening
 });</code></pre>
+<p>It is not emitted in the worker.
+
+</p>
 <h3>Event: &#39;disconnect&#39;<span><a class="mark" href="#all_event_disconnect_2" id="all_event_disconnect_2">#</a></span></h3>
-<p>Same as the <code>cluster.on(&#39;disconnect&#39;)</code> event, but emits only when the state change
-on the specified worker.
+<p>Similar to the <code>cluster.on(&#39;disconnect&#39;)</code> event, but specfic to this worker.
 
 </p>
 <pre><code>cluster.fork().on(&#39;disconnect&#39;, function() {
@@ -13351,8 +13695,7 @@ on the specified worker.
 <li><code>signal</code> <span class="type">String</span> the name of the signal (eg. <code>&#39;SIGHUP&#39;</code>) that caused
 the process to be killed.</li>
 </div></ul>
-<p>Emitted by the individual worker instance, when the underlying child process
-is terminated.  See <a href="child_process.html#child_process_event_exit">child_process event: &#39;exit&#39;</a>.
+<p>Similar to the <code>cluster.on(&#39;exit&#39;)</code> event, but specific to this worker.
 
 </p>
 <pre><code>var worker = cluster.fork();
@@ -13365,6 +13708,13 @@ worker.on(&#39;exit&#39;, function(code, signal) {
     console.log(&quot;worker success!&quot;);
   }
 });</code></pre>
+<h3>Event: &#39;error&#39;<span><a class="mark" href="#all_event_error_7" id="all_event_error_7">#</a></span></h3>
+<p>This event is the same as the one provided by <code>child_process.fork()</code>.
+
+</p>
+<p>In a worker you can also use <code>process.on(&#39;error&#39;)</code>.
+
+</p>
 
           </div>
         </div>
@@ -13384,7 +13734,7 @@ worker.on(&#39;exit&#39;, function(code, signal) {
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

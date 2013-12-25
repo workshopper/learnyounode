@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Modules Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>Modules Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/modules.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -56,7 +56,10 @@
 </ul>
 </li>
 <li><a href="#modules_the_module_object">The <code>module</code> Object</a><ul>
-<li><a href="#modules_module_exports">module.exports</a></li>
+<li><a href="#modules_module_exports">module.exports</a><ul>
+<li><a href="#modules_exports_alias">exports alias</a></li>
+</ul>
+</li>
 <li><a href="#modules_module_require_id">module.require(id)</a></li>
 <li><a href="#modules_module_id">module.id</a></li>
 <li><a href="#modules_module_filename">module.filename</a></li>
@@ -103,29 +106,37 @@ exports.circumference = function (r) {
   return 2 * PI * r;
 };</code></pre>
 <p>The module <code>circle.js</code> has exported the functions <code>area()</code> and
-<code>circumference()</code>.  To export an object, add to the special <code>exports</code>
-object.
+<code>circumference()</code>.  To add functions and objects to the root of your module,
+you can add them to the special <code>exports</code> object.
 
 </p>
-<p>Note that <code>exports</code> is a reference to <code>module.exports</code> making it suitable
-for augmentation only. If you are exporting a single item such as a
-constructor you will want to use <code>module.exports</code> directly instead.
+<p>Variables local to the module will be private, as though the module was wrapped
+in a function. In this example the variable <code>PI</code> is private to <code>circle.js</code>.
 
 </p>
-<pre><code>function MyConstructor (opts) {
-  //...
-}
-
-// BROKEN: Does not modify exports
-exports = MyConstructor;
-
-// exports the constructor properly
-module.exports = MyConstructor;</code></pre>
-<p>Variables
-local to the module will be private. In this example the variable <code>PI</code> is
-private to <code>circle.js</code>.
+<p>If you want the root of your module&#39;s export to be a function (such as a
+constructor) or if you want to export a complete object in one assignment
+instead of building it one property at a time, assign it to <code>module.exports</code>
+instead of <code>exports</code>.
 
 </p>
+<p>Below, <code>bar.js</code> makes use of the <code>square</code> module, which exports a constructor:
+
+</p>
+<pre><code>var square = require(&#39;./square.js&#39;);
+var mySquare = square(2);
+console.log(&#39;The area of my square is &#39; + mySquare.area());</code></pre>
+<p>The <code>square</code> module is defined in <code>square.js</code>:
+
+</p>
+<pre><code>// assigning to exports will not modify module, must use module.exports
+module.exports = function(width) {
+  return {
+    area: function() {
+      return width * width;
+    }
+  };
+}</code></pre>
 <p>The module system is implemented in the <code>require(&quot;module&quot;)</code> module.
 
 </p>
@@ -331,9 +342,9 @@ would resolve to different files.
 <li>{Object}</li>
 </ul>
 <p>In each module, the <code>module</code> free variable is a reference to the object
-representing the current module.  In particular
-<code>module.exports</code> is accessible via the <code>exports</code> module-global.
-<code>module</code> isn&#39;t actually a global but rather local to each module.
+representing the current module.  For convenience, <code>module.exports</code> is
+also accessible via the <code>exports</code> module-global. <code>module</code> isn&#39;t actually
+a global but rather local to each module.
 
 </p>
 <h3>module.exports<span><a class="mark" href="#modules_module_exports" id="modules_module_exports">#</a></span></h3>
@@ -341,9 +352,13 @@ representing the current module.  In particular
 <li><span class="type">Object</span></li>
 </div></ul>
 <p>The <code>module.exports</code> object is created by the Module system. Sometimes this is not
-acceptable, many want their module to be an instance of some class. To do this
-assign the desired export object to <code>module.exports</code>. For example suppose we
-were making a module called <code>a.js</code>
+acceptable; many want their module to be an instance of some class. To do this
+assign the desired export object to <code>module.exports</code>. Note that assigning the
+desired object to <code>exports</code> will simply rebind the local <code>exports</code> variable,
+which is probably not what you want to do.
+
+</p>
+<p>For example suppose we were making a module called <code>a.js</code>
 
 </p>
 <pre><code>var EventEmitter = require(&#39;events&#39;).EventEmitter;
@@ -377,6 +392,30 @@ done in any callbacks.  This does not work:
 </p>
 <pre><code>var x = require(&#39;./x&#39;);
 console.log(x.a);</code></pre>
+<h4>exports alias<span><a class="mark" href="#modules_exports_alias" id="modules_exports_alias">#</a></span></h4>
+<p>The <code>exports</code> variable that is available within a module starts as a reference
+to <code>module.exports</code>. As with any variable, if you assign a new value to it, it
+is no longer bound to the previous value.
+
+</p>
+<p>To illustrate the behaviour, imagine this hypothetical implementation of
+<code>require()</code>:
+
+</p>
+<pre><code>function require(...) {
+  // ...
+  function (module, exports) {
+    // Your module code here
+    exports = some_func;        // re-assigns exports, exports is no longer
+                                // a shortcut, and nothing is exported.
+    module.exports = some_func; // makes your module export 0
+  } (module, module.exports);
+  return module;
+}</code></pre>
+<p>As a guideline, if the relationship between <code>exports</code> and <code>module.exports</code>
+seems like magic to you, ignore <code>exports</code> and only use <code>module.exports</code>.
+
+</p>
 <h3>module.require(id)<span><a class="mark" href="#modules_module_require_id" id="modules_module_require_id">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>id</code> <span class="type">String</span></li>
@@ -612,7 +651,7 @@ relative, and based on the real path of the files making the calls to
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Domain Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>Domain Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/domain.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -64,6 +64,8 @@
 <li><a href="#domain_example_1">Example</a></li>
 </ul>
 </li>
+<li><a href="#domain_domain_enter">domain.enter()</a></li>
+<li><a href="#domain_domain_exit">domain.exit()</a></li>
 <li><a href="#domain_domain_dispose">domain.dispose()</a></li>
 </ul>
 </li>
@@ -470,6 +472,45 @@ d.on(&#39;error&#39;, function(er) {
   // if we throw it now, it will crash the program
   // with the normal line number and stack message.
 });</code></pre>
+<h3>domain.enter()<span><a class="mark" href="#domain_domain_enter" id="domain_domain_enter">#</a></span></h3>
+<p>The <code>enter</code> method is plumbing used by the <code>run</code>, <code>bind</code>, and <code>intercept</code>
+methods to set the active domain. It sets <code>domain.active</code> and <code>process.domain</code>
+to the domain, and implicitly pushes the domain onto the domain stack managed
+by the domain module (see <code>domain.exit()</code> for details on the domain stack). The
+call to <code>enter</code> delimits the beginning of a chain of asynchronous calls and I/O
+operations bound to a domain.
+
+</p>
+<p>Calling <code>enter</code> changes only the active domain, and does not alter the domain
+itself. <code>Enter</code> and <code>exit</code> can be called an arbitrary number of times on a
+single domain.
+
+</p>
+<p>If the domain on which <code>enter</code> is called has been disposed, <code>enter</code> will return
+without setting the domain.
+
+</p>
+<h3>domain.exit()<span><a class="mark" href="#domain_domain_exit" id="domain_domain_exit">#</a></span></h3>
+<p>The <code>exit</code> method exits the current domain, popping it off the domain stack.
+Any time execution is going to switch to the context of a different chain of
+asynchronous calls, it&#39;s important to ensure that the current domain is exited.
+The call to <code>exit</code> delimits either the end of or an interruption to the chain
+of asynchronous calls and I/O operations bound to a domain.
+
+</p>
+<p>If there are multiple, nested domains bound to the current execution context,
+<code>exit</code> will exit any domains nested within this domain.
+
+</p>
+<p>Calling <code>exit</code> changes only the active domain, and does not alter the domain
+itself. <code>Enter</code> and <code>exit</code> can be called an arbitrary number of times on a
+single domain.
+
+</p>
+<p>If the domain on which <code>exit</code> is called has been disposed, <code>exit</code> will return
+without exiting the domain.
+
+</p>
 <h3>domain.dispose()<span><a class="mark" href="#domain_domain_dispose" id="domain_domain_dispose">#</a></span></h3>
 <p>The dispose method destroys a domain, and makes a best effort attempt to
 clean up any and all IO that is associated with the domain.  Streams are
@@ -511,7 +552,7 @@ in flight, Node.js will not communicate further about them.
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>HTTP Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>HTTP Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/http.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -68,6 +68,7 @@
 </li>
 <li><a href="#http_class_http_serverresponse">Class: http.ServerResponse</a><ul>
 <li><a href="#http_event_close_1">Event: &#39;close&#39;</a></li>
+<li><a href="#http_event_finish">Event: &#39;finish&#39;</a></li>
 <li><a href="#http_response_writecontinue">response.writeContinue()</a></li>
 <li><a href="#http_response_writehead_statuscode_reasonphrase_headers">response.writeHead(statusCode, [reasonPhrase], [headers])</a></li>
 <li><a href="#http_response_settimeout_msecs_callback">response.setTimeout(msecs, callback)</a></li>
@@ -82,8 +83,8 @@
 <li><a href="#http_response_end_data_encoding">response.end([data], [encoding])</a></li>
 </ul>
 </li>
-<li><a href="#http_http_request_options_callback">http.request(options, callback)</a></li>
-<li><a href="#http_http_get_options_callback">http.get(options, callback)</a></li>
+<li><a href="#http_http_request_options_callback">http.request(options, [callback])</a></li>
+<li><a href="#http_http_get_options_callback">http.get(options, [callback])</a></li>
 <li><a href="#http_class_http_agent">Class: http.Agent</a><ul>
 <li><a href="#http_agent_maxsockets">agent.maxSockets</a></li>
 <li><a href="#http_agent_sockets">agent.sockets</a></li>
@@ -185,8 +186,8 @@ connected to.
 </p>
 <p>Emitted each time there is a request. Note that there may be multiple requests
 per connection (in the case of keep-alive connections).
- <code>request</code> is an instance of <code>http.IncomingMessage</code> and <code>response</code> is
- an instance of <code>http.ServerResponse</code>
+ <code>request</code> is an instance of <a href="#http_http_incomingmessage">http.IncomingMessage</a> and <code>response</code> is
+an instance of <a href="#http_class_http_serverresponse">http.ServerResponse</a>.
 
 </p>
 <h3>Event: &#39;connection&#39;<span><a class="mark" href="#http_event_connection" id="http_event_connection">#</a></span></h3>
@@ -216,7 +217,7 @@ If this event isn&#39;t listened for, the server will automatically respond
 with a 100 Continue as appropriate.
 
 </p>
-<p>Handling this event involves calling <code>response.writeContinue</code> if the client
+<p>Handling this event involves calling <a href="#http_response_writecontinue">response.writeContinue()</a> if the client
 should continue to send the request body, or generating an appropriate HTTP
 response (e.g., 400 Bad Request) if the client should not continue to send the
 request body.
@@ -391,7 +392,20 @@ passed as the second parameter to the <code>&#39;request&#39;</code> event.
 
 </p>
 <p>Indicates that the underlying connection was terminated before
-<code>response.end()</code> was called or able to flush.
+<a href="#http_response_end_data_encoding">response.end()</a> was called or able to flush.
+
+</p>
+<h3>Event: &#39;finish&#39;<span><a class="mark" href="#http_event_finish" id="http_event_finish">#</a></span></h3>
+<p><code>function () { }</code>
+
+</p>
+<p>Emitted when the response has been sent. More specifically, this event is
+emitted when the last segment of the response headers and body have been
+handed off to the operating system for transmission over the network. It
+does not imply that the client has received anything yet.
+
+</p>
+<p>After this event, no more events will be emitted on the response object.
 
 </p>
 <h3>response.writeContinue()<span><a class="mark" href="#http_response_writecontinue" id="http_response_writecontinue">#</a></span></h3>
@@ -414,10 +428,10 @@ response.writeHead(200, {
   &#39;Content-Length&#39;: body.length,
   &#39;Content-Type&#39;: &#39;text/plain&#39; });</code></pre>
 <p>This method must only be called once on a message and it must
-be called before <code>response.end()</code> is called.
+be called before <a href="#http_response_end_data_encoding">response.end()</a> is called.
 
 </p>
-<p>If you call <code>response.write()</code> or <code>response.end()</code> before calling this, the
+<p>If you call <a href="#http_response_write_chunk_encoding">response.write()</a> or <a href="#http_response_end_data_encoding">response.end()</a> before calling this, the
 implicit/mutable headers will be calculated and call this function for you.
 
 </p>
@@ -447,9 +461,9 @@ sockets.
 
 </p>
 <h3>response.statusCode<span><a class="mark" href="#http_response_statuscode" id="http_response_statuscode">#</a></span></h3>
-<p>When using implicit headers (not calling <code>response.writeHead()</code> explicitly), this property
-controls the status code that will be sent to the client when the headers get
-flushed.
+<p>When using implicit headers (not calling <a href="#http_response_writehead_statuscode_reasonphrase_headers">response.writeHead()</a> explicitly),
+this property controls the status code that will be sent to the client when
+the headers get flushed.
 
 </p>
 <p>Example:
@@ -479,7 +493,7 @@ here if you need to send multiple headers with the same name.
 
 </p>
 <h3>response.sendDate<span><a class="mark" href="#http_response_senddate" id="http_response_senddate">#</a></span></h3>
-<p>When true, the Date header will be automatically generated and sent in 
+<p>When true, the Date header will be automatically generated and sent in
 the response if it is not already present in the headers. Defaults to true.
 
 </p>
@@ -506,8 +520,8 @@ implicitly flushed.
 </p>
 <pre><code>response.removeHeader(&quot;Content-Encoding&quot;);</code></pre>
 <h3>response.write(chunk, [encoding])<span><a class="mark" href="#http_response_write_chunk_encoding" id="http_response_write_chunk_encoding">#</a></span></h3>
-<p>If this method is called and <code>response.writeHead()</code> has not been called, it will
-switch to implicit header mode and flush the implicit headers.
+<p>If this method is called and <a href="#http_response_writehead_statuscode_reasonphrase_headers">response.writeHead()</a> has not been called,
+it will switch to implicit header mode and flush the implicit headers.
 
 </p>
 <p>This sends a chunk of the response body. This method may
@@ -566,7 +580,7 @@ followed by <code>response.end()</code>.
 
 
 </p>
-<h2>http.request(options, callback)<span><a class="mark" href="#http_http_request_options_callback" id="http_http_request_options_callback">#</a></span></h2>
+<h2>http.request(options, [callback])<span><a class="mark" href="#http_http_request_options_callback" id="http_http_request_options_callback">#</a></span></h2>
 <p>Node maintains several connections per server to make HTTP requests.
 This function allows one to transparently issue requests.
 
@@ -600,7 +614,11 @@ default to <code>Connection: keep-alive</code>. Possible values:<ul>
 </ul>
 </li>
 </ul>
-<p><code>http.request()</code> returns an instance of the <code>http.ClientRequest</code>
+<p>The optional <code>callback</code> parameter will be added as a one time listener for
+the <a href="#http_event_response">&#39;response&#39;</a> event.
+
+</p>
+<p><code>http.request()</code> returns an instance of the <a href="#http_class_http_clientrequest">http.ClientRequest</a>
 class. The <code>ClientRequest</code> instance is a writable stream. If one needs to
 upload a file with a POST request, then write to the <code>ClientRequest</code> object.
 
@@ -660,7 +678,7 @@ information.</p>
 to compute basic authentication.</p>
 </li>
 </ul>
-<h2>http.get(options, callback)<span><a class="mark" href="#http_http_get_options_callback" id="http_http_get_options_callback">#</a></span></h2>
+<h2>http.get(options, [callback])<span><a class="mark" href="#http_http_get_options_callback" id="http_http_get_options_callback">#</a></span></h2>
 <p>Since most requests are GET requests without bodies, Node provides this
 convenience method. The only difference between this method and <code>http.request()</code>
 is that it sets the method to GET and calls <code>req.end()</code> automatically.
@@ -708,17 +726,17 @@ pool you can do something along the lines of:
   // Do stuff
 })</code></pre>
 <h3>agent.maxSockets<span><a class="mark" href="#http_agent_maxsockets" id="http_agent_maxsockets">#</a></span></h3>
-<p>By default set to 5. Determines how many concurrent sockets the agent can have 
+<p>By default set to 5. Determines how many concurrent sockets the agent can have
 open per host.
 
 </p>
 <h3>agent.sockets<span><a class="mark" href="#http_agent_sockets" id="http_agent_sockets">#</a></span></h3>
-<p>An object which contains arrays of sockets currently in use by the Agent. Do not 
+<p>An object which contains arrays of sockets currently in use by the Agent. Do not
 modify.
 
 </p>
 <h3>agent.requests<span><a class="mark" href="#http_agent_requests" id="http_agent_requests">#</a></span></h3>
-<p>An object which contains queues of requests that have not yet been assigned to 
+<p>An object which contains queues of requests that have not yet been assigned to
 sockets. Do not modify.
 
 </p>
@@ -739,7 +757,7 @@ data chunk or when closing the connection.
 <p>To get the response, add a listener for <code>&#39;response&#39;</code> to the request object.
 <code>&#39;response&#39;</code> will be emitted from the request object when the response
 headers have been received.  The <code>&#39;response&#39;</code> event is executed with one
-argument which is an instance of <code>http.IncomingMessage</code>.
+argument which is an instance of <a href="#http_http_incomingmessage">http.IncomingMessage</a>.
 
 </p>
 <p>During the <code>&#39;response&#39;</code> event, one can add listeners to the
@@ -751,7 +769,9 @@ entirely discarded.  However, if you add a <code>&#39;response&#39;</code> event
 then you <strong>must</strong> consume the data from the response object, either by
 calling <code>response.read()</code> whenever there is a <code>&#39;readable&#39;</code> event, or
 by adding a <code>&#39;data&#39;</code> handler, or by calling the <code>.resume()</code> method.
-Until the data is consumed, the <code>&#39;end&#39;</code> event will not fire.
+Until the data is consumed, the <code>&#39;end&#39;</code> event will not fire.  Also, until
+the data is read it will consume memory that can eventually lead to a
+&#39;process out of memory&#39; error.
 
 </p>
 <p>Note: Node does not check whether Content-Length and the length of the body
@@ -767,7 +787,7 @@ which has been transmitted are equal or not.
 
 </p>
 <p>Emitted when a response is received to this request. This event is emitted only
-once. The <code>response</code> argument will be an instance of <code>http.IncomingMessage</code>.
+once. The <code>response</code> argument will be an instance of <a href="#http_http_incomingmessage">http.IncomingMessage</a>.
 
 </p>
 <p>Options:
@@ -955,9 +975,10 @@ chunked, this will send the terminating <code>&#39;0\r\n\r\n&#39;</code>.
 
 </p>
 <h2>http.IncomingMessage<span><a class="mark" href="#http_http_incomingmessage" id="http_http_incomingmessage">#</a></span></h2>
-<p>An <code>IncomingMessage</code> object is created by <code>http.Server</code> or <code>http.ClientRequest</code>
-and passed as the first argument to the <code>&#39;request&#39;</code> and <code>&#39;response&#39;</code> event
-respectively. It may be used to access response status, headers and data.
+<p>An <code>IncomingMessage</code> object is created by <a href="#http_class_http_server">http.Server</a> or
+<a href="#http_class_http_clientrequest">http.ClientRequest</a> and passed as the first argument to the <code>&#39;request&#39;</code>
+and <code>&#39;response&#39;</code> event respectively. It may be used to access response status,
+headers and data.
 
 </p>
 <p>It implements the <a href="stream.html#stream_readable_stream">Readable Stream</a> interface, as well as the
@@ -968,12 +989,8 @@ following additional events, methods, and properties.
 <p><code>function () { }</code>
 
 </p>
-<p>Indicates that the underlaying connection was terminated before
-<code>response.end()</code> was called or able to flush.
-
-</p>
-<p>Just like <code>&#39;end&#39;</code>, this event occurs only once per response. See
-[http.ServerResponse][]&#39;s <code>&#39;close&#39;</code> event for more information.
+<p>Indicates that the underlaying connection was closed.
+Just like <code>&#39;end&#39;</code>, this event occurs only once per response.
 
 </p>
 <h3>message.httpVersion<span><a class="mark" href="#http_message_httpversion" id="http_message_httpversion">#</a></span></h3>
@@ -1013,7 +1030,7 @@ console.log(request.headers);</code></pre>
 
 </p>
 <h3>message.method<span><a class="mark" href="#http_message_method" id="http_message_method">#</a></span></h3>
-<p><strong>Only valid for request obtained from <code>http.Server</code>.</strong>
+<p><strong>Only valid for request obtained from <a href="#http_class_http_server">http.Server</a>.</strong>
 
 </p>
 <p>The request method as a string. Read only. Example:
@@ -1021,7 +1038,7 @@ console.log(request.headers);</code></pre>
 
 </p>
 <h3>message.url<span><a class="mark" href="#http_message_url" id="http_message_url">#</a></span></h3>
-<p><strong>Only valid for request obtained from <code>http.Server</code>.</strong>
+<p><strong>Only valid for request obtained from <a href="#http_class_http_server">http.Server</a>.</strong>
 
 </p>
 <p>Request URL string. This contains only the URL that is
@@ -1090,7 +1107,7 @@ authentication details.
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

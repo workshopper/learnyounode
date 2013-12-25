@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Crypto Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>Crypto Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/crypto.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -221,7 +221,9 @@ digest.  The legacy <code>update</code> and <code>digest</code> methods are also
 <h3>hash.update(data, [input_encoding])<span><a class="mark" href="#crypto_hash_update_data_input_encoding" id="crypto_hash_update_data_input_encoding">#</a></span></h3>
 <p>Updates the hash content with the given <code>data</code>, the encoding of which
 is given in <code>input_encoding</code> and can be <code>&#39;utf8&#39;</code>, <code>&#39;ascii&#39;</code> or
-<code>&#39;binary&#39;</code>.  If no encoding is provided, then a buffer is expected.
+<code>&#39;binary&#39;</code>.  If no encoding is provided and the input is a string an
+encoding of <code>&#39;binary&#39;</code> is enforced. If <code>data</code> is a <code>Buffer</code> then
+<code>input_encoding</code> is ignored.
 
 </p>
 <p>This can be called many times with new data as it is streamed.
@@ -324,6 +326,7 @@ methods are also supported.
 <p>Updates the cipher with <code>data</code>, the encoding of which is given in
 <code>input_encoding</code> and can be <code>&#39;utf8&#39;</code>, <code>&#39;ascii&#39;</code> or <code>&#39;binary&#39;</code>.  If no
 encoding is provided, then a buffer is expected.
+If <code>data</code> is a <code>Buffer</code> then <code>input_encoding</code> is ignored.
 
 </p>
 <p>The <code>output_encoding</code> specifies the output format of the enciphered
@@ -381,6 +384,7 @@ plain-text data on the the readable side.  The legacy <code>update</code> and
 <p>Updates the decipher with <code>data</code>, which is encoded in <code>&#39;binary&#39;</code>,
 <code>&#39;base64&#39;</code> or <code>&#39;hex&#39;</code>.  If no encoding is provided, then a buffer is
 expected.
+If <code>data</code> is a <code>Buffer</code> then <code>input_encoding</code> is ignored.
 
 </p>
 <p>The <code>output_decoding</code> specifies in what format to return the
@@ -613,7 +617,14 @@ try {
   console.log(&#39;Have %d bytes of random data: %s&#39;, buf.length, buf);
 } catch (ex) {
   // handle error
+  // most likely, entropy sources are drained
 }</code></pre>
+<p>NOTE: Will throw error or invoke callback with error, if there is not enough
+accumulated entropy to generate cryptographically strong data. In other words,
+<code>crypto.randomBytes</code> without callback will not block even if all entropy sources
+are drained.
+
+</p>
 <h2>crypto.pseudoRandomBytes(size, [callback])<span><a class="mark" href="#crypto_crypto_pseudorandombytes_size_callback" id="crypto_crypto_pseudorandombytes_size_callback">#</a></span></h2>
 <p>Generates <em>non</em>-cryptographically strong pseudo-random data. The data
 returned will be unique if it is sufficiently long, but is not
@@ -691,7 +702,7 @@ temporary measure.
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

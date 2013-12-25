@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Child Process Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>Child Process Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/child_process.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -56,6 +56,7 @@
 <li><a href="#child_process_child_stdout">child.stdout</a></li>
 <li><a href="#child_process_child_stderr">child.stderr</a></li>
 <li><a href="#child_process_child_pid">child.pid</a></li>
+<li><a href="#child_process_child_connected">child.connected</a></li>
 <li><a href="#child_process_child_kill_signal">child.kill([signal])</a></li>
 <li><a href="#child_process_child_send_message_sendhandle">child.send(message, [sendHandle])</a><ul>
 <li><a href="#child_process_example_sending_server_object">Example: sending server object</a></li>
@@ -118,6 +119,11 @@ which can be piped to and from.
 <li>The process could not be killed, or</li>
 <li>Sending a message to the child process failed for whatever reason.</li>
 </ol>
+<p>Note that the <code>exit</code>-event may or may not fire after an error has occured. If
+you are listening on both events to fire a function, remember to guard against
+calling your function twice.
+
+</p>
 <p>See also <a href="#child_process_child_kill_signal"><code>ChildProcess#kill()</code></a> and
 <a href="#child_process_child_send_message_sendhandle"><code>ChildProcess#send()</code></a>.
 
@@ -137,6 +143,10 @@ of the signal, otherwise <code>null</code>.
 <p>Note that the child process stdio streams might still be open.
 
 </p>
+<p>Also, note that node establishes signal handlers for <code>&#39;SIGINT&#39;</code> and <code>&#39;SIGTERM</code>&#39;,
+so it will not terminate due to receipt of those signals, it will exit.
+
+</p>
 <p>See <code>waitpid(2)</code>.
 
 </p>
@@ -152,10 +162,9 @@ might share the same stdio streams.
 
 </p>
 <h3>Event: &#39;disconnect&#39;<span><a class="mark" href="#child_process_event_disconnect" id="child_process_event_disconnect">#</a></span></h3>
-<p>This event is emitted after using the <code>.disconnect()</code> method in the parent or
-in the child. After disconnecting it is no longer possible to send messages.
-An alternative way to check if you can send messages is to see if the
-<code>child.connected</code> property is <code>true</code>.
+<p>This event is emitted after calling the <code>.disconnect()</code> method in the parent
+or in the child. After disconnecting it is no longer possible to send messages,
+and the <code>.connected</code> property is false.
 
 </p>
 <h3>Event: &#39;message&#39;<span><a class="mark" href="#child_process_event_message" id="child_process_event_message">#</a></span></h3>
@@ -216,6 +225,13 @@ not be set.
 
 console.log(&#39;Spawned child pid: &#39; + grep.pid);
 grep.stdin.end();</code></pre>
+<h3>child.connected<span><a class="mark" href="#child_process_child_connected" id="child_process_child_connected">#</a></span></h3>
+<div class="signature"><ul>
+<li><span class="type">Boolean</span> Set to false after `.disconnect&#39; is called</li>
+</div></ul>
+<p>If <code>.connected</code> is false, it is no longer possible to send messages.
+
+</p>
 <h3>child.kill([signal])<span><a class="mark" href="#child_process_child_kill_signal" id="child_process_child_kill_signal">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>signal</code> <span class="type">String</span></li>
@@ -368,12 +384,17 @@ It is also recommended not to use <code>.maxConnections</code> in this condition
 
 </p>
 <h3>child.disconnect()<span><a class="mark" href="#child_process_child_disconnect" id="child_process_child_disconnect">#</a></span></h3>
-<p>To close the IPC connection between parent and child use the
-<code>child.disconnect()</code> method. This allows the child to exit gracefully since
-there is no IPC channel keeping it alive. When calling this method the
-<code>disconnect</code> event will be emitted in both parent and child, and the
-<code>connected</code> flag will be set to <code>false</code>. Please note that you can also call
-<code>process.disconnect()</code> in the child process.
+<p>Close the IPC channel between parent and child, allowing the child to exit
+gracefully once there are no other connections keeping it alive. After calling
+this method the <code>.connected</code> flag will be set to <code>false</code> in both the parent and
+child, and it is no longer possible to send messages.
+
+</p>
+<p>The &#39;disconnect&#39; event will be emitted when there are no messages in the process
+of being received, most likely immediately.
+
+</p>
+<p>Note that you can also call <code>process.disconnect()</code> in the child process.
 
 </p>
 <h2>child_process.spawn(command, [args], [options])<span><a class="mark" href="#child_process_child_process_spawn_command_args_options" id="child_process_child_process_spawn_command_args_options">#</a></span></h2>
@@ -581,7 +602,7 @@ Use at your own risk.
 <li><code>env</code> <span class="type">Object</span> Environment key-value pairs</li>
 <li><code>encoding</code> <span class="type">String</span> (Default: &#39;utf8&#39;)</li>
 <li><code>timeout</code> <span class="type">Number</span> (Default: 0)</li>
-<li><code>maxBuffer</code> <span class="type">Number</span> (Default: 200*1024)</li>
+<li><code>maxBuffer</code> <span class="type">Number</span> (Default: <code>200*1024</code>)</li>
 <li><code>killSignal</code> <span class="type">String</span> (Default: &#39;SIGTERM&#39;)</li>
 </ul>
 </li>
@@ -667,6 +688,10 @@ leaner than <code>child_process.exec</code>. It has the same options.
 <li><code>env</code> <span class="type">Object</span> Environment key-value pairs</li>
 <li><code>encoding</code> <span class="type">String</span> (Default: &#39;utf8&#39;)</li>
 <li><code>execPath</code> <span class="type">String</span> Executable used to create the child process</li>
+<li><code>execArgv</code> <span class="type">Array</span> List of string arguments passed to the executable
+(Default: <code>process.execArgv</code>)</li>
+<li><code>silent</code> <span class="type">Boolean</span> If true, prevent stdout and stderr in the spawned node
+process from being associated with the parent&#39;s (default is false)</li>
 </ul>
 </li>
 <li>Return: ChildProcess object</li>
@@ -675,15 +700,6 @@ leaner than <code>child_process.exec</code>. It has the same options.
 processes. In addition to having all the methods in a normal ChildProcess
 instance, the returned object has a communication channel built-in. See
 <code>child.send(message, [sendHandle])</code> for details.
-
-</p>
-<p>By default the spawned Node process will have the stdout, stderr associated
-with the parent&#39;s. To change this behavior set the <code>silent</code> property in the
-<code>options</code> object to <code>true</code>.
-
-</p>
-<p>The child process does not automatically exit once it&#39;s done, you need to call
-<code>process.exit()</code> explicitly. This limitation may be lifted in the future.
 
 </p>
 <p>These child Nodes are still whole new instances of V8. Assume at least 30ms
@@ -717,7 +733,7 @@ output on this fd is expected to be line delimited JSON objects.
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

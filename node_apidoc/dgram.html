@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>UDP / Datagram Sockets Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>UDP / Datagram Sockets Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/dgram.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -149,22 +149,28 @@ on this socket.
 <li><code>buf</code> Buffer object.  Message to be sent</li>
 <li><code>offset</code> Integer. Offset in the buffer where the message starts.</li>
 <li><code>length</code> Integer. Number of bytes in the message.</li>
-<li><code>port</code> Integer. destination port</li>
-<li><code>address</code> String. destination IP</li>
-<li><code>callback</code> Function. Callback when message is done being delivered.
-Optional.</li>
+<li><code>port</code> Integer. Destination port.</li>
+<li><code>address</code> String. Destination hostname or IP address.</li>
+<li><code>callback</code> Function. Called when the message has been sent. Optional.</li>
 </div></ul>
-<p>For UDP sockets, the destination port and IP address must be specified.  A string
-may be supplied for the <code>address</code> parameter, and it will be resolved with DNS.  An
-optional callback may be specified to detect any DNS errors and when <code>buf</code> may be
-re-used.  Note that DNS lookups will delay the time that a send takes place, at
-least until the next tick.  The only way to know for sure that a send has taken place
-is to use the callback.
+<p>For UDP sockets, the destination port and address must be specified.  A string
+may be supplied for the <code>address</code> parameter, and it will be resolved with DNS.
 
 </p>
-<p>If the socket has not been previously bound with a call to <code>bind</code>, it&#39;s
-assigned a random port number and bound to the &quot;all interfaces&quot; address
-(0.0.0.0 for <code>udp4</code> sockets, ::0 for <code>udp6</code> sockets).
+<p>If the address is omitted or is an empty string, <code>&#39;0.0.0.0&#39;</code> or <code>&#39;::0&#39;</code> is used
+instead.  Depending on the network configuration, those defaults may or may not
+work; it&#39;s best to be explicit about the destination address.
+
+</p>
+<p>If the socket has not been previously bound with a call to <code>bind</code>, it gets
+assigned a random port number and is bound to the &quot;all interfaces&quot; address
+(<code>&#39;0.0.0.0&#39;</code> for <code>udp4</code> sockets, <code>&#39;::0&#39;</code> for <code>udp6</code> sockets.)
+
+</p>
+<p>An optional callback may be specified to detect DNS errors or for determining
+when it&#39;s safe to reuse the <code>buf</code> object.  Note that DNS lookups delay the time
+to send for at least one tick.  The only way to know for sure that the datagram
+has been sent is by using a callback.
 
 </p>
 <p>Example of sending a UDP packet to a random port on <code>localhost</code>;
@@ -210,14 +216,23 @@ informing the source that the data did not reach its intended recipient).
 <div class="signature"><ul>
 <li><code>port</code> Integer</li>
 <li><code>address</code> String, Optional</li>
-<li><code>callback</code> Function, Optional</li>
+<li><code>callback</code> Function with no parameters, Optional. Callback when
+binding is done.</li>
 </div></ul>
-<p>For UDP sockets, listen for datagrams on a named <code>port</code> and optional <code>address</code>.
-If <code>address</code> is not specified, the OS will try to listen on all addresses.
+<p>For UDP sockets, listen for datagrams on a named <code>port</code> and optional
+<code>address</code>. If <code>address</code> is not specified, the OS will try to listen on
+all addresses.  After binding is done, a &quot;listening&quot; event is emitted
+and the <code>callback</code>(if specified) is called. Specifying both a
+&quot;listening&quot; event listener and <code>callback</code> is not harmful but not very
+useful.
 
 </p>
-<p>The <code>callback</code> argument, if provided, is added as a one-shot <code>&#39;listening&#39;</code>
-event listener.
+<p>A bound datagram socket keeps the node process running to receive
+datagrams.
+
+</p>
+<p>If binding fails, an &quot;error&quot; event is generated. In rare case (e.g.
+binding a closed socket), an <code>Error</code> may be thrown by this method.
 
 </p>
 <p>Example of a UDP server listening on port 41234:
@@ -226,6 +241,11 @@ event listener.
 <pre><code>var dgram = require(&quot;dgram&quot;);
 
 var server = dgram.createSocket(&quot;udp4&quot;);
+
+server.on(&quot;error&quot;, function (err) {
+  console.log(&quot;server error:\n&quot; + err.stack);
+  server.close();
+});
 
 server.on(&quot;message&quot;, function (msg, rinfo) {
   console.log(&quot;server got: &quot; + msg + &quot; from &quot; +
@@ -351,7 +371,7 @@ the socket is <code>ref</code>d calling <code>ref</code> again will have no effe
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>

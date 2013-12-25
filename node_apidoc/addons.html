@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Addons Node.js v0.10.15 Manual &amp; Documentation</title>
+  <title>Addons Node.js v0.10.24 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/addons.html">
@@ -31,7 +31,7 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.15 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -390,12 +390,13 @@ class MyObject : public node::ObjectWrap {
   static void Init(v8::Handle&lt;v8::Object&gt; exports);
 
  private:
-  MyObject();
+  explicit MyObject(double value = 0);
   ~MyObject();
 
   static v8::Handle&lt;v8::Value&gt; New(const v8::Arguments&amp; args);
   static v8::Handle&lt;v8::Value&gt; PlusOne(const v8::Arguments&amp; args);
-  double counter_;
+  static v8::Persistent&lt;v8::Function&gt; constructor;
+  double value_;
 };
 
 #endif</code></pre>
@@ -410,8 +411,13 @@ prototype:
 
 using namespace v8;
 
-MyObject::MyObject() {};
-MyObject::~MyObject() {};
+Persistent&lt;Function&gt; MyObject::constructor;
+
+MyObject::MyObject(double value) : value_(value) {
+}
+
+MyObject::~MyObject() {
+}
 
 void MyObject::Init(Handle&lt;Object&gt; exports) {
   // Prepare constructor template
@@ -421,28 +427,34 @@ void MyObject::Init(Handle&lt;Object&gt; exports) {
   // Prototype
   tpl-&gt;PrototypeTemplate()-&gt;Set(String::NewSymbol(&quot;plusOne&quot;),
       FunctionTemplate::New(PlusOne)-&gt;GetFunction());
-
-  Persistent&lt;Function&gt; constructor = Persistent&lt;Function&gt;::New(tpl-&gt;GetFunction());
+  constructor = Persistent&lt;Function&gt;::New(tpl-&gt;GetFunction());
   exports-&gt;Set(String::NewSymbol(&quot;MyObject&quot;), constructor);
 }
 
 Handle&lt;Value&gt; MyObject::New(const Arguments&amp; args) {
   HandleScope scope;
 
-  MyObject* obj = new MyObject();
-  obj-&gt;counter_ = args[0]-&gt;IsUndefined() ? 0 : args[0]-&gt;NumberValue();
-  obj-&gt;Wrap(args.This());
-
-  return args.This();
+  if (args.IsConstructCall()) {
+    // Invoked as constructor: `new MyObject(...)`
+    double value = args[0]-&gt;IsUndefined() ? 0 : args[0]-&gt;NumberValue();
+    MyObject* obj = new MyObject(value);
+    obj-&gt;Wrap(args.This());
+    return args.This();
+  } else {
+    // Invoked as plain function `MyObject(...)`, turn into construct call.
+    const int argc = 1;
+    Local&lt;Value&gt; argv[argc] = { args[0] };
+    return scope.Close(constructor-&gt;NewInstance(argc, argv));
+  }
 }
 
 Handle&lt;Value&gt; MyObject::PlusOne(const Arguments&amp; args) {
   HandleScope scope;
 
   MyObject* obj = ObjectWrap::Unwrap&lt;MyObject&gt;(args.This());
-  obj-&gt;counter_ += 1;
+  obj-&gt;value_ += 1;
 
-  return scope.Close(Number::New(obj-&gt;counter_));
+  return scope.Close(Number::New(obj-&gt;value_));
 }</code></pre>
 <p>Test it with:
 
@@ -499,13 +511,13 @@ class MyObject : public node::ObjectWrap {
   static v8::Handle&lt;v8::Value&gt; NewInstance(const v8::Arguments&amp; args);
 
  private:
-  MyObject();
+  explicit MyObject(double value = 0);
   ~MyObject();
 
-  static v8::Persistent&lt;v8::Function&gt; constructor;
   static v8::Handle&lt;v8::Value&gt; New(const v8::Arguments&amp; args);
   static v8::Handle&lt;v8::Value&gt; PlusOne(const v8::Arguments&amp; args);
-  double counter_;
+  static v8::Persistent&lt;v8::Function&gt; constructor;
+  double value_;
 };
 
 #endif</code></pre>
@@ -518,10 +530,13 @@ class MyObject : public node::ObjectWrap {
 
 using namespace v8;
 
-MyObject::MyObject() {};
-MyObject::~MyObject() {};
-
 Persistent&lt;Function&gt; MyObject::constructor;
+
+MyObject::MyObject(double value) : value_(value) {
+}
+
+MyObject::~MyObject() {
+}
 
 void MyObject::Init() {
   // Prepare constructor template
@@ -531,18 +546,24 @@ void MyObject::Init() {
   // Prototype
   tpl-&gt;PrototypeTemplate()-&gt;Set(String::NewSymbol(&quot;plusOne&quot;),
       FunctionTemplate::New(PlusOne)-&gt;GetFunction());
-
   constructor = Persistent&lt;Function&gt;::New(tpl-&gt;GetFunction());
 }
 
 Handle&lt;Value&gt; MyObject::New(const Arguments&amp; args) {
   HandleScope scope;
 
-  MyObject* obj = new MyObject();
-  obj-&gt;counter_ = args[0]-&gt;IsUndefined() ? 0 : args[0]-&gt;NumberValue();
-  obj-&gt;Wrap(args.This());
-
-  return args.This();
+  if (args.IsConstructCall()) {
+    // Invoked as constructor: `new MyObject(...)`
+    double value = args[0]-&gt;IsUndefined() ? 0 : args[0]-&gt;NumberValue();
+    MyObject* obj = new MyObject(value);
+    obj-&gt;Wrap(args.This());
+    return args.This();
+  } else {
+    // Invoked as plain function `MyObject(...)`, turn into construct call.
+    const int argc = 1;
+    Local&lt;Value&gt; argv[argc] = { args[0] };
+    return scope.Close(constructor-&gt;NewInstance(argc, argv));
+  }
 }
 
 Handle&lt;Value&gt; MyObject::NewInstance(const Arguments&amp; args) {
@@ -559,9 +580,9 @@ Handle&lt;Value&gt; MyObject::PlusOne(const Arguments&amp; args) {
   HandleScope scope;
 
   MyObject* obj = ObjectWrap::Unwrap&lt;MyObject&gt;(args.This());
-  obj-&gt;counter_ += 1;
+  obj-&gt;value_ += 1;
 
-  return scope.Close(Number::New(obj-&gt;counter_));
+  return scope.Close(Number::New(obj-&gt;value_));
 }</code></pre>
 <p>Test it with:
 
@@ -603,7 +624,7 @@ Handle&lt;Value&gt; Add(const Arguments&amp; args) {
   MyObject* obj2 = node::ObjectWrap::Unwrap&lt;MyObject&gt;(
       args[1]-&gt;ToObject());
 
-  double sum = obj1-&gt;Val() + obj2-&gt;Val();
+  double sum = obj1-&gt;Value() + obj2-&gt;Value();
   return scope.Close(Number::New(sum));
 }
 
@@ -632,15 +653,15 @@ class MyObject : public node::ObjectWrap {
  public:
   static void Init();
   static v8::Handle&lt;v8::Value&gt; NewInstance(const v8::Arguments&amp; args);
-  double Val() const { return val_; }
+  double Value() const { return value_; }
 
  private:
-  MyObject();
+  explicit MyObject(double value = 0);
   ~MyObject();
 
-  static v8::Persistent&lt;v8::Function&gt; constructor;
   static v8::Handle&lt;v8::Value&gt; New(const v8::Arguments&amp; args);
-  double val_;
+  static v8::Persistent&lt;v8::Function&gt; constructor;
+  double value_;
 };
 
 #endif</code></pre>
@@ -653,28 +674,37 @@ class MyObject : public node::ObjectWrap {
 
 using namespace v8;
 
-MyObject::MyObject() {};
-MyObject::~MyObject() {};
-
 Persistent&lt;Function&gt; MyObject::constructor;
+
+MyObject::MyObject(double value) : value_(value) {
+}
+
+MyObject::~MyObject() {
+}
 
 void MyObject::Init() {
   // Prepare constructor template
   Local&lt;FunctionTemplate&gt; tpl = FunctionTemplate::New(New);
   tpl-&gt;SetClassName(String::NewSymbol(&quot;MyObject&quot;));
   tpl-&gt;InstanceTemplate()-&gt;SetInternalFieldCount(1);
-
   constructor = Persistent&lt;Function&gt;::New(tpl-&gt;GetFunction());
 }
 
 Handle&lt;Value&gt; MyObject::New(const Arguments&amp; args) {
   HandleScope scope;
 
-  MyObject* obj = new MyObject();
-  obj-&gt;val_ = args[0]-&gt;IsUndefined() ? 0 : args[0]-&gt;NumberValue();
-  obj-&gt;Wrap(args.This());
-
-  return args.This();
+  if (args.IsConstructCall()) {
+    // Invoked as constructor: `new MyObject(...)`
+    double value = args[0]-&gt;IsUndefined() ? 0 : args[0]-&gt;NumberValue();
+    MyObject* obj = new MyObject(value);
+    obj-&gt;Wrap(args.This());
+    return args.This();
+  } else {
+    // Invoked as plain function `MyObject(...)`, turn into construct call.
+    const int argc = 1;
+    Local&lt;Value&gt; argv[argc] = { args[0] };
+    return scope.Close(constructor-&gt;NewInstance(argc, argv));
+  }
 }
 
 Handle&lt;Value&gt; MyObject::NewInstance(const Arguments&amp; args) {
@@ -715,7 +745,7 @@ console.log(result); // 30</code></pre>
             <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.15/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
     </div>
 
   <script src="../sh_main.js"></script>
