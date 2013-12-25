@@ -8,7 +8,10 @@ line) to the console. You {bold}must{/bold} use asynchronous I/O.
 
 You must write a {italic}module{/italic} file to do most of the work. The module
 must {italic}export{/italic} a single function that takes {bold}three{/bold} arguments: the directory name,
-the filter string and a callback function.
+the filename extension string and a callback function. The filename extension
+argument must be the same as was passed to your program. i.e. don't turn it in
+to a RegExp or prefix with "." or do anything else but pass it to your module
+where you can do what you need to make your filter work.
 
 The callback function must be called using the idomatic node(err, data)
 convention. This convention stipulates that unless there's an error, the first

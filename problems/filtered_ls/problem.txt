@@ -24,10 +24,11 @@ Documentation on the `fs` module can be found by pointing your browser
 here:
   {rootdir:/node_apidoc/fs.html}
 
-You may also find node's `path` module helpful.
+You may also find node's `path` module helpful, particularly the
+`extname` method.
 
-Documentation on the `path` module can be found by pointing your browser
-here:
+Documentation on the `path` module can be found by pointing your
+browser here:
   {rootdir:/node_apidoc/path.html}
 
 ----------------------------------------------------------------------

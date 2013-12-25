@@ -2,21 +2,7 @@ const fs        = require('fs')
     , path      = require('path')
     , os        = require('os')
     , onlyAsync = require('workshopper/verify-calls').verifyOnlyAsync
-
-    , files = [
-          'learnyounode.dat'
-        , 'learnyounode.txt'
-        , 'learnyounode.sql'
-        , 'api.html'
-        , 'README.md'
-        , 'data.json'
-        , 'data.dat'
-        , 'words.dat'
-        , 'w00t.dat'
-        , 'w00t.txt'
-        , 'wrrrrongdat'
-        , 'dat'
-      ]
+    , files     = require('./file-list')
 
 module.exports = function () {
   var dir       = path.join(os.tmpDir(), 'learnyounode_' + process.pid)
