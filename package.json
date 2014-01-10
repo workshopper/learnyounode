@@ -24,7 +24,7 @@
     "hyperquest": "~0.1.8",
     "bl": "~0.6.0",
     "through2-map": "~1.2.0",
-    "workshopper": "~0.5.0"
+    "workshopper": "~0.7.0"
   },
   "bin": "./learnyounode.js",
   "preferGlobal": true
