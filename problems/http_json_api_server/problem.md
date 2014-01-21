@@ -37,6 +37,8 @@ $ node -pe "require('url').parse('/test?q=1', true)"
 
 Documentation on the `url` module can be found by pointing your browser here:
   {rootdir:/node_apidoc/url.html}
+  
+Your response should be in a JSON string format. Look at `JSON#stringify()` for more information.
 
 You should also be a good web citizen and set the Content-Type properly:
 
