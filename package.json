@@ -17,14 +17,20 @@
   },
   "license": "MIT",
   "dependencies": {
-    "concat-stream": "~1.2.1",
+    "workshopper": "~1.0.0-alpha03",
+    "workshopper-exercise": "~0.1.0",
+    "workshopper-wrappedexec": "~0.0.0",
+    "workshopper-boilerplate": "~0.0.0",
+    "concat-stream": "~1.4.1",
     "duplexer": "~0.1.1",
     "through": "~2.3.4",
     "boganipsum": "~0.1.0",
-    "hyperquest": "~0.1.8",
-    "bl": "~0.6.0",
-    "through2-map": "~1.2.0",
-    "workshopper": "~0.7.0"
+    "hyperquest": "~0.2.0",
+    "bl": "~0.7.0",
+    "through2-map": "~1.2.1",
+    "colors-tmpl": "~0.1.0",
+    "after": "~0.8.1",
+    "rimraf": "~2.2.6"
   },
   "bin": "./learnyounode.js",
   "preferGlobal": true
