@@ -30,7 +30,8 @@
     "through2-map": "~1.2.1",
     "colors-tmpl": "~0.1.0",
     "after": "~0.8.1",
-    "rimraf": "~2.2.6"
+    "rimraf": "~2.2.6",
+    "chalk": "~0.4.0"
   },
   "bin": "./learnyounode.js",
   "preferGlobal": true
