@@ -36,8 +36,9 @@ exercise.addSetup(function (mode, callback) {
   this.server.listen(0, function () {
     var url = 'http://localhost:' + String(this.server.address().port)
 
-    this.submissionArgs.unshift(url)
-    this.solutionArgs.unshift(url)
+    // give the url as the first cmdline arg to the child processes
+    this.submissionArgs = [ url ]
+    this.solutionArgs   = [ url ]
 
     callback()
   }.bind(this))
