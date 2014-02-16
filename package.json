@@ -18,7 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "workshopper": "~1.0.0-alpha05",
-    "workshopper-exercise": "~0.2.0",
+    "workshopper-exercise": "~0.2.2",
     "workshopper-wrappedexec": "~0.0.0",
     "workshopper-boilerplate": "~0.0.0",
     "concat-stream": "~1.4.1",
@@ -31,7 +31,8 @@
     "colors-tmpl": "~0.1.0",
     "after": "~0.8.1",
     "rimraf": "~2.2.6",
-    "chalk": "~0.4.0"
+    "chalk": "~0.4.0",
+    "through2": "~0.4.1"
   },
   "bin": "./learnyounode.js",
   "preferGlobal": true
