@@ -35,7 +35,7 @@ exercise.addProcessor(function (mode, callback) {
   // replace stdout with our own streams
   this.submissionStdout = through2()
   if (mode == 'verify')
-    this.solutionStdout   = through2()
+    this.solutionStdout = through2()
 
   setTimeout(query.bind(this, mode), 500)
 
