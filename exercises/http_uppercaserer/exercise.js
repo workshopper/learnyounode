@@ -57,7 +57,6 @@ function query (mode) {
   var exercise = this
 
   function connect (port, stream) {
-    console.log('connect', port)
     var input = through2()
       , count  = 0
       , iv
