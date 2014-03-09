@@ -1,27 +1,36 @@
-Write an HTTP **server** that serves the same text file for each request it receives.
+----------------------------------------------------------------------
 
-Your server should listen on the port provided by the first argument to your program.
+## Task
 
-You will be provided with the location of the file to serve as the second command-line argument. You **must** use the `fs.createReadStream()` method to stream the file contents to the response.
+Write an HTTP Server that serves the same text file for each request it receives.
 
 ----------------------------------------------------------------------
-## HINTS
 
-Because we need to create an HTTP server for this exercise rather than a generic TCP server, we should use the `http` module from Node core. Like the `net` module, `http` also has a method named `http.createServer()` but this one creates a server that can talk HTTP.
+## Description
 
-`http.createServer()` takes a callback that is called once for each connection received by your server. The callback function has the signature:
+You will be provided a port and filepath as the first and second arguments to your program.
 
-```js
-function callback (request, response) { /* ... */ }
-```
+Use the `http` module from Node core to create a HTTP server. Your server will listen on the supplied port and use use `fs.createReadStream()` to get a ReadableStream of the file's content and pipe it to the HTTP Response for every request.
 
-Where the two arguments are objects representing the HTTP request and the corresponding response for this request. `request` is used to fetch properties, such as the header and query-string from the request while `response` is for sending data to the client, both headers and body.
+## Conditions
 
-Both `request` and `response` are also Node streams! Which means that you can use the streaming abstractions to send and receive data if they suit your use-case.
+* Your server must listen on the port provided as the first argument to your program.
+* You must use the `fs.createReadStream()` method to stream the file contents to the response.
+* Don't forget to set the content type header!
 
-`http.createServer()` also returns an instance of your `server`. You must call `server.listen(portNumber)` to start listening on a particular port.
+## Resources
 
-A typical Node HTTP server looks like this:
+Documentation on the `http` module can be found by pointing your browser here:
+  {rootdir:/node_apidoc/http.html}
+
+Documentation on the `fs` module can be found by pointing your browser here:
+  {rootdir:/node_apidoc/fs.html}
+
+----------------------------------------------------------------------
+
+## Hints
+
+Like the `net` module, `http` also has `createServer()` method, though this server speaks HTTP rather than TCP. A typical Node HTTP server looks like this:
 
 ```js
 var http = require('http')
@@ -31,9 +40,22 @@ var server = http.createServer(function (req, res) {
 server.listen(8000)
 ```
 
-Documentation on the `http` module can be found by pointing your browser here:
-  {rootdir:/node_apidoc/http.html}
+`http.createServer(callback)` returns an instance of a `http.Server`. You must call the created server's `listen(portNumber)` method to start serving requests on a given port.
 
-The `fs` core module also has some streaming APIs for files. You will need to use the `fs.createReadStream()` method to create a stream representing the file you are given as a command-line argument. The method returns a stream object which you can use `src.pipe(dst)` to pipe the data from the `src` stream to the `dst` stream. In this way you can connect a filesystem stream with an HTTP response stream.
+`http.createServer(callback)` takes a callback that is called once for each new connection received by your server. The callback function has the signature:
 
-----------------------------------------------------------------------
+```js
+function callback (request, response) { /* ... */ }
+```
+
+`request` and `response` are objects of type `http.IncomingMessage` and `http.ServerResponse` respectively. These objects are your interface for reading the incoming request (e.g. url, headers, etc) and writing a corresponding response.
+
+`request` and `response` are Node streams: `request` is a ReadableStream, and `response` is a WritableStream.
+
+The core `fs` module also provides a streaming API in the form of `fs.createReadStream` and `fs.createWriteStream`.
+
+Piping a `ReadableStream` to a `WritableStream` sets up a pipeline for data to flow from readable to writable, like so:
+
+```js
+readable.pipe(writable) // sends data from readable to writable
+```
