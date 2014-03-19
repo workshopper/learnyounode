@@ -1,6 +1,2 @@
-var result = 0
-
-for (var i = 2; i < process.argv.length; i++)
-  result += Number(process.argv[i])
-
-console.log(result)
+for (var i = 2, sum = 0; i < process.argv.length; sum += parseInt(process.argv[i++],10));
+console.log(sum);
