@@ -10,6 +10,15 @@ You **must** not print directly to the console from your module file, only from 
 
 In the case of an error bubbling up to your original program file, simply check for it and print an informative message to the console.
 
+These four things is the contract that your module must follow.
+
+1. Export a single function that takes exactly the arguments described.
+2. Call the callback exactly once with an error or some data as described.
+3. Don't change anything else, like global variables or stdout.
+4. Handle all the errors that may occur and pass them to the callback.
+
+The benifit of having a contract is that your module can be used by anyone who expects this contract. So your module could be used by anyone else who does learnyounode, or the verifier, and just work.
+
 ----------------------------------------------------------------------
 ## HINTS
 
