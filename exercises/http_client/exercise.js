@@ -29,7 +29,7 @@ exercise.addSetup(function (mode, callback) {
       if (i == words.length)
         return res.end()
       res.write(words[i].trim())
-      setTimeout(next.bind(null, i + 1), 10)
+      setTimeout(next.bind(null, i + 1), 25)
     }(0))
   })
 
