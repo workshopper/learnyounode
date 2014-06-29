@@ -77,6 +77,9 @@ exercise.addVerifyProcessor(function (callback) {
     }
   }.bind(this))
 
+  if (!usedSync && !usedAsync) // https://github.com/nodeschool/discussions/issues/356
+    this.emit('fail', 'Used asynchronous method from the `fs` module')
+
   callback(null, usedAsync && !usedSync)
 })
 
