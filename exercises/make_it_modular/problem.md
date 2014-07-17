@@ -17,7 +17,7 @@ These four things is the contract that your module must follow.
 3. Don't change anything else, like global variables or stdout.
 4. Handle all the errors that may occur and pass them to the callback.
 
-The benifit of having a contract is that your module can be used by anyone who expects this contract. So your module could be used by anyone else who does learnyounode, or the verifier, and just work.
+The benefit of having a contract is that your module can be used by anyone who expects this contract. So your module could be used by anyone else who does learnyounode, or the verifier, and just work.
 
 ----------------------------------------------------------------------
 ## HINTS
