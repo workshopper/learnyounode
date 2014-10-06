@@ -7,7 +7,7 @@
 ![Learn You The Node.js For Much Win!](https://raw.github.com/rvagg/learnyounode/master/learnyounode.png)
 
   1. Install [Node.js](http://nodejs.org/)
-  2. Run `sudo npm install learnyounode -g`
+  2. Run `npm install learnyounode -g`
   3. Run `learnyounode`
   4. **.. profit!**
 
