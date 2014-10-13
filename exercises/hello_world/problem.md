@@ -1,27 +1,28 @@
-Write a program that prints the text "HELLO WORLD" to the console (stdout).
+撰寫一個印出「HELLO WORLD」字串到終端機的程式
 
 ----------------------------------------------------------------------
-## HINTS
+## 提示
 
-To make Node.js program, create a new file with a `.js` extension and start writing JavaScript! Execute your program by running it with the
+要撰寫一個 Node.js 程式，可以先建立一個以副檔名 `.js` 結尾的檔案，然後開始在裡面撰寫 Javascript 程式碼。如果要執行程式的話，請在終端機以 `node` 命令執行，如：
+
 `node` command. e.g.:
 
 ```sh
 $ node program.js
 ```
 
-You can write to the console in the same way as in the browser:
+您可以在瀏覽器的終端機中以同樣方式輸入：
 
 ```js
 console.log("text")
 ```
 
-When you are done, you must run:
+當您做完以後，您必須在終端機中輸入：
 
 ```sh
 $ {appname} verify program.js
 ```
 
-to proceed. Your program will be tested, a report will be generated, and the lesson will be marked 'completed' if you are successful.
+以執行程式。 {appname} 將會測試您的程式，生成一個報告，如果成功通過測試的話，課程將會被標示「completed」，表示您已完成這個課程。
 
 ----------------------------------------------------------------------

@@ -1,32 +1,33 @@
-Write a program that accepts one or more numbers as command-line arguments and prints the sum of those numbers to the console (stdout).
+撰寫一個可以印出命令列參數總和的程式。
 
 ----------------------------------------------------------------------
-## HINTS
+## 提示
 
-You can access command-line arguments via the global `process` object. The `process` object has an `argv` property which is an array containing the complete command-line. i.e. `process.argv`.
+透過 global 的 `process` 物件，您可以存取到來自命令列的參數。 `process` 物件會把完整的命令列放到底下的 `argv` 屬性中，如 `process.argv` 。
 
-To get started, write a program that simply contains:
+請先撰寫一個單純包含底下命令的程式：
 
 ```js
 console.log(process.argv)
 ```
 
-Run it with `node program.js` and some numbers as arguments. e.g:
+在命令列中輸入 `node program.js` ，然後再後面多輸入幾個數字作為參數，如：
 
 ```sh
 $ node program.js 1 2 3
 ```
 
-In which case the output would be an array looking something like:
+在這個範例中，程式的輸出會像底下一樣，是一個 Array （數列）：
+
 
 ```js
 [ 'node', '/path/to/your/program.js', '1', '2', '3' ]
 ```
 
-You'll need to think about how to loop through the number arguments so  you can output just their sum. The first element of the process.argv array is always 'node', and the second element is always the path to your program.js file, so you need to start at the 3rd element (index 2), adding each item to the total until you reach the end of the array.
+為了輸出這些參數的總和，您需要思考如何以迴圈的方式輪流存取這幾個參數。`process.argv` Array 的第一個元素永遠是「node」，而第二個元素也永遠是被執行的程式 `program.js` 的完整路徑，所以您需要從第三個元素（index 2）開始，依序加入來自命令列的參數，直到這個 Array 結束。
 
-Also be aware that all elements of `process.argv` are strings and you may need to *coerce* them into numbers. You can do this by prefixing the property with `+` or passing it to `Number()`. e.g. `+process.argv[2]` or `Number(process.argv[2])`.
+要注意的是， `process.argv` 的所有元素都是字串（String），而您需要把它們 *轉換* 成數字。您可以在元素前加上 `+` 或是把這個元素傳給函式 `Number()` 。如 `+process.argv[2]` 或 `Number(process.argv[2])` 。
 
-{appname} will be supplying arguments to your program when you run `{appname} verify program.js` so you don't need to supply them yourself. To test your program without verifying it, you can invoke it with `{appname} run program.js`. When you use `run`, you are invoking the test environment that {appname} sets up for each exercise.
+{appname} 將會在您執行 `{appname} verify program.js` 的時候加入參數，所以您不用自己加上。如果不想驗證程式，只想自己嘗試執行看看，可以在終端機中輸入 `{appname} run program.js` 並執行。當您使用 `run` 的方式執行程式的時候，您將會引入 {appname} 為每個作業所設定好的測試環境。
 
 ----------------------------------------------------------------------
