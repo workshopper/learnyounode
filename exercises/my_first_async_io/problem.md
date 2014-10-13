@@ -1,23 +1,23 @@
-Write a program that uses a single **asynchronous** filesystem operation to read a file and print the number of newlines it contains to the console (stdout), similar to running `cat file | wc -l`.
+撰寫一個程式，以 **非同步（ asynchronous ）** 的檔案操作方式讀入一個檔案，並在命令列上顯示該檔案的行數。這個程式的行為類似終端機命令 `cat file | wc -l` 。
 
-The full path to the file to read will be provided as the first command-line argument.
+程式的第一個命令列參數將是檔案的完整路徑。
 
 ----------------------------------------------------------------------
-# HINTS
+# 提示
 
-The solution to this problem is *almost* the same as the previous problem except you must now do it **the Node.js way**: asynchronous.
+除了現在您必須以 **Node.js 的** 非同步（asynchronous）方式解決這個問題以外，這個問題的解法 *幾乎* 和前一個問題相同。
 
-Instead of `fs.readFileSync()` you will want to use `fs.readFile()` and instead of using the return value of this method you need to collect the value from a callback function that you pass in as the second argument.
+您要使用 `fs.readFile()` 取代 `fs.readFileSync()` 方法，相對地，還要用在第二個參數中傳入收集資料的 callback 函式，以取代原本使用回傳值的方法。
 
-Remember that idiomatic Node.js callbacks normally have the signature:
+請記得， Node.js 的 callback 函式一般會有以下的語法特徵：
 
 ```js
 function callback (err, data) { /* ... */ }
 ```
 
-so you can check if an error occurred by checking whether the first argument is truthy. If there is no error, you should have your `Buffer` object as the second argument. As with `readFileSync()`, you can supply 'utf8' as the second argument and put the callback as the third argument and you will get a `String` instead of a `Buffer`.
+所以您就可以藉著檢查第一個參數是否為 True 以確認是不是有錯誤發生。如果沒有錯誤發生，您應該就會可以取得 Buffer 物件作為您的第二個參數。如果使用 `readFileSync()` 方法，您可以在第二參數中改填入「utf8」，然後把 callback 函式放在第三個參數，相對地，您會得到一個 `String` 而非 `Buffer`。
 
-Documentation on the `fs` module can be found by pointing your browser here:
+要閱讀 `fs` 模組的文件，可以在瀏覽器中打開這個頁面：
   {rootdir:/node_apidoc/fs.html}
 
 ----------------------------------------------------------------------
