@@ -5,7 +5,7 @@
 
 透過 global 的 `process` 物件，您可以存取到來自命令列的參數。 `process` 物件會把完整的命令列放到底下的 `argv` 屬性中，如 `process.argv` 。
 
-一開始，撰寫一個單純包含底下命令的程式：
+請先撰寫一個單純包含底下命令的程式：
 
 ```js
 console.log(process.argv)
