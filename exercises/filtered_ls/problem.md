@@ -1,26 +1,26 @@
-Create a program that prints a list of files in a given directory, filtered by the extension of the files. You will be provided a directory name as the first argument to your program (e.g. '/path/to/dir/') and a file extension to filter by as the second argument.
+撰寫一個以副檔名作為過濾條件，列出指定資料夾內檔案的程式。程式的第一個參數是目錄的路徑，第二個參數則是過濾用的副檔名。
 
-For example, if you get 'txt' as the second argument then you will need to filter the list to only files that **end with .txt**. Note that the second argument _will not_ come prefixed with a '.'.
+舉例來說，如果第二個參數是「txt」，你將需要過濾出資料夾內 **以 .txt 結尾** 的檔案。注意，第二個參數 _將不會_ 預先加上「.」。
 
-The list of files should be printed to the console, one file per line. You **must** use asynchronous I/O.
+檔案列表應該要顯示在命令列上，一個檔案一列。你 **必須** 使用非同步（asynchronous）的方式讀取。
 
 ----------------------------------------------------------------------
-## HINTS
+## 提示
 
-The `fs.readdir()` method takes a pathname as its first argument and a callback as its second. The callback signature is:
+`fs.readdir()`方法的第一個參數是路徑，第二個參數是 callback 函式。callback 函式的特徵是：
 
 ```js
 function callback (err, list) { /* ... */ }
 ```
 
-where `list` is an array of filename strings.
+而 `list` 是檔名字串（String）所組成的 Array。
 
-Documentation on the `fs` module can be found by pointing your browser here:
+要閱讀 `fs` 模組的文件，可以在瀏覽器中打開這個頁面：
   {rootdir:/node_apidoc/fs.html}
 
-You may also find node's `path` module helpful, particularly the `extname` method.
+你可能也會發現 Node 的 `path` 模組很好用，尤其是模組裡的 `extname` 方法。
 
-Documentation on the `path` module can be found by pointing your browser here:
+要閱讀 `path` 模組的文件，可以在瀏覽器中打開這個頁面：
   {rootdir:/node_apidoc/path.html}
 
 ----------------------------------------------------------------------
