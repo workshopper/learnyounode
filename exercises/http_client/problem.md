@@ -16,7 +16,7 @@
 function callback (response) { /* ... */ }
 ```
 
-`response` 物件是一個 Node **Stream（串流）** 物件。你可以把 Node Streams 會發出事件（emit events）的物件來對待，這三個會發出的事件是「data」、「error」及「end」。你可以以底下的方法傾聽（listen）事件：
+`response` 物件是一個 Node **Stream（串流）** 物件。你可以把 Node Streams 會發出事件（emit events）的物件來對待，其中最常被用到的三個事件是「data」、「error」及「end」。你可以以底下的方法傾聽（listen）事件：
 
 ```js
 response.on("data", function (data) { /* ... */ })
