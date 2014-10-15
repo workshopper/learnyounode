@@ -1,39 +1,39 @@
-Write a program that performs an HTTP GET request to a URL provided to you as the first command-line argument. Collect **all** data from the server (not just the first "data" event) and then write two lines to the console (stdout).
+撰寫一個會對第一個參數所提供之URL（網址）發起 HTTP GET 請求（request）的程式。從伺服器收集 **所有** 的資料，並且在終端機（標準輸出，stdout）上顯示兩行以呈現這些數據。
 
-The first line you write should just be an integer representing the number of characters received from the server and the second line should contain the complete String of characters sent by the server.
+第一行是從伺服器收到的字元（characters）數量，第二行則是伺服器回傳的完整字串（String）。
 
 ----------------------------------------------------------------------
-## HINTS
+## 提示
 
-There are two approaches you can take to this problem: 
+對於這個問題，你可以採用底下兩種方法以解決問題。
 
-**1)** Collect data across multiple "data" events and append the results together prior to printing the output. Use the "end" event to determine when the stream is finished and you can write the output.
+**1）** 把所有「data」事件的資料都收集在一起，而不事先把資料顯示出來。當收到「end」事件的時候，就代表串流（stream）已經完成，此時就可以把輸出印到螢幕上面。
 
-**2)** Use a third-party package to abstract the difficulties involved in collecting an entire stream of data. Two different packages provide a useful API for solving this problem (there are likely more!): `bl` (Buffer List) and `concat-stream`; take your pick!
+**2）** 使用第三方的套件（package） 簡化從串流中收集資料的難度。兩個不同的套件提供了有用的 API 以解決這個問題（好像還有更多！）： `bl` (Buffer List) 以及 `concat-stream` 。選一個吧！
 
   <http://npm.im/bl>
   <http://npm.im/concat-stream>
 
-To install a Node package, use the Node Package Manager `npm`. Simply type:
+要安裝 Node 套件，可以使用 Node 套件管理程式 `npm` ，簡單輸入並執行：
 
 ```sh
 $ npm install bl
 ```
 
-And it will download and install the latest version of the package into a subdirectory named `node_modules`. Any package in this subdirectory under your main program file can be loaded with the `require` syntax without being prefixed by './':
+接著 `npm` 就會下載並安裝最新版的套見到名為 `node_modules` 的子目錄當中。任何在這個子目錄中的套件都不用在前面預先加入「./」就可以利用 `require` 命令載入：
 
 ```js
 var bl = require('bl')
 ```
 
-Node will first look in the core modules and then in the `node_modules` directory where the package is located.
+Node 會先尋找核心模組是否有符合名稱的模組，接著會尋找 `node_modules` 目錄中是否有這個套件。
 
-If you don't have an Internet connection, simply make a `node_modules` directory and copy the entire directory for the package you want to use from inside the {appname} installation directory:
+如果你沒有網路連線，可以簡單地建立一個 `node_modules` 目錄，並把 {appname} 安裝目錄下，你要用的套件目錄都複製到 `node_modules` 目錄當中。
 
   {rootdir:/node_modules/bl}
   {rootdir:/node_modules/concat-stream}
 
-Both `bl` and `concat-stream` can have a stream *piped* in to them and they will collect the data for you. Once the stream has ended, a callback will be fired with the data:
+`bl` 和 `concat-stream` 套件都可以在串流（stream）中建立 *pipe* ，並替你收集裡面的資料。一旦串流結束，就會以收集到的資料觸發 callback 函式。
 
 ```js
 response.pipe(bl(function (err, data) { /* ... */ }))
@@ -41,9 +41,9 @@ response.pipe(bl(function (err, data) { /* ... */ }))
 response.pipe(concatStream(function (data) { /* ... */ }))
 ```
 
-Note that you will probably need to `data.toString()` to convert from a Buffer.
+注意你可能需要使用 `data.toString()` 以把 Buffer 轉換成 String
 
-Documentation for both of these modules has been installed along with {appname} on your system and you can read them by pointing your browser here:
+要閱讀這兩個跟著 {appname} 安裝到系統上的模組文件，可以在瀏覽器中打開這個頁面：
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
