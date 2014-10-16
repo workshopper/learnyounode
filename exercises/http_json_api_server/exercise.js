@@ -54,6 +54,10 @@ exercise.addProcessor(function (mode, callback) {
 exercise = comparestdout(exercise)
 
 
+function normalizeJSON(data) {
+  return JSON.stringify(JSON.parse(data))
+}
+
 // delayed for 500ms to wait for servers to start so we can start
 // playing with them
 function query (mode) {
@@ -73,7 +77,7 @@ function query (mode) {
         if (err)
           return stream.emit('error', err)
 
-        stream.write(data.toString() + '\n')
+        stream.write(normalizeJSON(data.toString()) + '\n')
 
         hyperquest.get('http://localhost:' + port + '/api/unixtime?iso=' + date.toISOString())
           .on('error', error)
@@ -81,7 +85,7 @@ function query (mode) {
             if (err)
               return stream.emit('error', err)
 
-            stream.write(data.toString() + '\n')
+            stream.write(normalizeJSON(data.toString()) + '\n')
             stream.end()
           }))
       }))
