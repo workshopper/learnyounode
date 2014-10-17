@@ -1,11 +1,17 @@
 Write an HTTP **server** that serves the same text file for each request it receives.
 
+撰寫一個 HTTP **伺服器** ，可以對每個請求都提供它收到的 text 檔案。
+
 Your server should listen on the port provided by the first argument to your program.
+
+第一個參數是 port ，你的伺服器應該監聽在第一個參數所給予的 port 上。
+
+第二個參數會是將要提供的檔案。你 **必須** 使用 `fs.createReadStream() 方法將檔案內容傳遞到回應上。
 
 You will be provided with the location of the file to serve as the second command-line argument. You **must** use the `fs.createReadStream()` method to stream the file contents to the response.
 
 ----------------------------------------------------------------------
-## HINTS
+## 提示
 
 Because we need to create an HTTP server for this exercise rather than a generic TCP server, we should use the `http` module from Node core. Like the `net` module, `http` also has a method named `http.createServer()` but this one creates a server that can talk HTTP.
 

@@ -5,7 +5,7 @@
 ----------------------------------------------------------------------
 ## 提示
 
-對於這個問題，你可以採用底下兩種方法以解決問題。
+對於這個問題，您可以採用底下兩種方法解決問題。
 
 **1）** 把所有「data」事件的資料都收集在一起，而不事先把資料顯示出來。當收到「end」事件的時候，就代表串流（stream）已經完成，此時就可以把輸出印到螢幕上面。
 
@@ -28,12 +28,12 @@ var bl = require('bl')
 
 Node 會先尋找核心模組是否有符合名稱的模組，接著會尋找 `node_modules` 目錄中是否有這個套件。
 
-如果你沒有網路連線，可以簡單地建立一個 `node_modules` 目錄，並把 {appname} 安裝目錄下，你要用的套件目錄都複製到 `node_modules` 目錄當中。
+如果您沒有網路連線，可以簡單地建立一個 `node_modules` 目錄，並把 {appname} 安裝目錄下，您要用的套件目錄都複製到 `node_modules` 目錄當中。
 
   {rootdir:/node_modules/bl}
   {rootdir:/node_modules/concat-stream}
 
-`bl` 和 `concat-stream` 套件都可以在串流（stream）中建立 *pipe* ，並替你收集裡面的資料。一旦串流結束，就會以收集到的資料觸發 callback 函式。
+`bl` 和 `concat-stream` 套件都可以在串流（stream）中建立 *pipe* ，並替您收集裡面的資料。一旦串流結束，就會以收集到的資料觸發 callback 函式。
 
 ```js
 response.pipe(bl(function (err, data) { /* ... */ }))
@@ -41,7 +41,7 @@ response.pipe(bl(function (err, data) { /* ... */ }))
 response.pipe(concatStream(function (data) { /* ... */ }))
 ```
 
-注意你可能需要使用 `data.toString()` 以把 Buffer 轉換成 String
+注意您可能需要使用 `data.toString()` 以把 Buffer 轉換成 String
 
 要閱讀這兩個跟著 {appname} 安裝到系統上的模組文件，可以在瀏覽器中打開這個頁面：
 
