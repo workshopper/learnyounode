@@ -17,7 +17,7 @@
 
 ### 貢獻者
 
-下面的 hackers 很榮幸能為您製作 <b><code>learnyounode</code></b> ：
+下面的 hacker 們很榮幸能為您製作 <b><code>learnyounode</code></b> ：
 
 <table><tbody>
 <tr><th align="left">Rod Vagg</th><td><a href="https://github.com/rvagg">GitHub/rvagg</a></td><td><a href="http://twitter.com/rvagg">Twitter/@rvagg</a></td></tr>

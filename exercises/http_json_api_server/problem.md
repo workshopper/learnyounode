@@ -48,7 +48,7 @@ Documentation on the `url` module can be found by pointing your browser here:
 res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
-Javascript 的 `Date` 物件可以用 ISO 格式顯示日期，如 `new Date().toISOString()` 。如果您把日期字串傳入 `Date` 物件，這個物件也可以用來解析時間格式。 `Date#getTime()` 也可以派上用場。
+Javascript 的 `Date` 物件可以用 ISO 格式顯示日期，如 `new Date().toISOString()` 。如果您把日期字串傳入 `Date` 物件，這個物件也可以用來解析時間格式。 `Date.getTime()` 也可以派上用場。
 
 
 ----------------------------------------------------------------------
