@@ -15,7 +15,7 @@
 ----------------------------------------------------------------------
 ## 提示
 
-在這個問題中，您必須建立一個 TCP 伺服器。這裡不涉及任何 HTTP 協議，所以您需要使用擁有完整基礎網路功能，屬於 Node 核心的 `net` 模組。
+在這個習題中，您必須建立一個 TCP 伺服器。這裡不涉及任何 HTTP 協議，所以您需要使用擁有完整基礎網路功能，屬於 Node 核心的 `net` 模組。
 
 這個 `net` 模組有一個名為 `net.createServer()` 的方法，這個方法需要一個 callback 函式作為參數。不像其他的 Node callback 函式，作為參數傳入的 callback 函式會被 `createServer()` 呼叫不只一次。您的伺服器所收到的每個連線都會呼叫 callback 函式。這個 callback 函式有以下的語法特徵：
 
@@ -37,7 +37,7 @@ server.listen(8000)
 
 記得要使用第一個參數傳給您的 port number 。
 
-`socket` 物件包含一堆和連線有關的 meta-data ，不過這也是一個可讀、可寫的 Node 雙工串流（duplex Stream）。在這個問題中，我們只需要寫入資料，然後關閉 socket。
+`socket` 物件包含一堆和連線有關的 meta-data ，不過這也是一個可讀、可寫的 Node 雙工串流（duplex Stream）。在這個習題中，我們只需要寫入資料，然後關閉 socket。
 
 使用 `socket.write(data)` 可以對 socket 寫入資料，以及使用 `socket.end()` 以關閉 socket 。另外， `.end()` 方法也可以加上一個 data 物件作為參數，所以您可以很簡單的這樣使用： `socket.end(data)` 。
 

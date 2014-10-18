@@ -1,23 +1,23 @@
 # Learn You The Node.js For Much Win!
 
-**An intro to Node.js via a set of self-guided workshops.**
+**經由一系列自學的 workshop 熟悉 Node.js**
 
 [![NPM](https://nodei.co/npm/learnyounode.png?downloads=true&&downloadRank=true&stars=true)](https://nodei.co/npm/learnyounode/) [![NPM](https://nodei.co/npm-dl/learnyounode.png?months=3&height=3)](https://nodei.co/npm/learnyounode/)
 
 ![Learn You The Node.js For Much Win!](https://raw.github.com/rvagg/learnyounode/master/learnyounode.png)
 
-  1. Install [Node.js](http://nodejs.org/)
-  2. Run `sudo npm install learnyounode -g`
-  3. Run `learnyounode`
-  4. **.. profit!**
+  1. 安裝 [Node.js](http://nodejs.org/)
+  2. 在終端機上執行 `sudo npm install learnyounode -g`
+  3. 在終端機上執行 `learnyounode`
+  4. **.. 就這樣！**
 
-<b><code>learnyounode</code></b> will run through a series of Node.js workshops. Starting at a basic *"HELLO WORLD"* and moving on to more advanced exercises about dealing with synchronous & asynchronous I/O, filesystem operations, TCP and HTTP networking, events and streams.
+<b><code>learnyounode</code></b> 將會執行一系列的 workshop 。從基礎的 *"HELLO WORLD"* 開始，然後到難一點的同步（synchronous）與非同步（asynchronous）檔案系統 I/O 操作， TCP 和 HTTP 網路操作、事件（event）和串流（stream）。
 
-Once you have finished <b><code>learnyounode</code></b>, graduate to <b><code>[stream-adventure](https://github.com/substack/stream-adventure)</code></b> for a set of exercises that dig in to Node's streams.
+一旦你完成 <b><code>learnyounode</code></b> ，就可以往下一個階段 <b><code>[stream-adventure](https://github.com/substack/stream-adventure)</code></b> 前進，在那裡有一系列的習題可以讓您更深入的了解 Node 的串流（stream）。
 
-### Contributors
+### 貢獻者
 
-<b><code>learnyounode</code></b> is proudly brought to you by the following hackers:
+下面的 hackers 很榮幸能為您製作 <b><code>learnyounode</code></b> ：
 
 <table><tbody>
 <tr><th align="left">Rod Vagg</th><td><a href="https://github.com/rvagg">GitHub/rvagg</a></td><td><a href="http://twitter.com/rvagg">Twitter/@rvagg</a></td></tr>

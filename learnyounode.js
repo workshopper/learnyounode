@@ -7,7 +7,7 @@ const workshopper = require('workshopper')
 
     , name        = 'learnyounode'
     , title       = 'LEARN YOU THE NODE.JS FOR MUCH WIN!'
-    , subtitle    = '\x1b[23mSelect an exercise and hit \x1b[3mEnter\x1b[23m to begin'
+    , subtitle    = '\x1b[23m選擇一個問題，然後按下 \x1b[3mEnter\x1b[23m 開始嘗試！'
 
 
 function fpath (f) {
