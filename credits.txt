@@ -1,4 +1,4 @@
-{yellow}{bold}learnyounode is brought to you by the following dedicated hackers:{/bold}{/yellow}
+{yellow}{bold}底下這些做出重大貢獻的 hacker 為您製作了 learnyounode ：{/bold}{/yellow}
 
 {bold}Name                GitHub Username{/bold}
 -----------------------------------
