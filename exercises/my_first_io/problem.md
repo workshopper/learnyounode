@@ -14,8 +14,6 @@ var fs = require('fs')
 
 現在，您可以透過變數 `fs` 以使用 `fs` 模組的完整功能。
 
-Now you have the full `fs` module available in a variable named `fs`.
-
 fs 模組裡所有同步（ synchronous ，或稱為阻塞， blocking ）的功能都會以「Sync」結尾。您需要使用 `fs.readFileSync('檔案路徑')` 以讀取一個檔案。這個程式會 *返回* 一個包含完整檔案內容的 `Buffer` 物件。
 
 要閱讀 `fs` 模組的文件，可以在瀏覽器中打開這個頁面：

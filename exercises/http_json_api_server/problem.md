@@ -1,10 +1,10 @@
-Write an HTTP **server** that serves JSON data when it receives a GET request to the path '/api/parsetime'. Expect the request to contain a query string with a key 'iso' and an ISO-format time as the value.
+撰寫一個 HTTP **伺服器** ，當伺服器收到路徑「/api/parsetime」的 GET 請求時，要回應 JSON 格式的資料。這個請求會包含一個 query ， key 是「iso」，值是 ISO 格式的時間。
 
-For example:
+如下例：
 
   /api/parsetime?iso=2013-08-10T12:10:15.474Z
 
-The JSON response should contain only 'hour', 'minute' and 'second' properties. For example:
+回應的 JSON 應該只包含三個屬性：「hour」、「minute」及「second」。舉例來說：
 
 ```json
 {
@@ -14,39 +14,41 @@ The JSON response should contain only 'hour', 'minute' and 'second' properties. 
 }
 ```
 
-Add second endpoint for the path '/api/unixtime' which accepts the same query string but returns UNIX epoch time under the property 'unixtime'. For example:
+您還要加入第二個可以接受相同 query ，但這次在「unixtime」屬性下回應 UNIX 時間格式（又稱為 epoch 或 POSIX 時間格式）的路徑「/api/unixtime」。 
 
 ```json
 { "unixtime": 1376136615474 }
 ```
 
-Your server should listen on the port provided by the first argument to your program.
+您的伺服器應該持續監聽在第一個參數提供的 port 上。
 
 ----------------------------------------------------------------------
-## HINTS
+## 提示
 
-The `request` object from an HTTP server has a `url` property that you will need to use to *"route"* your requests for the two endpoints.
+來自 HTTP 伺服器的 `request` 物件會擁有一個 `url` 屬性，您可以使用這個屬性判斷請求究竟是針對哪個路徑。
 
-You can parse the URL and query string using the Node core 'url' module. `url.parse(request.url, true)` will parse content of request.url and provide you with an object with helpful properties.
+您可以使用 Node 核心模組 url 來解析 query 和網址。 `url.parse(request.url, true)` 會解析 request.url 的內容，並提供您一個擁有好用屬性的物件。
 
-For example, on the command prompt, type:
+舉例來說，在命令列中輸入：
 
 ```sh
 $ node -pe "require('url').parse('/test?q=1', true)"
 ```
 
+要閱讀 `url` 模組的文件，可以在瀏覽器中打開這個頁面：
+
 Documentation on the `url` module can be found by pointing your browser here:
   {rootdir:/node_apidoc/url.html}
-  
-Your response should be in a JSON string format. Look at `JSON.stringify()` for more information.
 
-You should also be a good web citizen and set the Content-Type properly:
+您的回應應該是 JSON 格式。要了解更多資訊，可以參考 `JSON.stringify()` 。
+
+您也應該做個網路上的好公民，回應 Content-Type 屬性：
 
 ```js
 res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
-The JavaScript `Date` object can print dates in ISO format, e.g. `new Date().toISOString()`. It can also parse this format if you pass the string into the `Date` constructor. `Date#getTime()` will also
-come in handy.
+Javascript 的 `Date` 物件可以用 ISO 格式顯示日期，如 `new Date().toISOString()` 。如果您把日期字串傳入 `Date` 物件，這個物件也可以用來解析時間格式。 `Date#getTime()` 也可以派上用場。
+
 
 ----------------------------------------------------------------------
