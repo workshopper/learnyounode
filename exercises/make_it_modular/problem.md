@@ -10,7 +10,7 @@ You **must** not print directly to the console from your module file, only from 
 
 In the case of an error bubbling up to your original program file, simply check for it and print an informative message to the console.
 
-These four things is the contract that your module must follow.
+These four things are the contract that your module must follow.
 
 1. Export a single function that takes exactly the arguments described.
 2. Call the callback exactly once with an error or some data as described.
