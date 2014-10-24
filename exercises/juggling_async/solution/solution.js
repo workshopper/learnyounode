@@ -1,27 +1,28 @@
-var http = require('http')
-var bl = require('bl')
-var results = []
-var count = 0
+var http = require('http');
+var bl = require('bl');
 
-function printResults () {
-  for (var i = 0; i < 3; i++)
-    console.log(results[i])
-}
+var urls=process.argv.slice(2); //Get rid off the node.js path & the executable name
+var cbCounter=urls.length;      //We should wait as many callbacks as provided urls
+var responses=[];
 
-function httpGet (index) {
-  http.get(process.argv[2 + index], function (response) {
-    response.pipe(bl(function (err, data) {
-      if (err)
-        return console.error(err)
 
-      results[index] = data.toString()
-      count++
+	urls.forEach(function(url, index){
 
-      if (count == 3) // yay! we are the last one!
-        printResults()
-    }))
-  })
-}
+		http.get(url, function (res){
 
-for (var i = 0; i < 3; i++)
-  httpGet(i)
+			res.pipe(bl(function (err, data) { 
+
+				if (err)
+					return console.error(err);
+
+	            //The index value is hold privately on each callback so we can preserve the order
+		        responses[index]=data.toString();
+
+				if(--cbCounter === 0) //Dec the counter, if it's the last callback we are done
+					responses.forEach(function(r){ 
+						console.log(r);
+					});
+		}));
+	});
+
+})
