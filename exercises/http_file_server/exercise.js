@@ -3,6 +3,7 @@ var fs            = require('fs')
   , os            = require('os')
   , through2      = require('through2')
   , hyperquest    = require('hyperquest')
+  , rimraf        = require('rimraf')
   , exercise      = require('workshopper-exercise')()
   , filecheck     = require('workshopper-exercise/filecheck')
   , execute       = require('workshopper-exercise/execute')
@@ -71,7 +72,7 @@ exercise.addSetup(function (mode, callback) {
 exercise.addCleanup(function (mode, passed, callback) {
   // mode == 'run' || 'verify'
 
-  fs.unlink(testFile, callback)
+  rimraf(testFile, callback)
 })
 
 

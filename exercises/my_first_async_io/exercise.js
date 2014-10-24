@@ -1,6 +1,7 @@
 var fs            = require('fs')
   , path          = require('path')
   , os            = require('os')
+  , rimraf        = require('rimraf')
   , exercise      = require('workshopper-exercise')()
   , filecheck     = require('workshopper-exercise/filecheck')
   , execute       = require('workshopper-exercise/execute')
@@ -71,7 +72,7 @@ exercise.addVerifyProcessor(function (callback) {
 exercise.addCleanup(function (mode, passed, callback) {
   // mode == 'run' || 'verify'
 
-  fs.unlink(testFile, callback)
+  rimraf(testFile, callback)
 })
 
 
