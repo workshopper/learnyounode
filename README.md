@@ -7,8 +7,8 @@
 ![Learn You The Node.js For Much Win!](https://raw.github.com/rvagg/learnyounode/master/learnyounode.png)
 
   1. 安裝 [Node.js](http://nodejs.org/)
-  2. 在終端機上執行 `sudo npm install learnyounode -g`
-  3. 在終端機上執行 `learnyounode`
+  2. 在終端機上執行 `sudo npm install learnyounode-zh-tw -g`
+  3. 在終端機上執行 `learnyounode-zh-tw`
   4. **.. 就這樣！**
 
 <b><code>learnyounode</code></b> 將會執行一系列的 workshop 。從基礎的 *"HELLO WORLD"* 開始，然後到難一點的同步（synchronous）與非同步（asynchronous）檔案系統 I/O 操作， TCP 和 HTTP 網路操作、事件（event）和串流（stream）。
