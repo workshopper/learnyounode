@@ -2,7 +2,7 @@
 
 **經由一系列自學的 workshop 熟悉 Node.js**
 
-[![NPM](https://nodei.co/npm/learnyounode.png?downloads=true&&downloadRank=true&stars=true)](https://nodei.co/npm/learnyounode/) [![NPM](https://nodei.co/npm-dl/learnyounode.png?months=3&height=3)](https://nodei.co/npm/learnyounode/)
+[![NPM](https://nodei.co/npm/learnyounode-zh-tw.png?downloads=true&&downloadRank=true&stars=true)](https://nodei.co/npm/learnyounode-zh-tw/) [![NPM](https://nodei.co/npm-dl/learnyounode-zh-tw.png?months=3&height=3)](https://nodei.co/npm/learnyounode-zh-tw/)
 
 ![Learn You The Node.js For Much Win!](https://raw.github.com/rvagg/learnyounode/master/learnyounode.png)
 
@@ -11,9 +11,9 @@
   3. 在終端機上執行 `learnyounode-zh-tw`
   4. **.. 就這樣！**
 
-<b><code>learnyounode</code></b> 將會執行一系列的 workshop 。從基礎的 *"HELLO WORLD"* 開始，然後到難一點的同步（synchronous）與非同步（asynchronous）檔案系統 I/O 操作， TCP 和 HTTP 網路操作、事件（event）和串流（stream）。
+<b><code>learnyounode</code></b> 有一系列的 workshop ，從基礎的 *『HELLO WORLD』* 開始，到難一點的同步（synchronous）與非同步（asynchronous）檔案系統 I/O 操作，然後更進一步練習 TCP 和 HTTP 網路操作、事件（event）和串流（stream）。
 
-一旦你完成 <b><code>learnyounode</code></b> ，就可以往下一個階段 <b><code>[stream-adventure](https://github.com/substack/stream-adventure)</code></b> 前進，在那裡有一系列的習題可以讓您更深入的了解 Node 的串流（stream）。
+一旦你完成 <b><code>learnyounode</code></b> ，就可以往下一個階段 <b><code>[stream-adventure](https://github.com/substack/stream-adventure)</code></b> 的教材前進，在那裡有一系列的練習和挑戰可以讓您更深入的了解 Node 的串流（stream）。
 
 ### 貢獻者
 
