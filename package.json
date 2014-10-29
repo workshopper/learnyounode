@@ -1,6 +1,6 @@
 {
   "name": "learnyounode-zh-tw",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Learn You The Node.js For Much Win! An intro to Node.js via a set of self-guided workshops. (Traditional Chinese Version)",
   "author": "Rod Vagg <rod@vagg.org> (https://github.com/rvagg)",
   "contributors": [
@@ -36,6 +36,8 @@
     "chalk": "^0.4.0",
     "through2": "^0.4.1"
   },
-  "bin": "./learnyounode-zh-tw.js",
+  "bin": {
+    "learnyounode-zh-tw": "./learnyounode.js"
+  },
   "preferGlobal": true
 }
