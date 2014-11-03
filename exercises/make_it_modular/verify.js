@@ -124,10 +124,18 @@ function validateModule (modFile, callback) {
 
         exercise.emit('pass', 'Additional module file returned Array as second argument of the callback')
 
-        //---- Check that we got the expected number of elements in the Array
         var exp = files.filter(function (f) { return (/\.md$/).test(f) })
+          , noDotExp = files.filter(function(f) { return (/md$/).test(f) })
           , i
 
+        //---- Check for `ext` instead of `.ext`
+        if (noDotExp.length === list.length) {
+          return modFileError(
+            'may be matching "ext" instead of ".ext"'
+          )
+        }
+
+        //---- Check that we got the expected number of elements in the Array
         if (exp.length !== list.length) {
           return modFileError(
             'did not return an Array with the correct number of elements as the second argument of the callback'
