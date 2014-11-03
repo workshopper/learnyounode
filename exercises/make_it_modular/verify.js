@@ -131,7 +131,7 @@ function validateModule (modFile, callback) {
         //---- Check for `ext` instead of `.ext`
         if (noDotExp.length === list.length) {
           return modFileError(
-            'seems to match incorrect input "ext" instead of ".ext"'
+            'may be matching "ext" instead of ".ext"'
           )
         }
 
