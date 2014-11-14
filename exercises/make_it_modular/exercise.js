@@ -9,7 +9,7 @@ var fs            = require('fs')
   , after         = require('after')
   , rimraf        = require('rimraf')
   , verify        = require('./verify')
-  , files         = require('../filtered_ls/file-list')
+  , files         = require('../filtered_lsls/file-list')
 
   , testDir       = path.join(os.tmpDir(), '_learnyounode_' + process.pid)
 
@@ -29,7 +29,7 @@ exercise = wrappedexec(exercise)
 
 // modules we want run just prior to the submission in the
 // child process
-exercise.wrapModule(require.resolve('../my_first_io/wrap'))
+exercise.wrapModule(require.resolve('../my_first_ioio/wrap'))
 exercise.wrapModule(require.resolve('./wrap-requires'))
 
 

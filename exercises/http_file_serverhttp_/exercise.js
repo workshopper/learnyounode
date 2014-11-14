@@ -51,7 +51,7 @@ exercise = wrappedexec(exercise)
 
 // a module we want run just prior to the submission in the
 // child process
-exercise.wrapModule(require.resolve('../my_first_io/wrap'))
+exercise.wrapModule(require.resolve('../my_first_ioio/wrap'))
 
 
 // set up the data file to be passed to the submission

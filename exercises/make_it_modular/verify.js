@@ -1,7 +1,7 @@
 const fs    = require('fs')
     , path  = require('path')
     , util  = require('util')
-    , files = require('../filtered_ls/file-list')
+    , files = require('../filtered_lsls/file-list')
     , chalk = require('chalk')
 
 function validateModule (modFile, callback) {
@@ -186,7 +186,7 @@ function requires (exercise) {
   // rule out these 4 things
   var main  = path.resolve(process.cwd(), exercise.args[0])
     , exec  = require.resolve('workshopper-wrappedexec/exec-wrap')
-    , wrap1 = require.resolve('../my_first_io/wrap')
+    , wrap1 = require.resolve('../my_first_ioio/wrap')
     , wrap2 = require.resolve('./wrap-requires')
 
   return exercise.wrapData.requires.filter(function (m) {
