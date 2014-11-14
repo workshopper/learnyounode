@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "workshopper": "^1.0.0-alpha05",
+    "workshopper": "maxogden/workshopper#visualwidth",
     "workshopper-exercise": "^0.2.2",
     "workshopper-wrappedexec": "^0.1.1",
     "workshopper-boilerplate": "0.0.1",
