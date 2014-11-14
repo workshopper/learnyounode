@@ -9,6 +9,6 @@
 
 {yellow}{bold}{appname}のバグが見つける場合または貢献したい場合：{/bold}{/yellow}
 
-  The official repository for {appname} is:
+  {appname}のリポシトリはここにあります:
     https://github.com/maxogden/learnyounode-jp/
   バグリクエストやPullリクエストはいつでもどうぞ
