@@ -14,12 +14,12 @@ function fpath (f) {
   return path.join(__dirname, f)
 }
 
-
 workshopper({
     name        : name
   , title       : title
   , subtitle    : subtitle
   , exerciseDir : fpath('./exercises/')
+  , footerFile  : fpath('./footer.md')
   , appDir      : __dirname
   , helpFile    : fpath('help.txt')
   , menuItems   : [ {
