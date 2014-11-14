@@ -1,26 +1,26 @@
-Create a program that prints a list of files in a given directory, filtered by the extension of the files. You will be provided a directory name as the first argument to your program (e.g. '/path/to/dir/') and a file extension to filter by as the second argument.
+拡張子のフィルタを使ってファイルリストをコンソールに出すアプリを書いてください。アプリの一つ目のアーギュメントはフォルダーのパスです（例えば `/あなた/の/フォルダー/`)。 拡張子は二つ目のアーギュメントです。
 
-For example, if you get 'txt' as the second argument then you will need to filter the list to only files that **end with .txt**. Note that the second argument _will not_ come prefixed with a '.'.
+例えば：`"txt"`が二つ目のアーギュメントだったら*後ろに.txt*がついてあるだけファイルのリストを表示しないといけません。メモ：二つ目のアーギュメントは`"."`プレフィックスがありません。
 
-The list of files should be printed to the console, one file per line. You **must** use asynchronous I/O.
+コンソールにそのリストを出してください。一つのファイル名は一行。**ASYNC**I/Oが要件です。
 
 ----------------------------------------------------------------------
 ## HINTS
 
-The `fs.readdir()` method takes a pathname as its first argument and a callback as its second. The callback signature is:
+`fs.readdir()`というメソードの一つ目のアーギュメントはパスです。コールバップは二つ目です。コールバックはこのようになります：
 
 ```js
 function callback (err, list) { /* ... */ }
 ```
 
-where `list` is an array of filename strings.
+`list`はファイル名のStringのArrayです。
 
-Documentation on the `fs` module can be found by pointing your browser here:
+`fs`のモジュールドキュメントはブラウザーを使ってこのリンクにアクセスできます:
   {rootdir:/node_apidoc/fs.html}
 
-You may also find node's `path` module helpful, particularly the `extname` method.
+Nodeの `path` も役に立つかもしれません。とくに `extname` のメソード.
 
-Documentation on the `path` module can be found by pointing your browser here:
+`path`のモジュールドキュメントはブラウザーを使ってこのリンクにアクセスできます:
   {rootdir:/node_apidoc/path.html}
 
 ----------------------------------------------------------------------
