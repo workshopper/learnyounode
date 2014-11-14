@@ -1,4 +1,4 @@
- __»__ To print these instructions again, run: `{appname} print`
- __»__ To execute your program in a test environment, run: `{appname} run program.js`
- __»__ To verify your program, run: `{appname} verify program.js`
- __»__ For help run: `{appname} help`
+ __»__ この説明をもう一度表示するためにこれを読んでください: `{appname} print`
+ __»__ あなたのアプリをテストのエンバイロメントにスタートのためにこれを読んでください`{appname} run program.js`
+ __»__ アプリをテストのためにこれを読んでください： `{appname} verify program.js`
+ __»__ ヘルプのために： `{appname} help`
