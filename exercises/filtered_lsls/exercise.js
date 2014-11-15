@@ -70,15 +70,15 @@ exercise.addVerifyProcessor(function (callback) {
   Object.keys(exercise.wrapData.fsCalls).forEach(function (m) {
     if (/Sync$/.test(m)) {
       usedSync = true
-      this.emit('fail', 'Used synchronous method: fs.' + m + '()')
+      this.emit('fail', 'SYNCのメソードを使われています: fs.' + m + '()')
     } else {
       usedAsync = true
-      this.emit('pass', 'Used asynchronous method: fs.' + m + '()')
+      this.emit('pass', 'ASYNCのメソードが使われています: fs.' + m + '()')
     }
   }.bind(this))
 
   if (!usedSync && !usedAsync) // https://github.com/nodeschool/discussions/issues/356
-    this.emit('fail', 'Used asynchronous method from the `fs` module')
+    this.emit('fail', '`fs`のモジュールのASYNCメソードを使われています')
 
   callback(null, usedAsync && !usedSync)
 })
