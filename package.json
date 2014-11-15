@@ -34,6 +34,8 @@
     "chalk": "^0.4.0",
     "through2": "^0.4.1"
   },
-  "bin": "./learnyounode.js",
+  "bin": {
+    "learnyounode": "./learnyounode.js"
+  },
   "preferGlobal": true
 }
