@@ -21,6 +21,7 @@ Once you have finished <b><code>learnyounode</code></b>, graduate to <b><code>[s
 
   1. Run `npm install learnyounode` instead of `sudo npm install learnyounode -g`
   2. Run `$(npm bin)/learnyounode` wherever the instructions say "run `learnyounode`"
+  3. Or alternatively to step 2 above, tweak your `PATH` to include `$(npm bin)` if you know how to do that.
 
 ### Contributors
 
