@@ -1,46 +1,55 @@
-This problem is the same as the previous but introduces the concept of **modules**. You will need to create two files to solve this.
+今回の問題は前とよく二ていますが今回は**Module**を使いましょうか？ソリューションのために二つのファイルが必要です。
 
-Create a program that prints a list of files in a given directory, filtered by the extension of the files. The first argument is the directory name and the second argument is the extension filter. Print the list of files (one file per line) to the console. You **must** use asynchronous I/O.
+拡張子のフィルタを使ってファイルリストをコンソールに出すアプリを書いてください。一つ目の引数はフォルダーだし二つ目はファイルの拡張子です。コンソールにそのリストを出してください。一つのファイル名は一行。**ASYNC**I/Oが要件です。
 
-You must write a *module* file to do most of the work. The module must *export* a single function that takes **three** arguments: the directory name, the filename extension string and a callback function, in that order. The filename extension argument must be the same as was passed to your program. i.e. don't turn it into a RegExp or prefix with "." or do anything else but pass it to your module where you can do what you need to make your filter work.
+アプリの多文は一つの**Module**ファイルを書いてください。そのModuleが一つのメソードをexportするのが必要です。そのメソードは三つの引数があります：フォルダー名、ファイルの拡張子、ASYNCのコールバックメソード。全くこの順番。Moduleのファイル拡張子はアプリがもらっているファイル拡張子と全く同じバリューをつかってください。例えば:RegExpにラップや"."をつけるのがダメです。
 
-The callback function must be called using the idiomatic node(err, data) convention. This convention stipulates that unless there's an error, the first argument passed to the callback will be null, and the second will be your data. In this case, the data will be your filtered list of files, as an Array. If you receive an error, e.g. from your call to  `fs.readdir()`, the callback must be called with the error, and only the error, as the first argument.
+コールバックはNodeのイディオムを守らないといけません：```(err, data)```。このイディオムならエラーのない場合は一つ目の引数（err）は```null```です。二つ目にはデータが入っています。今回の問題の場合にはファイルリストのArrayです。
+エラーの場合（例えば：```fs.readdir()```が問題の場合）そのエラーだけを一つ目の引数として渡してください。
 
-You **must** not print directly to the console from your module file, only from your original program.
+そのModuleはコンソールに出力に書くじゃだめです。アプリのファイルだけが出力していいです。
 
-In the case of an error bubbling up to your original program file, simply check for it and print an informative message to the console.
+エラーの場合はわかりやすいエラーメッセージを出力してください。
 
-These four things are the contract that your module must follow.
+約定；つまり、あなたのModuleはこの四つの店を守らないといけません。
 
-1. Export a single function that takes exactly the arguments described.
-2. Call the callback exactly once with an error or some data as described.
-3. Don't change anything else, like global variables or stdout.
-4. Handle all the errors that may occur and pass them to the callback.
+1. 説明した引数だけがある一つもメソードをexportしてください
+2. コールバックは一回だけを説明したように呼んでください。
+3. 他のことを変えないでください（グローバル変数とかStdout)
+4. 全ての可能性があるエラーをチェックしてコールバックに渡してください
 
-The benefit of having a contract is that your module can be used by anyone who expects this contract. So your module could be used by anyone else who does learnyounode, or the verifier, and just work.
+約定はアドバンテージがあります。Moduleは約定を守るとその約定がしている人はそのままにあなたのModuleが使えます。
 
 ----------------------------------------------------------------------
-## HINTS
+## ヒント
 
-Create a new module by creating a new file that just contains your directory reading and filtering function. To define a *single function* *export*, you assign your function to the `module.exports` object, overwriting what is already there:
+フォルダーを読むフィルタするModuleを書くためにそれを新しいファイルに書いてください。*一つのメソード*を*export*するために`module.exports`、この例と同じように：
 
 ```js
 module.exports = function (args) { /* ... */ }
 ```
 
-Or you can use a named function and assign the name.
+あるいは名前があるメソードを名前を使ってexportしてもいいです。
 
-To use your new module in your original program file, use the `require()` call in the same way that you `require('fs')` to load the `fs` module. The only difference is that for local modules must be prefixed with './'. So, if your file is named mymodule.js then:
+```js
+function hoge() {
+    /* ... */
+}
+
+module.exports = hoge
+```
+
+あなたの新いModuleを使うために`require()`を使ってください。 `require('fs')`が`fs` をロードすると同じように。ただ、一つの大切な違いはローカルのModuleのために'./'を使ってください。あなたのModuleの名前は`mymodule.js`だったらこのように使ってください:
 
 ```js
 var mymodule = require('./mymodule.js')
 ```
 
-The '.js' is optional here and you will often see it omitted.
+（メモ：`'.js'`の拡張子はこの場合が必要ではありません。他のコードではそれはよく省略しています。）
 
-You now have the `module.exports` object in your module assigned to the `mymodule` variable. Since you are exporting a single function, `mymodule` is a function you can call!
+今は`mymodule`の変数を使ってにそのModuleに書いてある `module.exports`のObjectをアクセスできます。一つのメソードだけをexportしてあるから`mymodule`が呼べるメソードです！
 
-Also keep in mind that it is idiomatic to check for errors and do early-returns within callback functions:
+イディオムのエラーチェックとreturnを忘れないでください：
 
 ```js
 function bar (callback) {
