@@ -125,11 +125,13 @@ function validateModule (modFile, callback) {
         exercise.emit('pass', 'Additional module file returned Array as second argument of the callback')
 
         var exp = files.filter(function (f) { return (/\.md$/).test(f) })
-          , noDotExp = files.filter(function(f) { return (/md$/).test(f) })
+          , noDotExp0 = files.filter(function(f) { return (/md$/).test(f) })
+          , noDotExp1 = files.filter(function(f) { return path.extname(f) == "md" })
           , i
 
         //---- Check for `ext` instead of `.ext`
-        if (noDotExp.length === list.length) {
+        if (noDotExp0.length === list.length ||
+            noDotExp1.length === list.length) {
           return modFileError(
             'may be matching "ext" instead of ".ext"'
           )
