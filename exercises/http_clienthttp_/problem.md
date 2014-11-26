@@ -1,29 +1,29 @@
-Write a program that performs an HTTP GET request to a URL provided to you as the first command-line argument. Write the String contents of **each** "data" event from the response to a new line on the console (stdout).
+URLが最初の引数のHTTPのGETリクエストするアプリを書いてください。"data"イベント**一つ一つｓ**の文字列を開業をつかってコンソールにかきだしてください。
 
 ----------------------------------------------------------------------
-## HINTS
+## ヒント
 
-For this exercise you will need to use the `http` core module.
+この例題のために`http`のNode.jsモジュールが必要になります。
 
-Documentation on the `http` module can be found by pointing your browser here:
+`http`のモジュールドキュメントはブラウザーを使ってこのリンクにアクセスできます:
   {rootdir:/node_apidoc/http.html}
 
-The `http.get()` method is a shortcut for simple GET requests, use it to simplify your solution. The first argument to `http.get()` can be the URL you want to GET, provide a callback as the second argument.
+`http.get()`というメソードは簡単のGETリクエストのショートカットです。あなたのソールションンがシンプルになるように役に立つと思います。`http.get()`の一つ目の引数はGETリクエストのURLです。二つ目はコールバックのメソードです。
 
-Unlike other callback functions, this one has the signature:
+`http`はよくあるイディオムと違ってこのようなコールバックになります：
 
 ```js
 function callback (response) { /* ... */ }
 ```
 
-Where the `response` object is a Node **Stream** object. You can treat Node Streams as objects that emit events, the three events that are of most interest are: "data", "error" and "end". You listen to an event like so:
+`response`のオブジェクトはNode.jsの**Stream**です。その**Stream**はイベントを発するオブジェクトを考えていいです。**Stream**の大切な三つのイベントは：`data`、`error`と`end`。イベントの時データいただくためにこのようにリスナーがつけられます。
 
 ```js
 response.on("data", function (data) { /* ... */ })
 ```
 
-The "data" is emitted when a chunk of data is available and can be processed. The size of the chunk depends upon the underlying data source.
+`data`のイベントはプロセスできるデータチャンクがある時に発されています。チャンクのサイズはデータソースによって変わります。
 
-The `response` object / Stream that you get from `http.get()` also has a `setEncoding()` method. If you call this method with "utf8", the "data" events will emit Strings rather than the standard Node `Buffer` objects which you have to explicitly convert to Strings.
+`http.get()`の`response`のStreamオブジェクトには`setEncoding()`というメソードがあります。それ`utf8`のバリューを使って呼ぶとエータイベントの`Buffer`の代わり文字列になります。
 
 ----------------------------------------------------------------------
