@@ -1,14 +1,14 @@
-This problem is the same as the previous problem (HTTP COLLECT) in that you need to use `http.get()`. However, this time you will be provided with **three** URLs as the first three command-line arguments.
+今の問題は前回（HTTP Collect)と同じく動いている。`http.get()`を使ってURLの結果をコンソールに書く出す。ただ今回は**三つ**のURLにがコマンドラインの引数にしてください。
 
-You must collect the complete content provided to you by each of the URLs and print it to the console (stdout). You don't need to print out the length, just the data as a String; one line per URL. The catch is that you **must** print them out in the same order as the URLs are provided to you as command-line arguments.
+三つのGETリクエストの全てのデータを集めてコンソールに書き出してください。文字カウントは今回いりません、文字列だけがたります。一つのURLは一行になります。コマンドラインの順番は守らないと行きません。
 
 ----------------------------------------------------------------------
-## HINTS
+## ヒント
 
-Don't expect these three servers to play nicely! They are not going to give you complete responses in the order you hope, so you can't naively just print the output as you get it because they will be out of order.
+その三つのサーバは思った通り動かなても可能性です。どの順番でデータもらうのが決まってないのでそのままに書き出すと順番がぐちゃぐちゃになります。
 
-You will need to queue the results and keep track of how many of the URLs have returned their entire contents. Only once you have them all, you can print the data to the console.
+そのURLの結果ができているまで順番が間違えないようになんかの列にステートを保村しないといけないと思います。全てが届いてからコンソールに書き出してください。
 
-Counting callbacks is one of the fundamental ways of managing async in Node. Rather than doing it yourself, you may find it more convenient to rely on a third-party library such as [async](http://npm.im/async) or [after](http://npm.im/after). But for this exercise, try and do it without any external helper library.
+コールバックをか数えるのがNode.jsの**async**マネージメントの大切なことでｓ。[async](http://npm.im/async)とか[after](http://npm.im/after)とかのサードパーティライブラリーはありますが今回は手伝いなしに頑張ってください。
 
 ----------------------------------------------------------------------
