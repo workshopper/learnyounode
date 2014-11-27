@@ -25,7 +25,7 @@ function callback (socket) { /* ... */ }
 
 `net.createServer()` もサーバのオブジェクトを返事しています。特別のポートをリッスンするためは `server.listen(portNumber)` のように読んでください。
 
-珍しくない　Node のTCP サーバはこのように開発されています：
+珍しくない　Node.js のTCP サーバはこのように開発されています：
 
 ```js
 var net = require('net')
@@ -37,12 +37,11 @@ server.listen(8000)
 
 メモ：忘れないでください：ポートは最初の引数に入っています。
 
-`socket`と言うオブジェクトに色々のmetaのデータが変えられます。ただ、その`socket`は読むと書き出すができます（`duplex`のストリームです）。今回の問題は
+`socket`と言うオブジェクトに色々の meta のデータが変えられます。ただ、その`socket`は読むと書き出すができます（`duplex`のストリームです）。今回の問題は
 
 `socket.write(data)`を使ってデータが書き出せます。`socket.end()` はそのSocketがとじています。`.end()`は一つのオプショナル引数をつｋたって例が簡単になります。その引数はデータですので、`socket.end(data)`の例が簡単に役に立つと思います。 
 
-`net`のモジュールドキュメントは{appname}と一緒にインストールされてブラウザーを使ってこのリンクにアクセスできます:
-`net`のモユールｈ module can be found by pointing your browser here:
+`net`のモジュールドキュメントはブラウザーを使ってこのリンクにアクセスできます:
 
   {rootdir:/node_apidoc/net.html}
 
