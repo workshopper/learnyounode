@@ -1,4 +1,4 @@
-{yellow}{bold}learnyounode is brought to you by the following dedicated hackers:{/bold}{/yellow}
+{yellow}{bold}learnyounode はこの頑張っているメンバが作りました：{/bold}{/yellow}
 
 {bold}Name                GitHub Username{/bold}
 -----------------------------------
@@ -19,3 +19,4 @@ atomizer            @atomizer
 franza              @franza‎
 gargol              @gargol
 Martin Heidegger    @martinheidegger
+Takashi Fujita      @tgfjt 
