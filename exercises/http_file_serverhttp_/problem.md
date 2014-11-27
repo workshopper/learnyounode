@@ -1,27 +1,28 @@
-Write an HTTP **server** that serves the same text file for each request it receives.
+いつも同じテキストファイルを返事する、HTTP の**サーバを書いてください。
 
-Your server should listen on the port provided by the first argument to your program.
+サーバは最初の引数で供給されているポートをリッスンします。
 
-You will be provided with the location of the file to serve as the second command-line argument. You **must** use the `fs.createReadStream()` method to stream the file contents to the response.
+二つ目の引数はサーブするファイルのパスです。ファイルを返事するためは`fs.createReadStream()`を使わないといけません。
 
 ----------------------------------------------------------------------
-## HINTS
+## ヒント
 
-Because we need to create an HTTP server for this exercise rather than a generic TCP server, we should use the `http` module from Node core. Like the `net` module, `http` also has a method named `http.createServer()` but this one creates a server that can talk HTTP.
+今回は HTTP 専用サーバになりますので一般的なTCPサーバより Node.js の`http`のコアモジュールを使うほうがいいです。`net`モジュールと同じく`http.createServer()`のメソードがあります。たたそのサーバは HTTP がわかります。
 
-`http.createServer()` takes a callback that is called once for each connection received by your server. The callback function has the signature:
+`http.createServer()`のコールバックはそれぞれのコネクションに呼ばれています。署名；
 
 ```js
 function callback (request, response) { /* ... */ }
 ```
 
-Where the two arguments are objects representing the HTTP request and the corresponding response for this request. `request` is used to fetch properties, such as the header and query-string from the request while `response` is for sending data to the client, both headers and body.
+ある二つの引数は HTTP のリクエストやリスポンスを代表します。`request` は HTTP のプロパティーが置いてあります。例えば：ヘッダーやクエリ文字列。`response`はクライアントにヘッダーもボディも返事するためです。
 
-Both `request` and `response` are also Node streams! Which means that you can use the streaming abstractions to send and receive data if they suit your use-case.
+`request`や`response`は Node.js の **Stream** です！役に立てば **Stream** のシステムを送るやもらえるために使えます。
 
-`http.createServer()` also returns an instance of your `server`. You must call `server.listen(portNumber)` to start listening on a particular port.
+`http.createServer()`はあなたのサーバのオブジェクトを返事します。ポートをリッスンのためにサーバに`server.listen(portNumber)`読んでください。
 
-A typical Node HTTP server looks like this:
+
+珍しくない　Node.js の HTTP サーバはこのように開発されています：
 
 ```js
 var http = require('http')
@@ -31,9 +32,9 @@ var server = http.createServer(function (req, res) {
 server.listen(8000)
 ```
 
-Documentation on the `http` module can be found by pointing your browser here:
+`http`のモジュールドキュメントはブラウザーを使ってこのリンクにアクセスできます:
   {rootdir:/node_apidoc/http.html}
 
-The `fs` core module also has some streaming APIs for files. You will need to use the `fs.createReadStream()` method to create a stream representing the file you are given as a command-line argument. The method returns a stream object which you can use `src.pipe(dst)` to pipe the data from the `src` stream to the `dst` stream. In this way you can connect a filesystem stream with an HTTP response stream.
+`fs`と言うNode.jsのコアモジュールも stream できるAPIがあります。コマンドラインの引数を `fs.createReadStream()` に渡すとそのファイルの代表するStreamオブジェクトがもらえます。その Stream をは `src.pipe(dst)` を使って`src`の Stream を `dst` の Stream につながることができます。このようにファイルのデータ Stream を HTTP のリスポンス Stream と繋がれます。
 
 ----------------------------------------------------------------------
