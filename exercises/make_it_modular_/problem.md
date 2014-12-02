@@ -23,13 +23,13 @@
 ----------------------------------------------------------------------
 ## ヒント
 
-フォルダーを読むフィルタする module を書くためにそれを新しいファイルに書いてください。*一つのメソード*を*export*するために`module.exports`、この例と同じように：
+フォルダーを読むフィルタする module を書くためにそれを新しいファイルに書いてください。*一つの関数*を*export*するために`module.exports`、この例と同じように：
 
 ```js
 module.exports = function (args) { /* ... */ }
 ```
 
-あるいは名前があるメソードを名前を使ってexportしてもいいです。
+あるいは名前がある関数を名前を使ってexportしてもいいです。
 
 ```js
 function hoge() {
@@ -47,7 +47,7 @@ var mymodule = require('./mymodule.js')
 
 （メモ：`'.js'`の拡張子はこの場合が必要ではありません。他のコードではそれはよく省略しています。）
 
-今は`mymodule`の変数を使ってにそのModuleに書いてある `module.exports`のObjectをアクセスできます。一つのメソードだけをexportしてあるから`mymodule`が呼べるメソードです！
+今は`mymodule`の変数を使ってにそのModuleに書いてある `module.exports`のObjectをアクセスできます。一つの関数だけをexportしてあるから`mymodule`が呼べる関数です！
 
 イディオムのエラーチェックとreturnを忘れないでください：
 

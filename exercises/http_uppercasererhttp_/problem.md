@@ -9,7 +9,7 @@ POSTリクエストのボディを大文字に書き換えて返事する HTTP �
 
 Streamのデータを途中書き換えるためには npm に色んなパッケージがあります。この問題のために `through2-map` が一番簡単です。
 
-`through2-map` はただ一つのメソードを使って新しい「transform stream」が作られます。`Array#map()`のStreamバーションと考えていいです：
+`through2-map` はただ一つの関数を使って新しい「transform stream」が作られます。`Array#map()`のStreamバーションと考えていいです：
 
 ```js
 var map = require('through2-map')
