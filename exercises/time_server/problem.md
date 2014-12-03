@@ -22,7 +22,7 @@ For this exercise we'll be creating a raw TCP server. There's no HTTP involved h
 The `net` module has a method named `net.createServer()` that takes a callback function. The method that you need to pass to `net.createServer()` is not an async callback but a event handler that is called more than once. Every connection received by your server triggers another call to the handler. The handler function has the signature:
 
 ```js
-function callback (socket) { /* ... */ }
+function handler(socket) { /* ... */ }
 ```
 
 `net.createServer()` also returns an instance of your `server`. You must call `server.listen(portNumber)` to start listening on a particular port.
