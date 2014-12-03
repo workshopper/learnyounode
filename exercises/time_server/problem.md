@@ -19,10 +19,10 @@ After sending the string, close the connection.
 
 For this exercise we'll be creating a raw TCP server. There's no HTTP involved here so we need to use the `net` module from Node core which has all the basic networking functions.
 
-The `net` module has a method named `net.createServer()` that takes a callback function. The method that you need to pass to `net.createServer()` is not an async callback but a event handler that is called more than once. Every connection received by your server triggers another call to the handler. The handler function has the signature:
+The `net` module has a method named `net.createServer()` that takes a callback function. The method that you need to pass to `net.createServer()` is not an async callback but a connection listener that is called more than once. Every connection received by your server triggers another call to the listener. The listener function has the signature:
 
 ```js
-function handler(socket) { /* ... */ }
+function listener(socket) { /* ... */ }
 ```
 
 `net.createServer()` also returns an instance of your `server`. You must call `server.listen(portNumber)` to start listening on a particular port.
