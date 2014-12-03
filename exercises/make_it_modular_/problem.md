@@ -1,57 +1,67 @@
-This problem is the same as the previous but introduces the concept of **modules**. You will need to create two files to solve this.
+今回の問題は前回のとよく似ていますが、今回は **modules** の概念を使いましょう。問題の解決には2つのファイルが必要になります。
 
-Create a program that prints a list of files in a given directory, filtered by the extension of the files. The first argument is the directory name and the second argument is the extension filter. Print the list of files (one file per line) to the console. You **must** use asynchronous I/O.
+与えられたディレクトリーからファイルの拡張子でフィルタリングされたファイルのリストを出力するプログラムを書いてください。ーつ目の引数はディレクトリー名、二つ目は拡張子です。１行に１ファイルずつコンソールに出力してください。非同期 I/O を使ってください。
 
-You must write a *module* file to do most of the work. The module must *export* a single function that takes **three** arguments: the directory name, the filename extension string and a callback function, in that order. The filename extension argument must be the same as was passed to your program. i.e. don't turn it into a RegExp or prefix with "." or do anything else but pass it to your module where you can do what you need to make your filter work.
+**module** ファイルに処理の大部分を書いてください。**module** は、3つの引数を取る関数を一つだけ定義してください。引数は ディレクトリー名、ファイル拡張子、それからコールバック関数、という順序です。ファイル拡張子の引数はそのままプログラム本体に渡してください。つまり、正規表現に変換したり `"."` を付けたりしてはいけません。
 
-The callback function must be called using the idiomatic node(err, data) convention. This convention stipulates that unless there's an error, the first argument passed to the callback will be null, and the second will be your data. In this case, the data will be your filtered list of files, as an Array. If you receive an error, e.g. from your call to  `fs.readdir()`, the callback must be called with the error, and only the error, as the first argument.
+コールバック関数は Node の習慣的なイディオムを使って呼び出してください： `(err, data)` 。このイディオムで言うとエラーのない場合はーつ目の引数 （err）は null です。2つ目にはデータが入っています。今回の問題の場合にはファイルリストの Array です。
+エラーの場合（つまり： `fs.readdir()` で問題があった場合）は、そのエラーだけを一つ目の引数としてコールバック関数に渡してください。
 
-You **must** not print directly to the console from your module file, only from your original program.
+コンソールへの出力は **module** ではなく、本体のプログラムでのみ出力してください。
 
-In the case of an error bubbling up to your original program file, simply check for it and print an informative message to the console.
+エラーの場合はわかりやすいエラーメッセージを出力してください。
 
-These four things are the contract that your module must follow.
+まとめ：つまり、あなたの **module** は、以下の４点の制約を守ってください。
 
-1. Export a single function that takes exactly the arguments described.
-2. Call the callback exactly once with an error or some data as described.
-3. Don't change anything else, like global variables or stdout.
-4. Handle all the errors that may occur and pass them to the callback.
+1. 正しく引数を取る関数を定義してください。
+2. エラーか何らかのデータを引数に取るコールバックを1度だけ呼び出してください。
+3. 他には何も変えないでください（グローバル変数や標準出力）
+4. 発生する可能性のあるエラーは全てコールバック関数に渡してください。
 
-The benefit of having a contract is that your module can be used by anyone who expects this contract. So your module could be used by anyone else who does learnyounode, or the verifier, and just work.
+この制約の良いところはこれを守っている **module** であれば誰にでも扱えることです。
 
 ----------------------------------------------------------------------
-## HINTS
+## ヒント
 
-Create a new module by creating a new file that just contains your directory reading and filtering function. To define a *single function* *export*, you assign your function to the `module.exports` object, overwriting what is already there:
+フォルダーの内容を読み、フィルタする Module を書くためにそれを新しいファイルに書いてください。**一つの関数だけ** を定義するためには、以下の例のように `module.exports` を利用します。：
 
 ```js
 module.exports = function (args) { /* ... */ }
 ```
 
-Or you can use a named function and assign the name.
-
-To use your new module in your original program file, use the `require()` call in the same way that you `require('fs')` to load the `fs` module. The only difference is that for local modules must be prefixed with './'. So, if your file is named mymodule.js then:
+あるいは名前がある関数を名前を使って定義してもいいです。
 
 ```js
-var mymodule = require('./mymodule.js')
+function hoge() {
+    /* ... */
+}
+
+module.exports = hoge
 ```
 
-The '.js' is optional here and you will often see it omitted.
+あなたの新い Module を使うために `require()` を使ってください。 `require('fs')` が `fs` をロードすると同じように。ただ、一つの大切な違いはローカルの Module のために `'./'` を使ってください。あなたの Module の名前は `mymodule.js` だったらこのように使ってください:
 
-You now have the `module.exports` object in your module assigned to the `mymodule` variable. Since you are exporting a single function, `mymodule` is a function you can call!
+```js
+var hoge_module = require('./mymodule.js')
+```
 
-Also keep in mind that it is idiomatic to check for errors and do early-returns within callback functions:
+（メモ： `'.js'` の拡張子はこの場合必ずしも必要ではありません。他のコードではそれはよく省略しています。）
+
+上記コードによって Module に書いてある `module.exports` の Object にアクセスできます。それは `hoge_module` 変数に格納されます。`mymodule.js` には一つの関数だけが定義されているので、 `hoge_module` 変数そのものが実行可能な関数です！
+
+**例**： `hoge_module();`
+
+イディオムのエラーチェックと `return` を忘れないでください：
 
 ```js
 function bar (callback) {
   foo(function (err, data) {
     if (err)
-      return callback(err) // early return
+      return callback(err) // 早めの `return` が大事。
 
-    // ... no error, continue doing cool things with `data`
+    // ... エラーのない場合、そのまま `data`を使って楽しんでください。
 
-    // all went well, call callback with `null` for the error argument
-
+    // 十分楽しく過ごしてからはエラーの引数を `null` にしてください。
     callback(null, data)
   })
 }

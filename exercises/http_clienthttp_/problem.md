@@ -1,29 +1,36 @@
-Write a program that performs an HTTP GET request to a URL provided to you as the first command-line argument. Write the String contents of **each** "data" event from the response to a new line on the console (stdout).
+一つ目のコマンドラインの引数が URL 文字列である、 HTTP のデーターをロード (※)するアプリを書いてください。`"data"` イベント**一つ一つ**の文字列を改行をつかってコンソールに書き出してください。
+
+※これからは「GET リクエスト」と記述します。
 
 ----------------------------------------------------------------------
-## HINTS
+## ヒント
 
-For this exercise you will need to use the `http` core module.
+この例題のために `http` の Node.js モジュールが必要になります。
 
-Documentation on the `http` module can be found by pointing your browser here:
+`http` のモジュールドキュメントはブラウザーを使ってこのリンクにアクセスできます:
   {rootdir:/node_apidoc/http.html}
 
-The `http.get()` method is a shortcut for simple GET requests, use it to simplify your solution. The first argument to `http.get()` can be the URL you want to GET, provide a callback as the second argument.
+`http.get()` という関数は簡単な GET リクエストのショートカットです。あなたのソリューションがシンプルになるのに役に立つと思います。 `http.get()` の一つ目の引数は GET リクエストの URL です。二つ目はコールバックの関数です。
 
-Unlike other callback functions, this one has the signature:
+```js
+http.get(url, callback)
+```
+
+`http` はよくあるイディオム  `(error, result)` と違って以下のようなコールバックになります：
 
 ```js
 function callback (response) { /* ... */ }
 ```
 
-Where the `response` object is a Node **Stream** object. You can treat Node Streams as objects that emit events, the three events that are of most interest are: "data", "error" and "end". You listen to an event like so:
+`response` のオブジェクトは Node.js の **Stream** です。Stream はイベントを発行するオブジェクトと考えてよいです。 Stream における大切な三つのイベントは： `data` 、 `error` と `end` です。各イベント時にデータを受け取る為には、以下のようにリスナーを設定します。
 
 ```js
 response.on("data", function (data) { /* ... */ })
 ```
 
-The "data" is emitted when a chunk of data is available and can be processed. The size of the chunk depends upon the underlying data source.
+`data` イベントは処理できるデータチャンク(※)が現れた時に発行されます。チャンクのサイズはデータの出元によって変わります。
+※ データの一部分。Stream ではこれが断続的に提供されます。
 
-The `response` object / Stream that you get from `http.get()` also has a `setEncoding()` method. If you call this method with "utf8", the "data" events will emit Strings rather than the standard Node `Buffer` objects which you have to explicitly convert to Strings.
+`http.get()` の `response` の Stream オブジェクトには `setEncoding()` という関数があります。それを `utf8` という値を使って呼ぶとデータイベントの `Buffer` の代わりに文字列が渡ってきます。
 
 ----------------------------------------------------------------------

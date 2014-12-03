@@ -1,10 +1,10 @@
-Write an HTTP **server** that serves JSON data when it receives a GET request to the path '/api/parsetime'. Expect the request to contain a query string with a key 'iso' and an ISO-format time as the value.
+'/api/parsetime' への GET リクエストの時に JSON のデータを返す HTTP **サーバ** を書いてください。リクエストのクエリには 'iso' と言う ISO 形式のタイムスタンプパラメーターが渡されるものとします。
 
-For example:
+すなわち：
 
   /api/parsetime?iso=2013-08-10T12:10:15.474Z
 
-The JSON response should contain only 'hour', 'minute' and 'second' properties. For example:
+返事はそのタイムスタンプの時間、分、秒のデータである 'hour', 'minute' と 'second' の JSON プロパティです:
 
 ```json
 {
@@ -14,39 +14,41 @@ The JSON response should contain only 'hour', 'minute' and 'second' properties. 
 }
 ```
 
-Add second endpoint for the path '/api/unixtime' which accepts the same query string but returns UNIX epoch time in milliseconds (the number of milliseconds since 1 Jan 1970 00:00:00 UTC) under the property 'unixtime'. For example:
+また、'/api/unixtime' への GET リクエストも作ってください。そこでも同じクエリパラメーターを使って UNIX の epoch time (※) を JSON の 'unixtime' というプロパティに格納して返してください：
 
 ```json
 { "unixtime": 1376136615474 }
 ```
 
-Your server should listen on the port provided by the first argument to your program.
+※ UNIX の epoch time ： 1970/01/01 00:00:00.000 からカウントされた時間（ミリ秒単位）
+
+サーバは最初の引数で供給されているポートをリッスンします。
 
 ----------------------------------------------------------------------
-## HINTS
+## ヒント
 
-The `request` object from an HTTP server has a `url` property that you will need to use to *"route"* your requests for the two endpoints.
+リクエストごとに正しいエンドポイントを選択するために `request` オブジェクトの `url` プロパティを使ってください。
 
-You can parse the URL and query string using the Node core 'url' module. `url.parse(request.url, true)` will parse content of request.url and provide you with an object with helpful properties.
+クエリを URL からをパースするためには Node.js のコアモジュール `url` が役に立ちます。`url.parse(request.url, true)` は `request.url` のコンテンツを解釈して有用なオブジェクトを返します。
 
-For example, on the command prompt, type:
+例としてコマンドラインで以下を実行してみてください：
 
 ```sh
 $ node -pe "require('url').parse('/test?q=1', true)"
 ```
 
-Documentation on the `url` module can be found by pointing your browser here:
+`url` のモジュールドキュメントはブラウザーを使ってこのリンクにアクセスできます:
   {rootdir:/node_apidoc/url.html}
-  
-Your response should be in a JSON string format. Look at `JSON.stringify()` for more information.
+ 
+サーバからのレスポンスは JSON 文字列の形式にしてください。`JSON.stringify()` について調べたほうがよいです。
 
-You should also be a good web citizen and set the Content-Type properly:
+良いインターネットの住民になるために Content-Type ヘッダーをつけてください：
 
 ```js
 res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
-The JavaScript `Date` object can print dates in ISO format, e.g. `new Date().toISOString()`. It can also parse this format if you pass the string into the `Date` constructor. `Date#getTime()` will also
-come in handy.
+JavaScript の `Date` オブジェクトは ISO 形式で出力できます。例えば：`new Date().toISOString()` を使って。
+逆に、`Date` のオブジェクトを作るときには ISO の時間形式も解釈できます。例えば： `new Date(isoString)` 。 `Date#getTime()` も役に立つと思います。
 
 ----------------------------------------------------------------------

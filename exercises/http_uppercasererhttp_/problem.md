@@ -1,15 +1,15 @@
-Write an HTTP **server** that receives only POST requests and converts incoming POST body characters to upper-case and returns it to the client.
+POSTリクエストで渡される文字列を大文字に書き換えて返す HTTP の**サーバ** を書いてください。
 
-Your server should listen on the port provided by the first argument to your program.
+サーバは最初の引数で供給されているポートをリッスンします。
 
 ----------------------------------------------------------------------
-## HINTS
+## ヒント
 
-While you're not restricted to using the streaming capabilities of the `request` and `response` objects, it will be much easier if you do.
+`request` や `response` オブジェクトを使う必要はありませんが使ったら楽になると思います。
 
-There are a number of different packages in npm that you can use to *"transform"* stream data as it's passing through. For this exercise the `through2-map` package offers the simplest API.
+Streamのデータを途中で書き換えるためには npm に色々なパッケージがあります。この問題のためには `through2-map` と言うパッケージが一番簡単です。
 
-`through2-map` allows you to create a *transform stream* using only a single function that takes a chunk of data and returns a chunk of data. It's designed to work much like `Array#map()` but for streams:
+`through2-map` が提供する関数を使うと、簡単に新しい「transform stream」が作成できます。`Array#map()` の Stream バーションと考えてよいです：
 
 ```js
 var map = require('through2-map')
@@ -18,20 +18,24 @@ inStream.pipe(map(function (chunk) {
 })).pipe(outStream)
 ```
 
-In the above example, the incoming data from `inStream` is converted to a String (if it isn't already), the characters are reversed and the result is passed through to `outStream`. So we've made a chunk character reverser! Remember though that the chunk size is determined up-stream and you have little control over it for incoming data.
+上記の例では `inStream` のデータを使って文字列を逆順に並び替えて `outStream` に書き出しています。
+入っているチャンクサイズがコントロールできないのを忘れないでください。
 
-To install `through2-map` type:
+`through2-map` をインストールするために以下をコマンドラインに書いてください：
 
 ```sh
 $ npm install through2-map
 ```
 
-If you don't have an Internet connection, simply make a `node_modules` directory and copy the entire directory for the module you want to use from inside the {appname} installation directory:
+インタネットのコネクションがない場合は `node_modules` に {rootdir:/node_modules} のフォルダのパッケージをコピーしてください。
 
   {rootdir:/node_modules/through2-map}
 
-Documentation for through2-map has been installed along with {appname} on your system and you can read them by pointing your browser here:
+`through2-map` のモジュールドキュメントは {appname} と一緒にインストールされてブラウザーを使ってこのリンクにアクセスできます:
 
   {rootdir:/docs/through2-map.html}
 
 ----------------------------------------------------------------------
+
+
+

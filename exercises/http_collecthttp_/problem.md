@@ -1,39 +1,40 @@
-Write a program that performs an HTTP GET request to a URL provided to you as the first command-line argument. Collect **all** data from the server (not just the first "data" event) and then write two lines to the console (stdout).
+一つ目のコマンドラインの引数が URL 文字列である、 HTTP のデーターをロード (※)するアプリを書いてください。サーバからの**全て**（初めてのイベントだけじゃなくて）のデータを集めて二行をコンソールに書き出してください。
 
-The first line you write should just be an integer representing the number of characters received from the server and the second line should contain the complete String of characters sent by the server.
+一行目は文字数です。二行目はサーバから受け取った全てのデータを文字列で出力してください。
 
 ----------------------------------------------------------------------
-## HINTS
+## ヒント
 
-There are two approaches you can take to this problem: 
+この問題は二つの方法があります：
 
-**1)** Collect data across multiple "data" events and append the results together prior to printing the output. Use the "end" event to determine when the stream is finished and you can write the output.
+**1)** 全ての `data` イベントの結果を集めて `end` イベントの時に書き出してください。
 
-**2)** Use a third-party package to abstract the difficulties involved in collecting an entire stream of data. Two different packages provide a useful API for solving this problem (there are likely more!): `bl` (Buffer List) and `concat-stream`; take your pick!
+**2)** 問題が少なくなるようにサードパーティのパッケージを使ってもいいです。以下の二つのパッケージはこの問題に関して役に立ちます。 `bl` (Buffer List) や `concat-stream`。いずれかを選んでください。
 
   <http://npm.im/bl>
   <http://npm.im/concat-stream>
 
-To install a Node package, use the Node Package Manager `npm`. Simply type:
+Node.js のパッケージをインストールために Node.js のパッケージ管理ツールである `npm`を使ってください。コマンドラインに以下を書いてください：
 
 ```sh
 $ npm install bl
 ```
 
-And it will download and install the latest version of the package into a subdirectory named `node_modules`. Any package in this subdirectory under your main program file can be loaded with the `require` syntax without being prefixed by './':
+上記を実行すると、指定されたパッケージの一番新しいバーションをダウンロードして `node_modules` という新しいフォルダに格納されます。そのフォルダにあるパッケージは `require` を使って `.` の接頭辞なしで利用できます：
 
 ```js
 var bl = require('bl')
 ```
 
-Node will first look in the core modules and then in the `node_modules` directory where the package is located.
+メモ： Node.js のロードの優先順位は、まずNode.jsのコア、その後は上述の `node_modules`のフォルダの順です。
 
-If you don't have an Internet connection, simply make a `node_modules` directory and copy the entire directory for the package you want to use from inside the {appname} installation directory:
+インターネットのコネクションがない場合には `node_modules` に{rootdir:/node_modules}のフォルダのパッケージをコピーしてください：
 
   {rootdir:/node_modules/bl}
   {rootdir:/node_modules/concat-stream}
 
-Both `bl` and `concat-stream` can have a stream *piped* in to them and they will collect the data for you. Once the stream has ended, a callback will be fired with the data:
+`bl` にも `concat-stream` にも `Stream` を入力として *pipe* (※) できます。以下の例では`Stream` が終わってからコールバックが呼ばれています：
+※ pipe: Stream中に流れるデータが次々と橋渡しされる関数を登録すること。
 
 ```js
 response.pipe(bl(function (err, data) { /* ... */ }))
@@ -41,11 +42,14 @@ response.pipe(bl(function (err, data) { /* ... */ }))
 response.pipe(concatStream(function (data) { /* ... */ }))
 ```
 
-Note that you will probably need to `data.toString()` to convert from a Buffer.
+メモ：もしかしたら `Buffer` から `data.toString()` をつかって文字列に変える必要があるかもしれません。
 
-Documentation for both of these modules has been installed along with {appname} on your system and you can read them by pointing your browser here:
+両方のモジュールドキュメントは `{appname}` と一緒にインストールされてブラウザーを使ってこのリンクにアクセスできます:
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
 
 ----------------------------------------------------------------------
+
+
+

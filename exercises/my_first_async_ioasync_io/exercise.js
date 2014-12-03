@@ -57,10 +57,10 @@ exercise.addVerifyProcessor(function (callback) {
   Object.keys(exercise.wrapData.fsCalls).forEach(function (m) {
     if (/Sync$/.test(m)) {
       usedSync = true
-      this.emit('fail', 'SYNCのメソードが使われています: fs.' + m + '()')
+      this.emit('fail', 'SYNCの関数が使われています: fs.' + m + '()')
     } else {
       usedAsync = true
-      this.emit('pass', 'ASYNCのメソードが使われています: fs.' + m + '()')
+      this.emit('pass', 'ASYNCの関数が使われています: fs.' + m + '()')
     }
   }.bind(this))
 

@@ -6,8 +6,8 @@ const workshopper = require('workshopper')
     , menu        = require('./exercises/menu')
 
     , name        = 'learnyounode'
-    , title       = 'LEARN YOU THE NODE.JS FOR MUCH WIN!'
-    , subtitle    = '\x1b[23mSelect an exercise and hit \x1b[3mEnter\x1b[23m to begin'
+    , title       = 'Node.jsを学んで豊かな人生を！'
+    , subtitle    = '\x1b[23m問題を選んで \x1b[3mEnter\x1b[23m 押してスタートお願いします：'
 
 
 function fpath (f) {
