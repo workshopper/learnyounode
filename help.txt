@@ -1,4 +1,4 @@
-{yellow}{bold}{appname} のワークショッパーの問題がありますか？{/bold}{/yellow}
+{yellow}{bold}{appname} のワークショッパーに対して質問がありますか？{/bold}{/yellow}
 
   エキスパートのチームはあなたの質問を待っています。あなたもNode.jsのマスターになるようにここに質問({bold}New Issue{/bold})を出してください:
     https://github.com/nodeschool/discussions/issues
@@ -7,7 +7,7 @@
   一般的にNode.jsのヘルプが必要であればNode.jsの日本のグーグルグループがあります：
     https://groups.google.com/forum/#!forum/nodejs_jp
 
-{yellow}{bold}{appname}のバグが見つける場合または貢献したい場合：{/bold}{/yellow}
+{yellow}{bold}{appname}のバグが見つかった場合または貢献したい場合：{/bold}{/yellow}
 
   {appname}のリポシトリはここにあります:
     https://github.com/maxogden/learnyounode-jp/
