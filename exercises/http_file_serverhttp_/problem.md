@@ -32,7 +32,7 @@ var server = http.createServer(function (req, res) {
 server.listen(8000)
 ```
 
-`http` のモジュールドキュメントはブラウザーを使ってこのリンクにアクセスできます:
+`http` モジュールのドキュメントはブラウザーでこのリンクを見てください:
   {rootdir:/node_apidoc/http.html}
 
 
