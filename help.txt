@@ -1,14 +1,14 @@
 {yellow}{bold}{appname} のワークショッパーに対して質問がありますか？{/bold}{/yellow}
 
-  エキスパートのチームはあなたの質問を待っています。あなたもNode.jsのマスターになるようにここに質問({bold}New Issue{/bold})を出してください:
+  エキスパートチームはあなたの質問を待っています。あなたもNode.jsのマスターになれるようにここに質問({bold}New Issue{/bold})を出してください:
     https://github.com/nodeschool/discussions/issues
-  いい質問しかありません。なんでもどうぞ！
+  どんな質問でもどうぞ！
 
-  一般的にNode.jsのヘルプが必要であればNode.jsの日本のグーグルグループがあります：
+  一般的なNode.jsのヘルプが必要であればNode.jsの日本のグーグルグループがあります：
     https://groups.google.com/forum/#!forum/nodejs_jp
 
 {yellow}{bold}{appname}のバグが見つかった場合または貢献したい場合：{/bold}{/yellow}
 
   {appname}のリポシトリはここにあります:
     https://github.com/maxogden/learnyounode-jp/
-  バグリクエストやPullリクエストはいつでもどうぞ
+  バグリクエストやPullリクエストはいつでもどうぞ！

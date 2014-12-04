@@ -1,4 +1,4 @@
-{yellow}{bold}learnyounode はこの頑張っているメンバが作りました：{/bold}{/yellow}
+{yellow}{bold}learnyounode はこの頑張っているメンバーが作りました：{/bold}{/yellow}
 
 {bold}Name                GitHub Username{/bold}
 -----------------------------------
