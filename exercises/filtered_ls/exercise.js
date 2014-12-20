@@ -8,8 +8,7 @@ var fs            = require('fs')
   , wrappedexec   = require('workshopper-wrappedexec')
   , after         = require('after')
   , rimraf        = require('rimraf')
-  , verify        = require('./verify')
-  , files         = require('../filtered_lsls/file-list')
+  , files         = require('./file-list')
 
   , testDir       = path.join(os.tmpDir(), '_learnyounode_' + process.pid)
 
@@ -27,18 +26,14 @@ exercise = comparestdout(exercise)
 // mess with the global environment and inspect execution
 exercise = wrappedexec(exercise)
 
-// modules we want run just prior to the submission in the
+// a module we want run just prior to the submission in the
 // child process
-exercise.wrapModule(require.resolve('../my_first_ioio/wrap'))
-exercise.wrapModule(require.resolve('./wrap-requires'))
+exercise.wrapModule(require.resolve('../my_first_io/wrap'))
 
 
 // set up the data file to be passed to the submission
 exercise.addSetup(function (mode, callback) {
   // mode == 'run' || 'verify'
-
-  // store for later use by verify()
-  this._testDir = testDir
 
   // supply the dir and extensions as args to the 'execute' processor for both
   // solution and submission spawn()
@@ -68,7 +63,25 @@ exercise.addSetup(function (mode, callback) {
 
 
 // add a processor only for 'verify' calls
-exercise.addVerifyProcessor(verify)
+exercise.addVerifyProcessor(function (callback) {
+  var usedSync  = false
+    , usedAsync = false
+
+  Object.keys(exercise.wrapData.fsCalls).forEach(function (m) {
+    if (/Sync$/.test(m)) {
+      usedSync = true
+      this.emit('fail', 'SYNCの関数を使われています: fs.' + m + '()')
+    } else {
+      usedAsync = true
+      this.emit('pass', 'ASYNCの関数が使われています: fs.' + m + '()')
+    }
+  }.bind(this))
+
+  if (!usedSync && !usedAsync) // https://github.com/nodeschool/discussions/issues/356
+    this.emit('fail', '`fs`のモジュールのASYNC関数を使われています')
+
+  callback(null, usedAsync && !usedSync)
+})
 
 
 // cleanup for both run and verify

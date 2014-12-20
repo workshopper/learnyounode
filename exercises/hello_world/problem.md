@@ -1,26 +1,27 @@
-コンソール (stdout) に ```"こんにちは世界"``` と出力するアプリを書いてください。
+Write a program that prints the text "HELLO WORLD" to the console (stdout).
 
 ----------------------------------------------------------------------
-## ヒント
+## HINTS
 
-Node.js のアプリを作るには `.js` のついた新規ファイルを作って JavaScript を書くだけです。書いた後は `node` コマンドを使って実行します。例えば：
+To make Node.js program, create a new file with a `.js` extension and start writing JavaScript! Execute your program by running it with the
+`node` command. e.g.:
 
 ```sh
 $ node program.js
 ```
 
-このファイルにはブラウザと同じように JavaScript が書けます。
+You can write to the console in the same way as in the browser:
 
 ```js
 console.log("text")
 ```
 
-アプリができたら以下のコマンドを実行してください：
+When you are done, you must run:
 
 ```sh
 $ {appname} verify program.js
 ```
 
-これを実行するとテストが動きます。プログラムが正しく書けていればこのステップが **Completed** になります。
+to proceed. Your program will be tested, a report will be generated, and the lesson will be marked 'completed' if you are successful.
 
 ----------------------------------------------------------------------

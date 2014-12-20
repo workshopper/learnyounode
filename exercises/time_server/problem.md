@@ -1,35 +1,31 @@
-**TCPのタイムサーバ**を書いてください！
+Write a **TCP time server**!
 
-サーバは最初の引数で供給されているポートをリッスンするサーバです。それぞれのコネクションに今の日付と時間24時間表記）を返してください。
+Your server should listen to TCP connections on the port provided by the first argument to your program. For each connection you must write the current date & 24 hour time in the format:
 
 ```
 "YYYY-MM-DD hh:mm"
 ```
 
-その後は改行です。月、日、時間や分は２桁にゼロパディング(※)してください。例：
+followed by a **newline** character. Month, day, hour and minute must be *zero-filled* to 2 integers. For example:
 
 ```
 "2013-07-06 17:42"
 ```
 
-※ ゼロパディング：足りない桁を0で埋める事。例えば `1` を2桁にする場合は `01` となります。
-
 ----------------------------------------------------------------------
-## ヒント
+## HINTS
 
-この例題のために生の TCP サーバを書いてください。 HTTP 専用の TCP は使っていないので Node.js の `net` モジュールが必要になります。 `net` モジュールには全ての基本的なネットワーキング機能が含まれます。
+For this exercise we'll be creating a raw TCP server. There's no HTTP involved here so we need to use the `net` module from Node core which has all the basic networking functions.
 
-`net` にはイベントハンドラのような関数を引数に取る `net.createServer()` という関数があります。引数が関数のみでイベント名が無いのでコールバックのようですが、コールバックと違って何回も呼ばれます。それぞれの接続が確立するごとに引数に定義した関数が呼ばれます。
-
-一般的なイベントハンドラ用関数の例：
+The `net` module has a method named `net.createServer()` that takes a callback function. Unlike most callbacks in Node, the callback used by `createServer()` is called more than once. Every connection received by your server triggers another call to the callback. The callback function has the signature:
 
 ```js
-function handler (eventData) { /* ... */ }
+function callback (socket) { /* ... */ }
 ```
 
-`net.createServer()` もサーバのオブジェクトを返しています。特定のポートをリッスンするためは `server.listen(portNumber)` を呼んでください。
+`net.createServer()` also returns an instance of your `server`. You must call `server.listen(portNumber)` to start listening on a particular port.
 
-一般的な Node.js の TCP サーバはこのように記述されています：
+A typical Node TCP server looks like this:
 
 ```js
 var net = require('net')
@@ -39,26 +35,26 @@ var server = net.createServer(function (socket) {
 server.listen(8000)
 ```
 
-ポート番号としてコマンドラインの一つ目の引数を使いましょう。忘れないでください！
+Remember to use the port number supplied to you as the first command-line argument.
 
-`socket` と言うオブジェクトに色々な meta のデータが含まれます。ただ、その `socket` は読み書きもできます。 読み書きStream は`duplex Stream` と言われています。今回の問題はデータを送信して接続を閉じるだけです。
+The `socket` object contains a lot of meta-data regarding the connection, but it is also a Node duplex Stream, in that it can be both read from, and written to. For this exercise we only need to write data and then close the socket.
 
-`socket.write(data)` を使ってデータが送り出せます。`socket.end()` はその Socket (接続)を閉じます。`.end()` は任意で引数を一つ取ることができます。その引数は `.write` と同じく data ですので、`socket.end(data)` などとするとコードが簡単なると思います。 
+Use `socket.write(data)` to write data to the socket and `socket.end()` to close the socket. Alternatively, the `.end()` method also takes a data object so you can simplify to just: `socket.end(data)`.
 
-`net` モジュールのドキュメントはブラウザーでこのリンクを見てください:
+Documentation on the `net` module can be found by pointing your browser here:
 
   {rootdir:/node_apidoc/net.html}
 
-問題に書いてあった通り `new Date()` の日付を整形する必要があります。`date` には色々な役に立つ関数があります：
+To create the date, you'll need to create a custom format from a `new Date()` object. The methods that will be useful are:
 
 ```js
 date.getFullYear()
-date.getMonth()     // 0からスタートしています
-date.getDate()      // 月の日
+date.getMonth()     // starts at 0
+date.getDate()      // returns the day of month
 date.getHours()
 date.getMinutes()
 ```
 
-また、 `strftime` というnpmパッケージには、 Unix の `date` 関数と同じフォーマットで日付を整形可能な機能 `strftime(fmt, date)` があります。 `strftime' のドキュメントは次のURLを参照してください。：https://github.com/samsonjs/strftime
+Or, if you want to be adventurous, use the `strftime` package from npm. The `strftime(fmt, date)` function takes date formats just like the unix `date` command. You can read more about strftime at: https://github.com/samsonjs/strftime
 
 ----------------------------------------------------------------------

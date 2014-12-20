@@ -1,7 +1,7 @@
 const fs    = require('fs')
     , path  = require('path')
     , util  = require('util')
-    , files = require('../filtered_lsls/file-list')
+    , files = require('../filtered_ls/file-list')
     , chalk = require('chalk')
 
 function validateModule (modFile, callback) {

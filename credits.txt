@@ -1,7 +1,3 @@
-{yellow}{bold}learnyounode はこの頑張っているメンバーが作りました：{/bold}{/yellow}
-
-{bold}Name                GitHub Username{/bold}
------------------------------------
 Rod Vagg            @rvagg
 Andrey Sidorov      @sidorares
 Julian Duque        @julianduque‎

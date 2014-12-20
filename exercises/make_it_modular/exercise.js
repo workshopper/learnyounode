@@ -1,15 +1,17 @@
 var fs            = require('fs')
   , path          = require('path')
   , os            = require('os')
-  , rimraf        = require('rimraf')
   , exercise      = require('workshopper-exercise')()
   , filecheck     = require('workshopper-exercise/filecheck')
   , execute       = require('workshopper-exercise/execute')
   , comparestdout = require('workshopper-exercise/comparestdout')
   , wrappedexec   = require('workshopper-wrappedexec')
-  , boganipsum    = require('boganipsum')
+  , after         = require('after')
+  , rimraf        = require('rimraf')
+  , verify        = require('./verify')
+  , files         = require('../filtered_ls/file-list')
 
-  , testFile      = path.join(os.tmpDir(), '_learnyounode_' + process.pid + '.txt')
+  , testDir       = path.join(os.tmpDir(), '_learnyounode_' + process.pid)
 
 
 // checks that the submission file actually exists
@@ -25,54 +27,55 @@ exercise = comparestdout(exercise)
 // mess with the global environment and inspect execution
 exercise = wrappedexec(exercise)
 
-// a module we want run just prior to the submission in the
+// modules we want run just prior to the submission in the
 // child process
-exercise.wrapModule(require.resolve('../my_first_ioio/wrap'))
+exercise.wrapModule(require.resolve('../my_first_io/wrap'))
+exercise.wrapModule(require.resolve('./wrap-requires'))
 
 
 // set up the data file to be passed to the submission
 exercise.addSetup(function (mode, callback) {
   // mode == 'run' || 'verify'
 
-  var lines = Math.ceil(Math.random() * 50)
-    , txt   = boganipsum({ paragraphs: lines })
+  // store for later use by verify()
+  this._testDir = testDir
 
-  // supply the file as an arg to the 'execute' processor for both
+  // supply the dir and extensions as args to the 'execute' processor for both
   // solution and submission spawn()
   // using unshift here because wrappedexec needs to use additional
   // args to do its magic
-  this.submissionArgs.unshift(testFile)
-  this.solutionArgs.unshift(testFile)
+  this.submissionArgs.unshift('md')
+  this.submissionArgs.unshift(testDir)
+  this.solutionArgs.unshift('md')
+  this.solutionArgs.unshift(testDir)
 
-  // file with random text
-  fs.writeFile(testFile, txt, 'utf8', callback)
+  fs.mkdir(testDir, function (err) {
+    if (err)
+      return callback(err)
+
+    var done = after(files.length, callback)
+
+    files.forEach(function (f) {
+      fs.writeFile(
+          path.join(testDir, f)
+        , 'nothing to see here'
+        , 'utf8'
+        , done
+      )
+    })
+  })
 })
 
 
 // add a processor only for 'verify' calls
-exercise.addVerifyProcessor(function (callback) {
-  var usedSync  = false
-    , usedAsync = false
-
-  Object.keys(exercise.wrapData.fsCalls).forEach(function (m) {
-    if (/Sync$/.test(m)) {
-      usedSync = true
-      this.emit('fail', 'SYNCの関数が使われています: fs.' + m + '()')
-    } else {
-      usedAsync = true
-      this.emit('pass', 'ASYNCの関数が使われています: fs.' + m + '()')
-    }
-  }.bind(this))
-
-  callback(null, usedAsync && !usedSync)
-})
+exercise.addVerifyProcessor(verify)
 
 
 // cleanup for both run and verify
 exercise.addCleanup(function (mode, passed, callback) {
   // mode == 'run' || 'verify'
 
-  rimraf(testFile, callback)
+  rimraf(testDir, callback)
 })
 
 

@@ -1,0 +1,22 @@
+{
+      "title"    : "Node.jsを学んで豊かな人生を！"
+    , "subtitle" : "\u001b[23m問題を選んで \u001b[3mEnter\u001b[23m 押してスタートお願いします："
+	, "exercise" : {
+		"HELLO WORLD": "こんにちは世界"
+	  , "BABY STEPS": "ベイビーステップ"
+	  , "MY FIRST I/O!": "初めてのI/O！"
+	  , "MY FIRST ASYNC I/O!": "初めての非同期I/O！"
+	  , "FILTERED LS": "LSのフィルター"
+	  , "MAKE IT MODULAR": "モジュラーにしましょう"
+	  , "HTTP CLIENT": "HTTP クライアント"
+	  , "HTTP COLLECT": "HTTP 集める"
+	  , "JUGGLING ASYNC": "ASYNCジャグリング"
+	  , "TIME SERVER": "タイムサーバ"
+	  , "HTTP FILE SERVER": "HTTP ファイルサーバ"
+	  , "HTTP UPPERCASERER": "HTTP アッパーケース"
+	  , "HTTP JSON API SERVER": "HTTP JSON API サーバ"
+	}
+	, "menu": {
+		"credits": "クレジット"
+	}
+}

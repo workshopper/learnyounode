@@ -1,32 +1,32 @@
-引数に与えた数字を合計してコンソール(stdout)に出力するコマンドラインアプリを書いてください。
+Write a program that accepts one or more numbers as command-line arguments and prints the sum of those numbers to the console (stdout).
 
 ----------------------------------------------------------------------
-## ヒント
+## HINTS
 
-コマンドライン引数を読むためにはグローバル変数の `process` というオブジェクトが使えます。`process` は `argv` という `Array` を持っています。その `Array` のなかには全てのコマンドラインが入っています。例： `process.argv`
+You can access command-line arguments via the global `process` object. The `process` object has an `argv` property which is an array containing the complete command-line. i.e. `process.argv`.
 
-新しいアプリ `(program.js)` にこれを書いてスタートしてください：
+To get started, write a program that simply contains:
 
 ```js
 console.log(process.argv)
 ```
 
-コマンドラインに `node program.js` を入力してアプリを実行します。引数も使えます！ 例:
+Run it with `node program.js` and some numbers as arguments. e.g:
 
 ```sh
 $ node program.js 1 2 3
 ```
 
-実行するとこのように出力されるはずです:
+In which case the output would be an array looking something like:
 
 ```js
-[ 'node', '/あなた/の/アプリ/フォルダ/program.js', '1', '2', '3' ]
+[ 'node', '/path/to/your/program.js', '1', '2', '3' ]
 ```
 
-次のステップでは数値だけを合計して表示する方法を考えます。`argv` の一つ目の引数はいつでも `node` です。二つ目の引数はいつもあなたのアプリファイルのパスです。なので三つ目の引数からスタートしないといけません。それぞれの要素を最後の要素まで合計してください。
+You'll need to think about how to loop through the number arguments so  you can output just their sum. The first element of the process.argv array is always 'node', and the second element is always the path to your program.js file, so you need to start at the 3rd element (index 2), adding each item to the total until you reach the end of the array.
 
-`process.argv` の要素は全て string ですので注意してください。もしかしたら数字への変換が必要になるかもしれません。変換するには、数字の前に `+` を書きます。`Number()`を使う方法もあります。例: `+process.argv[2]` または `Number(process.argv[2])` 。
+Also be aware that all elements of `process.argv` are strings and you may need to *coerce* them into numbers. You can do this by prefixing the property with `+` or passing it to `Number()`. e.g. `+process.argv[2]` or `Number(process.argv[2])`.
 
-`{appname} verify program.js` で、アプリが正しく動くかどうか確かめられます。{appname} はあなたのアプリの実行時に引数を渡します。単純にアプリを実行する方法もあります： `{appname} run program.js`。 `run` を使うと各ステップのためのテスト設定を呼び出して実行することが出来ます。
+{appname} will be supplying arguments to your program when you run `{appname} verify program.js` so you don't need to supply them yourself. To test your program without verifying it, you can invoke it with `{appname} run program.js`. When you use `run`, you are invoking the test environment that {appname} sets up for each exercise.
 
 ----------------------------------------------------------------------

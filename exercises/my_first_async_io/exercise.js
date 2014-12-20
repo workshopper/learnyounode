@@ -1,16 +1,15 @@
 var fs            = require('fs')
   , path          = require('path')
   , os            = require('os')
+  , rimraf        = require('rimraf')
   , exercise      = require('workshopper-exercise')()
   , filecheck     = require('workshopper-exercise/filecheck')
   , execute       = require('workshopper-exercise/execute')
   , comparestdout = require('workshopper-exercise/comparestdout')
   , wrappedexec   = require('workshopper-wrappedexec')
-  , after         = require('after')
-  , rimraf        = require('rimraf')
-  , files         = require('./file-list')
+  , boganipsum    = require('boganipsum')
 
-  , testDir       = path.join(os.tmpDir(), '_learnyounode_' + process.pid)
+  , testFile      = path.join(os.tmpDir(), '_learnyounode_' + process.pid + '.txt')
 
 
 // checks that the submission file actually exists
@@ -28,37 +27,25 @@ exercise = wrappedexec(exercise)
 
 // a module we want run just prior to the submission in the
 // child process
-exercise.wrapModule(require.resolve('../my_first_ioio/wrap'))
+exercise.wrapModule(require.resolve('../my_first_io/wrap'))
 
 
 // set up the data file to be passed to the submission
 exercise.addSetup(function (mode, callback) {
   // mode == 'run' || 'verify'
 
-  // supply the dir and extensions as args to the 'execute' processor for both
+  var lines = Math.ceil(Math.random() * 50)
+    , txt   = boganipsum({ paragraphs: lines })
+
+  // supply the file as an arg to the 'execute' processor for both
   // solution and submission spawn()
   // using unshift here because wrappedexec needs to use additional
   // args to do its magic
-  this.submissionArgs.unshift('md')
-  this.submissionArgs.unshift(testDir)
-  this.solutionArgs.unshift('md')
-  this.solutionArgs.unshift(testDir)
+  this.submissionArgs.unshift(testFile)
+  this.solutionArgs.unshift(testFile)
 
-  fs.mkdir(testDir, function (err) {
-    if (err)
-      return callback(err)
-
-    var done = after(files.length, callback)
-
-    files.forEach(function (f) {
-      fs.writeFile(
-          path.join(testDir, f)
-        , 'nothing to see here'
-        , 'utf8'
-        , done
-      )
-    })
-  })
+  // file with random text
+  fs.writeFile(testFile, txt, 'utf8', callback)
 })
 
 
@@ -70,15 +57,12 @@ exercise.addVerifyProcessor(function (callback) {
   Object.keys(exercise.wrapData.fsCalls).forEach(function (m) {
     if (/Sync$/.test(m)) {
       usedSync = true
-      this.emit('fail', 'SYNCの関数を使われています: fs.' + m + '()')
+      this.emit('fail', 'SYNCの関数が使われています: fs.' + m + '()')
     } else {
       usedAsync = true
       this.emit('pass', 'ASYNCの関数が使われています: fs.' + m + '()')
     }
   }.bind(this))
-
-  if (!usedSync && !usedAsync) // https://github.com/nodeschool/discussions/issues/356
-    this.emit('fail', '`fs`のモジュールのASYNC関数を使われています')
 
   callback(null, usedAsync && !usedSync)
 })
@@ -88,7 +72,7 @@ exercise.addVerifyProcessor(function (callback) {
 exercise.addCleanup(function (mode, passed, callback) {
   // mode == 'run' || 'verify'
 
-  rimraf(testDir, callback)
+  rimraf(testFile, callback)
 })
 
 
