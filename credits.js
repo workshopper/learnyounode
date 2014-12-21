@@ -10,7 +10,7 @@ function read (file) {
 function credits (workshopper) {
   combinedStream
     .create()
-    .append(read ('./credits.' + workshopper.lang + '.txt'))
+    .append(read ('./i18n/credits/' + workshopper.lang + '.txt'))
     .append(read ('./credits.txt'))
     .on("error", function (err) {
       console.log(err)

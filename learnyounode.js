@@ -12,7 +12,7 @@ workshopper({
       name        : 'learnyounode'
     , appDir      : __dirname
     , langs       : ['en', 'ja']
-    , helpFile    : fpath('./help.{lang}.txt')
+    , helpFile    : fpath('./i18n/help/{lang}.txt')
     , menuItems   : [ {
           name    : 'credits'
         , handler : credits
