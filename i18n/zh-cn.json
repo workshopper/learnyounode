@@ -1,3 +1,22 @@
 {
-      "subtitle" : "\u001b[23m选择一个练习，按 \u001b[3m回车\u001b[23m开始"
+	  "title"    : "LEARN YOU THE NODE.JS FOR MUCH WIN!"
+	, "subtitle" : "\u001b[23m选择一个练习，按 \u001b[3m回车\u001b[23m开始"
+	, "exercise" : {
+		"HELLO WORLD": "HELLO WORLD"
+	  , "BABY STEPS": "BABY STEPS"
+	  , "MY FIRST I/O!": "MY FIRST I/O!"
+	  , "MY FIRST ASYNC I/O!": "MY FIRST ASYNC I/O!"
+	  , "FILTERED LS": "FILTERED LS"
+	  , "MAKE IT MODULAR": "MAKE IT MODULAR"
+	  , "HTTP CLIENT": "HTTP CLIENT"
+	  , "HTTP COLLECT": "HTTP COLLECT"
+	  , "JUGGLING ASYNC": "JUGGLING ASYNC"
+	  , "TIME SERVER": "TIME SERVER"
+	  , "HTTP FILE SERVER": "HTTP FILE SERVER"
+	  , "HTTP UPPERCASERER": "HTTP UPPERCASERER"
+	  , "HTTP JSON API SERVER": "HTTP JSON API SERVER"
+	}
+	, "menu": {
+		"credits": "CREDITS"
+	}
 }
