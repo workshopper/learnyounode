@@ -54,13 +54,13 @@ exercise.addVerifyProcessor(function (callback) {
   var usedSync  = false
     , usedAsync = false
 
-  Object.keys(exercise.wrapData.fsCalls).forEach(function (m) {
+  Object.keys(exercise.wrapData.fsCalls || {}).forEach(function (m) {
     if (/Sync$/.test(m)) {
       usedSync = true
-      this.emit('pass', 'SYNCの関数が使われています: fs.' + m + '()')
+      this.emit('pass', this.__('pass.sync', {method: 'fs.' + m + '()'}))
     } else {
       usedAsync = true
-      this.emit('fail', 'ASYNCの関数が使われています: fs.' + m + '()')
+      this.emit('fail', this.__('fail.async', {method: 'fs.' + m + '()'}))
     }
   }.bind(this))
 

@@ -4,4 +4,16 @@
 	, "menu": {
 		"credits": "CREDITS"
 	}
+	, "common": {
+		"exercise": {
+			  "pass": {
+				  "sync": "Used synchronous method: {{{method}}}"
+				, "async": "Used asynchronous method: {{{method}}}"
+			}
+			, "fail": {
+				  "sync": "Used synchronous method: {{{method}}}"
+				, "async": "Used asynchronous method: {{{method}}}"
+			}
+		}
+	}
 }

@@ -19,4 +19,16 @@
 	, "menu": {
 		"credits": "クレジット"
 	}
+	, "common": {
+		"exercise": {
+			  "pass": {
+				  "sync": "SYNCの関数が使われています: {{{method}}}"
+				, "async": "ASYNCの関数が使われています: {{{method}}}"
+			}
+			, "fail": {
+				  "sync": "SYNCの関数が使われています: {{{method}}}"
+				, "async": "ASYNCの関数が使われています: {{{method}}}"
+			}
+		}
+	}
 }
