@@ -70,15 +70,15 @@ exercise.addVerifyProcessor(function (callback) {
   Object.keys(exercise.wrapData.fsCalls).forEach(function (m) {
     if (/Sync$/.test(m)) {
       usedSync = true
-      this.emit('fail', 'SYNCの関数を使われています: fs.' + m + '()')
+      this.emit('fail', this.__('fail.sync', {method: 'fs.' + m + '()'}))
     } else {
       usedAsync = true
-      this.emit('pass', 'ASYNCの関数が使われています: fs.' + m + '()')
+      this.emit('pass', this.__('pass.sync', {method: 'fs.' + m + '()'}))
     }
   }.bind(this))
 
   if (!usedSync && !usedAsync) // https://github.com/nodeschool/discussions/issues/356
-    this.emit('fail', '`fs`のモジュールのASYNC関数を使われています')
+    this.emit('fail', this.__('fail.unused'))
 
   callback(null, usedAsync && !usedSync)
 })
