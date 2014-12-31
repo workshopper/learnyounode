@@ -83,11 +83,12 @@ function query (mode) {
 
   function connect (port, stream) {
     //TODO: introduce verification of content-type:text/plain and statusCode=200
-    hyperquest.get('http://localhost:' + port)
+    var url = 'http://localhost:' + port
+    hyperquest.get(url)
       .on('error', function (err) {
         exercise.emit(
             'fail'
-          , 'Error connecting to http://localhost:' + port + ': ' + err.message
+          , exercise.__('fail.connection', {address: url, message: err.message})
         )
       })
       .pipe(stream)
@@ -104,7 +105,7 @@ function query (mode) {
 exercise.addVerifyProcessor(function (callback) {
   var exercise = this
     , badCalls = Object.keys(exercise.wrapData.fsCalls).filter(function (m) {
-        exercise.emit('fail', 'Used fs method other than fs.createReadStream(): fs.' + m + '()')
+        exercise.emit('fail', exercise.__('fail.no_createReadStream', {method: 'fs.' + m + '()'}))
         return !(/createReadStream/).test(m)
       })
 

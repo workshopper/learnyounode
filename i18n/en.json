@@ -15,6 +15,7 @@
 				, "async": "Used asynchronous method: {{{method}}}"
 				, "unused": "Used asynchronous method from the `fs` module."
 				, "unexpected_error": "Unexpected error from HTTP server: {{{message}}}"
+				, "connection": "Error connecting to {{{address}}}: {{{message}}}"
 			}
 		}
 	}
@@ -56,6 +57,11 @@
 		, "TIME SERVER": {
 			"fail": {
 				"connection": "Error connecting to localhost:{{port}}: {{{message}}}"
+			}
+		}
+		, "HTTP FILE SERVER": {
+			"fail": {
+				"no_createReadStream": "Used fs method other than fs.createReadStream(): {{{method}}}"
 			}
 		}
 	}
