@@ -19,7 +19,7 @@
 		}
 	}
 	, "exercises": {
-		"MAKE IT MODULAR": {
+		  "MAKE IT MODULAR": {
 			  "fail": {
 				  "missing_module": "Did not use an additional module file, you must require() a module to help solve this exercise"
 				, "loadError": "Error loading module file [{{path}}]: {{{message}}}"
@@ -51,6 +51,11 @@
 				, "array_argument": "Additional module file returned correct number of elements as the second argument of the callback"
 				, "array_size": "Additional module file returned correct number of elements as the second argument of the callback"
 				, "final": "Additional module file returned correct list of files as the second argument of the callback"
+			}
+		}
+		, "TIME SERVER": {
+			"fail": {
+				"connection": "Error connecting to localhost:{{port}}: {{{message}}}"
 			}
 		}
 	}

@@ -68,5 +68,10 @@
 				, "final": "Additional module file returned correct list of files as the second argument of the callback"
 			}
 		}
+		, "TIME SERVER": {
+			"fail": {
+				"connection": "Error connecting to localhost:{{port}}: {{{message}}}"
+			}
+		}
 	}
 }

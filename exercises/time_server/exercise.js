@@ -63,7 +63,7 @@ function query (mode) {
         setImmediate(function () {
           exercise.emit(
               'fail'
-            , 'Error connecting to localhost:' + port + ': ' + err.message
+            , exercise.__('fail.connection', {port: port, message: err.message})
           )
         })
       })
