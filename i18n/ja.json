@@ -29,6 +29,7 @@
 				  "sync": "SYNCの関数が使われています: {{{method}}}"
 				, "async": "ASYNCの関数が使われています: {{{method}}}"
 				, "unused": "`fs`のモジュールのASYNC関数を使われています"
+				, "unexpected_error": "HTTPサーバがエラーで閉じました: {{{message}}}"
 			}
 		}
 	}

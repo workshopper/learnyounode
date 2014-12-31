@@ -14,6 +14,7 @@
 				  "sync": "Used synchronous method: {{{method}}}"
 				, "async": "Used asynchronous method: {{{method}}}"
 				, "unused": "Used asynchronous method from the `fs` module."
+				, "unexpected_error": "Unexpected error from HTTP server: {{{message}}}"
 			}
 		}
 	}
