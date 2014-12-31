@@ -1,6 +1,6 @@
 {
-  "name": "learnyounode-jp",
-  "version": "1.0.15",
+  "name": "learnyounode",
+  "version": "2.0.0",
   "description": "Learn You The Node.js For Much Win! An intro to Node.js via a set of self-guided workshops.",
   "author": "Rod Vagg <rod@vagg.org> (https://github.com/rvagg)",
   "contributors": [
@@ -9,7 +9,8 @@
     "Julián Duque <julianduquej@gmail.com> (https://github.com/julianduque)",
     "Lars-Magnus Skog <lars.magnus.skog@gmail.com> (https://github.com/ralphtheninja)",
     "Tim Inman <tim.inman@gmail.com> (https://github.com/thehack)",
-    "Dan Flettre <fletd01@yahoo.com> (https://github.com/Flet)"
+    "Dan Flettre <fletd01@yahoo.com> (https://github.com/Flet)",
+    "Martin Heidegger <martin.heidegger@gmail.com> (https://github.com/martinheidegger)"
   ],
   "repository": {
     "type": "git",
