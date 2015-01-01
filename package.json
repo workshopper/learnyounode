@@ -10,11 +10,13 @@
     "Lars-Magnus Skog <lars.magnus.skog@gmail.com> (https://github.com/ralphtheninja)",
     "Tim Inman <tim.inman@gmail.com> (https://github.com/thehack)",
     "Dan Flettre <fletd01@yahoo.com> (https://github.com/Flet)",
-    "Martin Heidegger <martin.heidegger@gmail.com> (https://github.com/martinheidegger)"
+    "Martin Heidegger <martin.heidegger@gmail.com> (https://github.com/martinheidegger)",
+    "Fred Chien <cfsghost@gmail.com> (https://github.com/cfsghost)",
+    "雨蒼(Billy) <billy3321@gmail.com> (https://github.com/billy3321)"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/rvagg/learnyounode.git"
+    "url": "https://github.com/cfsghost/learnyounode.git#tanslation-zh-tw"
   },
   "license": "MIT",
   "dependencies": {
