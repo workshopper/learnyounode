@@ -2,36 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>process Node.js v0.10.24 Manual &amp; Documentation</title>
+  <title>process Node.js v0.10.35 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/process.html">
+  <script type="text/javascript" src="//use.typekit.net/mse5tqx.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
-<body class="alt apidoc" id="api-section-process">
-    <div id="intro" class="interior">
-        <a href="/" title="Go back to the home page">
-            <img id="logo" src="http://nodejs.org/images/logo-light.png" alt="node.js">
-        </a>
+<body class="alt apidoc int docs" id="docs">
+    <div id="nav">
+      <img id="logo" src="assets/logo.svg" alt="node.js">
+      <ul>
+        <li><a href="http://nodejs.org">Home</a></li>
+        <li><a href="http://nodejs.org/download/">Downloads</a></li>
+        <li class="active"><a href="http://nodejs.org/documentation/">Docs</a></li>
+        <li><a href="http://nodejs.org/community/">Community</a></li>
+        <li><a href="http://nodejs.org/about/">About</a></li>
+        <li><a href="http://jobs.nodejs.org">Jobs</a></li>
+        <li><a href="http://blog.nodejs.org">Blog</a></li>
+      </ul>
     </div>
+    <div id="content-wrap">
     <div id="content" class="clearfix">
-        <div id="column2" class="interior">
-            <ul>
-                <li><a href="/" class="home">Home</a></li>
-                <li><a href="/download/" class="download">Download</a></li>
-                <li><a href="/about/" class="about">About</a></li>
-                <li><a href="http://npmjs.org/" class="npm">npm Registry</a></li>
-                <li><a href="http://nodejs.org/api/" class="docs current">Docs</a></li>
-                <li><a href="http://blog.nodejs.org" class="blog">Blog</a></li>
-                <li><a href="/community/" class="community">Community</a></li>
-                <li><a href="/logos/" class="logos">Logos</a></li>
-                <li><a href="http://jobs.nodejs.org/" class="jobs">Jobs</a></li>
-            </ul>
-            <p class="twitter"><a href="http://twitter.com/nodejs">@nodejs</a></p>
-        </div>
-
+      <div id="column2" class="interior">
+        <!--<img src="/images/logo-light.svg" alt="node.js" width="170">-->
+        <ul class="docs-nav">
+          <li><a href="http://nodejs.org/documentation/">About Docs</a></li>
+          <li><a href="http://nodejs.org/documentation/tutorials/">Tutorials</a></li>
+          <li><a href="http://nodejs.org/documentation/contributing/">Contributing</a></li>
+          <li><a href="http://nodejs.org/documentation/localization/">Localization</a></li>
+          <li class="active"><a href="http://nodejs.org/api/">API Docs</a></li>
+        </ul>
+      </div>
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.35 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -97,20 +102,23 @@ It is an instance of <a href="events.html#events_class_events_eventemitter">Even
 
 </p>
 <h2>Event: &#39;exit&#39;<span><a class="mark" href="#process_event_exit" id="process_event_exit">#</a></span></h2>
-<p>Emitted when the process is about to exit.  This is a good hook to perform
-constant time checks of the module&#39;s state (like for unit tests).  The main
-event loop will no longer be run after the &#39;exit&#39; callback finishes, so
-timers may not be scheduled.
+<p>Emitted when the process is about to exit. There is no way to prevent the
+exiting of the event loop at this point, and once all <code>exit</code> listeners have
+finished running the process will exit. Therefore you <strong>must</strong> only perform
+<strong>synchronous</strong> operations in this handler. This is a good hook to perform
+checks on the module&#39;s state (like for unit tests). The callback takes one
+argument, the code the process is exiting with.
 
 </p>
 <p>Example of listening for <code>exit</code>:
 
 </p>
-<pre><code>process.on(&#39;exit&#39;, function() {
+<pre><code>process.on(&#39;exit&#39;, function(code) {
+  // do *NOT* do this
   setTimeout(function() {
     console.log(&#39;This will not run&#39;);
   }, 0);
-  console.log(&#39;About to exit.&#39;);
+  console.log(&#39;About to exit with code:&#39;, code);
 });</code></pre>
 <h2>Event: &#39;uncaughtException&#39;<span><a class="mark" href="#process_event_uncaughtexception" id="process_event_uncaughtexception">#</a></span></h2>
 <p>Emitted when an exception bubbles all the way back to the event loop. If a
@@ -191,9 +199,9 @@ about 10 seconds later. On non-Windows platforms, the default behaviour of
 <code>SIGHUP</code> is to terminate node, but once a listener has been installed its
 default behaviour will be removed.</li>
 <li><code>SIGTERM</code> is not supported on Windows, it can be listened on.</li>
-<li><code>SIGINT</code> is supported on all platforms, and can usually be generated with
-<code>CTRL+C</code> (though this may be configurable). It is not generated when terminal
-raw mode is enabled.</li>
+<li><code>SIGINT</code> from the terminal is supported on all platforms, and can usually be
+generated with <code>CTRL+C</code> (though this may be configurable). It is not generated
+when terminal raw mode is enabled.</li>
 <li><code>SIGBREAK</code> is delivered on Windows when <code>CTRL+BREAK</code> is pressed, on non-Windows
 platforms it can be listened on, but there is no way to send or generate it.</li>
 <li><code>SIGWINCH</code> is delivered when the console has been resized. On Windows, this will
@@ -203,8 +211,15 @@ readable tty is used in raw mode.</li>
 node on all platforms.</li>
 <li><code>SIGSTOP</code> cannot have a listener installed.</li>
 </ul>
+<p>Note that Windows does not support sending Signals, but node offers some
+emulation with <code>process.kill()</code>, and <code>child_process.kill()</code>:
+- Sending signal <code>0</code> can be used to search for the existence of a process
+- Sending <code>SIGINT</code>, <code>SIGTERM</code>, and <code>SIGKILL</code> cause the unconditional exit of the
+  target process.
+
+</p>
 <h2>process.stdout<span><a class="mark" href="#process_process_stdout" id="process_process_stdout">#</a></span></h2>
-<p>A <code>Writable Stream</code> to <code>stdout</code>.
+<p>A <code>Writable Stream</code> to <code>stdout</code> (on fd <code>1</code>).
 
 </p>
 <p>Example: the definition of <code>console.log</code>
@@ -214,11 +229,18 @@ node on all platforms.</li>
   process.stdout.write(d + &#39;\n&#39;);
 };</code></pre>
 <p><code>process.stderr</code> and <code>process.stdout</code> are unlike other streams in Node in
-that writes to them are usually blocking.  They are blocking in the case
-that they refer to regular files or TTY file descriptors. In the case they
-refer to pipes, they are non-blocking like other streams.
+that writes to them are usually blocking.
 
 </p>
+<ul>
+<li>They are blocking in the case that they refer to regular files or TTY file
+descriptors.</li>
+<li>In the case they refer to pipes:<ul>
+<li>They are blocking in Linux/Unix.</li>
+<li>They are non-blocking like other streams in Windows.</li>
+</ul>
+</li>
+</ul>
 <p>To check if Node is being run in a TTY context, read the <code>isTTY</code> property
 on <code>process.stderr</code>, <code>process.stdout</code>, or <code>process.stdin</code>:
 
@@ -236,34 +258,56 @@ false</code></pre>
 
 </p>
 <h2>process.stderr<span><a class="mark" href="#process_process_stderr" id="process_process_stderr">#</a></span></h2>
-<p>A writable stream to stderr.
+<p>A writable stream to stderr (on fd <code>2</code>).
 
 </p>
 <p><code>process.stderr</code> and <code>process.stdout</code> are unlike other streams in Node in
-that writes to them are usually blocking.  They are blocking in the case
-that they refer to regular files or TTY file descriptors. In the case they
-refer to pipes, they are non-blocking like other streams.
-
+that writes to them are usually blocking.
 
 </p>
+<ul>
+<li>They are blocking in the case that they refer to regular files or TTY file
+descriptors.</li>
+<li>In the case they refer to pipes:<ul>
+<li>They are blocking in Linux/Unix.</li>
+<li>They are non-blocking like other streams in Windows.</li>
+</ul>
+</li>
+</ul>
 <h2>process.stdin<span><a class="mark" href="#process_process_stdin" id="process_process_stdin">#</a></span></h2>
-<p>A <code>Readable Stream</code> for stdin. The stdin stream is paused by default, so one
-must call <code>process.stdin.resume()</code> to read from it.
+<p>A <code>Readable Stream</code> for stdin (on fd <code>0</code>).
 
 </p>
 <p>Example of opening standard input and listening for both events:
 
 </p>
-<pre><code>process.stdin.resume();
-process.stdin.setEncoding(&#39;utf8&#39;);
+<pre><code>process.stdin.setEncoding(&#39;utf8&#39;);
 
-process.stdin.on(&#39;data&#39;, function(chunk) {
-  process.stdout.write(&#39;data: &#39; + chunk);
+process.stdin.on(&#39;readable&#39;, function() {
+  var chunk = process.stdin.read();
+  if (chunk !== null) {
+    process.stdout.write(&#39;data: &#39; + chunk);
+  }
 });
 
 process.stdin.on(&#39;end&#39;, function() {
   process.stdout.write(&#39;end&#39;);
 });</code></pre>
+<p>As a Stream, <code>process.stdin</code> can also be used in &quot;old&quot; mode that is compatible
+with scripts written for node prior v0.10.
+For more information see
+<a href="stream.html#stream_compatibility_with_older_node_versions">Stream compatibility</a>.
+
+</p>
+<p>In &quot;old&quot; Streams mode the stdin stream is paused by default, so one
+must call <code>process.stdin.resume()</code> to read from it. Note also that calling
+<code>process.stdin.resume()</code> itself would switch stream to &quot;old&quot; mode.
+
+</p>
+<p>If you are starting a new project you should prefer a more recent &quot;new&quot; Streams
+mode over &quot;old&quot; one.
+
+</p>
 <h2>process.argv<span><a class="mark" href="#process_process_argv" id="process_process_argv">#</a></span></h2>
 <p>An array containing the command line arguments.  The first element will be
 &#39;node&#39;, the second element will be the name of the JavaScript file.  The
@@ -337,8 +381,30 @@ catch (err) {
 <h2>process.env<span><a class="mark" href="#process_process_env" id="process_process_env">#</a></span></h2>
 <p>An object containing the user environment. See environ(7).
 
+</p>
+<p>An example of this object looks like:
 
 </p>
+<pre><code>{ TERM: &#39;xterm-256color&#39;,
+  SHELL: &#39;/usr/local/bin/bash&#39;,
+  USER: &#39;maciej&#39;,
+  PATH: &#39;~/.bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin&#39;,
+  PWD: &#39;/Users/maciej&#39;,
+  EDITOR: &#39;vim&#39;,
+  SHLVL: &#39;1&#39;,
+  HOME: &#39;/Users/maciej&#39;,
+  LOGNAME: &#39;maciej&#39;,
+  _: &#39;/usr/local/bin/node&#39; }</code></pre>
+<p>You can write to this object, but changes won&#39;t be reflected outside of your
+process. That means that the following won&#39;t work:
+
+</p>
+<pre><code>node -e &#39;process.env.foo = &quot;bar&quot;&#39; &amp;&amp; echo $foo</code></pre>
+<p>But this will:
+
+</p>
+<pre><code>process.env.foo = &#39;bar&#39;;
+console.log(process.env.foo);</code></pre>
 <h2>process.exit([code])<span><a class="mark" href="#process_process_exit_code" id="process_process_exit_code">#</a></span></h2>
 <p>Ends the process with the specified <code>code</code>.  If omitted, exit uses the
 &#39;success&#39; code <code>0</code>.
@@ -508,7 +574,7 @@ the &quot;config.gypi&quot; file that was produced when running the <code>./conf
 <p>Send a signal to a process. <code>pid</code> is the process id and <code>signal</code> is the
 string describing the signal to send.  Signal names are strings like
 &#39;SIGINT&#39; or &#39;SIGHUP&#39;.  If omitted, the signal will be &#39;SIGTERM&#39;.
-See kill(2) for more information.
+See <a href="#process_signal_events">Signal Events</a> and kill(2) for more information.
 
 </p>
 <p>Will throw an error if target does not exist, and as a special case, a signal of
@@ -717,26 +783,48 @@ setTimeout(function() {
           </div>
         </div>
     </div>
+    </div>
     <div id="footer">
-        <a href="http://joyent.com" class="joyent-logo">Joyent</a>
-        <ul class="clearfix">
-            <li><a href="/">Node.js</a></li>
-            <li><a href="/download/">Download</a></li>
-            <li><a href="/about/">About</a></li>
-            <li><a href="http://npmjs.org/">npm Registry</a></li>
-            <li><a href="http://nodejs.org/api/">Docs</a></li>
+      <div class="foot-1">
+        <a href="http://www.joyent.com"><h5>The Node.js Project is Sponsored by</h5>
+        <img src="assets/joyent-footer.svg" width="200">
+        <p class="tag">Production Node +<br>High Performance Infrastructure</p></a>
+        <a href="https://my.joyent.com/landing/signup/701800000015696" class="button getstarted">Get Started</a>
+      </div>
+      <div class="foot-2">
+        <div class="foot-nav">
+          <ul>
+            <li><a href="http://nodejs.org/download/">Downloads</a></li>
+          </ul>
+          <ul>
+            <li><a href="http://nodejs.org/documentation/">Documentation</a></li>
+            <li><a href="http://nodejs.org/api/">API Docs</a></li>
+            <li><a href="http://nodejs.org/documentation/tutorials/">Tutorials</a></li>
+            <li><a href="http://nodejs.org/documentation/localization/">Localization</a></li>
+          </ul>
+          <ul>
+            <li><a href="http://nodejs.org/community/">Community</a></li>
+            <li><a href="https://github.com/joyent/node/issues">Github Issues</a></li>
+            <li><a href="http://groups.google.com/group/nodejs">Mailing List</a></li>
+            <li><a href="http://webchat.freenode.net/?channels=node.js">IRC</a></li>
+            <li><a href="https://twitter.com/nodejs">Twitter</a></li>
+          </ul>
+          <ul>
+            <li><a href="http://nodejs.org/about/">About</a></li>
+            <li><a href="http://nodejs.org/about/organization/">Organization</a></li>
+            <li><a href="http://nodejs.org/about/core-team/">Core Team</a></li>
+            <li><a href="http://nodejs.org/about/resources/">Resources</a></li>
+          </ul>
+          <ul>
             <li><a href="http://blog.nodejs.org">Blog</a></li>
-            <li><a href="/community/">Community</a></li>
-            <li><a href="/logos/">Logos</a></li>
-            <li><a href="http://jobs.nodejs.org/">Jobs</a></li>
-            <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
-        </ul>
-
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
+          </ul>
+        </div>
+        <p class="copyright">Copyright 2014 <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="https://nodejs.org/images/trademark-policy.pdf">trademark</a> of Joyent, Inc. <a href="https://raw.github.com/joyent/node/v0.10.35/LICENSE">View license</a>.</p>
+      </div>
     </div>
 
-  <script src="../sh_main.js"></script>
-  <script src="../sh_javascript.min.js"></script>
+  <script src="/sh_main.js"></script>
+  <script src="/sh_javascript.min.js"></script>
   <script>highlight(undefined, undefined, 'pre');</script>
   <script>
     window._gaq = [['_setAccount', 'UA-10874194-2'], ['_trackPageview']];

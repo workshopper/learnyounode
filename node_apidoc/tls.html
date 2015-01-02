@@ -2,36 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>TLS (SSL) Node.js v0.10.24 Manual &amp; Documentation</title>
+  <title>TLS (SSL) Node.js v0.10.35 Manual &amp; Documentation</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/tls.html">
+  <script type="text/javascript" src="//use.typekit.net/mse5tqx.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
-<body class="alt apidoc" id="api-section-tls">
-    <div id="intro" class="interior">
-        <a href="/" title="Go back to the home page">
-            <img id="logo" src="http://nodejs.org/images/logo-light.png" alt="node.js">
-        </a>
+<body class="alt apidoc int docs" id="docs">
+    <div id="nav">
+      <img id="logo" src="assets/logo.svg" alt="node.js">
+      <ul>
+        <li><a href="http://nodejs.org">Home</a></li>
+        <li><a href="http://nodejs.org/download/">Downloads</a></li>
+        <li class="active"><a href="http://nodejs.org/documentation/">Docs</a></li>
+        <li><a href="http://nodejs.org/community/">Community</a></li>
+        <li><a href="http://nodejs.org/about/">About</a></li>
+        <li><a href="http://jobs.nodejs.org">Jobs</a></li>
+        <li><a href="http://blog.nodejs.org">Blog</a></li>
+      </ul>
     </div>
+    <div id="content-wrap">
     <div id="content" class="clearfix">
-        <div id="column2" class="interior">
-            <ul>
-                <li><a href="/" class="home">Home</a></li>
-                <li><a href="/download/" class="download">Download</a></li>
-                <li><a href="/about/" class="about">About</a></li>
-                <li><a href="http://npmjs.org/" class="npm">npm Registry</a></li>
-                <li><a href="http://nodejs.org/api/" class="docs current">Docs</a></li>
-                <li><a href="http://blog.nodejs.org" class="blog">Blog</a></li>
-                <li><a href="/community/" class="community">Community</a></li>
-                <li><a href="/logos/" class="logos">Logos</a></li>
-                <li><a href="http://jobs.nodejs.org/" class="jobs">Jobs</a></li>
-            </ul>
-            <p class="twitter"><a href="http://twitter.com/nodejs">@nodejs</a></p>
-        </div>
-
+      <div id="column2" class="interior">
+        <!--<img src="/images/logo-light.svg" alt="node.js" width="170">-->
+        <ul class="docs-nav">
+          <li><a href="http://nodejs.org/documentation/">About Docs</a></li>
+          <li><a href="http://nodejs.org/documentation/tutorials/">Tutorials</a></li>
+          <li><a href="http://nodejs.org/documentation/contributing/">Contributing</a></li>
+          <li><a href="http://nodejs.org/documentation/localization/">Localization</a></li>
+          <li class="active"><a href="http://nodejs.org/api/">API Docs</a></li>
+        </ul>
+      </div>
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.10.24 Manual &amp; Documentation</h1>
+            <h1>Node.js v0.10.35 Manual &amp; Documentation</h1>
             <div id="gtoc">
               <p>
                 <a href="index.html" name="toc">Index</a> |
@@ -46,6 +51,7 @@
             <h2>Table of Contents</h2>
             <ul>
 <li><a href="#tls_tls_ssl">TLS (SSL)</a><ul>
+<li><a href="#tls_protocol_support">Protocol support</a></li>
 <li><a href="#tls_client_initiated_renegotiation_attack_mitigation">Client-initiated renegotiation attack mitigation</a></li>
 <li><a href="#tls_npn_and_sni">NPN and SNI</a></li>
 <li><a href="#tls_tls_getciphers">tls.getCiphers()</a></li>
@@ -102,17 +108,17 @@ Secure Socket Layer: encrypted stream communication.
 
 </p>
 <p>TLS/SSL is a public/private key infrastructure. Each client and each
-server must have a private key. A private key is created like this
+server must have a private key. A private key is created like this:
 
 </p>
-<pre><code>openssl genrsa -out ryans-key.pem 1024</code></pre>
-<p>All severs and some clients need to have a certificate. Certificates are public
+<pre><code>openssl genrsa -out ryans-key.pem 2048</code></pre>
+<p>All servers and some clients need to have a certificate. Certificates are public
 keys signed by a Certificate Authority or self-signed. The first step to
 getting a certificate is to create a &quot;Certificate Signing Request&quot; (CSR)
 file. This is done with:
 
 </p>
-<pre><code>openssl req -new -key ryans-key.pem -out ryans-csr.pem</code></pre>
+<pre><code>openssl req -new -sha256 -key ryans-key.pem -out ryans-csr.pem</code></pre>
 <p>To create a self-signed certificate with the CSR, do this:
 
 </p>
@@ -134,6 +140,46 @@ file. This is done with:
 <li><code>inkey</code>: private key</li>
 <li><code>certfile</code>: all CA certs concatenated in one file like
 <code>cat ca1-cert.pem ca2-cert.pem &gt; ca-cert.pem</code></li>
+</ul>
+<h2>Protocol support<span><a class="mark" href="#tls_protocol_support" id="tls_protocol_support">#</a></span></h2>
+<p>Node.js is compiled with SSLv2 and SSLv3 protocol support by default, but these
+protocols are <strong>disabled</strong>. They are considered insecure and could be easily
+compromised as was shown by <a href="https://access.redhat.com/articles/1232123">CVE-2014-3566</a>. However, in some situations, it
+may cause problems with legacy clients/servers (such as Internet Explorer 6).
+If you wish to enable SSLv2 or SSLv3, run node with the <code>--enable-ssl2</code> or
+<code>--enable-ssl3</code> flag respectively.  In future versions of Node.js SSLv2 and
+SSLv3 will not be compiled in by default.
+
+</p>
+<p>There is a way to force node into using SSLv3 or SSLv2 only mode by explicitly
+specifying <code>secureProtocol</code> to <code>&#39;SSLv3_method&#39;</code> or <code>&#39;SSLv2_method&#39;</code>.
+
+</p>
+<p>The default protocol method Node.js uses is <code>SSLv23_method</code> which would be more
+accurately named <code>AutoNegotiate_method</code>. This method will try and negotiate
+from the highest level down to whatever the client supports.  To provide a
+secure default, Node.js (since v0.10.33) explicitly disables the use of SSLv3
+and SSLv2 by setting the <code>secureOptions</code> to be
+<code>SSL_OP_NO_SSLv3|SSL_OP_NO_SSLv2</code> (again, unless you have passed
+<code>--enable-ssl3</code>, or <code>--enable-ssl2</code>, or <code>SSLv3_method</code> as <code>secureProtocol</code>).
+
+</p>
+<p>If you have set <code>secureOptions</code> to anything, we will not override your
+options.
+
+</p>
+<p>The ramifications of this behavior change:
+
+</p>
+<ul>
+<li>If your application is behaving as a secure server, clients who are <code>SSLv3</code>
+only will now not be able to appropriately negotiate a connection and will be
+refused. In this case your server will emit a <code>clientError</code> event. The error
+message will include <code>&#39;wrong version number&#39;</code>.</li>
+<li>If your application is behaving as a secure client and communicating with a
+server that doesn&#39;t support methods more secure than SSLv3 then your connection
+won&#39;t be able to negotiate and will fail. In this case your client will emit a
+an <code>error</code> event. The error message will include <code>&#39;wrong version number&#39;</code>.</li>
 </ul>
 <h2>Client-initiated renegotiation attack mitigation<span><a class="mark" href="#tls_client_initiated_renegotiation_attack_mitigation" id="tls_client_initiated_renegotiation_attack_mitigation">#</a></span></h2>
 <!-- type=misc -->
@@ -259,13 +305,17 @@ extension. Only one argument will be passed to it: <code>servername</code>. And
 SecureContext). If <code>SNICallback</code> wasn&#39;t provided - default callback with
 high-level API will be used (see below).</p>
 </li>
-<li><p><code>sessionIdContext</code>: A string containing a opaque identifier for session
+<li><p><code>sessionIdContext</code>: A string containing an opaque identifier for session
 resumption. If <code>requestCert</code> is <code>true</code>, the default is MD5 hash value
 generated from command-line. Otherwise, the default is not provided.</p>
 </li>
 <li><p><code>secureProtocol</code>: The SSL method to use, e.g. <code>SSLv3_method</code> to force
 SSL version 3. The possible values depend on your installation of
 OpenSSL and are defined in the constant <a href="http://www.openssl.org/docs/ssl/ssl.html#DEALING_WITH_PROTOCOL_METHODS">SSL_METHODS</a>.</p>
+</li>
+<li><p><code>secureOptions</code>: Set server options. For example, to disable the SSLv3
+protocol set the <code>SSL_OP_NO_SSLv3</code> flag. See <a href="https://www.openssl.org/docs/ssl/SSL_CTX_set_options.html">SSL_CTX_set_options</a>
+for all available options.</p>
 </li>
 </ul>
 <p>Here is a simple example echo server:
@@ -351,7 +401,7 @@ creating a new socket. If this option is specified, <code>host</code> and <code>
 are ignored.</p>
 </li>
 <li><p><code>pfx</code>: A string or <code>Buffer</code> containing the private key, certificate and
-CA certs of the server in PFX or PKCS12 format.</p>
+CA certs of the client in PFX or PKCS12 format.</p>
 </li>
 <li><p><code>key</code>: A string or <code>Buffer</code> containing the private key of the client in
 PEM format.</p>
@@ -489,7 +539,7 @@ connections using TLS or SSL.
 
 </p>
 <p>This event is emitted after a new connection has been successfully
-handshaked. The argument is a instance of <a href="#tls_class_tls_cleartextstream">CleartextStream</a>. It has all the
+handshaked. The argument is an instance of <a href="#tls_class_tls_cleartextstream">CleartextStream</a>. It has all the
 common stream methods and events.
 
 </p>
@@ -684,26 +734,48 @@ object with three properties, e.g.
           </div>
         </div>
     </div>
+    </div>
     <div id="footer">
-        <a href="http://joyent.com" class="joyent-logo">Joyent</a>
-        <ul class="clearfix">
-            <li><a href="/">Node.js</a></li>
-            <li><a href="/download/">Download</a></li>
-            <li><a href="/about/">About</a></li>
-            <li><a href="http://npmjs.org/">npm Registry</a></li>
-            <li><a href="http://nodejs.org/api/">Docs</a></li>
+      <div class="foot-1">
+        <a href="http://www.joyent.com"><h5>The Node.js Project is Sponsored by</h5>
+        <img src="assets/joyent-footer.svg" width="200">
+        <p class="tag">Production Node +<br>High Performance Infrastructure</p></a>
+        <a href="https://my.joyent.com/landing/signup/701800000015696" class="button getstarted">Get Started</a>
+      </div>
+      <div class="foot-2">
+        <div class="foot-nav">
+          <ul>
+            <li><a href="http://nodejs.org/download/">Downloads</a></li>
+          </ul>
+          <ul>
+            <li><a href="http://nodejs.org/documentation/">Documentation</a></li>
+            <li><a href="http://nodejs.org/api/">API Docs</a></li>
+            <li><a href="http://nodejs.org/documentation/tutorials/">Tutorials</a></li>
+            <li><a href="http://nodejs.org/documentation/localization/">Localization</a></li>
+          </ul>
+          <ul>
+            <li><a href="http://nodejs.org/community/">Community</a></li>
+            <li><a href="https://github.com/joyent/node/issues">Github Issues</a></li>
+            <li><a href="http://groups.google.com/group/nodejs">Mailing List</a></li>
+            <li><a href="http://webchat.freenode.net/?channels=node.js">IRC</a></li>
+            <li><a href="https://twitter.com/nodejs">Twitter</a></li>
+          </ul>
+          <ul>
+            <li><a href="http://nodejs.org/about/">About</a></li>
+            <li><a href="http://nodejs.org/about/organization/">Organization</a></li>
+            <li><a href="http://nodejs.org/about/core-team/">Core Team</a></li>
+            <li><a href="http://nodejs.org/about/resources/">Resources</a></li>
+          </ul>
+          <ul>
             <li><a href="http://blog.nodejs.org">Blog</a></li>
-            <li><a href="/community/">Community</a></li>
-            <li><a href="/logos/">Logos</a></li>
-            <li><a href="http://jobs.nodejs.org/">Jobs</a></li>
-            <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
-        </ul>
-
-        <p>Copyright <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.10.24/LICENSE">license</a>.</p>
+          </ul>
+        </div>
+        <p class="copyright">Copyright 2014 <a href="http://joyent.com/">Joyent, Inc</a>, Node.js is a <a href="https://nodejs.org/images/trademark-policy.pdf">trademark</a> of Joyent, Inc. <a href="https://raw.github.com/joyent/node/v0.10.35/LICENSE">View license</a>.</p>
+      </div>
     </div>
 
-  <script src="../sh_main.js"></script>
-  <script src="../sh_javascript.min.js"></script>
+  <script src="/sh_main.js"></script>
+  <script src="/sh_javascript.min.js"></script>
   <script>highlight(undefined, undefined, 'pre');</script>
   <script>
     window._gaq = [['_setAccount', 'UA-10874194-2'], ['_trackPageview']];
