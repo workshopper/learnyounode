@@ -1,15 +1,18 @@
-{yellow}{bold}解決 {appname} 習題的時候遇到困難了嗎？{/bold}{/yellow}
+{yellow}{bold}Having trouble with a {appname} exercise?{/bold}{/yellow}
 
-  一群渴望幫助您精進 Node.js 技巧的專家小幫手正在等您提問！只要到：
+  A team of expert helper elves is eagerly waiting to assist you in
+  mastering the basics of Node.js, simply go to:
     https://github.com/nodeschool/discussions/issues
-  然後新增一個 {bold}New Issue{/bold} 以讓我們知道您遇上的困難。絕對沒有
-  {italic}蠢{/italic} 問題！
+  and add a {bold}New Issue{/bold} and let us know what you're having trouble
+  with. There are no {italic}dumb{/italic} questions!
 
-  如果您正在尋找關於 Node.js 的協助， Freenode IRC 上的 #Node.js 頻道是
-  個尋找樂於協助者的好地方。這裡也有一個 Node.js 的 Google 群組：
+  If you're looking for general help with Node.js, the #Node.js
+  channel on Freenode IRC is usually a great place to find someone
+  willing to help. There is also the Node.js Google Group:
+    https://groups.google.com/forum/#!forum/nodejs
 
-{yellow}{bold}找到一個 {appname} 的 bug 或是想要一起貢獻嗎？{/bold}{/yellow}
+{yellow}{bold}Found a bug with {appname} or just want to contribute?{/bold}{/yellow}
 
-  官方的 {appname} repository 在：
+  The official repository for {appname} is:
     https://github.com/rvagg/learnyounode/
-  請不要拘束地提交一個 bug 或給我們一個 pull request（這當然更好！）
+  Feel free to file a bug report or (preferably) a pull request.
