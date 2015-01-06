@@ -20,6 +20,8 @@ inStream.pipe(map(function (chunk) {
 
 In the above example, the incoming data from `inStream` is converted to a String (if it isn't already), the characters are reversed and the result is passed through to `outStream`. So we've made a chunk character reverser! Remember though that the chunk size is determined up-stream and you have little control over it for incoming data.
 
+**Note** That for this exercise, we just need to convert the string received in the http request body to upper case!
+
 To install `through2-map` type:
 
 ```sh
