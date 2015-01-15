@@ -15,6 +15,14 @@
 
 Once you have finished <b><code>learnyounode</code></b>, graduate to <b><code>[stream-adventure](https://github.com/substack/stream-adventure)</code></b> for a set of exercises that dig in to Node's streams.
 
+### What if I don't have sudo rights?
+
+<b><code>learnyounode</code></b> can also be installed if you don't have root access:
+
+  1. Run `npm install learnyounode` instead of `sudo npm install learnyounode -g`
+  2. Run `$(npm bin)/learnyounode` wherever the instructions say "run `learnyounode`"
+  3. Or alternatively to step 2 above, tweak your `PATH` to include `$(npm bin)` if you know how to do that.
+
 ### Contributors
 
 <b><code>learnyounode</code></b> is proudly brought to you by the following hackers:
