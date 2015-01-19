@@ -1,82 +1,82 @@
 {
-	  "title"    : "LEARN YOU THE NODE.JS FOR MUCH WIN!"
-	, "subtitle" : "\u001b[23m选择一个练习，按 \u001b[3m回车\u001b[23m开始"
+	  "title"    : "教你玩转 Node.js，赢取更多机会"
+	, "subtitle" : "\u001b[23m选择一个题目，按 \u001b[3m回车\u001b[23m 开始"
 	, "exercise" : {
-		"HELLO WORLD": "HELLO WORLD"
-	  , "BABY STEPS": "BABY STEPS"
-	  , "MY FIRST I/O!": "MY FIRST I/O!"
-	  , "MY FIRST ASYNC I/O!": "MY FIRST ASYNC I/O!"
-	  , "FILTERED LS": "FILTERED LS"
-	  , "MAKE IT MODULAR": "MAKE IT MODULAR"
-	  , "HTTP CLIENT": "HTTP CLIENT"
-	  , "HTTP COLLECT": "HTTP COLLECT"
-	  , "JUGGLING ASYNC": "JUGGLING ASYNC"
-	  , "TIME SERVER": "TIME SERVER"
-	  , "HTTP FILE SERVER": "HTTP FILE SERVER"
-	  , "HTTP UPPERCASERER": "HTTP UPPERCASERER"
-	  , "HTTP JSON API SERVER": "HTTP JSON API SERVER"
+		"HELLO WORLD": "你好，世界"
+	  , "BABY STEPS": "婴儿学步"
+	  , "MY FIRST I/O!": "第一个 I/O！"
+	  , "MY FIRST ASYNC I/O!": "第一个异步 I/O！"
+	  , "FILTERED LS": "LS 过滤器"
+	  , "MAKE IT MODULAR": "使其模块化"
+	  , "HTTP CLIENT": "HTTP 客户端"
+	  , "HTTP COLLECT": "HTTP 收集器"
+	  , "JUGGLING ASYNC": "玩转异步"
+	  , "TIME SERVER": "授时服务器"
+	  , "HTTP FILE SERVER": "HTTP 文件服务器"
+	  , "HTTP UPPERCASERER": "HTTP 大写转换器"
+	  , "HTTP JSON API SERVER": "HTTP JSON API 服务器"
 	}
 	, "menu": {
-		"credits": "CREDITS"
+		"credits": "鸣谢"
 	}
 	, "common": {
 		"exercise": {
 			  "pass": {
-				  "sync": "Used synchronous method: {{{method}}}"
-				, "async": "Used asynchronous method: {{{method}}}"
+				  "sync": "使用了同步方法： {{{method}}}"
+				, "async": "使用了异步方法： {{{method}}}"
 			}
 			, "fail": {
-				  "sync": "Used synchronous method: {{{method}}}"
-				, "async": "Used asynchronous method: {{{method}}}"
-				, "unused": "Used asynchronous method from the `fs` module."
-				, "unexpected_error": "Unexpected error from HTTP server: {{{message}}}"
-				, "connection": "Error connecting to {{{address}}}: {{{message}}}"
+				  "sync": "使用了同步方法： {{{method}}}"
+				, "async": "使用了异步方法： {{{method}}}"
+				, "unused": "使用了 `fs` 模块的异步方法。"
+				, "unexpected_error": "HTTP 服务器发生了未知错误： {{{message}}}"
+				, "connection": "连接到 {{{address}}} 时候发生错误： {{{message}}}"
 			}
 		}
 	}
 	, "exercises": {
 		  "MAKE IT MODULAR": {
 			  "fail": {
-				  "missing_module": "Did not use an additional module file, you must require() a module to help solve this exercise"
-				, "loadError": "Error loading module file [{{path}}]: {{{message}}}"
+				  "missing_module": "你没有使用额外的模块文件，你必须使用 reqiure() 来引用一个模块来协助你完成这个习题"
+				, "loadError": "载入模块时发生错误： [{{path}}]： {{{message}}}"
 				, "mod": {
-					  "_base": "Your additional module file [{{path}}] {{{message}}}"	
-					, "no_export": "does not export a {{{method}}}. You must use the `module.exports = function () {}` pattern."
-					, "singleFunction": "single function"
-					, "arguments": "exports a function that takes fewer than {{{three}}} arguments. You must accept a directory, a filter and a {{{callback}}}."
-					, "arguments_three": "three"
-					, "arguments_callback": "callback"
-					, "missing_callback": "did not call the callback argument after an error from fs.readdir()"
-					, "missing_error": "does not appear to pass back an error received from `fs.readdir()`.\n  Use the following idiomatic Node.js pattern inside your callback to `fs.readdir()`:\n\tif (err)\n\t  return callback(err)"
-					, "callback_arguments": "did not return two arguments on the callback function (expected `null` and an Array of filenames)"
-					, "array_wrong_size": "did not return an Array with the correct number of elements as the second argument of the callback"
-					, "dotExt": "may be matching \"ext\" instead of \".ext\""
-					, "array_comparison": "did not return the correct list of files as the second argument of the callback"
-					, "missing_array_argument": "did not return an Array object as the second argument of the callback"
-					, "callback_error": "returned an error on its callback:\n\t{{{error}}}"
-					, "timeout": "did not call the callback argument"
-					, "unexpected": "threw an error:\n\t{{{error}}}"
+					  "_base": "你的额外的模块文件 [{{path}}] {{{message}}}"
+					, "no_export": "没有导出一个 {{{method}}}。你需要使用 `module.exports = function () {}` 这个模式去做。"
+					, "singleFunction": "单函数"
+					, "arguments": "导出的函数接受少于 {{{three}}} 个参数。你必须同时接受一个文件目录，一个过滤器以及一个 {{{callback}}} 这些参数。"
+					, "arguments_three": "三"
+					, "arguments_callback": "回调函数"
+					, "missing_callback": "fs.readdir() 发生错误时候没有执行回调函数"
+					, "missing_error": "似乎没有传回从 `fs.readdir()` 接收到的错误。\n  请在你的 `fs.readdir()` 的回调函数中使用以下所示 Node.js 中惯用的模式：\n\tif (err)\n\t  return callback(err)"
+					, "callback_arguments": "没有在回调函数中返回两个参数 (期望一个 `null` 和一个包含文件名的)"
+					, "array_wrong_size": "没有在回调函数的第二个参数中返回正确的元素数量"
+					, "dotExt": "需要匹配 \"ext\" 而不是 \".ext\""
+					, "array_comparison": "没有在回调函数的第二个参数中返回正确的文件列表"
+					, "missing_array_argument": "回调函数的第二个参数不是数组类型"
+					, "callback_error": "在回调函数中返回了一个错误：\n\t{{{error}}}"
+					, "timeout": "没有执行回调函数"
+					, "unexpected": "抛出错误：\n\t{{{error}}}"
 				}
 			}
 			, "pass": {
-				  "singleFunction": "Additional module file exports a single function"
-				, "arguments": "Additional module file exports a function that takes {{{count}}} arguments"
-				, "error": "Additional module file handles errors properly"
-				, "callback": "Additional module file handles callback argument"
-				, "callback_arguments": "Additional module file returned two arguments on the callback function"
-				, "array_argument": "Additional module file returned correct number of elements as the second argument of the callback"
-				, "array_size": "Additional module file returned correct number of elements as the second argument of the callback"
-				, "final": "Additional module file returned correct list of files as the second argument of the callback"
+				  "singleFunction": "额外的模块文件导出了一个单个函数"
+				, "arguments": "额外的模块文件导出的函数能接受 {{{count}}} 个参数"
+				, "error": "额外的模块文件正确地处理了错误"
+				, "callback": "额外的模块文件能处理回调参数"
+				, "callback_arguments": "额外的模块文件在回调中返回两个参数"
+				, "array_argument": "额外的模块文件在回调函数第二个参数中返回了正确的元素数量"
+				, "array_size": "额外的模块文件在回调函数第二个参数中返回了正确的元素数量"
+				, "final": "额外的模块文件在回调函数第二个参数中返回了正确的文件列表"
 			}
 		}
 		, "TIME SERVER": {
 			"fail": {
-				"connection": "Error connecting to localhost:{{port}}: {{{message}}}"
+				"connection": "连接到 localhost:{{port}} 时候发生错误： {{{message}}}"
 			}
 		}
 		, "HTTP FILE SERVER": {
 			"fail": {
-				"no_createReadStream": "Used fs method other than fs.createReadStream(): {{{method}}}"
+				"no_createReadStream": "使用除了 fs.createReadStream() 之外的 fs 模块方法： {{{method}}}"
 			}
 		}
 	}
