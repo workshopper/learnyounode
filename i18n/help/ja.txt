@@ -10,5 +10,5 @@
 {yellow}{bold}{appname}のバグが見つかった場合または貢献したい場合：{/bold}{/yellow}
 
   {appname}のリポジトリはここにあります:
-    https://github.com/maxogden/learnyounode-jp/
+    https://github.com/rvagg/learnyounode/
   バグリクエストやPullリクエストはいつでもどうぞ！
