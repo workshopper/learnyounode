@@ -1,0 +1,4 @@
+{yellow}{bold}learnyounode をお届けしたのは、以下の献身的なハッカー達です：{/bold}{/yellow}
+
+{bold}Name                GitHub Username{/bold}
+-----------------------------------

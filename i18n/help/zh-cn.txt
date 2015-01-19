@@ -1,0 +1,17 @@
+{yellow}{bold}在 {appname} 的练习中遇到困难了吗？{/bold}{/yellow}
+
+  一群专家级别的小精灵助手正急切等待着帮你掌握 Node.js 的基础，前往
+    https://github.com/nodeschool/discussions/issues
+  然后{bold}新建一个 Issue{/bold}，让我们知道你在哪里遇到了难题。
+  没什么有什么问题是{italic}愚蠢的{/italic}。
+
+  如果你正在寻找一些关于 Node.js 的帮助，在 Freenode 上的 #Node.js IRC
+  频道是一个很不错的地方，可以找到很多人来帮助你。
+  同样，这里还有一个关于 Node.js 的 Google Group：
+    https://groups.google.com/forum/#!forum/nodejs
+
+{yellow}{bold}发现了一个 {appname} 的 bug 或者想要贡献代码？{/bold}{/yellow}
+
+  {appname} 的官方 git 仓库是:
+    https://github.com/rvagg/learnyounode/
+  请随意提交一个 bug (或者更好的) 提交一个 Pull Request。

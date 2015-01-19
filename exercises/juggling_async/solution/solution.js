@@ -17,7 +17,7 @@ function httpGet (index) {
       results[index] = data.toString()
       count++
 
-      if (count == 3) // yay! we are the last one!
+      if (count == 3)
         printResults()
     }))
   })

@@ -1,7 +1,3 @@
-{yellow}{bold}learnyounode is brought to you by the following dedicated hackers:{/bold}{/yellow}
-
-{bold}Name                GitHub Username{/bold}
------------------------------------
 Rod Vagg            @rvagg
 Andrey Sidorov      @sidorares
 Julian Duque        @julianduque‎
@@ -18,3 +14,8 @@ Oli Evans           @olizilla‎
 atomizer            @atomizer
 franza              @franza‎
 gargol              @gargol
+Martin Heidegger    @martinheidegger
+Takashi Fujita      @tgfjt 
+Ryuta Nakashima     @AtuyL
+Leigh Zhu           @lisposter
+Toshiharu Harada    @haradats

@@ -35,10 +35,10 @@ exercise.addSetup(function (mode, callback) {
   })
 
   this.server.on('error', function (err) {
-    console.error('Unexpected error from HTTP server: %s', err.message)
+    console.error(this.__('fail.unexpected_error', {message: err.message}))
     console.error(err.stack)
     process.exit(1)
-  })
+  }.bind(this))
 
   this.server.listen(0, function () {
     var url = 'http://localhost:' + String(this.server.address().port)

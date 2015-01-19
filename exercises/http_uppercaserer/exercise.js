@@ -60,13 +60,14 @@ function query (mode) {
     var input = through2()
       , count  = 0
       , iv
+      , url = 'http://localhost:' + port
 
     //TODO: test GET requests for #fail
-    input.pipe(hyperquest.post('http://localhost:' + port)
+    input.pipe(hyperquest.post(url)
       .on('error', function (err) {
         exercise.emit(
             'fail'
-          , 'Error connecting to http://localhost:' + port + ': ' + err.message
+          , exercise.__('fail.connection', {address: url, message: err.message})
         )
       }))
       .pipe(stream)

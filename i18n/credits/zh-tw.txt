@@ -1,0 +1,4 @@
+{yellow}{bold}底下這些做出重大貢獻的 hacker 為您製作了 learnyounode ：{/bold}{/yellow}
+
+{bold}名字                GitHub 匿稱{/bold}
+-----------------------------------

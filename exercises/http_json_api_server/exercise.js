@@ -64,14 +64,17 @@ function query (mode) {
   var exercise = this
 
   function verify (port, stream) {
+
+    var url = 'http://localhost:' + port + '/api/parsetime?iso=' + date.toISOString();
+
     function error (err) {
       exercise.emit(
           'fail'
-        , 'Error connecting to http://localhost:' + port + ': ' + err.message
+        , exercise.__('fail.connection', {address: url, message: err.message})
       )
     }
 
-    hyperquest.get('http://localhost:' + port + '/api/parsetime?iso=' + date.toISOString())
+    hyperquest.get(url)
       .on('error', error)
       .pipe(bl(function (err, data) {
         if (err)
@@ -79,7 +82,7 @@ function query (mode) {
 
         stream.write(normalizeJSON(data.toString()) + '\n')
 
-        hyperquest.get('http://localhost:' + port + '/api/unixtime?iso=' + date.toISOString())
+        hyperquest.get(url)
           .on('error', error)
           .pipe(bl(function (err, data) {
             if (err)
