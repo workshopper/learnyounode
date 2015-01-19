@@ -1,4 +1,4 @@
-{yellow}{bold}learnyounode is brought to you by the following dedicated hackers:{/bold}{/yellow}
+{yellow}{bold}learnyounode 的完成离不开以下列举的黑客们:{/bold}{/yellow}
 
-{bold}Name                GitHub Username{/bold}
+{bold}姓名                GitHub 用户名{/bold}
 -----------------------------------
