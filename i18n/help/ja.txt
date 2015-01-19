@@ -11,4 +11,4 @@
 
   {appname}のリポジトリはここにあります:
     https://github.com/rvagg/learnyounode/
-  バグリクエストやPullリクエストはいつでもどうぞ！
+  バグの報告やPullリクエストはいつでもどうぞ！
