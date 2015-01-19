@@ -1,6 +1,6 @@
 {
   "name": "learnyounode",
-  "version": "2.0.0",
+  "version": "1.0.7",
   "description": "Learn You The Node.js For Much Win! An intro to Node.js via a set of self-guided workshops.",
   "author": "Rod Vagg <rod@vagg.org> (https://github.com/rvagg)",
   "contributors": [
@@ -20,23 +20,23 @@
   },
   "license": "MIT",
   "dependencies": {
-    "after": "^0.8.1",
-    "bl": "^0.7.0",
-    "boganipsum": "^0.1.0",
-    "chalk": "^0.4.0",
-    "colors-tmpl": "^0.1.0",
-    "combined-stream": "0.0.7",
-    "concat-stream": "^1.4.1",
-    "duplexer": "^0.1.1",
-    "hyperquest": "^0.2.0",
-    "rimraf": "^2.2.6",
-    "through": "^2.3.4",
-    "through2": "^0.4.1",
-    "through2-map": "^1.2.1",
-    "workshopper": "^2.0.0",
-    "workshopper-boilerplate": "0.0.1",
-    "workshopper-exercise": "^2.0.0",
-    "workshopper-wrappedexec": "^0.1.1"
+    "after": "~0.8.1",
+    "bl": "~0.7.0",
+    "boganipsum": "~0.1.0",
+    "chalk": "~0.4.0",
+    "colors-tmpl": "~0.1.0",
+    "combined-stream": "~0.0.7",
+    "concat-stream": "~1.4.1",
+    "duplexer": "~0.1.1",
+    "hyperquest": "~0.2.0",
+    "rimraf": "~2.2.6",
+    "through": "~2.3.4",
+    "through2": "~0.4.1",
+    "through2-map": "~1.2.1",
+    "workshopper": "~1.4.1",
+    "workshopper-boilerplate": "~0.0.1",
+    "workshopper-exercise": "~1.1.0",
+    "workshopper-wrappedexec": "~0.1.1"
   },
   "bin": {
     "learnyounode": "./learnyounode.js"
