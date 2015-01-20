@@ -65,25 +65,28 @@ function query (mode) {
 
   function verify (port, stream) {
 
-    var url = 'http://localhost:' + port + '/api/parsetime?iso=' + date.toISOString();
+    var url1 = 'http://localhost:' + port + '/api/parsetime?iso=' + date.toISOString();
+    var url2 = 'http://localhost:' + port + '/api/unixtime?iso=' + date.toISOString();
 
-    function error (err) {
-      exercise.emit(
-          'fail'
-        , exercise.__('fail.connection', {address: url, message: err.message})
-      )
+    function error (url) {
+      return function (err) {
+        exercise.emit(
+            'fail'
+          , exercise.__('fail.connection', {address: url, message: err.message})
+        )
+      }
     }
 
-    hyperquest.get(url)
-      .on('error', error)
+    hyperquest.get(url1)
+      .on('error', error(url1))
       .pipe(bl(function (err, data) {
         if (err)
           return stream.emit('error', err)
 
         stream.write(normalizeJSON(data.toString()) + '\n')
 
-        hyperquest.get(url)
-          .on('error', error)
+        hyperquest.get(url2)
+          .on('error', error(url2))
           .pipe(bl(function (err, data) {
             if (err)
               return stream.emit('error', err)
