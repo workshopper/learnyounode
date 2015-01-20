@@ -14,7 +14,7 @@ La respuesta JSON debe contener únicamente los propiedades 'hour', 'minute' y '
 }
 ```
 
-Luego, agrega un segundo endpoint con ruta '/api/unixtime' que reciba los mismos parámetros que la anterior pero devuelva la fecha en formato UNIX, por ejemplo:
+Luego, agrega un segundo endpoint con ruta '/api/unixtime' que reciba los mismos parámetros que la anterior pero que devuelva la fecha en formato UNIX, por ejemplo:
 
 ```json
 { 
