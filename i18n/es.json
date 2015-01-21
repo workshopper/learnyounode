@@ -22,13 +22,13 @@
 	, "common": {
 		"exercise": {
 			  "pass": {
-				  "sync": "Método sincrónico utilizado: {{{method}}}"
-				, "async": "Método asincrónico utilizado: {{{method}}}"
+				  "sync": "Método síncrono utilizado: {{{method}}}"
+				, "async": "Método asíncrono utilizado: {{{method}}}"
 			}
 			, "fail": {
-				  "sync": "Método sincrónico utilizado: {{{method}}}"
-				, "async": "Método asincrónico utilizado: {{{method}}}"
-				, "unused": "Método asincrónico del módulo `fs` utilizado."
+				  "sync": "Método síncrono utilizado: {{{method}}}"
+				, "async": "Método asíncrono utilizado: {{{method}}}"
+				, "unused": "Método asíncrono del módulo `fs` utilizado."
 				, "unexpected_error": "Error inesperado del server HTTP: {{{message}}}"
 				, "connection": "Error al connectarse a {{{address}}}: {{{message}}}"
 			}
