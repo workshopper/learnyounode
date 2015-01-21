@@ -1,4 +1,4 @@
-{yellow}{bold}¿Teniendo problemas con un ejercicio de {appname}?{/bold}{/yellow}
+{yellow}{bold}¿Tienes problemas con un ejercicio de {appname}?{/bold}{/yellow}
 
   Un equipo de ayudantes elfos expertos está esperando ayudarte ansiosamente en
   aprender lo básico de Node.js, simplemente ve a:
