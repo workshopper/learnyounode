@@ -22,61 +22,61 @@
 	, "common": {
 		"exercise": {
 			  "pass": {
-				  "sync": "Used synchronous method: {{{method}}}"
-				, "async": "Used asynchronous method: {{{method}}}"
+				  "sync": "Método síncrono utilizado: {{{method}}}"
+				, "async": "Método asíncrono utilizado: {{{method}}}"
 			}
 			, "fail": {
-				  "sync": "Used synchronous method: {{{method}}}"
-				, "async": "Used asynchronous method: {{{method}}}"
-				, "unused": "Used asynchronous method from the `fs` module."
-				, "unexpected_error": "Unexpected error from HTTP server: {{{message}}}"
-				, "connection": "Error connecting to {{{address}}}: {{{message}}}"
+				  "sync": "Método síncrono utilizado: {{{method}}}"
+				, "async": "Método asíncrono utilizado: {{{method}}}"
+				, "unused": "Método asíncrono del módulo `fs` utilizado."
+				, "unexpected_error": "Error inesperado del server HTTP: {{{message}}}"
+				, "connection": "Error al connectarse a {{{address}}}: {{{message}}}"
 			}
 		}
 	}
 	, "exercises": {
 		  "MAKE IT MODULAR": {
 			  "fail": {
-				  "missing_module": "Did not use an additional module file, you must require() a module to help solve this exercise"
-				, "loadError": "Error loading module file [{{path}}]: {{{message}}}"
+				  "missing_module": "No utilizaste un archivo de módulo adicional, debes utilizar require() para resolver este ejercicio"
+				, "loadError": "Error cargando archivo de módulo [{{path}}]: {{{message}}}"
 				, "mod": {
-					  "_base": "Your additional module file [{{path}}] {{{message}}}"	
-					, "no_export": "does not export a {{{method}}}. You must use the `module.exports = function () {}` pattern."
-					, "singleFunction": "single function"
-					, "arguments": "exports a function that takes fewer than {{{three}}} arguments. You must accept a directory, a filter and a {{{callback}}}."
-					, "arguments_three": "three"
+					  "_base": "Tu archivo de módulo adicional [{{path}}] {{{message}}}"	
+					, "no_export": "no exporta un {{{method}}}. Debes utilizar la forma `module.exports = function () {}`."
+					, "singleFunction": "una sola función"
+					, "arguments": "exporta una función que toma menos argumentos que {{{three}}}. Debes recibir un directorio, un filtro y un {{{callback}}}."
+					, "arguments_three": "tres"
 					, "arguments_callback": "callback"
-					, "missing_callback": "did not call the callback argument after an error from fs.readdir()"
-					, "missing_error": "does not appear to pass back an error received from `fs.readdir()`.\n  Use the following idiomatic Node.js pattern inside your callback to `fs.readdir()`:\n\tif (err)\n\t  return callback(err)"
-					, "callback_arguments": "did not return two arguments on the callback function (expected `null` and an Array of filenames)"
-					, "array_wrong_size": "did not return an Array with the correct number of elements as the second argument of the callback"
-					, "dotExt": "may be matching \"ext\" instead of \".ext\""
-					, "array_comparison": "did not return the correct list of files as the second argument of the callback"
-					, "missing_array_argument": "did not return an Array object as the second argument of the callback"
-					, "callback_error": "returned an error on its callback:\n\t{{{error}}}"
-					, "timeout": "did not call the callback argument"
-					, "unexpected": "threw an error:\n\t{{{error}}}"
+					, "missing_callback": "no llamó el argumento callback después de un error de parte de fs.readdir()"
+					, "missing_error": "no parece pasar de vuelta un error recibido de `fs.readdir()`.\n Utiliza el siguiente patrón idiomático de Node.js adentro de tu callback a `fs.readdir()`:\n\tif (err)\n\t  return callback(err)"
+					, "callback_arguments": "no retornó dos argumentos en la función callback (esperado `null` y un arreglo de nombres de archivos)"
+					, "array_wrong_size": "no retornó un arreglo con el número correcto de elementos como segundo parámetro del callback"
+					, "dotExt": "podría estar coincidiendo con \"ext\" en vez de \".ext\""
+					, "array_comparison": "no retornó la correcta lista de archivos como segundo parámetro del callback"
+					, "missing_array_argument": "no retornó un objeto Array como segundo argumento del callback"
+					, "callback_error": "retornó un error en su callback:\n\t{{{error}}}"
+					, "timeout": "no llamó al argumento callback "
+					, "unexpected": "disparó un error:\n\t{{{error}}}"
 				}
 			}
 			, "pass": {
-				  "singleFunction": "Additional module file exports a single function"
-				, "arguments": "Additional module file exports a function that takes {{{count}}} arguments"
-				, "error": "Additional module file handles errors properly"
-				, "callback": "Additional module file handles callback argument"
-				, "callback_arguments": "Additional module file returned two arguments on the callback function"
-				, "array_argument": "Additional module file returned correct number of elements as the second argument of the callback"
-				, "array_size": "Additional module file returned correct number of elements as the second argument of the callback"
-				, "final": "Additional module file returned correct list of files as the second argument of the callback"
+				  "singleFunction": "El archivo de módulo adicional exporta una sola función"
+				, "arguments": "El archivo de módulo adicional exporta una función que toma {{{count}}} argumentos"
+				, "error": "El archivo de módulo adicional maneja los errores correctamente"
+				, "callback": "El archivo de módulo adicional maneja el argumento callback "
+				, "callback_arguments": "El archivo de módulo adicional retornó dos argumentos en la función callback"
+				, "array_argument": "El archivo de módulo adicional retornó el número correcto de elementos en el segundo argumento del callback"
+				, "array_size": "El archivo de módulo adicional retornó el número correcto de elementos en el segundo argumento del callback"
+				, "final": "El archivo de módulo adicional retornó la lista correcta de archivos en el segundo argumento del callback"
 			}
 		}
 		, "TIME SERVER": {
 			"fail": {
-				"connection": "Error connecting to localhost:{{port}}: {{{message}}}"
+				"connection": "Error conectandose a localhost:{{port}}: {{{message}}}"
 			}
 		}
 		, "HTTP FILE SERVER": {
 			"fail": {
-				"no_createReadStream": "Used fs method other than fs.createReadStream(): {{{method}}}"
+				"no_createReadStream": "Otro método de fs utilizado en vez de fs.createReadStream(): {{{method}}}"
 			}
 		}
 	}

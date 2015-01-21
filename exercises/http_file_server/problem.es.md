@@ -1,4 +1,4 @@
-Escribe un **servidor** de HTTP que sirva un mismo archivo de texto para todas las peticiones que reciba.
+Escribe un **servidor** HTTP que sirva un mismo archivo de texto para todas las peticiones que reciba.
 
 El servidor deberá escuchar en un puerto cuyo número será el primer argumento del programa. Como segundo argumento recibirá la ruta a la ubicación del archivo. **Debes** usar `fs.createReadStream()` para servir como stream los contenidos del archivo en la respuesta del servicio.
 
@@ -15,9 +15,9 @@ function callback (request, response) { /* ... */ }
 
 Los parámetros `request`y `response` son los objetos que representan la petición y su respuesta respectivamente. La petición provee propiedades, como ser el encabezado y los parámetros de la misma. La respuesta permite devolverle al cliente encabezados y un cuerpo (body).
 
-¡Ten en cuenta que ambos `request` y `response` son stream de Node! Por lo tanto puedes usar APIs de streaming para simplificar el envío de datos.
+¡Ten en cuenta que ambos `request` y `response` son streams de Node! Por lo tanto puedes usar APIs de streaming para simplificar el envío de datos.
 
-La llamada a `http.createServer()` devuelve una instancia del `server`. Debes llamar a `server.listen(portNumber)` para iniciar la escucha activa. Por ejemplo:
+La llamada a `http.createServer()` devuelve una instancia del `server`. Debes llamar a `server.listen(portNumber)` para comenzar la escucha en un puerto particular. Por ejemplo:
 
 ```js
 var http = require('http')

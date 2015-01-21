@@ -1,9 +1,9 @@
-Escribe un programa  que reciba uno o más números como argumentos de la consola e imprima la suma de dichos números a consola(stdout).
+Escribe un programa que reciba uno o más números como argumentos de la consola e imprima la suma de dichos números a consola(stdout).
 
 ----------------------------------------------------------------------
 ## PISTAS
 
-Puedes acceder a los argumentos de la línea de comandos usando el objeto global `process`, el cual tiene una propiedad `argv` que es una lista de con toda la información de la línea. Ej: `process.argv`.
+Puedes acceder a los argumentos de la línea de comandos usando el objeto global `process`, el cual tiene una propiedad `argv` que es un array con toda la información del comando. Ej: `process.argv`.
 
 Para comenzar puedes escribir un programa que contenga:
 
