@@ -86,8 +86,24 @@ function validateModule (modFile, callback) {
     // replace the mock readdir
     fs.readdir = fs.$readdir
 
+    function compareArrays (a, b) {
+      if (a.length != b.length) return false
+
+      var a2 = (a != null) ? a.slice().sort() : new Array()
+        , b2 = (b != null) ? b.slice().sort() : new Array()
+        , length = a2.length > b2.length ? b2.length : a2.length
+
+      for (var i = 0; i < length; i++) {
+        if (a2[i] !== b2[i])
+          return false
+      }
+
+      return true
+    }
+
     callbackUsed = false
     try {
+
       mod(dir, 'md', function (err, list) {
         if (err) {
           return modFileError(__('fail.mod.callback_error', {error: util.inspect(err)}))
@@ -121,23 +137,31 @@ function validateModule (modFile, callback) {
           return modFileError(__('fail.mod.array_wrong_size'))
         }
 
-        exercise.emit('pass', __('pass.array_size'))
+        //---- Check for 'ext' instead of '.ext'
+        // N.B. This test complicates things as the remained of the function
+        // now has to be called from the mod callback otherwise we can an
+        // exception in workshopper-exercise/exercise.js
+        // Exercise.prototype.process in the line
+        // processors[i].call(self, mode, function (err, pass) {
+        mod(dir, '.md', function (err, list) {
+          if (compareArrays(exp, list)) {
+            return modFileError(__('fail.mod.dotExt'))
+          }
 
-        callbackUsed = true
+          exercise.emit('pass', __('pass.array_size'))
 
-        //---- Check that the elements are exactly the same as expected (ignoring order)
-        exp.sort()
-        list.sort()
-        for (i = 0; i < exp.length; i++) {
-          if (list[i] !== exp[i]) {
+          callbackUsed = true
+
+          //---- Check that the elements are exactly the same as expected (ignoring order)
+          if (!compareArrays(exp, list)) {
             return modFileError(__('fail.mod.array_comparison'))
           }
-        }
 
-        exercise.emit('pass', __('pass.final'))
+          exercise.emit('pass', __('pass.final'))
 
-        //WIN!!
-        callback()
+          //WIN!!
+          callback()
+        })
       })
     } catch (e) {
       return modFileError(__('fail.mod.unexpected', {error: util.inspect(e)}))
@@ -152,7 +176,6 @@ function validateModule (modFile, callback) {
     }, 300)
   }, 300)
 }
-
 
 // find any modules that are required by the submission program
 
