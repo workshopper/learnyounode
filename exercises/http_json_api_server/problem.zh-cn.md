@@ -14,13 +14,13 @@
 }
 ```
 
-然后增加一个接口，路径为 '/api/unixtime'，它可以接收相同的查询参数（query string），但是它的返回会包含一个属性：'unixtime'，相应值是一个 UNIX 时间戳。例如:
+然后增再加一个接口，路径为 '/api/unixtime'，它可以接收相同的查询参数（query string），但是它的返回会包含一个属性：'unixtime'，相应值是一个 UNIX 时间戳。例如:
 
 ```json
 { "unixtime": 1376136615474 }
 ```
 
-你的服务器应当监听第一个命令行参数所指定的端口。
+你的服务器需要监听第一个命令行参数所指定的端口。
 
 ----------------------------------------------------------------------
 ## 提示
@@ -28,7 +28,7 @@
 HTTP 服务器的 `request` 对象含有一个 `url` 属性，你可以通过它来决定具体需要走哪一条*"路由"*。
 
 你可以使用 Node 的核心模块 'url' 来处理 URL 和 查询参数（query string）。
-`url.parse(request.url, true)` 方法会处理 request.url，然后返回一个方便使用的对象。
+`url.parse(request.url, true)` 方法会处理 request.url，它返回的对象中包含了一些很有帮助的属性，方便方便你处理 querystring。
 
 举个例子，你可以在命令行窗口输入以下命令试试：
 
@@ -36,17 +36,17 @@ HTTP 服务器的 `request` 对象含有一个 `url` 属性，你可以通过它
 $ node -pe "require('url').parse('/test?q=1', true)"
 ```
 
-`url` 模块的文档，你可以使用浏览器访问如下路径来访问：
+关于 `url` 模块的文档，你可以使用浏览器访问如下路径来访问：
   {rootdir:/node_apidoc/url.html}
 
 你的响应应该是一个 JSON 字符串的形式。请查看 `JSON.stringify()` 来获取更多信息。
 
-你也应当争做 Web 世界的好公民，正确地设置 `Content-Type` 属性：
+你也应当争做 Web 世界的好公民，正确地为响应设置 `Content-Type` 属性：
 
 ```js
 res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
-JavaScript 的 `Date` 可以将日期以 ISO 的格式展现出来，如：`new Date().toISOString()`。并且，如果你把一个字符串传给 `Date`的构造函数，它也可以帮你将字符串处理成日期格式。另外，`Date#getTime()` 应该也会很有用。
+JavaScript 的 `Date` 可以将日期以 ISO 的格式展现出来，如：`new Date().toISOString()`。并且，如果你把一个字符串传给 `Date`的构造函数，它也可以帮你将字符串处理成日期类型。另外，`Date#getTime()` 放个应该也会很有用。
 
 ----------------------------------------------------------------------
