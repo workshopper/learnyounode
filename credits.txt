@@ -19,3 +19,4 @@ Takashi Fujita      @tgfjt
 Ryuta Nakashima     @AtuyL
 Leigh Zhu           @lisposter
 Toshiharu Harada    @haradats
+Lucas F. da Costa

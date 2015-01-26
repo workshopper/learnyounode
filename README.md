@@ -29,6 +29,7 @@ Once you have finished <b><code>learnyounode</code></b>, graduate to <b><code>[s
 <tr><th align="left">Tim Inman</th><td><a href="https://github.com/thehack">GitHub/thehack</a></td><td><a href="http://twitter.com/timinman">Twitter/@timinman</a></td></tr>
 <tr><th align="left">Dan Flettre</th><td><a href="https://github.com/Flet">GitHub/Flet</a></td><td><a href="http://twitter.com/flettre">Twitter/@flettre</a></td></tr>
 <tr><th align="left">Leigh Zhu</th><td><a href="https://github.com/lisposter">GitHub/lisposter</a></td><td><a href="http://twitter.com/lisposter">Twitter/@lisposter</a></td></tr>
+<tr><th align="left">Lucas F. da Costa</th><td><a href="https://github.com/lucasfcosta">GitHub/lucasfcosta</a></td><td></td></tr>
 </tbody></table>
 
 ## License
