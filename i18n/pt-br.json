@@ -1,0 +1,83 @@
+{
+	  "title"    : "Aprendendo Node.js para a mais plena vitória!"
+	, "subtitle" : "\u001b[23mSelecione um exercício e pressione \u001b[3mEnter\u001b[23m para começar"
+	, "menu": {
+		"credits": "CRÉDITOS"
+	}
+	, "exercise" : {
+		"HELLO WORLD": "OLÁ, MUNDO"
+	  , "BABY STEPS": "PASSOS DE BEBÊ"
+	  , "MY FIRST I/O!": "MEU PRIMEIRO I/O!"
+	  , "MY FIRST ASYNC I/O!": "MEU PRIMEIRO I/O ASSÍNCRONO!"
+	  , "FILTERED LS": "LISTA DE ARQUIVOS FILTRADOS"
+	  , "MAKE IT MODULAR": "FAÇA ISSO MODULAR"
+	  , "HTTP CLIENT": "CLIENTE HTTP"
+	  , "HTTP COLLECT": "COLETÂNEA HTTP"
+	  , "JUGGLING ASYNC": "BRINCANDO ASSÍNCRONAMENTE"
+	  , "TIME SERVER": "SERVIDOR DE TEMPO"
+	  , "HTTP FILE SERVER": "SERVIDOR DE ARQUIVOS HTTP"
+	  , "HTTP UPPERCASERER": "TRANSFORMADOR UPPERCASE HTTP"
+	  , "HTTP JSON API SERVER": "API DE SERVIDOR DE JSON HTTP"
+	}
+	, "common": {
+		"exercise": {
+			  "pass": {
+				  "sync": "Método síncrono utilizado: {{{method}}}"
+				, "async": "Método assíncrono utilizado: {{{method}}}"
+			}
+			, "fail": {
+				  "sync": "Método síncrono utilizado: {{{method}}}"
+				, "async": "Método assíncrono utilizado: {{{method}}}"
+				, "unused": "Método assíncrono do módulo `fs` utilizado."
+				, "unexpected_error": "Erro inesperado do servidor HTTP: {{{message}}}"
+				, "connection": "Erro ao conectar-se à {{{address}}}: {{{message}}}"
+			}
+		}
+	}
+	, "exercises": {
+		  "MAKE IT MODULAR": {
+			  "fail": {
+				  "missing_module": "Você não utilizou um arquivo de módulo adicional, é necessário que você use o require() para resolver este exercício"
+				, "loadError": "Erro ao carregar arquivo do módulo [{{path}}]: {{{message}}}"
+				, "mod": {
+					  "_base": "Seu arquivo de módulo adicional é: [{{path}}] {{{message}}}"	
+					, "no_export": "Não exporte um {{{method}}}. Você deve utilizar `module.exports = function () {}`."
+					, "singleFunction": "Uma só função."
+					, "arguments": "Exporte uma função que leve menos de {{{three}}} argumentos. Você deve receber um diretório, um filtro e um {{{callback}}}."
+					, "arguments_three": "três"
+					, "arguments_callback": "callback"
+					, "missing_callback": "O argumento de callback não foi chamado após um erro causado por fs.readdir()."
+					, "missing_error": "Não parece passar de volta um erro recebido de `fs.readdir()`.\n Utilize o seguinte padrão idiomático do Node.js dentro do seu callback: `fs.readdir()`:\n\tif (err)\n\t  return callback(err)"
+					, "callback_arguments": "Não retornou dois argumentos na função de callback (esperado `null` e um array de nomes de arquivos)."
+					, "array_wrong_size": "Não retornou um array com o número correto de elementos como segundo parâmetro do callback."
+					, "dotExt": "Você poderia estar fazendo confusão e utilizando \"ext\" em vez de \".ext\""
+					, "array_comparison": "Não retornou a lista de arquivos correta como segundo parâmetro do callback."
+					, "missing_array_argument": "Não retornou um objeto Array como segundo argumento do callback."
+					, "callback_error": "Seu callback retornou um erro:\n\t{{{error}}}"
+					, "timeout": "O argumento de callback não foi chamado."
+					, "unexpected": "Houve um erro:\n\t{{{error}}}"
+				}
+			}
+			, "pass": {
+				  "singleFunction": "O arquivo de módulo adicional exporta uma só função."
+				, "arguments": "O arquivo de módulo adicional exporta uma função que leva {{{count}}} argumentos"
+				, "error": "O arquivo de módulo adicional lida com os erros corretamente."
+				, "callback": "O arquivo de módulo adicional lida com callback corretamente."
+				, "callback_arguments": "O arquivo de módulo adicional retornou dois argumentos na função do callback."
+				, "array_argument": "O arquivo de módulo adicional retornou o número correto de elementos no segundo argumento do callback."
+				, "array_size": "O arquivo de módulo adicional retornou o número correto de elementos no segundo argumento do callback."
+				, "final": "O arquivo de módulo adicional retornou a lista correta de arquivos no segundo argumento do callback"
+			}
+		}
+		, "TIME SERVER": {
+			"fail": {
+				"connection": "Erro ao conectar-se ao localhost:{{port}}: {{{message}}}"
+			}
+		}
+		, "HTTP FILE SERVER": {
+			"fail": {
+				"no_createReadStream": "Outro método de fs utilizado em vez de fs.createReadStream(): {{{method}}}"
+			}
+		}
+	}
+}
