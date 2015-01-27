@@ -65,33 +65,29 @@ function query (mode) {
 
   function verify (port, stream) {
 
-    var url = 'http://localhost:' + port + '/api/parsetime?iso=' + date.toISOString();
+    function timeRequest(method, callback) {
+      var url = 'http://localhost:' + port + '/api/' + method + '?iso=' + date.toISOString();
+      return hyperquest.get(url)
+        .on('error', function (err) {
+          exercise.emit(
+              'fail'
+            , exercise.__('fail.connection', {address: url, message: err.message})
+          )
+        })
+        .pipe(bl(function (err, data) {
+          if (err)
+            return stream.emit('error', err)
 
-    function error (err) {
-      exercise.emit(
-          'fail'
-        , exercise.__('fail.connection', {address: url, message: err.message})
-      )
+          stream.write(normalizeJSON(data.toString()) + '\n')
+          callback()
+        }))
     }
 
-    hyperquest.get(url)
-      .on('error', error)
-      .pipe(bl(function (err, data) {
-        if (err)
-          return stream.emit('error', err)
-
-        stream.write(normalizeJSON(data.toString()) + '\n')
-
-        hyperquest.get(url)
-          .on('error', error)
-          .pipe(bl(function (err, data) {
-            if (err)
-              return stream.emit('error', err)
-
-            stream.write(normalizeJSON(data.toString()) + '\n')
-            stream.end()
-          }))
-      }))
+    timeRequest('parsetime', function () {
+      timeRequest('unixtime', function () {
+        stream.end()
+      })
+    })
   }
 
   verify(this.submissionPort, this.submissionStdout)
