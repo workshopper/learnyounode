@@ -33,6 +33,7 @@ Once you have finished <b><code>learnyounode</code></b>, graduate to <b><code>[s
 <tr><th align="left">Martin Heidegger</th><td><a href="https://github.com/martinheidegger">GitHub/martinheidegger</a></td><td><a href="http://twitter.com/leichtgewicht">Twitter/@leichtgewicht</a></td></tr>
 <tr><th align="left">Toshiharu Harada</th><td><a href="https://github.com/haradats">GitHub/haradats</a></td><td><a href="http://twitter.com/haradats">Twitter/@haradats</a></td></tr>
 <tr><th align="left">Eric Douglas</th><td><a href="https://github.com/ericdouglas">GitHub/ericdouglas</a></td><td><a href="http://twitter.com/ericdouglas_">Twitter/@ericdouglas_</a></td></tr>
+<tr><th align="left">Leonardo Nascimento</th><td><a href="https://github.com/leonascimento">GitHub/leonascimento</a></td><td><a href="http://twitter.com/leonardo386">Twitter/leonardo386</a></td></tr>
 </tbody></table>
 
 ## License
