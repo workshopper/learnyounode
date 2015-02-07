@@ -23,6 +23,6 @@ Objetos `Buffer` são a maneira do Node de representar eficientemente arrays arb
 A documentação sobre `Buffer`s pode ser encontrada apontando seu navegador para esse endereço:
   {rootdir:/node_apidoc/buffer.html}
 
-Se você estiver procurando por uma maneira fácil de contar o número de novas linhas em uma string, lembre-se que uma `String` JavaScript pode ser dividida usando `.split()` em um array de substrings e que '`\n`' pode ser usado como um delimitador. Note que o arquivo de teste não possui um caractere de nova linha ('`\n`') no fim da última linha, então ao usar esse método você vai acabar tendo um array com um elemento a mais do que o número de novas linhas.
+Se você estiver procurando por uma maneira fácil de contar o número de novas linhas em uma string, lembre-se que uma `String` JavaScript pode ser dividida usando `.split()` em um array de substrings e que '`\n`' pode ser usado como um delimitador.
 
 ----------------------------------------------------------------------

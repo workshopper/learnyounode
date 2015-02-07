@@ -23,6 +23,6 @@ Los objetos `Buffer` de Node's son una representación eficiente de Arrays de da
 Puedes leer la documentación del objeto `Buffer` en:
   {rootdir:/node_apidoc/buffer.html}
 
-Una forma sencilla de contar los números de línea es dividir el String con la función `split`, nativa de JavaScript, usando el carácter de nueva línea ('\n'). Ten en cuenta que el archivo puede no tener '\n' al final por lo que la lista resultante puede tener 1 elemento más que líneas el archivo.
+Una forma sencilla de contar los números de línea es dividir el String con la función `split`, nativa de JavaScript, usando el carácter de nueva línea ('\n').
 
 ----------------------------------------------------------------------

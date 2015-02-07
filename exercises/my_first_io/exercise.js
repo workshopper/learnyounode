@@ -45,7 +45,7 @@ exercise.addSetup(function (mode, callback) {
   this.solutionArgs.unshift(testFile)
 
   // file with random text
-  fs.writeFile(testFile, txt, 'utf8', callback)
+  fs.writeFile(testFile, txt + '\n', 'utf8', callback)
 })
 
 
