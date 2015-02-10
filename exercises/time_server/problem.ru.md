@@ -22,7 +22,7 @@
 function callback (socket) { /* ... */ }
 ```
 
-`net.createServer()` возвращает экземпляр `server`. Вы должны вызвать `server.listen(portNumber)` для того чтобы слушать заданный порт.
+`net.createServer()` возвращает экземпляр `server`. Вы должны вызвать `server.listen(portNumber)` для того чтобы стартовать сервер на заданом порту.
 
 Типичный Node TCP сервер выглядит так:
 
