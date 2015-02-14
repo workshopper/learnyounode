@@ -1,0 +1,19 @@
+{yellow}{bold}Возникли проблемы с {appname}?{/bold}{/yellow}
+
+  Команда экспертов готова помочь Вам в изучении основ Node.js,
+  для этого просто заведите задачу в nodeschool:
+    https://github.com/nodeschool/discussions/issues
+  И дайте нам знать с какими сложностями Вы столкнулись.
+  Не стесняйтесь, {italic}глупых{/italic} вопросов не бывает.
+
+  Если вам нужна помощь в решении каких-то общих вопросов
+  касаемых Node.js, то вы можете воспользоваться #Node.js
+  каналом на Freenode IRC или написать в группу
+  Node.js Google Group:
+    https://groups.google.com/forum/#!forum/nodejs
+
+{yellow}{bold}Нашли ошибку в {appname} или есть идеи по развитию?{/bold}{/yellow}
+
+  Официальный репозиторий {appname}:
+    https://github.com/rvagg/learnyounode/
+  Заводите задачи или отсылайте свои изменения.

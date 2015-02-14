@@ -1,0 +1,83 @@
+{
+	  "title"    : "ИЗУЧАЙТЕ NODE.JS!"
+	, "subtitle" : "\u001b[23mДля старта выберите задачу и нажмите \u001b[3mВвод\u001b[23m"
+	, "menu": {
+		"credits": "ПРИМЕАНИЯ"
+	}
+  ,  "exercise": {
+		"HELLO WORLD": "HELLO WORLD"
+	  , "BABY STEPS": "BABY STEPS"
+	  , "MY FIRST I/O!": "MY FIRST I/O!"
+	  , "MY FIRST ASYNC I/O!": "MY FIRST ASYNC I/O!"
+	  , "FILTERED LS": "FILTERED LS"
+	  , "MAKE IT MODULAR": "MAKE IT MODULAR"
+	  , "HTTP CLIENT": "HTTP CLIENT"
+	  , "HTTP COLLECT": "HTTP COLLECT"
+	  , "JUGGLING ASYNC": "JUGGLING ASYNC"
+	  , "TIME SERVER": "TIME SERVER"
+	  , "HTTP FILE SERVER": "HTTP FILE SERVER"
+	  , "HTTP UPPERCASERER": "HTTP UPPERCASERER"
+	  , "HTTP JSON API SERVER": "HTTP JSON API SERVER"
+  }
+	, "common": {
+		"exercise": {
+			  "pass": {
+				  "sync": "Использован синхронный метод: {{{method}}}"
+				, "async": "Использован асинхронный метод: {{{method}}}"
+			}
+			, "fail": {
+				  "sync": "Использован синхронный метод: {{{method}}}"
+				, "async": "Использован асинхронный метод: {{{method}}}"
+				, "unused": "Использован асинхронный метод и `fs` модуля."
+				, "unexpected_error": "Ошибка HTTP сервера: {{{message}}}"
+				, "connection": "Ошибка соединения {{{address}}}: {{{message}}}"
+			}
+		}
+	}
+	, "exercises": {
+		  "MAKE IT MODULAR": {
+			  "fail": {
+				  "missing_module": "Не был использован файл с дополнительным модулем, вы должны использовать require() для того чтобы решить эту задачу"
+				, "loadError": "Ошибка загрузки файла [{{path}}]: {{{message}}}"
+				, "mod": {
+					  "_base": "Ваш файл с доплнительным модулем [{{path}}] {{{message}}}"	
+					, "no_export": "не экспортирован метод {{{method}}}. Вы должны использовать конструкцию вида `module.exports = function () {}`"
+					, "singleFunction": "функция"
+					, "arguments": "экспортирована функция, которая принимает меньше, чем {{three}}} аргументов. Вы должны принимать директорию, фильтр и {{{callback}}}."
+					, "arguments_three": "три"
+					, "arguments_callback": "функция обратного вызова"
+					, "missing_callback": "не была вызвана функция обратного вызова после принятой ошибки из fs.readdir()"
+					, "missing_error": "похоже, не была передана ошибка полученная из `fs.readdir()`\n Используйте следующий паттерн внутри переданной в `fs.readdir()` функции:\n\tif (err)\n\t  return callback(err)"
+					, "callback_arguments": "не были получены два аргумента в функции обратного вызова (ожидались `null` и массив файловых имен)"
+					, "array_wrong_size": "не был получен массив с верным числом элементов."
+					, "dotExt": "может быть \"ext\" вместо \".ext\""
+					, "array_comparison": "не был получен верный список файловых имен."
+					, "missing_array_argument": "не был получен массив в качестве второго аргумента функции обратного вызова"
+					, "callback_error": "получена ошибка в функции обратного вызова:\n\t{{{error}}}"
+					, "timeout": "не была вызвана функция обратного вызова"
+					, "unexpected": "возвращена ошибка:\n\t{{{error}}}"
+				}
+			}
+			, "pass": {
+				  "singleFunction": "Файл с дополнительным модулем экспортирует функцию"
+				, "arguments": "Файл с дополнительным модулем экспортирует функцию, которая принимает {{{count}}} аргументов"
+				, "error": "Файл с дополнительным модулем корректно обработал ошибку"
+				, "callback": "Файл с дополнительным модулем корректно обработал функцию обратного выхова"
+				, "callback_arguments": "Файл с дополнительным модулем вернул два аргумента в функции обратного вызова"
+				, "array_argument": "Файл с дополнительным модулем вернул верное количество элементов в качестве второго аргумента функции обратного вызова"
+				, "array_size": "Файл с дополнительным модулем вернул верное количество элементов в качестве второго аргумента функции обратного вызова"
+				, "final": "Файл с дополнительным модулем вернул список файлов в качестве второго аргумента функции обратного вызова"
+			}
+		}
+		, "TIME SERVER": {
+			"fail": {
+				"connection": "Ошибка соединения к localhost:{{port}}: {{{message}}}"
+			}
+		}
+		, "HTTP FILE SERVER": {
+			"fail": {
+				"no_createReadStream": "Использован отличный от fs.createReadStream() метод fs модуля: {{{method}}}"
+			}
+		}
+	}
+}
