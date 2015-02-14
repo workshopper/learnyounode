@@ -1,0 +1,24 @@
+{yellow}{bold}Un souci avec un exercice de {appname} ?{/bold}{/yellow}
+
+  Une équipe d’assistants elfiques experts n’attend que l’occasion de
+  vous aider à maîtriser les bases de Node.js, allez simplement sur :
+
+    https://github.com/nodeschool/discussions/issues
+
+  et ajoutez une {bold}Nouvelle Requête{/bold} ({italic}New Issue{/italic}) pour nous
+  faire savoir ce qui vous pose problème.  Il n’y a pas de questions {italic}débiles{/italic} !
+
+  Si vous cherchez de l’aide plus globale sur Node.js, le canal #Node.js
+  sur Freenode IRC est généralement un excellent point de départ pour
+  trouver quelqu’un qui voudra bien vous aider.  Il existe aussi un
+  Google Group Node.js :
+
+    https://groups.google.com/forum/#!forum/nodejs
+
+{yellow}{bold}Vous avez trouvé un bogue dans {appname} ou voulez juste contribuer ?{/bold}{/yellow}
+
+  Le dépôt officiel pour {appname} est ici :
+
+    https://github.com/rvagg/learnyounode/
+
+  N’hésitez pas à créer un ticket ou (de préférence) faire une {italic}pull request{/italic}…
