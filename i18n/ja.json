@@ -1,82 +1,82 @@
 {
-      "title"    : "Node.jsを学んで豊かな人生を！"
-    , "subtitle" : "\u001b[23m演習課題を選択、 \u001b[3mEnter\u001b[23m 押してスタートします。"
-	, "exercise" : {
-		"HELLO WORLD": "こんにちは世界"
-	  , "BABY STEPS": "ベイビーステップ"
-	  , "MY FIRST I/O!": "初めてのI/O！"
-	  , "MY FIRST ASYNC I/O!": "初めての非同期I/O！"
-	  , "FILTERED LS": "LSのフィルター"
-	  , "MAKE IT MODULAR": "モジュラーにしましょう"
-	  , "HTTP CLIENT": "HTTP クライアント"
-	  , "HTTP COLLECT": "HTTP 集める"
-	  , "JUGGLING ASYNC": "ASYNCジャグリング"
-	  , "TIME SERVER": "タイムサーバ"
-	  , "HTTP FILE SERVER": "HTTP ファイルサーバ"
-	  , "HTTP UPPERCASERER": "HTTP アッパーケース"
-	  , "HTTP JSON API SERVER": "HTTP JSON API サーバ"
-	}
-	, "menu": {
-		"credits": "謝辞"
-	}
-	, "common": {
-		"exercise": {
-			  "pass": {
-				  "sync": "同期(syncronus)メソッドが用いられています: {{{method}}}"
-				, "async": "非同期(asyncronus)メソッドが用いられています: {{{method}}}"
-			}
-			, "fail": {
-				  "sync": "同期(syncronus)メソッドが用いられています: {{{method}}}"
-				, "async": "非同期(asyncronus)メソッドが用いられています: {{{method}}}"
-				, "unused": "`fs`モジュールから非同期(asyncronus)メソッドが用いられています"
-				, "unexpected_error": "HTTPサーバから予期せぬエラーが返されました: {{{message}}}"
-			}
-		}
-	}
-	, "exercises": {
-		"MAKE IT MODULAR": {
-			  "fail": {
-				  "missing_module": "追加されたモジュールファイルが用いられていません。この演習課題を行うためには、require() が必要です"
-				, "loadError": "モジュールファイル [{{path}}] 読み込み中にエラーが発生しました: {{{message}}}"
-				, "mod": {
-					  "_base": "あなたが追加したモジュールファイル [{{path}}] {{{message}}}"	
-					, "no_export": "{{{method}}} をエクスポートしていません。 `module.exports = function () {}` の形式を用いてください。"
-					, "singleFunction": "single function"
-					, "arguments": "{{{three}}}より少ない引数を受け取る関数をエキスポートしています。ディレクトリ、フィルター、そして{{{callback}}}を受け付けなければいけません。"
-					, "arguments_three": "三つ"
-					, "arguments_callback": "コールバック"
-					, "missing_callback": "fs.readdir() 内でのエラー発生後、コールバック引数を呼んでいません。"
-					, "missing_error": "`fs.readdir()` から受けとったエラーを伝えていないようです。\n あなたの書いたコールバックの中の `fs.readdir()` 呼び出しについて、次の Node.js の慣用的なパターンを用いるようにしてください:\n\tif (err)\n\t  return callback(err)"
-					, "callback_arguments": "コールバック関数に2つの引数を返却していません (`null` とファイル名の配列を期待していました)"
-					, "array_wrong_size": "コールバックの2つめの引数に、正しい要素の数を格納した配列が返却されませんでした"
-					, "dotExt": "\".ext\" ではなく \"ext\" にマッチさせているかもしれません"
-					, "array_comparison": "コールバックの2つめの引数に正しいファイルのリストを返却していません"
-					, "missing_array_argument": "コールバックの2つめの引数に配列オブジェクトを返却していません"
-					, "callback_error": "コールバックでエラーが返却されました:\n\t{{{error}}}"
-					, "timeout": "コールバック引数を呼びませんでした"
-					, "unexpected": "エラーがthrowされました:\n\t{{{error}}}"
-				}
-			}
-			, "pass": {
-				  "singleFunction": "追加されたモジュールファイルは、ひとつの関数をエキスポートします。"
-				, "arguments": "追加されたモジュールファイルは、 {{{count}}} 個の引数を受け取る関数をエキスポートします。"
-				, "error": "追加されたモジュールファイルは、エラーを適切に処理します。"
-				, "callback": "追加されたモジュールファイルは、コールバック引数を処理します。"
-				, "callback_arguments": "追加されたモジュールファイルは、コールバックに2つの引数を返却しました。"
-				, "array_argument": "追加されたモジュールファイルは、コールバックの2つめの引数として正しい引数の数を返却しました。"
-				, "array_size": "追加されたモジュールファイルは、コールバックの2つめの引数として正しい引数の数を返却しました。"
-				, "final": "追加されたモジュールファイルは、コールバックの2つめの引数として正しいファイルの一覧を返却しました。"
-			}
-		}
-		, "TIME SERVER": {
-			"fail": {
-				"connection": "localhost:{{port}}への接続中にエラーが発生しました: {{{message}}}"
-			}
-		}
-		, "HTTP FILE SERVER": {
-			"fail": {
-				"no_createReadStream": "fs.createReadStream()ではない fs メソッドが用いられています : {{{method}}}"
-			}
-		}
-	}
+  "title": "Node.jsを学んで豊かな人生を！",
+  "subtitle": "\u001b[23m演習課題を選択、 \u001b[3mEnter\u001b[23m 押してスタートします。",
+  "exercise": {
+    "HELLO WORLD": "こんにちは世界",
+    "BABY STEPS": "ベイビーステップ",
+    "MY FIRST I/O!": "初めてのI/O！",
+    "MY FIRST ASYNC I/O!": "初めての非同期I/O！",
+    "FILTERED LS": "LSのフィルター",
+    "MAKE IT MODULAR": "モジュラーにしましょう",
+    "HTTP CLIENT": "HTTP クライアント",
+    "HTTP COLLECT": "HTTP 集める",
+    "JUGGLING ASYNC": "ASYNCジャグリング",
+    "TIME SERVER": "タイムサーバ",
+    "HTTP FILE SERVER": "HTTP ファイルサーバ",
+    "HTTP UPPERCASERER": "HTTP アッパーケース",
+    "HTTP JSON API SERVER": "HTTP JSON API サーバ"
+  },
+  "menu": {
+    "credits": "謝辞"
+  },
+  "common": {
+    "exercise": {
+      "pass": {
+        "sync": "同期(syncronus)メソッドが用いられています: {{{method}}}",
+        "async": "非同期(asyncronus)メソッドが用いられています: {{{method}}}"
+      },
+      "fail": {
+        "sync": "同期(syncronus)メソッドが用いられています: {{{method}}}",
+        "async": "非同期(asyncronus)メソッドが用いられています: {{{method}}}",
+        "unused": "`fs`モジュールから非同期(asyncronus)メソッドが用いられています",
+        "unexpected_error": "HTTPサーバから予期せぬエラーが返されました: {{{message}}}"
+      }
+    }
+  },
+  "exercises": {
+    "MAKE IT MODULAR": {
+      "fail": {
+        "missing_module": "追加されたモジュールファイルが用いられていません。この演習課題を行うためには、require() が必要です",
+        "loadError": "モジュールファイル [{{path}}] 読み込み中にエラーが発生しました: {{{message}}}",
+        "mod": {
+          "_base": "あなたが追加したモジュールファイル [{{path}}] {{{message}}}",
+          "no_export": "{{{method}}} をエクスポートしていません。 `module.exports = function () {}` の形式を用いてください。",
+          "singleFunction": "single function",
+          "arguments": "{{{three}}}より少ない引数を受け取る関数をエキスポートしています。ディレクトリ、フィルター、そして{{{callback}}}を受け付けなければいけません。",
+          "arguments_three": "三つ",
+          "arguments_callback": "コールバック",
+          "missing_callback": "fs.readdir() 内でのエラー発生後、コールバック引数を呼んでいません。",
+          "missing_error": "`fs.readdir()` から受けとったエラーを伝えていないようです。\n あなたの書いたコールバックの中の `fs.readdir()` 呼び出しについて、次の Node.js の慣用的なパターンを用いるようにしてください:\n\tif (err)\n\t  return callback(err)",
+          "callback_arguments": "コールバック関数に2つの引数を返却していません (`null` とファイル名の配列を期待していました)",
+          "array_wrong_size": "コールバックの2つめの引数に、正しい要素の数を格納した配列が返却されませんでした",
+          "dotExt": "\".ext\" ではなく \"ext\" にマッチさせているかもしれません",
+          "array_comparison": "コールバックの2つめの引数に正しいファイルのリストを返却していません",
+          "missing_array_argument": "コールバックの2つめの引数に配列オブジェクトを返却していません",
+          "callback_error": "コールバックでエラーが返却されました:\n\t{{{error}}}",
+          "timeout": "コールバック引数を呼びませんでした",
+          "unexpected": "エラーがthrowされました:\n\t{{{error}}}"
+        }
+      },
+      "pass": {
+        "singleFunction": "追加されたモジュールファイルは、ひとつの関数をエキスポートします。",
+        "arguments": "追加されたモジュールファイルは、 {{{count}}} 個の引数を受け取る関数をエキスポートします。",
+        "error": "追加されたモジュールファイルは、エラーを適切に処理します。",
+        "callback": "追加されたモジュールファイルは、コールバック引数を処理します。",
+        "callback_arguments": "追加されたモジュールファイルは、コールバックに2つの引数を返却しました。",
+        "array_argument": "追加されたモジュールファイルは、コールバックの2つめの引数として正しい引数の数を返却しました。",
+        "array_size": "追加されたモジュールファイルは、コールバックの2つめの引数として正しい引数の数を返却しました。",
+        "final": "追加されたモジュールファイルは、コールバックの2つめの引数として正しいファイルの一覧を返却しました。"
+      }
+    },
+    "TIME SERVER": {
+      "fail": {
+        "connection": "localhost:{{port}}への接続中にエラーが発生しました: {{{message}}}"
+      }
+    },
+    "HTTP FILE SERVER": {
+      "fail": {
+        "no_createReadStream": "fs.createReadStream()ではない fs メソッドが用いられています : {{{method}}}"
+      }
+    }
+  }
 }
