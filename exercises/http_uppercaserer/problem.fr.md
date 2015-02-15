@@ -7,7 +7,7 @@ argument de la ligne de commande.
 
 ----------------------------------------------------------------------
 
-## ASTUCES
+## CONSEILS
 
 Même s’il n’est pas impératif que vous vous cantonniez aux capacités orientées
 flux des objets `request` et `response`, la solution sera nettement plus

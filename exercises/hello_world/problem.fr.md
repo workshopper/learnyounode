@@ -2,7 +2,7 @@
 
 ----------------------------------------------------------------------
 
-## ASTUCES
+## CONSEILS
 
 Pour faire un programme Node.js, créez un nouveau fichier avec l’extension
 `.js`, par exemple `program.js`, et tapez-y du JavaScript !  Exécutez-le

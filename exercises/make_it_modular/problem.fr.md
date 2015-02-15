@@ -52,7 +52,7 @@ tel quel.
 
 ----------------------------------------------------------------------
 
-## ASTUCES
+## CONSEILS
 
 Créez un nouveau module en créant simplement un nouveau fichier qui
 contiendrait votre fonction de lecture de répertoire et de filtrage.

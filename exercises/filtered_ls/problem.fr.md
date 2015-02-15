@@ -14,7 +14,7 @@ fichier par ligne.  Vous **devez** utiliser des E/S asynchrones.
 
 ----------------------------------------------------------------------
 
-## ASTUCES
+## CONSEILS
 
 La méthode `fs.readdir()` prend un chemin comme premier argument et une
 fonction de rappel en deuxième.  La signature de la fonction de rappel est :

@@ -7,7 +7,7 @@ de la ligne de commande.
 
 ----------------------------------------------------------------------
 
-## ASTUCES
+## CONSEILS
 
 Tout ce qui touche au système de fichiers se trouve dans le module noyau `fs`
 (un module noyau est fourni de base par Node).  Pour charger ce type de

@@ -33,7 +33,7 @@ premier argument de la ligne de commande.
 
 ----------------------------------------------------------------------
 
-## ASTUCES
+## CONSEILS
 
 L’objet `request` fourni par le serveur HTTP a une propriété `url` dont vous
 aurez besoin pour *« router »* les requêtes vers le bon point d’accès.

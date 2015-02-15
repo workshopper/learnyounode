@@ -10,7 +10,7 @@ ordre** que celui des URLs transmises sur la ligne de commande.
 
 ----------------------------------------------------------------------
 
-## ASTUCES
+## CONSEILS
 
 Ne vous attendez pas à ce que les trois serveurs soient sympa !  Ils ne vous
 enverront pas leurs réponses complètes dans l’ordre que vous espérez, donc

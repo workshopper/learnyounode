@@ -10,7 +10,7 @@ fichier que vous devrez servir.  Vous **devez** utiliser la méthode
 
 ----------------------------------------------------------------------
 
-## ASTUCES
+## CONSEILS
 
 Parce que nous avons besoin d’un serveur HTTP pour cet exercice, et non d’un
 serveur TCP générique, nous utiliserons le module noyau `http`.  Tout comme le

@@ -4,7 +4,7 @@ la ligne de commande, et affiche la somme de ces nombres sur la console
 
 ----------------------------------------------------------------------
 
-## ASTUCES
+## CONSEILS
 
 Vous pouvez accéder aux arguments de la ligne de commande via l’objet global
 `process`.  L’objet `process` a une propriété `argv` qui est un tableau

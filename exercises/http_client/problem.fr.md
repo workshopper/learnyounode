@@ -5,7 +5,7 @@ ligne dans la console (stdout).
 
 ----------------------------------------------------------------------
 
-## ASTUCES
+## CONSEILS
 
 Pour cet exercice, vous aurez besoin du module noyau `http`.
 

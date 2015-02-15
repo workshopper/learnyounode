@@ -9,7 +9,7 @@ complète reçue du serveur.
 
 ----------------------------------------------------------------------
 
-## ASTUCES
+## CONSEILS
 
 Il y a deux approches pour résoudre ce problème :
 

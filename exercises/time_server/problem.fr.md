@@ -19,7 +19,7 @@ minutes doivent absolument être présentés sur 2 chiffres avec, si besoin, un
 
 ----------------------------------------------------------------------
 
-## ASTUCES
+## CONSEILS
 
 Pour cet exercice, nous allons créer un serveur TCP brut.  Il n’y a pas de
 besoin HTTP sur ce coup, nous allons donc utiliser le module `net`, un autre
