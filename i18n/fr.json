@@ -20,19 +20,19 @@
     }
   },
   "exercise": {
-    "HELLO WORLD": "Bonjour, Monde",
-    "BABY STEPS": "Premiers pas",
-    "MY FIRST I/O!": "Ma première E/S !",
-    "MY FIRST ASYNC I/O!": "Ma première E/S asynchrone !",
-    "FILTERED LS": "Listing filtré",
-    "MAKE IT MODULAR": "Modularise-moi ça",
-    "HTTP CLIENT": "Client HTTP",
-    "HTTP COLLECT": "Collecteur HTTP",
-    "JUGGLING ASYNC": "Jongler avec l'asynchrone",
-    "TIME SERVER": "Serveur de temps",
-    "HTTP FILE SERVER": "Serveur de fichiers HTTP",
-    "HTTP UPPERCASERER": "Convertisseur en majuscules HTTP",
-    "HTTP JSON API SERVER": "Serveur d'API JSON en HTTP"
+    "HELLO WORLD": "BONJOUR, MONDE",
+    "BABY STEPS": "PREMIERS PAS",
+    "MY FIRST I/O!": "MA PREMIÈRE E/S !",
+    "MY FIRST ASYNC I/O!": "MA PREMIÈRE E/S ASYNCHRONE !",
+    "FILTERED LS": "LISTING FILTRÉ",
+    "MAKE IT MODULAR": "MODULARISE-MOI ÇA",
+    "HTTP CLIENT": "CLIENT HTTP",
+    "HTTP COLLECT": "COLLECTEUR HTTP",
+    "JUGGLING ASYNC": "JONGLER AVEC L'ASYNCHRONE",
+    "TIME SERVER": "SERVEUR DE TEMPS",
+    "HTTP FILE SERVER": "SERVEUR DE FICHIERS HTTP",
+    "HTTP UPPERCASERER": "CONVERTISSEUR EN MAJUSCULES HTTP",
+    "HTTP JSON API SERVER": "SERVEUR D'API JSON EN HTTP"
   },
   "exercises": {
     "MAKE IT MODULAR": {
