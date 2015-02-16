@@ -39,8 +39,8 @@
     "through": "~2.3.6",
     "through2": "~0.6.3",
     "through2-map": "~1.4.0",
-    "workshopper": "~2.3.0",
-    "workshopper-exercise": "~2.2.0",
+    "workshopper": "~2.3.1",
+    "workshopper-exercise": "~2.3.0",
     "workshopper-wrappedexec": "~0.1.1"
   },
   "bin": {
