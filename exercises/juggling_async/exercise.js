@@ -82,6 +82,9 @@ exercise.addSetup(function (mode, callback) {
 exercise.addCleanup(function (mode, passed, callback) {
   // mode == 'run' || 'verify'
 
+  if (!this.servers)
+    return process.nextTick(callback)
+
   // close all 3 servers
   var done = after(3, callback)
   this.servers.forEach(function (s) {
