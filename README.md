@@ -34,6 +34,7 @@ Once you have finished <b><code>learnyounode</code></b>, graduate to <b><code>[s
 <tr><th align="left">Toshiharu Harada</th><td><a href="https://github.com/haradats">GitHub/haradats</a></td><td><a href="http://twitter.com/haradats">Twitter/@haradats</a></td></tr>
 <tr><th align="left">Eric Douglas</th><td><a href="https://github.com/ericdouglas">GitHub/ericdouglas</a></td><td><a href="http://twitter.com/ericdouglas_">Twitter/@ericdouglas_</a></td></tr>
 <tr><th align="left">Alejandro Oviedo</th><td><a href="https://github.com/a0viedo">GitHub/a0viedo</a></td><td><a href="http://twitter.com/a0viedo">Twitter/@a0viedo</a></td></tr>
+<tr><th align="left">Christophe Porteneuve</th><td><a href="https://github.com/tdd">GitHub/tdd</a></td><td><a href="http://twitter.com/porteneuve">Twitter/@porteneuve</a></td></tr>
 </tbody></table>
 
 ## License

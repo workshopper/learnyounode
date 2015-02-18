@@ -1,0 +1,83 @@
+{
+  "title": "APPRENDS NODE POUR ÊTRE TROP BALÈZE !",
+  "subtitle" : "\u001b[23mSélectionnez un exercice et tapez \u001b[3mEnter\u001b[23m pour démarrer",
+  "menu": {
+    "credits": "CRÉDITS"
+  },
+  "common": {
+    "exercise": {
+      "pass": {
+        "sync": "Recours à une méthode synchrone : {{{method}}}",
+        "async": "Recourse à une méthode asynchrone : {{{method}}}"
+      },
+      "fail": {
+        "sync": "Recours à une méthode synchrone : {{{method}}}",
+        "async": "Recours à une méthode asynchrone : {{{method}}}",
+        "unused": "Recours à une méthode asynchrone du module `fs`.",
+        "unexpected_error": "Erreur inattendue du serveur HTTP : {{{message}}}",
+        "connection": "Erreur de connexion à {{{address}}}: {{{message}}}"
+      }
+    }
+  },
+  "exercise": {
+    "HELLO WORLD": "BONJOUR, MONDE",
+    "BABY STEPS": "PREMIERS PAS",
+    "MY FIRST I/O!": "MA PREMIÈRE E/S !",
+    "MY FIRST ASYNC I/O!": "MA PREMIÈRE E/S ASYNCHRONE !",
+    "FILTERED LS": "LISTING FILTRÉ",
+    "MAKE IT MODULAR": "MODULARISE-MOI ÇA",
+    "HTTP CLIENT": "CLIENT HTTP",
+    "HTTP COLLECT": "COLLECTEUR HTTP",
+    "JUGGLING ASYNC": "JONGLER AVEC L'ASYNCHRONE",
+    "TIME SERVER": "SERVEUR DE TEMPS",
+    "HTTP FILE SERVER": "SERVEUR DE FICHIERS HTTP",
+    "HTTP UPPERCASERER": "CONVERTISSEUR EN MAJUSCULES HTTP",
+    "HTTP JSON API SERVER": "SERVEUR D'API JSON EN HTTP"
+  },
+  "exercises": {
+    "MAKE IT MODULAR": {
+      "fail": {
+        "missing_module": "Pas d’utilisation d’un fichier module supplémentaire ; vous devez requérir (`require()`) un module pour résoudre cet exercice.",
+        "loadError": "Erreur au chargement du fichier de module [{{path}}] : {{{message}}}",
+        "mod": {
+          "_base": "Votre fichier de module additionnel [{{path}}] {{{message}}}",
+          "no_export": "n’exporte pas de méthode {{{method}}}. Vous devez utiliser le motif `module.exports = function () {}`.",
+          "singleFunction": "fonction unique",
+          "arguments": "exporte une fonction qui accepte moins de {{{three}}} arguments. Vous devez accepter un répertoire, un filtre et une {{{callback}}}.",
+          "arguments_three": "trois",
+          "arguments_callback": "fonction de rappel",
+          "missing_callback": "n’a pas appelé la fonction de rappel passée en argument après une erreur de `fs.readdir()`",
+          "missing_error": "ne semble pas faire remonter l’erreur reçue de `fs.readdir()`.\n  Utilisez le motif Node.js idiomatique suivant dans votre fonction de rappel pour `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
+          "callback_arguments": "n’a pas passé deux arguments à la fonction de rappel (on attendait `null` et un tableau de noms de fichiers)",
+          "array_wrong_size": "n’a pas passé un tableau avec le bon nombre d’éléments comme second argument de la fonction de rappel",
+          "dotExt": "fait peut-être une correspondance sur \"ext\" au lieu de \".ext\"",
+          "array_comparison": "n’a pas passé la bonne liste de fichiers en second argument de la fonction de rappel",
+          "missing_array_argument": "n’a pas passé un objet `Array` en second argument de la fonction de rappel",
+          "callback_error": "a passé une erreur à sa fonction de rappel :\n\t{{{error}}}",
+          "timeout": "n’a pas appelé la fonction de rappel",
+          "unexpected": "a levé une erreur :\n\t{{{error}}}"
+        }
+      },
+      "pass": {
+        "singleFunction": "Le fichier module additionnel exporte une unique fonction",
+        "arguments": "Le fichier module additionnel exporte une fonction qui prend {{{count}}} arguments",
+        "error": "Le fichier module additionnel traite correctement les erreurs",
+        "callback": "Le fichier module additionnel traite l’argument fonction de rappel",
+        "callback_arguments": "Le fichier module additionnel a passé deux arguments à la fonction de rappel",
+        "array_argument": "Le fichier module additionnel a passé un objet `Array` en second argument de la fonction de rappel",
+        "array_size": "Le fichier module additionnel a passé le bon nombre d’éléments en second argument de la fonction de rappel",
+        "final": "Le fichier module additionnel a passé la bonne liste de fichiers en second argument de la fonction de rappel"
+      }
+    },
+    "TIME SERVER": {
+      "fail": {
+        "connection": "Erreur de connexion à localhost:{{port}} : {{{message}}}"
+      }
+    },
+    "HTTP FILE SERVER": {
+      "fail": {
+        "no_createReadStream": "Recours à une méthode de `fs` autre que `fs.createReadStream()` : {{{method}}}"
+      }
+    }
+  }
+}

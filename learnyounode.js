@@ -11,7 +11,7 @@ function fpath (f) {
 workshopper({
       name        : 'learnyounode'
     , appDir      : __dirname
-    , languages   : ['en', 'es', 'ja', 'zh-cn', 'zh-tw', 'pt-br', 'ru']
+    , languages   : ['en', 'es', 'fr', 'ja', 'zh-cn', 'zh-tw', 'pt-br', 'ru']
     , helpFile    : fpath('./i18n/help/{lang}.txt')
     , menuItems   : [ {
           name    : 'credits'

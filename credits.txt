@@ -15,9 +15,10 @@ atomizer            @atomizer
 franza              @franza‎
 gargol              @gargol
 Martin Heidegger    @martinheidegger
-Takashi Fujita      @tgfjt 
+Takashi Fujita      @tgfjt
 Ryuta Nakashima     @AtuyL
 Leigh Zhu           @lisposter
 Toshiharu Harada    @haradats
 Lucas F. da Costa
 Eric Douglas        @ericdouglas
+Chris. Porteneuve   @tdd
