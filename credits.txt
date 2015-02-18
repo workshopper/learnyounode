@@ -1,18 +1,18 @@
 Rod Vagg            @rvagg
 Andrey Sidorov      @sidorares
-Julian Duque        @julianduque‎
-Tim Inman           @thehack‎
+Julian Duque        @julianduque
+Tim Inman           @thehack
 lms                 @ralphtheninja
-Brynn Bateman       @brynnb‎
-Chris Contolini     @contolini‎
+Brynn Bateman       @brynnb
+Chris Contolini     @contolini
 Dan Flettre         @Flet
 Jeff Kile           @jeffkile
-Joel Kemp           @mrjoelkemp‎
+Joel Kemp           @mrjoelkemp
 Jonathan Klein      @jklein
-Justin Noel         @calendee‎
-Oli Evans           @olizilla‎
+Justin Noel         @calendee
+Oli Evans           @olizilla
 atomizer            @atomizer
-franza              @franza‎
+franza              @franza
 gargol              @gargol
 Martin Heidegger    @martinheidegger
 Takashi Fujita      @tgfjt
@@ -21,4 +21,5 @@ Leigh Zhu           @lisposter
 Toshiharu Harada    @haradats
 Lucas F. da Costa
 Eric Douglas        @ericdouglas
+Leonardo Nasicmento @leonascimento
 Chris. Porteneuve   @tdd
