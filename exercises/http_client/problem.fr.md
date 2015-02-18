@@ -24,10 +24,10 @@ Contrairement aux autres fonctions de rappel, celle-ci a comme signature :
 function callback (response) { /* ... */ }
 ```
 
-…dans laquelle l’objet `response` est un objet **flux** Node.  Vous pouvez
-traiter les flux Node comme des objets émettant des événements.  Les trois
-événements qui nous intéressent le plus sont : 'data', 'error' et 'end'.
-Vous pouvez écouter un événement comme ceci :
+…dans laquelle l’objet `response` est un objet **flux** (*stream*) Node.
+Vous pouvez traiter les flux Node comme des objets émettant des événements.
+Les trois événements qui nous intéressent le plus sont : 'data', 'error'
+et 'end'.  Vous pouvez écouter un événement comme ceci :
 
 ```js
 response.on("data", function (data) { /* ... */ });
