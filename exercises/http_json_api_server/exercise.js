@@ -65,22 +65,26 @@ function query (mode) {
 
   function verify (port, stream) {
 
-    function timeRequest(method, callback) {
+    function timeRequest (method, callback) {
       var url = 'http://localhost:' + port + '/api/' + method + '?iso=' + date.toISOString();
-      return hyperquest.get(url)
-        .on('error', function (err) {
-          exercise.emit(
-              'fail'
-            , exercise.__('fail.connection', {address: url, message: err.message})
-          )
-        })
-        .pipe(bl(function (err, data) {
-          if (err)
-            return stream.emit('error', err)
 
-          stream.write(normalizeJSON(data.toString()) + '\n')
-          callback()
-        }))
+      function onData (err, _data) {
+        if (err)
+          exercise.emit('fail', exercise.__('fail.connection', { address: url, message: err.message }))
+
+        var data = _data.toString()
+
+        try {
+          data = normalizeJSON(data.toString())
+        } catch (e) {
+        }
+
+        stream.write(data + '\n')
+
+        callback()
+      }
+
+      return hyperquest.get(url).pipe(bl(onData))
     }
 
     timeRequest('parsetime', function () {
@@ -91,7 +95,6 @@ function query (mode) {
   }
 
   verify(this.submissionPort, this.submissionStdout)
-
   if (mode == 'verify')
     verify(this.solutionPort, this.solutionStdout)
 }
