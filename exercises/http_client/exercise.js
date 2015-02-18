@@ -49,6 +49,9 @@ exercise.addSetup(function (mode, callback) {
 exercise.addCleanup(function (mode, passed, callback) {
   // mode == 'run' || 'verify'
 
+  if (!this.server)
+    return process.nextTick(callback)
+
   this.server.close(callback)
 })
 
