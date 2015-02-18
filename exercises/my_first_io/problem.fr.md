@@ -3,7 +3,7 @@ de fichiers pour lire un fichier et afficher son nombre de fins de ligne sur
 la console (stdout), un peu comme si vous faisiez `cat file | wc -l`.
 
 Le chemin complet du fichier à lire vous sera fourni comme premier argument
-de la ligne de commande.
+de la ligne de commande.  Il est inutile de faire votre propre fichier de test.
 
 ----------------------------------------------------------------------
 
