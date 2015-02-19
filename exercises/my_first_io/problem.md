@@ -1,4 +1,4 @@
-Write a program that uses a single **synchronous** filesystem operation to read a file and print the number of newlines it contains to the console (stdout), similar to running `cat file | wc -l`.
+Write a program that uses a single **synchronous** filesystem operation to read a file and print the number of newlines it contains to the console (stdout), similar to running `cat file | wc -l`. (`wc` will count the number of lines, not newlines, so your result will be 1 greater.)
 
 The full path to the file to read will be provided as the first command-line argument. You do not need to make your own test file. 
 
