@@ -73,7 +73,7 @@ exercise.addVerifyProcessor(function (callback) {
       this.emit('fail', this.__('fail.sync', {method: 'fs.' + m + '()'}))
     } else {
       usedAsync = true
-      this.emit('pass', this.__('pass.sync', {method: 'fs.' + m + '()'}))
+      this.emit('pass', this.__('pass.async', {method: 'fs.' + m + '()'}))
     }
   }.bind(this))
 
