@@ -15,7 +15,7 @@
 
 <b><code>learnyounode</code></b> là một tập các bài tập về Node.js. Các bài tập này được sắp xếp theo độ phức tạp từ cơ bản với *"HELLO WORLD"* tới các phần nâng cao hơn như làm việc với xuất/nhập đồng bộ và bất đồng bộ, hệ thống file, lập trình mạng với TCP và HTTP, các sự kiện và dòng dữ liệu.
 
-Sau khi hoàn thành các bài tập phần <b><code>learnyounode</code></b> này, bạn nên tiếp đi tiếp tới các bài về <b><code>[stream-adventure](https://github.com/substack/stream-adventure)</code></b> để hiểu sâu hơn về các dòng dữ liệu của Node.
+Sau khi hoàn thành các bài tập phần <b><code>learnyounode</code></b> này, bạn nên tiếp tục làm phần  <b><code>[stream-adventure](https://github.com/substack/stream-adventure)</code></b> để hiểu sâu hơn về các dòng dữ liệu của Node.
 
 ### Cộng tác viên
 
