@@ -1,0 +1,17 @@
+{yellow}{bold}Có thắc mắc với một bài tập {appname} nào đó?{/bold}{/yellow}
+
+  Một đội ngũ chuyên gia luôn luôn lắng nghe và muốn giúp đỡ bạn để 
+  bạn có thể làm chủ được Node.js ở đây:
+    https://github.com/nodeschool/discussions/issues
+  và bạn có thể tạo một {bold}New Issue{/bold} và cho chúng tôi biết vấn đề bạn gặp phải.
+  Bạn hoàn toàn có thể sự dụng tiếng Việt vì lực lượng người Việt rất hùng hậu ở đây.
+
+  Ngoài ra, bạn có thể được giúp đỡ thong qua kênh #Node.js trên Freenode IRC.
+  Hoặc có thể tham gia nhóm hỏi đáp trên Google Group tại:
+    https://groups.google.com/forum/#!forum/nodejs
+
+{yellow}{bold}Bạn tìm ra lỗi trong {appname} hoặc muốn đóng góp?{/bold}{/yellow}
+
+  Repository chính thức của {appname} là:
+    https://github.com/rvagg/learnyounode/
+  Hãy báo lại cho chúng tôi lỗi bạn phát hiện ra hoặc tạo một pull request nếu bạn cải tiến được chương trình này.
