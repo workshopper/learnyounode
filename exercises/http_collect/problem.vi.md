@@ -1,39 +1,40 @@
-Write a program that performs an HTTP GET request to a URL provided to you as the first command-line argument. Collect **all** data from the server (not just the first "data" event) and then write two lines to the console (stdout).
+Viết một chương trình nhận một URL qua tham số đầu tiên và thực hiện một HTTP GET request. Tập kết **tất cả** dữ liệu từ máy chủ (không chỉ có sự kiện "data" đầu tiên) và sau đó hãy in ra 2 dòng như sau trên giao diện dòng lệnh (stdout).
 
-The first line you write should just be an integer representing the number of characters received from the server. The second line should contain the complete String of characters sent by the server.
+1. Dòng thứ 1: In ra số kí tự nhận được từ máy chủ.
+2. Dòng thứ 2: In ra đầy đủ chuỗi nội dung nhận được từ máy chủ.
 
 ----------------------------------------------------------------------
-## HINTS
+## GỢI Ý
 
-There are two approaches you can take to this problem: 
+Trong bài tập này bạn có thể phải đối mặt với 2 vấn đều lớn sau:
 
-**1)** Collect data across multiple "data" events and append the results together prior to printing the output. Use the "end" event to determine when the stream is finished and you can write the output.
+**1)** Tập kết dữ liệu thông suốt nhiều sự kiện "data" và nối kết quả lại với nhau trước khi có thể in ra màn hình. Ở đây, bạn sẽ dùng sự kiện "end" để biết được khi nào dòng dữ liệu nạp về đã được kết thúc, sau đó bạn có thể in chúng ra màn hình.
 
-**2)** Use a third-party package to abstract the difficulties involved in collecting an entire stream of data. Two different packages provide a useful API for solving this problem (there are likely more!): `bl` (Buffer List) and `concat-stream`; take your pick!
+**2)** Sử dụng một gói thư viện thứ 3 để có thể bỏ qua được sự phức tạp khi tập kết các dòng dữ liệu lại với nhau. Ở đây, ta có thể sử dụng 2 gói khác nhau cung cấp các API rất tiện dụng để giải quyết vấn đề này (có thể có nhiều thư viện như vậy!) là: `bl` (Buffer List) và `concat-stream`.
 
   <http://npm.im/bl>
   <http://npm.im/concat-stream>
 
-To install a Node package, use the Node Package Manager `npm`. Simply type:
+Để cài đặt một gói thư viện Node, hãy sử dụng Trình Quản Lý Gói của Node (Node Package Manager) `npm`. Ví dụ lệnh sau sẽ cài đặt gói `bl` vào thư mục cục bộ hiện tại của bạn:
 
 ```sh
 $ npm install bl
 ```
 
-And it will download and install the latest version of the package into a subdirectory named `node_modules`. Any package in this subdirectory under your main program file can be loaded with the `require` syntax without being prefixed by './':
+Với lệnh này, nó sẽ nó tải về và cài đặt phiên bản mới nhất của một gói thư viện trong thư mục con (con của thư mục hiện tại) tên là `node_modules`. Tất cả các gói trong thư mục con này đều có thể nạp được vào file chương trình chính của bạn với lệnh `require` mà không cần phải thêm tiền tố './'. Ví dụ:
 
 ```js
 var bl = require('bl')
 ```
 
-Node will first look in the core modules and then in the `node_modules` directory where the package is located.
+Khi thực hiện lệnh `require`, Node sẽ tìm kiếm trong các mô-đun lõi của Node trước, sau đó mới tìm kiếm tới các mô-đun trong thư mục con `node_modules`.
 
-If you don't have an Internet connection, simply make a `node_modules` directory and copy the entire directory for the package you want to use from inside the {appname} installation directory:
+Nếu bạn không có kết nối Internet, bạn có thể tự tạo một thư mục con `node_modules` trong thư mục ứng dụng {appname} và copy từng gói thư viện mà bạn muốn sử dụng trong đó:
 
   {rootdir:/node_modules/bl}
   {rootdir:/node_modules/concat-stream}
 
-Both `bl` and `concat-stream` can have a stream *piped* in to them and they will collect the data for you. Once the stream has ended, a callback will be fired with the data:
+Cả 2 mô-đun `bl` và `concat-stream` đều chứa có một dòng dữ liệu dạng *ống* (piped) và chúng sẽ thu thập dữ liệu cho bạn. Khi một dòng dữ liệu kết thúc (được nạp hết), thì một hàm phản hồi sẽ được gọi thực thi với dữ liệu thu được:
 
 ```js
 response.pipe(bl(function (err, data) { /* ... */ }))
@@ -41,9 +42,9 @@ response.pipe(bl(function (err, data) { /* ... */ }))
 response.pipe(concatStream(function (data) { /* ... */ }))
 ```
 
-Note that you will probably need to `data.toString()` to convert from a Buffer.
+Lưu ý rằng bạn có thể sẽ cần chuyển đổi Buffer qua String bằng `data.toString()`.
 
-Documentation for both of these modules has been installed along with {appname} on your system and you can read them by pointing your browser here:
+Tài liệu cho cả 2 mô-đun này đều đã được cì đặt cùng với {appname} trên hệ thống của bạn và bạn có thể đọc chúng ở đây:
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}

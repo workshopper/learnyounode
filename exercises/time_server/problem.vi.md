@@ -1,60 +1,60 @@
-Write a **TCP time server**!
+Viết một chương trình **Máy chủ thời gian TCP**!
 
-Your server should listen to TCP connections on the port provided by the first argument to your program. For each connection you must write the current date & 24 hour time in the format:
+Máy chủ của bạn sẽ lắng nghe kết nối TCP qua một cổng được nhập vào qua tham số đầu tiên. Với mỗi một kết nối tới, bạn sẽ gửi lại một thời gian hiện tại theo mẫu sau:
 
 ```
 "YYYY-MM-DD hh:mm"
 ```
 
-followed by a **newline** character. Month, day, hour and minute must be *zero-filled* to 2 integers. For example:
+với hậu tố là một kí tự **xuống dòng**. Ngày, tháng, giờ và phút cần *thêm 0* để có dạng 2 kí tự. Ví dụ:
 
 ```
 "2013-07-06 17:42"
 ```
 
 ----------------------------------------------------------------------
-## HINTS
+## GỢI Ý
 
-For this exercise we'll be creating a raw TCP server. There's no HTTP involved here so we need to use the `net` module from Node core which has all the basic networking functions.
+Trong bài tập này bạn chỉ cần tạo một máy chủ TCP cơ bản với mô-đun `net` - tích hợp sẵn trong lõi Nodejs, chứ không phải là máy chủ HTTP.
 
-The `net` module has a method named `net.createServer()` that takes a callback function. Unlike most callbacks in Node, the callback used by `createServer()` is called more than once. Every connection received by your server triggers another call to the callback. The callback function has the signature:
+Mô-đun `net` có phương thức `net.createServer()` và phương thức này sẽ nhận một hàm phản hồi. Nhưng điểm đặc biệt là không giống như các hàm phản hồi thông dụng trong Node, hàm phản hồi của `createServer()` sẽ được gọi nhiều lần. Tức là mỗi khi có một kết nối tới, hàm phản hồi này sẽ lại được gọi để thực thi. Hàm phản hồi này có mẫu nhau sau:
 
 ```js
 function callback (socket) { /* ... */ }
 ```
 
-`net.createServer()` also returns an instance of your `server`. You must call `server.listen(portNumber)` to start listening on a particular port.
+`net.createServer()` sẽ trả ra một thực thể (instance) của `server`. Để bắt đầu lắng nghe kết nối trên một cổng nào đó, bạn cần gọi tới `server.listen(portNumber)`, trong đó `portNumber` là cổng mà bạn muốn lắng nghe.
 
-A typical Node TCP server looks like this:
+Thường thì một máy chủ TCP đơn giản sẽ được thực hiện như sau:
 
 ```js
 var net = require('net')
 var server = net.createServer(function (socket) {
-  // socket handling logic
+  // Xử lý logic của socket
 })
 server.listen(8000)
 ```
 
-Remember to use the port number supplied to you as the first command-line argument.
+Trong bài này, bạn cần lưu ý rằng bạn phải sử dụng một cổng cung cấp qua tham số đầu tiên để lắng nghe.
 
-The `socket` object contains a lot of meta-data regarding the connection, but it is also a Node duplex Stream, in that it can be both read from, and written to. For this exercise we only need to write data and then close the socket.
+Đối tượng `socket` chứa rất nhiều thông tin meta-data của kết nối tương ứng, những nó cũng là một dòng dữ liệu kép của Node (Node duplex Stream) - là dòng dữ liệu vừa có thể đọc, vừa có thể viết. Với bài tập này, ta chỉ cần viết dữ liệu cho socket và sau đó đóng nó lại là xong.
 
-Use `socket.write(data)` to write data to the socket and `socket.end()` to close the socket. Alternatively, the `.end()` method also takes a data object so you can simplify to just: `socket.end(data)`.
+Sử dụng `socket.write(data)` để viết dữ liệu cho socket và `socket.end()` để đóng socket. Ngoài ra, phương thức `.end()` còn có thể nhận một đối tượng dữ liệu để viết dữ liệu cho socket trước khi đóng socket lại: `socket.end(data)`.
 
-Documentation on the `net` module can be found by pointing your browser here:
+Tài liệu cho mô-đun `net` có thể xem tại:
 
   {rootdir:/node_apidoc/net.html}
 
-To create the date, you'll need to create a custom format from a `new Date()` object. The methods that will be useful are:
+Để tạo thời gian, bạn có thể sử dụng đối tượng `new Date()`, sau đó dùng các phương thức hữu dụng như:
 
 ```js
 date.getFullYear()
-date.getMonth()     // starts at 0
-date.getDate()      // returns the day of month
+date.getMonth()     // bắt đầu từ 0
+date.getDate()      // trả ra ngày của tháng
 date.getHours()
 date.getMinutes()
 ```
 
-Or, if you want to be adventurous, use the `strftime` package from npm. The `strftime(fmt, date)` function takes date formats just like the unix `date` command. You can read more about strftime at: https://github.com/samsonjs/strftime
+Hoặc, nếu bạn muốn pro hơn thì có thể sử dụng gói (package) `strftime` từ npm. Hàm `strftime(fmt, date)` nhận dạng dữ liệu của date y như lệnh `date` của unix. Xem thêm thông tin về strftime tại: https://github.com/samsonjs/strftime
 
 ----------------------------------------------------------------------

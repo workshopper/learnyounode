@@ -1,39 +1,39 @@
-Write an HTTP **server** that serves the same text file for each request it receives.
+Viết một **máy chủ** HTTP trả về cùng một file text giống nhau cho mỗi request nó nhận được.
 
-Your server should listen on the port provided by the first argument to your program.
+Máy chủ của bạn sẽ lắng nghe tại một cổng được chỉ định qua tham số đầu tiền của chương trình.
 
-You will be provided with the location of the file to serve as the second command-line argument. You **must** use the `fs.createReadStream()` method to stream the file contents to the response.
+Còn tham số dòng lệnh thứ 2 sẽ cung cấp vị trí của file sẽ được phục vụ cho mỗi request. Bạn **cần phải** sử dụng phương thức `fs.createReadStream()` để tạo dòng dữ liệu từ file đó và gửi cho response nội dung nhận được từ dòng dữ liệu đó.
 
 ----------------------------------------------------------------------
-## HINTS
+## GỢI Ý
 
-Because we need to create an HTTP server for this exercise rather than a generic TCP server, we should use the `http` module from Node core. Like the `net` module, `http` also has a method named `http.createServer()` but this one creates a server that can talk HTTP.
+Trong bài này, ta dùng gói `http` trong lõi của Node để tạo máy chủ HTTP chứ không cần phải tạo máy chủ TCP ở mức dưới. Cũng như gói `net`, gói `http` cũng phương thức tên là `http.createServer()` nhưng phương thức này sẽ tạo ra một máy chủ HTTP.
 
-`http.createServer()` takes a callback that is called once for each connection received by your server. The callback function has the signature:
+`http.createServer()` sẽ sử dụng một hàm phản hồi để thực thi mỗi khi có một kết nối tới. Hàm phản hồi này có mẫu như sau:
 
 ```js
 function callback (request, response) { /* ... */ }
 ```
 
-Where the two arguments are objects representing the HTTP request and the corresponding response for this request. `request` is used to fetch properties, such as the header and query-string from the request while `response` is for sending data to the client, both headers and body.
+Trong đó, `request` sẽ là đối request nhận được và `response` sẽ là đối tượng response tương ứng với request nhận được. `request` được sử dụng để truy cập các thuộc tính từ request nhận được như header và chuỗi truy vấn (query-string), còn `response` sẽ được sử dụng để gửi dữ liệu cho máy khách bao gồm cả header và body.
 
-Both `request` and `response` are also Node streams! Which means that you can use the streaming abstractions to send and receive data if they suit your use-case.
+Cả 2 đối tượng `request` và `response` đều là dòng dữ liệu (Node streams)! Which means that you can use the streaming abstractions to send and receive data if they suit your use-case.
 
-`http.createServer()` also returns an instance of your `server`. You must call `server.listen(portNumber)` to start listening on a particular port.
+`http.createServer()` cũng trả ra một thực thể (instance) của `máy chủ`. Sau đó bạn sử dụng nó để bắt đầu lắng nghe sự kiện trên một cổng nào đó bằng phương thức `server.listen(portNumber)`.
 
-A typical Node HTTP server looks like this:
+Một máy chủ HTTP với Node thường có dạng như sau:
 
 ```js
 var http = require('http')
 var server = http.createServer(function (req, res) {
-  // request handling logic...
+  // xử lý logic cho request...
 })
 server.listen(8000)
 ```
 
-Documentation on the `http` module can be found by pointing your browser here:
+Bạn có thể xem thêm tài liệu về mô-đun `http` tại đây:
   {rootdir:/node_apidoc/http.html}
 
-The `fs` core module also has some streaming APIs for files. You will need to use the `fs.createReadStream()` method to create a stream representing the file you are given as a command-line argument. The method returns a stream object which you can use `src.pipe(dst)` to pipe the data from the `src` stream to the `dst` stream. In this way you can connect a filesystem stream with an HTTP response stream.
+mô-đun lõi `fs` cũng cung cấp API để tạo dòng dữ liệu từ các file như phương thức `fs.createReadStream()`. Phương thức này trả về một đối tượng dòng dữ liệu và bạn có thể sử dụng `src.pipe(dst)` để đẩu (pipe) dữ liệu từ dòng `src` tới dòng `dst`. Với các này, bạn có thể nối kết được một dòng dữ liệu của file nào đó với dòng response HTTP.
 
 ----------------------------------------------------------------------

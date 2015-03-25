@@ -1,26 +1,29 @@
-Create a program that prints a list of files in a given directory, filtered by the extension of the files. You will be provided a directory name as the first argument to your program (e.g. '/path/to/dir/') and a file extension to filter by as the second argument.
+Tạo một chương trình in ra danh sách các file được lọc theo phần mở rộng trong một thư mục nào đó.
+Chương trình của bạn cần nhận một đường dẫn thư mục qua tham số dòng lệnh đầu tiên (vd: '/path/to/dir/'), và một phần mở rộng để lọc qua tham số thứ 2.
 
-For example, if you get 'txt' as the second argument then you will need to filter the list to only files that **end with .txt**. Note that the second argument _will not_ come prefixed with a '.'.
+Ví dụ, nếu 'txt' là phần mở rộng được nhập qua tham số thứ 2, bạn cần lọc ra một danh tất cả các file **kết thúc với .txt**. 
+Lưu ý, tham số thứ 2 _không được _chứa tiền tố '.'.
 
-The list of files should be printed to the console, one file per line. You **must** use asynchronous I/O.
+Danh sách các file lọc được sẽ được in ra giao diện dòng lệnh với mỗi file nằm trên một dòng.
+Trong bài toán này bạn cần **phải** sử dụng I/O bất đồng bộ (asynchronous I/O).
 
 ----------------------------------------------------------------------
-## HINTS
+## GỢI Ý
 
-The `fs.readdir()` method takes a pathname as its first argument and a callback as its second. The callback signature is:
+Hàm `fs.readdir()` sẽ nhận một đường dẫn thư mục qua tham số thứ nhất và một hàm phản hồi qua tham số thứ hai. Hàm phản hồi có mẫu như sau:
 
 ```js
 function callback (err, list) { /* ... */ }
 ```
 
-where `list` is an array of filename strings.
+Trong đó  `list` là một mảng chứa các tên file trong thư mục tương ứng.
 
-Documentation on the `fs` module can be found by pointing your browser here:
+Bạn có thể xem thêm về mô-đun `fs` ở đây:
   {rootdir:/node_apidoc/fs.html}
 
-You may also find node's `path` module helpful, particularly the `extname` method.
+Bạn cũng có thể tìm mô-đun `path` của nodejs để làm việc với hàm `extname` hiệu quả hơn.
 
-Documentation on the `path` module can be found by pointing your browser here:
+Tài liệu cho mô-đun `path` có thể xem ở đây:
   {rootdir:/node_apidoc/path.html}
 
 ----------------------------------------------------------------------

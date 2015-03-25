@@ -1,10 +1,10 @@
-Write an HTTP **server** that serves JSON data when it receives a GET request to the path '/api/parsetime'. Expect the request to contain a query string with a key 'iso' and an ISO-format time as the value.
+Viết một **máy chủ** HTTP phục vụ dữ liệu JSON khi nhận được một request GET qua đường dẫn '/api/parsetime'. Request này sẽ chứa một chuỗi truy vấn (query string) với một khóa (key) là 'iso', và giá trị là một thông số thời gian dạng ISO (ISO-format time).
 
-For example:
+Ví dụ:
 
   /api/parsetime?iso=2013-08-10T12:10:15.474Z
 
-The JSON response should contain only 'hour', 'minute' and 'second' properties. For example:
+Response JSON sẽ chỉ bao gồm 3 thuộc tính là 'hour' (giờ), 'minute' (phút) and 'second' (giây). Ví dụ:
 
 ```json
 {
@@ -14,39 +14,38 @@ The JSON response should contain only 'hour', 'minute' and 'second' properties. 
 }
 ```
 
-Add second endpoint for the path '/api/unixtime' which accepts the same query string but returns UNIX epoch time in milliseconds (the number of milliseconds since 1 Jan 1970 00:00:00 UTC) under the property 'unixtime'. For example:
+Thêm một điểm cuối kết nối (endpoint) thứ 2 với đường dẫn '/api/unixtime'. Đường dẫn này cũng nhận một chuỗi truy vấn như trên, nhưng sẽ trả về thời gian UNIX mili-giây (khoảng thời gian tính bằng mili-giây tính từ 1/1/1970 00:00:00 UTC) với thuộc tính 'unixtime'. Ví dụ:
 
 ```json
 { "unixtime": 1376136615474 }
 ```
 
-Your server should listen on the port provided by the first argument to your program.
+Máy chủ của bạn sẽ lắng nghe ở cổng được truyền vào chương trình qua tham số đầu tiên.
 
 ----------------------------------------------------------------------
-## HINTS
+## GỢI Ý
 
-The `request` object from an HTTP server has a `url` property that you will need to use to *"route"* your requests for the two endpoints.
+Đối tượng `request` từ một máy chủ HTTP có một  thuộc tính `url`, bạn sẽ cần sử dụng thuộc tính này để *"điều hướng"* (route) các request cho từng điểm cuối kết nối (endpoint).
 
-You can parse the URL and query string using the Node core 'url' module. `url.parse(request.url, true)` will parse content of request.url and provide you with an object with helpful properties.
+Bạn có thể phân tích (parse) URL và chuỗi truy vấn (query string) bằng cách sử dụng mô-đun 'url' trong lõi Node. `url.parse(request.url, true)` sẽ phân tích nọi dung của request.url và trả lại cho bạn một đối tượng với các thuộc tính hữu ích.
 
-For example, on the command prompt, type:
+Ví dụ, gõ lệnh sau trên giao diện dòng lệnh:
 
 ```sh
 $ node -pe "require('url').parse('/test?q=1', true)"
 ```
 
-Documentation on the `url` module can be found by pointing your browser here:
+Xem thêm chi tiết về mô-đun `url` tại:
   {rootdir:/node_apidoc/url.html}
   
-Your response should be in a JSON string format. Look at `JSON.stringify()` for more information.
+Response sẽ được trả lại dưới dạng JSON. Bạn tìm hiểu `JSON.stringify()` để biết thêm nhé.
 
-You should also be a good web citizen and set the Content-Type properly:
+Bạn cũng nên trả lại thuộc tính Content-Type, vì bạn đang làm việc với Website mà, cách trả như sau:
 
 ```js
 res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
-The JavaScript `Date` object can print dates in ISO format, e.g. `new Date().toISOString()`. It can also parse this format if you pass the string into the `Date` constructor. `Date#getTime()` will also
-come in handy.
+Đối tượng `Date` của JavaScript có thể in ra thời gian dưới dạng ISO, ví dụ: `new Date().toISOString()`. Nó cũng có thể phân tích được một chuỗi dạng này khi bạn truyền nó cho hàm khởi tạo của lớp `Date`.  Ngoài ra, ta còn có thể dễ dàng sử dụng `Date#getTime()` để quy đổi ra dạng UNIX mili-giây.
 
 ----------------------------------------------------------------------

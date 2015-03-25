@@ -1,14 +1,13 @@
-This problem is the same as the previous problem (HTTP COLLECT) in that you need to use `http.get()`. However, this time you will be provided with **three** URLs as the first three command-line arguments.
+Bài toàn này tương tự như bài toán trước (tập kết HTTP) bằng cách sử dụng `http.get()`. Tuy nhiên, lần này bạn sẽ được cung cấp **ba** URL qua tham số đầu tiên.
 
-You must collect the complete content provided to you by each of the URLs and print it to the console (stdout). You don't need to print out the length, just the data as a String; one line per URL. The catch is that you **must** print them out in the same order as the URLs are provided to you as command-line arguments.
+Bạn phải tập kết toàn bộ nội dung đầy đủ của URL đã được cung cấp và in nó ra giao diện dòng lệnh (stdout). Bạn không cần phải in ra độ dài mà chỉ cần in dữ liệu ra dưới dạng String, với mỗi URL trên một dòng tương ứng. Tức là bạn **cần phải** in chúng ra đúng thứ tự của 3 URL đầu vào.
 
 ----------------------------------------------------------------------
-## HINTS
+## GỢI Ý
 
-Don't expect these three servers to play nicely! They are not going to give you complete responses in the order you hope, so you can't naively just print the output as you get it because they will be out of order.
+Các máy chủ từ URL này có thể trả về kết quả không theo thứ tự gọi, nên bạn không thể in ngay kết quả nhận được sau khi nhận được chúng.
+Mà bạn sẽ phải giữ chúng lại theo đúng thứ tự đầu vào cho tới khi toàn bộ cả 3 URL đều được lấy hết. Khi bạn lấy được toàn bộ dữ liệu rồi thì bạn có thể in nó ra giao diện dòng lệnh.
 
-You will need to queue the results and keep track of how many of the URLs have returned their entire contents. Only once you have them all, you can print the data to the console.
-
-Counting callbacks is one of the fundamental ways of managing async in Node. Rather than doing it yourself, you may find it more convenient to rely on a third-party library such as [async](http://npm.im/async) or [after](http://npm.im/after). But for this exercise, try and do it without any external helper library.
+Việc đếm thông qua các hàm phản hồi là một kĩ thuật quản lý bất đồng bộ căn bản trong Node. Thay vì phải tự mình thực hiện việc quản lý này, sẽ rất tiện nếu bạn sử dụng một thư viện thứ 3 nào đó chẳng hạn như [async](http://npm.im/async) hay [after](http://npm.im/after). Nhưng trong bài tập này, bạn hãy thử gắng tự thực hiện việc quản lý này xem sao nhé.
 
 ----------------------------------------------------------------------

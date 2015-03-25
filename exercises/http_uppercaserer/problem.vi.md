@@ -1,15 +1,15 @@
-Write an HTTP **server** that receives only POST requests and converts incoming POST body characters to upper-case and returns it to the client.
+Viết một **máy chủ** HTTP chỉ nhận các request dạng POST và chuyển đổi các kí tự trong phần nội dung (body) nhận được thành dạng chữ viết HOA, sau đó gửi lại chuỗi đã HOA hóa đó cho máy khách.
 
-Your server should listen on the port provided by the first argument to your program.
+Máy chủ của bạn cần lắng nghe trên một cổng được chỉ định thừ tham số dòng lệnh đầu tiên.
 
 ----------------------------------------------------------------------
-## HINTS
+## GỢI Ý
 
-While you're not restricted to using the streaming capabilities of the `request` and `response` objects, it will be much easier if you do.
+Tuy không ép buộc, nhưng sẽ dễ dàng hơn nếu bạn sử dụng các khả năng của dòng dữ liệu với 2 đối tượng`request` và `response`.
 
-There are a number of different packages in npm that you can use to *"transform"* stream data as it's passing through. For this exercise the `through2-map` package offers the simplest API.
+Có một số gói khác trong trong npm cho phép bạn có thể *"chuyển đổi"* (transform) dòng dữ liệu khi đẩy nó đi thông qua các hàm xử lý. Trong bài tập này, bạn hãy sử dụng gói `through2-map` vì nó cung cấp một số API rất đơn giản về dễ sử dụng.
 
-`through2-map` allows you to create a *transform stream* using only a single function that takes a chunk of data and returns a chunk of data. It's designed to work much like `Array#map()` but for streams:
+`through2-map` cho phép bạn tạo một *dòng chuyển đổi* (transform stream) sử dụng chỉ một hàm nhận một khúc dữ liệu và trả ra một khúc dữ liệu đã được chuyển đổi thành. Nó được thiết kế để hoạt động gần như với `Array#map()` nhưng được áp dụng cho các dòng dữ liệu:
 
 ```js
 var map = require('through2-map')
@@ -18,19 +18,19 @@ inStream.pipe(map(function (chunk) {
 })).pipe(outStream)
 ```
 
-In the above example, the incoming data from `inStream` is converted to a String (if it isn't already), the characters are reversed and the result is passed through to `outStream`. So we've made a chunk character reverser! Remember though that the chunk size is determined up-stream and you have little control over it for incoming data.
+Với ví dụ trên, dòng dữ liệu tới từ `inStream` sẽ được chuyển sang dạng String (nếu nó không phải là dạng String), sau đó các kí tự được sắp xếp ngược lại và kết quả cuối cùng sẽ được truyền cho `outStream`. Vì vậy ta có thể xáo ngược các kĩ tự từ một khúc dữ liệu mà không cần đợi đủ toàn bộ! Lưu ý rằng kích cỡ của các khúc dữ liệu được quyết định bởi nguồn dữ liệu và bạn chỉ có thể điều khiển được chúng khi dữ liệu đã tới và sẵn sàng sử dụng được.
 
-To install `through2-map` type:
+Cài đặt `through2-map`:
 
 ```sh
 $ npm install through2-map
 ```
 
-If you don't have an Internet connection, simply make a `node_modules` directory and copy the entire directory for the module you want to use from inside the {appname} installation directory:
+Nếu bạn không có kết nối Internet, đơn giản, hãy tạo một thư mục con `node_modules` trong thư mục {appname} và copy mô-đun bạn muốn sử dụng vào đó:
 
   {rootdir:/node_modules/through2-map}
 
-Documentation for through2-map has been installed along with {appname} on your system and you can read them by pointing your browser here:
+Tài liệu về through2-map được cài đặt sẵn cùng với {appname} trên hệ thống của bạn và bạn có thể đọc nó ở đây:
 
   {rootdir:/docs/through2-map.html}
 

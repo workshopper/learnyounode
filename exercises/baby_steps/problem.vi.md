@@ -1,4 +1,3 @@
-Write a program that accepts one or more numbers as command-line arguments and prints the sum of those numbers to the console (stdout).
 Viết một chương trình nhận một hoặc nhiều số đầu vào qua tham số dòng lệnh và in tổng của chúng ra giao diện dòng lệnh (stdout).
 
 ----------------------------------------------------------------------

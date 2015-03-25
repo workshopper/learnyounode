@@ -1,23 +1,23 @@
-Write a program that uses a single **asynchronous** filesystem operation to read a file and print the number of newlines it contains to the console (stdout), similar to running `cat file | wc -l`.
+Viết một chương trình sử dụng thao thác **bất đồng bộ** với file hệ thống để đọc một file và in ra số kí tự xuống dòng của nó ra giao diện dòng lệnh (stdout), tương tự như lệnh `cat file | wc -l`.
 
-The full path to the file to read will be provided as the first command-line argument.
+Đường dẫn của file sẽ được cung cấp qua tham số dòng lệnh đầu tiên.
 
 ----------------------------------------------------------------------
-# HINTS
+## GỢI Ý
 
-The solution to this problem is *almost* the same as the previous problem except you must now do it **the Node.js way**: asynchronous.
+Giải pháp cho vấn đề này *hầu như* giống bài trước, ngoại trừ lần này bạn phải sử dụng một **tính năng cơ bản của Node.js**: bất đồng bộ.
 
-Instead of `fs.readFileSync()` you will want to use `fs.readFile()` and instead of using the return value of this method you need to collect the value from a callback function that you pass in as the second argument. To learn more about callbacks, check out: https://github.com/maxogden/art-of-node#callbacks.
+Thay vì sử dụng `fs.readFileSync()`, lần này bạn sẽ dùng `fs.readFile()` và thay vì sử dụng giá trị được trả ra của phương thức này, bạn cần phải tự kết tập giá trị được truyền lại qua hàm phản hồi (hàm phản hồi được cung cấp qua tham số thứ 2). Nếu bạn muốn biết thêm về hàm phản hồi thì có thể xem tại: https://github.com/maxogden/art-of-node#callbacks.
 
-Remember that idiomatic Node.js callbacks normally have the signature:
+Hàm phản hồi được xây dựng sẵn trong Node.js thường có mẫu như sau:
 
 ```js
 function callback (err, data) { /* ... */ }
 ```
 
-so you can check if an error occurred by checking whether the first argument is truthy. If there is no error, you should have your `Buffer` object as the second argument. As with `readFileSync()`, you can supply 'utf8' as the second argument and put the callback as the third argument and you will get a `String` instead of a `Buffer`.
+vì vậy, bạn có thể kiểm tra được lỗi phát sinh nếu có qua tham số đầu tiên là `err`. Nếu không có lỗi xảy ra thì bạn sẽ nhận được một đối tượng `Buffer` qua tham số thứ 2 là `data`. Cũng như với `readFileSync()`, bạn có thể truyền 'utf8' qua tham số thứ 2 và truyền hàm phản hồi qua tham số thứ 3, khi đó bạn sẽ nhận được một `String` thay vì một `Buffer` ở hàm phản hồi của bạn.
 
-Documentation on the `fs` module can be found by pointing your browser here:
+Tài liệu về mô-đun `fs` có thể xem ở đây:
   {rootdir:/node_apidoc/fs.html}
 
 ----------------------------------------------------------------------

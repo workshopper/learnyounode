@@ -1,56 +1,56 @@
-This problem is the same as the previous but introduces the concept of **modules**. You will need to create two files to solve this.
+Bài toán này cũng tương tự như bài toán trước nhưng ở đây bạn sẽ làm quen với khái niệm **mô-đun**. Bạn sẽ cần tạo ra 2 file .js để giải quyết bài tập này.
 
-Create a program that prints a list of files in a given directory, filtered by the extension of the files. The first argument is the directory name and the second argument is the extension filter. Print the list of files (one file per line) to the console. You **must** use asynchronous I/O.
+Tạo một chương trình in ra một danh sách các file được lọc với đuôi mở rộng từ một thư mục được chỉ định. Tham số đầu tiên sẽ là tên thư mục, còn tham số thứ 2 sẽ là đuôi mở rộng. Sau đó in ra mỗi file trên một dòng ở giao diện dòng lệnh (stdout). Bạn **cần phải** sử dụng I/O bất đồng bộ ở đây.
 
-You must write a *module* file to do most of the work. The module must *export* a single function that takes **three** arguments: the directory name, the filename extension string and a callback function, in that order. The filename extension argument must be the same as what was passed to your program. Don't turn it into a RegExp or prefix with "." or do anything except pass it to your module where you can do what you need to make your filter work.
+Hầu hết công việc sẽ được thực hiện ở file *mô-đun*. Mô-đun sẽ *export* một hàm duy nhất, và hàm này nhận **ba** tham số theo thứ tự: tên thư mục, tên mở rộng và một hàm phản hồi. Tham số tên mở rộng phải giống với tên file mở rộng mà chương trình nhận được, tức là không biến đối nó như không dùng RegExp, không thêm tiền tố ".", hay nghịch bất kì cái gì với nó, chỉ đơn giản là truyển nó cho mô-đun của bạn.
 
-The callback function must be called using the idiomatic node(err, data) convention. This convention stipulates that unless there's an error, the first argument passed to the callback will be null, and the second will be your data. In this exercise, the data will be your filtered list of files, as an Array. If you receive an error, e.g. from your call to  `fs.readdir()`, the callback must be called with the error, and only the error, as the first argument.
+Hàm phản hồi phải được khai báo giống như các hàm phản hồi thông dụng được quy ước của Node: `function(err, data)`. Với quy ước này, bạn sẽ có thể truyền được lỗi phát sinh qua tham số đầu tiên nếu có, còn khi không có lỗi phát sinh thì nó được truyền giá trị là null, và tham số thứ 2 sẽ được sử dụng để truyền dữ liệu của bạn. Cụ thể trong bài tập này, dữ liệu của bạn thu được sẽ là một danh sách các file đã được lọc, ví dụ như một đối tượng Array chứa các file đã lọc được. Khi phát sinh lỗi, ví dụ lỗi phát sinh từ `fs.readdir()` chẳng hạn, bạn cần gọi hàm phản hồi với lỗi được truyền qua tham số đầu tiên, còn tham số thứ 2 không cần truyền.
 
-You **must** not print directly to the console from your module file, only from your original program.
+Bạn **không được** in trực tiếp ra màn hình từ file mô-đun, mà phải in nó trong file chương trình chính.
 
-In the case of an error bubbling up to your original program file, simply check for it and print an informative message to the console.
+Trong trường hợp có lỗi xảy ra ảnh hưởng tới file chương trình chính, đơn giản hãy kiểm tra nó và in ra một thông đẹp có tính thông tin ra màn hình.
 
-These four things are the contract that your module must follow.
+Mô-đun của bạn cần phải tuân theo các quy tắc sau:
 
-1. Export a single function that takes exactly the arguments described.
-2. Call the callback exactly once with an error or some data as described.
-3. Don't change anything else, like global variables or stdout.
-4. Handle all the errors that may occur and pass them to the callback.
+1. Export một hàm duy nhất, và hàm này có các tham số đầu vào chính xác như đã mô tả phía trên.
+2. Gọi hàm phản hồi đúng đắng với một lỗi phát sinh hoặc các dữ liệu như đã mô tả.
+3. Không thay đổi bất cứ thứ gì như biến toàn cục hay stdout.
+4. Xử lý tất cả các lỗi có thể xảy ra và truyền nó cho hàm phản hồi.
 
-The benefit of having a contract is that your module can be used by anyone who expects this contract. So your module could be used by anyone else who does learnyounode, or the verifier, and just work.
+Điểm lợi có thể thấy khi tuân theo các quy tắc là mô-đun của bạn có thể dễ dàng sử dụng với bất cứ ai.
 
 ----------------------------------------------------------------------
-## HINTS
+## GỢI Ý
 
-Create a new module by creating a new file that just contains your directory reading and filtering function. To define a *single function* *export*, you assign your function to the `module.exports` object, overwriting what is already there:
+Tạo một file js trong cùng thư mục với file chương trình chính và viết một hàm lọc file với mô tả như trên. Để *export* một *hàm đơn*, bạn gắn hàm của bạn cho đối tượng `module.exports`, giống như đoạn mã dưới đây:
 
 ```js
 module.exports = function (args) { /* ... */ }
 ```
 
-Or you can use a named function and assign the name.
+Hàm ví dụ trên không có tên nhưng bạn hoàn toàn có thể gắn tên bất kì nào cho nó.
 
-To use your new module in your original program file, use the `require()` call in the same way that you `require('fs')` to load the `fs` module. The only difference is that for local modules must be prefixed with './'. So, if your file is named mymodule.js then:
+Bạn cần sử dụng `require()` để nạp mô-đun bạn vừa tạo ra giống như cách ta nạp mô-đun `fs` bằng lệnh `require('fs')`. Ở đây chỉ có một điểm khác là file mô-đun cần phải được thêm tiền tố './' khi truyền cho phương thức `require()`. Giả sử file mô-đun của bạn là mymodule.js, thì ta sẽ nạp nó như sau:
 
 ```js
 var mymodule = require('./mymodule.js')
 ```
 
-The '.js' is optional here and you will often see it omitted.
+Đuôi mở rộng '.js' là không bắt buộc nên bạn có thể bỏ nó đi cũng được.
 
-You now have the `module.exports` object in your module assigned to the `mymodule` variable. Since you are exporting a single function, `mymodule` is a function you can call!
+Với đoạn mã trên, thì giờ bạn đã có một đối tượng `module.exports` được gắn cho biến `mymodule` trong chương trình. Vì bạn export một hàm đơn nên `mymodule` cũng chính là hàm mà bạn cần gọi!
 
-Also keep in mind that it is idiomatic to check for errors and do early-returns within callback functions:
+Ngoài ra, bạn cũng nên tạo thói quen kiểm tra lỗi trước và nếu có lỗi thì nên trả ra hàm phản hồi sớm:
 
 ```js
 function bar (callback) {
   foo(function (err, data) {
     if (err)
-      return callback(err) // early return
+      return callback(err) // có lỗi, ta trả ra sớm
 
-    // ... no error, continue doing cool things with `data`
+    // ... không có lỗi, ta tiếp tục xờ nắn `data`
 
-    // all went well, call callback with `null` for the error argument
+    // khi xử lý xong, gọi tới hàm phản hồi với tham số thứ nhất (đối tượng lỗi) là `null`
 
     callback(null, data)
   })

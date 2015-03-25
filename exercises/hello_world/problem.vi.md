@@ -22,6 +22,6 @@ Sau khi bạn làm xong như vậy thì hay chạy lệnh sau:
 $ {appname} verify program.js
 ```
 
-Bằng lệnh này thì chương trình của bạn sẽ được kiểm tra và nếu bạn làm đúng thì bài này của bạn sẽ được đánh dấu 'completed'.
+Bằng lệnh này thì chương trình của bạn sẽ được kiểm tra và nếu bạn làm đúng thì bài này của bạn sẽ được đánh dấu 'HOÀN THÀNH'.
 
 ----------------------------------------------------------------------

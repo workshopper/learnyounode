@@ -1,29 +1,29 @@
-Write a program that performs an HTTP GET request to a URL provided to you as the first command-line argument. Write the String contents of **each** "data" event from the response to a new line on the console (stdout).
+Viết một chương trình nhận một URL qua tham số đầu tiên và lấy nội dung của URL đó thông qua HTTP GET request. Sau đó hãy in **từng** "dữ liệu" ở mỗi sự kiện của response ra một dòng mới ở giao diện dòng lệnh (stdout).
 
 ----------------------------------------------------------------------
-## HINTS
+## GỢI Ý
 
-For this exercise you will need to use the `http` core module.
+Với bài tập này bạn cần sử dụng mô-đun `http` trong lõi của Node.
 
-Documentation on the `http` module can be found by pointing your browser here:
+Bạn có thể xem thêm  tài liệu về mô-đun `http` tại đây:
   {rootdir:/node_apidoc/http.html}
 
-The `http.get()` method is a shortcut for simple GET requests, use it to simplify your solution. The first argument to `http.get()` can be the URL you want to GET; provide a callback as the second argument.
+Bạn có thể sử dụng phương thức `http.get()` để tạo một GET request đơn giản. Tham số đầu tiên của `http.get()` có thể là một URL bạn muốn thực hiện GET, và tham số thứ 2 là một hàm phản hồi.
 
-Unlike other callback functions, this one has the signature:
+Không giống như các hàm phản hồi khác được xây dựng sẵn trong Node, hàm này chỉ có một tham số đầu vào như sau:
 
 ```js
 function callback (response) { /* ... */ }
 ```
 
-Where the `response` object is a Node **Stream** object. You can treat Node Streams as objects that emit events. The three events that are of most interest are: "data", "error" and "end". You listen to an event like so:
+Trong đó đối tượng `response` là một đối tượng **Stream** (dòng dữ liệu) của Node. Bạn cũng có thể xử lý đối tượng Streams của Node giống như các đối tượng phát sự kiện khác. Thường có 3 sự kiện hay được sử dụng để thực hiện thao tác là: "data", "error" và "end". Bạn có thể lắng nghe một sự kiện kiểu như sau:
 
 ```js
 response.on("data", function (data) { /* ... */ })
 ```
 
-The "data" event is emitted when a chunk of data is available and can be processed. The size of the chunk depends upon the underlying data source.
+Sự kiện "data" được phát ra khi có một khúc dữ liệu được nạp thành công và ta có thể xử lý. Kích cỡ của khúc dữ liệu phụ thuộc vào nguồn dữ liệu.
 
-The `response` object / Stream that you get from `http.get()` also has a `setEncoding()` method. If you call this method with "utf8", the "data" events will emit Strings rather than the standard Node `Buffer` objects which you have to explicitly convert to Strings.
+Đối tượng `response` / Stream mà bạn lấy từ `http.get()` cũng có thể được mã hóa với phương thức `setEncoding()`. Giả sử, bạn gọi phương thức này với mã "utf8", thì sự kiện "data" sẽ phát ra một Strings thay vì là một đối tượng `Buffer` của Node. Nếu không làm như vậy, khi bạn muốn sử dụng dữ liệu dưới dạng Strings bạn phải chuyển đổi đối tượng `Buffer` ra Strings.
 
 ----------------------------------------------------------------------
