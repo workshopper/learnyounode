@@ -1,7 +1,7 @@
 {
   "title": "CHO ĐỜI PHONG PHÚ HƠN VỚI NODE.JS!",
   "subtitle": "\u001b[23mChọn một bài tập và ấn \u001b[3mEnter\u001b[23m để bắt đầu",
-  "exercise": {
+  "exercise_need_fix_virtualwidth_module": {
     "HELLO WORLD": "Chào Thế Giới",
     "BABY STEPS": "Khởi động",
     "MY FIRST I/O!": "Làm quen với I/O",
