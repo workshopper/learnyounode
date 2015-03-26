@@ -1,20 +1,20 @@
 {
   "title": "CHO ĐỜI PHONG PHÚ HƠN VỚI NODE.JS!",
   "subtitle": "\u001b[23mChọn một bài tập và ấn \u001b[3mEnter\u001b[23m để bắt đầu",
-  "exercise_need_fix_virtualwidth_module": {
-    "HELLO WORLD": "Chào Thế Giới",
-    "BABY STEPS": "Khởi động",
-    "MY FIRST I/O!": "Làm quen với I/O",
-    "MY FIRST ASYNC I/O!": "Làm quen với I/O bất đồng bộ！",
-    "FILTERED LS": "Bộ lọc LS",
-    "MAKE IT MODULAR": "Tạo mô-đun",
+  "exercise": {
+    "HELLO WORLD": "HELLO WORLD",
+    "BABY STEPS": "BABY STEPS",
+    "MY FIRST I/O!": "MY FIRST I/O!",
+    "MY FIRST ASYNC I/O!": "MY FIRST ASYNC I/O!",
+    "FILTERED LS": "FILTERED LS",
+    "MAKE IT MODULAR": "MAKE IT MODULAR",
     "HTTP CLIENT": "HTTP CLIENT",
-    "HTTP COLLECT": "Tập kết HTTP",
-    "JUGGLING ASYNC": "Tập kết với ASYNC",
-    "TIME SERVER": "Máy chủ thời gian",
-    "HTTP FILE SERVER": "Máy chủ file HTTP",
-    "HTTP UPPERCASERER": "Đổi chữ viết hoa qua HTTP",
-    "HTTP JSON API SERVER": "Máy chủ JSON API với HTTP"
+    "HTTP COLLECT": "HTTP COLLECT",
+    "JUGGLING ASYNC": "JUGGLING ASYNC",
+    "TIME SERVER": "TIME SERVER",
+    "HTTP FILE SERVER": "HTTP FILE SERVER",
+    "HTTP UPPERCASERER": "HTTP UPPERCASERER",
+    "HTTP JSON API SERVER": "HTTP JSON API SERVER"
   },
   "menu": {
     "credits": "Đóng góp"
