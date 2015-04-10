@@ -17,7 +17,7 @@ function callback (request, response) { /* ... */ }
 
 Trong đó, `request` sẽ là đối request nhận được và `response` sẽ là đối tượng response tương ứng với request nhận được. `request` được sử dụng để truy cập các thuộc tính từ request nhận được như header và chuỗi truy vấn (query-string), còn `response` sẽ được sử dụng để gửi dữ liệu cho máy khách bao gồm cả header và body.
 
-Cả 2 đối tượng `request` và `response` đều là dòng dữ liệu (Node streams)! Which means that you can use the streaming abstractions to send and receive data if they suit your use-case.
+Cả 2 đối tượng `request` và `response` đều là dòng dữ liệu (Node streams)! Có nghĩa là bạn có thể gửi nhận dữ liệu trên đó.
 
 `http.createServer()` cũng trả ra một thực thể (instance) của `máy chủ`. Sau đó bạn sử dụng nó để bắt đầu lắng nghe sự kiện trên một cổng nào đó bằng phương thức `server.listen(portNumber)`.
 
