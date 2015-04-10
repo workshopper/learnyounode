@@ -44,7 +44,7 @@ response.pipe(concatStream(function (data) { /* ... */ }))
 
 Lưu ý rằng bạn có thể sẽ cần chuyển đổi Buffer qua String bằng `data.toString()`.
 
-Tài liệu cho cả 2 mô-đun này đều đã được cì đặt cùng với {appname} trên hệ thống của bạn và bạn có thể đọc chúng ở đây:
+Tài liệu cho cả 2 mô-đun này đều đã được cài đặt cùng với {appname} trên hệ thống của bạn và bạn có thể đọc chúng ở đây:
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
