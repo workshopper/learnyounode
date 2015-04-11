@@ -13,7 +13,7 @@ Trong trường hợp có lỗi xảy ra ảnh hưởng tới file chương trì
 Mô-đun của bạn cần phải tuân theo các quy tắc sau:
 
 1. Export một hàm duy nhất, và hàm này có các tham số đầu vào chính xác như đã mô tả phía trên.
-2. Gọi hàm phản hồi đúng đắng với một lỗi phát sinh hoặc các dữ liệu như đã mô tả.
+2. Gọi hàm phản hồi đúng đắn với một lỗi phát sinh hoặc các dữ liệu như đã mô tả.
 3. Không thay đổi bất cứ thứ gì như biến toàn cục hay stdout.
 4. Xử lý tất cả các lỗi có thể xảy ra và truyền nó cho hàm phản hồi.
 
