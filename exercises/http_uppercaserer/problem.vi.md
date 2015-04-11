@@ -7,7 +7,7 @@ Máy chủ của bạn cần lắng nghe trên một cổng được chỉ đị
 
 Tuy không ép buộc, nhưng sẽ dễ dàng hơn nếu bạn sử dụng các khả năng của dòng dữ liệu với 2 đối tượng`request` và `response`.
 
-Nhưng trong bài này, có một số gói khác trong trong npm cho phép bạn có thể *"chuyển đổi"* (transform) dòng dữ liệu khi đẩy nó đi thông qua các hàm xử lý. Trong bài tập này, bạn hãy sử dụng gói `through2-map` vì nó cung cấp một số API rất đơn giản về dễ sử dụng.
+Có một số gói khác trong trong npm cho phép bạn có thể *"chuyển đổi"* (transform) dòng dữ liệu khi đẩy nó đi thông qua các hàm xử lý. Trong bài tập này, bạn hãy sử dụng gói `through2-map` vì nó cung cấp một số API rất đơn giản về dễ sử dụng.
 
 `through2-map` cho phép bạn tạo một *dòng chuyển đổi* (transform stream), sử dụng chỉ một hàm nhận một khúc dữ liệu và trả ra một khúc dữ liệu đã được chuyển đổi thành. Nó được thiết kế để hoạt động gần như với `Array#map()` nhưng được áp dụng cho các dòng dữ liệu:
 
