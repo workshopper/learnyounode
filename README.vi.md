@@ -36,6 +36,8 @@ Sau khi hoàn thành các bài tập phần <b><code>learnyounode</code></b> nà
 <tr><th align="left">Alejandro Oviedo</th><td><a href="https://github.com/a0viedo">GitHub/a0viedo</a></td><td><a href="http://twitter.com/a0viedo">Twitter/@a0viedo</a></td></tr>
 <tr><th align="left">Leonardo Nascimento</th><td><a href="https://github.com/leonascimento">GitHub/leonascimento</a></td><td><a href="http://twitter.com/leonardo386">Twitter/leonardo386</a></td></tr>
 <tr><th align="left">Christophe Porteneuve</th><td><a href="https://github.com/tdd">GitHub/tdd</a></td><td><a href="http://twitter.com/porteneuve">Twitter/@porteneuve</a></td></tr>
+<tr><th align="left">Do Minh Hai</th><td><a href="https://github.com/dominhhai">GitHub/dominhhai</a></td><td><a href="http://twitter.com/minhhai3b">Twitter/@minhhai3b</a></td></tr>
+<tr><th align="left">Phung Van Tu</th><td><a href="https://github.com/minatu2d">GitHub/minatu2d</a></td><td><a href="http://twitter.com/minatu2d">Twitter/@minatu2d</a></td></tr>
 </tbody></table>
 
 ## Giấy phép
