@@ -1,4 +1,4 @@
-Viết một **máy chủ** HTTP phục vụ dữ liệu JSON khi nhận được một request GET qua đường dẫn '/api/parsetime'. Request này sẽ chứa một chuỗi truy vấn (query string) với một khóa (key) là 'iso', và giá trị là một thông số thời gian dạng ISO (ISO-format time).
+Viết một **máy chủ** HTTP trả về dữ liệu JSON khi nhận được một request GET qua đường dẫn '/api/parsetime'. Request này sẽ chứa một chuỗi truy vấn (query string) với một khóa (key) là 'iso', và giá trị là một thông số thời gian dạng ISO (ISO-format time).
 
 Ví dụ:
 
@@ -27,7 +27,7 @@ Máy chủ của bạn sẽ lắng nghe ở cổng được truyền vào chươ
 
 Đối tượng `request` từ một máy chủ HTTP có một  thuộc tính `url`, bạn sẽ cần sử dụng thuộc tính này để *"điều hướng"* (route) các request cho từng điểm cuối kết nối (endpoint).
 
-Bạn có thể phân tích (parse) URL và chuỗi truy vấn (query string) bằng cách sử dụng mô-đun 'url' trong lõi Node. `url.parse(request.url, true)` sẽ phân tích nọi dung của request.url và trả lại cho bạn một đối tượng với các thuộc tính hữu ích.
+Bạn có thể phân tích (parse) URL và chuỗi truy vấn (query string) bằng cách sử dụng mô-đun 'url' trong lõi Node. `url.parse(request.url, true)` sẽ phân tích nội dung của request.url và trả lại cho bạn một đối tượng với các thuộc tính hữu ích.
 
 Ví dụ, gõ lệnh sau trên giao diện dòng lệnh:
 
