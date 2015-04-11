@@ -22,13 +22,13 @@
   "common": {
     "exercise": {
       "pass": {
-        "sync": "同期(syncronus)メソッドが用いられています: {{{method}}}",
-        "async": "非同期(asyncronus)メソッドが用いられています: {{{method}}}"
+        "sync": "同期(synchronous)メソッドが用いられています: {{{method}}}",
+        "async": "非同期(asynchronous)メソッドが用いられています: {{{method}}}"
       },
       "fail": {
-        "sync": "同期(syncronus)メソッドが用いられています: {{{method}}}",
-        "async": "非同期(asyncronus)メソッドが用いられています: {{{method}}}",
-        "unused": "`fs`モジュールから非同期(asyncronus)メソッドが用いられています",
+        "sync": "同期(synchronous)メソッドが用いられています: {{{method}}}",
+        "async": "非同期(asynchronous)メソッドが用いられています: {{{method}}}",
+        "unused": "`fs`モジュールから非同期(asynchronous)メソッドが用いられています",
         "unexpected_error": "HTTPサーバから予期せぬエラーが返されました: {{{message}}}"
       }
     }
