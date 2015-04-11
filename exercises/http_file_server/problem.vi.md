@@ -34,6 +34,6 @@ server.listen(8000)
 Bạn có thể xem thêm tài liệu về mô-đun `http` tại đây:
   {rootdir:/node_apidoc/http.html}
 
-mô-đun lõi `fs` cũng cung cấp API để tạo dòng dữ liệu từ các file như phương thức `fs.createReadStream()`. Phương thức này trả về một đối tượng dòng dữ liệu và bạn có thể sử dụng `src.pipe(dst)` để đẩu (pipe) dữ liệu từ dòng `src` tới dòng `dst`. Với các này, bạn có thể nối kết được một dòng dữ liệu của file nào đó với dòng response HTTP.
+Mô-đun lõi `fs` cũng cung cấp API để tạo dòng dữ liệu từ các file như phương thức `fs.createReadStream()`. Phương thức này trả về một đối tượng dòng dữ liệu và bạn có thể sử dụng `src.pipe(dst)` để đẩu (pipe) dữ liệu từ dòng `src` tới dòng `dst`. Với các này, bạn có thể nối kết được một dòng dữ liệu của file nào đó với dòng response HTTP.
 
 ----------------------------------------------------------------------
