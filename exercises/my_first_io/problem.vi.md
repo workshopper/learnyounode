@@ -18,7 +18,7 @@ Tất cả các phương thức thao tác hệ thống file đồng bộ (hay bl
 Tài liệu cho mô-đun `fs` có thể xem tại:
   {rootdir:/node_apidoc/fs.html}
 
-Đối tượng `Buffer` là một cách hiệu quả để biểu diễn một mảng các dữ liệu tùy ý trong Node, tức là nó có thể biểu diễn được dữ liệu dạng ascii, nhị phân hay bất cứ một dạng nào khác. Để chuyển đổi đối tượng `Buffer` qua dạng chuỗi string, ta chỉ cần gọi phương thức `toString()` của nó là được. Ví dụ. `var str = buf.toString()`.
+Sử dụng đối tượng `Buffer` là một cách hiệu quả để biểu diễn một mảng các dữ liệu tùy ý trong Node, tức là nó có thể biểu diễn được dữ liệu dạng ascii, nhị phân hay bất cứ một dạng nào khác. Để chuyển đổi đối tượng `Buffer` qua dạng chuỗi string, ta chỉ cần gọi phương thức `toString()` của nó là được. Ví dụ. `var str = buf.toString()`.
 
 Bạn có thể đọc thêm tài liệu về `Buffer`s tại:
   {rootdir:/node_apidoc/buffer.html}
