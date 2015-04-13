@@ -49,6 +49,7 @@
           "missing_callback": "no llamó el argumento callback después de un error de parte de fs.readdir()",
           "missing_error": "no parece pasar de vuelta un error recibido de `fs.readdir()`.\n Utiliza el siguiente patrón idiomático de Node.js adentro de tu callback a `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
           "callback_arguments": "no retornó dos argumentos en la función callback (esperado `null` y un arreglo de nombres de archivos)",
+          "dont_use_dot": "aparentemente espera una extensión con prefijo del tipo '.', debería recibir el segundo argumento de la consola sin el agregado '.'",
           "array_wrong_size": "no retornó un arreglo con el número correcto de elementos como segundo parámetro del callback",
           "dotExt": "podría estar coincidiendo con \"ext\" en vez de \".ext\"",
           "array_comparison": "no retornó la correcta lista de archivos como segundo parámetro del callback",
@@ -65,6 +66,7 @@
         "callback": "El archivo de módulo adicional maneja el argumento callback ",
         "callback_arguments": "El archivo de módulo adicional retornó dos argumentos en la función callback",
         "array_argument": "El archivo de módulo adicional retornó el número correcto de elementos en el segundo argumento del callback",
+        "dont_use_dot":"El archivo de módulo adicional maneja correctamente la extensión con prefijo '.'",
         "array_size": "El archivo de módulo adicional retornó el número correcto de elementos en el segundo argumento del callback",
         "final": "El archivo de módulo adicional retornó la lista correcta de archivos en el segundo argumento del callback"
       }
