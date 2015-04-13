@@ -1,4 +1,4 @@
-Escreva um programa que usa uma única operação síncrona de sistema de arquivos (filesystem) para ler e imprimir o número de novas linhas que ele contém no console (stdout), algo similar à executar `cat file | wc -l`.
+Escreva um programa que usa uma única operação síncrona de sistema de arquivos (filesystem) para ler e imprimir o número de novas linhas (\n) que ele contém no console (stdout), algo similar à executar `cat file | wc -l`.
 
 Todo o caminho até o arquivo à ser lido será fornecido como primeiro argumento da linha de comando.
 

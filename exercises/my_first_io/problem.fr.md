@@ -1,5 +1,5 @@
 Écrivez un programme qui utilise une opération **synchrone** sur le système
-de fichiers pour lire un fichier et afficher son nombre de fins de ligne sur
+de fichiers pour lire un fichier et afficher son nombre de fins de ligne (\n) sur
 la console (stdout), un peu comme si vous faisiez `cat file | wc -l`.
 
 Le chemin complet du fichier à lire vous sera fourni comme premier argument
