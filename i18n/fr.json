@@ -49,6 +49,7 @@
           "missing_callback": "n’a pas appelé la fonction de rappel passée en argument après une erreur de `fs.readdir()`",
           "missing_error": "ne semble pas faire remonter l’erreur reçue de `fs.readdir()`.\n  Utilisez le motif Node.js idiomatique suivant dans votre fonction de rappel pour `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
           "callback_arguments": "n’a pas passé deux arguments à la fonction de rappel (on attendait `null` et un tableau de noms de fichiers)",
+          "dont_use_dot": "semble attendre une notation préfixée par '.', alors qu’il devrait recevoir le deuxième argument de ligne de commande sans le '.' ajouté",
           "array_wrong_size": "n’a pas passé un tableau avec le bon nombre d’éléments comme second argument de la fonction de rappel",
           "dotExt": "fait peut-être une correspondance sur \"ext\" au lieu de \".ext\"",
           "array_comparison": "n’a pas passé la bonne liste de fichiers en second argument de la fonction de rappel",
@@ -65,6 +66,7 @@
         "callback": "Le fichier module additionnel traite l’argument fonction de rappel",
         "callback_arguments": "Le fichier module additionnel a passé deux arguments à la fonction de rappel",
         "array_argument": "Le fichier module additionnel a passé un objet `Array` en second argument de la fonction de rappel",
+        "dont_use_dot": "Le fichier module additionnel traite correctement l’extension préfixée par '.'",
         "array_size": "Le fichier module additionnel a passé le bon nombre d’éléments en second argument de la fonction de rappel",
         "final": "Le fichier module additionnel a passé la bonne liste de fichiers en second argument de la fonction de rappel"
       }
