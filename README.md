@@ -38,7 +38,8 @@ Once you have finished <b><code>learnyounode</code></b>, graduate to <b><code>[s
 <tr><th align="left">Christophe Porteneuve</th><td><a href="https://github.com/tdd">GitHub/tdd</a></td><td><a href="http://twitter.com/porteneuve">Twitter/@porteneuve</a></td></tr>
 <tr><th align="left">Do Minh Hai</th><td><a href="https://github.com/dominhhai">GitHub/dominhhai</a></td><td><a href="http://twitter.com/minhhai3b">Twitter/@minhhai3b</a></td></tr>
 <tr><th align="left">Phung Van Tu</th><td><a href="https://github.com/minatu2d">GitHub/minatu2d</a></td><td><a href="http://twitter.com/minatu2d">Twitter/@minatu2d</a></td></tr>
-</tbody></table>
+<tr><th align="left">Shim</th><td><a href="https://github.com/marocchino">GitHub/marocchino</a></td><td><a href="http://twitter.com/marocchino">Twitter/@marocchino</a></td></tr>
+<tr><th align="left">ChaYoung You</th><td><a href="https://github.com/yous">GitHub/yous</a></td><td><a href="http://twitter.com/_Yous">Twitter/@_Yous</a></td></tr>
 </tbody></table>
 
 ## License
