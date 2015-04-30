@@ -1,0 +1,83 @@
+{
+  "title": "CHO ĐỜI PHONG PHÚ HƠN VỚI NODE.JS!",
+  "subtitle": "\u001b[23mChọn một bài tập và ấn \u001b[3mEnter\u001b[23m để bắt đầu",
+  "exercise": {
+    "HELLO WORLD": "HELLO WORLD",
+    "BABY STEPS": "BABY STEPS",
+    "MY FIRST I/O!": "MY FIRST I/O!",
+    "MY FIRST ASYNC I/O!": "MY FIRST ASYNC I/O!",
+    "FILTERED LS": "FILTERED LS",
+    "MAKE IT MODULAR": "MAKE IT MODULAR",
+    "HTTP CLIENT": "HTTP CLIENT",
+    "HTTP COLLECT": "HTTP COLLECT",
+    "JUGGLING ASYNC": "JUGGLING ASYNC",
+    "TIME SERVER": "TIME SERVER",
+    "HTTP FILE SERVER": "HTTP FILE SERVER",
+    "HTTP UPPERCASERER": "HTTP UPPERCASERER",
+    "HTTP JSON API SERVER": "HTTP JSON API SERVER"
+  },
+  "menu": {
+    "credits": "Đóng góp"
+  },
+  "common": {
+    "exercise": {
+      "pass": {
+        "sync": "Sử dụng phương thức đồng bộ (synchronous): {{{method}}}",
+        "async": "Sử dụng phương thức bất đồng bộ (asynchronous): {{{method}}}"
+      },
+      "fail": {
+        "sync": "Sử dụng phương thức đồng bộ (synchronous): {{{method}}}",
+        "async": "Sử dụng phương thức bất đồng bộ (asynchronous): {{{method}}}",
+        "unused": "Sử dụng phương thức bất đồng bộ (asynchronous) từ  mô-đun `fs`.",
+        "unexpected_error": "Một lỗi không dự đoán từ máy chủ HTTP: {{{message}}}",
+        "connection": "Lỗi truy cập tới {{{address}}}: {{{message}}}"
+      }
+    }
+  },
+  "exercises": {
+    "MAKE IT MODULAR": {
+      "fail": {
+        "missing_module": "Bạn đang không sử dụng một file mô-đun, bạn cần sử dụng require() mô-đun để giải quyết bài tập này.",
+        "loadError": "Lỗi nạp file mô-đun [{{path}}]: {{{message}}}",
+        "mod": {
+          "_base": "file mô-đun bổ sung của bạn [{{path}}] {{{message}}}",
+          "no_export": "không export {{{method}}}. Bạn cần sử dụng mẫu `module.exports = function () {}` để tạo mô-đun.",
+          "singleFunction": "single function",
+          "arguments": "export một hàm mà có không nhiều hơn {{{three}}} tham số. Tham số đầu vào cần nhận là: một thư mục (directory), một bộ lọc (filter) và một hàm phản hồi {{{callback}}}.",
+          "arguments_three": "3",
+          "arguments_callback": "hàm phản hồi",
+          "missing_callback": "không gọi hàm phản hồi sau khi có lỗi phát sinh ở fs.readdir()",
+          "missing_error": "đang không truyền lại lỗi phát sinh bởi `fs.readdir()`.\n Sử dụng mẫu cơ bản của Node.js trong hàm phản hồi của bạn như sau: `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
+          "callback_arguments": "không trả 2 tham số qua hàm phản hồi (cần `null` và một mảng các file)",
+          "array_wrong_size": "không trả đúng một mảng có số lượng phần tử cho tham số thứ 2 của hàm phản hồi",
+          "dotExt": "có thể \"ext\" phù hợp hơn là \".ext\"",
+          "array_comparison": "không trả đúng danh sách các file cho tham số thứ 2 của hàm phản hồi",
+          "missing_array_argument": "không trả ra một đối tượng mảng qua tham số thứ 2 của hàm phản hồi",
+          "callback_error": "trả ra một lỗi qua hàm phản hồi:\n\t{{{error}}}",
+          "timeout": "không gọi tham số hàm phản hồi",
+          "unexpected": "Ném ra một lỗi:\n\t{{{error}}}"
+        }
+      },
+      "pass": {
+        "singleFunction": "file mô-đun bổ sung export một hàm",
+        "arguments": "file mô-đun bổ sung export một hàm có {{{count}}} tham số",
+        "error": "file mô-đun bổ sung xử lý lỗi chính xác",
+        "callback": "file mô-đun bổ sung xử lý tham số của hàm phản hồi",
+        "callback_arguments": "file mô-đun bổ sung trả ra 2 tham số qua hàm phản hồi",
+        "array_argument": "file mô-đun bổ sung trả ra chính xác số lượng phần tử cho tham số thứ 2 của hàm phản hồi",
+        "array_size": "file mô-đun bổ sung trả ra chính xác số lượng phần tử cho tham số thứ 2 của hàm phản hồi",
+        "final": "file mô-đun bổ sung trả ra chính xác danh sách các file cho tham số thứ 2 của hàm phản hồi"
+      }
+    },
+    "TIME SERVER": {
+      "fail": {
+        "connection": "Lỗi truy cập tới localhost:{{port}}: {{{message}}}"
+      }
+    },
+    "HTTP FILE SERVER": {
+      "fail": {
+        "no_createReadStream": "Sử dụng phương thức fs không phải là fs.createReadStream(): {{{method}}}"
+      }
+    }
+  }
+}

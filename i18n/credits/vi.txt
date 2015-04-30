@@ -1,0 +1,4 @@
+{yellow}{bold}learnyounode được đóng góp bởi các hacker tích cực sau:{/bold}{/yellow}
+
+{bold}Name                GitHub Username{/bold}
+-----------------------------------

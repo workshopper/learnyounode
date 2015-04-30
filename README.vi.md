@@ -1,25 +1,25 @@
-# Learn You The Node.js For Much Win!
+# Cho đời phong phú hơn với Node.js!
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nodeschool/discussions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-**An intro to Node.js via a set of self-guided workshops.**
+**Giới thiệu về Node.js qua các bài tập.**
 
 [![NPM](https://nodei.co/npm/learnyounode.png?downloads=true&&downloadRank=true&stars=true)](https://nodei.co/npm/learnyounode/) [![NPM](https://nodei.co/npm-dl/learnyounode.png?months=3&height=3)](https://nodei.co/npm/learnyounode/)
 
 ![Learn You The Node.js For Much Win!](https://raw.github.com/rvagg/learnyounode/master/learnyounode.png)
 
-  1. Install [Node.js](http://nodejs.org/)
-  2. Run `sudo npm install learnyounode -g`
-  3. Run `learnyounode`
-  4. **.. profit!**
+  1. Cài đặt [Node.js](http://nodejs.org/)
+  2. Chạy lệnh `sudo npm install learnyounode -g`
+  3. Chạy lệnh `learnyounode`
+  4. **.. Nghiệm thu!**
 
-<b><code>learnyounode</code></b> will run through a series of Node.js workshops. Starting at a basic *"HELLO WORLD"* and moving on to more advanced exercises about dealing with synchronous & asynchronous I/O, filesystem operations, TCP and HTTP networking, events and streams.
+<b><code>learnyounode</code></b> là một tập các bài tập về Node.js. Các bài tập này được sắp xếp theo độ phức tạp từ cơ bản với *"HELLO WORLD"* tới các phần nâng cao hơn như làm việc với xuất/nhập đồng bộ và bất đồng bộ, hệ thống file, lập trình mạng với TCP và HTTP, các sự kiện và dòng dữ liệu.
 
-Once you have finished <b><code>learnyounode</code></b>, graduate to <b><code>[stream-adventure](https://github.com/substack/stream-adventure)</code></b> for a set of exercises that dig in to Node's streams.
+Sau khi hoàn thành các bài tập phần <b><code>learnyounode</code></b> này, bạn nên tiếp tục làm phần  <b><code>[stream-adventure](https://github.com/substack/stream-adventure)</code></b> để hiểu sâu hơn về các dòng dữ liệu của Node.
 
-### Contributors
+### Cộng tác viên
 
-<b><code>learnyounode</code></b> is proudly brought to you by the following hackers:
+<b><code>learnyounode</code></b> tự hào được sự đóng góp của các hacker dưới đây:
 
 <table><tbody>
 <tr><th align="left">Rod Vagg</th><td><a href="https://github.com/rvagg">GitHub/rvagg</a></td><td><a href="http://twitter.com/rvagg">Twitter/@rvagg</a></td></tr>
@@ -39,10 +39,9 @@ Once you have finished <b><code>learnyounode</code></b>, graduate to <b><code>[s
 <tr><th align="left">Do Minh Hai</th><td><a href="https://github.com/dominhhai">GitHub/dominhhai</a></td><td><a href="http://twitter.com/minhhai3b">Twitter/@minhhai3b</a></td></tr>
 <tr><th align="left">Phung Van Tu</th><td><a href="https://github.com/minatu2d">GitHub/minatu2d</a></td><td><a href="http://twitter.com/minatu2d">Twitter/@minatu2d</a></td></tr>
 </tbody></table>
-</tbody></table>
 
-## License
+## Giấy phép
 
-**learnyounode** is Copyright (c) 2013-2015 learnyounode contributors (listed above) and licenced under the MIT licence. All rights not explicitly granted in the MIT license are reserved. See the included LICENSE.md file for more details.
+**learnyounode** thuộc bản quyền (c) 2013-2015 cộng tác viên learnyounode (liệt kê phía trên) và cấp phép dưới giấy phép MIT. Tất cả các quyền không rõ ràng được cấp bởi giấy phép MIT sẽ được quy định riêng. Xem thêm file LICENSE.md để biết thêm chi tiết.
 
-**learnyounode** builds on the excellent work by [@substack](https://github.com/substack) and [@maxogden](https://github.com/maxogden) who created **[stream-adventure](https://github.com/substack/stream-adventure)** which serves as the original foundation for **learnyounode**.
+**learnyounode** là thành quả dựa trên sự làm việc cần mẫn của 2 lập trình viên [@substack](https://github.com/substack) và [@maxogden](https://github.com/maxogden). Hai lập trình viên tuyệt vời này đã tạo ra **[stream-adventure](https://github.com/substack/stream-adventure)** - một nền tảng cơ bản cho **learnyounode**.
