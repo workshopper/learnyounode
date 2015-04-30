@@ -1,0 +1,17 @@
+{yellow}{bold}{appname} 연습문제에 문제가 있나요{/bold}{/yellow}
+
+  전문적인 도우미 요정 팀이 열심히 당신이 Node.js의 기본에 정통하도록
+  돕기 위해 기다리는 중입니다.
+    https://github.com/nodeschool/discussions/issues
+  에서 {bold}새로운 이슈{/bold}를 추가해 어디에 문제가 있는지 저희에게
+  알려주세요. {italic}멍청한{/italic} 질문은 없습니다!
+
+  Node.js의 일반적인 도움이 필요하면 Freenode IRC의 #Node.js 채널이
+  도움을 받을 일반적인 장소입니다. Node.js 구글 그룹도 있습니다.
+    https://groups.google.com/forum/#!forum/nodejs
+
+{yellow}{bold}{appname}에 버그를 찾았거나 기여하고 싶으신가요?{/bold}{/yellow}
+
+  {appname}의 공식 저장소는 여기입니다.
+    https://github.com/rvagg/learnyounode/
+  자유롭게 버그를 제보하거나 (되도록이면) 풀 리퀘스트를 보내세요.

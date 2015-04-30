@@ -1,0 +1,68 @@
+{
+  "title": "LEARN YOU THE NODE.JS FOR MUCH WIN!",
+  "subtitle": "\u001b[23m연습문제를 고르고 \u001b[3mEnter\u001b[23m로 시작하세요.",
+  "menu": {
+    "credits": "CREDITS"
+  },
+  "common": {
+    "exercise": {
+      "pass": {
+        "sync": "동기 메소드를 사용했습니다. {{{method}}}",
+        "async": "비동기 메소드를 사용했습니다. {{{method}}}"
+      },
+      "fail": {
+        "sync": "동기 메소드를 사용했습니다. {{{method}}}",
+        "async": "비동기 메소드를 사용했습니다. {{{method}}}",
+        "unused": "`fs` 모듈의 비동기 메소드를 사용했습니다.",
+        "unexpected_error": "HTTP 서버에서 예상치 못한 에러가 발생했습니다. {{{message}}}",
+        "connection": "{{{address}}}로 연결하지 못했습니다. {{{message}}}"
+      }
+    }
+  },
+  "exercises": {
+    "MAKE IT MODULAR": {
+      "fail": {
+        "missing_module": "모듈 파일이 사용되지 않았습니다. 이 연습문제를 풀려면 모듈을 require()하세요.",
+        "loadError": "[{{path}}] 모듈 파일의 불러오기가 실패했습니다. {{{message}}}",
+        "mod": {
+          "_base": "[{{path}}] 모듈 파일에서 {{{message}}}",
+          "no_export": "{{{method}}}를 export하지 않았습니다. `module.exports = function () {}` 패턴을 사용하셔야 합니다.",
+          "singleFunction": "단일 함수",
+          "arguments": "인자를 {{{three}}}보다 적게 받는 함수를 export했습니다. 디렉터리, 필터, {{{callback}}}을 받아야 합니다.",
+          "arguments_three": "세 개",
+          "arguments_callback": "콜백",
+          "missing_callback": "fs.readdir()의 에러 이후 콜백 인자를 호출하지 않았습니다.",
+          "missing_error": "fs.readdir()의 에러를 반환하지 않았습니다.\n fs.readdir()의 콜백에 Node.js의 관용적 패턴을 사용하세요:\n\tif (err)\n\t return callback(err)",
+          "callback_arguments": "콜백 함수에서 두 인자를 반환하지 않았습니다.(`null`과 파일 이름의 배열이 와야합니다.)",
+          "array_wrong_size": "콜백의 두 번째 인자로 정확한 요소의 수의 배열을 반환하지 않았습니다.",
+          "dotExt": "\".ext\"가 아닌 \"ext\"에 일치할 수 있습니다.",
+          "array_comparison": "콜백의 두 번째 인자로 정확한 배열을 반환하지 않았습니다.",
+          "missing_array_argument": "배열 객체를 콜백의 두 번째 인자로 반환하지 않았습니다.",
+          "callback_error": "콜백 안에서 에러가 반환되었습니다.\n\t{{{error}}}",
+          "timeout": "콜백 인자를 호출하지 않았습니다.",
+          "unexpected": "에러가 발생했습니다.\n\t{{{error}}}"
+        }
+      },
+      "pass": {
+        "singleFunction": "모듈 파일이 단일 함수를 export 했습니다.",
+        "arguments": "모듈 파일이 {{{count}}} 개의 인자를 받는 함수를 export 했습니다.",
+        "error": "모듈 파일이 에러를 바르게 처리했습니다.",
+        "callback": "모듈 파일이 콜백 인자를 처리했습니다.",
+        "callback_arguments": "모듈 파일이 콜백 함수에서 인자 두 개를 반환했습니다.",
+        "array_argument": "모듈 파일이 정확한 수의 요소를 콜백의 두번째 인자로 반환했습니다.",
+        "array_size": "모듈 파일이 정확한 수의 요소를 콜백의 두번째 인자로 반환했습니다.",
+        "final": "모듈 파일이 정확한 파일 목록을 콜백의 두 번째 인자로 반환했습니다."
+      }
+    },
+    "TIME SERVER": {
+      "fail": {
+        "connection": "localhost:{{port}}의 접속에 실패했습니다. {{{message}}}"
+      }
+    },
+    "HTTP FILE SERVER": {
+      "fail": {
+        "no_createReadStream": "fs.createReadStream()가 아닌 fs 메소드를 사용했습니다. {{{method}}}"
+      }
+    }
+  }
+}
