@@ -9,7 +9,7 @@ La resolución es similar al problema anterior pero esta vez usaremos **the Node
 
 Vamos a sustituir `fs.readFileSync()` por `fs.readFile()` y en lugar de esperar que retorne un valor, vamos a tener que procesar el resultado con una función de callback que se invoca al terminar la lectura del archivo.
 
-La forma abitual de usar callbacks en Node.js es con la siguiente firma:
+La forma habitual de usar callbacks en Node.js es con la siguiente firma:
 
 ```js
 function callback (error, data) { /* ... */ }
