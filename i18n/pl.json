@@ -1,8 +1,8 @@
 {
   "title": "NAUCZ SIĘ NOŁDÓW KU WIELKIEMU ZWYCIĘSTWU!",
-  "subtitle": "\u001b[23mWybierz ćwiczenie i wciśnij \u001b[3mEnter\u001b[23m begin",
+  "subtitle": "\u001b[23mWybierz ćwiczenie i wciśnij \u001b[3mEnter\u001b[23m aby rozpocząć",
   "menu": {
-    "credits": "AUTORSTWO"
+    "credits": "AUTORZY"
   },
   "common": {
     "exercise": {
@@ -18,6 +18,21 @@
         "connection": "Błąd podczas łączenia z {{{address}}}: {{{message}}}"
       }
     }
+  },
+  "exercise": {
+    "HELLO WORLD": "WITAJ, ŚWIECIE",
+    "BABY STEPS": "MAŁE KROCZKI",
+    "MY FIRST I/O!": "MOJE PIERWSZE I/O!",
+    "MY FIRST ASYNC I/O!": "MOJE PIERWSZE ASYNCHRONICZNE I/O",
+    "FILTERED LS": "FILTROWANY LISTING",
+    "MAKE IT MODULAR": "POPEŁNIJ MODUŁY",
+    "HTTP CLIENT": "KLIENT HTTP",
+    "HTTP COLLECT": "ZBIERACZ HTTP",
+    "JUGGLING ASYNC": "ŻONGLOWANIE ASYNCHRONICZNOŚCIĄ",
+    "TIME SERVER": "SERWER CZASU",
+    "HTTP FILE SERVER": "SERWER PLIKÓW HTTP",
+    "HTTP UPPERCASERER": "CAPS LOCK HTTP",
+    "HTTP JSON API SERVER": "SERWER HTTP Z INTERFEJSEM JSON"
   },
   "exercises": {
     "MAKE IT MODULAR": {

@@ -1,6 +1,6 @@
 {yellow}{bold}Problemy z zadaniem {appname}?{/bold}{/yellow}
 
-  Zespół doświadczonych elfów-pomocników z tylko czeka żeby Ci pomóc w
+  Zespół doświadczonych elfów-pomocników tylko czeka żeby Ci pomóc w
   opanowaniu podstaw Node.js! Odwiedź:
     https://github.com/nodeschool/discussions/issues
   Dodaj {bold}New Issue{/bold} i daj nam znać z czym masz problemy.
