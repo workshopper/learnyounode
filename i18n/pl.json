@@ -1,0 +1,83 @@
+{
+  "title": "NAUCZ SIĘ NOŁDÓW KU WIELKIEMU ZWYCIĘSTWU!",
+  "subtitle": "\u001b[23mWybierz ćwiczenie i wciśnij \u001b[3mEnter\u001b[23m aby rozpocząć",
+  "menu": {
+    "credits": "AUTORZY"
+  },
+  "common": {
+    "exercise": {
+      "pass": {
+        "sync": "Użyto synchronicznej metody: {{{method}}}",
+        "async": "Użyto asynchronicznej metody: {{{method}}}"
+      },
+      "fail": {
+        "sync": "Użyto synchronicznej metody: {{{method}}}",
+        "async": "Użyto asynchronicznej metody: {{{method}}}",
+        "unused": "Użyto asynchronicznej metody from the `fs` module.",
+        "unexpected_error": "Otrzymano nieoczekiwany błąd od serwera HTTP: {{{message}}}",
+        "connection": "Błąd podczas łączenia z {{{address}}}: {{{message}}}"
+      }
+    }
+  },
+  "exercise": {
+    "HELLO WORLD": "WITAJ, ŚWIECIE",
+    "BABY STEPS": "MAŁE KROCZKI",
+    "MY FIRST I/O!": "MOJE PIERWSZE I/O!",
+    "MY FIRST ASYNC I/O!": "MOJE PIERWSZE ASYNCHRONICZNE I/O",
+    "FILTERED LS": "FILTROWANY LISTING",
+    "MAKE IT MODULAR": "POPEŁNIJ MODUŁY",
+    "HTTP CLIENT": "KLIENT HTTP",
+    "HTTP COLLECT": "ZBIERACZ HTTP",
+    "JUGGLING ASYNC": "ŻONGLOWANIE ASYNCHRONICZNOŚCIĄ",
+    "TIME SERVER": "SERWER CZASU",
+    "HTTP FILE SERVER": "SERWER PLIKÓW HTTP",
+    "HTTP UPPERCASERER": "CAPS LOCK HTTP",
+    "HTTP JSON API SERVER": "SERWER HTTP Z INTERFEJSEM JSON"
+  },
+  "exercises": {
+    "MAKE IT MODULAR": {
+      "fail": {
+        "missing_module": "Nie użyto dodatkowego pliku z modułem, musisz załadować moduł przy użyciu require() by pomóc sobie w rozwiązaniu tego ćwiczenia",
+        "loadError": "Błąd przy ładowaniu pliku modułu [{{path}}]: {{{message}}}",
+        "mod": {
+          "_base": "Twój dodatkowy plik z modułem[{{path}}] {{{message}}}",
+          "no_export": "nie eksportuje {{{method}}}. Musisz użyć wzorca `module.exports = function () {}`.",
+          "singleFunction": "pojedynczej funkcji",
+          "arguments": "eksportuje funckję pobierającą mniej niż {{{three}}} argumenty. Musi ona przyjmować katalog, filtr oraz {{{callback}}}.",
+          "arguments_three": "trzy",
+          "arguments_callback": "funkcję wywołania zwrotnego (callback)",
+          "missing_callback": "nie wywoła łargumentu funkcji callback po otrzymaniu błędu z fs.readdir()",
+          "missing_error": "nie przekazał z powrotem błędu otrzymanego z `fs.readdir()`.\n  Użyj następującego, typowego dla Node.js, wzorca wewnątrz swojej funkcji callback dla `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
+          "callback_arguments": "nie zwrócił dwóch argumentów dka funkcji callback (oczekiwano `null` oraz tablicy nazw plików)",
+          "array_wrong_size": "nie zwrócił tablicy z poprawną liczbą elementów jako drugiego argumentu funkcji callback",
+          "dotExt": "możliwe, że dopasowywane jest rozszerzenie w postaci \"ext\" zamiast \".ext\"",
+          "array_comparison": "nie zwrócił poprawnej listy plików jako drugiego argumentu funckji callback",
+          "missing_array_argument": "nie zwrócił obiektu tablicy jako drugiego argumentu funckji callback",
+          "callback_error": "zwrócił błąd w swojej funkcji callback:\n\t{{{error}}}",
+          "timeout": "nie wywołał funkcji callback",
+          "unexpected": "rzucił błąd:\n\t{{{error}}}"
+        }
+      },
+      "pass": {
+        "singleFunction": "Plik z dodatkowym modułem eksportuje jedną funkcję",
+        "arguments": "Plik z dodatkowym modułem eksportuje funkcję o {{{count}}} argumentach",
+        "error": "Plik z dodatkowym modułem poprawnie obsługuje błędy",
+        "callback": "Plik z dodatkowym modułem obsługuje argument funkcji callback",
+        "callback_arguments": "Plik z dodatkowym modułem zwrócił dwa argumenty w funkcji callback",
+        "array_argument": "Plik z dodatkowym modułem zwrócił poprawną liczbę elementów jako drugi argument funkcji callback",
+        "array_size": "Plik z dodatkowym modułem zwrócił poprawną liczbę elementów jako drugi argument funkcji callback",
+        "final": "Plik z dodatkowym modułem zwrócił poprawną listę plików jako drugi argument funkcji callback"
+      }
+    },
+    "TIME SERVER": {
+      "fail": {
+        "connection": "Błąd podczas łączenia z localhost:{{port}}: {{{message}}}"
+      }
+    },
+    "HTTP FILE SERVER": {
+      "fail": {
+        "no_createReadStream": "Użyto innej metody fs niż fs.createReadStream(): {{{method}}}"
+      }
+    }
+  }
+}
