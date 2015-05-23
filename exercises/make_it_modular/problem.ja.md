@@ -39,7 +39,7 @@ function hoge() {
 module.exports = hoge
 ```
 
-あなたの新い Module を使うために `require()` を使ってください。 `require('fs')` が `fs` をロードすると同じように。ただ、一つの大切な違いはローカルの Module のために `'./'` を使ってください。あなたの Module の名前は `mymodule.js` だったらこのように使ってください:
+あなたの新しい Module を使うために `require()` を使ってください。 `require('fs')` が `fs` をロードすると同じように。ただ、一つの大切な違いはローカルの Module のために `'./'` を使ってください。あなたの Module の名前は `mymodule.js` だったらこのように使ってください:
 
 ```js
 var hoge_module = require('./mymodule.js')
