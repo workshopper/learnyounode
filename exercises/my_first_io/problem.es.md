@@ -1,4 +1,4 @@
-Escribe un programa que, usando una llamada síncrona al sistema de archivos, lea un archivo recibido por argumento e imprima a consola la cantidad de líneas nuevas (\n) que contiene. Similar a ejecutar `cat file | wc -l`.
+Escribe un programa que, usando una llamada síncrona al sistema de archivos, lea un archivo recibido por argumento e imprima a consola la cantidad de saltos de línea ('\n') que contiene. Similar a ejecutar `cat file | wc -l`.
 
 El programa recibirá la ruta al archivo como único argumento.
 
@@ -23,6 +23,6 @@ Los objetos `Buffer` de Node son una representación eficiente de Arrays de dato
 Puedes leer la documentación del objeto `Buffer` en:
   {rootdir:/node_apidoc/buffer.html}
 
-Una forma sencilla de contar los números de línea es dividir el String con la función `split`, nativa de JavaScript, usando el carácter de nueva línea ('\n'). Ten en cuenta que el archivo puede no tener '\n' al final por lo que la lista resultante puede tener 1 elemento más que líneas en el archivo.
+Si buscas una forma sencilla de contar el número de saltos de línea en un string, piensa que puedes convertir un `String` de Javascript en un array de substrings usando `.split()`, y que puedes usar '\n' como delimitador. Nótese que el fichero de test no tiene ningún salto de línea ('\n') al final de la última línea, con lo que al usar este método acabarás obteniendo un array que tiene un elemento más que el número de saltos de línea.
 
 ----------------------------------------------------------------------
