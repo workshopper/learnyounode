@@ -1,4 +1,4 @@
-Viết một chương trình sử dụng thao tác đọc một file bằng phương pháp đồng bộ và sau đó in ra số kí tự xuống dòng trong file đó ra giao diện dòng lệnh (stdout), tương tự như lệnh `cat file | wc -l`.
+Viết một chương trình sử dụng thao tác đọc một file bằng phương pháp đồng bộ và sau đó in ra số kí tự xuống dòng (\n) trong file đó ra giao diện dòng lệnh (stdout), tương tự như lệnh `cat file | wc -l`.
 
 Đường dẫn của file sẽ được cung cấp qua tham số dòng lệnh đầu tiên. Bạn không nhất thiết phải tạo một file để kiểm tra vì môi trường giả lập đã cung cấp sẵn các file cho bạn rồi.
 
