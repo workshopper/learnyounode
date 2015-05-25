@@ -69,17 +69,18 @@ function query (mode) {
       var url = 'http://localhost:' + port + '/api/' + method + '?iso=' + date.toISOString();
 
       function onData (err, _data) {
-        if (err)
+        if (err) {
           exercise.emit('fail', exercise.__('fail.connection', { address: url, message: err.message }))
+        } else {
+          var data = _data.toString()
 
-        var data = _data.toString()
+          try {
+            data = normalizeJSON(data.toString())
+          } catch (e) {
+          }
 
-        try {
-          data = normalizeJSON(data.toString())
-        } catch (e) {
+          stream.write(data + '\n')
         }
-
-        stream.write(data + '\n')
 
         callback()
       }
