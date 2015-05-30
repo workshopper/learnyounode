@@ -1,6 +1,6 @@
 {yellow}{bold}Har du problemer med {appname} oppgaven?{/bold}{/yellow}
 
-  Et helt team med hjelp alver står ivrige å venter på å hjelpe deg til å lære elementær Node.js, bare gå til denne adressen:
+  Et helt team med ivrige og hjelpsomme JavaScript-alver venter på å hjelpe deg lære grunnleggende Node.js, bare gå til denne adressen:
     https://github.com/nodeschool/discussions/issues
   og legg til en {bold}New Issue{/bold} og la oss få vite hva du har problemer med. Det finnes {italic}ingen{/italic} dumme spørsmål!
 
