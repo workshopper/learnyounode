@@ -1,0 +1,4 @@
+{yellow}{bold}Takket være disse dedikerte hacker'ne har du kunnet bruke learnyounode:{/bold}{/yellow}
+
+{bold}Navn                GitHub Brukernavn{/bold}
+-----------------------------------
