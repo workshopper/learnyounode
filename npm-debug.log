@@ -1,0 +1,1715 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@2.0.0
+3 info using node@v0.11.14
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/home/espen/git/me/nodeschool-no/learnyounode',
+5 verbose install   [ 'after',
+5 verbose install     'bl',
+5 verbose install     'boganipsum',
+5 verbose install     'chalk',
+5 verbose install     'colors-tmpl',
+5 verbose install     'combined-stream',
+5 verbose install     'concat-stream',
+5 verbose install     'duplexer',
+5 verbose install     'hyperquest',
+5 verbose install     'rimraf',
+5 verbose install     'through',
+5 verbose install     'through2',
+5 verbose install     'through2-map',
+5 verbose install     'workshopper',
+5 verbose install     'workshopper-exercise',
+5 verbose install     'workshopper-wrappedexec' ] ]
+6 info preinstall learnyounode@2.5.2
+7 verbose readDependencies using package.json deps
+8 verbose cache add [ 'after@~0.8.1', null ]
+9 verbose cache add spec="after@~0.8.1" args=["after@~0.8.1",null]
+10 verbose parsed spec { raw: 'after@~0.8.1',
+10 verbose parsed spec   scope: null,
+10 verbose parsed spec   name: 'after',
+10 verbose parsed spec   rawSpec: '~0.8.1',
+10 verbose parsed spec   spec: '>=0.8.1 <0.9.0',
+10 verbose parsed spec   type: 'range' }
+11 verbose cache add [ 'bl@~0.9.4', null ]
+12 verbose cache add spec="bl@~0.9.4" args=["bl@~0.9.4",null]
+13 verbose parsed spec { raw: 'bl@~0.9.4',
+13 verbose parsed spec   scope: null,
+13 verbose parsed spec   name: 'bl',
+13 verbose parsed spec   rawSpec: '~0.9.4',
+13 verbose parsed spec   spec: '>=0.9.4 <0.10.0',
+13 verbose parsed spec   type: 'range' }
+14 verbose cache add [ 'boganipsum@~0.1.0', null ]
+15 verbose cache add spec="boganipsum@~0.1.0" args=["boganipsum@~0.1.0",null]
+16 verbose parsed spec { raw: 'boganipsum@~0.1.0',
+16 verbose parsed spec   scope: null,
+16 verbose parsed spec   name: 'boganipsum',
+16 verbose parsed spec   rawSpec: '~0.1.0',
+16 verbose parsed spec   spec: '>=0.1.0 <0.2.0',
+16 verbose parsed spec   type: 'range' }
+17 verbose cache add [ 'chalk@~0.5.1', null ]
+18 verbose cache add spec="chalk@~0.5.1" args=["chalk@~0.5.1",null]
+19 verbose parsed spec { raw: 'chalk@~0.5.1',
+19 verbose parsed spec   scope: null,
+19 verbose parsed spec   name: 'chalk',
+19 verbose parsed spec   rawSpec: '~0.5.1',
+19 verbose parsed spec   spec: '>=0.5.1 <0.6.0',
+19 verbose parsed spec   type: 'range' }
+20 verbose cache add [ 'colors-tmpl@~1.0.0', null ]
+21 verbose cache add spec="colors-tmpl@~1.0.0" args=["colors-tmpl@~1.0.0",null]
+22 verbose parsed spec { raw: 'colors-tmpl@~1.0.0',
+22 verbose parsed spec   scope: null,
+22 verbose parsed spec   name: 'colors-tmpl',
+22 verbose parsed spec   rawSpec: '~1.0.0',
+22 verbose parsed spec   spec: '>=1.0.0 <1.1.0',
+22 verbose parsed spec   type: 'range' }
+23 verbose cache add [ 'combined-stream@~0.0.7', null ]
+24 verbose cache add spec="combined-stream@~0.0.7" args=["combined-stream@~0.0.7",null]
+25 verbose parsed spec { raw: 'combined-stream@~0.0.7',
+25 verbose parsed spec   scope: null,
+25 verbose parsed spec   name: 'combined-stream',
+25 verbose parsed spec   rawSpec: '~0.0.7',
+25 verbose parsed spec   spec: '>=0.0.7 <0.1.0',
+25 verbose parsed spec   type: 'range' }
+26 verbose cache add [ 'concat-stream@~1.4.7', null ]
+27 verbose cache add spec="concat-stream@~1.4.7" args=["concat-stream@~1.4.7",null]
+28 verbose parsed spec { raw: 'concat-stream@~1.4.7',
+28 verbose parsed spec   scope: null,
+28 verbose parsed spec   name: 'concat-stream',
+28 verbose parsed spec   rawSpec: '~1.4.7',
+28 verbose parsed spec   spec: '>=1.4.7 <1.5.0',
+28 verbose parsed spec   type: 'range' }
+29 verbose cache add [ 'duplexer@~0.1.1', null ]
+30 verbose cache add spec="duplexer@~0.1.1" args=["duplexer@~0.1.1",null]
+31 verbose parsed spec { raw: 'duplexer@~0.1.1',
+31 verbose parsed spec   scope: null,
+31 verbose parsed spec   name: 'duplexer',
+31 verbose parsed spec   rawSpec: '~0.1.1',
+31 verbose parsed spec   spec: '>=0.1.1 <0.2.0',
+31 verbose parsed spec   type: 'range' }
+32 verbose cache add [ 'hyperquest@~1.0.1', null ]
+33 verbose cache add spec="hyperquest@~1.0.1" args=["hyperquest@~1.0.1",null]
+34 verbose parsed spec { raw: 'hyperquest@~1.0.1',
+34 verbose parsed spec   scope: null,
+34 verbose parsed spec   name: 'hyperquest',
+34 verbose parsed spec   rawSpec: '~1.0.1',
+34 verbose parsed spec   spec: '>=1.0.1 <1.1.0',
+34 verbose parsed spec   type: 'range' }
+35 verbose cache add [ 'rimraf@~2.2.8', null ]
+36 verbose cache add spec="rimraf@~2.2.8" args=["rimraf@~2.2.8",null]
+37 verbose parsed spec { raw: 'rimraf@~2.2.8',
+37 verbose parsed spec   scope: null,
+37 verbose parsed spec   name: 'rimraf',
+37 verbose parsed spec   rawSpec: '~2.2.8',
+37 verbose parsed spec   spec: '>=2.2.8 <2.3.0',
+37 verbose parsed spec   type: 'range' }
+38 verbose cache add [ 'through@~2.3.6', null ]
+39 verbose cache add spec="through@~2.3.6" args=["through@~2.3.6",null]
+40 verbose parsed spec { raw: 'through@~2.3.6',
+40 verbose parsed spec   scope: null,
+40 verbose parsed spec   name: 'through',
+40 verbose parsed spec   rawSpec: '~2.3.6',
+40 verbose parsed spec   spec: '>=2.3.6 <2.4.0',
+40 verbose parsed spec   type: 'range' }
+41 verbose cache add [ 'through2@~0.6.3', null ]
+42 verbose cache add spec="through2@~0.6.3" args=["through2@~0.6.3",null]
+43 verbose parsed spec { raw: 'through2@~0.6.3',
+43 verbose parsed spec   scope: null,
+43 verbose parsed spec   name: 'through2',
+43 verbose parsed spec   rawSpec: '~0.6.3',
+43 verbose parsed spec   spec: '>=0.6.3 <0.7.0',
+43 verbose parsed spec   type: 'range' }
+44 verbose parsed spec { raw: 'after@~0.8.1',
+44 verbose parsed spec   scope: null,
+44 verbose parsed spec   name: 'after',
+44 verbose parsed spec   rawSpec: '~0.8.1',
+44 verbose parsed spec   spec: '>=0.8.1 <0.9.0',
+44 verbose parsed spec   type: 'range' }
+45 verbose addNamed [ 'after', '>=0.8.1 <0.9.0' ]
+46 verbose addNamed [ null, '>=0.8.1 <0.9.0' ]
+47 verbose parsed spec { raw: 'bl@~0.9.4',
+47 verbose parsed spec   scope: null,
+47 verbose parsed spec   name: 'bl',
+47 verbose parsed spec   rawSpec: '~0.9.4',
+47 verbose parsed spec   spec: '>=0.9.4 <0.10.0',
+47 verbose parsed spec   type: 'range' }
+48 verbose addNamed [ 'bl', '>=0.9.4 <0.10.0' ]
+49 verbose addNamed [ null, '>=0.9.4 <0.10.0' ]
+50 verbose parsed spec { raw: 'boganipsum@~0.1.0',
+50 verbose parsed spec   scope: null,
+50 verbose parsed spec   name: 'boganipsum',
+50 verbose parsed spec   rawSpec: '~0.1.0',
+50 verbose parsed spec   spec: '>=0.1.0 <0.2.0',
+50 verbose parsed spec   type: 'range' }
+51 verbose addNamed [ 'boganipsum', '>=0.1.0 <0.2.0' ]
+52 verbose addNamed [ null, '>=0.1.0 <0.2.0' ]
+53 verbose parsed spec { raw: 'chalk@~0.5.1',
+53 verbose parsed spec   scope: null,
+53 verbose parsed spec   name: 'chalk',
+53 verbose parsed spec   rawSpec: '~0.5.1',
+53 verbose parsed spec   spec: '>=0.5.1 <0.6.0',
+53 verbose parsed spec   type: 'range' }
+54 verbose addNamed [ 'chalk', '>=0.5.1 <0.6.0' ]
+55 verbose addNamed [ null, '>=0.5.1 <0.6.0' ]
+56 verbose parsed spec { raw: 'colors-tmpl@~1.0.0',
+56 verbose parsed spec   scope: null,
+56 verbose parsed spec   name: 'colors-tmpl',
+56 verbose parsed spec   rawSpec: '~1.0.0',
+56 verbose parsed spec   spec: '>=1.0.0 <1.1.0',
+56 verbose parsed spec   type: 'range' }
+57 verbose addNamed [ 'colors-tmpl', '>=1.0.0 <1.1.0' ]
+58 verbose addNamed [ null, '>=1.0.0 <1.1.0' ]
+59 verbose parsed spec { raw: 'combined-stream@~0.0.7',
+59 verbose parsed spec   scope: null,
+59 verbose parsed spec   name: 'combined-stream',
+59 verbose parsed spec   rawSpec: '~0.0.7',
+59 verbose parsed spec   spec: '>=0.0.7 <0.1.0',
+59 verbose parsed spec   type: 'range' }
+60 verbose addNamed [ 'combined-stream', '>=0.0.7 <0.1.0' ]
+61 verbose addNamed [ null, '>=0.0.7 <0.1.0' ]
+62 verbose parsed spec { raw: 'concat-stream@~1.4.7',
+62 verbose parsed spec   scope: null,
+62 verbose parsed spec   name: 'concat-stream',
+62 verbose parsed spec   rawSpec: '~1.4.7',
+62 verbose parsed spec   spec: '>=1.4.7 <1.5.0',
+62 verbose parsed spec   type: 'range' }
+63 verbose addNamed [ 'concat-stream', '>=1.4.7 <1.5.0' ]
+64 verbose addNamed [ null, '>=1.4.7 <1.5.0' ]
+65 verbose parsed spec { raw: 'duplexer@~0.1.1',
+65 verbose parsed spec   scope: null,
+65 verbose parsed spec   name: 'duplexer',
+65 verbose parsed spec   rawSpec: '~0.1.1',
+65 verbose parsed spec   spec: '>=0.1.1 <0.2.0',
+65 verbose parsed spec   type: 'range' }
+66 verbose addNamed [ 'duplexer', '>=0.1.1 <0.2.0' ]
+67 verbose addNamed [ null, '>=0.1.1 <0.2.0' ]
+68 verbose parsed spec { raw: 'hyperquest@~1.0.1',
+68 verbose parsed spec   scope: null,
+68 verbose parsed spec   name: 'hyperquest',
+68 verbose parsed spec   rawSpec: '~1.0.1',
+68 verbose parsed spec   spec: '>=1.0.1 <1.1.0',
+68 verbose parsed spec   type: 'range' }
+69 verbose addNamed [ 'hyperquest', '>=1.0.1 <1.1.0' ]
+70 verbose addNamed [ null, '>=1.0.1 <1.1.0' ]
+71 verbose parsed spec { raw: 'rimraf@~2.2.8',
+71 verbose parsed spec   scope: null,
+71 verbose parsed spec   name: 'rimraf',
+71 verbose parsed spec   rawSpec: '~2.2.8',
+71 verbose parsed spec   spec: '>=2.2.8 <2.3.0',
+71 verbose parsed spec   type: 'range' }
+72 verbose addNamed [ 'rimraf', '>=2.2.8 <2.3.0' ]
+73 verbose addNamed [ null, '>=2.2.8 <2.3.0' ]
+74 verbose parsed spec { raw: 'through@~2.3.6',
+74 verbose parsed spec   scope: null,
+74 verbose parsed spec   name: 'through',
+74 verbose parsed spec   rawSpec: '~2.3.6',
+74 verbose parsed spec   spec: '>=2.3.6 <2.4.0',
+74 verbose parsed spec   type: 'range' }
+75 verbose addNamed [ 'through', '>=2.3.6 <2.4.0' ]
+76 verbose addNamed [ null, '>=2.3.6 <2.4.0' ]
+77 verbose cache add [ 'through2-map@~1.4.0', null ]
+78 verbose cache add spec="through2-map@~1.4.0" args=["through2-map@~1.4.0",null]
+79 verbose parsed spec { raw: 'through2-map@~1.4.0',
+79 verbose parsed spec   scope: null,
+79 verbose parsed spec   name: 'through2-map',
+79 verbose parsed spec   rawSpec: '~1.4.0',
+79 verbose parsed spec   spec: '>=1.4.0 <1.5.0',
+79 verbose parsed spec   type: 'range' }
+80 verbose already installed skipping workshopper@~2.5.0 /home/espen/git/me/nodeschool-no/learnyounode
+81 verbose cache add [ 'workshopper-exercise@~2.3.0', null ]
+82 verbose cache add spec="workshopper-exercise@~2.3.0" args=["workshopper-exercise@~2.3.0",null]
+83 verbose parsed spec { raw: 'workshopper-exercise@~2.3.0',
+83 verbose parsed spec   scope: null,
+83 verbose parsed spec   name: 'workshopper-exercise',
+83 verbose parsed spec   rawSpec: '~2.3.0',
+83 verbose parsed spec   spec: '>=2.3.0 <2.4.0',
+83 verbose parsed spec   type: 'range' }
+84 verbose cache add [ 'workshopper-wrappedexec@~0.1.1', null ]
+85 verbose cache add spec="workshopper-wrappedexec@~0.1.1" args=["workshopper-wrappedexec@~0.1.1",null]
+86 verbose parsed spec { raw: 'workshopper-wrappedexec@~0.1.1',
+86 verbose parsed spec   scope: null,
+86 verbose parsed spec   name: 'workshopper-wrappedexec',
+86 verbose parsed spec   rawSpec: '~0.1.1',
+86 verbose parsed spec   spec: '>=0.1.1 <0.2.0',
+86 verbose parsed spec   type: 'range' }
+87 verbose parsed spec { raw: 'through2@~0.6.3',
+87 verbose parsed spec   scope: null,
+87 verbose parsed spec   name: 'through2',
+87 verbose parsed spec   rawSpec: '~0.6.3',
+87 verbose parsed spec   spec: '>=0.6.3 <0.7.0',
+87 verbose parsed spec   type: 'range' }
+88 verbose addNamed [ 'through2', '>=0.6.3 <0.7.0' ]
+89 verbose addNamed [ null, '>=0.6.3 <0.7.0' ]
+90 silly lockFile dea33058-after-0-8-1-0-9-0 after@>=0.8.1 <0.9.0
+91 verbose lock after@>=0.8.1 <0.9.0 /home/espen/.npm/dea33058-after-0-8-1-0-9-0.lock
+92 silly lockFile ee7168e4-bl-0-9-4-0-10-0 bl@>=0.9.4 <0.10.0
+93 verbose lock bl@>=0.9.4 <0.10.0 /home/espen/.npm/ee7168e4-bl-0-9-4-0-10-0.lock
+94 silly lockFile 848fedfa-boganipsum-0-1-0-0-2-0 boganipsum@>=0.1.0 <0.2.0
+95 verbose lock boganipsum@>=0.1.0 <0.2.0 /home/espen/.npm/848fedfa-boganipsum-0-1-0-0-2-0.lock
+96 silly lockFile 06d67e5d-chalk-0-5-1-0-6-0 chalk@>=0.5.1 <0.6.0
+97 verbose lock chalk@>=0.5.1 <0.6.0 /home/espen/.npm/06d67e5d-chalk-0-5-1-0-6-0.lock
+98 silly lockFile 2d065176-colors-tmpl-1-0-0-1-1-0 colors-tmpl@>=1.0.0 <1.1.0
+99 verbose lock colors-tmpl@>=1.0.0 <1.1.0 /home/espen/.npm/2d065176-colors-tmpl-1-0-0-1-1-0.lock
+100 silly lockFile 70f473af-combined-stream-0-0-7-0-1-0 combined-stream@>=0.0.7 <0.1.0
+101 verbose lock combined-stream@>=0.0.7 <0.1.0 /home/espen/.npm/70f473af-combined-stream-0-0-7-0-1-0.lock
+102 silly lockFile ebfd77f5-concat-stream-1-4-7-1-5-0 concat-stream@>=1.4.7 <1.5.0
+103 verbose lock concat-stream@>=1.4.7 <1.5.0 /home/espen/.npm/ebfd77f5-concat-stream-1-4-7-1-5-0.lock
+104 silly lockFile f0364ddc-duplexer-0-1-1-0-2-0 duplexer@>=0.1.1 <0.2.0
+105 verbose lock duplexer@>=0.1.1 <0.2.0 /home/espen/.npm/f0364ddc-duplexer-0-1-1-0-2-0.lock
+106 silly lockFile ddadfd77-hyperquest-1-0-1-1-1-0 hyperquest@>=1.0.1 <1.1.0
+107 verbose lock hyperquest@>=1.0.1 <1.1.0 /home/espen/.npm/ddadfd77-hyperquest-1-0-1-1-1-0.lock
+108 silly lockFile 27bce628-rimraf-2-2-8-2-3-0 rimraf@>=2.2.8 <2.3.0
+109 verbose lock rimraf@>=2.2.8 <2.3.0 /home/espen/.npm/27bce628-rimraf-2-2-8-2-3-0.lock
+110 silly lockFile 69ee2fe7-through-2-3-6-2-4-0 through@>=2.3.6 <2.4.0
+111 verbose lock through@>=2.3.6 <2.4.0 /home/espen/.npm/69ee2fe7-through-2-3-6-2-4-0.lock
+112 silly lockFile 35d92644-through2-0-6-3-0-7-0 through2@>=0.6.3 <0.7.0
+113 verbose lock through2@>=0.6.3 <0.7.0 /home/espen/.npm/35d92644-through2-0-6-3-0-7-0.lock
+114 verbose parsed spec { raw: 'through2-map@~1.4.0',
+114 verbose parsed spec   scope: null,
+114 verbose parsed spec   name: 'through2-map',
+114 verbose parsed spec   rawSpec: '~1.4.0',
+114 verbose parsed spec   spec: '>=1.4.0 <1.5.0',
+114 verbose parsed spec   type: 'range' }
+115 verbose addNamed [ 'through2-map', '>=1.4.0 <1.5.0' ]
+116 verbose addNamed [ null, '>=1.4.0 <1.5.0' ]
+117 silly lockFile eccbb6c0-through2-map-1-4-0-1-5-0 through2-map@>=1.4.0 <1.5.0
+118 verbose lock through2-map@>=1.4.0 <1.5.0 /home/espen/.npm/eccbb6c0-through2-map-1-4-0-1-5-0.lock
+119 verbose parsed spec { raw: 'workshopper-exercise@~2.3.0',
+119 verbose parsed spec   scope: null,
+119 verbose parsed spec   name: 'workshopper-exercise',
+119 verbose parsed spec   rawSpec: '~2.3.0',
+119 verbose parsed spec   spec: '>=2.3.0 <2.4.0',
+119 verbose parsed spec   type: 'range' }
+120 verbose addNamed [ 'workshopper-exercise', '>=2.3.0 <2.4.0' ]
+121 verbose addNamed [ null, '>=2.3.0 <2.4.0' ]
+122 silly lockFile 2555be47-workshopper-exercise-2-3-0-2-4-0 workshopper-exercise@>=2.3.0 <2.4.0
+123 verbose lock workshopper-exercise@>=2.3.0 <2.4.0 /home/espen/.npm/2555be47-workshopper-exercise-2-3-0-2-4-0.lock
+124 verbose parsed spec { raw: 'workshopper-wrappedexec@~0.1.1',
+124 verbose parsed spec   scope: null,
+124 verbose parsed spec   name: 'workshopper-wrappedexec',
+124 verbose parsed spec   rawSpec: '~0.1.1',
+124 verbose parsed spec   spec: '>=0.1.1 <0.2.0',
+124 verbose parsed spec   type: 'range' }
+125 verbose addNamed [ 'workshopper-wrappedexec', '>=0.1.1 <0.2.0' ]
+126 verbose addNamed [ null, '>=0.1.1 <0.2.0' ]
+127 silly lockFile 816b8b7b-kshopper-wrappedexec-0-1-1-0-2-0 workshopper-wrappedexec@>=0.1.1 <0.2.0
+128 verbose lock workshopper-wrappedexec@>=0.1.1 <0.2.0 /home/espen/.npm/816b8b7b-kshopper-wrappedexec-0-1-1-0-2-0.lock
+129 silly addNameRange { name: 'after', range: '>=0.8.1 <0.9.0', hasData: false }
+130 verbose mapToRegistry name after
+131 verbose mapToRegistry uri https://registry.npmjs.org/after
+132 silly addNameRange { name: 'bl', range: '>=0.9.4 <0.10.0', hasData: false }
+133 verbose mapToRegistry name bl
+134 verbose mapToRegistry uri https://registry.npmjs.org/bl
+135 silly addNameRange { name: 'boganipsum', range: '>=0.1.0 <0.2.0', hasData: false }
+136 verbose mapToRegistry name boganipsum
+137 verbose mapToRegistry uri https://registry.npmjs.org/boganipsum
+138 silly addNameRange { name: 'chalk', range: '>=0.5.1 <0.6.0', hasData: false }
+139 verbose mapToRegistry name chalk
+140 verbose mapToRegistry uri https://registry.npmjs.org/chalk
+141 silly addNameRange { name: 'colors-tmpl', range: '>=1.0.0 <1.1.0', hasData: false }
+142 verbose mapToRegistry name colors-tmpl
+143 verbose mapToRegistry uri https://registry.npmjs.org/colors-tmpl
+144 silly addNameRange { name: 'combined-stream',
+144 silly addNameRange   range: '>=0.0.7 <0.1.0',
+144 silly addNameRange   hasData: false }
+145 verbose mapToRegistry name combined-stream
+146 verbose mapToRegistry uri https://registry.npmjs.org/combined-stream
+147 silly addNameRange { name: 'concat-stream',
+147 silly addNameRange   range: '>=1.4.7 <1.5.0',
+147 silly addNameRange   hasData: false }
+148 verbose mapToRegistry name concat-stream
+149 verbose mapToRegistry uri https://registry.npmjs.org/concat-stream
+150 silly addNameRange { name: 'duplexer', range: '>=0.1.1 <0.2.0', hasData: false }
+151 verbose mapToRegistry name duplexer
+152 verbose mapToRegistry uri https://registry.npmjs.org/duplexer
+153 silly addNameRange { name: 'hyperquest', range: '>=1.0.1 <1.1.0', hasData: false }
+154 verbose mapToRegistry name hyperquest
+155 verbose mapToRegistry uri https://registry.npmjs.org/hyperquest
+156 silly addNameRange { name: 'rimraf', range: '>=2.2.8 <2.3.0', hasData: false }
+157 verbose mapToRegistry name rimraf
+158 verbose mapToRegistry uri https://registry.npmjs.org/rimraf
+159 silly addNameRange { name: 'through', range: '>=2.3.6 <2.4.0', hasData: false }
+160 verbose mapToRegistry name through
+161 verbose mapToRegistry uri https://registry.npmjs.org/through
+162 silly addNameRange { name: 'through2', range: '>=0.6.3 <0.7.0', hasData: false }
+163 verbose mapToRegistry name through2
+164 verbose mapToRegistry uri https://registry.npmjs.org/through2
+165 silly addNameRange { name: 'through2-map', range: '>=1.4.0 <1.5.0', hasData: false }
+166 verbose mapToRegistry name through2-map
+167 verbose mapToRegistry uri https://registry.npmjs.org/through2-map
+168 silly addNameRange { name: 'workshopper-exercise',
+168 silly addNameRange   range: '>=2.3.0 <2.4.0',
+168 silly addNameRange   hasData: false }
+169 verbose mapToRegistry name workshopper-exercise
+170 verbose mapToRegistry uri https://registry.npmjs.org/workshopper-exercise
+171 silly addNameRange { name: 'workshopper-wrappedexec',
+171 silly addNameRange   range: '>=0.1.1 <0.2.0',
+171 silly addNameRange   hasData: false }
+172 verbose mapToRegistry name workshopper-wrappedexec
+173 verbose mapToRegistry uri https://registry.npmjs.org/workshopper-wrappedexec
+174 verbose request on initialization, where is /boganipsum
+175 verbose request after pass 1, where is /boganipsum
+176 verbose request url raw /boganipsum
+177 verbose request resolving registry [ 'https://registry.npmjs.org/', './boganipsum' ]
+178 verbose request after pass 2, where is https://registry.npmjs.org/boganipsum
+179 verbose request no auth needed
+180 info attempt registry request try #1 at 15:34:43
+181 verbose request id e31bceccd4c8c61f
+182 http request GET https://registry.npmjs.org/boganipsum
+183 verbose request on initialization, where is /hyperquest
+184 verbose request after pass 1, where is /hyperquest
+185 verbose request url raw /hyperquest
+186 verbose request resolving registry [ 'https://registry.npmjs.org/', './hyperquest' ]
+187 verbose request after pass 2, where is https://registry.npmjs.org/hyperquest
+188 verbose request no auth needed
+189 info attempt registry request try #1 at 15:34:43
+190 http request GET https://registry.npmjs.org/hyperquest
+191 verbose request on initialization, where is /rimraf
+192 verbose request after pass 1, where is /rimraf
+193 verbose request url raw /rimraf
+194 verbose request resolving registry [ 'https://registry.npmjs.org/', './rimraf' ]
+195 verbose request after pass 2, where is https://registry.npmjs.org/rimraf
+196 verbose request no auth needed
+197 info attempt registry request try #1 at 15:34:43
+198 http request GET https://registry.npmjs.org/rimraf
+199 verbose request on initialization, where is /through2-map
+200 verbose request after pass 1, where is /through2-map
+201 verbose request url raw /through2-map
+202 verbose request resolving registry [ 'https://registry.npmjs.org/', './through2-map' ]
+203 verbose request after pass 2, where is https://registry.npmjs.org/through2-map
+204 verbose request no auth needed
+205 info attempt registry request try #1 at 15:34:43
+206 http request GET https://registry.npmjs.org/through2-map
+207 verbose request on initialization, where is /workshopper-wrappedexec
+208 verbose request after pass 1, where is /workshopper-wrappedexec
+209 verbose request url raw /workshopper-wrappedexec
+210 verbose request resolving registry [ 'https://registry.npmjs.org/', './workshopper-wrappedexec' ]
+211 verbose request after pass 2, where is https://registry.npmjs.org/workshopper-wrappedexec
+212 verbose request no auth needed
+213 info attempt registry request try #1 at 15:34:43
+214 http request GET https://registry.npmjs.org/workshopper-wrappedexec
+215 verbose registry.get https://registry.npmjs.org/after not expired, no request
+216 silly addNameRange number 2 { name: 'after', range: '>=0.8.1 <0.9.0', hasData: true }
+217 silly addNameRange versions [ 'after',
+217 silly addNameRange   [ '0.1.0',
+217 silly addNameRange     '0.1.3',
+217 silly addNameRange     '0.1.4',
+217 silly addNameRange     '0.1.5',
+217 silly addNameRange     '0.1.6',
+217 silly addNameRange     '0.1.7',
+217 silly addNameRange     '0.1.8',
+217 silly addNameRange     '0.2.0',
+217 silly addNameRange     '0.3.1',
+217 silly addNameRange     '0.3.2',
+217 silly addNameRange     '0.3.3',
+217 silly addNameRange     '0.3.4',
+217 silly addNameRange     '0.4.0',
+217 silly addNameRange     '0.4.1',
+217 silly addNameRange     '0.5.0',
+217 silly addNameRange     '0.6.0',
+217 silly addNameRange     '0.7.0',
+217 silly addNameRange     '0.8.1' ] ]
+218 verbose addNamed [ 'after', '0.8.1' ]
+219 verbose addNamed [ '0.8.1', '0.8.1' ]
+220 silly lockFile d74a1991-after-0-8-1 after@0.8.1
+221 verbose lock after@0.8.1 /home/espen/.npm/d74a1991-after-0-8-1.lock
+222 verbose registry.get https://registry.npmjs.org/chalk not expired, no request
+223 silly addNameRange number 2 { name: 'chalk', range: '>=0.5.1 <0.6.0', hasData: true }
+224 silly addNameRange versions [ 'chalk',
+224 silly addNameRange   [ '0.1.0',
+224 silly addNameRange     '0.1.1',
+224 silly addNameRange     '0.2.0',
+224 silly addNameRange     '0.2.1',
+224 silly addNameRange     '0.3.0',
+224 silly addNameRange     '0.4.0',
+224 silly addNameRange     '0.5.0',
+224 silly addNameRange     '0.5.1',
+224 silly addNameRange     '1.0.0' ] ]
+225 verbose addNamed [ 'chalk', '0.5.1' ]
+226 verbose addNamed [ '0.5.1', '0.5.1' ]
+227 silly lockFile c28973bb-chalk-0-5-1 chalk@0.5.1
+228 verbose lock chalk@0.5.1 /home/espen/.npm/c28973bb-chalk-0-5-1.lock
+229 verbose registry.get https://registry.npmjs.org/colors-tmpl not expired, no request
+230 silly addNameRange number 2 { name: 'colors-tmpl', range: '>=1.0.0 <1.1.0', hasData: true }
+231 silly addNameRange versions [ 'colors-tmpl',
+231 silly addNameRange   [ '0.0.1', '0.0.2', '0.0.3', '0.1.0', '0.1.1', '1.0.0' ] ]
+232 verbose addNamed [ 'colors-tmpl', '1.0.0' ]
+233 verbose addNamed [ '1.0.0', '1.0.0' ]
+234 silly lockFile 0a5b6dc2-colors-tmpl-1-0-0 colors-tmpl@1.0.0
+235 verbose lock colors-tmpl@1.0.0 /home/espen/.npm/0a5b6dc2-colors-tmpl-1-0-0.lock
+236 verbose request on initialization, where is /duplexer
+237 verbose request after pass 1, where is /duplexer
+238 verbose request url raw /duplexer
+239 verbose request resolving registry [ 'https://registry.npmjs.org/', './duplexer' ]
+240 verbose request after pass 2, where is https://registry.npmjs.org/duplexer
+241 verbose request no auth needed
+242 info attempt registry request try #1 at 15:34:43
+243 verbose etag "14KWAP9J017CZCIJPTC8C59UA"
+244 http request GET https://registry.npmjs.org/duplexer
+245 verbose request on initialization, where is /concat-stream
+246 verbose request after pass 1, where is /concat-stream
+247 verbose request url raw /concat-stream
+248 verbose request resolving registry [ 'https://registry.npmjs.org/', './concat-stream' ]
+249 verbose request after pass 2, where is https://registry.npmjs.org/concat-stream
+250 verbose request no auth needed
+251 info attempt registry request try #1 at 15:34:43
+252 verbose etag "67DM80G9Y6SOX75JWBLWUFYRV"
+253 http request GET https://registry.npmjs.org/concat-stream
+254 verbose registry.get https://registry.npmjs.org/through not expired, no request
+255 silly addNameRange number 2 { name: 'through', range: '>=2.3.6 <2.4.0', hasData: true }
+256 silly addNameRange versions [ 'through',
+256 silly addNameRange   [ '0.0.1',
+256 silly addNameRange     '0.0.2',
+256 silly addNameRange     '0.0.3',
+256 silly addNameRange     '0.0.4',
+256 silly addNameRange     '0.1.0',
+256 silly addNameRange     '0.1.1',
+256 silly addNameRange     '0.1.2',
+256 silly addNameRange     '0.1.3',
+256 silly addNameRange     '0.1.4',
+256 silly addNameRange     '1.0.0',
+256 silly addNameRange     '1.1.0',
+256 silly addNameRange     '1.1.1',
+256 silly addNameRange     '1.1.2',
+256 silly addNameRange     '2.0.0',
+256 silly addNameRange     '2.1.0',
+256 silly addNameRange     '2.2.0',
+256 silly addNameRange     '2.2.1',
+256 silly addNameRange     '2.2.2',
+256 silly addNameRange     '2.2.4',
+256 silly addNameRange     '2.2.5',
+256 silly addNameRange     '2.2.6',
+256 silly addNameRange     '2.2.7',
+256 silly addNameRange     '2.3.1',
+256 silly addNameRange     '2.3.2',
+256 silly addNameRange     '2.3.3',
+256 silly addNameRange     '2.3.4',
+256 silly addNameRange     '2.3.6',
+256 silly addNameRange     '2.3.7' ] ]
+257 verbose addNamed [ 'through', '2.3.7' ]
+258 verbose addNamed [ '2.3.7', '2.3.7' ]
+259 silly lockFile fd820b08-through-2-3-7 through@2.3.7
+260 verbose lock through@2.3.7 /home/espen/.npm/fd820b08-through-2-3-7.lock
+261 verbose request on initialization, where is /combined-stream
+262 verbose request after pass 1, where is /combined-stream
+263 verbose request url raw /combined-stream
+264 verbose request resolving registry [ 'https://registry.npmjs.org/', './combined-stream' ]
+265 verbose request after pass 2, where is https://registry.npmjs.org/combined-stream
+266 verbose request no auth needed
+267 info attempt registry request try #1 at 15:34:43
+268 verbose etag "DK78JBVRHZ5QSU7AGQ1M874DL"
+269 http request GET https://registry.npmjs.org/combined-stream
+270 verbose registry.get https://registry.npmjs.org/through2 not expired, no request
+271 silly addNameRange number 2 { name: 'through2', range: '>=0.6.3 <0.7.0', hasData: true }
+272 silly addNameRange versions [ 'through2',
+272 silly addNameRange   [ '0.0.0',
+272 silly addNameRange     '0.0.1',
+272 silly addNameRange     '0.0.2',
+272 silly addNameRange     '0.0.3',
+272 silly addNameRange     '0.0.4',
+272 silly addNameRange     '0.0.5',
+272 silly addNameRange     '0.1.0',
+272 silly addNameRange     '0.2.0',
+272 silly addNameRange     '0.2.1',
+272 silly addNameRange     '0.2.2',
+272 silly addNameRange     '0.2.3',
+272 silly addNameRange     '0.3.0',
+272 silly addNameRange     '0.4.0',
+272 silly addNameRange     '0.4.1',
+272 silly addNameRange     '1.0.0',
+272 silly addNameRange     '0.4.2',
+272 silly addNameRange     '0.5.0',
+272 silly addNameRange     '0.5.1',
+272 silly addNameRange     '0.6.0',
+272 silly addNameRange     '1.1.0',
+272 silly addNameRange     '0.6.1',
+272 silly addNameRange     '1.1.1',
+272 silly addNameRange     '0.6.2',
+272 silly addNameRange     '0.6.3',
+272 silly addNameRange     '0.6.4',
+272 silly addNameRange     '0.6.5' ] ]
+273 verbose addNamed [ 'through2', '0.6.5' ]
+274 verbose addNamed [ '0.6.5', '0.6.5' ]
+275 silly lockFile 0698518e-through2-0-6-5 through2@0.6.5
+276 verbose lock through2@0.6.5 /home/espen/.npm/0698518e-through2-0-6-5.lock
+277 verbose registry.get https://registry.npmjs.org/workshopper-exercise not expired, no request
+278 silly addNameRange number 2 { name: 'workshopper-exercise',
+278 silly addNameRange   range: '>=2.3.0 <2.4.0',
+278 silly addNameRange   hasData: true }
+279 silly addNameRange versions [ 'workshopper-exercise',
+279 silly addNameRange   [ '0.0.0',
+279 silly addNameRange     '0.0.1',
+279 silly addNameRange     '0.0.2',
+279 silly addNameRange     '0.0.3',
+279 silly addNameRange     '0.0.4',
+279 silly addNameRange     '0.0.5',
+279 silly addNameRange     '0.0.6',
+279 silly addNameRange     '0.1.0',
+279 silly addNameRange     '0.2.0',
+279 silly addNameRange     '0.2.1',
+279 silly addNameRange     '0.2.2',
+279 silly addNameRange     '0.2.3',
+279 silly addNameRange     '1.0.0',
+279 silly addNameRange     '1.1.0',
+279 silly addNameRange     '2.0.0',
+279 silly addNameRange     '2.1.0',
+279 silly addNameRange     '2.2.0',
+279 silly addNameRange     '2.3.0' ] ]
+280 verbose addNamed [ 'workshopper-exercise', '2.3.0' ]
+281 verbose addNamed [ '2.3.0', '2.3.0' ]
+282 silly lockFile c4b50b5f-workshopper-exercise-2-3-0 workshopper-exercise@2.3.0
+283 verbose lock workshopper-exercise@2.3.0 /home/espen/.npm/c4b50b5f-workshopper-exercise-2-3-0.lock
+284 verbose request on initialization, where is /bl
+285 verbose request after pass 1, where is /bl
+286 verbose request url raw /bl
+287 verbose request resolving registry [ 'https://registry.npmjs.org/', './bl' ]
+288 verbose request after pass 2, where is https://registry.npmjs.org/bl
+289 verbose request no auth needed
+290 info attempt registry request try #1 at 15:34:43
+291 verbose etag "35D8O4CSWK320NAOXZO9WDENI"
+292 http request GET https://registry.npmjs.org/bl
+293 silly lockFile 5ed569c2-olors-tmpl-colors-tmpl-1-0-0-tgz https://registry.npmjs.org/colors-tmpl/-/colors-tmpl-1.0.0.tgz
+294 verbose lock https://registry.npmjs.org/colors-tmpl/-/colors-tmpl-1.0.0.tgz /home/espen/.npm/5ed569c2-olors-tmpl-colors-tmpl-1-0-0-tgz.lock
+295 silly lockFile c46b131c-e-workshopper-exercise-2-3-0-tgz https://registry.npmjs.org/workshopper-exercise/-/workshopper-exercise-2.3.0.tgz
+296 verbose lock https://registry.npmjs.org/workshopper-exercise/-/workshopper-exercise-2.3.0.tgz /home/espen/.npm/c46b131c-e-workshopper-exercise-2-3-0-tgz.lock
+297 verbose addRemoteTarball [ 'https://registry.npmjs.org/colors-tmpl/-/colors-tmpl-1.0.0.tgz',
+297 verbose addRemoteTarball   'b60ac4af816555d9edf1ad247337eb30241b6d2e' ]
+298 verbose addRemoteTarball [ 'https://registry.npmjs.org/workshopper-exercise/-/workshopper-exercise-2.3.0.tgz',
+298 verbose addRemoteTarball   '6c736b9b205f8ca1fa91daa07840716b4fd89c81' ]
+299 silly lockFile d74a1991-after-0-8-1 after@0.8.1
+300 silly lockFile d74a1991-after-0-8-1 after@0.8.1
+301 silly lockFile fd820b08-through-2-3-7 through@2.3.7
+302 silly lockFile fd820b08-through-2-3-7 through@2.3.7
+303 silly lockFile 0698518e-through2-0-6-5 through2@0.6.5
+304 silly lockFile 0698518e-through2-0-6-5 through2@0.6.5
+305 silly lockFile dea33058-after-0-8-1-0-9-0 after@>=0.8.1 <0.9.0
+306 silly lockFile dea33058-after-0-8-1-0-9-0 after@>=0.8.1 <0.9.0
+307 silly lockFile 69ee2fe7-through-2-3-6-2-4-0 through@>=2.3.6 <2.4.0
+308 silly lockFile 69ee2fe7-through-2-3-6-2-4-0 through@>=2.3.6 <2.4.0
+309 silly lockFile 35d92644-through2-0-6-3-0-7-0 through2@>=0.6.3 <0.7.0
+310 silly lockFile 35d92644-through2-0-6-3-0-7-0 through2@>=0.6.3 <0.7.0
+311 silly lockFile c28973bb-chalk-0-5-1 chalk@0.5.1
+312 silly lockFile c28973bb-chalk-0-5-1 chalk@0.5.1
+313 silly lockFile 06d67e5d-chalk-0-5-1-0-6-0 chalk@>=0.5.1 <0.6.0
+314 silly lockFile 06d67e5d-chalk-0-5-1-0-6-0 chalk@>=0.5.1 <0.6.0
+315 info retry fetch attempt 1 at 15:34:43
+316 info attempt registry request try #1 at 15:34:43
+317 http fetch GET https://registry.npmjs.org/colors-tmpl/-/colors-tmpl-1.0.0.tgz
+318 info retry fetch attempt 1 at 15:34:43
+319 info attempt registry request try #1 at 15:34:43
+320 http fetch GET https://registry.npmjs.org/workshopper-exercise/-/workshopper-exercise-2.3.0.tgz
+321 http 304 https://registry.npmjs.org/combined-stream
+322 silly registry.get cb [ 304,
+322 silly registry.get   { date: 'Tue, 02 Jun 2015 13:34:43 GMT',
+322 silly registry.get     via: '1.1 varnish',
+322 silly registry.get     'cache-control': 'max-age=60',
+322 silly registry.get     etag: '"DK78JBVRHZ5QSU7AGQ1M874DL"',
+322 silly registry.get     age: '60',
+322 silly registry.get     connection: 'close',
+322 silly registry.get     'x-served-by': 'cache-ams4122-AMS',
+322 silly registry.get     'x-cache': 'HIT',
+322 silly registry.get     'x-cache-hits': '6',
+322 silly registry.get     'x-timer': 'S1433252083.435007,VS0,VE0',
+322 silly registry.get     vary: 'Accept' } ]
+323 verbose etag https://registry.npmjs.org/combined-stream from cache
+324 http 304 https://registry.npmjs.org/concat-stream
+325 silly registry.get cb [ 304,
+325 silly registry.get   { date: 'Tue, 02 Jun 2015 13:34:43 GMT',
+325 silly registry.get     via: '1.1 varnish',
+325 silly registry.get     'cache-control': 'max-age=60',
+325 silly registry.get     etag: '"67DM80G9Y6SOX75JWBLWUFYRV"',
+325 silly registry.get     age: '15',
+325 silly registry.get     connection: 'close',
+325 silly registry.get     'x-served-by': 'cache-ams4140-AMS',
+325 silly registry.get     'x-cache': 'HIT',
+325 silly registry.get     'x-cache-hits': '1',
+325 silly registry.get     'x-timer': 'S1433252083.434715,VS0,VE0',
+325 silly registry.get     vary: 'Accept' } ]
+326 verbose etag https://registry.npmjs.org/concat-stream from cache
+327 http 304 https://registry.npmjs.org/duplexer
+328 silly registry.get cb [ 304,
+328 silly registry.get   { date: 'Tue, 02 Jun 2015 13:34:43 GMT',
+328 silly registry.get     via: '1.1 varnish',
+328 silly registry.get     'cache-control': 'max-age=60',
+328 silly registry.get     etag: '"14KWAP9J017CZCIJPTC8C59UA"',
+328 silly registry.get     age: '57',
+328 silly registry.get     connection: 'close',
+328 silly registry.get     'x-served-by': 'cache-ams4135-AMS',
+328 silly registry.get     'x-cache': 'HIT',
+328 silly registry.get     'x-cache-hits': '1',
+328 silly registry.get     'x-timer': 'S1433252083.436546,VS0,VE0',
+328 silly registry.get     vary: 'Accept' } ]
+329 verbose etag https://registry.npmjs.org/duplexer from cache
+330 http 304 https://registry.npmjs.org/bl
+331 silly registry.get cb [ 304,
+331 silly registry.get   { date: 'Tue, 02 Jun 2015 13:34:43 GMT',
+331 silly registry.get     via: '1.1 varnish',
+331 silly registry.get     'cache-control': 'max-age=60',
+331 silly registry.get     etag: '"35D8O4CSWK320NAOXZO9WDENI"',
+331 silly registry.get     age: '43',
+331 silly registry.get     connection: 'close',
+331 silly registry.get     'x-served-by': 'cache-ams4122-AMS',
+331 silly registry.get     'x-cache': 'HIT',
+331 silly registry.get     'x-cache-hits': '7',
+331 silly registry.get     'x-timer': 'S1433252083.439853,VS0,VE0',
+331 silly registry.get     vary: 'Accept' } ]
+332 verbose etag https://registry.npmjs.org/bl from cache
+333 silly addNameRange number 2 { name: 'concat-stream', range: '>=1.4.7 <1.5.0', hasData: true }
+334 silly addNameRange versions [ 'concat-stream',
+334 silly addNameRange   [ '0.0.1',
+334 silly addNameRange     '0.0.2',
+334 silly addNameRange     '0.0.3',
+334 silly addNameRange     '0.0.4',
+334 silly addNameRange     '0.0.5',
+334 silly addNameRange     '0.0.6',
+334 silly addNameRange     '0.0.7',
+334 silly addNameRange     '0.0.8',
+334 silly addNameRange     '0.0.9',
+334 silly addNameRange     '0.1.0',
+334 silly addNameRange     '0.1.1',
+334 silly addNameRange     '1.0.0',
+334 silly addNameRange     '1.0.1',
+334 silly addNameRange     '1.1.0',
+334 silly addNameRange     '1.2.0',
+334 silly addNameRange     '1.2.1',
+334 silly addNameRange     '1.3.0',
+334 silly addNameRange     '1.3.1',
+334 silly addNameRange     '1.4.0',
+334 silly addNameRange     '1.4.1',
+334 silly addNameRange     '1.4.2',
+334 silly addNameRange     '1.4.3',
+334 silly addNameRange     '1.4.4',
+334 silly addNameRange     '1.4.5',
+334 silly addNameRange     '1.4.6',
+334 silly addNameRange     '1.4.7',
+334 silly addNameRange     '1.4.8' ] ]
+335 verbose addNamed [ 'concat-stream', '1.4.8' ]
+336 verbose addNamed [ '1.4.8', '1.4.8' ]
+337 silly lockFile e951b139-concat-stream-1-4-8 concat-stream@1.4.8
+338 verbose lock concat-stream@1.4.8 /home/espen/.npm/e951b139-concat-stream-1-4-8.lock
+339 silly addNameRange number 2 { name: 'combined-stream',
+339 silly addNameRange   range: '>=0.0.7 <0.1.0',
+339 silly addNameRange   hasData: true }
+340 silly addNameRange versions [ 'combined-stream',
+340 silly addNameRange   [ '0.0.0',
+340 silly addNameRange     '0.0.1',
+340 silly addNameRange     '0.0.2',
+340 silly addNameRange     '0.0.3',
+340 silly addNameRange     '0.0.4',
+340 silly addNameRange     '0.0.5',
+340 silly addNameRange     '0.0.7',
+340 silly addNameRange     '1.0.0',
+340 silly addNameRange     '1.0.1',
+340 silly addNameRange     '1.0.2',
+340 silly addNameRange     '1.0.3' ] ]
+341 verbose addNamed [ 'combined-stream', '0.0.7' ]
+342 verbose addNamed [ '0.0.7', '0.0.7' ]
+343 silly lockFile efcbe7ce-combined-stream-0-0-7 combined-stream@0.0.7
+344 verbose lock combined-stream@0.0.7 /home/espen/.npm/efcbe7ce-combined-stream-0-0-7.lock
+345 silly addNameRange number 2 { name: 'duplexer', range: '>=0.1.1 <0.2.0', hasData: true }
+346 silly addNameRange versions [ 'duplexer',
+346 silly addNameRange   [ '0.0.1', '0.0.2', '0.0.3', '0.0.4', '0.1.0', '0.1.1' ] ]
+347 verbose addNamed [ 'duplexer', '0.1.1' ]
+348 verbose addNamed [ '0.1.1', '0.1.1' ]
+349 silly lockFile 8b6da3d1-duplexer-0-1-1 duplexer@0.1.1
+350 verbose lock duplexer@0.1.1 /home/espen/.npm/8b6da3d1-duplexer-0-1-1.lock
+351 http 200 https://registry.npmjs.org/hyperquest
+352 silly registry.get cb [ 200,
+352 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+352 silly registry.get     etag: '"7QN3JB2QAEYV57LNP0RZJ7API"',
+352 silly registry.get     'content-type': 'application/json',
+352 silly registry.get     'cache-control': 'max-age=60',
+352 silly registry.get     'content-length': '26784',
+352 silly registry.get     'accept-ranges': 'bytes',
+352 silly registry.get     date: 'Tue, 02 Jun 2015 13:34:43 GMT',
+352 silly registry.get     via: '1.1 varnish',
+352 silly registry.get     age: '7',
+352 silly registry.get     connection: 'close',
+352 silly registry.get     'x-served-by': 'cache-ams4132-AMS',
+352 silly registry.get     'x-cache': 'HIT',
+352 silly registry.get     'x-cache-hits': '1',
+352 silly registry.get     'x-timer': 'S1433252083.416242,VS0,VE0',
+352 silly registry.get     vary: 'Accept' } ]
+353 silly addNameRange number 2 { name: 'bl', range: '>=0.9.4 <0.10.0', hasData: true }
+354 silly addNameRange versions [ 'bl',
+354 silly addNameRange   [ '0.0.0',
+354 silly addNameRange     '0.1.0',
+354 silly addNameRange     '0.1.1',
+354 silly addNameRange     '0.2.0',
+354 silly addNameRange     '0.3.0',
+354 silly addNameRange     '0.4.0',
+354 silly addNameRange     '0.4.1',
+354 silly addNameRange     '0.4.2',
+354 silly addNameRange     '0.5.0',
+354 silly addNameRange     '0.6.0',
+354 silly addNameRange     '0.7.0',
+354 silly addNameRange     '0.8.0',
+354 silly addNameRange     '0.8.1',
+354 silly addNameRange     '0.8.2',
+354 silly addNameRange     '0.9.0',
+354 silly addNameRange     '0.9.1',
+354 silly addNameRange     '0.9.2',
+354 silly addNameRange     '0.9.3',
+354 silly addNameRange     '0.9.4' ] ]
+355 verbose addNamed [ 'bl', '0.9.4' ]
+356 verbose addNamed [ '0.9.4', '0.9.4' ]
+357 silly lockFile a57792fd-bl-0-9-4 bl@0.9.4
+358 verbose lock bl@0.9.4 /home/espen/.npm/a57792fd-bl-0-9-4.lock
+359 silly addNameRange number 2 { name: 'hyperquest', range: '>=1.0.1 <1.1.0', hasData: true }
+360 silly addNameRange versions [ 'hyperquest',
+360 silly addNameRange   [ '0.0.0',
+360 silly addNameRange     '0.0.1',
+360 silly addNameRange     '0.0.2',
+360 silly addNameRange     '0.0.3',
+360 silly addNameRange     '0.1.0',
+360 silly addNameRange     '0.1.1',
+360 silly addNameRange     '0.1.2',
+360 silly addNameRange     '0.1.3',
+360 silly addNameRange     '0.1.4',
+360 silly addNameRange     '0.1.5',
+360 silly addNameRange     '0.1.6',
+360 silly addNameRange     '0.1.7',
+360 silly addNameRange     '0.1.8',
+360 silly addNameRange     '0.2.0',
+360 silly addNameRange     '0.3.0',
+360 silly addNameRange     '1.0.0',
+360 silly addNameRange     '1.0.1',
+360 silly addNameRange     '1.1.0',
+360 silly addNameRange     '1.2.0' ] ]
+361 verbose addNamed [ 'hyperquest', '1.0.1' ]
+362 verbose addNamed [ '1.0.1', '1.0.1' ]
+363 silly lockFile f0d2898a-hyperquest-1-0-1 hyperquest@1.0.1
+364 verbose lock hyperquest@1.0.1 /home/espen/.npm/f0d2898a-hyperquest-1-0-1.lock
+365 silly lockFile e951b139-concat-stream-1-4-8 concat-stream@1.4.8
+366 silly lockFile e951b139-concat-stream-1-4-8 concat-stream@1.4.8
+367 http fetch 200 https://registry.npmjs.org/colors-tmpl/-/colors-tmpl-1.0.0.tgz
+368 silly lockFile ebfd77f5-concat-stream-1-4-7-1-5-0 concat-stream@>=1.4.7 <1.5.0
+369 silly lockFile ebfd77f5-concat-stream-1-4-7-1-5-0 concat-stream@>=1.4.7 <1.5.0
+370 silly lockFile efcbe7ce-combined-stream-0-0-7 combined-stream@0.0.7
+371 silly lockFile efcbe7ce-combined-stream-0-0-7 combined-stream@0.0.7
+372 http fetch 200 https://registry.npmjs.org/workshopper-exercise/-/workshopper-exercise-2.3.0.tgz
+373 silly lockFile 70f473af-combined-stream-0-0-7-0-1-0 combined-stream@>=0.0.7 <0.1.0
+374 silly lockFile 70f473af-combined-stream-0-0-7-0-1-0 combined-stream@>=0.0.7 <0.1.0
+375 silly lockFile 88c59231--hyperquest-hyperquest-1-0-1-tgz https://registry.npmjs.org/hyperquest/-/hyperquest-1.0.1.tgz
+376 verbose lock https://registry.npmjs.org/hyperquest/-/hyperquest-1.0.1.tgz /home/espen/.npm/88c59231--hyperquest-hyperquest-1-0-1-tgz.lock
+377 silly lockFile 8b6da3d1-duplexer-0-1-1 duplexer@0.1.1
+378 silly lockFile 8b6da3d1-duplexer-0-1-1 duplexer@0.1.1
+379 verbose addRemoteTarball [ 'https://registry.npmjs.org/hyperquest/-/hyperquest-1.0.1.tgz',
+379 verbose addRemoteTarball   'a1c8dc0bc37c03a83abe88d826413523016ec381' ]
+380 silly lockFile f0364ddc-duplexer-0-1-1-0-2-0 duplexer@>=0.1.1 <0.2.0
+381 silly lockFile f0364ddc-duplexer-0-1-1-0-2-0 duplexer@>=0.1.1 <0.2.0
+382 silly lockFile a57792fd-bl-0-9-4 bl@0.9.4
+383 silly lockFile a57792fd-bl-0-9-4 bl@0.9.4
+384 silly fetchAndShaCheck shasum b60ac4af816555d9edf1ad247337eb30241b6d2e
+385 silly lockFile ee7168e4-bl-0-9-4-0-10-0 bl@>=0.9.4 <0.10.0
+386 silly lockFile ee7168e4-bl-0-9-4-0-10-0 bl@>=0.9.4 <0.10.0
+387 info retry fetch attempt 1 at 15:34:44
+388 info attempt registry request try #1 at 15:34:44
+389 http fetch GET https://registry.npmjs.org/hyperquest/-/hyperquest-1.0.1.tgz
+390 silly fetchAndShaCheck shasum 6c736b9b205f8ca1fa91daa07840716b4fd89c81
+391 silly lockFile 5ed569c2-olors-tmpl-colors-tmpl-1-0-0-tgz https://registry.npmjs.org/colors-tmpl/-/colors-tmpl-1.0.0.tgz
+392 silly lockFile 5ed569c2-olors-tmpl-colors-tmpl-1-0-0-tgz https://registry.npmjs.org/colors-tmpl/-/colors-tmpl-1.0.0.tgz
+393 silly lockFile 0a5b6dc2-colors-tmpl-1-0-0 colors-tmpl@1.0.0
+394 silly lockFile 0a5b6dc2-colors-tmpl-1-0-0 colors-tmpl@1.0.0
+395 silly lockFile 2d065176-colors-tmpl-1-0-0-1-1-0 colors-tmpl@>=1.0.0 <1.1.0
+396 silly lockFile 2d065176-colors-tmpl-1-0-0-1-1-0 colors-tmpl@>=1.0.0 <1.1.0
+397 silly lockFile c46b131c-e-workshopper-exercise-2-3-0-tgz https://registry.npmjs.org/workshopper-exercise/-/workshopper-exercise-2.3.0.tgz
+398 silly lockFile c46b131c-e-workshopper-exercise-2-3-0-tgz https://registry.npmjs.org/workshopper-exercise/-/workshopper-exercise-2.3.0.tgz
+399 silly lockFile c4b50b5f-workshopper-exercise-2-3-0 workshopper-exercise@2.3.0
+400 silly lockFile c4b50b5f-workshopper-exercise-2-3-0 workshopper-exercise@2.3.0
+401 silly lockFile 2555be47-workshopper-exercise-2-3-0-2-4-0 workshopper-exercise@>=2.3.0 <2.4.0
+402 silly lockFile 2555be47-workshopper-exercise-2-3-0-2-4-0 workshopper-exercise@>=2.3.0 <2.4.0
+403 http 200 https://registry.npmjs.org/rimraf
+404 silly registry.get cb [ 200,
+404 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+404 silly registry.get     etag: '"AEMHRD55MXS2JBC52QMY3ETNY"',
+404 silly registry.get     'content-type': 'application/json',
+404 silly registry.get     'cache-control': 'max-age=60',
+404 silly registry.get     'content-length': '38314',
+404 silly registry.get     'accept-ranges': 'bytes',
+404 silly registry.get     date: 'Tue, 02 Jun 2015 13:34:43 GMT',
+404 silly registry.get     via: '1.1 varnish',
+404 silly registry.get     age: '53',
+404 silly registry.get     connection: 'close',
+404 silly registry.get     'x-served-by': 'cache-ams4124-AMS',
+404 silly registry.get     'x-cache': 'HIT',
+404 silly registry.get     'x-cache-hits': '5',
+404 silly registry.get     'x-timer': 'S1433252083.418850,VS0,VE0',
+404 silly registry.get     vary: 'Accept' } ]
+405 silly addNameRange number 2 { name: 'rimraf', range: '>=2.2.8 <2.3.0', hasData: true }
+406 silly addNameRange versions [ 'rimraf',
+406 silly addNameRange   [ '1.0.0',
+406 silly addNameRange     '1.0.1',
+406 silly addNameRange     '1.0.2',
+406 silly addNameRange     '1.0.4',
+406 silly addNameRange     '1.0.5',
+406 silly addNameRange     '1.0.6',
+406 silly addNameRange     '1.0.7',
+406 silly addNameRange     '1.0.8',
+406 silly addNameRange     '1.0.9',
+406 silly addNameRange     '2.0.0',
+406 silly addNameRange     '2.0.1',
+406 silly addNameRange     '2.0.2',
+406 silly addNameRange     '2.0.3',
+406 silly addNameRange     '2.1.0',
+406 silly addNameRange     '2.1.1',
+406 silly addNameRange     '2.1.2',
+406 silly addNameRange     '2.1.3',
+406 silly addNameRange     '2.1.4',
+406 silly addNameRange     '2.2.0',
+406 silly addNameRange     '2.2.1',
+406 silly addNameRange     '2.2.2',
+406 silly addNameRange     '2.2.3',
+406 silly addNameRange     '2.2.4',
+406 silly addNameRange     '2.2.5',
+406 silly addNameRange     '2.2.6',
+406 silly addNameRange     '2.2.8',
+406 silly addNameRange     '2.3.0',
+406 silly addNameRange     '2.3.1',
+406 silly addNameRange     '2.3.2',
+406 silly addNameRange     '2.3.3',
+406 silly addNameRange     '2.3.4' ] ]
+407 verbose addNamed [ 'rimraf', '2.2.8' ]
+408 verbose addNamed [ '2.2.8', '2.2.8' ]
+409 silly lockFile b87241a4-rimraf-2-2-8 rimraf@2.2.8
+410 verbose lock rimraf@2.2.8 /home/espen/.npm/b87241a4-rimraf-2-2-8.lock
+411 silly lockFile c887906a-pmjs-org-rimraf-rimraf-2-2-8-tgz https://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz
+412 verbose lock https://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz /home/espen/.npm/c887906a-pmjs-org-rimraf-rimraf-2-2-8-tgz.lock
+413 verbose addRemoteTarball [ 'https://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz',
+413 verbose addRemoteTarball   'e439be2aaee327321952730f99a8929e4fc50582' ]
+414 info retry fetch attempt 1 at 15:34:44
+415 info attempt registry request try #1 at 15:34:44
+416 http fetch GET https://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz
+417 http 200 https://registry.npmjs.org/workshopper-wrappedexec
+418 silly registry.get cb [ 200,
+418 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+418 silly registry.get     etag: '"8PR7DAYV40ZLR4VIKG34WV1XD"',
+418 silly registry.get     'content-type': 'application/json',
+418 silly registry.get     'cache-control': 'max-age=60',
+418 silly registry.get     'content-length': '7594',
+418 silly registry.get     'accept-ranges': 'bytes',
+418 silly registry.get     date: 'Tue, 02 Jun 2015 13:34:43 GMT',
+418 silly registry.get     via: '1.1 varnish',
+418 silly registry.get     age: '0',
+418 silly registry.get     connection: 'close',
+418 silly registry.get     'x-served-by': 'cache-ams4131-AMS',
+418 silly registry.get     'x-cache': 'HIT',
+418 silly registry.get     'x-cache-hits': '1',
+418 silly registry.get     'x-timer': 'S1433252083.437137,VS0,VE94',
+418 silly registry.get     vary: 'Accept' } ]
+419 silly addNameRange number 2 { name: 'workshopper-wrappedexec',
+419 silly addNameRange   range: '>=0.1.1 <0.2.0',
+419 silly addNameRange   hasData: true }
+420 silly addNameRange versions [ 'workshopper-wrappedexec',
+420 silly addNameRange   [ '0.0.1', '0.0.2', '0.0.3', '0.0.4', '0.1.0', '0.1.1', '0.1.2' ] ]
+421 verbose addNamed [ 'workshopper-wrappedexec', '0.1.2' ]
+422 verbose addNamed [ '0.1.2', '0.1.2' ]
+423 silly lockFile 1fb78f34-workshopper-wrappedexec-0-1-2 workshopper-wrappedexec@0.1.2
+424 verbose lock workshopper-wrappedexec@0.1.2 /home/espen/.npm/1fb78f34-workshopper-wrappedexec-0-1-2.lock
+425 silly lockFile 8a3abd79-orkshopper-wrappedexec-0-1-2-tgz https://registry.npmjs.org/workshopper-wrappedexec/-/workshopper-wrappedexec-0.1.2.tgz
+426 verbose lock https://registry.npmjs.org/workshopper-wrappedexec/-/workshopper-wrappedexec-0.1.2.tgz /home/espen/.npm/8a3abd79-orkshopper-wrappedexec-0-1-2-tgz.lock
+427 verbose addRemoteTarball [ 'https://registry.npmjs.org/workshopper-wrappedexec/-/workshopper-wrappedexec-0.1.2.tgz',
+427 verbose addRemoteTarball   '85a1674093c94c67cb81fdf75750335324bc33ef' ]
+428 info retry fetch attempt 1 at 15:34:44
+429 info attempt registry request try #1 at 15:34:44
+430 http fetch GET https://registry.npmjs.org/workshopper-wrappedexec/-/workshopper-wrappedexec-0.1.2.tgz
+431 http fetch 200 https://registry.npmjs.org/hyperquest/-/hyperquest-1.0.1.tgz
+432 silly fetchAndShaCheck shasum a1c8dc0bc37c03a83abe88d826413523016ec381
+433 silly lockFile 88c59231--hyperquest-hyperquest-1-0-1-tgz https://registry.npmjs.org/hyperquest/-/hyperquest-1.0.1.tgz
+434 silly lockFile 88c59231--hyperquest-hyperquest-1-0-1-tgz https://registry.npmjs.org/hyperquest/-/hyperquest-1.0.1.tgz
+435 silly lockFile f0d2898a-hyperquest-1-0-1 hyperquest@1.0.1
+436 silly lockFile f0d2898a-hyperquest-1-0-1 hyperquest@1.0.1
+437 silly lockFile ddadfd77-hyperquest-1-0-1-1-1-0 hyperquest@>=1.0.1 <1.1.0
+438 silly lockFile ddadfd77-hyperquest-1-0-1-1-1-0 hyperquest@>=1.0.1 <1.1.0
+439 http fetch 200 https://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz
+440 silly fetchAndShaCheck shasum e439be2aaee327321952730f99a8929e4fc50582
+441 silly lockFile c887906a-pmjs-org-rimraf-rimraf-2-2-8-tgz https://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz
+442 silly lockFile c887906a-pmjs-org-rimraf-rimraf-2-2-8-tgz https://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz
+443 silly lockFile b87241a4-rimraf-2-2-8 rimraf@2.2.8
+444 silly lockFile b87241a4-rimraf-2-2-8 rimraf@2.2.8
+445 silly lockFile 27bce628-rimraf-2-2-8-2-3-0 rimraf@>=2.2.8 <2.3.0
+446 silly lockFile 27bce628-rimraf-2-2-8-2-3-0 rimraf@>=2.2.8 <2.3.0
+447 http fetch 200 https://registry.npmjs.org/workshopper-wrappedexec/-/workshopper-wrappedexec-0.1.2.tgz
+448 silly fetchAndShaCheck shasum 85a1674093c94c67cb81fdf75750335324bc33ef
+449 silly lockFile 8a3abd79-orkshopper-wrappedexec-0-1-2-tgz https://registry.npmjs.org/workshopper-wrappedexec/-/workshopper-wrappedexec-0.1.2.tgz
+450 silly lockFile 8a3abd79-orkshopper-wrappedexec-0-1-2-tgz https://registry.npmjs.org/workshopper-wrappedexec/-/workshopper-wrappedexec-0.1.2.tgz
+451 silly lockFile 1fb78f34-workshopper-wrappedexec-0-1-2 workshopper-wrappedexec@0.1.2
+452 silly lockFile 1fb78f34-workshopper-wrappedexec-0-1-2 workshopper-wrappedexec@0.1.2
+453 silly lockFile 816b8b7b-kshopper-wrappedexec-0-1-1-0-2-0 workshopper-wrappedexec@>=0.1.1 <0.2.0
+454 silly lockFile 816b8b7b-kshopper-wrappedexec-0-1-1-0-2-0 workshopper-wrappedexec@>=0.1.1 <0.2.0
+455 http 200 https://registry.npmjs.org/boganipsum
+456 silly registry.get cb [ 200,
+456 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+456 silly registry.get     etag: '"XB232YJ5II3C6FN16WENB5UQ"',
+456 silly registry.get     'content-type': 'application/json',
+456 silly registry.get     'cache-control': 'max-age=60',
+456 silly registry.get     'content-length': '11481',
+456 silly registry.get     'accept-ranges': 'bytes',
+456 silly registry.get     date: 'Tue, 02 Jun 2015 13:34:43 GMT',
+456 silly registry.get     via: '1.1 varnish',
+456 silly registry.get     age: '0',
+456 silly registry.get     connection: 'close',
+456 silly registry.get     'x-served-by': 'cache-ams4120-AMS',
+456 silly registry.get     'x-cache': 'MISS',
+456 silly registry.get     'x-cache-hits': '0',
+456 silly registry.get     'x-timer': 'S1433252083.416083,VS0,VE381',
+456 silly registry.get     vary: 'Accept' } ]
+457 silly addNameRange number 2 { name: 'boganipsum', range: '>=0.1.0 <0.2.0', hasData: true }
+458 silly addNameRange versions [ 'boganipsum', [ '0.0.0', '0.1.0' ] ]
+459 verbose addNamed [ 'boganipsum', '0.1.0' ]
+460 verbose addNamed [ '0.1.0', '0.1.0' ]
+461 silly lockFile 0a548c44-boganipsum-0-1-0 boganipsum@0.1.0
+462 verbose lock boganipsum@0.1.0 /home/espen/.npm/0a548c44-boganipsum-0-1-0.lock
+463 silly lockFile cdf4f05b--boganipsum-boganipsum-0-1-0-tgz https://registry.npmjs.org/boganipsum/-/boganipsum-0.1.0.tgz
+464 verbose lock https://registry.npmjs.org/boganipsum/-/boganipsum-0.1.0.tgz /home/espen/.npm/cdf4f05b--boganipsum-boganipsum-0-1-0-tgz.lock
+465 verbose addRemoteTarball [ 'https://registry.npmjs.org/boganipsum/-/boganipsum-0.1.0.tgz',
+465 verbose addRemoteTarball   '9ab886e3018dc8efa5974041396e89a2120ad743' ]
+466 info retry fetch attempt 1 at 15:34:44
+467 info attempt registry request try #1 at 15:34:44
+468 http fetch GET https://registry.npmjs.org/boganipsum/-/boganipsum-0.1.0.tgz
+469 http fetch 200 https://registry.npmjs.org/boganipsum/-/boganipsum-0.1.0.tgz
+470 silly fetchAndShaCheck shasum 9ab886e3018dc8efa5974041396e89a2120ad743
+471 silly lockFile cdf4f05b--boganipsum-boganipsum-0-1-0-tgz https://registry.npmjs.org/boganipsum/-/boganipsum-0.1.0.tgz
+472 silly lockFile cdf4f05b--boganipsum-boganipsum-0-1-0-tgz https://registry.npmjs.org/boganipsum/-/boganipsum-0.1.0.tgz
+473 silly lockFile 0a548c44-boganipsum-0-1-0 boganipsum@0.1.0
+474 silly lockFile 0a548c44-boganipsum-0-1-0 boganipsum@0.1.0
+475 silly lockFile 848fedfa-boganipsum-0-1-0-0-2-0 boganipsum@>=0.1.0 <0.2.0
+476 silly lockFile 848fedfa-boganipsum-0-1-0-0-2-0 boganipsum@>=0.1.0 <0.2.0
+477 http 200 https://registry.npmjs.org/through2-map
+478 silly registry.get cb [ 200,
+478 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+478 silly registry.get     etag: '"AD7S4ACSHNMXOLTO0ZY7RY2NX"',
+478 silly registry.get     'content-type': 'application/json',
+478 silly registry.get     'cache-control': 'max-age=60',
+478 silly registry.get     'content-length': '11848',
+478 silly registry.get     'accept-ranges': 'bytes',
+478 silly registry.get     date: 'Tue, 02 Jun 2015 13:34:44 GMT',
+478 silly registry.get     via: '1.1 varnish',
+478 silly registry.get     age: '0',
+478 silly registry.get     connection: 'close',
+478 silly registry.get     'x-served-by': 'cache-ams4130-AMS',
+478 silly registry.get     'x-cache': 'HIT',
+478 silly registry.get     'x-cache-hits': '1',
+478 silly registry.get     'x-timer': 'S1433252083.418656,VS0,VE659',
+478 silly registry.get     vary: 'Accept' } ]
+479 silly addNameRange number 2 { name: 'through2-map', range: '>=1.4.0 <1.5.0', hasData: true }
+480 silly addNameRange versions [ 'through2-map',
+480 silly addNameRange   [ '1.0.0',
+480 silly addNameRange     '1.0.1',
+480 silly addNameRange     '1.0.2',
+480 silly addNameRange     '1.1.0',
+480 silly addNameRange     '1.2.0',
+480 silly addNameRange     '1.2.1',
+480 silly addNameRange     '1.3.0',
+480 silly addNameRange     '1.4.0' ] ]
+481 verbose addNamed [ 'through2-map', '1.4.0' ]
+482 verbose addNamed [ '1.4.0', '1.4.0' ]
+483 silly lockFile 5ab69fe7-through2-map-1-4-0 through2-map@1.4.0
+484 verbose lock through2-map@1.4.0 /home/espen/.npm/5ab69fe7-through2-map-1-4-0.lock
+485 silly lockFile 17815200-ough2-map-through2-map-1-4-0-tgz https://registry.npmjs.org/through2-map/-/through2-map-1.4.0.tgz
+486 verbose lock https://registry.npmjs.org/through2-map/-/through2-map-1.4.0.tgz /home/espen/.npm/17815200-ough2-map-through2-map-1-4-0-tgz.lock
+487 verbose addRemoteTarball [ 'https://registry.npmjs.org/through2-map/-/through2-map-1.4.0.tgz',
+487 verbose addRemoteTarball   '7cb13e7c9ef00c7a93c742567f9d2e51168ff7f5' ]
+488 info retry fetch attempt 1 at 15:34:44
+489 info attempt registry request try #1 at 15:34:44
+490 http fetch GET https://registry.npmjs.org/through2-map/-/through2-map-1.4.0.tgz
+491 http fetch 200 https://registry.npmjs.org/through2-map/-/through2-map-1.4.0.tgz
+492 silly fetchAndShaCheck shasum 7cb13e7c9ef00c7a93c742567f9d2e51168ff7f5
+493 silly lockFile 17815200-ough2-map-through2-map-1-4-0-tgz https://registry.npmjs.org/through2-map/-/through2-map-1.4.0.tgz
+494 silly lockFile 17815200-ough2-map-through2-map-1-4-0-tgz https://registry.npmjs.org/through2-map/-/through2-map-1.4.0.tgz
+495 silly lockFile 5ab69fe7-through2-map-1-4-0 through2-map@1.4.0
+496 silly lockFile 5ab69fe7-through2-map-1-4-0 through2-map@1.4.0
+497 silly lockFile eccbb6c0-through2-map-1-4-0-1-5-0 through2-map@>=1.4.0 <1.5.0
+498 silly lockFile eccbb6c0-through2-map-1-4-0-1-5-0 through2-map@>=1.4.0 <1.5.0
+499 silly resolved [ { name: 'after',
+499 silly resolved     description: 'after - tiny flow control',
+499 silly resolved     version: '0.8.1',
+499 silly resolved     author: { name: 'Raynos', email: 'raynos2@gmail.com' },
+499 silly resolved     contributors: [ [Object] ],
+499 silly resolved     scripts: { test: 'mocha --ui tdd --reporter spec test/*.js' },
+499 silly resolved     devDependencies: { mocha: '~1.8.1' },
+499 silly resolved     keywords: [ 'flowcontrol', 'after', 'flow', 'control', 'arch' ],
+499 silly resolved     repository: { type: 'git', url: 'git://github.com/Raynos/after.git' },
+499 silly resolved     bugs: { url: 'https://github.com/Raynos/after/issues' },
+499 silly resolved     _id: 'after@0.8.1',
+499 silly resolved     dist:
+499 silly resolved      { shasum: 'ab5d4fb883f596816d3515f8f791c0af486dd627',
+499 silly resolved        tarball: 'http://registry.npmjs.org/after/-/after-0.8.1.tgz' },
+499 silly resolved     _from: 'after@>=0.8.1 <0.9.0',
+499 silly resolved     _npmVersion: '1.2.25',
+499 silly resolved     _npmUser: { name: 'raynos', email: 'raynos2@gmail.com' },
+499 silly resolved     maintainers: [ [Object], [Object] ],
+499 silly resolved     directories: {},
+499 silly resolved     _shasum: 'ab5d4fb883f596816d3515f8f791c0af486dd627',
+499 silly resolved     _resolved: 'https://registry.npmjs.org/after/-/after-0.8.1.tgz',
+499 silly resolved     readme: 'ERROR: No README data found!',
+499 silly resolved     homepage: 'https://github.com/Raynos/after' },
+499 silly resolved   { name: 'through',
+499 silly resolved     version: '2.3.7',
+499 silly resolved     description: 'simplified stream construction',
+499 silly resolved     main: 'index.js',
+499 silly resolved     scripts: { test: 'set -e; for t in test/*.js; do node $t; done' },
+499 silly resolved     devDependencies: { 'stream-spec': '~0.3.5', tape: '~2.3.2', from: '~0.1.3' },
+499 silly resolved     keywords: [ 'stream', 'streams', 'user-streams', 'pipe' ],
+499 silly resolved     author:
+499 silly resolved      { name: 'Dominic Tarr',
+499 silly resolved        email: 'dominic.tarr@gmail.com',
+499 silly resolved        url: 'dominictarr.com' },
+499 silly resolved     license: 'MIT',
+499 silly resolved     repository:
+499 silly resolved      { type: 'git',
+499 silly resolved        url: 'https://github.com/dominictarr/through.git' },
+499 silly resolved     homepage: 'http://github.com/dominictarr/through',
+499 silly resolved     testling: { browsers: [Object], files: 'test/*.js' },
+499 silly resolved     gitHead: 'd532966ebcae90fd6a150cc489b55c6a4e0bc4a0',
+499 silly resolved     bugs: { url: 'https://github.com/dominictarr/through/issues' },
+499 silly resolved     _id: 'through@2.3.7',
+499 silly resolved     _shasum: '5fcc3690fed2fdf98c6fc88b4d207a4624ac3b87',
+499 silly resolved     _from: 'through@>=2.3.6 <2.4.0',
+499 silly resolved     _npmVersion: '2.4.1',
+499 silly resolved     _nodeVersion: '0.10.35',
+499 silly resolved     _npmUser: { name: 'dominictarr', email: 'dominic.tarr@gmail.com' },
+499 silly resolved     maintainers: [ [Object] ],
+499 silly resolved     dist:
+499 silly resolved      { shasum: '5fcc3690fed2fdf98c6fc88b4d207a4624ac3b87',
+499 silly resolved        tarball: 'http://registry.npmjs.org/through/-/through-2.3.7.tgz' },
+499 silly resolved     directories: {},
+499 silly resolved     _resolved: 'https://registry.npmjs.org/through/-/through-2.3.7.tgz',
+499 silly resolved     readme: 'ERROR: No README data found!' },
+499 silly resolved   { name: 'through2',
+499 silly resolved     version: '0.6.5',
+499 silly resolved     description: 'A tiny wrapper around Node streams2 Transform to avoid explicit subclassing noise',
+499 silly resolved     main: 'through2.js',
+499 silly resolved     scripts:
+499 silly resolved      { test: 'node test/test.js',
+499 silly resolved        'test-local': 'brtapsauce-local test/basic-test.js' },
+499 silly resolved     repository: { type: 'git', url: 'https://github.com/rvagg/through2.git' },
+499 silly resolved     keywords: [ 'stream', 'streams2', 'through', 'transform' ],
+499 silly resolved     author:
+499 silly resolved      { name: 'Rod Vagg',
+499 silly resolved        email: 'r@va.gg',
+499 silly resolved        url: 'https://github.com/rvagg' },
+499 silly resolved     license: 'MIT',
+499 silly resolved     dependencies:
+499 silly resolved      { 'readable-stream': '>=1.0.33-1 <1.1.0-0',
+499 silly resolved        xtend: '>=4.0.0 <4.1.0-0' },
+499 silly resolved     devDependencies:
+499 silly resolved      { bl: '>=0.9.0 <0.10.0-0',
+499 silly resolved        'stream-spigot': '>=3.0.4 <3.1.0-0',
+499 silly resolved        tape: '>=2.14.0 <2.15.0-0' },
+499 silly resolved     gitHead: 'ba4a87875f2c82323c10023e36f4ae4b386c1bf8',
+499 silly resolved     bugs: { url: 'https://github.com/rvagg/through2/issues' },
+499 silly resolved     homepage: 'https://github.com/rvagg/through2',
+499 silly resolved     _id: 'through2@0.6.5',
+499 silly resolved     _shasum: '41ab9c67b29d57209071410e1d7a7a968cd3ad48',
+499 silly resolved     _from: 'through2@>=0.6.3 <0.7.0',
+499 silly resolved     _npmVersion: '1.4.28',
+499 silly resolved     _npmUser: { name: 'bryce', email: 'bryce@ravenwall.com' },
+499 silly resolved     maintainers: [ [Object], [Object] ],
+499 silly resolved     dist:
+499 silly resolved      { shasum: '41ab9c67b29d57209071410e1d7a7a968cd3ad48',
+499 silly resolved        tarball: 'http://registry.npmjs.org/through2/-/through2-0.6.5.tgz' },
+499 silly resolved     directories: {},
+499 silly resolved     _resolved: 'https://registry.npmjs.org/through2/-/through2-0.6.5.tgz',
+499 silly resolved     readme: 'ERROR: No README data found!' },
+499 silly resolved   { name: 'chalk',
+499 silly resolved     version: '0.5.1',
+499 silly resolved     description: 'Terminal string styling done right. Created because the `colors` module does some really horrible things.',
+499 silly resolved     license: 'MIT',
+499 silly resolved     repository: { type: 'git', url: 'git://github.com/sindresorhus/chalk' },
+499 silly resolved     maintainers: [ [Object], [Object] ],
+499 silly resolved     engines: { node: '>=0.10.0' },
+499 silly resolved     scripts: { test: 'mocha', bench: 'matcha benchmark.js' },
+499 silly resolved     files: [ 'index.js' ],
+499 silly resolved     keywords:
+499 silly resolved      [ 'color',
+499 silly resolved        'colour',
+499 silly resolved        'colors',
+499 silly resolved        'terminal',
+499 silly resolved        'console',
+499 silly resolved        'cli',
+499 silly resolved        'string',
+499 silly resolved        'ansi',
+499 silly resolved        'styles',
+499 silly resolved        'tty',
+499 silly resolved        'formatting',
+499 silly resolved        'rgb',
+499 silly resolved        '256',
+499 silly resolved        'shell',
+499 silly resolved        'xterm',
+499 silly resolved        'log',
+499 silly resolved        'logging',
+499 silly resolved        'command-line',
+499 silly resolved        'text' ],
+499 silly resolved     dependencies:
+499 silly resolved      { 'ansi-styles': '^1.1.0',
+499 silly resolved        'escape-string-regexp': '^1.0.0',
+499 silly resolved        'has-ansi': '^0.1.0',
+499 silly resolved        'strip-ansi': '^0.3.0',
+499 silly resolved        'supports-color': '^0.2.0' },
+499 silly resolved     devDependencies: { matcha: '^0.5.0', mocha: '*' },
+499 silly resolved     gitHead: '994758f01293f1fdcf63282e9917cb9f2cfbdaac',
+499 silly resolved     bugs: { url: 'https://github.com/sindresorhus/chalk/issues' },
+499 silly resolved     homepage: 'https://github.com/sindresorhus/chalk',
+499 silly resolved     _id: 'chalk@0.5.1',
+499 silly resolved     _shasum: '663b3a648b68b55d04690d49167aa837858f2174',
+499 silly resolved     _from: 'chalk@>=0.5.1 <0.6.0',
+499 silly resolved     _npmVersion: '1.4.14',
+499 silly resolved     _npmUser: { name: 'jbnicolai', email: 'jappelman@xebia.com' },
+499 silly resolved     dist:
+499 silly resolved      { shasum: '663b3a648b68b55d04690d49167aa837858f2174',
+499 silly resolved        tarball: 'http://registry.npmjs.org/chalk/-/chalk-0.5.1.tgz' },
+499 silly resolved     directories: {},
+499 silly resolved     _resolved: 'https://registry.npmjs.org/chalk/-/chalk-0.5.1.tgz',
+499 silly resolved     readme: 'ERROR: No README data found!' },
+499 silly resolved   { name: 'concat-stream',
+499 silly resolved     version: '1.4.8',
+499 silly resolved     description: 'writable stream that concatenates strings or binary data and calls a callback with the result',
+499 silly resolved     tags: [ 'stream', 'simple', 'util', 'utility' ],
+499 silly resolved     author: { name: 'Max Ogden', email: 'max@maxogden.com' },
+499 silly resolved     repository:
+499 silly resolved      { type: 'git',
+499 silly resolved        url: 'http://github.com/maxogden/concat-stream.git' },
+499 silly resolved     bugs: { url: 'http://github.com/maxogden/concat-stream/issues' },
+499 silly resolved     engines: [ 'node >= 0.8' ],
+499 silly resolved     main: 'index.js',
+499 silly resolved     scripts: { test: 'tape test/*.js test/server/*.js' },
+499 silly resolved     license: 'MIT',
+499 silly resolved     dependencies:
+499 silly resolved      { inherits: '~2.0.1',
+499 silly resolved        typedarray: '~0.0.5',
+499 silly resolved        'readable-stream': '~1.1.9' },
+499 silly resolved     devDependencies: { tape: '~2.3.2' },
+499 silly resolved     testling: { files: 'test/*.js', browsers: [Object] },
+499 silly resolved     gitHead: '1f4ea1a7791b9366a133cab033eb0f3564cb0d92',
+499 silly resolved     homepage: 'https://github.com/maxogden/concat-stream',
+499 silly resolved     _id: 'concat-stream@1.4.8',
+499 silly resolved     _shasum: 'e8325bb89e55000e52b626d97466fde1a28cfe5d',
+499 silly resolved     _from: 'concat-stream@>=1.4.7 <1.5.0',
+499 silly resolved     _npmVersion: '2.7.0',
+499 silly resolved     _nodeVersion: '1.5.1',
+499 silly resolved     _npmUser: { name: 'maxogden', email: 'max@maxogden.com' },
+499 silly resolved     maintainers: [ [Object] ],
+499 silly resolved     dist:
+499 silly resolved      { shasum: 'e8325bb89e55000e52b626d97466fde1a28cfe5d',
+499 silly resolved        tarball: 'http://registry.npmjs.org/concat-stream/-/concat-stream-1.4.8.tgz' },
+499 silly resolved     directories: {},
+499 silly resolved     _resolved: 'https://registry.npmjs.org/concat-stream/-/concat-stream-1.4.8.tgz',
+499 silly resolved     readme: 'ERROR: No README data found!' },
+499 silly resolved   { author:
+499 silly resolved      { name: 'Felix Geisendörfer',
+499 silly resolved        email: 'felix@debuggable.com',
+499 silly resolved        url: 'http://debuggable.com/' },
+499 silly resolved     name: 'combined-stream',
+499 silly resolved     description: 'A stream that emits multiple other streams one after another.',
+499 silly resolved     version: '0.0.7',
+499 silly resolved     homepage: 'https://github.com/felixge/node-combined-stream',
+499 silly resolved     repository:
+499 silly resolved      { type: 'git',
+499 silly resolved        url: 'git://github.com/felixge/node-combined-stream.git' },
+499 silly resolved     main: './lib/combined_stream',
+499 silly resolved     scripts: { test: 'node test/run.js' },
+499 silly resolved     engines: { node: '>= 0.8' },
+499 silly resolved     dependencies: { 'delayed-stream': '0.0.5' },
+499 silly resolved     devDependencies: { far: '~0.0.7' },
+499 silly resolved     bugs: { url: 'https://github.com/felixge/node-combined-stream/issues' },
+499 silly resolved     _id: 'combined-stream@0.0.7',
+499 silly resolved     dist:
+499 silly resolved      { shasum: '0137e657baa5a7541c57ac37ac5fc07d73b4dc1f',
+499 silly resolved        tarball: 'http://registry.npmjs.org/combined-stream/-/combined-stream-0.0.7.tgz' },
+499 silly resolved     _from: 'combined-stream@>=0.0.7 <0.1.0',
+499 silly resolved     _npmVersion: '1.4.3',
+499 silly resolved     _npmUser: { name: 'felixge', email: 'felix@debuggable.com' },
+499 silly resolved     maintainers: [ [Object], [Object], [Object] ],
+499 silly resolved     directories: {},
+499 silly resolved     _shasum: '0137e657baa5a7541c57ac37ac5fc07d73b4dc1f',
+499 silly resolved     _resolved: 'https://registry.npmjs.org/combined-stream/-/combined-stream-0.0.7.tgz',
+499 silly resolved     readme: 'ERROR: No README data found!' },
+499 silly resolved   { name: 'duplexer',
+499 silly resolved     version: '0.1.1',
+499 silly resolved     description: 'Creates a duplex stream',
+499 silly resolved     keywords: [],
+499 silly resolved     author: { name: 'Raynos', email: 'raynos2@gmail.com' },
+499 silly resolved     repository: { type: 'git', url: 'git://github.com/Raynos/duplexer.git' },
+499 silly resolved     main: 'index',
+499 silly resolved     homepage: 'https://github.com/Raynos/duplexer',
+499 silly resolved     contributors: [ [Object] ],
+499 silly resolved     bugs:
+499 silly resolved      { url: 'https://github.com/Raynos/duplexer/issues',
+499 silly resolved        email: 'raynos2@gmail.com' },
+499 silly resolved     devDependencies: { tape: '0.3.3', through: '~0.1.4' },
+499 silly resolved     licenses: [ [Object] ],
+499 silly resolved     scripts: { test: 'node test' },
+499 silly resolved     testling: { files: 'test/index.js', browsers: [Object] },
+499 silly resolved     readme: '# duplexer\n\n[![build status][1]][2] [![dependency status][3]][4]\n\n[![browser support][5]][6]\n\nCreates a duplex stream\n\nTaken from [event-stream][7]\n\n## duplex (writeStream, readStream)\n\nTakes a writable stream and a readable stream and makes them appear as a readable writable stream.\n\nIt is assumed that the two streams are connected to each other in some way.\n\n## Example\n\n```js\nvar grep = cp.exec(\'grep Stream\')\n\nduplex(grep.stdin, grep.stdout)\n```\n\n## Installation\n\n`npm install duplexer`\n\n## Tests\n\n`npm test`\n\n## Contributors\n\n - Dominictarr\n - Raynos\n - samccone\n\n## MIT Licenced\n\n  [1]: https://secure.travis-ci.org/Raynos/duplexer.png\n  [2]: https://travis-ci.org/Raynos/duplexer\n  [3]: https://david-dm.org/Raynos/duplexer.png\n  [4]: https://david-dm.org/Raynos/duplexer\n  [5]: https://ci.testling.com/Raynos/duplexer.png\n  [6]: https://ci.testling.com/Raynos/duplexer\n  [7]: https://github.com/dominictarr/event-stream#duplex-writestream-readstream\n',
+499 silly resolved     readmeFilename: 'README.md',
+499 silly resolved     _id: 'duplexer@0.1.1',
+499 silly resolved     dist:
+499 silly resolved      { shasum: 'ace6ff808c1ce66b57d1ebf97977acb02334cfc1',
+499 silly resolved        tarball: 'http://registry.npmjs.org/duplexer/-/duplexer-0.1.1.tgz' },
+499 silly resolved     _from: 'duplexer@>=0.1.1 <0.2.0',
+499 silly resolved     _npmVersion: '1.2.18',
+499 silly resolved     _npmUser: { name: 'raynos', email: 'raynos2@gmail.com' },
+499 silly resolved     maintainers: [ [Object], [Object] ],
+499 silly resolved     directories: {},
+499 silly resolved     _shasum: 'ace6ff808c1ce66b57d1ebf97977acb02334cfc1',
+499 silly resolved     _resolved: 'https://registry.npmjs.org/duplexer/-/duplexer-0.1.1.tgz' },
+499 silly resolved   { name: 'bl',
+499 silly resolved     version: '0.9.4',
+499 silly resolved     description: 'Buffer List: collect buffers and access with a standard readable Buffer interface, streamable too!',
+499 silly resolved     main: 'bl.js',
+499 silly resolved     scripts:
+499 silly resolved      { test: 'node test/test.js | faucet',
+499 silly resolved        'test-local': 'brtapsauce-local test/basic-test.js' },
+499 silly resolved     repository: { type: 'git', url: 'https://github.com/rvagg/bl.git' },
+499 silly resolved     homepage: 'https://github.com/rvagg/bl',
+499 silly resolved     authors:
+499 silly resolved      [ 'Rod Vagg <rod@vagg.org> (https://github.com/rvagg)',
+499 silly resolved        'Matteo Collina <matteo.collina@gmail.com> (https://github.com/mcollina)',
+499 silly resolved        'Jarett Cruger <jcrugzz@gmail.com> (https://github.com/jcrugzz)' ],
+499 silly resolved     keywords: [ 'buffer', 'buffers', 'stream', 'awesomesauce' ],
+499 silly resolved     license: 'MIT',
+499 silly resolved     dependencies: { 'readable-stream': '~1.0.26' },
+499 silly resolved     devDependencies:
+499 silly resolved      { tape: '~2.12.3',
+499 silly resolved        hash_file: '~0.1.1',
+499 silly resolved        faucet: '~0.0.1',
+499 silly resolved        brtapsauce: '~0.3.0' },
+499 silly resolved     gitHead: 'e7f90703c5f90ca26f60455ea6ad0b6be4a9feee',
+499 silly resolved     bugs: { url: 'https://github.com/rvagg/bl/issues' },
+499 silly resolved     _id: 'bl@0.9.4',
+499 silly resolved     _shasum: '4702ddf72fbe0ecd82787c00c113aea1935ad0e7',
+499 silly resolved     _from: 'bl@>=0.9.4 <0.10.0',
+499 silly resolved     _npmVersion: '2.1.18',
+499 silly resolved     _nodeVersion: '1.0.3',
+499 silly resolved     _npmUser: { name: 'rvagg', email: 'rod@vagg.org' },
+499 silly resolved     maintainers: [ [Object] ],
+499 silly resolved     dist:
+499 silly resolved      { shasum: '4702ddf72fbe0ecd82787c00c113aea1935ad0e7',
+499 silly resolved        tarball: 'http://registry.npmjs.org/bl/-/bl-0.9.4.tgz' },
+499 silly resolved     directories: {},
+499 silly resolved     _resolved: 'https://registry.npmjs.org/bl/-/bl-0.9.4.tgz',
+499 silly resolved     readme: 'ERROR: No README data found!' },
+499 silly resolved   { author: { name: 'Rod Vagg', email: 'rod@vagg.org' },
+499 silly resolved     name: 'colors-tmpl',
+499 silly resolved     description: 'Simple templating for applying colors.js to strings',
+499 silly resolved     version: '1.0.0',
+499 silly resolved     homepage: 'https://github.com/rvagg/colors-tmpl',
+499 silly resolved     keywords:
+499 silly resolved      [ 'color',
+499 silly resolved        'colour',
+499 silly resolved        'colours',
+499 silly resolved        'colours',
+499 silly resolved        'colors.js',
+499 silly resolved        'templating',
+499 silly resolved        'templates',
+499 silly resolved        'goatscale' ],
+499 silly resolved     repository: { type: 'git', url: 'git://github.com/rvagg/colors-tmpl.git' },
+499 silly resolved     main: 'colors-tmpl',
+499 silly resolved     scripts: { test: 'node test.js' },
+499 silly resolved     dependencies: { colors: '~1.0.2' },
+499 silly resolved     gitHead: 'd1d64cca5e55dfca7bf376fb64ecad392f58204c',
+499 silly resolved     bugs: { url: 'https://github.com/rvagg/colors-tmpl/issues' },
+499 silly resolved     _id: 'colors-tmpl@1.0.0',
+499 silly resolved     _shasum: 'b60ac4af816555d9edf1ad247337eb30241b6d2e',
+499 silly resolved     _from: 'colors-tmpl@>=1.0.0 <1.1.0',
+499 silly resolved     _npmVersion: '1.4.23',
+499 silly resolved     _npmUser: { name: 'rvagg', email: 'rod@vagg.org' },
+499 silly resolved     maintainers: [ [Object] ],
+499 silly resolved     dist:
+499 silly resolved      { shasum: 'b60ac4af816555d9edf1ad247337eb30241b6d2e',
+499 silly resolved        tarball: 'http://registry.npmjs.org/colors-tmpl/-/colors-tmpl-1.0.0.tgz' },
+499 silly resolved     directories: {},
+499 silly resolved     _resolved: 'https://registry.npmjs.org/colors-tmpl/-/colors-tmpl-1.0.0.tgz' },
+499 silly resolved   { name: 'workshopper-exercise',
+499 silly resolved     version: '2.3.0',
+499 silly resolved     description: 'An exercise runner component for the Workshopper framework',
+499 silly resolved     main: './exercise.js',
+499 silly resolved     author:
+499 silly resolved      { name: 'Rod Vagg',
+499 silly resolved        email: 'rod@vagg.org',
+499 silly resolved        url: 'https://github.com/rvagg' },
+499 silly resolved     repository:
+499 silly resolved      { type: 'git',
+499 silly resolved        url: 'https://github.com/rvagg/workshopper-exercise.git' },
+499 silly resolved     license: 'MIT',
+499 silly resolved     dependencies:
+499 silly resolved      { after: '~0.8.1',
+499 silly resolved        chalk: '~0.4.0',
+499 silly resolved        'i18n-core': '^1.3.2',
+499 silly resolved        split: '~0.3.0',
+499 silly resolved        through2: '~0.4.1',
+499 silly resolved        'tuple-stream': '0.0.2',
+499 silly resolved        visualwidth: '~0.0.1',
+499 silly resolved        xtend: '~2.1.2' },
+499 silly resolved     gitHead: 'e5adbc4e08aa9ebc8c84f1b4ca76dbab5aac4f3e',
+499 silly resolved     bugs: { url: 'https://github.com/rvagg/workshopper-exercise/issues' },
+499 silly resolved     homepage: 'https://github.com/rvagg/workshopper-exercise',
+499 silly resolved     _id: 'workshopper-exercise@2.3.0',
+499 silly resolved     scripts: {},
+499 silly resolved     _shasum: '6c736b9b205f8ca1fa91daa07840716b4fd89c81',
+499 silly resolved     _from: 'workshopper-exercise@>=2.3.0 <2.4.0',
+499 silly resolved     _npmVersion: '2.5.1',
+499 silly resolved     _nodeVersion: '1.2.0',
+499 silly resolved     _npmUser: { name: 'rvagg', email: 'rod@vagg.org' },
+499 silly resolved     maintainers: [ [Object] ],
+499 silly resolved     dist:
+499 silly resolved      { shasum: '6c736b9b205f8ca1fa91daa07840716b4fd89c81',
+499 silly resolved        tarball: 'http://registry.npmjs.org/workshopper-exercise/-/workshopper-exercise-2.3.0.tgz' },
+499 silly resolved     directories: {},
+499 silly resolved     _resolved: 'https://registry.npmjs.org/workshopper-exercise/-/workshopper-exercise-2.3.0.tgz' },
+499 silly resolved   { name: 'hyperquest',
+499 silly resolved     version: '1.0.1',
+499 silly resolved     description: 'make streaming http requests',
+499 silly resolved     main: 'index.js',
+499 silly resolved     dependencies: { duplexer2: '~0.0.2', through2: '~0.6.3' },
+499 silly resolved     devDependencies: { tape: '^3.0.1' },
+499 silly resolved     scripts: { test: 'tape test/*.js' },
+499 silly resolved     repository: { type: 'git', url: 'git://github.com/substack/hyperquest.git' },
+499 silly resolved     homepage: 'https://github.com/substack/hyperquest',
+499 silly resolved     keywords:
+499 silly resolved      [ 'stream',
+499 silly resolved        'http',
+499 silly resolved        'transport',
+499 silly resolved        'request',
+499 silly resolved        'get',
+499 silly resolved        'post',
+499 silly resolved        'put',
+499 silly resolved        'delete',
+499 silly resolved        'duplex',
+499 silly resolved        'pooling' ],
+499 silly resolved     author:
+499 silly resolved      { name: 'James Halliday',
+499 silly resolved        email: 'mail@substack.net',
+499 silly resolved        url: 'http://substack.net' },
+499 silly resolved     license: 'MIT',
+499 silly resolved     gitHead: '3e12ab5726e1085c65f1242b469e5daf55b94a0b',
+499 silly resolved     bugs: { url: 'https://github.com/substack/hyperquest/issues' },
+499 silly resolved     _id: 'hyperquest@1.0.1',
+499 silly resolved     _shasum: 'a1c8dc0bc37c03a83abe88d826413523016ec381',
+499 silly resolved     _from: 'hyperquest@>=1.0.1 <1.1.0',
+499 silly resolved     _npmVersion: '2.1.3',
+499 silly resolved     _nodeVersion: '0.10.32',
+499 silly resolved     _npmUser: { name: 'juliangruber', email: 'julian@juliangruber.com' },
+499 silly resolved     maintainers: [ [Object], [Object] ],
+499 silly resolved     dist:
+499 silly resolved      { shasum: 'a1c8dc0bc37c03a83abe88d826413523016ec381',
+499 silly resolved        tarball: 'http://registry.npmjs.org/hyperquest/-/hyperquest-1.0.1.tgz' },
+499 silly resolved     directories: {},
+499 silly resolved     _resolved: 'https://registry.npmjs.org/hyperquest/-/hyperquest-1.0.1.tgz' },
+499 silly resolved   { name: 'rimraf',
+499 silly resolved     version: '2.2.8',
+499 silly resolved     main: 'rimraf.js',
+499 silly resolved     description: 'A deep deletion module for node (like `rm -rf`)',
+499 silly resolved     author:
+499 silly resolved      { name: 'Isaac Z. Schlueter',
+499 silly resolved        email: 'i@izs.me',
+499 silly resolved        url: 'http://blog.izs.me/' },
+499 silly resolved     license:
+499 silly resolved      { type: 'MIT',
+499 silly resolved        url: 'https://github.com/isaacs/rimraf/raw/master/LICENSE' },
+499 silly resolved     repository: { type: 'git', url: 'git://github.com/isaacs/rimraf.git' },
+499 silly resolved     scripts: { test: 'cd test && bash run.sh' },
+499 silly resolved     bin: { rimraf: './bin.js' },
+499 silly resolved     contributors: [ [Object], [Object], [Object], [Object], [Object] ],
+499 silly resolved     bugs: { url: 'https://github.com/isaacs/rimraf/issues' },
+499 silly resolved     homepage: 'https://github.com/isaacs/rimraf',
+499 silly resolved     _id: 'rimraf@2.2.8',
+499 silly resolved     _shasum: 'e439be2aaee327321952730f99a8929e4fc50582',
+499 silly resolved     _from: 'rimraf@>=2.2.8 <2.3.0',
+499 silly resolved     _npmVersion: '1.4.10',
+499 silly resolved     _npmUser: { name: 'isaacs', email: 'i@izs.me' },
+499 silly resolved     maintainers: [ [Object] ],
+499 silly resolved     dist:
+499 silly resolved      { shasum: 'e439be2aaee327321952730f99a8929e4fc50582',
+499 silly resolved        tarball: 'http://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz' },
+499 silly resolved     directories: {},
+499 silly resolved     _resolved: 'https://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz' },
+499 silly resolved   { name: 'workshopper-wrappedexec',
+499 silly resolved     version: '0.1.2',
+499 silly resolved     description: 'A utility to wrap a Workshopper exercise execution for fancy hackery',
+499 silly resolved     main: './wrappedexec.js',
+499 silly resolved     author:
+499 silly resolved      { name: 'Rod Vagg',
+499 silly resolved        email: 'rod@vagg.org',
+499 silly resolved        url: 'https://github.com/rvagg' },
+499 silly resolved     repository:
+499 silly resolved      { type: 'git',
+499 silly resolved        url: 'https://github.com/rvagg/workshopper-wrappedexec.git' },
+499 silly resolved     license: 'MIT',
+499 silly resolved     dependencies: { xtend: '~2.1.2', after: '~0.8.1' },
+499 silly resolved     gitHead: '39528832bb4c40de9f284d0bb76aa2daf5355738',
+499 silly resolved     bugs: { url: 'https://github.com/rvagg/workshopper-wrappedexec/issues' },
+499 silly resolved     homepage: 'https://github.com/rvagg/workshopper-wrappedexec',
+499 silly resolved     _id: 'workshopper-wrappedexec@0.1.2',
+499 silly resolved     scripts: {},
+499 silly resolved     _shasum: '85a1674093c94c67cb81fdf75750335324bc33ef',
+499 silly resolved     _from: 'workshopper-wrappedexec@>=0.1.1 <0.2.0',
+499 silly resolved     _npmVersion: '2.0.2',
+499 silly resolved     _nodeVersion: '0.10.31',
+499 silly resolved     _npmUser: { name: 'rvagg', email: 'rod@vagg.org' },
+499 silly resolved     maintainers: [ [Object] ],
+499 silly resolved     dist:
+499 silly resolved      { shasum: '85a1674093c94c67cb81fdf75750335324bc33ef',
+499 silly resolved        tarball: 'http://registry.npmjs.org/workshopper-wrappedexec/-/workshopper-wrappedexec-0.1.2.tgz' },
+499 silly resolved     directories: {},
+499 silly resolved     _resolved: 'https://registry.npmjs.org/workshopper-wrappedexec/-/workshopper-wrappedexec-0.1.2.tgz' },
+499 silly resolved   { name: 'boganipsum',
+499 silly resolved     version: '0.1.0',
+499 silly resolved     description: 'Lorem Ipsum ... Bogan Style!',
+499 silly resolved     main: 'index.js',
+499 silly resolved     bin: { boganipsum: './boganipsum' },
+499 silly resolved     keywords: [ 'lorem', 'ipsum', 'loremipsum', 'example', 'text', 'filler' ],
+499 silly resolved     repository:
+499 silly resolved      { type: 'git',
+499 silly resolved        url: 'git://github.com/rvagg/node-boganipsum.git' },
+499 silly resolved     authors: [ 'Rod Vagg @rvagg <rod@vagg.org> (https://github.com/rvagg)' ],
+499 silly resolved     license: 'MIT',
+499 silly resolved     readme: '# Node.js Lorem Ipsum ... Bogan Style!\n\nA JavaScript implementation of [Bogan Ipsum](http://www.boganipsum.com/) by [Eleven Media](http://www.elevenmedia.com.au/).\n\nGenerate some classy Bogan speak for your Node.js apps! Why not?\n\n## Example text\n\n > As cross as a mongrel my she\'ll be right his blood\'s worth bottling. As dry as a waggin\' school where come a dob. She\'ll be right sickie when she\'ll be right good onya. Built like a whinge mate as busy as a tucker. Lets get some battler no worries as cross as a trackies. As cunning as a mozzie to shazza got us some tucker-bag. As busy as a doovalacky where gutful of brizzie.\n >\n > He hasn\'t got a feral mate she\'ll be right tinny. Come a digger no dramas trent from punchy bathers. We\'re going grundies where she\'ll be right fossicker. As dry as a bradman heaps as busy as a brick sh*t house. He\'s got a massive smoko where as cunning as a veg out. He hasn\'t got a pokies also flat out like a barbie.\n >\n > She\'ll be right sickie bloody shazza got us some slabs. Watch out for the trackies piece of piss shazza got us some true blue. Built like a cactus mate when he hasn\'t got a cab sav. Get a dog up ya postie flamin it\'ll be waggin\' school. You little ripper grouse with grab us a hoon. As busy as a rack off also as dry as a reckon. She\'ll be right chokkie with come a beauty. Mad as a cubby house with get a dog up ya sook.\n >\n > He\'s got a massive ciggies flamin as cross as a kelpie. Get a dog up ya brisvegas no worries come a galah. As cunning as a bodgy and as stands out like bounce. Flat out like a grundies how flat out like a roadie. As cunning as a barbie where as busy as a roo bar. As busy as a ocker with as dry as a swagger. She\'ll be right wuss also gutful of ford. We\'re going booze bus heaps as dry as a franger.\n\n\n## Installation\n\n```sh\nnpm install boganipsum\n# or install globally so you can use `boganipsum` on the command line!\nnpm install boganipsum -g\n```\n\n## Usage\n\n```js\nvar bogan = require(\'boganipsum\')\nconsole.log(bogan())\n```\n\nOr, supply an `options` object with any of the following parameters:\n\n  * `paragraphs` (default: `4`) - how many paragraphs to generate\n  * `sentenceMin` (default: `5`) - the minimum number of sentences per paragraph\n  * `sentenceMax` (default: `9`) - the maximum number of sentences per paragraph\n  * `paragraphSeparator` (default: `\'\\n\'`) - the character to separate paragraphs with\n\n```js\n// generate a single sentence\nbogan({ paragraphs: 1 })\n// generate 10 short paragraphs\nbogan({ paragraphs: 10, sentenceMin: 2, sentenceMax: 5 })\n// generate some HTML bogan\n\'<p>\' + bogan({ paragraphSeparator: \'</p><p>\' }) + \'</p>\'\n```\n\n## Licence\n\nThis JavaScript implementation of Bogan Ipsum is Copyright (c) 2012 Rod Vagg [@rvagg](https://twitter.com/rvagg) and licenced under the MIT licence. All rights not explicitly granted in the MIT license are reserved. See the included LICENSE file for more details.\n\nAll original Bogan Ipsum implementation credit, word & sentence construction & general algorithm goes to [Eleven Media](http://www.thehonch.net/bogan-ipsum-how-to-guide/)!',
+499 silly resolved     readmeFilename: 'README.md',
+499 silly resolved     bugs: { url: 'https://github.com/rvagg/node-boganipsum/issues' },
+499 silly resolved     _id: 'boganipsum@0.1.0',
+499 silly resolved     dist:
+499 silly resolved      { shasum: '9ab886e3018dc8efa5974041396e89a2120ad743',
+499 silly resolved        tarball: 'http://registry.npmjs.org/boganipsum/-/boganipsum-0.1.0.tgz' },
+499 silly resolved     _from: 'boganipsum@>=0.1.0 <0.2.0',
+499 silly resolved     _npmVersion: '1.3.5',
+499 silly resolved     _npmUser: { name: 'rvagg', email: 'rod@vagg.org' },
+499 silly resolved     maintainers: [ [Object] ],
+499 silly resolved     directories: {},
+499 silly resolved     _shasum: '9ab886e3018dc8efa5974041396e89a2120ad743',
+499 silly resolved     _resolved: 'https://registry.npmjs.org/boganipsum/-/boganipsum-0.1.0.tgz' },
+499 silly resolved   { name: 'through2-map',
+499 silly resolved     version: '1.4.0',
+499 silly resolved     description: 'A through2 to create an Array.prototype.map analog for streams.',
+499 silly resolved     main: 'index.js',
+499 silly resolved     directories: { test: 'test' },
+499 silly resolved     scripts: { test: 'node test/' },
+499 silly resolved     repository:
+499 silly resolved      { type: 'git',
+499 silly resolved        url: 'git@github.com:brycebaril/through2-map.git' },
+499 silly resolved     keywords: [ 'streams', 'through', 'through2', 'map' ],
+499 silly resolved     author: { name: 'Bryce B. Baril' },
+499 silly resolved     license: 'MIT',
+499 silly resolved     bugs: { url: 'https://github.com/brycebaril/through2-map/issues' },
+499 silly resolved     jshintConfig:
+499 silly resolved      { asi: true,
+499 silly resolved        globalstrict: true,
+499 silly resolved        validthis: true,
+499 silly resolved        eqnull: true,
+499 silly resolved        node: true,
+499 silly resolved        loopfunc: true,
+499 silly resolved        newcap: false,
+499 silly resolved        eqeqeq: false },
+499 silly resolved     devDependencies:
+499 silly resolved      { tape: '~2.13.2',
+499 silly resolved        'stream-spigot': '~3.0.4',
+499 silly resolved        'concat-stream': '~1.4.6' },
+499 silly resolved     dependencies: { terminus: '~1.0.10', through2: '~0.5.1', xtend: '^3.0.0' },
+499 silly resolved     homepage: 'https://github.com/brycebaril/through2-map',
+499 silly resolved     _id: 'through2-map@1.4.0',
+499 silly resolved     _shasum: '7cb13e7c9ef00c7a93c742567f9d2e51168ff7f5',
+499 silly resolved     _from: 'through2-map@>=1.4.0 <1.5.0',
+499 silly resolved     _npmVersion: '1.4.9',
+499 silly resolved     _npmUser: { name: 'bryce', email: 'bryce@ravenwall.com' },
+499 silly resolved     maintainers: [ [Object] ],
+499 silly resolved     dist:
+499 silly resolved      { shasum: '7cb13e7c9ef00c7a93c742567f9d2e51168ff7f5',
+499 silly resolved        tarball: 'http://registry.npmjs.org/through2-map/-/through2-map-1.4.0.tgz' },
+499 silly resolved     _resolved: 'https://registry.npmjs.org/through2-map/-/through2-map-1.4.0.tgz' } ]
+500 info install after@0.8.1 into /home/espen/git/me/nodeschool-no/learnyounode
+501 info install through@2.3.7 into /home/espen/git/me/nodeschool-no/learnyounode
+502 info install through2@0.6.5 into /home/espen/git/me/nodeschool-no/learnyounode
+503 info install chalk@0.5.1 into /home/espen/git/me/nodeschool-no/learnyounode
+504 info install concat-stream@1.4.8 into /home/espen/git/me/nodeschool-no/learnyounode
+505 info install combined-stream@0.0.7 into /home/espen/git/me/nodeschool-no/learnyounode
+506 info install duplexer@0.1.1 into /home/espen/git/me/nodeschool-no/learnyounode
+507 info install bl@0.9.4 into /home/espen/git/me/nodeschool-no/learnyounode
+508 info install colors-tmpl@1.0.0 into /home/espen/git/me/nodeschool-no/learnyounode
+509 info install workshopper-exercise@2.3.0 into /home/espen/git/me/nodeschool-no/learnyounode
+510 info install hyperquest@1.0.1 into /home/espen/git/me/nodeschool-no/learnyounode
+511 info install rimraf@2.2.8 into /home/espen/git/me/nodeschool-no/learnyounode
+512 info install workshopper-wrappedexec@0.1.2 into /home/espen/git/me/nodeschool-no/learnyounode
+513 info install boganipsum@0.1.0 into /home/espen/git/me/nodeschool-no/learnyounode
+514 info install through2-map@1.4.0 into /home/espen/git/me/nodeschool-no/learnyounode
+515 info installOne after@0.8.1
+516 info installOne through@2.3.7
+517 info installOne through2@0.6.5
+518 info installOne chalk@0.5.1
+519 info installOne concat-stream@1.4.8
+520 info installOne combined-stream@0.0.7
+521 info installOne duplexer@0.1.1
+522 info installOne bl@0.9.4
+523 info installOne colors-tmpl@1.0.0
+524 info installOne workshopper-exercise@2.3.0
+525 info installOne hyperquest@1.0.1
+526 info installOne rimraf@2.2.8
+527 info installOne workshopper-wrappedexec@0.1.2
+528 info installOne boganipsum@0.1.0
+529 info installOne through2-map@1.4.0
+530 verbose node_modules/after unbuild
+531 verbose node_modules/through unbuild
+532 verbose node_modules/through2 unbuild
+533 verbose node_modules/chalk unbuild
+534 verbose node_modules/concat-stream unbuild
+535 verbose node_modules/combined-stream unbuild
+536 verbose node_modules/duplexer unbuild
+537 verbose node_modules/bl unbuild
+538 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/after
+539 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/through
+540 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/through2
+541 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/chalk
+542 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/concat-stream
+543 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/combined-stream
+544 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/duplexer
+545 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/bl
+546 verbose tar unpack /home/espen/.npm/after/0.8.1/package.tgz
+547 silly lockFile 311bd778--learnyounode-node-modules-after tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/after
+548 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/after /home/espen/.npm/311bd778--learnyounode-node-modules-after.lock
+549 silly lockFile a7493dd5-spen-npm-after-0-8-1-package-tgz tar:///home/espen/.npm/after/0.8.1/package.tgz
+550 verbose lock tar:///home/espen/.npm/after/0.8.1/package.tgz /home/espen/.npm/a7493dd5-spen-npm-after-0-8-1-package-tgz.lock
+551 verbose tar unpack /home/espen/.npm/through/2.3.7/package.tgz
+552 silly lockFile 9f238b2b-earnyounode-node-modules-through tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/through
+553 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/through /home/espen/.npm/9f238b2b-earnyounode-node-modules-through.lock
+554 silly lockFile 8ac92dc5-en-npm-through-2-3-7-package-tgz tar:///home/espen/.npm/through/2.3.7/package.tgz
+555 verbose lock tar:///home/espen/.npm/through/2.3.7/package.tgz /home/espen/.npm/8ac92dc5-en-npm-through-2-3-7-package-tgz.lock
+556 verbose tar unpack /home/espen/.npm/through2/0.6.5/package.tgz
+557 silly lockFile 2fef128e-arnyounode-node-modules-through2 tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/through2
+558 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/through2 /home/espen/.npm/2fef128e-arnyounode-node-modules-through2.lock
+559 silly lockFile d34a4dd4-n-npm-through2-0-6-5-package-tgz tar:///home/espen/.npm/through2/0.6.5/package.tgz
+560 verbose lock tar:///home/espen/.npm/through2/0.6.5/package.tgz /home/espen/.npm/d34a4dd4-n-npm-through2-0-6-5-package-tgz.lock
+561 verbose tar unpack /home/espen/.npm/chalk/0.5.1/package.tgz
+562 silly lockFile 322c2719--learnyounode-node-modules-chalk tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/chalk
+563 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/chalk /home/espen/.npm/322c2719--learnyounode-node-modules-chalk.lock
+564 silly lockFile 5f5f6a27-spen-npm-chalk-0-5-1-package-tgz tar:///home/espen/.npm/chalk/0.5.1/package.tgz
+565 verbose lock tar:///home/espen/.npm/chalk/0.5.1/package.tgz /home/espen/.npm/5f5f6a27-spen-npm-chalk-0-5-1-package-tgz.lock
+566 verbose tar unpack /home/espen/.npm/concat-stream/1.4.8/package.tgz
+567 silly lockFile 30ee58ae-unode-node-modules-concat-stream tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/concat-stream
+568 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/concat-stream /home/espen/.npm/30ee58ae-unode-node-modules-concat-stream.lock
+569 silly lockFile 9d46bec6--concat-stream-1-4-8-package-tgz tar:///home/espen/.npm/concat-stream/1.4.8/package.tgz
+570 verbose lock tar:///home/espen/.npm/concat-stream/1.4.8/package.tgz /home/espen/.npm/9d46bec6--concat-stream-1-4-8-package-tgz.lock
+571 verbose tar unpack /home/espen/.npm/combined-stream/0.0.7/package.tgz
+572 silly lockFile 60b84a5d-ode-node-modules-combined-stream tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/combined-stream
+573 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/combined-stream /home/espen/.npm/60b84a5d-ode-node-modules-combined-stream.lock
+574 silly lockFile 3bcc25d4-ombined-stream-0-0-7-package-tgz tar:///home/espen/.npm/combined-stream/0.0.7/package.tgz
+575 verbose lock tar:///home/espen/.npm/combined-stream/0.0.7/package.tgz /home/espen/.npm/3bcc25d4-ombined-stream-0-0-7-package-tgz.lock
+576 verbose tar unpack /home/espen/.npm/duplexer/0.1.1/package.tgz
+577 silly lockFile 5d7114cb-arnyounode-node-modules-duplexer tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/duplexer
+578 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/duplexer /home/espen/.npm/5d7114cb-arnyounode-node-modules-duplexer.lock
+579 silly lockFile c971b9ab-n-npm-duplexer-0-1-1-package-tgz tar:///home/espen/.npm/duplexer/0.1.1/package.tgz
+580 verbose lock tar:///home/espen/.npm/duplexer/0.1.1/package.tgz /home/espen/.npm/c971b9ab-n-npm-duplexer-0-1-1-package-tgz.lock
+581 verbose tar unpack /home/espen/.npm/bl/0.9.4/package.tgz
+582 silly lockFile aa753e43--no-learnyounode-node-modules-bl tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/bl
+583 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/bl /home/espen/.npm/aa753e43--no-learnyounode-node-modules-bl.lock
+584 silly lockFile a9735249-e-espen-npm-bl-0-9-4-package-tgz tar:///home/espen/.npm/bl/0.9.4/package.tgz
+585 verbose lock tar:///home/espen/.npm/bl/0.9.4/package.tgz /home/espen/.npm/a9735249-e-espen-npm-bl-0-9-4-package-tgz.lock
+586 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/after
+587 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/through
+588 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/through2
+589 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/chalk
+590 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/concat-stream
+591 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/combined-stream
+592 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/duplexer
+593 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/bl
+594 verbose node_modules/colors-tmpl unbuild
+595 verbose node_modules/workshopper-exercise unbuild
+596 verbose node_modules/hyperquest unbuild
+597 verbose node_modules/rimraf unbuild
+598 verbose node_modules/workshopper-wrappedexec unbuild
+599 verbose node_modules/boganipsum unbuild
+600 verbose node_modules/through2-map unbuild
+601 silly gunzTarPerm modes [ '755', '644' ]
+602 silly gunzTarPerm modes [ '755', '644' ]
+603 silly gunzTarPerm modes [ '755', '644' ]
+604 silly gunzTarPerm modes [ '755', '644' ]
+605 silly gunzTarPerm modes [ '755', '644' ]
+606 silly gunzTarPerm modes [ '755', '644' ]
+607 silly gunzTarPerm modes [ '755', '644' ]
+608 silly gunzTarPerm modes [ '755', '644' ]
+609 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/colors-tmpl
+610 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/workshopper-exercise
+611 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/hyperquest
+612 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/rimraf
+613 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/workshopper-wrappedexec
+614 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/boganipsum
+615 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/through2-map
+616 verbose tar unpack /home/espen/.npm/colors-tmpl/1.0.0/package.tgz
+617 silly lockFile 88e3397f-younode-node-modules-colors-tmpl tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/colors-tmpl
+618 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/colors-tmpl /home/espen/.npm/88e3397f-younode-node-modules-colors-tmpl.lock
+619 silly lockFile 922f8747-pm-colors-tmpl-1-0-0-package-tgz tar:///home/espen/.npm/colors-tmpl/1.0.0/package.tgz
+620 verbose lock tar:///home/espen/.npm/colors-tmpl/1.0.0/package.tgz /home/espen/.npm/922f8747-pm-colors-tmpl-1-0-0-package-tgz.lock
+621 verbose tar unpack /home/espen/.npm/workshopper-exercise/2.3.0/package.tgz
+622 silly lockFile c62ce1ee-ode-modules-workshopper-exercise tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/workshopper-exercise
+623 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/workshopper-exercise /home/espen/.npm/c62ce1ee-ode-modules-workshopper-exercise.lock
+624 silly lockFile 547f7656-opper-exercise-2-3-0-package-tgz tar:///home/espen/.npm/workshopper-exercise/2.3.0/package.tgz
+625 verbose lock tar:///home/espen/.npm/workshopper-exercise/2.3.0/package.tgz /home/espen/.npm/547f7656-opper-exercise-2-3-0-package-tgz.lock
+626 verbose tar unpack /home/espen/.npm/hyperquest/1.0.1/package.tgz
+627 silly lockFile 483d7a89-nyounode-node-modules-hyperquest tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/hyperquest
+628 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/hyperquest /home/espen/.npm/483d7a89-nyounode-node-modules-hyperquest.lock
+629 silly lockFile a2e29a24-npm-hyperquest-1-0-1-package-tgz tar:///home/espen/.npm/hyperquest/1.0.1/package.tgz
+630 verbose lock tar:///home/espen/.npm/hyperquest/1.0.1/package.tgz /home/espen/.npm/a2e29a24-npm-hyperquest-1-0-1-package-tgz.lock
+631 verbose tar unpack /home/espen/.npm/rimraf/2.2.8/package.tgz
+632 silly lockFile b2a74038-learnyounode-node-modules-rimraf tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/rimraf
+633 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/rimraf /home/espen/.npm/b2a74038-learnyounode-node-modules-rimraf.lock
+634 silly lockFile 0e711947-pen-npm-rimraf-2-2-8-package-tgz tar:///home/espen/.npm/rimraf/2.2.8/package.tgz
+635 verbose lock tar:///home/espen/.npm/rimraf/2.2.8/package.tgz /home/espen/.npm/0e711947-pen-npm-rimraf-2-2-8-package-tgz.lock
+636 verbose tar unpack /home/espen/.npm/workshopper-wrappedexec/0.1.2/package.tgz
+637 silly lockFile d19d86f2--modules-workshopper-wrappedexec tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/workshopper-wrappedexec
+638 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/workshopper-wrappedexec /home/espen/.npm/d19d86f2--modules-workshopper-wrappedexec.lock
+639 silly lockFile 2432c948-er-wrappedexec-0-1-2-package-tgz tar:///home/espen/.npm/workshopper-wrappedexec/0.1.2/package.tgz
+640 verbose lock tar:///home/espen/.npm/workshopper-wrappedexec/0.1.2/package.tgz /home/espen/.npm/2432c948-er-wrappedexec-0-1-2-package-tgz.lock
+641 verbose tar unpack /home/espen/.npm/through2-map/1.4.0/package.tgz
+642 silly lockFile 2b917b32-ounode-node-modules-through2-map tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/through2-map
+643 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/through2-map /home/espen/.npm/2b917b32-ounode-node-modules-through2-map.lock
+644 silly lockFile 2b4886d3-m-through2-map-1-4-0-package-tgz tar:///home/espen/.npm/through2-map/1.4.0/package.tgz
+645 verbose lock tar:///home/espen/.npm/through2-map/1.4.0/package.tgz /home/espen/.npm/2b4886d3-m-through2-map-1-4-0-package-tgz.lock
+646 verbose tar unpack /home/espen/.npm/boganipsum/0.1.0/package.tgz
+647 silly lockFile 9571907c-nyounode-node-modules-boganipsum tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/boganipsum
+648 verbose lock tar:///home/espen/git/me/nodeschool-no/learnyounode/node_modules/boganipsum /home/espen/.npm/9571907c-nyounode-node-modules-boganipsum.lock
+649 silly lockFile 9b10057a-npm-boganipsum-0-1-0-package-tgz tar:///home/espen/.npm/boganipsum/0.1.0/package.tgz
+650 verbose lock tar:///home/espen/.npm/boganipsum/0.1.0/package.tgz /home/espen/.npm/9b10057a-npm-boganipsum-0-1-0-package-tgz.lock
+651 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/colors-tmpl
+652 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/workshopper-exercise
+653 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/hyperquest
+654 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/rimraf
+655 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/workshopper-wrappedexec
+656 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/through2-map
+657 verbose gentlyRm vacuuming /home/espen/git/me/nodeschool-no/learnyounode/node_modules/boganipsum
+658 silly gunzTarPerm modes [ '755', '644' ]
+659 silly gunzTarPerm modes [ '755', '644' ]
+660 silly gunzTarPerm modes [ '755', '644' ]
+661 silly gunzTarPerm modes [ '755', '644' ]
+662 silly gunzTarPerm modes [ '755', '644' ]
+663 silly gunzTarPerm modes [ '755', '644' ]
+664 silly gunzTarPerm modes [ '755', '644' ]
+665 verbose fstream_path /home/espen/git/me/nodeschool-no/learnyounode/node_modules/after
+666 verbose fstream_type Directory
+667 verbose fstream_class DirWriter
+668 verbose stack Error: EACCES, mkdir '/home/espen/git/me/nodeschool-no/learnyounode/node_modules/after'
+668 verbose stack     at Error (native)
+669 verbose fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+669 verbose fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
+669 verbose fstream_stack Object.oncomplete (fs.js:93:15)
+670 verbose cwd /home/espen/git/me/nodeschool-no/learnyounode
+671 error Linux 3.13.0-24-generic
+672 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+673 error node v0.11.14
+674 error npm  v2.0.0
+675 error path /home/espen/git/me/nodeschool-no/learnyounode/node_modules/after
+676 error code EACCES
+677 error errno -13
+678 error Error: EACCES, mkdir '/home/espen/git/me/nodeschool-no/learnyounode/node_modules/after'
+678 error     at Error (native)
+678 error  { [Error: EACCES, mkdir '/home/espen/git/me/nodeschool-no/learnyounode/node_modules/after']
+678 error   stack: 'Error: EACCES, mkdir \'/home/espen/git/me/nodeschool-no/learnyounode/node_modules/after\'\n    at Error (native)',
+678 error   errno: -13,
+678 error   code: 'EACCES',
+678 error   path: '/home/espen/git/me/nodeschool-no/learnyounode/node_modules/after',
+678 error   fstream_type: 'Directory',
+678 error   fstream_path: '/home/espen/git/me/nodeschool-no/learnyounode/node_modules/after',
+678 error   fstream_class: 'DirWriter',
+678 error   fstream_stack:
+678 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+678 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
+678 error      'Object.oncomplete (fs.js:93:15)' ] }
+679 error Please try running this command again as root/Administrator.
+680 verbose exit [ -13, true ]
