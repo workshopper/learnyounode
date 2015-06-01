@@ -1,0 +1,84 @@
+{
+  "title": "LÆR DEG NODE.JS - FOR ET LYKKELIGERE LIV!!",
+  "subtitle": "\u001b[23mVelg en oppgave og trykk \u001b[3mEnter\u001b[23m for å begynne",
+  "menu": {
+    "credits": "TAKK TIL"
+  },
+  "common": {
+    "exercise": {
+      "pass": {
+        "sync": "Brukte synkron metode: {{{method}}}",
+        "async": "Brukte asynkron metode: {{{method}}}"
+      },
+      "fail": {
+        "sync": "Brukte synkron methode: {{{method}}}",
+        "async": "Brukte asynkron metode: {{{method}}}",
+        "unused": "Brukte asynkron metode fra `fs` modulen.",
+        "unexpected_error": "Uventet feil fra HTTP server: {{{message}}}",
+        "connection": "Kunne ikke koble til {{{address}}}: {{{message}}}"
+      }
+    }
+  },
+  "exercise": {
+    "HELLO WORLD": "Hei verden!",
+    "BABY STEPS": "Museskritt",
+    "MY FIRST I/O!": "Min første I/O!",
+    "MY FIRST ASYNC I/O!": "Min første asynkrone I/O",
+    "FILTERED LS": "Filtrert LS",
+    "MAKE IT MODULAR": "Lag en modul",
+    "HTTP CLIENT": "HTTP klient",
+    "HTTP COLLECT": "HTTP collect",
+    "JUGGLING ASYNC": "Håndtere asynkronitet",
+    "TIME SERVER": "Tids server",
+    "HTTP FILE SERVER": "HTTP fil server",
+    "HTTP UPPERCASERER": "HTTP caps lock",
+    "HTTP JSON API SERVER": "HTTP JSON API server"
+  },
+  "exercises": {
+    "LAG MODULER": {
+      "fail": {
+        "missing_module": "Did not use an additional module file, you must require() a module to help solve this exercise",
+        "missing_module": "Du brukte ikke en egen fil for modulen, du må require() en modul til å løse denne oppgaven",
+        "loadError": "Kunne ikke laste module fil [{{path}}]: {{{message}}}",
+        "mod": {
+          "_base": "Din ekstra modul fil [{{path}}] {{{message}}}",
+          "no_export": "gjør ikke tilgjgenlig en funksjon {{{method}}}. Du må bruke `module.exports = function () {}`.",
+          "singleFunction": "en funksjon",
+          "arguments": "tilgjengeliggjør en funksjon som tar mindre enn {{{three}}} argumenter. Du må ta imot en katalog, et filter og en {{{callback}}}.",
+          "arguments_three": "tre",
+          "arguments_callback": "callback",
+          "missing_callback": "kalte ikke callback argumentet etter en feil fra kallet fs.readdir()",
+          "missing_error": "sender ikke tilbake en feil motattat fra kallet `fs.readdir()`.\n  Bruk dette idiomatiske Node.js mønsteret i din callback til `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
+          "callback_arguments": "returnerte ikke to argumenter på callback funksjonen (forventet `null` og en Array med filenavn)",
+          "array_wrong_size": "returnerte ikke en an Array med riktig antall elementer som andre argument i callback funksjonen",
+          "dotExt": "kan hende du bruker \"ext\" istedet for \".ext\"",
+          "array_comparison": "returnerte ikke riktig liste av filer som andre argument i callback funksjonen",
+          "missing_array_argument": "returnerte ikke et Array objekt som det andre argument i callback funksjonen",
+          "callback_error": "returnerte en feil i callback funksjonen:\n\t{{{error}}}",
+          "timeout": "kalte aldri callback funksjonen",
+          "unexpected": "kastet en feil:\n\t{{{error}}}"
+        }
+      },
+      "pass": {
+        "singleFunction": "Modulen gjør tilgjengelig en funksjon",
+        "arguments": "Modulen tilgjengeliggjør en funksjon som tar {{{count}}} argumenter",
+        "error": "Modulen har riktig feilhåndtering ",
+        "callback": "Modulen håndterer callback argumentene",
+        "callback_arguments": "Modulen returnerte to argumenter på callback funksjonen",
+        "array_argument": "Modulen returnerte korrekt antall elementer i listen som andre argument i callback funksjonen",
+        "array_size": "Modulen returnerte riktig antall elementer som andre argument i callback funksjonen",
+        "final": "Modulen returnerte korrekt liste av filer som andre arugment i callback funksjonen"
+      }
+    },
+    "TIDS SERVER": {
+      "fail": {
+        "connection": "Feil ved tilkobling til localhost:{{port}}: {{{message}}}"
+      }
+    },
+    "HTTP FIL SERVER": {
+      "fail": {
+        "no_createReadStream": "Brukte en anne fs metode enn fs.createReadStream(): {{{method}}}"
+      }
+    }
+  }
+}

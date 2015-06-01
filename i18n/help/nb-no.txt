@@ -1,0 +1,14 @@
+{yellow}{bold}Har du problemer med {appname} oppgaven?{/bold}{/yellow}
+
+  Et helt team med ivrige og hjelpsomme JavaScript-alver venter på å hjelpe deg lære grunnleggende Node.js, bare gå til denne adressen:
+    https://github.com/nodeschool/discussions/issues
+  og legg til en {bold}New Issue{/bold} og la oss få vite hva du har problemer med. Det finnes {italic}ingen{/italic} dumme spørsmål!
+
+  Hvis du ser etter generell hjelp med Node.js, så er #Node.js kanalen på Freenode IRC ofte et veldig bra sted å finne noen som kan hjelpe. Det er også en Node.js Google Group:
+    https://groups.google.com/forum/#!forum/nodejs
+
+{yellow}{bold}Fant en feil i {appname} eller vil du bare bidra med noe?{/bold}{/yellow}
+
+  Det offisielle stedet {appname} er:
+    https://github.com/rvagg/learnyounode/
+  Du må gjerne rapportere en feil eller (aller helst) sende en pull request.
