@@ -6,7 +6,7 @@ Deberás escribir un archivo *modular* para hacer la tarea. Dicho módulo debe *
 
 En Node, los callbacks suelen tener una firma convencional de tener (error, data). Esto implica que si hay un error el primer parámetro devuelve el error sino viene `null` y el segundo parámetro son los datos. Para este ejercicio los datos a devolver es la lista de archivos en forma de Array. Si occurre un error, por ejemplo en la llamada a `fs.readdir()`, el callback debe llamarse con dicho error.
 
-Para completar el ejercicio **debes** imprimir desde el módulo y no desde el programa principal. En caso de que el módulo devuelva un error el programa deberá imprimir en consola la información del error.
+Para completar el ejercicio **no debes** imprimir desde el módulo, sólo desde el programa principal. En caso de que el módulo devuelva un error a tu programa principal, simplemente compruébalo y escribe un mensaje informativo en consola.
 
 El módulo debe cumplir el siguiente contrato:
 1. Exportar una función que reciba los parámetros mencionados.
