@@ -1,8 +1,23 @@
 {
   "title": "ВИВЧАЙТЕ NODE.JS!",
-  "subtitle": "\u001b[23mОберіть завдання та натисніть\u001b[3mEnter\u001b[23m щоб почати",
+  "subtitle": "\u001b[23mОберіть завдання та натисніть \u001b[3mEnter\u001b[23m щоб почати",
   "menu": {
     "credits": "АВТОРСТВО"
+  },
+  "exercise": {
+    "HELLO WORLD": "HELLO WORLD",
+    "BABY STEPS": "BABY STEPS",
+    "MY FIRST I/O!": "MY FIRST I/O!",
+    "MY FIRST ASYNC I/O!": "MY FIRST ASYNC I/O!",
+    "FILTERED LS": "FILTERED LS",
+    "MAKE IT MODULAR": "MAKE IT MODULAR",
+    "HTTP CLIENT": "HTTP CLIENT",
+    "HTTP COLLECT": "HTTP COLLECT",
+    "JUGGLING ASYNC": "JUGGLING ASYNC",
+    "TIME SERVER": "TIME SERVER",
+    "HTTP FILE SERVER": "HTTP FILE SERVER",
+    "HTTP UPPERCASERER": "HTTP UPPERCASERER",
+    "HTTP JSON API SERVER": "HTTP JSON API SERVER"
   },
   "common": {
     "exercise": {
