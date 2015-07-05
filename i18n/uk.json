@@ -1,0 +1,83 @@
+{
+  "title": "ВИВЧАЙТЕ NODE.JS!",
+  "subtitle": "\u001b[23mОберіть завдання та натисніть \u001b[3mEnter\u001b[23m щоб почати",
+  "menu": {
+    "credits": "АВТОРСТВО"
+  },
+  "exercise": {
+    "HELLO WORLD": "HELLO WORLD",
+    "BABY STEPS": "BABY STEPS",
+    "MY FIRST I/O!": "MY FIRST I/O!",
+    "MY FIRST ASYNC I/O!": "MY FIRST ASYNC I/O!",
+    "FILTERED LS": "FILTERED LS",
+    "MAKE IT MODULAR": "MAKE IT MODULAR",
+    "HTTP CLIENT": "HTTP CLIENT",
+    "HTTP COLLECT": "HTTP COLLECT",
+    "JUGGLING ASYNC": "JUGGLING ASYNC",
+    "TIME SERVER": "TIME SERVER",
+    "HTTP FILE SERVER": "HTTP FILE SERVER",
+    "HTTP UPPERCASERER": "HTTP UPPERCASERER",
+    "HTTP JSON API SERVER": "HTTP JSON API SERVER"
+  },
+  "common": {
+    "exercise": {
+      "pass": {
+        "sync": "Використаний синхронний метод: {{{method}}}",
+        "async": "Використаний асинхронний метод: {{{method}}}"
+      },
+      "fail": {
+        "sync": "Використаний синхронний метод: {{{method}}}",
+        "async": "Використаний асинхронний метод: {{{method}}}",
+        "unused": "Використаний асинхронний метод з модуля `fs`.",
+        "unexpected_error": "Неочікувана помилка HTTP сервера: {{{message}}}",
+        "connection": "Помилка з’єднання {{{address}}}: {{{message}}}"
+      }
+    }
+  },
+  "exercises": {
+    "MAKE IT MODULAR": {
+      "fail": {
+        "missing_module": "Не був використаний файл з додатковим модулем, ви повинні використовувати require() аби виконати це завдання",
+        "loadError": "Помилка завантаження файлу [{{path}}]: {{{message}}}",
+        "mod": {
+          "_base": "Ваш файл з додатковим модулем [{{path}}] {{{message}}}",
+          "no_export": "не експортований метод {{{method}}}. Ви повинні використовувати конструкцію `module.exports = function () {}`.",
+          "singleFunction": "функція",
+          "arguments": "експортована функція, яка приймає менше ніж {{{three}}} аргументів. Ви повинні приймати директорію, фільтр та {{{callback}}}.",
+          "arguments_three": "три",
+          "arguments_callback": "функція зворотнього виклику",
+          "missing_callback": "не була викликана функція зворотнього виклику після помилки з fs.readdir()",
+          "missing_error": "схоже, не була передана помилка, отримана з `fs.readdir()`.\n  Використовуйте наступний ідіоматичний Node.js паттерн встередині функції, що передається в `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
+          "callback_arguments": "не були отримані два аргументи в функції зворотнього виклику (очікувалися `null` та масив імен файлів)",
+          "array_wrong_size": "не був отриманий масив з вірною кількістю елементів в другому аргументів функції зворотнього виклику",
+          "dotExt": "може бути \"ext\" замість \".ext\"",
+          "array_comparison": "не був отриманий коректний список файлів в другому аргументів функції зворотнього виклику",
+          "missing_array_argument": "Не був отриманий масив в якості другого аргументу функції зворотнього виклику",
+          "callback_error": "отримана помилка в функціх зворотнього виклику:\n\t{{{error}}}",
+          "timeout": "не було викликано функції зворотнього виклику",
+          "unexpected": "отримана помилка:\n\t{{{error}}}"
+        }
+      },
+      "pass": {
+        "singleFunction": "Файл з додатковим модулем експортує функцію",
+        "arguments": "Файл з додатковим модулем експортує функцію, яка приймає {{{count}}} аргументів",
+        "error": "Файл з додатковим модулем коректно опрацював помилку",
+        "callback": "Файл з додатковим модулем коректно опрацював фукцію зворотнього виклику",
+        "callback_arguments": "Файл з додатковим модулем повернув два аргументи в функції зворотньго виклику",
+        "array_argument": "Файл з додатковим модулем повернув коректну кількість елементів в якості другого аргументу функції зворотньго виклику",
+        "array_size": "Файл з додатковим модулем повернув коректну кількість елементів в якості другого аргументу функції звортнього виклику",
+        "final": "Файл з додатковим модулем повернув коректний список файлів в якості другого аргументу функції зворотнього виклику"
+      }
+    },
+    "TIME SERVER": {
+      "fail": {
+        "connection": "Помилка підключення до localhost:{{port}}: {{{message}}}"
+      }
+    },
+    "HTTP FILE SERVER": {
+      "fail": {
+        "no_createReadStream": "Використаний fs-метод відмінний від fs.createReadStream(): {{{method}}}"
+      }
+    }
+  }
+}
