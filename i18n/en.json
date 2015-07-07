@@ -34,6 +34,7 @@
           "missing_callback": "did not call the callback argument after an error from fs.readdir()",
           "missing_error": "does not appear to pass back an error received from `fs.readdir()`.\n  Use the following idiomatic Node.js pattern inside your callback to `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
           "callback_arguments": "did not return two arguments on the callback function (expected `null` and an Array of filenames)",
+          "dont_use_dot": "appears to be expecting a '.'-prefixed extension, it should receive the second command-line argument without the added '.'",
           "array_wrong_size": "did not return an Array with the correct number of elements as the second argument of the callback",
           "dotExt": "may be matching \"ext\" instead of \".ext\"",
           "array_comparison": "did not return the correct list of files as the second argument of the callback",
@@ -50,6 +51,7 @@
         "callback": "Additional module file handles callback argument",
         "callback_arguments": "Additional module file returned two arguments on the callback function",
         "array_argument": "Additional module file returned correct number of elements as the second argument of the callback",
+        "dont_use_dot": "Additional module file correctly handles '.'-prefixed extension",
         "array_size": "Additional module file returned correct number of elements as the second argument of the callback",
         "final": "Additional module file returned correct list of files as the second argument of the callback"
       }
