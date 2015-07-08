@@ -37,7 +37,7 @@
   "exercises": {
     "MAKE IT MODULAR": {
       "fail": {
-        "missing_module": "你没有使用额外的模块文件，你必须使用 reqiure() 来引用一个模块来协助你完成这个习题",
+        "missing_module": "你没有使用额外的模块文件，你必须使用 require() 来引用一个模块来协助你完成这个习题",
         "loadError": "载入模块时发生错误： [{{path}}]： {{{message}}}",
         "mod": {
           "_base": "你的额外的模块文件 [{{path}}] {{{message}}}",
