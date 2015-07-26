@@ -1,4 +1,4 @@
-1つ目のコマンドラインの引数は URL 文字列である。 そのURL文字列を使ってHTTP のデーターをロード (※)するアプリを書いてください。
+1つ目のコマンドライン引数は URL 文字列です。 そのURL文字列を使ってHTTP のデーターをロード (※)するアプリを書いてください。
 
 サーバから**全て**（最初のイベントだけではなく）のデータを集め、次の2行をコンソールに出力して下さい。
 
@@ -17,7 +17,7 @@
   <http://npm.im/concat-stream>
 
 Node.js のパッケージをインストールするために Node.js のパッケージ管理ツールである `npm`を使ってください。
-コマンドラインに以下を書いてください：
+コマンドラインに次のコマンドを書いてください：
 
 ```sh
 $ npm install bl
@@ -36,7 +36,7 @@ var bl = require('bl')
   {rootdir:/node_modules/bl}
   {rootdir:/node_modules/concat-stream}
 
-`bl` も `concat-stream` も `Stream` を入力として *pipe* (※) することができます。以下の例では`Stream` が終わってからコールバックが呼ばれています：
+`bl` も `concat-stream` も `Stream` を入力として *pipe* (※) することができます。次の例では`Stream` が終わってからコールバックが呼ばれています：
 ※ pipe: Stream中に流れるデータを次々と橋渡しする関数を登録すること。
 
 ```js
@@ -47,7 +47,7 @@ response.pipe(concatStream(function (data) { /* ... */ }))
 
 メモ：もしかしたら `Buffer` から `data.toString()` をつかって文字列に変換する必要があるかもしれません。
 
-モジュールのドキュメントは `{appname}` と一緒にインストールされているので、このリンクをブラウザで見てください:
+モジュールのドキュメントは `{appname}` と一緒にインストールされているため、このリンクをブラウザで見てください:
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
