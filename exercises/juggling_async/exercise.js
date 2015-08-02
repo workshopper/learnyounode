@@ -70,9 +70,9 @@ exercise.addSetup(function (mode, callback) {
   }.bind(this))
 
   this.servers = [
-      server(0, 200, done)
-    , server(1, 0,   done)
-    , server(2, 100,  done)
+      server(0, (Math.floor(Math.random() * 500) + 1), done)
+    , server(1, (Math.floor(Math.random() * 500) + 1),   done)
+    , server(2, (Math.floor(Math.random() * 500) + 1),  done)
   ]
 
 })
