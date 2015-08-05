@@ -4,8 +4,7 @@ var results = []
 var count = 0
 
 function printResults () {
-  for (var i = 0; i < 3; i++)
-    console.log(results[i])
+  results.forEach(console.log)
 }
 
 function httpGet (index) {
