@@ -1,20 +1,13 @@
 var net = require('net')
 
-function zeroFill(i) {
-  return (i < 10 ? '0' : '') + i
-}
+var datetime = require('node-datetime') //Requires npm install node-datetime
+var dt = datetime.create()
+var time = dt.format('Y-m-d H:M') //"2013-07-06 17:42"
 
-function now () {
-  var d = new Date()
-  return d.getFullYear() + '-'
-    + zeroFill(d.getMonth() + 1) + '-'
-    + zeroFill(d.getDate()) + ' '
-    + zeroFill(d.getHours()) + ':'
-    + zeroFill(d.getMinutes())
-}
+var prt = process.argv[2]
 
-var server = net.createServer(function (socket) {
-  socket.end(now() + '\n')
+var server = net.createServer(function (socket) { //'connection' listner
+  socket.end(time + '\n')
 })
 
-server.listen(Number(process.argv[2]))
+server.listen(Number(prt))
