@@ -62,7 +62,6 @@ function query (mode) {
       , iv
       , url = 'http://localhost:' + port
 
-    //TODO: test GET requests for #fail
     input.pipe(hyperquest.post(url)
       .on('error', function (err) {
         exercise.emit(
@@ -71,6 +70,27 @@ function query (mode) {
         )
       }))
       .pipe(stream)
+
+    hyperquest.get(url, function (err, res) {
+      if (res.statusCode !== 405) {
+        // 405 is Method Not Allowed
+        exercise.emit(
+            'fail'
+          , exercise.__('fail.method')
+        )
+      } else if (res.headers["allow"] !== "POST") {
+        // 405 requres an appropriate Allow header
+        exercise.emit(
+            'fail'
+          , exercise.__('fail.allow_post')
+        )
+      }
+    }).on('error', function (err) {
+        exercise.emit(
+            'fail'
+          , exercise.__('fail.connection', {address: url, message: err.message})
+        )
+      })
 
     iv = setInterval(function () {
       input.write(words[count].trim() + '\n')
