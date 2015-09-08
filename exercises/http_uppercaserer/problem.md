@@ -5,6 +5,10 @@ Your server should listen on the port provided by the first argument to your pro
 ----------------------------------------------------------------------
 ## HINTS
 
+If your HTTP server receives a request other than POST (e.g. GET), you should respond with the appropriate status code and headers. See RFC 2616 for details.
+
+  <https://tools.ietf.org/html/rfc2616#section-10> 
+
 While you're not restricted to using the streaming capabilities of the `request` and `response` objects, it will be much easier if you do.
 
 There are a number of different packages in npm that you can use to *"transform"* stream data as it's passing through. For this exercise the `through2-map` package offers the simplest API.
@@ -33,5 +37,9 @@ If you don't have an Internet connection, simply make a `node_modules` directory
 Documentation for through2-map has been installed along with {appname} on your system and you can read them by pointing your browser here:
 
   {rootdir:/docs/through2-map.html}
+
+Documentation for HTTP, which includes status code definitions, has been installed along with {appname} on your system and you can read them by pointing your browser here:
+
+  {rootdir:/docs/RFC-2616.html}
 
 ----------------------------------------------------------------------
