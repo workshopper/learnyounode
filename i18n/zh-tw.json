@@ -1,82 +1,82 @@
 {
-  "title": "LEARN YOU THE NODE.JS FOR MUCH WIN!",
-  "subtitle": "\u001b[23m選擇一個問題，然後按下 \u001b[3mEnter\u001b[23m 開始嘗試！",
+  "title": "學習 NODE.JS 贏得更多",
+  "subtitle": "\u001b[23m選擇一個題目，然後按下 \u001b[3mEnter\u001b[23m 開始嘗試！",
   "exercise": {
-    "HELLO WORLD": "HELLO WORLD",
-    "BABY STEPS": "BABY STEPS",
-    "MY FIRST I/O!": "MY FIRST I/O!",
-    "MY FIRST ASYNC I/O!": "MY FIRST ASYNC I/O!",
-    "FILTERED LS": "FILTERED LS",
-    "MAKE IT MODULAR": "MAKE IT MODULAR",
-    "HTTP CLIENT": "HTTP CLIENT",
-    "HTTP COLLECT": "HTTP COLLECT",
-    "JUGGLING ASYNC": "JUGGLING ASYNC",
-    "TIME SERVER": "TIME SERVER",
-    "HTTP FILE SERVER": "HTTP FILE SERVER",
-    "HTTP UPPERCASERER": "HTTP UPPERCASERER",
-    "HTTP JSON API SERVER": "HTTP JSON API SERVER"
+    "HELLO WORLD": "哈囉世界",
+    "BABY STEPS": "第一步",
+    "MY FIRST I/O!": "輸入/輸出",
+    "MY FIRST ASYNC I/O!": "非同步輸入/輸出",
+    "FILTERED LS": "篩選",
+    "MAKE IT MODULAR": "模組化",
+    "HTTP CLIENT": "HTTP 客戶端",
+    "HTTP COLLECT": "HTTP 資料收集",
+    "JUGGLING ASYNC": "玩轉非同步",
+    "TIME SERVER": "報時伺服器",
+    "HTTP FILE SERVER": "HTTP 檔案伺服器",
+    "HTTP UPPERCASERER": "HTTP 回傳大寫字體",
+    "HTTP JSON API SERVER": "HTTP JSON API 伺服器"
   },
   "menu": {
-    "credits": "CREDITS"
+    "credits": "感謝"
   },
   "common": {
     "exercise": {
       "pass": {
-        "sync": "Used synchronous method: {{{method}}}",
-        "async": "Used asynchronous method: {{{method}}}"
+        "sync": "使用同步方法: {{{method}}}",
+        "async": "使用非同步方法: {{{method}}}"
       },
       "fail": {
-        "sync": "Used synchronous method: {{{method}}}",
-        "async": "Used asynchronous method: {{{method}}}",
-        "unused": "Used asynchronous method from the `fs` module.",
-        "unexpected_error": "Unexpected error from HTTP server: {{{message}}}",
-        "connection": "Error connecting to {{{address}}}: {{{message}}}"
+        "sync": "使用同步方法: {{{method}}}",
+        "async": "使用非同步方法: {{{method}}}",
+        "unused": "使用 `fs` 模組的非同步方法。",
+        "unexpected_error": "HTTP 伺服器產生預料之外的錯誤: {{{message}}}",
+        "connection": "連線 {{{address}}} 時產生錯誤: {{{message}}}"
       }
     }
   },
   "exercises": {
     "MAKE IT MODULAR": {
       "fail": {
-        "missing_module": "Did not use an additional module file, you must require() a module to help solve this exercise",
-        "loadError": "Error loading module file [{{path}}]: {{{message}}}",
+        "missing_module": "請不要使用其他的模組, 請以 require() 取得模組來解決題目",
+        "loadError": "載入模組[{{path}}]時發生錯誤: {{{message}}}",
         "mod": {
-          "_base": "Your additional module file [{{path}}] {{{message}}}",
-          "no_export": "does not export a {{{method}}}. You must use the `module.exports = function () {}` pattern.",
-          "singleFunction": "single function",
-          "arguments": "exports a function that takes fewer than {{{three}}} arguments. You must accept a directory, a filter and a {{{callback}}}.",
-          "arguments_three": "three",
-          "arguments_callback": "callback",
-          "missing_callback": "did not call the callback argument after an error from fs.readdir()",
-          "missing_error": "does not appear to pass back an error received from `fs.readdir()`.\n  Use the following idiomatic Node.js pattern inside your callback to `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
-          "callback_arguments": "did not return two arguments on the callback function (expected `null` and an Array of filenames)",
-          "array_wrong_size": "did not return an Array with the correct number of elements as the second argument of the callback",
-          "dotExt": "may be matching \"ext\" instead of \".ext\"",
-          "array_comparison": "did not return the correct list of files as the second argument of the callback",
-          "missing_array_argument": "did not return an Array object as the second argument of the callback",
-          "callback_error": "returned an error on its callback:\n\t{{{error}}}",
-          "timeout": "did not call the callback argument",
-          "unexpected": "threw an error:\n\t{{{error}}}"
+          "_base": "你的外加模組檔案 [{{path}}] {{{message}}}",
+          "no_export": "未對外提供 {{{method}}}。你必須使用 `module.exports = function () {}` 語法。",
+          "singleFunction": "單一函式",
+          "arguments": "對外提供一個不多於{{{three}}}參數的函數。 必須包含一個目錄名稱，副檔名，以及一個{{{callback}}}。",
+          "arguments_three": "三個",
+          "arguments_callback": "回傳參數",
+          "missing_callback": "在 fs.readdir() 發生錯誤後沒有呼叫 callback 參數",
+          "missing_error": "未將 `fs.readdir()` 產生的錯誤回傳。\n  在`fs.readdir()`中以下列 Node.js 慣例語法作為你的回送函式:\n\tif (err)\n\t  return callback(err)",
+          "callback_arguments": "未回傳兩個參數到回送函數中(預期的參數是 `null` 與檔名的陣列)",
+          "array_wrong_size": "未將正確數量元素的陣列作為第二個參數回送",
+          "dotExt": "可能將配對\"ext\" 錯置為 \".ext\"",
+          "array_comparison": "未將正確的檔案清單作為第二個參數回送",
+          "missing_array_argument": "未將陣列物件作為第二個參數回送",
+          "callback_error": "回送時產生錯誤 :\n\t{{{error}}}",
+          "timeout": "並沒有使用回送參數",
+          "unexpected": "拋出預料之外的錯誤:\n\t{{{error}}}"
         }
       },
       "pass": {
-        "singleFunction": "Additional module file exports a single function",
-        "arguments": "Additional module file exports a function that takes {{{count}}} arguments",
-        "error": "Additional module file handles errors properly",
-        "callback": "Additional module file handles callback argument",
-        "callback_arguments": "Additional module file returned two arguments on the callback function",
-        "array_argument": "Additional module file returned correct number of elements as the second argument of the callback",
-        "array_size": "Additional module file returned correct number of elements as the second argument of the callback",
-        "final": "Additional module file returned correct list of files as the second argument of the callback"
+        "singleFunction": "以外加模組對外提供單一函式",
+        "arguments": "以外加模組對外提供單一函式帶有{{{count}}} 個參數",
+        "error": "外加模組正確地處理錯誤",
+        "callback": "外加模組處理回送參數",
+        "callback_arguments": "外加模組在回送函數中回送兩個參數",
+        "array_argument": "外加模組回傳正確的元素數量作為回送的第二個參數",
+        "array_size": "外加模組回傳的正確元素數量作為回送的第二個參數",
+        "final": "外加模組回傳正確的檔案清單作為回送的第二個參數"
       }
     },
     "TIME SERVER": {
       "fail": {
-        "connection": "Error connecting to localhost:{{port}}: {{{message}}}"
+        "connection": "連線localhost:{{port}}時產生錯誤: {{{message}}}"
       }
     },
     "HTTP FILE SERVER": {
       "fail": {
-        "no_createReadStream": "Used fs method other than fs.createReadStream(): {{{method}}}"
+        "no_createReadStream": "未使用 fs.createReadStream() 而使用 fs 方法: {{{method}}}"
       }
     }
   }

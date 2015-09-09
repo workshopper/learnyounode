@@ -1,17 +1,17 @@
-{yellow}{bold}在 {appname} 的练习中遇到困难了吗？{/bold}{/yellow}
+{yellow}{bold}在 {appname} 的練習中遇到困難了嗎？{/bold}{/yellow}
 
-  一群专家级别的小精灵助手正急切等待着帮你掌握 Node.js 的基础，前往
+  一群專家級的小精靈助手正等着協助您掌握 Node.js 的基礎，請前往
     https://github.com/nodeschool/discussions/issues
-  然后{bold}新建一个 Issue{/bold}，让我们知道你在哪里遇到了难题。
-  没什么有什么问题是{italic}愚蠢的{/italic}。
+  然後{bold}新建一個 Issue{/bold}，讓我們知道你在哪裡遇到了問題。
+  沒有甚麼問題是{italic}愚蠢的{/italic}。
 
-  如果你正在寻找一些关于 Node.js 的帮助，在 Freenode 上的 #Node.js IRC
-  频道是一个很不错的地方，可以找到很多人来帮助你。
-  同样，这里还有一个关于 Node.js 的 Google Group：
+  關於 Node.js 如果你正在尋找幫助，在 Freenode IRC 上的 #Node.js 
+  頻道是一個很不錯的地方，可以找到很多人来協助你。
+  同樣地，這裡還有一個 Node.js 的 Google 群組：
     https://groups.google.com/forum/#!forum/nodejs
 
-{yellow}{bold}发现了一个 {appname} 的 bug 或者想要贡献代码？{/bold}{/yellow}
+{yellow}{bold}發現了{appname} 的 bug 或者想要貢獻代碼？{/bold}{/yellow}
 
-  {appname} 的官方 git 仓库是:
+  {appname} 的官方 git 倉庫是:
     https://github.com/rvagg/learnyounode/
-  请随意提交一个 bug (或者更好的) 提交一个 Pull Request。
+  請隨意指出一個 bug (或者更進一步) 提出一個 Pull Request。
