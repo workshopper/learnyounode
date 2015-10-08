@@ -1,4 +1,4 @@
-Escreva um programa que imprime o texto "Olá Mundo" no console (stdout).
+Escreva um programa que imprime o texto "Olá, Mundo" no console (stdout).
 
 ----------------------------------------------------------------------
 ## Dicas
