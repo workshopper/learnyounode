@@ -1,4 +1,0 @@
-{yellow}{bold}learnyounode é trazido até você pelos seguintes hackers dedicados:{/bold}{/yellow}
-
-{bold}Nome                GitHub Username{/bold}
------------------------------------

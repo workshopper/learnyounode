@@ -1,9 +1,5 @@
 {
   "title": "ИЗУЧАЙТЕ NODE.JS!",
-  "subtitle": "\u001b[23mДля старта выберите задачу и нажмите \u001b[3mВвод\u001b[23m",
-  "menu": {
-    "credits": "ПРИМЕАНИЯ"
-  },
   "exercise": {
     "HELLO WORLD": "HELLO WORLD",
     "BABY STEPS": "BABY STEPS",

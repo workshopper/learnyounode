@@ -3,10 +3,6 @@ const learnyounode = require('workshopper-adventure')({
   , languages   : ['en', 'es', 'fr', 'ja', 'zh-cn', 'zh-tw', 'pt-br', 'ru', 'uk', 'vi', 'ko', 'nb-no']
   , header      : require('workshopper-adventure/default/header')
   , footer      : require('workshopper-adventure/default/footer')
-  , commands    : [ {
-        aliases : ['credits']
-      , handler : require('./credits')
-    } ]
 })
 
 learnyounode.addAll([

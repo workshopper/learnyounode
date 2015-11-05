@@ -1,6 +1,5 @@
 {
   "title": "學習 NODE.JS 贏得更多",
-  "subtitle": "\u001b[23m選擇一個題目，然後按下 \u001b[3mEnter\u001b[23m 開始嘗試！",
   "exercise": {
     "HELLO WORLD": "哈囉世界",
     "BABY STEPS": "第一步",
@@ -15,9 +14,6 @@
     "HTTP FILE SERVER": "HTTP 檔案伺服器",
     "HTTP UPPERCASERER": "HTTP 回傳大寫字體",
     "HTTP JSON API SERVER": "HTTP JSON API 伺服器"
-  },
-  "menu": {
-    "credits": "感謝"
   },
   "common": {
     "exercise": {

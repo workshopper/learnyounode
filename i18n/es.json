@@ -1,9 +1,5 @@
 {
   "title": "Aprendiendo NODE.JS!",
-  "subtitle": "\u001b[23mElije un ejercicio y presiona \u001b[3mEnter\u001b[23m para empezar",
-  "menu": {
-    "credits": "CREDITS"
-  },
   "exercise": {
     "HELLO WORLD": "HELLO WORLD",
     "BABY STEPS": "BABY STEPS",

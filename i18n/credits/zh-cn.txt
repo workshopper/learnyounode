@@ -1,4 +1,0 @@
-{yellow}{bold}learnyounode 的完成离不开以下列举的黑客们:{/bold}{/yellow}
-
-{bold}姓名                GitHub 用户名{/bold}
------------------------------------

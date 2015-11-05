@@ -1,6 +1,5 @@
 {
   "title": "教你玩转 Node.js，赢取更多机会",
-  "subtitle": "\u001b[23m选择一个题目，按 \u001b[3m回车\u001b[23m 开始",
   "exercise": {
     "HELLO WORLD": "你好，世界",
     "BABY STEPS": "婴儿学步",
@@ -15,9 +14,6 @@
     "HTTP FILE SERVER": "HTTP 文件服务器",
     "HTTP UPPERCASERER": "HTTP 大写转换器",
     "HTTP JSON API SERVER": "HTTP JSON API 服务器"
-  },
-  "menu": {
-    "credits": "鸣谢"
   },
   "common": {
     "exercise": {
