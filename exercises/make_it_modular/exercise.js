@@ -75,7 +75,10 @@ exercise.addVerifyProcessor(verify)
 exercise.addCleanup(function (mode, passed, callback) {
   // mode == 'run' || 'verify'
 
-  rimraf(testDir, callback)
+  rimraf(testDir, function () {
+    // Ignoring error.
+    callback()
+  })
 })
 
 
