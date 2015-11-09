@@ -1,4 +1,0 @@
-{yellow}{bold}learnyounode jest w Twoich rękach dzięki staraniom następujących hakerów:{/bold}{/yellow}
-
-{bold}Imię i Nazwisko     GitHub{/bold}
------------------------------------

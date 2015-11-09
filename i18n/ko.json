@@ -1,6 +1,5 @@
 {
   "title": "LEARN YOU THE NODE.JS FOR MUCH WIN!",
-  "subtitle": "\u001b[23m연습문제를 고르고 \u001b[3mEnter\u001b[23m로 시작하세요.",
   "exercise": {
     "HELLO WORLD": "핼로 월드",
     "BABY STEPS": "베이비 스텝",
@@ -15,9 +14,6 @@
     "HTTP FILE SERVER": "HTTP 파일 서버",
     "HTTP UPPERCASERER": "HTTP 대문자로 만드는 서버",
     "HTTP JSON API SERVER": "HTTP JSON API 서버"
-  },
-  "menu": {
-    "credits": "CREDITS"
   },
   "common": {
     "exercise": {

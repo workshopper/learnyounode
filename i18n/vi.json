@@ -1,6 +1,5 @@
 {
   "title": "CHO ĐỜI PHONG PHÚ HƠN VỚI NODE.JS!",
-  "subtitle": "\u001b[23mChọn một bài tập và ấn \u001b[3mEnter\u001b[23m để bắt đầu",
   "exercise": {
     "HELLO WORLD": "HELLO WORLD",
     "BABY STEPS": "BABY STEPS",
@@ -15,9 +14,6 @@
     "HTTP FILE SERVER": "HTTP FILE SERVER",
     "HTTP UPPERCASERER": "HTTP UPPERCASERER",
     "HTTP JSON API SERVER": "HTTP JSON API SERVER"
-  },
-  "menu": {
-    "credits": "Đóng góp"
   },
   "common": {
     "exercise": {
