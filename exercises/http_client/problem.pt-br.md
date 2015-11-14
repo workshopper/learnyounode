@@ -1,4 +1,4 @@
-Escreva um programa que realize uma requisição HTTP GET a uma URL fornecida por você como primeiro argumento na linha de comando. Escreva o conteúdo da String de **cada** evento "data" da resposta para em uma nova linha do console (stdout).
+Escreva um programa que realize uma requisição HTTP GET a uma URL fornecida por você como primeiro argumento na linha de comando. Escreva o conteúdo da String de **cada** evento "data" da resposta em uma nova linha do console (stdout).
 
 ----------------------------------------------------------------------
 ## DICAS
