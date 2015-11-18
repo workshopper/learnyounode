@@ -14,7 +14,7 @@ Estes quatro itens representam o *contrato* que seu módulo deve seguir:
 
 1. Exportar uma única função que leva os argumentos exatamente conforme descritos
 2. Chame o callback exatamente uma vez com um erro ou algum outro dado, conforme descrito
-3. Não mude mais nada, como por exemplo variávels globais ou o stdout
+3. Não mude mais nada, como por exemplo variáveis globais ou o stdout
 4. Lide com todos os erros que possam ocorrer e passe-os para o callback
 
 O benefício de ter um contrato é que seu módulo poderá ser usado por qualquer um que conheça esse contrato. Sendo assim seu módulo pode ser usado por qualquer outra pessoa que faça o curso learnyounode, ou até pelo verificador, e funcionar corretamente.
@@ -33,12 +33,12 @@ Ou você pode usar uma função nominal e atribuir, então, o nome.
 Para usar seu novo módulo no seu arquivo original de programa, use a chamada `require()` da mesma maneira que você usou `require('fs')` para carregar o módulo `fs`. A única diferença é que no caso de serem módulos locais, eles devem ter './' prefixado. Então se o nome do seu arquivo é meumodulo.js você teria algo como:
 
 ```js
-var mymodule = require('./meumodulo.js')
+var meumodulo = require('./meumodulo.js')
 ```
 
-O '.js' é opcioinal e você frequentemente vai reparar que ele foi omitido.
+O '.js' é opcional e você frequentemente vai reparar que ele foi omitido.
 
-Você agora tem o objeto `modulo.exports` no seu módulo atribuído à variável `meumodulo`. Como você está exportando uma única função, `meumodulo` é uma função que você pode chamar!
+Você agora tem o objeto `module.exports` no seu módulo atribuído à variável `meumodulo`. Como você está exportando uma única função, `meumodulo` é uma função que você pode chamar!
 
 Também tenha em mente que é comum checar por erros e fazer returns precoces dentro de funções callback:
 
