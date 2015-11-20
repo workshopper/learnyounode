@@ -17,7 +17,7 @@ function callback (request, response) { /* ... */ }
 
 Onde os dois argumentos são objetos que representam a requisição HTTP e a resposta correspondente para esta requisição. `request` é utilizado para buscar propriedades, tais como o cabeçalho e a consulta do pedido, enquanto `response` é utilizado para enviar dados para o cliente bem como o cabeçalho e o corpo.
 
-Ambos `request` and `response` são também Node streams!O que significa que podemos usar as abstrações de streaming para enviar e receber dados que se adéquam ao seu caso de uso. 
+Ambos `request` and `response` são também Node streams! O que significa que podemos usar as abstrações de streaming para enviar e receber dados que se adéquam ao seu caso de uso. 
 
 `http.createServer()` também retorna uma instância para seu `server`. Você deve chamar `server.listen(portNumber)` para iniciar uma escuta na porta específica.
 
@@ -34,6 +34,6 @@ server.listen(8000)
 A documentação do modulo `http` pode ser encontrada redirecionando seu navegador para:
   {rootdir:/node_apidoc/http.html}
 
-O núcleo do módulo `fs` também possui algumas APIs streaming para arquivos.Você precisa usar o método `fs.createReadStream()` para criar uma stream que representa o arquivo que você passa como argumento. O método retorna um objeto de stream que você pode usar `src.pipe(dst)` para fornecer os dados de `src` stream para o `dst` stream. Desta maneira, você pode conectar um filesystem stream com uma resposta HTTP stream.
+O núcleo do módulo `fs` também possui algumas APIs streaming para arquivos. Você precisa usar o método `fs.createReadStream()` para criar uma stream que representa o arquivo que você passa como argumento. O método retorna um objeto de stream que você pode usar `src.pipe(dst)` para fornecer os dados de `src` stream para o `dst` stream. Desta maneira, você pode conectar um filesystem stream com uma resposta HTTP stream.
 
 ----------------------------------------------------------------------

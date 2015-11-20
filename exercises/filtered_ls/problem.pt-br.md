@@ -2,7 +2,7 @@ Crie um programa que imprima uma lista de arquivos filtrados por suas extensões
  
 Por exemplo, se você receber 'txt' como segundo argumento, então você precisará criar um filtro para que a lista contenha apenas arquivos que **terminem com .txt**. Note que o segundo argumento _não irá_ vir precedido por um '.' (ponto).
  
-A lista de arquivos deve ser impressa no console, um arquivo por linha. Você **precisa**, obrigatóriamente, usar I/O assíncrono.
+A lista de arquivos deve ser impressa no console, um arquivo por linha. Você **precisa**, obrigatoriamente, usar I/O assíncrono.
 
 ----------------------------------------------------------------------
 ## DICAS

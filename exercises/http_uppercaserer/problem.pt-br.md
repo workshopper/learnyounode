@@ -7,7 +7,7 @@ Seu servidor deve "escutar" na porta provida a você pelo primeiro argumento par
 
 Ainda que você não esteja restrito ao uso das capacidades de streaming dos objetos `request` e `response`, será muito mais fácil se você decidir usá-las.
 
-Existe um grande número de pacotes diferentes no npm que você pode usar para *"transformar"* um streaming de dados enquando ele está sendo passado. Para esse exercício, o pacote `through2-map` oferece a API mais simples.
+Existe um grande número de pacotes diferentes no npm que você pode usar para *"transformar"* um streaming de dados enquanto ele está sendo passado. Para esse exercício, o pacote `through2-map` oferece a API mais simples.
 
 `through2-map` permite que você crie um *stream transformador* usando apenas uma única função que recebe um bloco de dados e retorna um outro bloco de dados. Ela é designada para funcionar como um `Array#map()`, só que para streams:
 

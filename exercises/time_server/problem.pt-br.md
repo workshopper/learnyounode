@@ -6,7 +6,7 @@ Seu servidor deve listar para conexões TCP na porta fornecida pelo primeiro arg
 "YYYY-MM-DD hh:mm"
 ```
 
-seguido por um caracter **newline** (nova linha). Mês, dia, hora e minuto devem ser *preenchidos com zero* para terem dois inteiros. Por exemplo:
+seguido por um carácter **newline** (nova linha). Mês, dia, hora e minuto devem ser *preenchidos com zero* para terem dois inteiros. Por exemplo:
 
 ```
 "2013-07-06 17:42"
@@ -17,7 +17,7 @@ seguido por um caracter **newline** (nova linha). Mês, dia, hora e minuto devem
 
 Para este exercício nós vamos criar um servidor TCP cru. Não há HTTP envolvido aqui então vamos precisar usar o módulo `net` do núcleo do Node que contém todas as funções de rede (networking) básicas.
 
-O módulo `net` tem método chamado `net.createServer()` que recebe uma função callback. Diferente da maiorira dos callbacks no Node, o callback usado por `createServer()` é chamado mais de uma vez. Toda conexão recebida por nosso servidor dispara outra chamada para o callback. A função callback tem a seguinte assinatura:
+O módulo `net` tem método chamado `net.createServer()` que recebe uma função callback. Diferente da maioria dos callbacks no Node, o callback usado por `createServer()` é chamado mais de uma vez. Toda conexão recebida por nosso servidor dispara outra chamada para o callback. A função callback tem a seguinte assinatura:
 
 ```js
 function callback (socket) { /* ... */ }
@@ -37,7 +37,7 @@ server.listen(8000)
 
 Lembre-se de usar o número da porta fornecida para você como primeiro argumento da linha de comando.
 
-O objeto `socket` contém muitos *meta-dados* em relação a conexão, mas isso é também um *Node duplex Stream*, em que isso pode ser ambos "lido de", ou "escrito em". Para este exercício nós vamos apenas escrever os dados e então fechar o socket.
+O objeto `socket` contém muitos *meta dados* em relação a conexão, mas isso é também um *Node duplex Stream*, em que isso pode ser ambos "lido de", ou "escrito em". Para este exercício nós vamos apenas escrever os dados e então fechar o socket.
 
 Use `socket.write(data)` para escrever dados para o socket e `socket.end()` para fechar o socket. Alternativamente, o método `.end()` também pode receber um objeto *data*, então você pode simplificar da seguinte forma: `socket.end(data)`.
 
