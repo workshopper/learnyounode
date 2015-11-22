@@ -7,7 +7,7 @@ A primeira linha que você vai escrever deve apenas ser um inteiro representando
 
 Existem duas abordagens para você resolver este problema:
 
-**1)** Coletar dados através de múltiplos eventos "data" e anexar os resultados antes de imprimí-los na saída. Use o evento "end" para determinar quando a stream (o fluxo) terminou e então você pode imprimir a saída.
+**1)** Coletar dados através de múltiplos eventos "data" e anexar os resultados antes de imprimi-los na saída. Use o evento "end" para determinar quando a stream (o fluxo) terminou e então você pode imprimir a saída.
 
 **2)** Use um pacote de terceiros para abstrair as dificuldades envolvidas em coletar uma stream inteira de dados. Dois pacotes diferentes fornecem uma API útil para resolver este problema (existem mais parecidos!): `bl` (Buffer List) e `concat-stream`; faça sua escolha!
 
@@ -20,7 +20,7 @@ Para instalar um pacote Node, use o Node Package Manager `npm`. Apenas digite:
 $ npm install bl
 ```
 
-E isso vai fazer o download e instalar a última versão do pacote dentro de um sub-diretório chamado `node_modules`. Qualquer pacote neste sub-diretório sob seu arquivo principal do programa poderá carregá-lo com a sintaxe `require` sem ser precedido por `./`:
+E isso vai fazer o download e instalar a última versão do pacote dentro de um subdiretório chamado `node_modules`. Qualquer pacote neste subdiretório sob seu arquivo principal do programa poderá carregá-lo com a sintaxe `require` sem ser precedido por `./`:
 
 ```js
 var bl = require('bl')

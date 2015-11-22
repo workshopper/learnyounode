@@ -1,6 +1,6 @@
 Este problema é o mesmo que o anterior, mas introduz o conceito de **módulos**. Você precisará criar dois arquivos para resolver este problema.
 
-Crie um programa que imprime uma lista de arquivos em um dado diretório, de modo que haja um filtro de acordo com a extensão dos arquivos. O primeiro argumento é o nome do diretório e o segundo argumento é a extensão pela qual filtrar. Imprima a lista de arquivos (um arquivo por linha) no console. Você **precisa**, obrigatóriamente, usar I/O assíncrono.
+Crie um programa que imprime uma lista de arquivos em um dado diretório, de modo que haja um filtro de acordo com a extensão dos arquivos. O primeiro argumento é o nome do diretório e o segundo argumento é a extensão pela qual filtrar. Imprima a lista de arquivos (um arquivo por linha) no console. Você **precisa**, obrigatoriamente, usar I/O assíncrono.
 
 Você deve escrever um arquivo *módulo* para fazer a maior parte do trabalho. O módulo deve *exportar* uma única função que leva **três** argumentos: o nome do diretório, a extensão do arquivo em uma string e uma função de callback, nessa ordem. O argumento contendo o nome da extensão do arquivo deve ser o mesmo que aquele passado para seu programa. Por exemplo: não transforme-o em uma expressão regular ou prefixe-o com "." ou faça qualquer coisa que não seja passá-lo para o seu módulo onde você vai poder fazer tudo que for necessário para o filtro funcionar.
 
@@ -22,7 +22,7 @@ O benefício de ter um contrato é que seu módulo poderá ser usado por qualque
 ----------------------------------------------------------------------
 ## DICAS
 
-Crie um novo módulo através da criação de um novo arquivo que contém apenas suas funções de ler e filtrar o diretório. Para definir uma *exportação de uma única função* você deverá designar sua função ao objeto `module.exports`, sobreescrevendo o que já está lá:
+Crie um novo módulo através da criação de um novo arquivo que contém apenas suas funções de ler e filtrar o diretório. Para definir uma *exportação de uma única função* você deverá designar sua função ao objeto `module.exports`, sobrescrevendo o que já está lá:
 
 ```js
 module.exports = function (args) { /* ... */ }
