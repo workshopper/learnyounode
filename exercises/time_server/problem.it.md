@@ -17,7 +17,7 @@ seguito da un carattere **nuova riga**. Mese, giorno, ora e minuto devono essere
 
 Per quest'esercizio creeremo un server di basso livello TCP. Non c'è alcun HTTP coinvolto qui quindi dobbiamo usare il modulo `net` di Node core che ha tutte le funzioni di base per le comunicazioni di rete.
 
-Il modulo `net` ha un metodo chiamato `net.createServer()` che riceve una funzione callback. Diversamebte da molte callback in Node, la callback usata da `createServer()` viene chiamata più di una volta. Ciascuna connessione ricevuta dal tuo server scatena un'altra chiamata alla callback. La funzione callback ha la firma:
+Il modulo `net` ha un metodo chiamato `net.createServer()` che riceve una funzione callback. Diversamente da molte callback in Node, la callback usata da `createServer()` viene chiamata più di una volta. Ciascuna connessione ricevuta dal tuo server scatena un'altra chiamata alla callback. La funzione callback ha la firma:
 
 ```js
 function callback (socket) { /* ... */ }

@@ -1,4 +1,4 @@
-Scrivi un programma che effettua una richiesta HTTP GET ad un URL fornito come primo argomento da riga di comando. Scrivi il contenuto di **ciascun** evento "data" della risposta come una stringa su una nuova riga della console (stdout).
+Scrivi un programma che effettui una richiesta HTTP GET ad un URL fornito come primo argomento da riga di comando. Scrivi il contenuto di **ciascun** evento "data" della risposta come una stringa su una nuova riga della console (stdout).
 
 ----------------------------------------------------------------------
 ## SUGGERIMENTI
@@ -16,7 +16,9 @@ Diversamente da altre funzioni callback, questa ha la firma:
 function callback (response) { /* ... */ }
 ```
 
-In cui l'oggetto `response` è un oggetto **Stream** di Node. Puoi trattare gli Stream di Node come oggetti che emettono eventi. The three events that are of most interest are: "data", "error" and "end". You listen to an event like so:
+In cui l'oggetto `response` è un oggetto **Stream** di Node. Puoi trattare gli Stream di Node come oggetti che emettono eventi.
+I tre eventi di maggiore interesse sono: "data", "error" ed "end".
+Puoi metterti in ascolto di un evento in questo modo:
 
 ```js
 response.on("data", function (data) { /* ... */ })

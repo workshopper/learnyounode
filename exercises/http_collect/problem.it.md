@@ -1,4 +1,4 @@
-Scrivi un programma che effettua una richiesta HTTP GET ad un URL fornito come primo argomento da riga di comando. Raccogli **tutti** i dati dal server (non soltanto il primo evento "data") e successivamente scrivi due righe sulla console (stdout).
+Scrivi un programma che effettui una richiesta HTTP GET ad un URL fornito come primo argomento da riga di comando. Raccogli **tutti** i dati dal server (non soltanto il primo evento "data") e successivamente scrivi due righe sulla console (stdout).
 
 La prima riga dovrà essere un numero intero che rappresenta il numero di caratteri ricevuti dal server. La seconda riga dovrà contenere la stringa completa di caratteri inviati dal server.
 
