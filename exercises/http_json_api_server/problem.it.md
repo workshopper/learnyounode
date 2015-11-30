@@ -1,4 +1,4 @@
-Scrivi un **server**  HTTP che serve dati JSON quando riceve una richiesta GET al percorso '/api/parsetime'. Aspettati una richiesta contenente una query string con una chiave 'iso' e un valore di tempo in formato ISO come valore.
+Scrivi un **server**  HTTP che serva dati JSON quando riceve una richiesta GET al percorso '/api/parsetime'. Aspettati una richiesta contenente una query string con una chiave 'iso' e un valore di tempo in formato ISO come valore.
 
 Ad esempio:
 
