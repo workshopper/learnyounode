@@ -1,4 +1,4 @@
-Scrivi un **server** HTTP che restituisce lo stesso file di testo per ciascuna richiesta ricevuta.
+Scrivi un **server** HTTP che restituisca lo stesso file di testo per ciascuna richiesta ricevuta.
 
 Il tuo server deve ascoltare sulla porta fornita come primo argomento al tuo programma.
 
@@ -31,7 +31,7 @@ var server = http.createServer(function (req, res) {
 server.listen(8000)
 ```
 
-La documetazione sul modulo `http` può essere ottenuta puntando il tuo browser all'indirizzo:
+La documentazione sul modulo `http` può essere ottenuta puntando il tuo browser all'indirizzo:
   {rootdir:/node_apidoc/http.html}
 
 Il modulo core `fs` possiede anche delle API streaming per i file. Dovrai usare il metodo `fs.createReadStream()` per creare uno stream che rappresenta il file che ti viene passato come argomento da riga di comando. Il metodo restituisce un oggetto stream sul quale puoi usare `src.pipe(dst)` per effettuare il pipe dei dati dallo stream `src` allo stream `dst`. In questo modo puoi connettere uno stream del file system con uno stream della risposta HTTP.

@@ -1,4 +1,4 @@
-Scrivi un programma che usa una singola operazione **sincrona** sul file system per leggere un file e stampare il numero di caratteri di nuova riga (\n) che contiene sulla console (stdout), in maniera simile all'esecuzione del comando `cat file | wc -l`.
+Scrivi un programma che usi una singola operazione **sincrona** sul file system per leggere un file e stampare il numero di caratteri di nuova riga (\n) che contiene sulla console (stdout), in maniera simile all'esecuzione del comando `cat file | wc -l`.
 
 Il percorso completo al file da leggere sarà fornito come il primo argomento da riga di comando (cioè process.argv[2]). Non c'è bisogno di creare da te un file di prova.
 

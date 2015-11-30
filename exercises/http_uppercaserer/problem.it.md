@@ -1,4 +1,4 @@
-Scrivi un **server** HTTP che riceve solo richieste POST e converte i caratteri nel corpo delle richieste POST in maiuscolo e li restituisce al client.
+Scrivi un **server** HTTP che riceva solo richieste POST e converta i caratteri nel corpo delle richieste POST in maiuscolo e li restituisce al client.
 
 Il tuo server deve ascoltare sulla porta fornita come primo argomento del tuo programma.
 
