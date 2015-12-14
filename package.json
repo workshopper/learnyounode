@@ -52,7 +52,6 @@
     "after": "~0.8.1",
     "bl": "~0.9.4",
     "boganipsum": "~0.1.0",
-    "chalk": "~0.5.1",
     "colors-tmpl": "~1.0.0",
     "combined-stream": "~0.0.7",
     "concat-stream": "~1.4.7",

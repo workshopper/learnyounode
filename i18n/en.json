@@ -22,11 +22,8 @@
         "loadError": "Error loading module file [{{path}}]: {{{message}}}",
         "mod": {
           "_base": "Your additional module file [{{path}}] {{{message}}}",
-          "no_export": "does not export a {{{method}}}. You must use the `module.exports = function () {}` pattern.",
-          "singleFunction": "single function",
-          "arguments": "exports a function that takes fewer than {{{three}}} arguments. You must accept a directory, a filter and a {{{callback}}}.",
-          "arguments_three": "three",
-          "arguments_callback": "callback",
+          "no_export": "does not export a **single function**. You must use the `module.exports = function () {}` pattern.",
+          "arguments": "exports a function that takes fewer than **three** arguments. You must accept a directory, a filter and a **callback**.",
           "missing_callback": "did not call the callback argument after an error from fs.readdir()",
           "missing_error": "does not appear to pass back an error received from `fs.readdir()`.\n  Use the following idiomatic Node.js pattern inside your callback to `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
           "callback_arguments": "did not return two arguments on the callback function (expected `null` and an Array of filenames)",

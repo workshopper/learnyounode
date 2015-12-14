@@ -2,7 +2,6 @@ const fs    = require('fs')
     , path  = require('path')
     , util  = require('util')
     , files = require('../filtered_ls/file-list')
-    , chalk = require('chalk')
 
 function validateModule (modFile, callback) {
   var exercise  = this
@@ -28,24 +27,21 @@ function validateModule (modFile, callback) {
   }
 
   function modFileError (txt) {
-    exercise.emit('fail', __('fail.mod._base', { path: path.basename(modFile), message: txt }))
-    callback (null, false)
+    exercise.emit('fail',  __('fail.mod._base', { path: path.basename(modFile), message: txt }))
+    callback(false)
   }
 
   //---- Check that our module file is `module.exports = function () {}`
 
   if (typeof mod != 'function')
-    return modFileError(__('fail.mod.no_export', { method: chalk.bold(__('fail.mod.singleFunction')) }))
+    return modFileError(__('fail.mod.no_export'))
 
   exercise.emit('pass', __('pass.singleFunction'))
 
   //---- Check that the function exported takes 3 arguments
 
   if (mod.length < 3) {
-    return modFileError(
-        __n('fail.mod.arguments', mod.length, { three: chalk.bold(__('fail.mod.arguments_three'))
-      , callback: chalk.bold(__('fail.mod.arguments_callback')) })
-    )
+    return modFileError(__n('fail.mod.arguments', mod.length))
   }
 
   exercise.emit('pass', __n('pass.arguments', mod.length))
@@ -58,7 +54,7 @@ function validateModule (modFile, callback) {
   }
 
   function noerr () {
-    modFileError(__('fail.mod.missing_error'))
+    return modFileError(__('fail.mod.missing_error'))
   }
 
   callbackUsed = false
