@@ -12,6 +12,8 @@ followed by a **newline** character. Month, day, hour and minute must be *zero-f
 "2013-07-06 17:42"
 ```
 
+After sending the string, close the connection.
+
 ----------------------------------------------------------------------
 ## HINTS
 
