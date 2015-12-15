@@ -54,6 +54,12 @@
         "connection": "Error connecting to localhost:{{port}}: {{{message}}}"
       }
     },
+    "HTTP UPPERCASERER": {
+      "fail": {
+        "method": "Allowed method other than POST",
+        "allow_post": "Returned 405 but did not Allow POST"
+      }
+    },
     "HTTP FILE SERVER": {
       "fail": {
         "no_createReadStream": "Used fs method other than fs.createReadStream(): {{{method}}}"

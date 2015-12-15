@@ -46,10 +46,43 @@ exercise.addProcessor(function (mode, callback) {
   })
 })
 
+// add a processor to check GET failure case only for 'verify' calls
+exercise.addVerifyProcessor(function (callback) {
+  setTimeout(checkOnlyPost.bind(this, callback) , 500)
+})
 
 // compare stdout of solution and submission
 exercise = comparestdout(exercise)
 
+// delayed for 500ms to wait for servers to start so we can start
+// playing with them
+function checkOnlyPost (callback) {
+    var exercise = this
+      , url = 'http://localhost:' + this.submissionPort
+      , verified = true
+
+    hyperquest.get(url, function (err, res) {
+      if (err) {
+        exercise.emit(
+            'fail'
+          , exercise.__('fail.connection', {address: url, message: err.message})
+        )
+        return callback(null, false)
+      }
+
+      if (res.statusCode !== 405) {
+        // 405 is Method Not Allowed
+        exercise.emit('fail', exercise.__('fail.method'))
+        verified = false;
+      } else if (res.headers["allow"] !== "POST") {
+        // 405 requres an appropriate Allow header
+        exercise.emit('fail', exercise.__('fail.allow_post'))
+        verified = false;
+      }
+
+      callback(null, verified)
+    })
+}
 
 // delayed for 500ms to wait for servers to start so we can start
 // playing with them
@@ -62,7 +95,6 @@ function query (mode) {
       , iv
       , url = 'http://localhost:' + port
 
-    //TODO: test GET requests for #fail
     input.pipe(hyperquest.post(url)
       .on('error', function (err) {
         exercise.emit(
