@@ -84,14 +84,18 @@ function query (mode) {
   function connect (port, stream) {
     //TODO: introduce verification of content-type:text/plain and statusCode=200
     var url = 'http://localhost:' + port
-    hyperquest.get(url)
+    var req = hyperquest.get(url)
       .on('error', function (err) {
         exercise.emit(
             'fail'
           , exercise.__('fail.connection', {address: url, message: err.message})
         )
       })
-      .pipe(stream)
+    req.pipe(stream)
+    setTimeout(function () {
+      req.destroy.bind(req)
+      stream.end()
+    }, 2000)
   }
 
   connect(this.submissionPort, this.submissionStdout)
