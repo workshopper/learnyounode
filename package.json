@@ -61,7 +61,7 @@
     "through": "~2.3.6",
     "through2": "~2.0.0",
     "through2-map": "~2.0.0",
-    "workshopper-adventure": "^4.4.0",
+    "workshopper-adventure": "^4.4.2",
     "workshopper-exercise": "~2.5.3",
     "workshopper-wrappedexec": "~0.1.1"
   },
