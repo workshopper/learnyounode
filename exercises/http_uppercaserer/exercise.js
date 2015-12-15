@@ -61,16 +61,22 @@ function query (mode) {
       , count  = 0
       , iv
       , url = 'http://localhost:' + port
+      , req
 
     //TODO: test GET requests for #fail
-    input.pipe(hyperquest.post(url)
+    req = input.pipe(hyperquest.post(url)
       .on('error', function (err) {
         exercise.emit(
             'fail'
           , exercise.__('fail.connection', {address: url, message: err.message})
         )
       }))
-      .pipe(stream)
+
+    req.pipe(stream)
+    setTimeout(function () {
+      stream.unpipe(req)
+      stream.end()
+    }, 5000)
 
     iv = setInterval(function () {
       input.write(words[count].trim() + '\n')

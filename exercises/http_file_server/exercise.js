@@ -93,9 +93,9 @@ function query (mode) {
       })
     req.pipe(stream)
     setTimeout(function () {
-      req.destroy.bind(req)
+      stream.unpipe(req)
       stream.end()
-    }, 2000)
+    }, 5000)
   }
 
   connect(this.submissionPort, this.submissionStdout)
