@@ -56,7 +56,10 @@
     },
     "HTTP FILE SERVER": {
       "fail": {
-        "no_createReadStream": "Used fs method other than fs.createReadStream(): {{{method}}}"
+        "no_createReadStream": "Used fs method other than fs.createReadStream(): {{{method}}}",
+        "status_code": "Status code of HTTP response was incorrect: {{{status}}}",
+        "missing_content_type": "`Content-Type` header was not found in the response",
+        "content_type": "`Content-Type` header was not `text/plain`: {{{header}}}"
       }
     }
   }

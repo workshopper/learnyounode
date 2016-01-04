@@ -17,6 +17,8 @@ function callback (request, response) { /* ... */ }
 
 Where the two arguments are objects representing the HTTP request and the corresponding response for this request. `request` is used to fetch properties, such as the header and query-string from the request while `response` is for sending data to the client, both headers and body.
 
+When sending the HTTP response, it is important to specify what kind of data you're sending back. This is declared in the 'Content-Type' header. For this exercise we'll be sending plain text, so the content type will be 'text/plain'. Look at `response.writeHead()` in the `http` module to learn how to do this.
+
 Both `request` and `response` are also Node streams! Which means that you can use the streaming abstractions to send and receive data if they suit your use-case.
 
 `http.createServer()` also returns an instance of your `server`. You must call `server.listen(portNumber)` to start listening on a particular port.
