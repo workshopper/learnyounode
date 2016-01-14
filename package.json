@@ -57,7 +57,7 @@
     "concat-stream": "~1.5.1",
     "duplexer": "~0.1.1",
     "hyperquest": "~1.2.0",
-    "rimraf": "~2.4.4",
+    "rimraf": "~2.5.0",
     "through": "~2.3.6",
     "through2": "~2.0.0",
     "through2-map": "~2.0.0",
