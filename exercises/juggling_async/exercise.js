@@ -49,6 +49,12 @@ function server (i, delay, callback) {
   }).listen(0, callback)
 }
 
+// used to randomize the delay on the 3 servers
+function getRandomInt(min, max)
+{
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 
 // set up the data file to be passed to the submission
 exercise.addSetup(function (mode, callback) {
@@ -70,9 +76,9 @@ exercise.addSetup(function (mode, callback) {
   }.bind(this))
 
   this.servers = [
-      server(0, 200, done)
-    , server(1, 0,   done)
-    , server(2, 100,  done)
+      server(0, getRandomInt(0, 200), done)
+    , server(1, getRandomInt(0, 200),   done)
+    , server(2, getRandomInt(0, 200),  done)
   ]
 
 })
