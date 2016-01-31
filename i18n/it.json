@@ -1,0 +1,81 @@
+{
+  "title": "IMPARA NODE.JS E STRAVINCI!",
+  "common": {
+    "exercise": {
+      "pass": {
+        "sync": "Usato un metodo sincrono: {{{method}}}",
+        "async": "Usato un metodo asincrono: {{{method}}}"
+      },
+      "fail": {
+        "sync": "Usato un metodo sincrono: {{{method}}}",
+        "async": "Usato un metodo asincrono: {{{method}}}",
+        "unused": "Usato un metodo asincrono dal modulo `fs`.",
+        "unexpected_error": "Errore inatteso dal server HTTP: {{{message}}}",
+        "connection": "Errore durante la connessione a {{{address}}}: {{{message}}}"
+      }
+    }
+  },
+  "exercise": {
+    "HELLO WORLD": "CIAO MONDO",
+    "BABY STEPS": "PRIMI PASSI",
+    "MY FIRST I/O!": "IL MIO PRIMO I/O!",
+    "MY FIRST ASYNC I/O!": "IL MIO PRIMO I/O ASINCRONO!",
+    "FILTERED LS": "LS FILTRATO",
+    "MAKE IT MODULAR": "MODULARIZZALO",
+    "HTTP CLIENT": "CLIENT HTTP",
+    "HTTP COLLECT": "COLLETTORE HTTP",
+    "JUGGLING ASYNC": "GIOCOLIERE ASINCRONO",
+    "TIME SERVER": "SERVER DEL TEMPO",
+    "HTTP FILE SERVER": "SERVER DI FILE HTTP",
+    "HTTP UPPERCASERER": "MAIUSCOLATORE HTTP",
+    "HTTP JSON API SERVER": "SERVER HTTP CON API JSON"
+  },
+  "exercises": {
+    "MAKE IT MODULAR": {
+      "fail": {
+        "missing_module": "Did not use an additional module file, you must require() a module to help solve this exercise",
+        "loadError": "Error loading module file [{{path}}]: {{{message}}}",
+        "mod": {
+          "_base": "Your additional module file [{{path}}] {{{message}}}",
+          "no_export": "does not export a {{{method}}}. You must use the `module.exports = function () {}` pattern.",
+          "singleFunction": "single function",
+          "arguments": "exports a function that takes fewer than {{{three}}} arguments. You must accept a directory, a filter and a {{{callback}}}.",
+          "arguments_three": "three",
+          "arguments_callback": "callback",
+          "missing_callback": "did not call the callback argument after an error from fs.readdir()",
+          "missing_error": "does not appear to pass back an error received from `fs.readdir()`.\n  Use the following idiomatic Node.js pattern inside your callback to `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
+          "callback_arguments": "did not return two arguments on the callback function (expected `null` and an Array of filenames)",
+          "dont_use_dot": "appears to be expecting a '.'-prefixed extension, it should receive the second command-line argument without the added '.'",
+          "array_wrong_size": "did not return an Array with the correct number of elements as the second argument of the callback",
+          "dotExt": "may be matching \"ext\" instead of \".ext\"",
+          "array_comparison": "did not return the correct list of files as the second argument of the callback",
+          "missing_array_argument": "did not return an Array object as the second argument of the callback",
+          "callback_error": "returned an error on its callback:\n\t{{{error}}}",
+          "timeout": "did not call the callback argument",
+          "unexpected": "threw an error:\n\t{{{error}}}"
+        }
+      },
+      "pass": {
+        "singleFunction": "Additional module file exports a single function",
+        "arguments": "Additional module file exports a function that takes {{{count}}} arguments",
+        "error": "Additional module file handles errors properly",
+        "callback": "Additional module file handles callback argument",
+        "callback_arguments": "Additional module file returned two arguments on the callback function",
+        "array_argument": "Additional module file returned correct number of elements as the second argument of the callback",
+        "dont_use_dot": "Additional module file correctly handles '.'-prefixed extension",
+        "array_size": "Additional module file returned correct number of elements as the second argument of the callback",
+        "final": "Additional module file returned correct list of files as the second argument of the callback"
+      }
+    },
+    "TIME SERVER": {
+      "fail": {
+        "connection": "Errore durante la connessione a localhost:{{port}}: {{{message}}}"
+      }
+    },
+    "HTTP FILE SERVER": {
+      "fail": {
+        "no_createReadStream": "Usato un metodo fs diverso da fs.createReadStream(): {{{method}}}"
+      }
+    }
+  }
+}
