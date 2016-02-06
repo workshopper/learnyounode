@@ -4,7 +4,7 @@
     "exercise": {
       "pass": {
         "sync": "Recours à une méthode synchrone : {{{method}}}",
-        "async": "Recourse à une méthode asynchrone : {{{method}}}"
+        "async": "Recours à une méthode asynchrone : {{{method}}}"
       },
       "fail": {
         "sync": "Recours à une méthode synchrone : {{{method}}}",
