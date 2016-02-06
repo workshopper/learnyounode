@@ -1,6 +1,6 @@
 {
   "name": "learnyounode",
-  "version": "2.7.1",
+  "version": "3.4.0",
   "description": "Learn You The Node.js For Much Win! An intro to Node.js via a set of self-guided workshops.",
   "author": "Rod Vagg <rod@vagg.org> (https://github.com/rvagg)",
   "contributors": [
@@ -12,40 +12,69 @@
     "Dan Flettre <fletd01@yahoo.com> (https://github.com/Flet)",
     "Martin Heidegger <martin.heidegger@gmail.com> (https://github.com/martinheidegger)",
     "Fred Chien <cfsghost@gmail.com> (https://github.com/cfsghost)",
-    "雨蒼(Billy) <billy3321@gmail.com> (https://github.com/billy3321)",
+    "雨蒼 - Billy <billy3321@gmail.com> (https://github.com/billy3321)",
     "Leigh Zhu <i@zhuli.me> (https://github.com/lisposter)",
     "Toshiharu Harada <haradats@gmail.com> (https://github.com/haradats)",
     "Lucas Fernandes da Costa <fernandesdacostalucas@gmail.com> (https://github.com/lucasfcosta)",
     "Eric Douglas <eric.douglas.mail@gmail.com> (https://github.com/ericdouglas)",
     "Alejandro Oviedo <alejandro.oviedo.g@gmail.com> (https://github.com/a0viedo)",
     "Leonardo Nascimento <leo386386@gmail.com> (https://github.com/leonardo386)",
-    "Christophe Porteneuve <christophe@delicious-insights.com> (https://www.js-attitude.fr/node-js/)"
+    "Christophe Porteneuve <christophe@delicious-insights.com> (https://github.com/tdd)",
+    "Brynn Bateman (https://github.com/brynnb)",
+    "Chris Contolini <chris@contolini.com> (https://github.com/contolini)",
+    "Jeff Kile <hello@jeffkile.com> (https://github.com/jeffkile)",
+    "Joel Kemp <joel@mrjoelkemp.com> (https://github.com/mrjoelkemp)",
+    "Jonathan Klein (https://github.com/jklein)",
+    "Justin Noel (https://github.com/calendee)",
+    "Oli Evans <oli@zilla.org.uk> (https://github.com/olizilla)",
+    "atomizer <danila.gerasimov@gmail.com> (https://github.com/atomizer)",
+    "Yusup Abdullaev <nico.franza@gmail.com> (https://github.com/franza)",
+    "Nazar Gargol <nazargargol@gmail.com> (https://github.com/gargol)",
+    "Takashi Fujita (https://github.com/tgfjt)",
+    "Ryuta Nakashima <atuyl.jp@gmail.com> (https://github.com/AtuyL)",
+    "Leigh Zhu <i@zhuli.me> (https://github.com/lisposter)",
+    "Eric Douglas <eric.douglas.mail@gmail.com> (https://github.com/ericdouglas)",
+    "Do Minh Hai (https://github.com/dominhhai)",
+    "Phung Van Tu <tuphungvan@gmail.com> (https://github.com/minatu2d)",
+    "Shim (https://github.com/marocchino)",
+    "Chayoung You <yous@yous.be> (https://github.com/yous)",
+    "Korneliusz Caputa <helluinster@gmail.com> (https://github.com/elkorn)",
+    "Espen Dalløkken (https://github.com/leftieFriele)",
+    "Thomas Torp (https://github.com/torsph)",
+    "Phillip Johnsen (https://github.com/hillipj)",
+    "Claudio Procida <claudio.procida@gmail.com> (https://github.com/claudiopro)"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/rvagg/learnyounode.git"
+    "url": "https://github.com/workshopper/learnyounode.git"
   },
   "license": "MIT",
   "dependencies": {
     "after": "~0.8.1",
-    "bl": "~0.9.4",
+    "bl": "~1.0.0",
     "boganipsum": "~0.1.0",
-    "chalk": "~0.5.1",
     "colors-tmpl": "~1.0.0",
-    "combined-stream": "~0.0.7",
-    "concat-stream": "~1.4.7",
+    "combined-stream": "~1.0.5",
+    "concat-stream": "~1.5.1",
     "duplexer": "~0.1.1",
-    "hyperquest": "~1.0.1",
-    "rimraf": "~2.2.8",
+    "hyperquest": "~1.2.0",
+    "rimraf": "~2.5.1",
     "through": "~2.3.6",
-    "through2": "~0.6.3",
-    "through2-map": "~1.4.0",
-    "workshopper": "~2.7.0",
-    "workshopper-exercise": "~2.4.0",
+    "through2": "~2.0.0",
+    "through2-map": "~2.0.0",
+    "workshopper-adventure": "^4.4.5",
+    "workshopper-exercise": "^2.6.0",
     "workshopper-wrappedexec": "~0.1.1"
   },
-  "bin": {
-    "learnyounode": "./learnyounode.js"
+  "devDependencies": {
+    "workshopper-adventure-test": "~1.0.1"
   },
+  "scripts": {
+    "test": "workshopper-adventure-test"
+  },
+  "bin": {
+    "learnyounode": "./bin/learnyounode"
+  },
+  "main": "./learnyounode.js",
   "preferGlobal": true
 }

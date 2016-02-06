@@ -1,4 +1,4 @@
-Escreva um programa que realize uma requisição HTTP GET a uma URL fornecida por você como primeiro argumento na linha de comando. Escreva o conteúdo da String de **cada** evento "data" da resposta para em uma nova linha do console (stdout).
+Escreva um programa que realize uma requisição HTTP GET a uma URL fornecida por você como primeiro argumento na linha de comando. Escreva o conteúdo da String de **cada** evento "data" da resposta para uma nova linha do console (stdout).
 
 ----------------------------------------------------------------------
 ## DICAS
@@ -10,7 +10,7 @@ Documentação do módulo `http` pode ser encontrada apontando seu navegador par
 
 O método `http.get()` é um atalho para simples requisições GET, use-o para simplificar sua solução. O primeiro argumento para `http.get()` pode ser a URL que você quer fazer o GET, fornecendo um callback como segundo argumento.
 
-Diferente de outras funções callback. esta tem a assinatura:
+Diferente de outras funções callback, esta tem a assinatura:
 
 ```js
 function callback (response) { /* ... */ }

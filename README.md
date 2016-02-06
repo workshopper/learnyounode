@@ -1,5 +1,5 @@
 # Learn You The Node.js For Much Win!
-
+[![Build Status](https://travis-ci.org/workshopper/learnyounode.svg?branch=master)](https://travis-ci.org/workshopper/learnyounode)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nodeschool/discussions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 **An intro to Node.js via a set of self-guided workshops.**
@@ -39,7 +39,7 @@ Once you have finished <b><code>learnyounode</code></b>, graduate to <b><code>[s
 <tr><th align="left">Do Minh Hai</th><td><a href="https://github.com/dominhhai">GitHub/dominhhai</a></td><td><a href="http://twitter.com/minhhai3b">Twitter/@minhhai3b</a></td></tr>
 <tr><th align="left">Phung Van Tu</th><td><a href="https://github.com/minatu2d">GitHub/minatu2d</a></td><td><a href="http://twitter.com/minatu2d">Twitter/@minatu2d</a></td></tr>
 <tr><th align="left">Shim</th><td><a href="https://github.com/marocchino">GitHub/marocchino</a></td><td><a href="http://twitter.com/marocchino">Twitter/@marocchino</a></td></tr>
-<tr><th align="left">ChaYoung You</th><td><a href="https://github.com/yous">GitHub/yous</a></td><td><a href="http://twitter.com/_Yous">Twitter/@_Yous</a></td></tr>
+<tr><th align="left">Chayoung You</th><td><a href="https://github.com/yous">GitHub/yous</a></td><td><a href="http://twitter.com/_Yous">Twitter/@_Yous</a></td></tr>
 <tr><th align="left">Espen Dalløkken</th><td><a href="https://github.com/leftieFriele">GitHub/leftieFriele</a></td><td><a href="http://twitter.com/leftieFriele">Twitter/leftieFriele</a></td></tr>
 </tbody></table>
 

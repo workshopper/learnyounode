@@ -1,9 +1,5 @@
 {
   "title": "NAUCZ SIĘ NOŁDÓW KU WIELKIEMU ZWYCIĘSTWU!",
-  "subtitle": "\u001b[23mWybierz ćwiczenie i wciśnij \u001b[3mEnter\u001b[23m aby rozpocząć",
-  "menu": {
-    "credits": "AUTORZY"
-  },
   "common": {
     "exercise": {
       "pass": {
