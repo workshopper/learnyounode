@@ -41,6 +41,24 @@ function writeWords(i, delay, res) {
   }, delay)
 }
 
+//shuffle an array of elements in JavaScript to randomize the range.
+// taken from http://stackoverflow.com/a/6274398/962452
+function shuffle(array) {
+    let counter = array.length;
+    // While there are elements in the array
+    while (counter > 0) {
+        // Pick a random index
+        let index = Math.floor(Math.random() * counter);
+        // Decrease counter by 1
+        counter--;
+        // And swap the last element with it
+        let temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
+    return array;
+}
+
 
 // start a server to print `words[i]` after `delay`
 function server (i, delay, callback) {
@@ -69,10 +87,16 @@ exercise.addSetup(function (mode, callback) {
     callback()
   }.bind(this))
 
+  var times = [];
+  times.push(1 +  Math.random() * 100);
+  times.push(times[0] + 100 + Math.random() * 100);
+  times.push(times[1] + 100 + Math.random() * 100);
+  times = shuffle(times);
+
   this.servers = [
-      server(0, 200, done)
-    , server(1, 0,   done)
-    , server(2, 100,  done)
+      server(0, times[0], done)
+    , server(1, times[1],   done)
+    , server(2, times[2],  done)
   ]
 
 })
