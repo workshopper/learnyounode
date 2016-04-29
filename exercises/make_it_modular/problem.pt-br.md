@@ -30,15 +30,15 @@ module.exports = function (args) { /* ... */ }
 
 Ou você pode usar uma função nominal e atribuir, então, o nome.
 
-Para usar seu novo módulo no seu arquivo original de programa, use a chamada `require()` da mesma maneira que você usou `require('fs')` para carregar o módulo `fs`. A única diferença é que no caso de serem módulos locais, eles devem ter './' prefixado. Então se o nome do seu arquivo é meumodulo.js você teria algo como:
+Para usar seu novo módulo no seu arquivo original de programa, use a chamada `require()` da mesma maneira que você usou `require('fs')` para carregar o módulo `fs`. A única diferença é que no caso de serem módulos locais, eles devem ter './' prefixado. Então se o nome do seu arquivo é mymodule.js você teria algo como:
 
 ```js
-var meumodulo = require('./meumodulo.js')
+var mymodule = require('./mymodule.js')
 ```
 
 O '.js' é opcional e você frequentemente vai reparar que ele foi omitido.
 
-Você agora tem o objeto `module.exports` no seu módulo atribuído à variável `meumodulo`. Como você está exportando uma única função, `meumodulo` é uma função que você pode chamar!
+Você agora tem o objeto `module.exports` no seu módulo atribuído à variável `mymodule`. Como você está exportando uma única função, `mymodule` é uma função que você pode chamar!
 
 Também tenha em mente que é comum checar por erros e fazer returns precoces dentro de funções callback:
 

@@ -33,7 +33,7 @@ Se você não tem uma conexão com a internet, simplesmente crie um diretório `
   {rootdir:/node_modules/bl}
   {rootdir:/node_modules/concat-stream}
 
-Ambos `bl` e `concat-stream` pode ter uma stream *piped* (canalizada) dentro deles e então vão coletar os dados para você. Uma vez que a stream terminou, um callback vai ser disparado com os dados:
+Ambos `bl` e `concat-stream` podem ter uma stream *piped* (canalizada) dentro deles e então vão coletar os dados para você. Uma vez que a stream terminou, um callback vai ser disparado com os dados:
 
 ```js
 response.pipe(bl(function (err, data) { /* ... */ }))

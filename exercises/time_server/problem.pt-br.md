@@ -1,6 +1,6 @@
 Escreva um **Servidor de Tempo TCP**!
 
-Seu servidor deve listar para conexões TCP na porta fornecida pelo primeiro argumento de seu programa. Para cada conexão você deve escrever a data atual e o hora (em 24h) no formato:
+Seu servidor deve escutar por conexões TCP na porta fornecida pelo primeiro argumento de seu programa. Para cada conexão você deve escrever a data atual e o hora (em 24h) no formato:
 
 ```
 "YYYY-MM-DD hh:mm"
@@ -17,7 +17,7 @@ seguido por um carácter **newline** (nova linha). Mês, dia, hora e minuto deve
 
 Para este exercício nós vamos criar um servidor TCP cru. Não há HTTP envolvido aqui então vamos precisar usar o módulo `net` do núcleo do Node que contém todas as funções de rede (networking) básicas.
 
-O módulo `net` tem método chamado `net.createServer()` que recebe uma função callback. Diferente da maioria dos callbacks no Node, o callback usado por `createServer()` é chamado mais de uma vez. Toda conexão recebida por nosso servidor dispara outra chamada para o callback. A função callback tem a seguinte assinatura:
+O módulo `net` tem um método chamado `net.createServer()` que recebe uma função callback. Diferente da maiorira dos callbacks no Node, o callback usado por `createServer()` é chamado mais de uma vez. Toda conexão recebida por nosso servidor dispara outra chamada para o callback. A função callback tem a seguinte assinatura:
 
 ```js
 function callback (socket) { /* ... */ }

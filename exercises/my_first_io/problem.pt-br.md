@@ -13,7 +13,7 @@ var fs = require('fs')
 
 Agora você tem o módulo `fs` completo disponível em uma variável chamada `fs`.
 
-Todas os métodos de sistema de arquivos síncronas (ou bloqueantes) no módulo `fs` terminam com 'Sync'. Para ler um arquivo, você vai precisar usar `fs.readFileSync('caminho/do/arquivo')`. Esse método irá retornar um objeto `Buffer` contendo o conteúdo completo do arquivo.
+Todos os métodos de sistema de arquivos síncronos (ou bloqueantes) no módulo `fs` terminam com 'Sync'. Para ler um arquivo, você vai precisar usar `fs.readFileSync('caminho/do/arquivo')`. Esse método irá retornar um objeto `Buffer` contendo o conteúdo completo do arquivo.
 
 A documentação do módulo `fs` pode ser encontrada apontando seu navegador para esse endereço:
   {rootdir:/node_apidoc/fs.html}
