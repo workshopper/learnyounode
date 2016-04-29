@@ -43,7 +43,7 @@
         "error": "Additional module file handles errors properly",
         "callback": "Additional module file handles callback argument",
         "callback_arguments": "Additional module file returned two arguments on the callback function",
-        "array_argument": "Additional module file returned correct number of elements as the second argument of the callback",
+        "array_argument": "Additional module file returned an Array as the second argument of the callback",
         "dont_use_dot": "Additional module file correctly handles '.'-prefixed extension",
         "array_size": "Additional module file returned correct number of elements as the second argument of the callback",
         "final": "Additional module file returned correct list of files as the second argument of the callback"
