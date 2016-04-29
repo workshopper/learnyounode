@@ -11,6 +11,7 @@
   1. Install [Node.js](http://nodejs.org/)
   2. Run `sudo npm install learnyounode -g`
   3. Run `learnyounode`
+  	3.1 (Ubuntu users) In case step 3 fails, run `sudo apt-get install nodejs-legacy`
   4. **.. profit!**
 
 <b><code>learnyounode</code></b> will run through a series of Node.js workshops. Starting at a basic *"HELLO WORLD"* and moving on to more advanced exercises about dealing with synchronous & asynchronous I/O, filesystem operations, TCP and HTTP networking, events and streams.
