@@ -10,7 +10,7 @@ var fs            = require('fs')
   , rimraf        = require('rimraf')
   , files         = require('./file-list')
 
-  , testDir       = path.join(os.tmpDir(), '_learnyounode_' + process.pid)
+  , testDir       = path.join(os.tmpdir(), '_learnyounode_' + process.pid)
 
 
 // checks that the submission file actually exists

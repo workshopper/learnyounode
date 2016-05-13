@@ -11,7 +11,7 @@ var fs            = require('fs')
   , verify        = require('./verify')
   , files         = require('../filtered_ls/file-list')
 
-  , testDir       = path.join(os.tmpDir(), '_learnyounode_' + process.pid)
+  , testDir       = path.join(os.tmpdir(), '_learnyounode_' + process.pid)
 
 
 // checks that the submission file actually exists
