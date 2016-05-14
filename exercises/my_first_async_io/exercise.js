@@ -9,7 +9,7 @@ var fs            = require('fs')
   , wrappedexec   = require('workshopper-wrappedexec')
   , boganipsum    = require('boganipsum')
 
-  , testFile      = path.join(os.tmpDir(), '_learnyounode_' + process.pid + '.txt')
+  , testFile      = path.join(os.tmpdir(), '_learnyounode_' + process.pid + '.txt')
 
 
 // checks that the submission file actually exists

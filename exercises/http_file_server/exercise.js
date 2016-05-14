@@ -10,7 +10,7 @@ var fs            = require('fs')
   , comparestdout = require('workshopper-exercise/comparestdout')
   , wrappedexec   = require('workshopper-wrappedexec')
   , rndtxt        = require('boganipsum')({ paragraphs: 1, sentenceMax: 1 }) + '\n'
-  , testFile      = path.join(os.tmpDir(), '_learnyounode_' + process.pid + '.txt')
+  , testFile      = path.join(os.tmpdir(), '_learnyounode_' + process.pid + '.txt')
   , rndport       = require('../../lib/rndport')
 
 
