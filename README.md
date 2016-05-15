@@ -4,6 +4,10 @@
 
 **An intro to Node.js via a set of self-guided workshops.**
 
+**What is Node.js?**
+Node.js is an open-source, cross-platform runtime environment for developing server-side Web applications.
+Many of its basic modules are written in JavaScript, and developers can write new modules in JavaScript.
+
 [![NPM](https://nodei.co/npm/learnyounode.png?downloads=true&&downloadRank=true&stars=true)](https://nodei.co/npm/learnyounode/) [![NPM](https://nodei.co/npm-dl/learnyounode.png?months=3&height=3)](https://nodei.co/npm/learnyounode/)
 
 ![Learn You The Node.js For Much Win!](https://raw.github.com/rvagg/learnyounode/master/learnyounode.png)
