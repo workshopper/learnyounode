@@ -28,7 +28,7 @@ function validateModule (modFile, callback) {
 
   function modFileError (txt) {
     exercise.emit('fail',  __('fail.mod._base', { path: path.basename(modFile), message: txt }))
-    callback(false)
+    callback(null, false)
   }
 
   //---- Check that our module file is `module.exports = function () {}`
