@@ -7,7 +7,7 @@ var ext = '.' + process.argv[3]
 fs.readdir(folder, function (err, files) {
   if (err) return console.error(err)
   files.forEach(function(file) {
-      if (path.extname(file) === ext) {
+      if (path.extname(file).slice(1) === ext) {
           console.log(file)
       }
   })
