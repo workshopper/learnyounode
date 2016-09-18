@@ -1,0 +1,15 @@
+{
+  "name": "http_client",
+  "version": "1.0.0",
+  "description": "WLjJsJa_http_client fot GETs",
+  "main": "WLjJsJa_http_client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cesargafer/learnyounode/blob/WLjJsJa_learnyounode/exercises/http_client/"
+  },
+  "author": "cesargafer",
+  "license": "ISC"
+}
