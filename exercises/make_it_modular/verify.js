@@ -46,11 +46,15 @@ function validateModule (modFile, callback) {
 
   exercise.emit('pass', __n('pass.arguments', mod.length))
 
-  //---- Mock `fs.readdir` and check that an error bubbles back up through the cb 
+  //---- Mock `fs.readdir` and check that an error bubbles back up through the cb
 
   fs.$readdir = fs.readdir
-  fs.readdir = function (dir, callback) {
-    callback(error)
+  fs.readdir = function (dir, encodingOrCallback, callback) {
+    if (typeof callback === 'function') {
+      callback(error)
+    } else if (typeof encodingOrCallback === 'function') {
+      encodingOrCallback(error)
+    }
   }
 
   function noerr () {
