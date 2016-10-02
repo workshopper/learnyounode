@@ -74,10 +74,12 @@
     "workshopper-wrappedexec": "~0.1.1"
   },
   "devDependencies": {
+    "standard": "^8.1.0",
     "workshopper-adventure-test": "^1.0.4"
   },
   "scripts": {
-    "test": "workshopper-adventure-test"
+    "lint": "standard",
+    "test": "standard && workshopper-adventure-test"
   },
   "bin": {
     "learnyounode": "./bin/learnyounode"

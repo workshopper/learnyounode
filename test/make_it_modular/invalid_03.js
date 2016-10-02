@@ -1,2 +1,2 @@
 // Triggers: fail.mod.arguments
-require("./module_invalid_02")
+require('./module_invalid_02')

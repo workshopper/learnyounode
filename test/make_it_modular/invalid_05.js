@@ -1,2 +1,2 @@
 // Triggers: fail.loadError
-require("./module_invalid_04")
+require('./module_invalid_04')

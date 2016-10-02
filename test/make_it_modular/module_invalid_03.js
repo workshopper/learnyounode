@@ -1,2 +1,1 @@
-module.exports = function (directory, filter, callback) {
-}
+module.exports = function (directory, filter, callback) {}

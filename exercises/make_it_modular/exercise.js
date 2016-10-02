@@ -1,18 +1,17 @@
-var fs            = require('fs')
-  , path          = require('path')
-  , os            = require('os')
-  , exercise      = require('workshopper-exercise')()
-  , filecheck     = require('workshopper-exercise/filecheck')
-  , execute       = require('workshopper-exercise/execute')
-  , comparestdout = require('workshopper-exercise/comparestdout')
-  , wrappedexec   = require('workshopper-wrappedexec')
-  , after         = require('after')
-  , rimraf        = require('rimraf')
-  , verify        = require('./verify')
-  , files         = require('../filtered_ls/file-list')
+var fs = require('fs')
+var path = require('path')
+var os = require('os')
+var exercise = require('workshopper-exercise')()
+var filecheck = require('workshopper-exercise/filecheck')
+var execute = require('workshopper-exercise/execute')
+var comparestdout = require('workshopper-exercise/comparestdout')
+var wrappedexec = require('workshopper-wrappedexec')
+var after = require('after')
+var rimraf = require('rimraf')
+var verify = require('./verify')
+var files = require('../filtered_ls/file-list')
 
-  , testDir       = path.join(os.tmpdir(), '_learnyounode_' + process.pid)
-
+var testDir = path.join(os.tmpdir(), '_learnyounode_' + process.pid)
 
 // checks that the submission file actually exists
 exercise = filecheck(exercise)
@@ -32,7 +31,6 @@ exercise = wrappedexec(exercise)
 exercise.wrapModule(require.resolve('../my_first_io/wrap'))
 exercise.wrapModule(require.resolve('./wrap-requires'))
 
-
 // set up the data file to be passed to the submission
 exercise.addSetup(function (mode, callback) {
   // mode == 'run' || 'verify'
@@ -50,14 +48,15 @@ exercise.addSetup(function (mode, callback) {
   this.solutionArgs.unshift(testDir)
 
   fs.mkdir(testDir, function (err) {
-    if (err)
+    if (err) {
       return callback(err)
+    }
 
     var done = after(files.length, callback)
 
     files.forEach(function (f) {
       fs.writeFile(
-          path.join(testDir, f)
+        path.join(testDir, f)
         , 'nothing to see here'
         , 'utf8'
         , done
@@ -66,10 +65,8 @@ exercise.addSetup(function (mode, callback) {
   })
 })
 
-
 // add a processor only for 'verify' calls
 exercise.addVerifyProcessor(verify)
-
 
 // cleanup for both run and verify
 exercise.addCleanup(function (mode, passed, callback) {
@@ -80,6 +77,5 @@ exercise.addCleanup(function (mode, passed, callback) {
     callback()
   })
 })
-
 
 module.exports = exercise

@@ -1,2 +1,2 @@
 // Triggers: fail.no_export
-require("./module_invalid_01")
+require('./module_invalid_01')

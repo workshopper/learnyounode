@@ -1,18 +1,18 @@
-const fs    = require('fs')
-    , path  = require('path')
-    , util  = require('util')
-    , files = require('../filtered_ls/file-list')
+var fs = require('fs')
+var path = require('path')
+var util = require('util')
+var files = require('../filtered_ls/file-list')
 
 function validateModule (modFile, callback) {
-  var exercise  = this
-    , __        = this.__
-    , __n       = this.__n
-    , dir       = this._testDir
-    , mod
-    , error     = new Error('testing')
-    , returned  = false
-    , _callback = callback
-    , callbackUsed
+  var exercise = this
+  var __ = this.__
+  var __n = this.__n
+  var dir = this._testDir
+  var mod
+  var error = new Error('testing')
+  var returned = false
+  var _callback = callback
+  var callbackUsed
 
   try {
     mod = require(modFile)
@@ -27,18 +27,19 @@ function validateModule (modFile, callback) {
   }
 
   function modFileError (txt) {
-    exercise.emit('fail',  __('fail.mod._base', { path: path.basename(modFile), message: txt }))
+    exercise.emit('fail', __('fail.mod._base', { path: path.basename(modFile), message: txt }))
     callback(null, false)
   }
 
-  //---- Check that our module file is `module.exports = function () {}`
+  // ---- Check that our module file is `module.exports = function () {}`
 
-  if (typeof mod != 'function')
+  if (typeof mod !== 'function') {
     return modFileError(__('fail.mod.no_export'))
+  }
 
   exercise.emit('pass', __('pass.singleFunction'))
 
-  //---- Check that the function exported takes 3 arguments
+  // ---- Check that the function exported takes 3 arguments
 
   if (mod.length < 3) {
     return modFileError(__n('fail.mod.arguments', mod.length))
@@ -46,7 +47,7 @@ function validateModule (modFile, callback) {
 
   exercise.emit('pass', __n('pass.arguments', mod.length))
 
-  //---- Mock `fs.readdir` and check that an error bubbles back up through the cb 
+  // ---- Mock `fs.readdir` and check that an error bubbles back up through the cb
 
   fs.$readdir = fs.readdir
   fs.readdir = function (dir, callback) {
@@ -60,8 +61,9 @@ function validateModule (modFile, callback) {
   callbackUsed = false
   try {
     mod('/foo/bar/', 'wheee', function (err) {
-      if (err !== error)
+      if (err !== error) {
         return noerr()
+      }
 
       callbackUsed = true
     })
@@ -69,17 +71,20 @@ function validateModule (modFile, callback) {
     noerr()
   }
 
-  if (callbackUsed)
+  if (callbackUsed) {
     exercise.emit('pass', __('pass.error'))
+  }
 
-  //---- Check whether the callback is used at all
+  // ---- Check whether the callback is used at all
 
   setTimeout(function () {
-    if (returned)
+    if (returned) {
       return
+    }
 
-    if (!callbackUsed)
+    if (!callbackUsed) {
       return modFileError(__('fail.mod.missing_callback'))
+    }
 
     exercise.emit('pass', __('pass.callback'))
 
@@ -93,9 +98,13 @@ function validateModule (modFile, callback) {
     // sending in the '.'-prefixed value
     function checkWithDot () {
       mod(dir, '.dat', function (err, list) {
+        if (err) {
+          return modFileError(__('fail.mod.callback_error', { error: util.inspect(err) }))
+        }
         var notexp = files.filter(function (f) { return (/\.dat$/).test(f) })
-        if (list.length == notexp.length)
+        if (list.length === notexp.length) {
           return modFileError(__('fail.mod.dont_use_dot'))
+        }
 
         exercise.emit('pass', __('pass.dont_use_dot'))
         // else ... no idea what went wrong here!
@@ -105,49 +114,55 @@ function validateModule (modFile, callback) {
 
     try {
       mod(dir, 'md', function (err, list) {
-        if (err)
+        if (err) {
           return modFileError(__('fail.mod.callback_error', { error: util.inspect(err) }))
+        }
 
-        //---- Check that we got the correct number of elements
-        if (arguments.length < 2)
+        // ---- Check that we got the correct number of elements
+        if (arguments.length < 2) {
           return modFileError(__n('fail.mod.callback_arguments', arguments.length))
+        }
 
         exercise.emit('pass', __('pass.callback_arguments'))
 
-        //---- Check that we got an Array as the second argument
-        if (!Array.isArray(list))
+        // ---- Check that we got an Array as the second argument
+        if (!Array.isArray(list)) {
           return modFileError(__('fail.mod.missing_array_argument'))
+        }
 
         exercise.emit('pass', __('pass.array_argument'))
 
-        var exp      = files.filter(function (f) { return (/\.md$/).test(f) })
-          , noDotExp = files.filter(function (f) { return (/md$/).test(f) })
-          , i
+        var exp = files.filter(function (f) { return (/\.md$/).test(f) })
+        var noDotExp = files.filter(function (f) { return (/md$/).test(f) })
+        var i
 
-        //---- Check for `ext` instead of `.ext`
-        if (noDotExp.length === list.length)
+        // ---- Check for `ext` instead of `.ext`
+        if (noDotExp.length === list.length) {
           return modFileError(__('fail.mod.dotExt'))
+        }
 
-        //---- Check that we got the expected number of elements in the Array
-        if (exp.length !== list.length)
+        // ---- Check that we got the expected number of elements in the Array
+        if (exp.length !== list.length) {
           return checkWithDot()
+        }
 
         exercise.emit('pass', __('pass.dont_use_dot'))
         exercise.emit('pass', __('pass.array_size'))
 
         callbackUsed = true
 
-        //---- Check that the elements are exactly the same as expected (ignoring order)
+        // ---- Check that the elements are exactly the same as expected (ignoring order)
         exp.sort()
         list.sort()
         for (i = 0; i < exp.length; i++) {
-          if (list[i] !== exp[i])
+          if (list[i] !== exp[i]) {
             return modFileError(__('fail.mod.array_comparison'))
+          }
         }
 
         exercise.emit('pass', __('pass.final'))
 
-        //WIN!!
+        // WIN!!
         callback()
       })
     } catch (e) {
@@ -155,30 +170,30 @@ function validateModule (modFile, callback) {
     }
 
     setTimeout(function () {
-      if (returned)
+      if (returned) {
         return
+      }
 
-      if (!callbackUsed)
+      if (!callbackUsed) {
         return modFileError(__('fail.mod.timeout'))
+      }
     }, 300)
   }, 300)
 }
-
 
 // find any modules that are required by the submission program
 
 function requires (exercise) {
   // rule out these 4 things
-  var main  = path.resolve(process.cwd(), exercise.args[0])
-    , exec  = require.resolve('workshopper-wrappedexec/exec-wrap')
-    , wrap1 = require.resolve('../my_first_io/wrap')
-    , wrap2 = require.resolve('./wrap-requires')
+  var main = path.resolve(process.cwd(), exercise.args[0])
+  var exec = require.resolve('workshopper-wrappedexec/exec-wrap')
+  var wrap1 = require.resolve('../my_first_io/wrap')
+  var wrap2 = require.resolve('./wrap-requires')
 
   return exercise.wrapData.requires.filter(function (m) {
-    return m != main && m != exec && m != wrap1 && m != wrap2
+    return m !== main && m !== exec && m !== wrap1 && m !== wrap2
   })
 }
-
 
 function verifyModuleUsed (callback) {
   var required = requires(this)
@@ -192,15 +207,10 @@ function verifyModuleUsed (callback) {
 }
 
 function verify (callback) {
-  var usedSync  = false
-    , usedAsync = false
-
   Object.keys(this.wrapData.fsCalls).forEach(function (m) {
     if (/Sync$/.test(m)) {
-      usedSync = true
       this.emit('fail', this.__('fail.sync', { method: 'fs.' + m + '()' }))
     } else {
-      usedAsync = true
       this.emit('pass', this.__('pass.async', { method: 'fs.' + m + '()' }))
     }
   }.bind(this))
