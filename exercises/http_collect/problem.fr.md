@@ -26,8 +26,8 @@ d’accumulation du flux complet.  Au moins deux modules fournissent une API
 utile pour résoudre ce problème : `bl` (*Buffer List*) et `concat-stream` ;
 faites votre choix !
 
-  <http://npm.im/bl>
-  <http://npm.im/concat-stream>
+  <https://npmjs.com/bl>
+  <https://npmjs.com/concat-stream>
 
 Pour installer un module tiers, utilisez l’outil `npm` (Node Packaged Modules).
 Tapez simplement :

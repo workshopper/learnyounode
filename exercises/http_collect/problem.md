@@ -11,8 +11,8 @@ There are two approaches you can take to this problem:
 
 **2)** Use a third-party package to abstract the difficulties involved in collecting an entire stream of data. Two different packages provide a useful API for solving this problem (there are likely more!): `bl` (Buffer List) and `concat-stream`; take your pick!
 
-  <http://npm.im/bl>
-  <http://npm.im/concat-stream>
+  <https://npmjs.com/bl>
+  <https://npmjs.com/concat-stream>
 
 To install a Node package, use the Node Package Manager `npm`. Simply type:
 

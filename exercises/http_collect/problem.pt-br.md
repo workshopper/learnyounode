@@ -11,8 +11,8 @@ Existem duas abordagens para você resolver este problema:
 
 **2)** Use um pacote de terceiros para abstrair as dificuldades envolvidas em coletar uma stream inteira de dados. Dois pacotes diferentes fornecem uma API útil para resolver este problema (existem mais parecidos!): `bl` (Buffer List) e `concat-stream`; faça sua escolha!
 
-  <http://npm.im/bl>
-  <http://npm.im/concat-stream>
+  <https://npmjs.com/bl>
+  <https://npmjs.com/concat-stream>
 
 Para instalar um pacote Node, use o Node Package Manager `npm`. Apenas digite:
 
