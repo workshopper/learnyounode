@@ -13,8 +13,8 @@
 
 **2)** サードパーティ製のパッケージを使っても良いです。以下の2つのパッケージはこの問題に関して役に立ちます。 `bl` (Buffer List) か `concat-stream`のいずれかを選んでください。
 
-  <http://npm.im/bl>
-  <http://npm.im/concat-stream>
+  <https://npmjs.com/bl>
+  <https://npmjs.com/concat-stream>
 
 Node.js のパッケージをインストールするために Node.js のパッケージ管理ツールである `npm`を使ってください。
 コマンドラインに次のコマンドを書いてください：
