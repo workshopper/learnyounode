@@ -79,7 +79,8 @@
   },
   "scripts": {
     "lint": "standard",
-    "test": "standard && workshopper-adventure-test"
+    "test": "standard && workshopper-adventure-test",
+    "start": "npm link learnyounode"
   },
   "bin": {
     "learnyounode": "./bin/learnyounode"
