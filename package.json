@@ -80,7 +80,7 @@
   "scripts": {
     "lint": "standard",
     "test": "standard && workshopper-adventure-test",
-    "start": "npm link learnyounode"
+    "start": "npm link"
   },
   "bin": {
     "learnyounode": "./bin/learnyounode"
