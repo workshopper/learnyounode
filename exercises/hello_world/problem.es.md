@@ -1,16 +1,4 @@
-Para mantener el orden, procederemos a crear una carpeta para este workshop.  
-
-Ejecuta el siguiente comando en una terminal:
-
-```sh
-$ mkdir {appname}  
-```
-
-Cambia de directorio a la carpeta que acabas de crear:  
-
-```sh   
-$ cd {appname}
-```
+Bienvenidos a {appname}!
 
 Para cada ejercicio, crearemos una nueva carpeta. En este caso,
 
