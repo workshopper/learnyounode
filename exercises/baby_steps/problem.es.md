@@ -8,7 +8,7 @@ $ mkdir baby_steps
 $ cd baby_steps
 ```
 
-Algo importante que se debe saber es que los programas pueden recibir parámetros para su operación al momento ser invocados! Por ejemplo, si tenemos un código llamado `hola.js` y lo corremos así
+Algo importante que se debe saber es que los programas pueden recibir parámetros para su operación al momento de ser invocados! Por ejemplo, si tenemos un código llamado `hola.js` y lo corremos así
 
 ```sh
 $ node hola.js carolina juliana
