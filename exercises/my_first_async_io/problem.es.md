@@ -36,7 +36,7 @@ Puedes leer la documentación del módulo `fs` en:
 Para el caso de `fs.readFile()`, la plantilla se vería más o menos así:
 
 ```js
-fs.readFile('/ruta/al/archivo', function callback(err, data) {
+fs.readFile('/ruta/al/archivo', function(err, data) {
   /* ... */
 });
 ```

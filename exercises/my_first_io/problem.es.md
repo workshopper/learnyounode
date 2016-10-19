@@ -10,7 +10,7 @@ Los entornos de ejecución de programas tradicionales son síncronos, esto signi
 
 Antes de entrar a ver una de las grandes ventajas de node.js, la asincronía, veremos un ejemplo más tradicional.
 
-En los sistemas operativos tipo UNIX (e.g. Linux, Mac OS X) podemos contar el número de líneas de un archivo de texto por medio del comando `cat file | wc -l`. Escribe un programa que, usando una llamada síncrona al sistema de archivos, lea un archivo recibido por argumento de línea de consola e imprima la cantidad de saltos de línea ('\n') que contiene.
+En los sistemas operativos tipo UNIX (e.g. Linux, Mac OS X) podemos contar el número de saltos de línea de un archivo de texto por medio del comando `cat file | wc -l`. Escribe un programa que, usando una llamada síncrona al sistema de archivos, lea un archivo recibido por argumento de línea de consola e imprima la cantidad de saltos de línea ('\n') que contiene.
 
 El programa recibirá la ruta al archivo como único argumento.
 
