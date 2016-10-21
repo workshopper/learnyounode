@@ -23,7 +23,9 @@ El método `http.get()` es una versión simplificada para peticiones GET y convi
 A diferencia de otros callbacks, su firma es:
 
 ```js
-function callback(response) { /* ... */ }
+function callback(response) {
+  /* ... */
+}
 ```
 
 Siendo `response` un objeto **Stream** de node.js. En node.js los Streams emiten eventos, a los cuales puedes suscribir callbacks. Para este ejercicio sólo nos interesan los eventos: "data", "error" y "end". Para escuchar un evento (por ejemplo, "data") debes hacer:
