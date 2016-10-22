@@ -1,17 +1,28 @@
-Escribe un programa que imprima el texto "HELLO WORLD" en consola (stdout).
+Bienvenidos a {appname}!
+
+Para cada ejercicio, crearemos una nueva carpeta. En este caso,
+
+```sh
+$ mkdir hello_world
+$ cd hello_world
+```
+
+Ahora, escribe un programa que imprima el texto "HELLO WORLD" en la consola.
 
 ----------------------------------------------------------------------
 ## PISTAS
 
-Para escribir un programa en Node.js, crea un archivo con extensión `.js` y dentro escribe JavaScript! Para ejecutarlo usa el comando 'node', por ejemplo:
+Para escribir un programa en Node.js, crea un archivo con extensión `.js` y dentro escribe código en JavaScript! Para ejecutarlo usa el comando `node`, por ejemplo:
+
 ```sh
 $ node program.js
 ```
 
-Puedes escribir a consola de la misma forma que en el navegador(browser):
+Dentro del código, puedes hacer cosas como imprimir texto en la terminal! Por ejemplo:
 
 ```js
-console.log("texto")
+// program.js
+console.log("texto");
 ```
 
 Cuando termines debes ejecutar:
@@ -20,6 +31,12 @@ Cuando termines debes ejecutar:
 $ {appname} verify program.js
 ```
 
-para continuar con el siguiente ejercicio. Tu programa será probado, se generará un reporte y si todo funciona correctamente se etiquetará el ejercicio como 'completado'.
+Tu programa será probado, se generará un reporte y si todo funciona correctamente se etiquetará el ejercicio como 'completado'.
+
+Para continuar con el taller, ejecuta en la terminal
+
+```sh
+$ {appname}
+```
 
 ----------------------------------------------------------------------
