@@ -17,6 +17,14 @@ El servidor deberá escuchar en un puerto cuyo número será el primer argumento
 
 Para resolver el ejercicio es conveniente usar las capacidades de streaming de los objetos `request` y `response` pero no obligatorio.
 
+Para empezar, puedes verificar el tipo (método) de la petición por medio del atributo `method` de la petición:
+
+```js
+if (req.method === 'POST') {
+  /* ... */
+}
+```
+
 Hay muchos paquetes en el registro de npm que permiten *"transformar"* streams. Para este ejercicio sugerimos usar `through2-map` pues su API es simple.
 
 `through2-map` te permite crear un *transform stream* que recibe un chunk data y lo devuelve modificado. Funciona como el método `map()` de un Array, pero se aplica a streams:
