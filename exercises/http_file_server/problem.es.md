@@ -5,6 +5,7 @@ $ cd ..
 $ mkdir http_file_server
 $ cd http_file_server
 ```
+En este ejercicio debes crear un servidor HTTP en lugar de un servidor TCP. Los servidores no necesariamente deben servir datos como streams, es posible que al realizar una petición a un servidor, este nos retorne un archivo de texto! En realidad esto sólo es un truco, que se trata de servir los caracteres del archivo como un stream.
 
 Escribe un **servidor** HTTP que sirva un mismo archivo de texto para todas las peticiones que reciba.
 
@@ -13,7 +14,7 @@ El servidor deberá escuchar en un puerto cuyo número será el primer argumento
 ----------------------------------------------------------------------
 ## PISTAS
 
-En este ejercicio debes crear un servidor HTTP en lugar de un servidor TCP. Usa el módulo `http` de node.js para ello que tiene un método `http.createServer()` para servir peticiones HTTP.
+Usa el módulo `http` de node.js, que tiene un método `http.createServer()` para servir peticiones HTTP.
 
 `http.createServer()` espera de parámetro un callback a invocar cuando se reciba una petición HTTP. La firma de dicho callback es la siguiente:
 
