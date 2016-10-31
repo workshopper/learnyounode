@@ -1,7 +1,5 @@
 language: node_js
 node_js:
-  - '0.12'
-  - 'iojs'
   - '4.0'
   - '5.0'
 before_install:
