@@ -19,5 +19,3 @@ vì vậy, bạn có thể kiểm tra được lỗi phát sinh nếu có qua th
 
 Tài liệu về mô-đun `fs` có thể xem ở đây:
   {rootdir:/node_apidoc/fs.html}
-
-----------------------------------------------------------------------

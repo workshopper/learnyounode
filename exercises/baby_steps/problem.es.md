@@ -28,6 +28,3 @@ Para resolver este ejercicio debes iterar en la lista de argumentos de modo que 
 Ten en cuenta que todos los elementos de `process.argv` son cadenas de caracteres ('strings') por lo que debes convertirlas a números, por ejemplo: agregando el prefijo `+` o llamando a `Number()`. Ej: `+process.argv[2]` ó `Number(process.argv[2])`.
 
 Cuando ejecutes `{appname} verify program.js` no tienes que pasarle argumentos pues {appname} se encarga de hacerlo. Para probar tu programa sin verificarlo puedes ejecutar `{appname} run program.js`, éste ejecutará en el mismo ambiente de prueba que {appname} crea para cada ejercicio.
-
-----------------------------------------------------------------------
-

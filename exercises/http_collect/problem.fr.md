@@ -73,5 +73,3 @@ sur votre système pour que vous puissiez la consulter facilement :
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

@@ -40,5 +40,3 @@ L’objet `response` que vous obtenez suite à un `http.get()` dispose aussi
 d’une méthode `setEncoding()`. Si vous l’appelez avec l’argument 'utf8',
 les événements 'data' émettront des `String` au lieu des `Buffer` habituels,
 qu’il vous aurait fallu convertir explicitement en `String`.
-
-----------------------------------------------------------------------

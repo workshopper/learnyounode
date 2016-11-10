@@ -9,5 +9,3 @@ Các máy chủ từ URL này có thể trả về kết quả không theo thứ
 Mà bạn sẽ phải giữ chúng lại theo đúng thứ tự đầu vào cho tới khi toàn bộ cả 3 URL đều được lấy hết. Khi bạn lấy được toàn bộ dữ liệu rồi thì bạn có thể in nó ra giao diện dòng lệnh.
 
 Việc đếm thông qua các hàm phản hồi là một kĩ thuật quản lý bất đồng bộ căn bản trong Node. Thay vì phải tự mình thực hiện việc quản lý này, sẽ rất tiện nếu bạn sử dụng một thư viện thứ 3 nào đó chẳng hạn như [async](https://npmjs.com/async) hay [after](https://npmjs.com/after). Nhưng trong bài tập này, bạn hãy thử gắng tự thực hiện việc quản lý này xem sao nhé.
-
-----------------------------------------------------------------------

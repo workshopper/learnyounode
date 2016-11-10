@@ -48,5 +48,3 @@ Tài liệu cho cả 2 mô-đun này đều đã được cài đặt cùng vớ
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

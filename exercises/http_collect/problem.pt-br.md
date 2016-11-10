@@ -47,5 +47,3 @@ A documentação para ambos estes módulos foram instaladas juntamente com {appn
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

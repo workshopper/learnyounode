@@ -34,5 +34,3 @@ Hvis du ikke er tilkoblet Internett kan du lage en `node_modules` katalog også 
 Dokumentasjon for through2-map finner du her:
 
   {rootdir:/docs/through2-map.html}
-
-----------------------------------------------------------------------

@@ -17,8 +17,8 @@ La respuesta JSON debe contener únicamente los propiedades 'hour', 'minute' y '
 Luego, agrega un segundo endpoint con ruta '/api/unixtime' que reciba los mismos parámetros que la anterior pero que devuelva la fecha en formato UNIX, por ejemplo:
 
 ```json
-{ 
-	"unixtime": 1376136615474 
+{
+	"unixtime": 1376136615474
 }
 ```
 
@@ -38,7 +38,7 @@ $ node -pe "require('url').parse('/test?q=1', true)"
 ```
 La documentación del módulo `url` puede verse en:
   {rootdir:/node_apidoc/url.html}
-  
+
 Para enviar la respuesta del servidor en formato JSON puedes usar el método `JSON.stringify()`.
 Asimismo convendría que en la misma le agregaras un encabezado 'Content-Type' adecuado, por ejemplo:
 
@@ -47,5 +47,3 @@ res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
 Por último ten en cuenta el objeto JavaScript `Date` que permite imprimir fechas en formato ISO format, por ejemplo: `new Date().toISOString()`. También parsea dicho formato cuando se lo pasa por parámetro al constructor `Date`. Revisa también el uso de `Date#getTime()`.
-
-----------------------------------------------------------------------

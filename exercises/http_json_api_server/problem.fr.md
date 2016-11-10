@@ -67,5 +67,3 @@ L’objet `Date` en JavaScript peut afficher des dates au format ISO, par
 exemple `new Date().toISOString()`.  Il peut aussi les analyser à partir
 de ce format grâce au constructeur `Date`.  Vous trouverez aussi sûrement
 `Date#getTime()` utile.
-
-----------------------------------------------------------------------

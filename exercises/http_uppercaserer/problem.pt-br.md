@@ -33,5 +33,3 @@ Se você não possuir uma conexão à Internet, simplesmente crie uma pasta `nod
 A documentação do through2-map foi instalada junto com o {appname} no seu sistema e você pode lê-los apontando seu navegador para cá:
 
   {rootdir:/docs/through2-map.html}
-
-----------------------------------------------------------------------

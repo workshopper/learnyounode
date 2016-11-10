@@ -29,5 +29,3 @@ Você vai precisar pensar sobre como fazer uma repetição (loop) através do n�
 Também esteja ciente que todos os elementos do `process.argv` são string e você pode precisar *convertê-los* em números. Você pode fazer isso prefixando a propriedade com `+` ou passando-os como argumento para `Number()`. Por exemplo: `+process.argv[2]` ou `Number(process.argv[2])`.
 
 {appname} irá fornecer argumentos para seu programa quando você rodar `{appname} verify program.js`, então você não precisa se preocupar em fornecê-los. Para testar seu programa sem a verificação, você pode invocá-lo com `{appname} run program.js`. Quando você usa `run` você está invocando o ambiente de testes que o {appname} prepara para cada exercício.
-
-----------------------------------------------------------------------

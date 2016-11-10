@@ -22,5 +22,3 @@ Det kan også være hjelpsomt å se på node's `path` modul. Spesielt funksjonen
 
 Dokumentasjonen til `path` finner du her:
   {rootdir:/node_apidoc/path.html}
-
-----------------------------------------------------------------------

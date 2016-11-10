@@ -24,5 +24,3 @@ Bạn có thể đọc thêm tài liệu về `Buffer`s tại:
   {rootdir:/node_apidoc/buffer.html}
 
 Nếu bạn đang tìm kiếm một giải pháp để đếm số kí tự xuống dòng trong một chuỗi, thì nhớ lại một chút là `String` trong JavaScript có thể được phân rã bằng `.split()` thành một mảng của các chuỗi con và '\n' có thể được sử dụng làm tham số phân rã chuỗi. Chú ý rằng file kiểm tra của bài này sẽ không có kí tự xuống dòng ('\n') ở dòng cuối cùng, nên nếu  bạn sử dụng cách phân rã này thì bạn sẽ thu được một mảng có số phần tử lớn hơn số kí tự xuống dòng của file đầu vào một đơn vị.
-
-----------------------------------------------------------------------

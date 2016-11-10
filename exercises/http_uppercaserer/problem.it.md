@@ -33,5 +33,3 @@ Se non disponi di una connessione ad Internet, crea semplicemente una directory 
 La documetazione di `through2-map` è stata installata assieme a {appname} sul tuo sistema e puoi leggerla puntando il tuo browser all'indirizzo:
 
   {rootdir:/docs/through2-map.html}
-
-----------------------------------------------------------------------

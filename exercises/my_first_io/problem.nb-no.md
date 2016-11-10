@@ -24,5 +24,3 @@ Dokumentasjonen til `Buffer`s kan du finne her:
   {rootdir:/node_apidoc/buffer.html}
 
 Hvis du leter etter en enkel måte å telle antallet newlines i en streng, så huske på at en streng (`String`) i JavaScript kan deles opp i en array av strenger med å kalle `.split()` og at du kan sende inn '\n' som arugment til den. Merk deg at testfilen ikke har en newline ('\n') på slutten av siste linje, så om du bruker denne metoden vil du få en array med ett element mer enn antallet newlines.
-
-----------------------------------------------------------------------

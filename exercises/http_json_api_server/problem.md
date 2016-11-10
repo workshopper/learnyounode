@@ -37,7 +37,7 @@ $ node -pe "require('url').parse('/test?q=1', true)"
 
 Documentation on the `url` module can be found by pointing your browser here:
   {rootdir:/node_apidoc/url.html}
-  
+
 Your response should be in a JSON string format. Look at `JSON.stringify()` for more information.
 
 You should also be a good web citizen and set the Content-Type properly:
@@ -48,5 +48,3 @@ res.writeHead(200, { 'Content-Type': 'application/json' })
 
 The JavaScript `Date` object can print dates in ISO format, e.g. `new Date().toISOString()`. It can also parse this format if you pass the string into the `Date` constructor. `Date#getTime()` will also
 come in handy.
-
-----------------------------------------------------------------------

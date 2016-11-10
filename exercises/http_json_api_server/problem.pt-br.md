@@ -25,7 +25,7 @@ Seu servidor deve escutar na porta fornecida pelo primeiro argumento passado par
 ----------------------------------------------------------------------
 ## DICAS
 
-O objeto `request` de um servidor HTTP contém a propriedade `url` que você vai precisar usar para *"rotear"* suas requisições para os dois endpoints. 
+O objeto `request` de um servidor HTTP contém a propriedade `url` que você vai precisar usar para *"rotear"* suas requisições para os dois endpoints.
 
 Você pode *parsear* a URL e a string de consulta usando o módulo do núcleo do Node chamado 'url'. `url.parse(request.url, true)` vai parsear o conteúdo de `request.url` e fornecer para você um objeto com propriedades úteis.
 
@@ -37,8 +37,8 @@ $ node -pe "require('url').parse('/test?q=1', true)"
 
 Documentação sobre o módulo `url` pode ser encontrada apontando seu navegador aqui:
   {rootdir:/node_apidoc/url.html}
-  
-Sua reposta deve ser uma string no formato JSON. Veja `JSON.stringify()` para mais informações. 
+
+Sua reposta deve ser uma string no formato JSON. Veja `JSON.stringify()` para mais informações.
 
 Você deve também ser um bom cidadão da web e configurar seu `Content-Type` corretamente:
 
@@ -46,8 +46,6 @@ Você deve também ser um bom cidadão da web e configurar seu `Content-Type` co
 res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
-O objeto `Date` do JavaScript pode imprimir datas no formato ISO, por exemplo, `new Date().toISOString()`. Ele também pode parsear este formato se você passar uma string para um construtor `Date`. 
+O objeto `Date` do JavaScript pode imprimir datas no formato ISO, por exemplo, `new Date().toISOString()`. Ele também pode parsear este formato se você passar uma string para um construtor `Date`.
 
 `Date.getTime()` também pode ser útil.
-
-----------------------------------------------------------------------

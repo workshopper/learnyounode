@@ -25,5 +25,3 @@ Dokumentację obiektów `Buffer` możesz przeczytać tutaj:
   {rootdir:/node_apidoc/buffer.html}
 
 Jeżeli interesuje Cię prosty sposób na zliczenie liczby znaków nowej linii występującej w ciągu znaków, pamiętaj, że obiekty `String` w JavaScripcie posiadają metodę `split()`, która dzieli ciąg znaków na podciągi. Możesz przekazać `'\n'` jako argument do tej metody - znak nowej linii posłuży wtedy jako separator. Plik testowy nie posiada znaku nowej linii na końcu ostatniej linii, zatem wywołanie tej metody da Ci tablicę o rozmiarze większą o 1 niż liczba znaków nowej linii występujących w pliku.
-
-----------------------------------------------------------------------

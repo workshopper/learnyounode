@@ -28,5 +28,3 @@ Giờ bạn cần chạy vòng lặp để duyệt tất cả các tham số đ�
 Chú ý rằng toàn bộ các phần tử của mảng `process.argv` là các string nên bạn cần phải chuyển đổi chúng qua dạng số. Bạn có thể chuyển qua dạng số bằng cách thêm `+` vào đầu hoặc sử dụng hàm `Number()`. Ví dụ: `+process.argv[2]` hoặc `Number(process.argv[2])`.
 
 Dùng lệnh `{appname} verify program.js` để kiểm tra chương trình chạy đúng hay chưa. Khi thực thi lệnh {appname}, nó sẽ tự truyền tham số đầu vào cho bạn, nên bạn không cần truyền tham số vào nữa. Nếu bạn muốn chạy trường trình của mình thì có thể sử dụng lệnh `{appname} run program.js`. Bằng việc sử dụng `run`, chương trình của bạn sẽ được cung cấp môi trường thử mà {appname} đã thiết lập sẵn cho các bài tập.
-
-----------------------------------------------------------------------

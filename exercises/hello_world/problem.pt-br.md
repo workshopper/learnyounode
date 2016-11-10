@@ -22,5 +22,3 @@ $ {appname} verify program.js
 ```
 
 para proceder. Seu programa será testado, um relatório será gerado e a lição será marcada como 'completa' caso você tenha sucesso.
-
-----------------------------------------------------------------------

@@ -28,5 +28,3 @@ Du er nødt til å tenke gjennom hvordan gå gjennom argumentene slik at du kan 
 Vær oppmerksom på at alle elementer i `process.argv` er strenger og du må derfor *konvertere* dem til tall. Du kan gjøre dette med å brke `+` eller `Number()` som f.eks `+process.argv[2]` eller `Number(process.argv[2])`.
 
 {appname} sender inn argumentene til programmet ditt når du kjører `{appname} verify program.js` så du slipper å sende dem inn. For å teste programmet uten å verifisere kan du kjøre `{appname} run program.js`. Når du bruker `run`, kjører du test miljøet som {appname} setter opp for hver oppgave.
-
-----------------------------------------------------------------------

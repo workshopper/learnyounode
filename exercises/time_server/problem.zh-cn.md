@@ -58,6 +58,3 @@ date.getMinutes()
 ```
 
 或者，如果你喜欢尝鲜的话，可以使用  `strftime` 这个模块。其中 `strftime(fmt, date)` 这个方法可以接收一个和 unix 命令 `date` 相似的时间日期格式。你可以在这里查看更多关于 strftime 的信息：https://github.com/samsonjs/strftime
-
-
-----------------------------------------------------------------------

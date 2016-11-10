@@ -25,5 +25,3 @@ response.on("data", function (data) { /* ... */ })
 "data" é emitido quando um pedaço de informação está disponível e pode ser processada. O tamanho deste pedaço depende do tamanho do dado em questão.
 
 O objeto `response` / Stream que você vai pegar de `http.get()` também tem um método `setEncoding()`. Se você chamar este método com "utf8", o evento "data" vai emitir Strings ao invés do objeto padrão `Buffer` do Node, que você tem explicitamente que converter para String.
-
-----------------------------------------------------------------------

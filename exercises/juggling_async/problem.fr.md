@@ -26,5 +26,3 @@ l’asynchrone en Node.  Plutôt que de le faire vous-même, vous trouverez
 sûrement utile de vous baser sur des modules tiers tels que
 [async](https://npmjs.com/async) ou [after](https://npmjs.com/after). Mais pour
 cet exercice, essayez de réussir sans l’aide d’un module externe.
-
-----------------------------------------------------------------------

@@ -33,5 +33,3 @@ If you don't have an Internet connection, simply make a `node_modules` directory
 Documentation for through2-map has been installed along with {appname} on your system and you can read them by pointing your browser here:
 
   {rootdir:/docs/through2-map.html}
-
-----------------------------------------------------------------------

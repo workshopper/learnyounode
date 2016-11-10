@@ -47,5 +47,3 @@ res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
 JavaScript `Date` 객체는 ISO 형식으로 날짜를 출력할 수 있습니다.(예를 들면 `new Date().toISOString()`) `Date` 생성자에 문자열을 넘겨준다면 이 형식으로 변환해 줄 수도 있습니다. `Date#getTime()`도 유용할 수 있습니다.
-
-----------------------------------------------------------------------

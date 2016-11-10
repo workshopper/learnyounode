@@ -38,5 +38,3 @@ La documentation du module `path` est disponible à l’adresse hors-ligne
 suivante :
 
   {rootdir:/node_apidoc/path.html}
-
-----------------------------------------------------------------------

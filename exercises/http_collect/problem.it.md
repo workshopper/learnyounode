@@ -47,5 +47,3 @@ La documentazione per ciascuno di questi moduli è stata installata con {appname
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

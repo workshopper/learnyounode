@@ -53,5 +53,3 @@ de {appname} sur votre système pour que vous puissiez la consulter
 avec votre navigateur à l’adresse suivante :
 
   {rootdir:/docs/through2-map.html}
-
-----------------------------------------------------------------------

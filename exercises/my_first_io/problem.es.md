@@ -24,5 +24,3 @@ Puedes leer la documentación del objeto `Buffer` en:
   {rootdir:/node_apidoc/buffer.html}
 
 Si buscas una forma sencilla de contar el número de saltos de línea en un string, piensa que puedes convertir un `String` de Javascript en un array de substrings usando `.split()`, y que puedes usar '\n' como delimitador. Nótese que el fichero de test no tiene ningún salto de línea ('\n') al final de la última línea, con lo que al usar este método acabarás obteniendo un array que tiene un elemento más que el número de saltos de línea.
-
-----------------------------------------------------------------------

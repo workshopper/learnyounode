@@ -15,10 +15,8 @@ La forma habitual de usar callbacks en Node.js es con la siguiente firma:
 function callback (error, data) { /* ... */ }
 ```
 
-Puedes validar si ocurrió un error controlando si el primer parámetro es nulo. Si no hay errores, 'data' será un objeto Buffer de Node.js. 
+Puedes validar si ocurrió un error controlando si el primer parámetro es nulo. Si no hay errores, 'data' será un objeto Buffer de Node.js.
 Al igual que pasa con `readFileSync()`, puedes pasar 'utf8' como segundo parámetro y luego el callback como tercero de modo de que data sea un `String` y no un `Buffer`.
 
 Puedes leer la documentación del módulo `fs` en:
   {rootdir:/node_apidoc/fs.html}
-
-----------------------------------------------------------------------

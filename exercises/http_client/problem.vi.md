@@ -25,5 +25,3 @@ response.on("data", function (data) { /* ... */ })
 Sự kiện "data" được phát ra khi có một khúc dữ liệu được nạp thành công và ta có thể xử lý. Kích cỡ của khúc dữ liệu phụ thuộc vào nguồn dữ liệu.
 
 Đối tượng `response` / Stream mà bạn lấy từ `http.get()` cũng có thể được mã hóa với phương thức `setEncoding()`. Giả sử, bạn gọi phương thức này với mã "utf8", thì sự kiện "data" sẽ phát ra một Strings thay vì là một đối tượng `Buffer` của Node. Nếu không làm như vậy, khi bạn muốn sử dụng dữ liệu dưới dạng Strings bạn phải chuyển đổi đối tượng `Buffer` ra Strings.
-
-----------------------------------------------------------------------

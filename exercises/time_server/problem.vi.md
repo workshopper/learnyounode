@@ -56,5 +56,3 @@ date.getMinutes()
 ```
 
 Hoặc, nếu bạn muốn pro hơn thì có thể sử dụng gói (package) `strftime` từ npm. Hàm `strftime(fmt, date)` nhận dạng dữ liệu của date y như lệnh `date` của unix. Xem thêm thông tin về strftime tại: https://github.com/samsonjs/strftime
-
-----------------------------------------------------------------------
