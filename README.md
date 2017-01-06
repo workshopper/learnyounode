@@ -13,7 +13,7 @@
 
   1. Install [Node.js](http://nodejs.org/)
   2. Run `npm install learnyounode -g`
-    1. In In case it fails, easiest way is to prefix with `sudo`:
+    1. In case it fails, easiest way is to prefix with `sudo`:
 
         `sudo npm install learnyounode -g` or to:
     2. [fix your npm permissions](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
