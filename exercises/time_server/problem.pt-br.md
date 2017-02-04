@@ -56,5 +56,3 @@ date.getMinutes()
 ```
 
 Ou, se você quiser ser aventureiro, use o pacote `strftime` do npm. A função `strftime(fmt, date)` pega o formato de data assim como o comando `date` do unix. Você pode ler mais sobre o strftime em: https://github.com/samsonjs/strftime
-
-----------------------------------------------------------------------

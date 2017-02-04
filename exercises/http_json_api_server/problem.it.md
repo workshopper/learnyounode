@@ -47,5 +47,3 @@ res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
 L'oggetto JavaScript `Date` può produrre date in formato ISO, ad es. `new Date().toISOString()`. Può anche decodificare questo formato se gli passi una stringa al costruttore `Date`. `Date#getTime()` tornerà anch'esso utile.
-
-----------------------------------------------------------------------

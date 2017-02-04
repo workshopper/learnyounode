@@ -48,5 +48,3 @@ Puedes leer la documentación de ambos módulos en la carpeta de instalación de
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

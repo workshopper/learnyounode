@@ -26,5 +26,3 @@ $ {appname} verify program.js
 
 pour avancer.  Votre programme sera testé, un rapport sera généré, et la
 leçon sera marquée comme faite, si vous avez réussi.
-
-----------------------------------------------------------------------

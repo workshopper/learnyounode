@@ -51,5 +51,3 @@ response.pipe(concatStream(function (data) { /* ... */ }))
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

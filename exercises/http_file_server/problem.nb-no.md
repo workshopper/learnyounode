@@ -1,4 +1,4 @@
-Du skal nå skrive en HTTP **server** som for hver forespørsel returnerer en tekstfil. 
+Du skal nå skrive en HTTP **server** som for hver forespørsel returnerer en tekstfil.
 
 Serveren skal lytte på porten som den får fra det første kommandolinje argumentet. Det andre kommandolinje argumentet vil være filstien til filen som skal serveres. Du **må** benytte `fs.createReadStream()` metoden for streame innholdet av filen til responsen.
 
@@ -34,6 +34,4 @@ Dokumentasjonen til `http` finner du her:
   {rootdir:/node_apidoc/http.html}
 
 
-`fs` modulen i Node har noen streaming APIer for filer. Når du benytter deg av `fs.createReadStream()` vil du få et stream objekt tilbake som representerer filen du vil lese. På et stream objekt kan du kalle på `src.pipe(dst)` for å pipe dataene fra en stream til en annen (Her fra `src` til `dst`). Du kan på den måte koble filsystem streamen med HTTP response streamen. 
-
-----------------------------------------------------------------------
+`fs` modulen i Node har noen streaming APIer for filer. Når du benytter deg av `fs.createReadStream()` vil du få et stream objekt tilbake som representerer filen du vil lese. På et stream objekt kan du kalle på `src.pipe(dst)` for å pipe dataene fra en stream til en annen (Her fra `src` til `dst`). Du kan på den måte koble filsystem streamen med HTTP response streamen.

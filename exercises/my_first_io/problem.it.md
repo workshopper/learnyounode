@@ -24,5 +24,3 @@ La documentazione sui `Buffer` può essere trovata puntando il tuo browser all'i
   {rootdir:/node_apidoc/buffer.html}
 
 Se stai cercando una maniera semplice di contare il numero di andate a capo in una stringa, ricorda che un oggetto `String` di JavaScript possiede un metodo `.split()` che lo suddivide in un array di sottostringhe, e che '\n' può essere usato come un delimitatore. Nota che il file di prova non possiede un carattere di nuova riga ('\n') alla fine dell'ultima riga, quindi usando questo metodo otterrai un array che ha un elemento in più del numero di nuove righe.
-
-----------------------------------------------------------------------

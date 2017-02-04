@@ -1,6 +1,6 @@
 {
   "name": "learnyounode",
-  "version": "3.5.6",
+  "version": "3.5.8",
   "description": "Learn You The Node.js For Much Win! An intro to Node.js via a set of self-guided workshops.",
   "author": "Rod Vagg <rod@vagg.org> (https://github.com/rvagg)",
   "contributors": [
@@ -69,7 +69,7 @@
     "through": "^2.3.8",
     "through2": "^2.0.1",
     "through2-map": "^3.0.0",
-    "workshopper-adventure": "^5.0.3",
+    "workshopper-adventure": "^5.1.1",
     "workshopper-exercise": "^2.7.0",
     "workshopper-wrappedexec": "~0.1.1"
   },

@@ -21,5 +21,3 @@ $ {appname} verify program.js
 ```
 
 para continuar con el siguiente ejercicio. Tu programa será probado, se generará un reporte y si todo funciona correctamente se etiquetará el ejercicio como 'completado'.
-
-----------------------------------------------------------------------

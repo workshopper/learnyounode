@@ -60,5 +60,3 @@ commande.  Cette méthode renvoie un objet flux sur lequel vous pouvez appeler
 `src.pipe(dest)` pour connecter les données lues sur le flux `src` à une
 écriture sur le flux `dst`.  De cette façon, vous pouvez connecter un flux issu
 du système de fichier à votre flux de réponse HTTP.
-
-----------------------------------------------------------------------

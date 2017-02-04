@@ -56,5 +56,3 @@ date.getMinutes()
 ```
 
 您如果想要再大膽一點，可以使用 npm 的 `strftime` 套件。這個 `strftime(fmt, date)` 函式使用的日期格式參數和 unix 系統的 `date` 命令相同。您可以在這裡了解更多關於 strftime 套件的使用方法： https://github.com/samsonjs/strftime
-
-----------------------------------------------------------------------

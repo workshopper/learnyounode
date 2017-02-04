@@ -37,7 +37,7 @@ $ node -pe "require('url').parse('/test?q=1', true)"
 
 Dokumentasjon for `url` modulen finnes her:
   {rootdir:/node_apidoc/url.html}
-  
+
 Responsen din må være i et JSON streng format. Du kan se i metoden `JSON.stringify()` for mer informasjon.
 
 Du kan også være en god venn å sette riktig Content-Type:
@@ -47,5 +47,3 @@ res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
 JavaScript sitt `Date` objektet kan skrive ut datoer i ISO format, f.eks `new Date().toISOString()`. Det kan også gjøre om strenger på dette formatet til objekter dersom du sender en streng inn til `Date` kontruktøren. `Date#getTime()` vil du også kunne trenge.
-
-----------------------------------------------------------------------

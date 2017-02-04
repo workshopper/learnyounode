@@ -28,5 +28,3 @@ Dovrai pensare a come iterare sugli argomenti numerici in maniera da produrne la
 Tieni anche presente che tutti gli elementi di `process.argv` sono stringhe e potresti dover  *forzare* la loro conversione a numeri. Puoi fare ciò prefiggendo la proprietà con `+` o passandola a `Number()`. Ad es. `+process.argv[2]` o `Number(process.argv[2])`.
 
 {appname} fornirà gli argomenti al tuo programma quando esegui `{appname} verify program.js` quindi non hai bisogno di fornirli da te. Per provare il tuo programma senza verificarlo, puoi invocarlo con `{appname} run program.js`. Quando usi `run`, stai invocando l'ambiente di prova che {appname} imposta per ciascun esercizio.
-
-----------------------------------------------------------------------

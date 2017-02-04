@@ -14,7 +14,7 @@
 }
 ```
 
-您還要加入第二個可以接受相同 query ，但這次在「unixtime」屬性下回應 UNIX 時間格式（又稱為 epoch 或 POSIX 時間格式）的路徑「/api/unixtime」。 
+您還要加入第二個可以接受相同 query ，但這次在「unixtime」屬性下回應 UNIX 時間格式（又稱為 epoch 或 POSIX 時間格式）的路徑「/api/unixtime」。
 
 ```json
 { "unixtime": 1376136615474 }
@@ -49,6 +49,3 @@ res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
 Javascript 的 `Date` 物件可以用 ISO 格式顯示日期，如 `new Date().toISOString()` 。如果您把日期字串傳入 `Date` 物件，這個物件也可以用來解析時間格式。 `Date.getTime()` 也可以派上用場。
-
-
-----------------------------------------------------------------------

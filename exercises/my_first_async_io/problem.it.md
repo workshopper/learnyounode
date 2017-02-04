@@ -19,5 +19,3 @@ quindi puoi controllare se si è verificato un errore controllando se il primo a
 
 La documentazione sul modulo `fs` può essere ottenuta puntando il tuo browser all'indirizzo:
   {rootdir:/node_apidoc/fs.html}
-
-----------------------------------------------------------------------

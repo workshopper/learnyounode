@@ -27,5 +27,3 @@ response.on("data", function (data) { /* ... */ })
 L'evento "data" è emesso quando un frammento di dati è disponibile e può essere processato. La dimensione del frammento dipende dalla fonte dati sottostante.
 
 L'oggetto `response` / Stream che ottieni da `http.get()` ha anche un metodo `setEncoding()`. Se chiami questo metodo con "utf8", gli eventi "data" emetteranno oggetti String anziché oggetti standard `Buffer` di Node che dovrai esplicitamente convertire in stringhe.
-
-----------------------------------------------------------------------

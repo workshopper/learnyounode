@@ -24,5 +24,3 @@ You may also find node's `path` module helpful, particularly the `extname` metho
 
 Documentation on the `path` module can be found by pointing your browser here:
   {rootdir:/node_apidoc/path.html}
-
-----------------------------------------------------------------------

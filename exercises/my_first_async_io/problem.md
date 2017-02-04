@@ -19,5 +19,3 @@ so you can check if an error occurred by checking whether the first argument is 
 
 Documentation on the `fs` module can be found by pointing your browser here:
   {rootdir:/node_apidoc/fs.html}
-
-----------------------------------------------------------------------

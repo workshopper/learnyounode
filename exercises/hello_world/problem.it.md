@@ -22,5 +22,3 @@ $ {appname} verify program.js
 ```
 
 per continuare. Il tuo programma verrà verificato, un resoconto sarà generato, e la lezione verrà contrassegnata come 'completata' se hai avuto successo.
-
-----------------------------------------------------------------------

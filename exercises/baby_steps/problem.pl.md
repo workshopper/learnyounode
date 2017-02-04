@@ -28,5 +28,3 @@ Zastanów się jak przeiterować się przez argumenty liczbowe tak, by możliwe 
 Zwróć uwagę, że wszystkie elementy `process.argv` są ciągami znaków i może zaistnieć potrzeba *przekształcenia (koercji, ang. coerce)* ich na liczby. Możesz to zrobić dodając `+` przed właściwością lub przekazując ją do funkcji `Number()` tzn. `+process.argv[2]` lub `Number(process.argv[2])`.
 
 {appname} poda swoje argumenty dla Twojego programu gdy uruchomisz `{appname} verify program.js`, nie musisz zatem przejmować się ich podawaniem. Aby przetestować swój program bez weryfikacji, możesz wywołać go komendą `{appname} run program.js`. Za pomocą polecenia `run` uruchamiasz środowisko testowe, które {appname} przygotowuje dla każdego ćwiczenia.
-
-----------------------------------------------------------------------

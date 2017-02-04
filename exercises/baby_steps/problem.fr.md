@@ -49,5 +49,3 @@ vous-mêmes.  Pour tester votre programme sans vérifier son bon résultat,
 vous pouvez lancer `{appname} run program.js`. Quand vous utilisez `run`,
 vous invoquez un environnement de test que {appname} met en place pour
 chaque exercice.
-
-----------------------------------------------------------------------

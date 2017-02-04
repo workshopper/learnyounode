@@ -10,5 +10,3 @@ Não espere que estes três servidores joguem limpo! Eles não vão te dar respo
 Você vai precisar enfileirar os resultados e manter um registro de quantas URLs já retornaram o conteúdo completo. Uma vez que você tiver todos os dados, você poderá imprimi-los no console.
 
 Contar callbacks é uma das maneiras fundamentais de lidar com chamadas assíncronas no Node. Ao invés de fazer isso manualmente, você pode achar mais conveniente depender de uma library de terceiros como por exemplo [async](https://npmjs.com/async) ou [after](https://npmjs.com/after). Mas para esse exercício, tente fazer sem ajuda de nenhuma library externa.
-
-----------------------------------------------------------------------

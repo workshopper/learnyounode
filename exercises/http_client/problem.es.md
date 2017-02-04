@@ -25,5 +25,3 @@ response.on("data", function (data) { /* ... */ })
 El evento "data" se dispara cuando un `chunk`, conjunto de datos, está disponible para procesarse. El tamaño del `chunk` depende de la implementación.
 
 Nota: Por omisión, los objetos 'data' recibidos son `Buffers` de Node que deben ser convertidos a Strings para luego ser escritos en consola. Sin embargo, el objeto `response` que obtienes de `http.get()` tiene un método `setEncoding()` que permite definir cómo se leen los bytes obtenidos. Si lo llamas con parámetro "utf8" recibirás Strings en los eventos emitidos.
-
-----------------------------------------------------------------------

@@ -74,5 +74,3 @@ date.getMinutes()
 また、 `strftime` というnpmパッケージには、 Unix の `date` 関数と同じフォーマットで日付を整形可能な機能 `strftime(fmt, date)` があります。
 
 `strftime' のドキュメントは次のURLを参照してください。：https://github.com/samsonjs/strftime
-
-----------------------------------------------------------------------

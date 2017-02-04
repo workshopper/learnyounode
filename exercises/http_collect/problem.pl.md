@@ -49,5 +49,3 @@ Dokumentacja dla obydwu modułów jest zainstalowana wraz z {appname} na Twoim s
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

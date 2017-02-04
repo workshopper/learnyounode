@@ -22,5 +22,3 @@ Puoi inoltre trovare utile il modulo `path` di node, in particolare il metodo `e
 
 La documentazione del modulo `path` può essere ottenuta puntando il tuo browser a questo indirizzo:
   {rootdir:/node_apidoc/path.html}
-
-----------------------------------------------------------------------

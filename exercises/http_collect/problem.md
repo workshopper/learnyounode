@@ -5,7 +5,7 @@ The first line you write should just be an integer representing the number of ch
 ----------------------------------------------------------------------
 ## HINTS
 
-There are two approaches you can take to this problem: 
+There are two approaches you can take to this problem:
 
 **1)** Collect data across multiple "data" events and append the results together prior to printing the output. Use the "end" event to determine when the stream is finished and you can write the output.
 
@@ -47,5 +47,3 @@ Documentation for both of these modules has been installed along with {appname} 
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

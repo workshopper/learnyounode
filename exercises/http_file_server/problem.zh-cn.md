@@ -35,5 +35,3 @@ server.listen(8000)
   {rootdir:/node_apidoc/http.html}
 
 `fs` 这个核心模块也含有一些用来处理文件的流式（stream） API。你可以使用 `fs.createReadStream()` 方法来为命令行参数指定的文件创建一个 stream。这个方法会返回一个 stream 对象，该对象可以使用类似 `src.pipe(dst)` 的语法把数据从 `src`流传输(pipe) 到 `dst`流中。通过这种形式，你可以轻松地把一个文件系统的 stream 和一个 HTTP 响应的 stream 连接起来。
-
-----------------------------------------------------------------------

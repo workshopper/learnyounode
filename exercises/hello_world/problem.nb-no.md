@@ -22,5 +22,3 @@ $ {appname} verify program.js
 ```
 
 for å fortsette. Programmet vil bli testet og det blir laget en rapport. Oppgaven blir markert som 'løst' hvis verifiseringen gikk bra.
-
-----------------------------------------------------------------------
