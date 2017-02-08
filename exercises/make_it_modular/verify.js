@@ -51,7 +51,7 @@ function validateModule (modFile, callback) {
 
   fs.$readdir = fs.readdir
   fs.readdir = function (dir, optionalEncoding, callback) {
-    callback = callback || optionalEncoding 
+    callback = callback || optionalEncoding
     callback(error)
   }
 
