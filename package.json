@@ -75,11 +75,13 @@
   },
   "devDependencies": {
     "standard": "^8.1.0",
+    "standard-version": "^4.0.0",
     "workshopper-adventure-test": "^1.0.4"
   },
   "scripts": {
-    "lint": "standard",
-    "test": "standard && workshopper-adventure-test"
+    "lint": "./node_modules/.bin/standard",
+    "test": "npm run lint && ./node_modules/.bin/workshopper-adventure-test",
+    "release": "./node_modules/.bin/standard-version"
   },
   "bin": {
     "learnyounode": "./bin/learnyounode"

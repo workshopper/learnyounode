@@ -4,6 +4,8 @@ Code contributions are welcome and highly encouraged! For instructions on and he
 
 If you have questions about contributing, please create an issue.
 
+See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
 ## Lead Maintainers
 
 The role of lead maintainers is to triage and categorize issues, answer questions about contributing to the repository, review and give feedback on PRs, and maintain the quality of a workshopper's codebase and repository.
