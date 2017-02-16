@@ -50,7 +50,8 @@ function validateModule (modFile, callback) {
   // ---- Mock `fs.readdir` and check that an error bubbles back up through the cb
 
   fs.$readdir = fs.readdir
-  fs.readdir = function (dir, callback) {
+  fs.readdir = function (dir, optionalEncoding, callback) {
+    callback = callback || optionalEncoding
     callback(error)
   }
 
