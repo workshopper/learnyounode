@@ -70,7 +70,7 @@
     "through": "^2.3.8",
     "through2": "^2.0.1",
     "through2-map": "^3.0.0",
-    "workshopper-adventure": "^5.1.1",
+    "workshopper-adventure": "^6.0.0",
     "workshopper-exercise": "^2.7.0",
     "workshopper-wrappedexec": "~0.1.1"
   },
