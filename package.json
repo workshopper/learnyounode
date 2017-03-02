@@ -77,7 +77,7 @@
   "devDependencies": {
     "standard": "^8.1.0",
     "standard-version": "^4.0.0",
-    "workshopper-adventure-test": "^1.0.4"
+    "workshopper-adventure-test": "^1.1.1"
   },
   "scripts": {
     "lint": "./node_modules/.bin/standard",
