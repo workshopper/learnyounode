@@ -1,10 +1,10 @@
 {
-  "title": "Aprendiendo NODE.JS!",
+  "title": "¡Aprendiendo NODE.JS!",
   "exercise": {
     "HELLO WORLD": "HOLA MUNDO",
     "BABY STEPS":  "PASOS DE BEBE",
-    "MY FIRST I/O!": "MI PRIMER I/O!",
-    "MY FIRST ASYNC I/O!": "MI PRIMER I/O ASINCRÓNICO!",
+    "MY FIRST I/O!": "¡MI PRIMER I/O!",
+    "MY FIRST ASYNC I/O!": "¡MI PRIMER I/O ASINCRÓNICO!",
     "FILTERED LS": "LS FILTRADO",
     "MAKE IT MODULAR": "HAZLO MODULAR",
     "HTTP CLIENT": "CLIENTE HTTP",
