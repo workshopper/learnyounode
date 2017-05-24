@@ -23,6 +23,6 @@ function httpGet (index) {
   })
 }
 
-for (var i = 2; i >= 0; i--) {
+for (var i = 2; i > 0; i--) {
   setTimeout(httpGet.bind(null, i), 3 - i * 500)
 }
