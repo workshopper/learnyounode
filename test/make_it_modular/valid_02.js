@@ -16,4 +16,3 @@ function handleOutput (error, list) {
     console.log(entry)
   })
 }
-
