@@ -39,7 +39,7 @@ server.listen(8000)
 
 记住，请一定监听由第一个命令行参数指定的端口。
 
-`socket` 对象包含了很多关于各个连接的信息（meta-data），但是它也同时是一个 Node 双工流（duplex Stream），所以，它即可以读，也可以写。对这个练习来说，我们只需要对 socket 写数据和关闭它就可以了。
+`socket` 对象包含了很多关于各个连接的信息（meta-data），但是它也同时是一个 Node 双工流（duplex Stream），所以，它既可以读，也可以写。对这个练习来说，我们只需要对 socket 写数据和关闭它就可以了。
 
 使用  `socket.write(data)` 可以写数据到 socket 中，用  `socket.end()` 可以关闭一个 socket。另外， `.end()` 方法也可以接收一个数据对象作为参数，因此，你可简单地使用 `socket.end(data)` 来完成写数据和关闭两个操作。
 
