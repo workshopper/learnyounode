@@ -85,5 +85,3 @@ mêmes formats de date que la commande Unix `date`.  Vous pouvez en apprendre
 davantage sur `strftime` ici :
 
   https://github.com/samsonjs/strftime
-
-----------------------------------------------------------------------

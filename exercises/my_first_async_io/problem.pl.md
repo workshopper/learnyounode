@@ -19,5 +19,3 @@ dzięki czemu możesz sprawdzić czy wystąpił błąd przez sprawdzenie czy war
 
 Dokumentację modułu `fs` możesz przeczytać tutaj:
   {rootdir:/node_apidoc/fs.html}
-
-----------------------------------------------------------------------

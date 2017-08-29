@@ -1,4 +1,4 @@
-Crea un programa que dado un directorio imprima una lista de archivos filtrados por la extensión. El primer argumento será la ruta al directorio (ej: '/path/dir/') y el segundo la extensión a filtrar, por ejemplo si recibes 'txt' deberás filtrar todos los archivos que **terminen en .txt**. 
+Crea un programa que dado un directorio imprima una lista de archivos filtrados por la extensión. El primer argumento será la ruta al directorio (ej: '/path/dir/') y el segundo la extensión a filtrar, por ejemplo si recibes 'txt' deberás filtrar todos los archivos que **terminen en .txt**.
 
 Nota: el segundo argumento _no incluye_ el punto '.'.
 
@@ -22,5 +22,3 @@ Además, el módulo `path` puede resultar útil, especialmente la función `extn
 
 La documentación del módulo `path` puede verse en:
   {rootdir:/node_apidoc/path.html}
-
-----------------------------------------------------------------------

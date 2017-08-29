@@ -33,5 +33,3 @@ $ npm install through2-map
 要閱讀這跟著 {appname} 安裝到系統上的 through2-map 模組文件，可以在瀏覽器中打開這個頁面：
 
   {rootdir:/docs/through2-map.html}
-
-----------------------------------------------------------------------

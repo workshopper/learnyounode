@@ -9,6 +9,4 @@ Ikke forvent at disse tre URLene er "snille med deg"! De vil ikke gi deg svar i 
 
 Du blir nødt til å lage en kø av resultatene og holde kontroll på hvor mange URLer som har returnert med innhold. Når du har alt innholdet kan du skrive dem ut til skjermen.
 
-Å telle callbacks er en av de grunnleggende måtene å håndtere asynkronitet på i Node. I stedet for å gjøre alt dette selv så kan det være enklere å støtte seg på tredjeparts biblioteker som [async](http://npm.im/async) eller [after](http://npm.im/after). For denne eoppgaven derimot må du gjøre dette uten hjelp av noe bibliotek.
-
-----------------------------------------------------------------------
+Å telle callbacks er en av de grunnleggende måtene å håndtere asynkronitet på i Node. I stedet for å gjøre alt dette selv så kan det være enklere å støtte seg på tredjeparts biblioteker som [async](https://npmjs.com/async) eller [after](https://npmjs.com/after). For denne eoppgaven derimot må du gjøre dette uten hjelp av noe bibliotek.

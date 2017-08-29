@@ -12,8 +12,8 @@ Hay por lo menos dos formas de resolver este problema:
 
 **2)** Usa un paquete de terceros para evitar los problemas de almacenar el stream completo de datos. Por ejemplo, tienes a disposición: `bl` (Buffer List) o `concat-stream`.
 
-  <http://npm.im/bl>
-  <http://npm.im/concat-stream>
+  <https://npmjs.com/bl>
+  <https://npmjs.com/concat-stream>
 
 Para instalar alguno de estos paquetes usa Node Package Manager `npm` de la siguiente forma:
 
@@ -48,5 +48,3 @@ Puedes leer la documentación de ambos módulos en la carpeta de instalación de
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

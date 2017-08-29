@@ -55,7 +55,7 @@ server.listen(8000)
 `socket.write(data)` を使ってデータが送り出せます。
 
 `socket.end()` は、その Socket (接続)を閉じます。`.end()` は任意の引数を1つ取ることができます。
-その引数は `.write` と同じく data ですので、`socket.end(data)` などとするとコードが簡単なると思います。
+その引数は `.write` と同じく data ですので、`socket.end(data)` などとするとコードが簡単になると思います。
 
 `net` モジュールのドキュメントは、このリンクをブラウザで見てください:
 
@@ -74,5 +74,3 @@ date.getMinutes()
 また、 `strftime` というnpmパッケージには、 Unix の `date` 関数と同じフォーマットで日付を整形可能な機能 `strftime(fmt, date)` があります。
 
 `strftime' のドキュメントは次のURLを参照してください。：https://github.com/samsonjs/strftime
-
-----------------------------------------------------------------------

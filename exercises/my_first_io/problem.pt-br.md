@@ -13,7 +13,7 @@ var fs = require('fs')
 
 Agora você tem o módulo `fs` completo disponível em uma variável chamada `fs`.
 
-Todas os métodos de sistema de arquivos síncronas (ou bloqueantes) no módulo `fs` terminam com 'Sync'. Para ler um arquivo, você vai precisar usar `fs.readFileSync('caminho/do/arquivo')`. Esse método irá retornar um objeto `Buffer` contendo o conteúdo completo do arquivo.
+Todos os métodos de sistema de arquivos síncronos (ou bloqueantes) no módulo `fs` terminam com 'Sync'. Para ler um arquivo, você vai precisar usar `fs.readFileSync('caminho/do/arquivo')`. Esse método irá retornar um objeto `Buffer` contendo o conteúdo completo do arquivo.
 
 A documentação do módulo `fs` pode ser encontrada apontando seu navegador para esse endereço:
   {rootdir:/node_apidoc/fs.html}
@@ -24,5 +24,3 @@ A documentação sobre `Buffer`s pode ser encontrada apontando seu navegador par
   {rootdir:/node_apidoc/buffer.html}
 
 Se você estiver procurando por uma maneira fácil de contar o número de novas linhas em uma string, lembre-se que uma `String` JavaScript pode ser dividida usando `.split()` em um array de substrings e que '`\n`' pode ser usado como um delimitador. Note que o arquivo de teste não possui um caractere de nova linha ('`\n`') no fim da última linha, então ao usar esse método você vai acabar tendo um array com um elemento a mais do que o número de novas linhas.
-
-----------------------------------------------------------------------

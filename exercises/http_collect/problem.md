@@ -5,14 +5,14 @@ The first line you write should just be an integer representing the number of ch
 ----------------------------------------------------------------------
 ## HINTS
 
-There are two approaches you can take to this problem: 
+There are two approaches you can take to this problem:
 
 **1)** Collect data across multiple "data" events and append the results together prior to printing the output. Use the "end" event to determine when the stream is finished and you can write the output.
 
 **2)** Use a third-party package to abstract the difficulties involved in collecting an entire stream of data. Two different packages provide a useful API for solving this problem (there are likely more!): `bl` (Buffer List) and `concat-stream`; take your pick!
 
-  <http://npm.im/bl>
-  <http://npm.im/concat-stream>
+  <https://npmjs.com/bl>
+  <https://npmjs.com/concat-stream>
 
 To install a Node package, use the Node Package Manager `npm`. Simply type:
 
@@ -47,5 +47,3 @@ Documentation for both of these modules has been installed along with {appname} 
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

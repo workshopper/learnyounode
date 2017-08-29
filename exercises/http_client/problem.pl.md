@@ -25,5 +25,3 @@ response.on("data", function (data) { /* ... */ })
 Zdarzenie "data" jest emitowane gdy porcja danych jest dostępne i może być przetworzona. Rozmiar porcji zależy od bazowego źródła danych.
 
 Obiekt `response` - strumień, który otrzymujesz z metody `http.get()` - posiada również metodę `setEncoding()`. Jeżeli wywołasz ją z argumentem "utf8", zdarzenia "data" emitować będą ciągi znaków zamiast standardowych dla Node.js obiektów `Buffer`, które muszą zostać jawnie przekształcone do ciągów znaków.
-
-----------------------------------------------------------------------

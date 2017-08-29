@@ -23,5 +23,3 @@ $ {appname} verify program.js
 ```
 
 aby kontynuować. Twój program zostanie przetestowany, zobaczysz raport, a lekcja będzie oznaczone jako 'ukończona' gdy Ci się uda.
-
-----------------------------------------------------------------------

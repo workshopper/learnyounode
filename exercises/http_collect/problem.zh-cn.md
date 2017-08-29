@@ -11,8 +11,8 @@
 
 **2)** 使用一个第三方模块，来简化从 stream 中收集数据的繁琐步骤。这里有两个不同的模块都提供了一些有用的 API 来解决这个问题（似乎还有好多另外的模块可以选哦！）：`bl (Buffer list)` 或者 `concat-stream`，来选一个吧！
 
-  <http://npm.im/bl>
-  <http://npm.im/concat-stream>
+  <https://npmjs.com/bl>
+  <https://npmjs.com/concat-stream>
 
 要安装一个 Node 模块，需用到 Node 的包管理工具 `npm`，输入：
 
@@ -47,5 +47,3 @@ response.pipe(concatStream(function (data) { /* ... */ }))
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

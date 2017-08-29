@@ -49,5 +49,3 @@ découpée avec `.split()` en un tableau de sous-chaînes, et que '\n' peut
 y être renseigné comme délimiteur.  À ce propos, le fichier de test n’aura
 pas de '\n' à la fin, donc il contiendra un élément de plus que le nombre
 de fins de ligne.
-
-----------------------------------------------------------------------

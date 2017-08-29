@@ -1,2 +1,2 @@
 // Triggers: fail.mod.callback_arguments
-require("./module_invalid_06")
+require('./module_invalid_06')

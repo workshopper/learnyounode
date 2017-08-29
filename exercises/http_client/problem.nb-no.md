@@ -25,5 +25,3 @@ response.on("data", function (data) { /* ... */ })
 Data eventen sendes ut når en bit av dataen er tilgjengelig og kan behandles. Datastørrelsen avhenger av den underliggende datakilden.
 
 `response` objektet / Stream du får fra `http.get()` har også en `setEncoding()` metode. Kaller du den metoden med "utf8" som argument, vil "data" eventene levere String istedefor et standard Node `Buffer` objekt som du selv må konvertere til en String.
-
-----------------------------------------------------------------------

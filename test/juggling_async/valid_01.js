@@ -10,16 +10,19 @@ function printResults () {
 function httpGet (index) {
   require('http').get(process.argv[2 + index], function (response) {
     response.pipe(require('bl')(function (err, data) {
-      if (err)
+      if (err) {
         return console.error(err)
+      }
 
       results[index] = data.toString()
 
-      if (++count > 2)
+      if (++count > 2) {
         printResults()
+      }
     }))
   })
 }
 
-for (var i = 0; i < 3; i++)
+for (var i = 0; i < 3; i++) {
   httpGet(i)
+}

@@ -33,5 +33,3 @@ $ npm install through2-map
 through2-map 的文档已经随着 {appname} 安装到你的系统中了，用浏览器访问如下路径，即可进行查看：
 
   {rootdir:/docs/through2-map.html}
-
-----------------------------------------------------------------------

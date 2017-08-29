@@ -12,8 +12,8 @@ Możesz zastosować jedno z dwóch podejsć do tego problemu:
 
 **2)** Użyj zewnętrznego mogułu aby przykryć wygodniejszą abstrakcją trudności związane ze zbieraniem całego strumieinia danych. Dwa różne pakiety udostępniają użyteczny dla rozwiązania tego problemu interfejs (najprawdopodobniej więcej niż 2!): `bl` (Buffer List) oraz `concat-stream`. Wybór należy do Ciebie!
 
-  <http://npm.im/bl>
-  <http://npm.im/concat-stream>
+  <https://npmjs.com/bl>
+  <https://npmjs.com/concat-stream>
 
 Aby zainstalować pakiet Node.js, użyj menadżera pakietów `npm` (ang. Node Package Manager). Wystarczy wywołać w wierszu poleceń:
 
@@ -49,5 +49,3 @@ Dokumentacja dla obydwu modułów jest zainstalowana wraz z {appname} na Twoim s
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

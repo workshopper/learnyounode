@@ -1,17 +1,25 @@
 # Learn You The Node.js For Much Win!
-
+[![Build Status](https://travis-ci.org/workshopper/learnyounode.svg?branch=master)](https://travis-ci.org/workshopper/learnyounode)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nodeschool/discussions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 
 **An intro to Node.js via a set of self-guided workshops.**
+
+[What is Node.js](https://github.com/nodeschool/what-is-node/blob/master/simple.en.md)
 
 [![NPM](https://nodei.co/npm/learnyounode.png?downloads=true&&downloadRank=true&stars=true)](https://nodei.co/npm/learnyounode/) [![NPM](https://nodei.co/npm-dl/learnyounode.png?months=3&height=3)](https://nodei.co/npm/learnyounode/)
 
 ![Learn You The Node.js For Much Win!](https://raw.github.com/rvagg/learnyounode/master/learnyounode.png)
 
   1. Install [Node.js](http://nodejs.org/)
-  2. Run `sudo npm install learnyounode -g`
+  2. Run `npm install learnyounode -g`
+    1. In case it fails, easiest way is to prefix with `sudo`:
+
+        `sudo npm install learnyounode -g` or to:
+    2. [fix your npm permissions](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
   3. Run `learnyounode`
-  4. **.. profit!**
+    1. (Ubuntu users) In case step 3 fails, run `sudo apt-get install nodejs-legacy`
+  4. **profit!**
 
 <b><code>learnyounode</code></b> will run through a series of Node.js workshops. Starting at a basic *"HELLO WORLD"* and moving on to more advanced exercises about dealing with synchronous & asynchronous I/O, filesystem operations, TCP and HTTP networking, events and streams.
 

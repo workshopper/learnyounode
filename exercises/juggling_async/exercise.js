@@ -1,18 +1,17 @@
-var http          = require('http')
-  , exercise      = require('workshopper-exercise')()
-  , filecheck     = require('workshopper-exercise/filecheck')
-  , execute       = require('workshopper-exercise/execute')
-  , comparestdout = require('workshopper-exercise/comparestdout')
-  , bogan         = require('boganipsum')
-  , after         = require('after')
+var http = require('http')
+var exercise = require('workshopper-exercise')()
+var filecheck = require('workshopper-exercise/filecheck')
+var execute = require('workshopper-exercise/execute')
+var comparestdout = require('workshopper-exercise/comparestdout')
+var bogan = require('boganipsum')
+var after = require('after')
 
-    // three separate chunks of words to spit out
-  , words = [
-        bogan({ paragraphs: 1, sentenceMax: 1 }).split(' ')
-      , bogan({ paragraphs: 1, sentenceMax: 1 }).split(' ')
-      , bogan({ paragraphs: 1, sentenceMax: 1 }).split(' ')
-    ]
-
+  // three separate chunks of words to spit out
+var words = [
+  bogan({ paragraphs: 1, sentenceMax: 1 }).split(' '),
+  bogan({ paragraphs: 1, sentenceMax: 1 }).split(' '),
+  bogan({ paragraphs: 1, sentenceMax: 1 }).split(' ')
+]
 
 // the output will be long lines so make the comparison take that into account
 exercise.longCompareOutput = true
@@ -26,14 +25,14 @@ exercise = execute(exercise)
 // compare stdout of solution and submission
 exercise = comparestdout(exercise)
 
-
 // write the words out to the client for this server, do it slowly
 // and wait for `delay` until we start to make async handling a pain
-function writeWords(i, delay, res) {
+function writeWords (i, delay, res) {
   setTimeout(function () {
     ;(function next (j) {
-      if (j == words[i].length)
+      if (j === words[i].length) {
         return res.end()
+      }
       res.write(words[i][j] + ' ')
       // use setTimeout to slow down the output to test timing
       setTimeout(next.bind(null, j + 1), 2)
@@ -41,6 +40,23 @@ function writeWords(i, delay, res) {
   }, delay)
 }
 
+// shuffle an array of elements in JavaScript to randomize the range.
+// taken from http://stackoverflow.com/a/6274398/962452
+function shuffle (array) {
+  var counter = array.length
+  // While there are elements in the array
+  while (counter > 0) {
+    // Pick a random index
+    var index = Math.floor(Math.random() * counter)
+    // Decrease counter by 1
+    counter--
+    // And swap the last element with it
+    var temp = array[counter]
+    array[counter] = array[index]
+    array[index] = temp
+  }
+  return array
+}
 
 // start a server to print `words[i]` after `delay`
 function server (i, delay, callback) {
@@ -49,14 +65,14 @@ function server (i, delay, callback) {
   }).listen(0, callback)
 }
 
-
 // set up the data file to be passed to the submission
 exercise.addSetup(function (mode, callback) {
   // mode == 'run' || 'verify'
 
   var done = after(3, function (err) {
-    if (err)
+    if (err) {
       return callback(err)
+    }
 
     // give the 3 server urls as cmdline args to the child processes
     var args = this.servers.map(function (s) {
@@ -64,26 +80,31 @@ exercise.addSetup(function (mode, callback) {
     })
 
     this.submissionArgs = args
-    this.solutionArgs   = args
+    this.solutionArgs = args
 
     callback()
   }.bind(this))
 
+  var times = []
+  times.push(1 + Math.random() * 100)
+  times.push(times[0] + 100 + Math.random() * 100)
+  times.push(times[1] + 100 + Math.random() * 100)
+  times = shuffle(times)
+
   this.servers = [
-      server(0, 200, done)
-    , server(1, 0,   done)
-    , server(2, 100,  done)
+    server(0, times[0], done),
+    server(1, times[1], done),
+    server(2, times[2], done)
   ]
-
 })
-
 
 // cleanup for both run and verify
 exercise.addCleanup(function (mode, passed, callback) {
   // mode == 'run' || 'verify'
 
-  if (!this.servers)
+  if (!this.servers) {
     return process.nextTick(callback)
+  }
 
   // close all 3 servers
   var done = after(3, callback)
@@ -91,6 +112,5 @@ exercise.addCleanup(function (mode, passed, callback) {
     s.close(done)
   })
 })
-
 
 module.exports = exercise

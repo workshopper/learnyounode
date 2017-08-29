@@ -1,8 +1,7 @@
 var fs = require('fs')
-  , path = require('path')
 
-fs.readFile(process.argv[2], count_new_lines)
+fs.readFile(process.argv[2], countNewLines)
 
-function count_new_lines(error, text) {
-	console.log(-1)
+function countNewLines (_, text) {
+  console.log(-1)
 }

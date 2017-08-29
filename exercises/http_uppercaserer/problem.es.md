@@ -32,5 +32,3 @@ En caso de no tener conexión a Internet, simplemente crea una carpeta `node_mod
 La documentación del paquete `through2-map` puede verse en:
 
   {rootdir:/docs/through2-map.html}
-
-----------------------------------------------------------------------

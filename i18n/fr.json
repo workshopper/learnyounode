@@ -1,14 +1,10 @@
 {
   "title": "APPRENDS NODE POUR ÊTRE TROP BALÈZE !",
-  "subtitle" : "\u001b[23mSélectionnez un exercice et tapez \u001b[3mEnter\u001b[23m pour démarrer",
-  "menu": {
-    "credits": "CRÉDITS"
-  },
   "common": {
     "exercise": {
       "pass": {
         "sync": "Recours à une méthode synchrone : {{{method}}}",
-        "async": "Recourse à une méthode asynchrone : {{{method}}}"
+        "async": "Recours à une méthode asynchrone : {{{method}}}"
       },
       "fail": {
         "sync": "Recours à une méthode synchrone : {{{method}}}",

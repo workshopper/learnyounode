@@ -24,7 +24,5 @@ pourrez afficher vos résultats dans la console.
 Compter les fonctions de rappels et une des manières basiques de gérer
 l’asynchrone en Node.  Plutôt que de le faire vous-même, vous trouverez
 sûrement utile de vous baser sur des modules tiers tels que
-[async](http://npm.im/async) ou [after](http://npm.im/after). Mais pour
+[async](https://npmjs.com/async) ou [after](https://npmjs.com/after). Mais pour
 cet exercice, essayez de réussir sans l’aide d’un module externe.
-
-----------------------------------------------------------------------

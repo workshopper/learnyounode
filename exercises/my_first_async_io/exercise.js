@@ -1,16 +1,15 @@
-var fs            = require('fs')
-  , path          = require('path')
-  , os            = require('os')
-  , rimraf        = require('rimraf')
-  , exercise      = require('workshopper-exercise')()
-  , filecheck     = require('workshopper-exercise/filecheck')
-  , execute       = require('workshopper-exercise/execute')
-  , comparestdout = require('workshopper-exercise/comparestdout')
-  , wrappedexec   = require('workshopper-wrappedexec')
-  , boganipsum    = require('boganipsum')
+var fs = require('fs')
+var path = require('path')
+var os = require('os')
+var rimraf = require('rimraf')
+var exercise = require('workshopper-exercise')()
+var filecheck = require('workshopper-exercise/filecheck')
+var execute = require('workshopper-exercise/execute')
+var comparestdout = require('workshopper-exercise/comparestdout')
+var wrappedexec = require('workshopper-wrappedexec')
+var boganipsum = require('boganipsum')
 
-  , testFile      = path.join(os.tmpDir(), '_learnyounode_' + process.pid + '.txt')
-
+var testFile = path.join(os.tmpdir(), '_learnyounode_' + process.pid + '.txt')
 
 // checks that the submission file actually exists
 exercise = filecheck(exercise)
@@ -29,13 +28,12 @@ exercise = wrappedexec(exercise)
 // child process
 exercise.wrapModule(require.resolve('../my_first_io/wrap'))
 
-
 // set up the data file to be passed to the submission
 exercise.addSetup(function (mode, callback) {
   // mode == 'run' || 'verify'
 
   var lines = Math.ceil(Math.random() * 50)
-    , txt   = boganipsum({ paragraphs: lines })
+  var txt = boganipsum({ paragraphs: lines })
 
   // supply the file as an arg to the 'execute' processor for both
   // solution and submission spawn()
@@ -48,11 +46,10 @@ exercise.addSetup(function (mode, callback) {
   fs.writeFile(testFile, txt, 'utf8', callback)
 })
 
-
 // add a processor only for 'verify' calls
 exercise.addVerifyProcessor(function (callback) {
-  var usedSync  = false
-    , usedAsync = false
+  var usedSync = false
+  var usedAsync = false
 
   Object.keys(exercise.wrapData.fsCalls).forEach(function (m) {
     if (/Sync$/.test(m)) {
@@ -67,13 +64,11 @@ exercise.addVerifyProcessor(function (callback) {
   callback(null, usedAsync && !usedSync)
 })
 
-
 // cleanup for both run and verify
 exercise.addCleanup(function (mode, passed, callback) {
   // mode == 'run' || 'verify'
 
   rimraf(testFile, callback)
 })
-
 
 module.exports = exercise

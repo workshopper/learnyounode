@@ -6,7 +6,7 @@ Le chemin complet du fichier à lire vous sera fourni comme premier argument
 de la ligne de commande.
 
 ----------------------------------------------------------------------
-# HINTS
+# CONSEILS
 
 La solution à ce problème est presque exactement la même que pour le précédent,
 à ceci près que vous devez désormais le faire **à la façon Node.js** : en
@@ -36,5 +36,3 @@ La documentation du module `fs` peut être consultée avec votre navigateur
 à l’adresse hors-ligne suivante :
 
   {rootdir:/node_apidoc/fs.html}
-
-----------------------------------------------------------------------

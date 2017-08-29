@@ -21,13 +21,13 @@ Fordelen med en kontrakt er at modulen kan bli benyttet av alle som forventer de
 ----------------------------------------------------------------------
 ## HINT
 
-Lag en modul ved å opprette en ny fil som inneholder funksjonen som leser filene i en katalog og filtrerer bort filnavn som ikke har riktig filetternavn. For å *eksportere* *funksjonen* må du tilordne funksjonen til `module.exports` objektet: 
+Lag en modul ved å opprette en ny fil som inneholder funksjonen som leser filene i en katalog og filtrerer bort filnavn som ikke har riktig filetternavn. For å *eksportere* *funksjonen* må du tilordne funksjonen til `module.exports` objektet:
 
 ```js
 module.exports = function (args) { /* ... */ }
 ```
 
-Du kan også gi funksjonen et navn og tilordne navnet til `module.exports` objektet. 
+Du kan også gi funksjonen et navn og tilordne navnet til `module.exports` objektet.
 
 Dette kalles å eksportere eller tilgjengeliggjøre funksjonen på modulen.
 
@@ -57,5 +57,3 @@ function bar (callback) {
   })
 }
 ```
-
-----------------------------------------------------------------------

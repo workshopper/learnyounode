@@ -9,6 +9,4 @@ Nie spodziewaj się, że te trzy zewnętrzne serwery będą miłe i kochane! Nie
 
 Zaistnieje potrzeba zakolejkowania wyników i pamiętania ile URLi zwróciło całą odpowiedź. Dopiero gdy masz je wszystkie możesz wypisać dane na konsolę.
 
-Zliczanie wywołań funkcji callback stanowi jeden z podstawowych sposobów radzenia sobie z asynchronicznością w Node.js. W praktyce wygodniejsze od ogarnięcia tego własnoręcznie może być poleganie na zewnętrznej bibliotece takiej jak [async](http://npm.im/async) lub [after](http://npm.im/after). Na potrzeby tego ćwiczenia spróbuj jednak osiągnąć cel własnymi siłami.
-
-----------------------------------------------------------------------
+Zliczanie wywołań funkcji callback stanowi jeden z podstawowych sposobów radzenia sobie z asynchronicznością w Node.js. W praktyce wygodniejsze od ogarnięcia tego własnoręcznie może być poleganie na zewnętrznej bibliotece takiej jak [async](https://npmjs.com/async) lub [after](https://npmjs.com/after). Na potrzeby tego ćwiczenia spróbuj jednak osiągnąć cel własnymi siłami.

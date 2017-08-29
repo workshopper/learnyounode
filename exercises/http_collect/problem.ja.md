@@ -1,4 +1,4 @@
-1つ目のコマンドライン引数は URL 文字列です。 そのURL文字列を使ってHTTP のデーターをロード (※)するアプリを書いてください。
+1つ目のコマンドライン引数は URL 文字列です。 そのURL文字列を使ってHTTP のデータをロード (※)するアプリを書いてください。
 
 サーバから**全て**（最初のイベントだけではなく）のデータを集め、次の2行をコンソールに出力して下さい。
 
@@ -13,8 +13,8 @@
 
 **2)** サードパーティ製のパッケージを使っても良いです。以下の2つのパッケージはこの問題に関して役に立ちます。 `bl` (Buffer List) か `concat-stream`のいずれかを選んでください。
 
-  <http://npm.im/bl>
-  <http://npm.im/concat-stream>
+  <https://npmjs.com/bl>
+  <https://npmjs.com/concat-stream>
 
 Node.js のパッケージをインストールするために Node.js のパッケージ管理ツールである `npm`を使ってください。
 コマンドラインに次のコマンドを書いてください：
@@ -51,5 +51,3 @@ response.pipe(concatStream(function (data) { /* ... */ }))
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

@@ -12,8 +12,8 @@ Trong bài tập này bạn có thể phải đối mặt với 2 vấn đều l
 
 **2)** Sử dụng một gói thư viện thứ 3 để có thể bỏ qua được sự phức tạp khi tập kết các dòng dữ liệu lại với nhau. Ở đây, ta có thể sử dụng 2 gói khác nhau cung cấp các API rất tiện dụng để giải quyết vấn đề này (có thể có nhiều thư viện như vậy!) là: `bl` (Buffer List) và `concat-stream`.
 
-  <http://npm.im/bl>
-  <http://npm.im/concat-stream>
+  <https://npmjs.com/bl>
+  <https://npmjs.com/concat-stream>
 
 Để cài đặt một gói thư viện Node, hãy sử dụng Trình Quản Lý Gói của Node (Node Package Manager) `npm`. Ví dụ lệnh sau sẽ cài đặt gói `bl` vào thư mục cục bộ hiện tại của bạn:
 
@@ -48,5 +48,3 @@ Tài liệu cho cả 2 mô-đun này đều đã được cài đặt cùng vớ
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

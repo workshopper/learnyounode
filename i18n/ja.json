@@ -1,6 +1,5 @@
 {
   "title": "Node.jsを学んで豊かな人生を！",
-  "subtitle": "\u001b[23m演習課題を選択、 \u001b[3mEnter\u001b[23m 押してスタートします。",
   "exercise": {
     "HELLO WORLD": "こんにちは世界",
     "BABY STEPS": "ベイビーステップ",
@@ -15,9 +14,6 @@
     "HTTP FILE SERVER": "HTTP ファイルサーバ",
     "HTTP UPPERCASERER": "HTTP アッパーケース",
     "HTTP JSON API SERVER": "HTTP JSON API サーバ"
-  },
-  "menu": {
-    "credits": "謝辞"
   },
   "common": {
     "exercise": {

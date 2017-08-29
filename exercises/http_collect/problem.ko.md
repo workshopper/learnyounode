@@ -11,8 +11,8 @@
 
 **2)** 전체 데이터 스트림을 수집하는 것은 어려운 작업입니다. 서드 파티 패키지를 이용해 해소하세요. `bl` (Buffer List), `concat-stream` 두 패키지가 이 문제를 풀기에 유용한 API를 제공.(할 가능성이 있음!) 하나를 고르세요.
 
-  <http://npm.im/bl>
-  <http://npm.im/concat-stream>
+  <https://npmjs.com/bl>
+  <https://npmjs.com/concat-stream>
 
 Node 패키지를 설치하려면, Node 패키지 관리자 `npm`을 사용하세요. 밑의 줄을 그냥 입력하세요.
 
@@ -47,5 +47,3 @@ response.pipe(concatStream(function (data) { /* ... */ }))
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
-
-----------------------------------------------------------------------

@@ -37,7 +37,7 @@ $ node -pe "require('url').parse('/test?q=1', true)"
 
 Xem thêm chi tiết về mô-đun `url` tại:
   {rootdir:/node_apidoc/url.html}
-  
+
 Response sẽ được trả lại dưới dạng JSON. Bạn tìm hiểu `JSON.stringify()` để biết thêm nhé.
 
 Bạn cũng nên trả lại thuộc tính Content-Type, vì bạn đang làm việc với Website mà, cách trả như sau:
@@ -47,5 +47,3 @@ res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
 Đối tượng `Date` của JavaScript có thể in ra thời gian dưới dạng ISO, ví dụ: `new Date().toISOString()`. Nó cũng có thể phân tích được một chuỗi dạng này khi bạn truyền nó cho hàm khởi tạo của lớp `Date`.  Ngoài ra, ta còn có thể dễ dàng sử dụng `Date#getTime()` để quy đổi ra dạng UNIX mili-giây.
-
-----------------------------------------------------------------------

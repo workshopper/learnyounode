@@ -38,7 +38,7 @@ $ node -pe "require('url').parse('/test?q=1', true)"
 
 Dokumentację modułu `url` możesz przeczytać tutaj:
   {rootdir:/node_apidoc/url.html}
-  
+
 Your response should be in a JSON string format. Look at `JSON.stringify()` for more information.
 Twoja odpowiedź powinna być w formacie JSON. Poszukaj informacji na temat `JSON.stringify()` aby dowiedzieć się więcej.
 
@@ -50,5 +50,3 @@ res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
 JavaScriptowy obiekt `Date` może wypisywać dane w formacie ISO, np. `new Date().toISOString()`. Jest on również w stanie parsować tenże format jeżeli przekażesz odpowiedni ciąg znaków do konstruktora `Date`. Przyda Ci się również metoda `Date#getTime()`.
-
-----------------------------------------------------------------------

@@ -9,7 +9,7 @@ Løsningen på problemet er nesten identisk med løsningen på det forrige probl
 
 I stede for å bruke `fs.readFileSync()` vil du nå benytte `fs.readFile()`. Denne vil ikke returnere svaret som i forrige oppgave, men gi svaret i en callback funksjon. Callback funksjonen skal gis som det andre parameteret til `fs.readFile()`. For å lære mer om callbacks kan du lese https://github.com/maxogden/art-of-node#callbacks.
 
-Husk at den idiomatiske Node.js måten for callbacks normalt har signaturen: 
+Husk at den idiomatiske Node.js måten for callbacks normalt har signaturen:
 
 ```js
 function callback (err, data) { /* ... */ }
@@ -19,5 +19,3 @@ og du kan derfor sjekke om **err argumentet**  inneholder en feil. Hvis det ikke
 
 Dokumentasjonen til `fs`s finner du her:
   {rootdir:/node_apidoc/fs.html}
-
-----------------------------------------------------------------------

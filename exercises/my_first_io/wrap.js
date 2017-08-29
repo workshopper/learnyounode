@@ -1,6 +1,5 @@
 var fs = require('fs')
 
-
 function wrap (ctx) {
   ctx.fsCalls = {}
 
@@ -18,11 +17,12 @@ function wrap (ctx) {
       // the substring() is necessary as the user doesn't have to provide
       // a .js extension to make it work
 
-      if (stack[0].getFileName().substring(0, ctx.mainProgram.length) == ctx.mainProgram) {
-        if (!ctx.fsCalls[m])
+      if (stack[0].getFileName().substring(0, ctx.mainProgram.length) === ctx.mainProgram) {
+        if (!ctx.fsCalls[m]) {
           ctx.fsCalls[m] = 1
-        else
+        } else {
           ctx.fsCalls[m]++
+        }
       }
 
       // call the real fs.readFileSync
@@ -31,6 +31,5 @@ function wrap (ctx) {
     }
   })
 }
-
 
 module.exports = wrap

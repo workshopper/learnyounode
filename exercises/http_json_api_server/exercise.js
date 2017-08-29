@@ -1,14 +1,13 @@
-var through2      = require('through2')
-  , hyperquest    = require('hyperquest')
-  , bl            = require('bl')
-  , exercise      = require('workshopper-exercise')()
-  , filecheck     = require('workshopper-exercise/filecheck')
-  , execute       = require('workshopper-exercise/execute')
-  , comparestdout = require('workshopper-exercise/comparestdout')
-  , rndport       = require('../../lib/rndport')
+var through2 = require('through2')
+var hyperquest = require('hyperquest')
+var bl = require('bl')
+var exercise = require('workshopper-exercise')()
+var filecheck = require('workshopper-exercise/filecheck')
+var execute = require('workshopper-exercise/execute')
+var comparestdout = require('workshopper-exercise/comparestdout')
+var rndport = require('../../lib/rndport')
 
-  , date          = new Date(Date.now() - 100000)
-
+var date = new Date(Date.now() - 100000)
 
 // the output will be long lines so make the comparison take that into account
 exercise.longCompareOutput = true
@@ -19,18 +18,16 @@ exercise = filecheck(exercise)
 // execute the solution and submission in parallel with spawn()
 exercise = execute(exercise)
 
-
 // set up the data file to be passed to the submission
 exercise.addSetup(function (mode, callback) {
   this.submissionPort = rndport()
-  this.solutionPort   = this.submissionPort + 1
+  this.solutionPort = this.submissionPort + 1
 
   this.submissionArgs = [ this.submissionPort ]
-  this.solutionArgs   = [ this.solutionPort ]
+  this.solutionArgs = [ this.solutionPort ]
 
   process.nextTick(callback)
 })
-
 
 // add a processor for both run and verify calls, added *before*
 // the comparestdout processor so we can mess with the stdouts
@@ -39,8 +36,9 @@ exercise.addProcessor(function (mode, callback) {
 
   // replace stdout with our own streams
   this.submissionStdout = through2()
-  if (mode == 'verify')
+  if (mode === 'verify') {
     this.solutionStdout = through2()
+  }
 
   setTimeout(query.bind(this, mode), 500)
 
@@ -49,12 +47,10 @@ exercise.addProcessor(function (mode, callback) {
   })
 })
 
-
 // compare stdout of solution and submission
 exercise = comparestdout(exercise)
 
-
-function normalizeJSON(data) {
+function normalizeJSON (data) {
   return JSON.stringify(JSON.parse(data))
 }
 
@@ -64,9 +60,8 @@ function query (mode) {
   var exercise = this
 
   function verify (port, stream) {
-
     function timeRequest (method, callback) {
-      var url = 'http://localhost:' + port + '/api/' + method + '?iso=' + date.toISOString();
+      var url = 'http://localhost:' + port + '/api/' + method + '?iso=' + date.toISOString()
 
       function onData (err, _data) {
         if (err) {
@@ -76,8 +71,7 @@ function query (mode) {
 
           try {
             data = normalizeJSON(data.toString())
-          } catch (e) {
-          }
+          } catch (e) {}
 
           stream.write(data + '\n')
         }
@@ -96,9 +90,9 @@ function query (mode) {
   }
 
   verify(this.submissionPort, this.submissionStdout)
-  if (mode == 'verify')
+  if (mode === 'verify') {
     verify(this.solutionPort, this.solutionStdout)
+  }
 }
-
 
 module.exports = exercise

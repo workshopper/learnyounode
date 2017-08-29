@@ -36,5 +36,3 @@ Jeżeli nie masz internetów, utwórz katalog `node_modules` i skopiuj cały kat
 Dokumentacja pakietu `through2-map` została zainstalowana razem z {appname} w Twoim systemie i możesz ją przeczytać tutaj:
 
   {rootdir:/docs/through2-map.html}
-
-----------------------------------------------------------------------

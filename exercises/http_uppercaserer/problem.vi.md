@@ -33,5 +33,3 @@ Nếu bạn không có kết nối Internet, đơn giản, hãy tạo một thư
 Tài liệu về through2-map được cài đặt sẵn cùng với {appname} trên hệ thống của bạn và bạn có thể đọc nó ở đây:
 
   {rootdir:/docs/through2-map.html}
-
-----------------------------------------------------------------------
