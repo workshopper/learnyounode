@@ -46,7 +46,7 @@ exercise.addProcessor(function (mode, callback) {
 
 // add a processor to check GET failure case only for 'verify' calls
 exercise.addVerifyProcessor(function (callback) {
-  setTimeout(checkOnlyPost.bind(this, callback) , 500)
+  setTimeout(checkOnlyPost.bind(this, callback), 500)
 })
 
 // compare stdout of solution and submission
@@ -55,31 +55,31 @@ exercise = comparestdout(exercise)
 // delayed for 500ms to wait for servers to start so we can start
 // playing with them
 function checkOnlyPost (callback) {
-    var exercise = this
-      , url = 'http://localhost:' + this.submissionPort
-      , verified = true
+  var exercise = this
+  var url = 'http://localhost:' + this.submissionPort
+  var verified = true
 
-    hyperquest.get(url, function (err, res) {
-      if (err) {
-        exercise.emit(
+  hyperquest.get(url, function (err, res) {
+    if (err) {
+      exercise.emit(
             'fail'
           , exercise.__('fail.connection', {address: url, message: err.message})
         )
-        return callback(null, false)
-      }
+      return callback(null, false)
+    }
 
-      if (res.statusCode !== 405) {
+    if (res.statusCode !== 405) {
         // 405 is Method Not Allowed
-        exercise.emit('fail', exercise.__('fail.method'))
-        verified = false;
-      } else if (res.headers["allow"] !== "POST") {
+      exercise.emit('fail', exercise.__('fail.method'))
+      verified = false
+    } else if (res.headers['allow'] !== 'POST') {
         // 405 requres an appropriate Allow header
-        exercise.emit('fail', exercise.__('fail.allow_post'))
-        verified = false;
-      }
+      exercise.emit('fail', exercise.__('fail.allow_post'))
+      verified = false
+    }
 
-      callback(null, verified)
-    })
+    callback(null, verified)
+  })
 }
 
 // delayed for 500ms to wait for servers to start so we can start

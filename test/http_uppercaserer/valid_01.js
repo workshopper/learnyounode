@@ -1,5 +1,6 @@
 require('http').createServer(function (req, res) {
   if (req.method !== 'POST') {
+    res.writeHead(405, {'Allow': 'POST'})
     return res.end('POST only!\n')
   }
 
