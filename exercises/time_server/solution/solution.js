@@ -1,11 +1,11 @@
-var net = require('net')
+const net = require('net')
 
 function zeroFill (i) {
   return (i < 10 ? '0' : '') + i
 }
 
 function now () {
-  var d = new Date()
+  const d = new Date()
   return d.getFullYear() + '-' +
     zeroFill(d.getMonth() + 1) + '-' +
     zeroFill(d.getDate()) + ' ' +
@@ -13,7 +13,7 @@ function now () {
     zeroFill(d.getMinutes())
 }
 
-var server = net.createServer(function (socket) {
+const server = net.createServer(function (socket) {
   socket.end(now() + '\n')
 })
 

@@ -1,8 +1,8 @@
-var fs = require('fs')
-var path = require('path')
+const fs = require('fs')
+const path = require('path')
 
-var folder = process.argv[2]
-var ext = '.' + process.argv[3]
+const folder = process.argv[2]
+const ext = '.' + process.argv[3]
 
 fs.readdir(folder, function (err, files) {
   if (err) return console.error(err)
