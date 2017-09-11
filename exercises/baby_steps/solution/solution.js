@@ -1,6 +1,6 @@
-var result = 0
+let result = 0
 
-for (var i = 2; i < process.argv.length; i++) {
+for (let i = 2; i < process.argv.length; i++) {
   result += Number(process.argv[i])
 }
 

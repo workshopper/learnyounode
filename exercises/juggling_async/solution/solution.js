@@ -1,10 +1,10 @@
-var http = require('http')
-var bl = require('bl')
-var results = []
-var count = 0
+const http = require('http')
+const bl = require('bl')
+const results = []
+let count = 0
 
 function printResults () {
-  for (var i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i++) {
     console.log(results[i])
   }
 }
@@ -26,6 +26,6 @@ function httpGet (index) {
   })
 }
 
-for (var i = 0; i < 3; i++) {
+for (let i = 0; i < 3; i++) {
   httpGet(i)
 }

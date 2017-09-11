@@ -1,6 +1,6 @@
-var filterFn = require('./solution_filter.js')
-var dir = process.argv[2]
-var filterStr = process.argv[3]
+const filterFn = require('./solution_filter.js')
+const dir = process.argv[2]
+const filterStr = process.argv[3]
 
 filterFn(dir, filterStr, function (err, list) {
   if (err) {
