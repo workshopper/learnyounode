@@ -1,7 +1,7 @@
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
+const exercise = require('workshopper-exercise')()
+const filecheck = require('workshopper-exercise/filecheck')
+const execute = require('workshopper-exercise/execute')
+const comparestdout = require('workshopper-exercise/comparestdout')
 
 // checks that the submission file actually exists
 exercise = filecheck(exercise)
@@ -22,7 +22,7 @@ exercise.addSetup(function (mode, callback) {
   // mode == 'run' || 'verify'
 
   // create a random batch of cmdline args
-  var args = [ rndint(), rndint() ]
+  const args = [ rndint(), rndint() ]
 
   while (Math.random() > 0.3) {
     args.push(rndint())
