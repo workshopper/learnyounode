@@ -1,4 +1,4 @@
-const exercise = require('workshopper-exercise')()
+let exercise = require('workshopper-exercise')()
 const filecheck = require('workshopper-exercise/filecheck')
 const execute = require('workshopper-exercise/execute')
 const comparestdout = require('workshopper-exercise/comparestdout')
