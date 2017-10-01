@@ -1,3 +1,5 @@
+"use strict"
+
 const http = require('http')
 let exercise = require('workshopper-exercise')()
 const filecheck = require('workshopper-exercise/filecheck')
