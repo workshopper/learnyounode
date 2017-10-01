@@ -1,7 +1,7 @@
-var http = require('http')
-var map = require('through2-map')
+const http = require('http')
+const map = require('through2-map')
 
-var server = http.createServer(function (req, res) {
+const server = http.createServer(function (req, res) {
   if (req.method !== 'POST') {
     return res.end('send me a POST\n')
   }

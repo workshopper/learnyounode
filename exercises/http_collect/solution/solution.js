@@ -1,5 +1,5 @@
-var http = require('http')
-var bl = require('bl')
+const http = require('http')
+const bl = require('bl')
 
 http.get(process.argv[2], function (response) {
   response.pipe(bl(function (err, data) {
