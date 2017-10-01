@@ -1,7 +1,7 @@
-var fs = require('fs')
+const fs = require('fs')
 
-var contents = fs.readFileSync(process.argv[2])
-var lines = contents.toString().split('\n').length - 1
+const contents = fs.readFileSync(process.argv[2])
+const lines = contents.toString().split('\n').length - 1
 console.log(lines)
 
 // Merk deg at du kan unngå kallet til .toString() ved å sende inn 'utf8' som det
