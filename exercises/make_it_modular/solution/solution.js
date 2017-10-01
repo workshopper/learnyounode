@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 
 const filterFn = require('./solution_filter.js')
 const dir = process.argv[2]
