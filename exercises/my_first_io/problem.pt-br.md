@@ -8,7 +8,7 @@ Todo o caminho até o arquivo à ser lido será fornecido como primeiro argument
 Para realizar uma operação de sistema de arquivos (filesystem), você vai precisar do módulo `fs` da library principal do Node. Para carregar esse tipo de módulo ou qualquer outro módulo "global", use o seguinte código:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 Agora você tem o módulo `fs` completo disponível em uma variável chamada `fs`.
