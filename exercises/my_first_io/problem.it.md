@@ -8,7 +8,7 @@ Il percorso completo al file da leggere sarà fornito come il primo argomento da
 Per effettuare operazioni sul file system avrai bisogno del modulo `fs` dalla libreria Node core. Per caricare questo tipo di modulo, o qualsiasi altro modulo "globale", usa il seguente incantesimo:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 Dopodiché disporrai dell'intero modulo `fs` in una variabile chiamata `fs`.

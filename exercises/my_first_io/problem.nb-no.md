@@ -8,7 +8,7 @@ Hele filstien til filen du skal lese vil bli sendt inn som første kommandolinje
 Du trenger `fs` modulen fra Node core biblioteket for å kjøre operasjoner mot filsystemet. For å laste inn denne typen moduler, eller andre "globale" moduler, kan du skrive dette:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 Nå har du hele `fs` modulen tilgjengelig i variabelen  `fs`.
