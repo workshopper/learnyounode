@@ -28,8 +28,8 @@ function callback (socket) { /* ... */ }
 Un tipico server TCP di Node si presenta così:
 
 ```js
-var net = require('net')
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
   // logica per gestire la socket
 })
 server.listen(8000)
