@@ -1,16 +1,18 @@
-var fs = require('fs')
-var path = require('path')
-var os = require('os')
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
-var wrappedexec = require('workshopper-wrappedexec')
-var after = require('after')
-var rimraf = require('rimraf')
-var files = require('./file-list')
+'use strict'
 
-var testDir = path.join(os.tmpdir(), '_learnyounode_' + process.pid)
+const fs = require('fs')
+const path = require('path')
+const os = require('os')
+let exercise = require('workshopper-exercise')()
+const filecheck = require('workshopper-exercise/filecheck')
+const execute = require('workshopper-exercise/execute')
+const comparestdout = require('workshopper-exercise/comparestdout')
+const wrappedexec = require('workshopper-wrappedexec')
+const after = require('after')
+const rimraf = require('rimraf')
+const files = require('./file-list')
+
+const testDir = path.join(os.tmpdir(), '_learnyounode_' + process.pid)
 
 // checks that the submission file actually exists
 exercise = filecheck(exercise)
@@ -47,7 +49,7 @@ exercise.addSetup(function (mode, callback) {
       return callback(err)
     }
 
-    var done = after(files.length, callback)
+    const done = after(files.length, callback)
 
     files.forEach(function (f) {
       fs.writeFile(
@@ -62,8 +64,8 @@ exercise.addSetup(function (mode, callback) {
 
 // add a processor only for 'verify' calls
 exercise.addVerifyProcessor(function (callback) {
-  var usedSync = false
-  var usedAsync = false
+  let usedSync = false
+  let usedAsync = false
 
   Object.keys(exercise.wrapData.fsCalls).forEach(function (m) {
     if (/Sync$/.test(m)) {
