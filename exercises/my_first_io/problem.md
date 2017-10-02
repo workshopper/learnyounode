@@ -8,7 +8,7 @@ The full path to the file to read will be provided as the first command-line arg
 To perform a filesystem operation you are going to need the `fs` module from the Node core library. To load this kind of module, or any other "global" module, use the following incantation:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 Now you have the full `fs` module available in a variable named `fs`.

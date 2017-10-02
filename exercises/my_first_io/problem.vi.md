@@ -8,7 +8,7 @@ Viết một chương trình sử dụng thao tác đọc một file bằng phư
 Để thực hiện các thao tác với hệ thống file, bạn cần sử dụng mô-đun `fs` được tích hợp sẵn trong lõi thư viện Node. Để nạp những mô-đun được tích hợp sẵn, hoặc các mô-đun "toàn cục", sử dụng `require(module_name)` để nạp:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 Với mã nạp như trên bạn sẽ nạp được đầy đủ mô-đun `fs`, và có thể sử dụng chúng như một biến trong chương trình.
