@@ -13,7 +13,7 @@ cat 檔案路徑 | wc -l
 為了進行檔案系統（filesystem）的操作，你必須使用 Node.js 內建的 `fs` 核心模組。要載入此核心模祖，或任何全域（Global）的模組，您可以使用以下的語法：
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 現在，您可以透過變數 `fs` 以使用 `fs` 模組的完整功能。因為 `fs` 模組已經被載入，並存放在名為 `fs` 的變數中。
 

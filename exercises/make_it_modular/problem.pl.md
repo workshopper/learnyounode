@@ -34,7 +34,7 @@ Możesz też użyć funkcji nazwanej (`function foo (args) { /* ... */ }`) i prz
 Aby użyć Twojego nowego modułu w pierwotnym pliku programu, wywołaj `require()` w takim sam sposób jak `require('fs')` do wczytania modułu `fs`. Jedyna różnica tkwi w tym, że lokalne moduły muszą zostać poprzedzone `./`. Jeżeli zatem Twój plik ma nazwę `mymodule.js`:
 
 ```js
-var mymodule = require('./mymodule.js')
+const mymodule = require('./mymodule.js')
 ```
 
 Rozszerzenie '.js' nie jest obowiązkowe w tym wywołaniu i często będziesz spotykać się z przypadkami, gdzie jest ono pomijane.

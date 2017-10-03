@@ -8,7 +8,7 @@ El programa recibirá la ruta al archivo como único argumento.
 Para resolver este ejercicio usaremos el módulo `fs` del núcleo de Node. Para cargar dicho módulo o cualquier módulo es necesario hacer:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 De este modo, el módulo `fs` estará disponible en esa variable.
