@@ -33,7 +33,7 @@ module.exports = function (args) { /* ... */ }
 要在您原本的程式裡使用您建立的新模組，可以用像使用 `require('fs')` 以載入 `fs` 模組的方式呼叫 `require()` 方法。唯一不同的地方是，放在此處的模組必須以「./」開頭。所以，如果您的檔案名稱是 mymodule.js ，載入模組的方法就是：
 
 ```js
-var mymodule = require('./mymodule.js')
+const mymodule = require('./mymodule.js')
 ```
 
 「.js」副檔名是選擇性加入的，您將會常常看到這個副檔名被省略
