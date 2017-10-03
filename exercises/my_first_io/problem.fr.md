@@ -16,7 +16,7 @@ Tout ce qui touche au système de fichiers se trouve dans le module noyau `fs`
 module, il vous suffit d’un appel comme le suivant :
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 À présent vous avez le module `fs` entier mis à disposition dans votre
