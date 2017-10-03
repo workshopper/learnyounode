@@ -56,7 +56,7 @@ function query (mode) {
     const input = through2()
     const count = 0
     const iv
-    const url = 'http://localhost:' + port
+    const url = `http://localhost:${port}`
     const req
 
     // TODO: test GET requests for #fail
