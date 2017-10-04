@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 'use strict'
 
->>>>>>> upstream/es6
 const net = require('net')
 
 function zeroFill (i) {
