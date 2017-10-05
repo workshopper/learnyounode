@@ -1,3 +1,5 @@
+'use strict'
+
 require('fs').readFileSync(process.argv[3])
 require('http').createServer(function (req, res) {
   res.writeHead(200, 'content-type: text/plain')
