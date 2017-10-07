@@ -1,6 +1,8 @@
+'use strict'
+
 require('http').createServer(function (req, res) {
-  var time = new Date(require('url').parse(req.url, true).query.iso)
-  var result =
+  const time = new Date(require('url').parse(req.url, true).query.iso)
+  let result =
   /^\/api\/parsetime/.test(req.url)
     ? {
       hour: time.getHours(),
