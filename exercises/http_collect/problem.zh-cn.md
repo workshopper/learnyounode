@@ -23,7 +23,7 @@ $ npm install bl
 这样，相应的模块的最新版本便会被下载到当前目录下一个名为 `node_modules` 的子目录中。任何在这个子目录中的模块都可以简单地使用 `require` 语法来将模块载入到你的程序中，并且不需要加 `./` 这样的路径前缀，如下所示：
 
 ```js
-var bl = require('bl')
+const bl = require('bl')
 ```
 
 这里，Node 会先查找是否有这个名字的核心模块，如果没有，再查找在 `node_modules` 目录下是否有这个模块。

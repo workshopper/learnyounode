@@ -23,7 +23,7 @@ $ npm install bl
 E isso vai fazer o download e instalar a última versão do pacote dentro de um subdiretório chamado `node_modules`. Qualquer pacote neste subdiretório sob seu arquivo principal do programa poderá carregá-lo com a sintaxe `require` sem ser precedido por `./`:
 
 ```js
-var bl = require('bl')
+const bl = require('bl')
 ```
 
 Node vai primeiro olhar dentro dos módulos do núcleo e então dentro do diretório `node_modules` onde o pacote está localizado.

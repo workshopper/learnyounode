@@ -42,7 +42,7 @@ sous-dossier de votre programme principal peut être chargé avec la syntaxe
 `require` sans préfixe de chemin (et notamment sans './') :
 
 ```js
-var bl = require('bl');
+const bl = require('bl');
 ```
 
 Node regardera d’abord dans ses modules noyau puis dans le dossier
