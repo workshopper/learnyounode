@@ -23,7 +23,7 @@ $ npm install bl
 And it will download and install the latest version of the package into a subdirectory named `node_modules`. Any package in this subdirectory under your main program file can be loaded with the `require` syntax without being prefixed by './':
 
 ```js
-var bl = require('bl')
+const bl = require('bl')
 ```
 
 Node will first look in the core modules and then in the `node_modules` directory where the package is located.

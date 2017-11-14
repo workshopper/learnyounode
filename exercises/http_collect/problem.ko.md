@@ -23,7 +23,7 @@ $ npm install bl
 그러면 패키지의 최신 버전이 `node_modules`라는 하위 디렉터리에 다운로드되고 설치될 것입니다. 이 하위 디렉터리에 있는 모든 패키지는 메인 프로그램 파일에서 `require` 구문으로 './'를 앞에 붙이지 않고 로드할 수 있습니다.
 
 ```js
-var bl = require('bl')
+const bl = require('bl')
 ```
 
 Node는 패키지의 위치를 찾을 때, 먼저 핵심 모듈에서 찾은 다음 `node_modules` 디렉터리를 찾습니다.

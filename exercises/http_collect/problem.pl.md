@@ -24,7 +24,7 @@ $ npm install bl
 `npm` pobierze i zainstaluje najnowszą wersję pakietu do podkatalogu o nazwie `node_modules`. Dowolny pakiet w tym podkatalogu Twojego projektu może zostać załadowany za pomocą funkcji `require` bez poprzedzania go `./`:
 
 ```js
-var bl = require('bl')
+const bl = require('bl')
 ```
 
 Node.js najpierw będzie poszukiwać wśród modułów podstawowych (core modules), a następnie w katalogu `node_modules`, gdzie pakiet został pobrany.
