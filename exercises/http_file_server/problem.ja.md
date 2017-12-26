@@ -29,8 +29,8 @@ function listener (request, response) { /* ... */ }
 一般的な Node の HTTP サーバは次のように記述されています：
 
 ```js
-var http = require('http')
-var server = http.createServer(function (req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // request handling logic...
 })
 server.listen(8000)
