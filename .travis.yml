@@ -4,5 +4,3 @@ node_js:
   - '6'
   - '7'
 sudo: false
-before_install:
-  - npm install -g npm@latest
