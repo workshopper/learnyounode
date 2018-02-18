@@ -54,34 +54,43 @@ function query (mode) {
 
   function connect (port, stream) {
     var input = through2()
-    var count = 0
-    var iv
     var url = 'http://localhost:' + port
-    var req
+    var methods = ['post', 'get']
 
-    // TODO: test GET requests for #fail
-    req = input.pipe(hyperquest.post(url)
-      .on('error', function (err) {
-        exercise.emit(
-          'fail'
-          , exercise.__('fail.connection', {address: url, message: err.message})
-        )
-      }))
+    var mi = 0
+    var miv = setInterval(function () {
+      var count = 0
+      // test POST request for #success
+      // or GET request for #fail
+      var req = input.pipe(hyperquest[methods[mi]](url)
+        .on('error', function (err) {
+          exercise.emit(
+            'fail'
+            , exercise.__('fail.connection', {address: url, message: err.message})
+          )
+        }))
 
-    req.pipe(stream)
-    setTimeout(function () {
-      stream.unpipe(req)
-      stream.end()
-    }, 5000)
+      req.pipe(stream)
+      setTimeout(function () {
+        stream.unpipe(req)
+        if (++mi === methods.length) {
+          stream.end()
+        }
+      }, 3000)
 
-    iv = setInterval(function () {
-      input.write(words[count].trim() + '\n')
+      var iv = setInterval(function () {
+        input.write(words[count].trim() + '\n')
 
-      if (++count === words.length) {
-        clearInterval(iv)
-        input.end()
-      }
-    }, 50)
+        if (++count === words.length) {
+          clearInterval(iv)
+
+          if (++mi === methods.length) {
+            clearInterval(miv)
+            input.end()
+          }
+        }
+      }, 50)
+    }, 600)
   }
 
   connect(this.submissionPort, this.submissionStdout)

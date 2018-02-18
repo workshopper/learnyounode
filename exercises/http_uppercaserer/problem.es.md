@@ -1,5 +1,7 @@
 Escribe un **servidor** HTTP que reciba sólo peticiones POST y convierta los caracteres del cuerpo de la petición a mayúsculas y lo devuelva al cliente.
 
+Peticiones GET hay que dar les una respuesta vacia.
+
 El servidor deberá escuchar en un puerto cuyo número será el primer argumento del programa.
 
 ----------------------------------------------------------------------
