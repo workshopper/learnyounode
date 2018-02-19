@@ -75,7 +75,7 @@
     "workshopper-wrappedexec": "~0.1.1"
   },
   "devDependencies": {
-    "standard": "^10.0.2",
+    "standard": "^11.0.0",
     "standard-version": "^4.0.0",
     "workshopper-adventure-test": "^1.1.2"
   },
