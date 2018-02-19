@@ -6,7 +6,7 @@ var comparestdout = require('workshopper-exercise/comparestdout')
 var bogan = require('boganipsum')
 var after = require('after')
 
-  // three separate chunks of words to spit out
+// three separate chunks of words to spit out
 var words = [
   bogan({ paragraphs: 1, sentenceMax: 1 }).split(' '),
   bogan({ paragraphs: 1, sentenceMax: 1 }).split(' '),

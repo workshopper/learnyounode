@@ -4,7 +4,7 @@ El programa debe imprimir el listado de archivos de un directorio filtrando por 
 
 Deberás escribir un archivo *modular* para hacer la tarea. Dicho módulo debe *exportar* una función que reciba **tres** parámetros en orden: la ruta del directorio, la extensión para filtrar y una función de callback. La idea es encapsular toda la lógica dentro del módulo.
 
-En Node, los callbacks suelen tener una firma convencional de tener (error, data). Esto implica que si hay un error el primer parámetro devuelve el error sino viene `null` y el segundo parámetro son los datos. Para este ejercicio los datos a devolver es la lista de archivos en forma de Array. Si occurre un error, por ejemplo en la llamada a `fs.readdir()`, el callback debe llamarse con dicho error.
+En Node, los callbacks suelen tener una firma convencional de tener (error, data). Esto implica que si hay un error el primer parámetro devuelve el error sino viene `null` y el segundo parámetro son los datos. Para este ejercicio los datos a devolver es la lista de archivos en forma de Array. Si ocurre un error, por ejemplo en la llamada a `fs.readdir()`, el callback debe llamarse con dicho error.
 
 Para completar el ejercicio **no debes** imprimir desde el módulo, sólo desde el programa principal. En caso de que el módulo devuelva un error a tu programa principal, simplemente compruébalo y escribe un mensaje informativo en consola.
 
