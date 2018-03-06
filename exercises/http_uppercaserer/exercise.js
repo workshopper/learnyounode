@@ -54,10 +54,10 @@ function query (mode) {
 
   function connect (port, stream) {
     const input = through2()
-    const count = 0
-    const iv
+    let count = 0
+    let iv
     const url = `http://localhost:${port}`
-    const req
+    let req
 
     // TODO: test GET requests for #fail
     req = input.pipe(hyperquest.post(url)
