@@ -66,7 +66,7 @@
     "concat-stream": "^1.5.1",
     "duplexer": "^0.1.1",
     "hyperquest": "^2.0.0",
-    "node-offline-api": "0.11.0",
+    "node-offline-api": "0.12.0",
     "rimraf": "^2.5.4",
     "through": "^2.3.8",
     "through2": "^2.0.1",
@@ -81,9 +81,10 @@
     "workshopper-adventure-test": "^1.1.2"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/standard --fix",
+    "lint": "./node_modules/.bin/standard",
     "test": "npm run lint && ./node_modules/.bin/workshopper-adventure-test",
-    "release": "./node_modules/.bin/standard-version"
+    "release": "./node_modules/.bin/standard-version",
+    "postinstall": "node ./lib/docbuild.js"
   },
   "bin": {
     "learnyounode": "./bin/learnyounode"
