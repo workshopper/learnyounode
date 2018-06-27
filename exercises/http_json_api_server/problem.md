@@ -14,7 +14,7 @@ The JSON response should contain only 'hour', 'minute' and 'second' properties. 
 }
 ```
 
-Add second endpoint for the path '/api/unixtime' which accepts the same query string but returns UNIX epoch time in milliseconds (the number of milliseconds since 1 Jan 1970 00:00:00 UTC) under the property 'unixtime'. For example:
+Add a second endpoint for the path '/api/unixtime' which accepts the same query string, but returns UNIX epoch time in milliseconds (the number of milliseconds since 1 Jan 1970 00:00:00 UTC) under the property 'unixtime'. For example:
 
 ```json
 { "unixtime": 1376136615474 }
@@ -27,7 +27,8 @@ Your server should listen on the port provided by the first argument to your pro
 
 The `request` object from an HTTP server has a `url` property that you will need to use to *"route"* your requests for the two endpoints.
 
-You can parse the URL and query string using the Node core 'url' module. `url.parse(request.url, true)` will parse content of request.url and provide you with an object with helpful properties.
+You can parse the URL and query string using the Node core 'url' module.
+`url.parse(request.url, true)` will parse content of `request.url` and provide you with an object with helpful properties.
 
 For example, on the command prompt, type:
 
