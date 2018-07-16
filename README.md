@@ -18,7 +18,7 @@
 
         `sudo npm install -g learnyounode` or to:
     2. [fix your npm permissions](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
-  3. Open your terminal and run the following command: `learnyounode`
+  3. On your terminal and run the following command: `learnyounode`
     1. (Ubuntu users) In case step 3 fails, run `sudo apt-get install nodejs-legacy`
   4. **profit!**
 
