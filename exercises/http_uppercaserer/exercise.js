@@ -1,11 +1,12 @@
-var through2 = require('through2')
-var hyperquest = require('hyperquest')
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
-var rndport = require('../../lib/rndport')
-var words = require('boganipsum/clean_words')
+'use strict';
+let through2 = require('through2')
+let hyperquest = require('hyperquest')
+let exercise = require('workshopper-exercise')()
+let filecheck = require('workshopper-exercise/filecheck')
+let execute = require('workshopper-exercise/execute')
+let comparestdout = require('workshopper-exercise/comparestdout')
+let rndport = require('../../lib/rndport')
+let words = require('boganipsum/clean_words')
   .sort(function () { return 0.5 - Math.random() })
   .slice(0, 10)
 
@@ -50,14 +51,14 @@ exercise = comparestdout(exercise)
 // delayed for 500ms to wait for servers to start so we can start
 // playing with them
 function query (mode) {
-  var exercise = this
+  let exercise = this
 
   function connect (port, stream) {
-    var input = through2()
-    var count = 0
-    var iv
-    var url = 'http://localhost:' + port
-    var req
+    let input = through2()
+    const count = 0
+    let iv
+    const url = 'http://localhost:' + port
+    let req
 
     // TODO: test GET requests for #fail
     req = input.pipe(hyperquest.post(url)

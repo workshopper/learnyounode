@@ -1,13 +1,14 @@
-var http = require('http')
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
-var bogan = require('boganipsum')
-var after = require('after')
+'use strict';
+let http = require('http')
+let exercise = require('workshopper-exercise')()
+let filecheck = require('workshopper-exercise/filecheck')
+let execute = require('workshopper-exercise/execute')
+let comparestdout = require('workshopper-exercise/comparestdout')
+let bogan = require('boganipsum')
+let after = require('after')
 
 // three separate chunks of words to spit out
-var words = [
+let words = [
   bogan({ paragraphs: 1, sentenceMax: 1 }).split(' '),
   bogan({ paragraphs: 1, sentenceMax: 1 }).split(' '),
   bogan({ paragraphs: 1, sentenceMax: 1 }).split(' ')
