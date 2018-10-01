@@ -5,5 +5,3 @@ node_js:
   - '8'
   - '9'
 sudo: false
-before_install:
-  - npm install -g npm@latest

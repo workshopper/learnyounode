@@ -24,7 +24,7 @@ $ npm install bl
 Npm descargará el paquete e instalará la última versión disponible en la carpeta `node_modules`. Todos los paquetes instalados ahí pueden cargarse desde tu programa usando `require` sin prefijo. Ejemplo:
 
 ```js
-var bl = require('bl')
+const bl = require('bl')
 ```
 
 Node busca primero en su núcleo de módulos y si no lo encuentra busca en `node_modules`.

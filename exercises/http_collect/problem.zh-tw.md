@@ -23,7 +23,7 @@ $ npm install bl
 接著 `npm` 就會下載並安裝最新版的套見到名為 `node_modules` 的子目錄當中。任何在這個子目錄中的套件都不用在前面預先加入「./」就可以利用 `require` 命令載入：
 
 ```js
-var bl = require('bl')
+const bl = require('bl')
 ```
 
 Node 會先尋找核心模組是否有符合名稱的模組，接著會尋找 `node_modules` 目錄中是否有這個套件。

@@ -20,8 +20,8 @@ Los parámetros `request`y `response` son los objetos que representan la petici�
 La llamada a `http.createServer()` devuelve una instancia del `server`. Debes llamar a `server.listen(portNumber)` para comenzar la escucha en un puerto particular. Por ejemplo:
 
 ```js
-var http = require('http')
-var server = http.createServer(function (req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // manejar cada petición aquí.
 })
 server.listen(8000)

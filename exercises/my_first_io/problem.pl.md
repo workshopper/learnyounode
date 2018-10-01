@@ -8,7 +8,7 @@ Pełna ścieżka do pliku, który należy odczytać zostanie przekazana jako pie
 Aby wykonać operację na systemie plików, będzie Ci potrzebny moduł `fs` z biblioteki standardowej Node.js. Aby wczytać tego typu moduł lub jakikolwiek inny moduł "globalny", użyj następującego zaklęcia:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 Now you have the full `fs` module available in a variable named `fs`.

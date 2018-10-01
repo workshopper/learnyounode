@@ -24,8 +24,8 @@ Ambos `request` and `response` são também Node streams! O que significa que po
 Um típico Servidor HTTP Node parece com isto:
 
 ```js
-var http = require('http')
-var server = http.createServer(function (req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // request handling logic...
 })
 server.listen(8000)
