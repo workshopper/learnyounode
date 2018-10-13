@@ -1,13 +1,13 @@
-var through2 = require('through2')
-var hyperquest = require('hyperquest')
-var bl = require('bl')
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
-var rndport = require('../../lib/rndport')
+const through2 = require('through2')
+const hyperquest = require('hyperquest')
+const bl = require('bl')
+let exercise = require('workshopper-exercise')()
+const filecheck = require('workshopper-exercise/filecheck')
+const execute = require('workshopper-exercise/execute')
+const comparestdout = require('workshopper-exercise/comparestdout')
+const rndport = require('../../lib/rndport')
 
-var date = new Date(Date.now() - 100000)
+const date = new Date(Date.now() - 100000)
 
 // the output will be long lines so make the comparison take that into account
 exercise.longCompareOutput = true
@@ -57,17 +57,17 @@ function normalizeJSON (data) {
 // delayed for 500ms to wait for servers to start so we can start
 // playing with them
 function query (mode) {
-  var exercise = this
+  const exercise = this
 
   function verify (port, stream) {
     function timeRequest (method, callback) {
-      var url = 'http://localhost:' + port + '/api/' + method + '?iso=' + date.toISOString()
+      const url = 'http://localhost:' + port + '/api/' + method + '?iso=' + date.toISOString()
 
       function onData (err, _data) {
         if (err) {
           exercise.emit('fail', exercise.__('fail.connection', { address: url, message: err.message }))
         } else {
-          var data = _data.toString()
+          let data = _data.toString()
 
           try {
             data = normalizeJSON(data.toString())
