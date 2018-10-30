@@ -1,3 +1,5 @@
+'use strict'
+
 const through2 = require('through2')
 const hyperquest = require('hyperquest')
 let exercise = require('workshopper-exercise')()
