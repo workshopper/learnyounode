@@ -63,7 +63,7 @@
     "boganipsum": "~0.1.0",
     "colors-tmpl": "^1.0.0",
     "combined-stream": "^1.0.5",
-    "concat-stream": "^1.5.1",
+    "concat-stream": "^2.0.0",
     "duplexer": "^0.1.1",
     "hyperquest": "^2.0.0",
     "rimraf": "^2.5.4",
