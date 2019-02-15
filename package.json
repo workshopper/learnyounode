@@ -76,7 +76,7 @@
   },
   "devDependencies": {
     "standard": "^11.0.0",
-    "standard-version": "^4.0.0",
+    "standard-version": "^5.0.0",
     "workshopper-adventure-test": "^1.1.2"
   },
   "scripts": {
