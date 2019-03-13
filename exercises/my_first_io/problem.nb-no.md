@@ -8,7 +8,7 @@ Hele filstien til filen du skal lese vil bli sendt inn som første kommandolinje
 Du trenger `fs` modulen fra Node core biblioteket for å kjøre operasjoner mot filsystemet. For å laste inn denne typen moduler, eller andre "globale" moduler, kan du skrive dette:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 Nå har du hele `fs` modulen tilgjengelig i variabelen  `fs`.
@@ -18,7 +18,7 @@ Alle synkrone (eller blokkerende) metoder i `fs` modulen ender på 'Sync'. For �
 Dokumentasjonen til `fs` modulen kan du finne her:
   {rootdir:/node_apidoc/fs.html}
 
-`Buffer` objekter er Node sin måte å effektivt representere arrays med data. Uavhengig av om det er ascii, binære eller noe annet format. `Buffer` objeker can bli konvertert til strengerved å kalle metoden `toString()` på dem. F.eks `var str = buf.toString()`.
+`Buffer` objekter er Node sin måte å effektivt representere arrays med data. Uavhengig av om det er ascii, binære eller noe annet format. `Buffer` objeker can bli konvertert til strengerved å kalle metoden `toString()` på dem. F.eks `const str = buf.toString()`.
 
 Dokumentasjonen til `Buffer`s kan du finne her:
   {rootdir:/node_apidoc/buffer.html}

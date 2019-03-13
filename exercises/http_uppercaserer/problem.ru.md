@@ -12,7 +12,7 @@
 `through2-map` позволяет создать *преобразованный поток*, используя только одну функцию, которая принимает фрагмент данных и возвращает фрагмент данных. Это работает практически так же как `Array#map()`, только с потоками:
 
 ```js
-var map = require('through2-map')
+const map = require('through2-map')
 inStream.pipe(map(function (chunk) {
   return chunk.toString().split('').reverse().join('')
 })).pipe(outStream)

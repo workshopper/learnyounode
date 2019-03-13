@@ -24,8 +24,8 @@ function callback (request, response) { /* ... */ }
 一個標準的 Node HTTP 伺服器看起來像這樣：
 
 ```js
-var http = require('http')
-var server = http.createServer(function (req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // request handling logic...
 })
 server.listen(8000)

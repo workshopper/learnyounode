@@ -9,7 +9,7 @@
 要执行一个对文件系统的操作，你将会用到 `fs` 这个 Node 核心模块。要加载这类核心模块，或者其他的"全局"模块，可以用下面的方式引入：
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 现在你可以通过 `fs` 这个变量来访问整个 `fs` 模块了。
@@ -19,7 +19,7 @@ var fs = require('fs')
 `fs` 模块的文档，可以使用浏览器打开如下路径来访问：
   {rootdir:/node_apidoc/fs.html}
 
-`Buffer` 对象是 Node 用来高效处理数据的方式，无论该数据是 ascii 还是二进制文件，或者其他的格式。`Buffer` 可以很容易地通过调用 `toString()` 方法转换为字符串。如：`var str = buf.toString()`。
+`Buffer` 对象是 Node 用来高效处理数据的方式，无论该数据是 ascii 还是二进制文件，或者其他的格式。`Buffer` 可以很容易地通过调用 `toString()` 方法转换为字符串。如：`const str = buf.toString()`。
 
 `Buffer` 的文档可以通过浏览器访问如下路径来查看：
   {rootdir:/node_apidoc/buffer.html}

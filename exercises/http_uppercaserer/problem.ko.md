@@ -13,7 +13,7 @@ npm에는 통과하는 스트림 데이터를 *"변환"* 하는데 사용할 수
 `through2-map`은 데이터의 덩어리를 받아 데이터의 덩어리를 반환하는 한 개의 함수만으로 *변환 스트림*을 만들 수 있습니다. 이는 스트림용 `Array#map()`처럼 설계되었습니다.
 
 ```js
-var map = require('through2-map')
+const map = require('through2-map')
 inStream.pipe(map(function (chunk) {
   return chunk.toString().split('').reverse().join('')
 })).pipe(outStream)
