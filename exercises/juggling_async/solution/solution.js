@@ -1,31 +1,25 @@
-const http = require('http')
-const bl = require('bl')
-const results = []
-let count = 0
+var http = require("http")
 
-function printResults () {
-  for (let i = 0; i < 3; i++) {
-    console.log(results[i])
-  }
-}
+required_queue= process.argv.length - 2
+queue = 0
+urls = process.argv.slice(2)
+var dict = {}
 
-function httpGet (index) {
-  http.get(process.argv[2 + index], function (response) {
-    response.pipe(bl(function (err, data) {
-      if (err) {
-        return console.error(err)
-      }
-
-      results[index] = data.toString()
-      count++
-
-      if (count === 3) {
-        printResults()
-      }
-    }))
-  })
-}
-
-for (let i = 0; i < 3; i++) {
-  httpGet(i)
-}
+urls.forEach(function (url) {
+	dict[url]=""
+	http.get(url, function (response){
+		response.setEncoding('utf8')
+		response.on("error", console.error)
+		response.on("data", function(chunk){
+			dict[url]+=chunk
+		})
+		response.on("end",function(){
+			queue+=1
+			if (queue == required_queue){
+				urls.forEach(function (key){
+					console.log(dict[key])
+				})
+			}
+		})
+	})
+})
