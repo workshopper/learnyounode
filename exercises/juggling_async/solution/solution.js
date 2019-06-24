@@ -1,8 +1,7 @@
-var http = require("http")
-
-required_queue= process.argv.length - 2
-queue = 0
-urls = process.argv.slice(2)
+const http = require("http")
+var required_queue= process.argv.length - 2
+var queue = 0
+var urls = process.argv.slice(2)
 var dict = {}
 
 urls.forEach(function (url) {
