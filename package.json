@@ -81,7 +81,7 @@
   },
   "scripts": {
     "lint": "./node_modules/.bin/standard",
-    "test": "npm run lint && ./node_modules/.bin/workshopper-adventure-test",
+    "test": "npm run lint && \"./node_modules/.bin/workshopper-adventure-test\"",
     "release": "./node_modules/.bin/standard-version"
   },
   "bin": {
