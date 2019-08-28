@@ -204,7 +204,7 @@ function verifyModuleUsed (callback) {
     return callback(null, false)
   }
 
-  validateModule.call(this, required[0], callback)
+  validateModule.call(this, required[1], callback)
 }
 
 function verify (callback) {
