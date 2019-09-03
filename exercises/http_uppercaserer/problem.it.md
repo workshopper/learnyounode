@@ -12,7 +12,7 @@ Esistono un numero di diversi pacchetti in npm che possono essere utilizzati per
 `through2-map` ti permette di creare una *stream di trasformazione* usando soltanto una singola funzione che riceve un frammento di dati e restituisce un frammento di dati. È concepita per funzionare in maniera simile a `Array#map()` ma per gli stream:
 
 ```js
-var map = require('through2-map')
+const map = require('through2-map')
 inStream.pipe(map(function (chunk) {
   return chunk.toString().split('').reverse().join('')
 })).pipe(outStream)

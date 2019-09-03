@@ -12,7 +12,7 @@ Hay muchos paquetes en el registro de npm que permiten *"transformar"* streams. 
 `through2-map` te permite crear un *transform stream* que recibe un chunk data y lo devuelve modificado. Funciona como `Array#map()` pero se aplica a streams:
 
 ```js
-var map = require('through2-map')
+const map = require('through2-map')
 inStream.pipe(map(function (chunk) {
   return chunk.toString().split('').reverse().join('')
 })).pipe(outStream)

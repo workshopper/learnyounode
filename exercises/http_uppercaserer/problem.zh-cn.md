@@ -12,7 +12,7 @@
 `through2-map` 允许你创建一个 *transform stream*，它仅需要一个函数就能完成「接收一个数据块，处理完后返回这个数据块」的功能 ，它的工作模式类似于 `Array#map()`，但是是针对 stream 的：
 
 ```js
-var map = require('through2-map')
+const map = require('through2-map')
 inStream.pipe(map(function (chunk) {
   return chunk.toString().split('').reverse().join('')
 })).pipe(outStream)

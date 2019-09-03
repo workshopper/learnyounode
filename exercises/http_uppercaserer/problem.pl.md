@@ -15,7 +15,7 @@ Istnieje wiele pakietów w `npm`, które możesz wykorzystać do *"transformacji
 `through2-map` pozwala na utworzenie *strumienia transformującego* przy użyciu jednej funkcji, przyjmującej porcję danych i zwracającej porcję danych. Jest zaprojektowany tak, by działać w sposób jak najbardziej zbliżony do metody `Array#map()`, ale dla strumieni:
 
 ```js
-var map = require('through2-map')
+const map = require('through2-map')
 inStream.pipe(map(function (chunk) {
   return chunk.toString().split('').reverse().join('')
 })).pipe(outStream)

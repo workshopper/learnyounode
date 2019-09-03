@@ -13,7 +13,7 @@ Det er mange ulike moduler i npm som tilbyr å gjøre om stream-data. I denne op
 `through2-map` lar deg opprette en *transform stream* ved kun å bruk en enkel funksjon som tar en bit data og returnerer en bit data. Funksjonen er ment å virke slik som `Array#map()`, men for streams:
 
 ```js
-var map = require('through2-map')
+const map = require('through2-map')
 inStream.pipe(map(function (chunk) {
   return chunk.toString().split('').reverse().join('')
 })).pipe(outStream)
