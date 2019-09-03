@@ -1,5 +1,7 @@
 Write an HTTP **server** that receives only POST requests and converts incoming POST body characters to upper-case and returns it to the client.
 
+GET requests have to be answered with an empty response.
+
 Your server should listen on the port provided by the first argument to your program.
 
 ----------------------------------------------------------------------
