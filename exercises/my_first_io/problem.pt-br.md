@@ -8,7 +8,7 @@ Todo o caminho até o arquivo à ser lido será fornecido como primeiro argument
 Para realizar uma operação de sistema de arquivos (filesystem), você vai precisar do módulo `fs` da library principal do Node. Para carregar esse tipo de módulo ou qualquer outro módulo "global", use o seguinte código:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 Agora você tem o módulo `fs` completo disponível em uma variável chamada `fs`.
@@ -18,7 +18,7 @@ Todos os métodos de sistema de arquivos síncronos (ou bloqueantes) no módulo 
 A documentação do módulo `fs` pode ser encontrada apontando seu navegador para esse endereço:
   {rootdir:/node_apidoc/fs.html}
 
-Objetos `Buffer` são a maneira do Node de representar eficientemente arrays arbitrários de dados, sejam eles ascii, binários ou quaisquer outros formatos. Objetos `Buffer` podem ser convertidos em strings invocando o método `toString()` neles. Por exemplo: `var str = buf.toString()`.
+Objetos `Buffer` são a maneira do Node de representar eficientemente arrays arbitrários de dados, sejam eles ascii, binários ou quaisquer outros formatos. Objetos `Buffer` podem ser convertidos em strings invocando o método `toString()` neles. Por exemplo: `const str = buf.toString()`.
 
 A documentação sobre `Buffer`s pode ser encontrada apontando seu navegador para esse endereço:
   {rootdir:/node_apidoc/buffer.html}

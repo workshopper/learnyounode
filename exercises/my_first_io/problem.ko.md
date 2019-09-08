@@ -8,7 +8,7 @@
 파일 시스템 연산을 수행하기 위해 Node 핵심 모듈의 `fs` 모듈이 필요합니다. 이런 종류 "전역" 모듈을 불러오려면, 다음의 주문을 사용하세요.
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 이제 `fs` 모듈 전체를 `fs`라는 변수로 사용할 수 있습니다.
@@ -18,7 +18,7 @@ var fs = require('fs')
 `fs` 모듈의 문서는 브라우저에 이 주소를 넣으면 볼 수 있습니다.
   {rootdir:/node_apidoc/fs.html}
 
-`Buffer` 객체는 효과적으로 임의의 배열(ascii, 바이너리나 다른 형식의) 데이터를 나타내는 Node의 방법입니다. `Buffer` 객체는 `toString()`를 호출하기만 하면 간단히 문자열로 변환 할 수 있습니다. 예를 들면, `var str = buf.toString()`.
+`Buffer` 객체는 효과적으로 임의의 배열(ascii, 바이너리나 다른 형식의) 데이터를 나타내는 Node의 방법입니다. `Buffer` 객체는 `toString()`를 호출하기만 하면 간단히 문자열로 변환 할 수 있습니다. 예를 들면, `const str = buf.toString()`.
 
 `Buffer` 모듈의 문서는 브라우저에 이 주소를 넣으면 볼 수 있습니다.
   {rootdir:/node_apidoc/buffer.html}

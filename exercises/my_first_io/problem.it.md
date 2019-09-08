@@ -8,7 +8,7 @@ Il percorso completo al file da leggere sarà fornito come il primo argomento da
 Per effettuare operazioni sul file system avrai bisogno del modulo `fs` dalla libreria Node core. Per caricare questo tipo di modulo, o qualsiasi altro modulo "globale", usa il seguente incantesimo:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 Dopodiché disporrai dell'intero modulo `fs` in una variabile chiamata `fs`.
@@ -18,7 +18,7 @@ Tutti i metodi sincroni (o bloccanti) sul file system del modulo `fs` terminano 
 La documentazione sul modulo `fs` può essere trovata puntando il tuo browser all'indirizzo:
   {rootdir:/node_apidoc/fs.html}
 
-Gli oggetti `Buffer` sono la maniera usata da Node per rappresentare efficientemente array arbitrari di dati, sia che si tratti di ascii, binari o qualunque altro formato. Gli oggetti `Buffer` possono essere convertiti in stringhe semplicemente chiamando il metodo `toString()` su di essi, ad es. `var str = buf.toString()`.
+Gli oggetti `Buffer` sono la maniera usata da Node per rappresentare efficientemente array arbitrari di dati, sia che si tratti di ascii, binari o qualunque altro formato. Gli oggetti `Buffer` possono essere convertiti in stringhe semplicemente chiamando il metodo `toString()` su di essi, ad es. `const str = buf.toString()`.
 
 La documentazione sui `Buffer` può essere trovata puntando il tuo browser all'indirizzo:
   {rootdir:/node_apidoc/buffer.html}

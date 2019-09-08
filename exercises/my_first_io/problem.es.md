@@ -8,7 +8,7 @@ El programa recibirá la ruta al archivo como único argumento.
 Para resolver este ejercicio usaremos el módulo `fs` del núcleo de Node. Para cargar dicho módulo o cualquier módulo es necesario hacer:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 De este modo, el módulo `fs` estará disponible en esa variable.
@@ -18,7 +18,7 @@ Toda operación síncrona (o de bloqueo) del sistema de archivos en el módulo `
 Puedes leer la documentación del módulo `fs` en:
   {rootdir:/node_apidoc/fs.html}
 
-Los objetos `Buffer` de Node son una representación eficiente de Arrays de datos en variedad de formatos como ser ASCII, binarios o UTF-8 entre otros. Los objetos `Buffer` se pueden convertir en String usando el método `toString()` por ejemplo: `var str = buf.toString()`.
+Los objetos `Buffer` de Node son una representación eficiente de Arrays de datos en variedad de formatos como ser ASCII, binarios o UTF-8 entre otros. Los objetos `Buffer` se pueden convertir en String usando el método `toString()` por ejemplo: `const str = buf.toString()`.
 
 Puedes leer la documentación del objeto `Buffer` en:
   {rootdir:/node_apidoc/buffer.html}
