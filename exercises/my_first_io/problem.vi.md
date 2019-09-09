@@ -8,7 +8,7 @@ Viết một chương trình sử dụng thao tác đọc một file bằng phư
 Để thực hiện các thao tác với hệ thống file, bạn cần sử dụng mô-đun `fs` được tích hợp sẵn trong lõi thư viện Node. Để nạp những mô-đun được tích hợp sẵn, hoặc các mô-đun "toàn cục", sử dụng `require(module_name)` để nạp:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 Với mã nạp như trên bạn sẽ nạp được đầy đủ mô-đun `fs`, và có thể sử dụng chúng như một biến trong chương trình.
@@ -18,7 +18,7 @@ Tất cả các phương thức thao tác hệ thống file đồng bộ (hay bl
 Tài liệu cho mô-đun `fs` có thể xem tại:
   {rootdir:/node_apidoc/fs.html}
 
-Sử dụng đối tượng `Buffer` là một cách hiệu quả để biểu diễn một mảng các dữ liệu tùy ý trong Node, tức là nó có thể biểu diễn được dữ liệu dạng ascii, nhị phân hay bất cứ một dạng nào khác. Để chuyển đổi đối tượng `Buffer` qua dạng chuỗi string, ta chỉ cần gọi phương thức `toString()` của nó là được. Ví dụ. `var str = buf.toString()`.
+Sử dụng đối tượng `Buffer` là một cách hiệu quả để biểu diễn một mảng các dữ liệu tùy ý trong Node, tức là nó có thể biểu diễn được dữ liệu dạng ascii, nhị phân hay bất cứ một dạng nào khác. Để chuyển đổi đối tượng `Buffer` qua dạng chuỗi string, ta chỉ cần gọi phương thức `toString()` của nó là được. Ví dụ. `const str = buf.toString()`.
 
 Bạn có thể đọc thêm tài liệu về `Buffer`s tại:
   {rootdir:/node_apidoc/buffer.html}

@@ -8,7 +8,7 @@ Pełna ścieżka do pliku, który należy odczytać zostanie przekazana jako pie
 Aby wykonać operację na systemie plików, będzie Ci potrzebny moduł `fs` z biblioteki standardowej Node.js. Aby wczytać tego typu moduł lub jakikolwiek inny moduł "globalny", użyj następującego zaklęcia:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 Now you have the full `fs` module available in a variable named `fs`.
@@ -19,7 +19,7 @@ Wszystkie synchroniczne (blokujące) metody modułu `fs` operujące na systemie 
 Dokumentację modułu `fs` możesz przeczytać tutaj:
   {rootdir:/node_apidoc/fs.html}
 
-Obiekty `Buffer` służą w Node.js jako wydajna reprezentacja dowolnych tablic danych - tekstu, danych binarnych czy dowolnego innego formatu. Obiekty `Buffer` mogą zostać przekształcone do ciągów znaków (`String`) przez wywołanie ich metody `toString()` np. `var str = buf.toString()`.
+Obiekty `Buffer` służą w Node.js jako wydajna reprezentacja dowolnych tablic danych - tekstu, danych binarnych czy dowolnego innego formatu. Obiekty `Buffer` mogą zostać przekształcone do ciągów znaków (`String`) przez wywołanie ich metody `toString()` np. `const str = buf.toString()`.
 
 Dokumentację obiektów `Buffer` możesz przeczytać tutaj:
   {rootdir:/node_apidoc/buffer.html}
