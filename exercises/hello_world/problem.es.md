@@ -11,7 +11,7 @@ $ node program.js
 Puedes escribir a consola de la misma forma que en el navegador(browser):
 
 ```js
-console.log("texto")
+console.log('texto')
 ```
 
 Cuando termines debes ejecutar:

@@ -51,8 +51,8 @@ Aby utworzyć datę, musisz przygotować odpowiedni format z obiektu `new Date()
 
 ```js
 date.getFullYear()
-date.getMonth()     // zaczyna się od 0
-date.getDate()      // zwraca dzień miesiąca
+date.getMonth() // zaczyna się od 0
+date.getDate() // zwraca dzień miesiąca
 date.getHours()
 date.getMinutes()
 ```

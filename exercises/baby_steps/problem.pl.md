@@ -20,7 +20,7 @@ $ node program.js 1 2 3
 W takim przypadku na konsolę powinna zostać wypisana tablica wyglądająca w ten sposób:
 
 ```js
-[ 'node', '/path/to/your/program.js', '1', '2', '3' ]
+['node', '/path/to/your/program.js', '1', '2', '3']
 ```
 
 Zastanów się jak przeiterować się przez argumenty liczbowe tak, by możliwe było wypisanie jedynie ich sumy. Pierwszym elementem tablicy `process.argv` jest zawsze 'node', drugim zawsze ścieżka do twojego pliku `program.js`, należałoby więc rozpocząć od trzeciego elementu (indeks 2), dodając każdy z elementów do sumy aż do momentu osiągnięcia końca tablicy.

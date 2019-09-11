@@ -14,7 +14,7 @@ function unixtime (time) {
 }
 
 const server = http.createServer(function (req, res) {
-  const parsedUrl = url.parse(req.url, true)
+  const parsedUrl = url.parse(req.url, true) // eslint-disable-line
   const time = new Date(parsedUrl.query.iso)
   let result
 

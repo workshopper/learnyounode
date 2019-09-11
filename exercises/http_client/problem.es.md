@@ -19,7 +19,7 @@ function callback (response) { /* ... */ }
 Siendo `response` un objeto **Stream** de Node. En Node los Streams emiten eventos, a los cuales puedes suscribir callbacks. Para este ejercicio sólo nos interesan los eventos: "data", "error" y "end". Para escuchar un evento debes hacer:
 
 ```js
-response.on("data", function (data) { /* ... */ })
+response.on('data', function (data) { /* ... */ })
 ```
 
 El evento "data" se dispara cuando un `chunk`, conjunto de datos, está disponible para procesarse. El tamaño del `chunk` depende de la implementación.

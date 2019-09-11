@@ -20,7 +20,7 @@ $ node program.js 1 2 3
 Programmet vil skrive ut en array med tall som ser slik ut:
 
 ```js
-[ 'node', '/filsti/til/ditt/program.js', '1', '2', '3' ]
+['node', '/filsti/til/ditt/program.js', '1', '2', '3']
 ```
 
 Du er nødt til å tenke gjennom hvordan gå gjennom argumentene slik at du kan skrive ut summen av dem. Det første elementet av process.argv array'et er alltid 'node', og det andre er alltid filstien til  program.js filen. Derfor må du starte med det tredje elementet (index 2) også summere hvert element helt til du når enden av array'et.

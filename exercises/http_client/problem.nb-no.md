@@ -19,7 +19,7 @@ function callback (response) { /* ... */ }
 Her er `response` objektet er et Node **Stream** objekt. Du kan behandle Node Streams som objekter som sender ut eventer. De tre eventene som er mest interessante er: "data", "error" og "end". Du lytter en event på denne måten:
 
 ```js
-response.on("data", function (data) { /* ... */ })
+response.on('data', function (data) { /* ... */ })
 ```
 
 Data eventen sendes ut når en bit av dataen er tilgjengelig og kan behandles. Datastørrelsen avhenger av den underliggende datakilden.

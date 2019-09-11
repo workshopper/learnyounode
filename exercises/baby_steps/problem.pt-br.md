@@ -21,7 +21,7 @@ $ node program.js 1 2 3
 Nesse caso a saída seria um array, algo parecido com isso:
 
 ```js
-[ 'node', '/caminho/para/seu/program.js', '1', '2', '3' ]
+['node', '/caminho/para/seu/program.js', '1', '2', '3']
 ```
 
 Você vai precisar pensar sobre como fazer uma repetição (loop) através do número de argumentos para que você possa fornecer apenas a soma deles. O primeiro elemento do array `process.argv` é sempre 'node' e o segundo elemento é sempre o caminho para seu arquivo program.js, então você precisa começar no terceiro elemento (índice 2), adicionando cada item ao total até que você atinja o fim do array.

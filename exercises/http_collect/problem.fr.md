@@ -42,7 +42,7 @@ sous-dossier de votre programme principal peut être chargé avec la syntaxe
 `require` sans préfixe de chemin (et notamment sans './') :
 
 ```js
-var bl = require('bl');
+var bl = require('bl')
 ```
 
 Node regardera d’abord dans ses modules noyau puis dans le dossier
@@ -60,9 +60,9 @@ et ils accumuleront son contenu pour vous.  Une fois que le flux a fini, une
 fonction de rappel sera déclenchée avec les données :
 
 ```js
-response.pipe(bl(function(err, data) { /* ... */ }))
+response.pipe(bl(function (err, data) { /* ... */ }))
 // ou
-response.pipe(concatStream(function(data) { /* ... */ }))
+response.pipe(concatStream(function (data) { /* ... */ }))
 ```
 
 Remarquez que vous aurez probablement besoin de faire un `data.toString()`

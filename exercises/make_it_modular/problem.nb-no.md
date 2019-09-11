@@ -46,8 +46,7 @@ Husk at man burde sjekke etter feil og kalle på callback funksjoner så tidlig 
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // returner tidlig
+    if (err) { return callback(err) } // returner tidlig
 
     // ... ingen feil, fortsett å gjøre kule ting med `data`
 

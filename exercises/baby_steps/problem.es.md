@@ -20,7 +20,7 @@ $ node program.js 1 2 3
 La salida estándar a consola será algo parecido a:
 
 ```js
-[ 'node', '/path/to/your/program.js', '1', '2', '3' ]
+['node', '/path/to/your/program.js', '1', '2', '3']
 ```
 
 Para resolver este ejercicio debes iterar en la lista de argumentos de modo que sólo escribas la suma. El primer elemento de la lista siempre es 'node', el segundo es la ruta al program.js; por ende, debes comenzar a iterar en el tercer elemento (índice 2 de la lista) sumando cada elemento sucesivo hasta el final.

@@ -49,8 +49,8 @@ Para calcular la fecha puedes usar `new Date()` y luego llamar a algunos método
 
 ```js
 date.getFullYear()
-date.getMonth()     // empieza en 0
-date.getDate()      // devuelve día del mes, empieza en 1
+date.getMonth() // empieza en 0
+date.getDate() // devuelve día del mes, empieza en 1
 date.getHours()
 date.getMinutes()
 ```

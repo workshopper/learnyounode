@@ -45,8 +45,7 @@ Tieni anche a mente che è una forma idiomatica controllare la presenza di error
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // ritorno anticipato
+    if (err) { return callback(err) } // ritorno anticipato
 
     // ... nessun errore, continua a cose interessanti con `data`
 

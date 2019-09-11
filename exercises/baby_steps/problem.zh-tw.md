@@ -21,7 +21,7 @@ $ node program.js 1 2 3
 
 
 ```js
-[ 'node', '/path/to/your/program.js', '1', '2', '3' ]
+['node', '/path/to/your/program.js', '1', '2', '3']
 ```
 
 為了輸出這些參數的總和，您需要思考如何以迴圈的方式輪流存取這幾個參數。`process.argv` Array 的第一個元素永遠是「node」，而第二個元素也永遠是被執行的程式 `program.js` 的完整路徑，所以您需要從第三個元素（index 2）開始，依序加入來自命令列的參數，直到這個 Array 結束。

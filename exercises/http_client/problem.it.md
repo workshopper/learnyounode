@@ -21,7 +21,7 @@ I tre eventi di maggiore interesse sono: "data", "error" ed "end".
 Puoi metterti in ascolto di un evento in questo modo:
 
 ```js
-response.on("data", function (data) { /* ... */ })
+response.on('data', function (data) { /* ... */ })
 ```
 
 L'evento "data" è emesso quando un frammento di dati è disponibile e può essere processato. La dimensione del frammento dipende dalla fonte dati sottostante.

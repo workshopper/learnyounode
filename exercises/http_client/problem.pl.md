@@ -19,7 +19,7 @@ function callback (response) { /* ... */ }
 Gdzie obiekt `response` to obiekt **Strumienia (Stream)** Node.js. Możesz traktować Strumienie jako obiekty emitujące zdarzenia. Trzy zdarzenia, które najbardziej powinny Cię zainteresować to "data", "error" i "end". Nasłuchujesz zdarzeń w ten sposób:
 
 ```js
-response.on("data", function (data) { /* ... */ })
+response.on('data', function (data) { /* ... */ })
 ```
 
 Zdarzenie "data" jest emitowane gdy porcja danych jest dostępne i może być przetworzona. Rozmiar porcji zależy od bazowego źródła danych.

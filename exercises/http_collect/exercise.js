@@ -34,7 +34,7 @@ exercise.addSetup(function (mode, callback) {
   })
 
   this.server.on('error', function (err) {
-    console.error(this.__('fail.unexpected_error', {message: err.message}))
+    console.error(this.__('fail.unexpected_error', { message: err.message }))
     console.error(err.stack)
     process.exit(1)
   }.bind(this))
@@ -43,8 +43,8 @@ exercise.addSetup(function (mode, callback) {
     var url = 'http://localhost:' + String(this.server.address().port)
 
     // give the url as the first cmdline arg to the child processes
-    this.submissionArgs = [ url ]
-    this.solutionArgs = [ url ]
+    this.submissionArgs = [url]
+    this.solutionArgs = [url]
 
     callback()
   }.bind(this))

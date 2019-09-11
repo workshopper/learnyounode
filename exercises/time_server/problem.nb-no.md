@@ -49,8 +49,8 @@ Etter å ha opprettet et `new Date()` object, vil disse funksjonene være til hj
 
 ```js
 date.getFullYear()
-date.getMonth()     // starter på 0
-date.getDate()      // returnerer dagen i måneden
+date.getMonth() // starter på 0
+date.getDate() // returnerer dagen i måneden
 date.getHours()
 date.getMinutes()
 ```

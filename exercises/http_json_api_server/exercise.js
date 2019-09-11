@@ -23,8 +23,8 @@ exercise.addSetup(function (mode, callback) {
   this.submissionPort = rndport()
   this.solutionPort = this.submissionPort + 1
 
-  this.submissionArgs = [ this.submissionPort ]
-  this.solutionArgs = [ this.solutionPort ]
+  this.submissionArgs = [this.submissionPort]
+  this.solutionArgs = [this.solutionPort]
 
   process.nextTick(callback)
 })

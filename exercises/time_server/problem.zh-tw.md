@@ -49,8 +49,8 @@ server.listen(8000)
 
 ```js
 date.getFullYear()
-date.getMonth()     // starts at 0
-date.getDate()      // returns the day of month
+date.getMonth() // starts at 0
+date.getDate() // returns the day of month
 date.getHours()
 date.getMinutes()
 ```

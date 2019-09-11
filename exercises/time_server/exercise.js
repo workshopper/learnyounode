@@ -18,8 +18,8 @@ exercise.addSetup(function (mode, callback) {
   this.solutionPort = this.submissionPort + 1
 
   // set child process arguments
-  this.submissionArgs = [ this.submissionPort ]
-  this.solutionArgs = [ this.solutionPort ]
+  this.submissionArgs = [this.submissionPort]
+  this.solutionArgs = [this.solutionPort]
 
   process.nextTick(callback)
 })
@@ -60,7 +60,7 @@ function query (mode) {
         setImmediate(function () {
           exercise.emit(
             'fail'
-            , exercise.__('fail.connection', {port: port, message: err.message})
+            , exercise.__('fail.connection', { port: port, message: err.message })
           )
         })
       })

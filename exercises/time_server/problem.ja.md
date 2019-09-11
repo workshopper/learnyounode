@@ -65,8 +65,8 @@ server.listen(8000)
 
 ```js
 date.getFullYear()
-date.getMonth()     // 0からスタートしています
-date.getDate()      // 月の日
+date.getMonth() // 0からスタートしています
+date.getDate() // 月の日
 date.getHours()
 date.getMinutes()
 ```

@@ -31,7 +31,7 @@ Stream における大切な3つのイベントは： `data` 、 `error` と `en
 各イベント時にデータを受け取る為には、次のようにリスナを設定します。
 
 ```js
-response.on("data", function (data) { /* ... */ })
+response.on('data', function (data) { /* ... */ })
 ```
 
 `data` イベントは処理できるデータチャンク(※)が現れたときに発行されます。チャンクのサイズはデータによって変わります。
