@@ -11,7 +11,7 @@ Don't expect these three servers to play nicely! They are not going to give you 
 
 You will need to queue the results and keep track of how many of the URLs have returned their entire contents. Only once you have them all, you can print the data to the console.
 
-Counting callbacks is one of the fundamental ways of managing async in Node. Rather than doing it, you may find more convenient to rely in [JavaScript async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function). But for this exercise, do it without that.
+Counting callbacks is one of the fundamental ways of managing async in Node. Rather than doing it manually, you may find it more convenient to rely on [`async`](https://www.npmjs.com/package/async) or [`run-parallel`](https://www.npmjs.com/package/run-parallel). But for this exercise, do it without that.
 
 Check to see if your program is correct by running this command:
 
