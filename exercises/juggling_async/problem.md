@@ -1,3 +1,5 @@
+Create a file named `juggling-async.js`.
+
 This problem is the same as the previous problem (HTTP COLLECT) in that you need to use `http.get()`. However, this time you will be provided with **three** URLs as the first three command-line arguments.
 
 You must collect the complete content provided to you by each of the URLs and print it to the console (stdout). You don't need to print out the length, just the data as a String; one line per URL. The catch is that you **must** print them out in the same order as the URLs are provided to you as command-line arguments.
@@ -10,3 +12,9 @@ Don't expect these three servers to play nicely! They are not going to give you 
 You will need to queue the results and keep track of how many of the URLs have returned their entire contents. Only once you have them all, you can print the data to the console.
 
 Counting callbacks is one of the fundamental ways of managing async in Node. Rather than doing it, you may find more convenient to rely in [JavaScript async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function). But for this exercise, do it without that.
+
+Check to see if your program is correct by running this command:
+
+```sh
+$ {appname} verify juggling-async.js
+```

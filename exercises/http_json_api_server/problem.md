@@ -1,3 +1,5 @@
+Create a file named `http-json-api-server.js`.
+
 Write an HTTP **server** that serves JSON data when it receives a GET request to the path '/api/parsetime'. Expect the request to contain a query string with a key 'iso' and an ISO-format time as the value.
 
 For example:
@@ -48,3 +50,9 @@ res.writeHead(200, { 'Content-Type': 'application/json' })
 
 The JavaScript `Date` object can print dates in ISO format, e.g. `new Date().toISOString()`. It can also parse this format if you pass the string into the `Date` constructor. `Date.getTime()` will also
 come in handy.
+
+Check to see if your program is correct by running this command:
+
+```sh
+$ {appname} verify http-json-api-server.js
+```

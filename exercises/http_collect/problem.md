@@ -1,3 +1,5 @@
+Create a file named `http-collect.js`.
+
 Write a program that performs an HTTP GET request to a URL provided to you as the first command-line argument. Collect **all** data from the server (not just the first "data" event) and then write two lines to the console (stdout).
 
 The first line you write should just be an integer representing the number of characters received from the server. The second line should contain the complete String of characters sent by the server.
@@ -47,3 +49,9 @@ Documentation for both of these modules has been installed along with {appname} 
 
   {rootdir:/docs/bl.html}
   {rootdir:/docs/concat-stream.html}
+
+Check to see if your program is correct by running this command:
+
+```sh
+$ {appname} verify http-collect.js
+```

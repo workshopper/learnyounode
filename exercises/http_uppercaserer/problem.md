@@ -1,3 +1,5 @@
+Create a file named `http-uppercaserer.js`.
+
 Write an HTTP **server** that receives only POST requests and converts incoming POST body characters to upper-case and returns it to the client.
 
 Your server should listen on the port provided by the first argument to your program.
@@ -33,3 +35,9 @@ If you don't have an Internet connection, simply make a `node_modules` directory
 Documentation for through2-map has been installed along with {appname} on your system and you can read them by pointing your browser here:
 
   {rootdir:/docs/through2-map.html}
+
+Check to see if your program is correct by running this command:
+
+```sh
+$ {appname} verify http-uppercaserer.js
+```

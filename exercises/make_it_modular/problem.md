@@ -1,8 +1,10 @@
+Create two files named `make-it-modular.js` and `mymodule.js`.
+
 This problem is the same as the previous but introduces the concept of **modules**. You will need to create two files to solve this.
 
 Create a program that prints a list of files in a given directory, filtered by the extension of the files. The first argument is the directory name and the second argument is the extension filter. Print the list of files (one file per line) to the console. You **must** use asynchronous I/O.
 
-You must write a *module* file to do most of the work. The module must *export* a single function that takes **three** arguments: the directory name, the filename extension string and your callback function, in that order. Don't alter the filename extension string in any way before passing it to your module.
+You must write a *module* file (`mymodule.js`) to do most of the work. The module must *export* a single function that takes **three** arguments: the directory name, the filename extension string and your callback function, in that order. Don't alter the filename extension string in any way before passing it to your module.
 
 The callback function must be called using the idiomatic node(err, data) convention. This convention stipulates that unless there's an error, the first argument passed to the callback will be null, and the second will be your data. In this exercise, the data will be your filtered list of files, as an Array. If you receive an error, e.g. from your call to  `fs.readdir()`, the callback must be called with the error as the first and only argument.
 
@@ -22,7 +24,7 @@ The benefit of having a contract is that your module can be used by anyone who e
 ----------------------------------------------------------------------
 ## HINTS
 
-Create a new module by creating a new file that just contains your directory reading and filtering function. To define a *single function export*, you assign your function to the `module.exports` object, overwriting what is already there:
+Create a new module by creating a new file (`mymodule.js`) that just contains your directory reading and filtering function. To define a *single function export*, you assign your function to the `module.exports` object, overwriting what is already there:
 
 ```js
 module.exports = function (args) { /* ... */ }
@@ -30,7 +32,7 @@ module.exports = function (args) { /* ... */ }
 
 Or you can use a named function and assign the name.
 
-To use your new module in your original program file, use the `require()` call in the same way that you `require('fs')` to load the `fs` module. The only difference is that for local modules must be prefixed with './'. So, if your file is named mymodule.js then:
+To use your new module in your original program file (`make-it-modular.js`), use the `require()` call in the same way that you `require('fs')` to load the `fs` module. The only difference is that for local modules must be prefixed with './'. So, if your file is named mymodule.js then:
 
 ```js
 const mymodule = require('./mymodule.js')
@@ -54,4 +56,10 @@ function bar (callback) {
     callback(null, data)
   })
 }
+```
+
+Check to see if your program is correct by running this command:
+
+```sh
+$ {appname} verify make-it-modular.js
 ```
