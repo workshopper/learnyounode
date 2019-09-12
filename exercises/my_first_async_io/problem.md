@@ -1,3 +1,5 @@
+Create a file named `my-first-async-io.js`.
+
 Write a program that uses a single **asynchronous** filesystem operation to read a file and print the number of newlines it contains to the console (stdout), similar to running `cat file | wc -l`.
 
 The full path to the file to read will be provided as the first command-line argument.
@@ -19,3 +21,9 @@ so you can check if an error occurred by checking whether the first argument is 
 
 Documentation on the `fs` module can be found by pointing your browser here:
   {rootdir:/docs-nodejs/fs.html}
+
+Check to see if your program is correct by running this command:
+
+```sh
+$ {appname} verify my-first-async-io.js
+```

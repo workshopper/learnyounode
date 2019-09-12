@@ -1,3 +1,5 @@
+Create a file named `time-server.js`.
+
 Write a **TCP time server**!
 
 Your server should listen to TCP connections on the port provided by the first argument to your program. For each connection you must write the current date & 24 hour time in the format:
@@ -58,3 +60,9 @@ date.getMinutes()
 ```
 
 Or, if you want to be adventurous, use the `strftime` package from npm. The `strftime(fmt, date)` function takes date formats just like the unix `date` command. You can read more about strftime at: https://github.com/samsonjs/strftime
+
+Check to see if your program is correct by running this command:
+
+```sh
+$ {appname} verify time-server.js
+```
