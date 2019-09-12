@@ -19,7 +19,7 @@ function callback (response) { /* ... */ }
 Trong đó đối tượng `response` là một đối tượng **Stream** (dòng dữ liệu) của Node. Bạn cũng có thể xử lý đối tượng Streams của Node giống như các đối tượng phát sự kiện khác. Thường có 3 sự kiện hay được sử dụng để thực hiện thao tác là: "data", "error" và "end". Bạn có thể lắng nghe một sự kiện kiểu như sau:
 
 ```js
-response.on("data", function (data) { /* ... */ })
+response.on('data', function (data) { /* ... */ })
 ```
 
 Sự kiện "data" được phát ra khi có một khúc dữ liệu được nạp thành công và ta có thể xử lý. Kích cỡ của khúc dữ liệu phụ thuộc vào nguồn dữ liệu.

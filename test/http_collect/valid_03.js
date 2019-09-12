@@ -1,5 +1,5 @@
 const http = require('http')
-let bufferArray = []
+const bufferArray = []
 
 http.get(process.argv[2], response => {
   response.on('data', chunk => {

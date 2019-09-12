@@ -42,8 +42,7 @@ Ten en cuenta que es buena práctica en Node controlar errores y devolverlos bie
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // devolver el error
+    if (err) { return callback(err) } // devolver el error
 
     // ... no hay error, continuar con los cálculos.
 

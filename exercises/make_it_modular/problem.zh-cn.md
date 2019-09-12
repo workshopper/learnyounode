@@ -45,8 +45,7 @@ var mymodule = require('./mymodule.js')
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // 尽早返回错误
+    if (err) { return callback(err) } // 尽早返回错误
 
     // ... 没有错误，处理 `data`
 

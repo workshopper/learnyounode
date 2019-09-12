@@ -60,7 +60,7 @@ Soyez également un-e bon-ne citoyen-ne du web et définissez le
 `Content-Type` correctement avant d’envoyer le corps de réponse :
 
 ```js
-res.writeHead(200, { 'Content-Type': 'application/json' });
+res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
 L’objet `Date` en JavaScript peut afficher des dates au format ISO, par

@@ -12,7 +12,7 @@ $ node program.js
 Du kan skrive til skjermen på samme måte som du skriver til consolet i en nettleser:
 
 ```js
-console.log("tekst")
+console.log('tekst')
 ```
 
 Når du er ferdig, må du kjøre:

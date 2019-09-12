@@ -20,7 +20,7 @@ $ node program.js 1 2 3
 Với lệnh chạy trên ta sẽ có kết quả như sau:
 
 ```js
-[ 'node', '/đường_dẫn/tới/thư_mục_chương_trình/program.js', '1', '2', '3' ]
+['node', '/đường_dẫn/tới/thư_mục_chương_trình/program.js', '1', '2', '3']
 ```
 
 Giờ bạn cần chạy vòng lặp để duyệt tất cả các tham số đầu vào để tính được tổng của chúng. Phần tử đầu tiên của mảng process.argv luôn là 'node', và phần tử thứ 2 luôn là đường dẫn tới chương trình của bạn, vì vậy bạn cần bắt đầu duyệt từ tham số thứ 3(tức là 'process.argv[2]') tới hết để truy cập được toàn bộ tham số đầu vào và tính tổng của chúng.

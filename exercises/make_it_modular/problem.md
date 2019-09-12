@@ -45,8 +45,7 @@ Also keep in mind that it is idiomatic to check for errors and do early-returns 
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // early return
+    if (err) { return callback(err) } // early return
 
     // ... no error, continue doing cool things with `data`
 

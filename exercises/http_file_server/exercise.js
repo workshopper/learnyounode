@@ -83,7 +83,7 @@ function query (mode) {
       .on('error', function (err) {
         exercise.emit(
           'fail'
-          , exercise.__('fail.connection', {address: url, message: err.message})
+          , exercise.__('fail.connection', { address: url, message: err.message })
         )
       })
     req.pipe(stream)
@@ -104,7 +104,7 @@ function query (mode) {
 exercise.addVerifyProcessor(function (callback) {
   var exercise = this
   var badCalls = Object.keys(exercise.wrapData.fsCalls).filter(function (m) {
-    exercise.emit('fail', exercise.__('fail.no_createReadStream', {method: 'fs.' + m + '()'}))
+    exercise.emit('fail', exercise.__('fail.no_createReadStream', { method: 'fs.' + m + '()' }))
     return !(/createReadStream/).test(m)
   })
 

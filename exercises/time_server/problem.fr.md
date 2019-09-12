@@ -32,7 +32,7 @@ Chaque connexion reçue par votre serveur déclenche un appel à votre fonction
 de rappel.  Elle a la signature suivante :
 
 ```js
-function callback(socket) { /* ... */ }
+function callback (socket) { /* ... */ }
 ```
 
 `net.createServer()` renvoie également une instance de votre serveur. Vous
@@ -42,11 +42,11 @@ port particulier.
 Un serveur TCP Node ressemble classiquement à ceci :
 
 ```js
-var net = require('net');
+var net = require('net')
 var server = net.createServer(function (socket) {
   // logique de gestion de la socket
-});
-server.listen(8000);
+})
+server.listen(8000)
 ```
 
 Souvenez-vous que le numéro de port vous sera fourni comme premier argument
@@ -73,8 +73,8 @@ trouver utiles sont :
 
 ```js
 date.getFullYear()
-date.getMonth()     // démarre 0 !
-date.getDate()      // renvoie le jour du mois
+date.getMonth() // démarre 0 !
+date.getDate() // renvoie le jour du mois
 date.getHours()
 date.getMinutes()
 ```

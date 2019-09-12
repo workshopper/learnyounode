@@ -46,8 +46,7 @@ Pamiętaj również o tym, że naturalne jest sprawdzanie czy istnieją błędy 
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // wcześniejsze zwrócenie kontroli
+    if (err) { return callback(err) } // wcześniejsze zwrócenie kontroli
 
     // ... brak błędów, szalej dalej z wartością argumentu `data`.
 

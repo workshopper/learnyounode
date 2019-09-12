@@ -45,8 +45,7 @@ Ngoài ra, bạn cũng nên tạo thói quen kiểm tra lỗi trước và nếu
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // có lỗi, ta trả ra sớm
+    if (err) { return callback(err) } // có lỗi, ta trả ra sớm
 
     // ... không có lỗi, ta tiếp tục xờ nắn `data`
 

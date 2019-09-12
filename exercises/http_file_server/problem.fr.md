@@ -21,7 +21,7 @@ crée un serveur qui comprend le protocole HTTP.
 connexion reçue par la serveur.  La fonction de rappel a la signature :
 
 ```js
-function callback(request, response) { /* ... */ }
+function callback (request, response) { /* ... */ }
 ```
 
 Les deux arguments sont des objets représentant la requête HTTP et la
@@ -41,11 +41,11 @@ particulier.
 Un serveur HTTP Node ressemble classiquement à ceci :
 
 ```js
-var http = require('http');
-var server = http.createServer(function(req, res) {
+var http = require('http')
+var server = http.createServer(function (req, res) {
   // logique de traitement de la requête…
-});
-server.listen(8000);
+})
+server.listen(8000)
 ```
 
 La documentation du module `http` peut être consultée hors-ligne à l’adresse

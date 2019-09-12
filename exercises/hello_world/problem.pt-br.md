@@ -12,7 +12,7 @@ $ node program.js
 Você pode escrever no console da mesma maneira que no navegador:
 
 ```js
-console.log("texto")
+console.log('texto')
 ```
 
 Quando tiver terminado seu código, você deverá executar:

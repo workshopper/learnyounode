@@ -54,10 +54,10 @@ exercise.addVerifyProcessor(function (callback) {
   Object.keys(exercise.wrapData.fsCalls || {}).forEach(function (m) {
     if (/Sync$/.test(m)) {
       usedSync = true
-      this.emit('pass', this.__('pass.sync', {method: 'fs.' + m + '()'}))
+      this.emit('pass', this.__('pass.sync', { method: 'fs.' + m + '()' }))
     } else {
       usedAsync = true
-      this.emit('fail', this.__('fail.async', {method: 'fs.' + m + '()'}))
+      this.emit('fail', this.__('fail.async', { method: 'fs.' + m + '()' }))
     }
   }.bind(this))
 

@@ -22,7 +22,7 @@ For this exercise we'll be creating a raw TCP server. There's no HTTP involved h
 The `net` module has a method named `net.createServer()` that takes a function. The function that you need to pass to `net.createServer()` is a connection listener that is called more than once. Every connection received by your server triggers another call to the listener. The listener function has the signature:
 
 ```js
-function listener(socket) { /* ... */ }
+function listener (socket) { /* ... */ }
 ```
 
 `net.createServer()` also returns an instance of your `server`. You must call `server.listen(portNumber)` to start listening on a particular port.
@@ -51,8 +51,8 @@ To create the date, you'll need to create a custom format from a `new Date()` ob
 
 ```js
 date.getFullYear()
-date.getMonth()     // starts at 0
-date.getDate()      // returns the day of month
+date.getMonth() // starts at 0
+date.getDate() // returns the day of month
 date.getHours()
 date.getMinutes()
 ```

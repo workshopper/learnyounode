@@ -13,7 +13,7 @@ $ node program.js
 Bạn có thể in ra giao diện dòng lệnh y như in ra trên trình duyệt:
 
 ```js
-console.log("text")
+console.log('text')
 ```
 
 Sau khi bạn làm xong như vậy thì hay chạy lệnh sau:

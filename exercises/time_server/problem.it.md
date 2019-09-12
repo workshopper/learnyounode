@@ -49,8 +49,8 @@ Per creare la data, dovrai creare un formato personalizzato da un oggetto `new D
 
 ```js
 date.getFullYear()
-date.getMonth()     // comincia da 0
-date.getDate()      // restituisce il giorno del mese
+date.getMonth() // comincia da 0
+date.getDate() // restituisce il giorno del mese
 date.getHours()
 date.getMinutes()
 ```

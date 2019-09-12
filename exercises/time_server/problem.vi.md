@@ -49,8 +49,8 @@ Tài liệu cho mô-đun `net` có thể xem tại:
 
 ```js
 date.getFullYear()
-date.getMonth()     // bắt đầu từ 0
-date.getDate()      // trả ra ngày của tháng
+date.getMonth() // bắt đầu từ 0
+date.getDate() // trả ra ngày của tháng
 date.getHours()
 date.getMinutes()
 ```

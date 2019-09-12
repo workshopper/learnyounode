@@ -51,8 +51,8 @@ server.listen(8000)
 
 ```js
 date.getFullYear()
-date.getMonth()     // 从 0 开始
-date.getDate()      // 返回当前月的日期
+date.getMonth() // 从 0 开始
+date.getDate() // 返回当前月的日期
 date.getHours()
 date.getMinutes()
 ```

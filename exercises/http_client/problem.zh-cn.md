@@ -18,7 +18,7 @@ function callback (response) { /* ... */ }
 `response` 对象是一个 Node 的 **Stream** 类型的对象，你可以将 Node Stream 当做一个会触发一些事件的对象，其中我们通常所需要关心的事件有三个： "data"，"error" 以及 "end"。你可以像这样来监听一个事件：
 
 ```js
-response.on("data", function (data) { /* ... */ })
+response.on('data', function (data) { /* ... */ })
 ```
 
 'data' 事件会在每个数据块到达并已经可以对其进行一些处理的时候被触发。数据块的大小将取决于数据源。

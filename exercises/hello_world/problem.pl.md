@@ -13,7 +13,7 @@ $ node program.js
 Możesz wypisywać na konsolę tak samo jak w przeglądarce:
 
 ```js
-console.log("text")
+console.log('text')
 ```
 
 Kiedy skończysz, uruchom:

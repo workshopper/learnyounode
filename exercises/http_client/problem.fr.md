@@ -30,7 +30,7 @@ Les trois événements qui nous intéressent le plus sont : 'data', 'error'
 et 'end'.  Vous pouvez écouter un événement comme ceci :
 
 ```js
-response.on("data", function (data) { /* ... */ });
+response.on('data', function (data) { /* ... */ })
 ```
 
 L’événement 'data' est émis pour chaque bloc de données disponible et prêt

@@ -14,7 +14,7 @@ $ node program.js
 您可以在瀏覽器的終端機中以同樣方式輸入：
 
 ```js
-console.log("text")
+console.log('text')
 ```
 
 當您做完以後，您必須在終端機中輸入：
