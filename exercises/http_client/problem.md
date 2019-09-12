@@ -6,7 +6,7 @@ Write a program that performs an HTTP GET request to a URL provided to you as th
 For this exercise you will need to use the `http` core module.
 
 Documentation on the `http` module can be found by pointing your browser here:
-  {rootdir:/node_apidoc/http.html}
+  https://nodejs.org/api/http.html
 
 The `http.get()` method is a shortcut for simple GET requests, use it to simplify your solution. The first argument to `http.get()` can be the URL you want to GET; provide a callback as the second argument.
 

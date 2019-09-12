@@ -18,4 +18,4 @@ function callback (err, data) { /* ... */ }
 所以，你可以通过检查第一个参数的真假值来判断是否有错误发生。如果没有错误发生，你会在第二个参数中获取到一个 `Buffer` 对象。和 `readFileSync()` 一样，你可以传入 'utf8' 作为它的第二个参数，然后把回调函数作为第三个参数，这样，你得到的将会是一个字符串，而不是 Buffer。
 
 `fs` 模块的文档可以通过使用你的浏览器访问如下路径来查看：
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html

@@ -21,13 +21,13 @@ fs 模組裡所有同步（ synchronous ，或稱為阻塞， blocking ）的功
 
 要閱讀並參考 `fs` 模組的說明文件，可以在瀏覽器中打開這個頁面：
 
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html
 
 任何的大量資料，無論編碼是 ASCII、二位元或其他的格式， Node.js 都可以用 `Buffer` 物件有效地儲存和操作。使用 `Buffer` 本身的 `toString()` 方法，就可以簡單的把 `Buffer` 物件的內容轉換成可見字串（String）。如 `const str = buf.toString()` 。
 
 
 要閱讀並參考關於 Buffer 物件的文件，可以在瀏覽器中打開這個頁面：
-  {rootdir:/node_apidoc/buffer.html}
+  https://nodejs.org/api/buffer.html
 
 如果您正在尋找計算字串中換行符號的數目的方法，最簡單的做法是計算換行符號。請記得 Javascript 中是使用「\n」表示換行符號，所以你可以用 `String` 的 `.split()` 方法，對字串所有的換行符號處進行切割，並生成一個多字串組成的陣列（Array），然後由 Array 的大小得知行數 。注意，測試檔案的最後一行不會以換行符號「\n」結尾，所以使用這個方法得到的 Array 元素數目（也就是行數）將會比換行符號多一個。
 

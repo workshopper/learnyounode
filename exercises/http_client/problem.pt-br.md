@@ -6,7 +6,7 @@ Escreva um programa que realize uma requisição HTTP GET a uma URL fornecida po
 Para este exercício você vai precisar usar o módulo do núcleo `http`.
 
 Documentação do módulo `http` pode ser encontrada apontando seu navegador para:
-  {rootdir:/node_apidoc/http.html}
+  https://nodejs.org/api/http.html
 
 O método `http.get()` é um atalho para simples requisições GET, use-o para simplificar sua solução. O primeiro argumento para `http.get()` pode ser a URL que você quer fazer o GET, fornecendo um callback como segundo argumento.
 

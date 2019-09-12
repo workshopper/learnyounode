@@ -17,11 +17,11 @@ const fs = require('fs')
 在 `fs` 中，所有的同步（或者阻塞）的操作文件系统的方法名都会以 'Sync' 结尾。要读取一个文件，你将需要使用  `fs.readFileSync('/path/to/file')` 方法。这个方法会*返回*一个包含文件完整内容的 `Buffer` 对象。
 
 `fs` 模块的文档，可以使用浏览器打开如下路径来访问：
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html
 
 `Buffer` 对象是 Node 用来高效处理数据的方式，无论该数据是 ascii 还是二进制文件，或者其他的格式。`Buffer` 可以很容易地通过调用 `toString()` 方法转换为字符串。如：`const str = buf.toString()`。
 
 `Buffer` 的文档可以通过浏览器访问如下路径来查看：
-  {rootdir:/node_apidoc/buffer.html}
+  https://nodejs.org/api/buffer.html
 
 如果你在想如何更简单地去计算行数，请回想一下，一个 JavaScript 字符串，可以使用 `.split()` 分割成子字符串数组，而且，'\n' 可以作为分隔符。注意，供测试的文件末尾的最后一行并没有进行换行，即没有 '\n' 的存在，因此，使用这个方法的话，所得的数组的长度会比行数多一个。

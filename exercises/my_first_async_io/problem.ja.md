@@ -22,4 +22,4 @@ function callback (err, data) { /* ... */ }
 `readFileSync`と同じようにファイルパスとコールバック引数の間に `"utf8"` を入れてもいいです。その場合、 `Buffer` のかわりに `String` が返るようになります。
 
 `fs` モジュールのドキュメントはブラウザーでこのリンクを見てください:
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html

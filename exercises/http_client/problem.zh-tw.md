@@ -6,7 +6,7 @@
 在這個練習中，您將需要使用核心的 `http` 模組。
 
 要閱讀 `http` 模組的文件，可以在瀏覽器中打開這個頁面：
-  {rootdir:/node_apidoc/http.html}
+  https://nodejs.org/api/http.html
 
 `http.get()` 方法可以發起一個簡單的 GET 請求，可以簡化您的解決方法。 `http.get()` 的第一個參數是您想要發起GET請求的URL，第二個參數是一個 callback 函式。
 

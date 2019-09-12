@@ -18,4 +18,4 @@ function callback (err, data) { /* ... */ }
 dzięki czemu możesz sprawdzić czy wystąpił błąd przez sprawdzenie czy wartość pierwszego argumentu jest prawdziwa (ang. *truthy* - zwróć uwagę, że to nie to samo co wartość `true`!). Jeżeli nie wystąpił żaden błąd, wartością drugiego argumentu powinien być obiekt `Buffer`. Tak samo jak w przypadku `fs.readFileSync()`, możesz przekazać `'utf8'` jako drugi argument (funkcja callback w tym przypadku będzie na trzecim miejscu) - jako wartość `data` otrzymasz wtedy ciąg znaków (`String`) zamiast obiektu `Buffer`.
 
 Dokumentację modułu `fs` możesz przeczytać tutaj:
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html

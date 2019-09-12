@@ -18,7 +18,7 @@ const fs = require('fs')
 この関数は `Buffer` オブジェクトを返します。この `Buffer` を使うことで全てのファイルコンテンツにアクセスできます。
 
 `fs` モジュールのドキュメントは以下のリンクをブラウザでご覧ください:
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html
 
 `Buffer` オブジェクトは、ASCIIやバイナリ、その他のフォーマットを扱う際の Nodeの効率的な方法です。エンコーディングは関係ありません。
 `Buffer` のオブジェクトは `toString()` をつかって String に変換できます。
@@ -26,7 +26,7 @@ const fs = require('fs')
 例えば `const str = buf.toString()`.
 
 `Buffer` モジュールのドキュメントは、このリンクをブラウザで見てください:
-  {rootdir:/node_apidoc/buffer.html}
+  https://nodejs.org/api/buffer.html
 
 簡単に改行を数える方法を探しているのなら、このヒントは役に立つでしょう：
 

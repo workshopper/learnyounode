@@ -17,9 +17,9 @@ function callback (err, list) { /* ... */ }
 Де `list` є масивом рядків з іменами файлів.
 
 Документацію до модуля `fs` Ви можете знайти, набравши в браузері:
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html
 
 Також Вам в нагоді може стати модуль `path`, між іншим, його метод `extname`.
 
 Документацію для модуля `path` Ви можете знайти, перейшовши у браузері:
-  {rootdir:/node_apidoc/path.html}
+  https://nodejs.org/api/path.html

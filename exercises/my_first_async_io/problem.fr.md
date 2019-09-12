@@ -35,4 +35,4 @@ recevra une `String` plutôt qu’un `Buffer`.
 La documentation du module `fs` peut être consultée avec votre navigateur
 à l’adresse hors-ligne suivante :
 
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html

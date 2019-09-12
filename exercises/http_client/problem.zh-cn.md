@@ -5,7 +5,7 @@
 
 完成这个练习，你需要使用 Node.js 核心模块之一：`http`。
 
-你可以使用浏览器访问 {rootdir:/node_apidoc/http.html} 来获取关于 `http` 模块的文档。
+你可以使用浏览器访问 https://nodejs.org/api/http.html 来获取关于 `http` 模块的文档。
 
 `http.get()` 方法是用来发起简单的 GET 请求的快捷方式，使用这个方法可以一定程度简化你的程序。`http.get()` 的第一个参数是你想要 GET 的 URL，第二个参数则是回调函数。
 

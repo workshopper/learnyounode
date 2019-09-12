@@ -16,9 +16,9 @@ function callback (err, list) { /* ... */ }
 gdzie `list` stanowi tablicę nazw plików.
 
 Dokumentację modułu `fs` możesz znaleźć tutaj:
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html
 
 Moduł Node.js `path` może okazać się pomocny, zwłaszcza metoda `extname`.
 
 Dokumentację modułu `path` możesz znaleźć tutaj:
-  {rootdir:/node_apidoc/path.html}
+  https://nodejs.org/api/path.html

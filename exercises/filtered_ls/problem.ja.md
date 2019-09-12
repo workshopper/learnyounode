@@ -21,9 +21,9 @@ function callback (err, list) { /* ... */ }
 `list` はファイル名の `String` が格納された `Array` です。
 
 `fs` モジュールのドキュメントは、このリンクをブラウザで見てください:
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html
 
 Node の `path` も役に立つかもしれません。特に `extname` の関数が使えます。
 
 `path` モジュールのドキュメントはこのリンクをブラウザで見てください:
-  {rootdir:/node_apidoc/path.html}
+  https://nodejs.org/api/path.html

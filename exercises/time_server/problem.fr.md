@@ -65,7 +65,7 @@ comme ceci : `socket.end(data)`.
 La documentation hors-ligne pour le module noyau `net` peut être consultée
 à l’adresse suivante :
 
-  {rootdir:/node_apidoc/net.html}
+  https://nodejs.org/api/net.html
 
 Pour créer la date, vous aurez besoin de construire un format spécial à partir
 d’un objet obtenu par un appel à `new Date()`.  Les méthodes que vous pourrez

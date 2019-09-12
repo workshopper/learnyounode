@@ -16,11 +16,11 @@ Dopodiché disporrai dell'intero modulo `fs` in una variabile chiamata `fs`.
 Tutti i metodi sincroni (o bloccanti) sul file system del modulo `fs` terminano con 'Sync'. Per leggere un file, dovrai usare `fs.readFileSync('/percorso/al/file')`. Questo metodo *restituirà* un oggetto `Buffer` contenente l'intero contenuto del file.
 
 La documentazione sul modulo `fs` può essere trovata puntando il tuo browser all'indirizzo:
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html
 
 Gli oggetti `Buffer` sono la maniera usata da Node per rappresentare efficientemente array arbitrari di dati, sia che si tratti di ascii, binari o qualunque altro formato. Gli oggetti `Buffer` possono essere convertiti in stringhe semplicemente chiamando il metodo `toString()` su di essi, ad es. `const str = buf.toString()`.
 
 La documentazione sui `Buffer` può essere trovata puntando il tuo browser all'indirizzo:
-  {rootdir:/node_apidoc/buffer.html}
+  https://nodejs.org/api/buffer.html
 
 Se stai cercando una maniera semplice di contare il numero di andate a capo in una stringa, ricorda che un oggetto `String` di JavaScript possiede un metodo `.split()` che lo suddivide in un array di sottostringhe, e che '\n' può essere usato come un delimitatore. Nota che il file di prova non possiede un carattere di nuova riga ('\n') alla fine dell'ultima riga, quindi usando questo metodo otterrai un array che ha un elemento in più del numero di nuove righe.
