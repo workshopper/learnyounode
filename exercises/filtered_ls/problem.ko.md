@@ -16,9 +16,9 @@ function callback (err, list) { /* ... */ }
 `list`는 파일 이름 문자열의 배열입니다.
 
 `fs` 모듈의 문서는 브라우저에 이 주소를 넣으면 볼 수 있습니다.
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html
 
 아마 `extname` 메소드를 구현하는데 노드의 `path` 모듈이 도움될 것입니다.
 
 `path` 모듈의 문서는 브라우저에 이 주소를 넣으면 볼 수 있습니다.
-  {rootdir:/node_apidoc/path.html}
+  https://nodejs.org/api/path.html

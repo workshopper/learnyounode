@@ -11,7 +11,7 @@
 
 `http` モジュールのドキュメントは、このリンクをブラウザで見てください:
 
-  {rootdir:/node_apidoc/http.html}
+  https://nodejs.org/api/http.html
 
 `http.get()` という関数は簡単に GET リクエストを送信するショートカットです。解決方法をシンプルするのに役に立つと思います。
 `http.get()` の1つ目の引数は、GET リクエストの URL です。2つ目はコールバック関数です。

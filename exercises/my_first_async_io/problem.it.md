@@ -18,4 +18,4 @@ function callback (err, data) { /* ... */ }
 quindi puoi controllare se si è verificato un errore controllando se il primo argomento ha un valore di verità. Se non si è verificato alcun errore, dovresti ricevere il tuo oggetto `Buffer` come secondo argomento. Come per `readFileSync()`, puoi fornire 'utf8' come secondo argomento e passare la callback come terzo argomento, e otterrai un valore `String` anziché un `Buffer`.
 
 La documentazione sul modulo `fs` può essere ottenuta puntando il tuo browser all'indirizzo:
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html

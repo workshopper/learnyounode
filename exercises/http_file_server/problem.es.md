@@ -27,6 +27,6 @@ var server = http.createServer(function (req, res) {
 server.listen(8000)
 ```
 La documentación del módulo `http` puede verse en:
-  {rootdir:/node_apidoc/http.html}
+  https://nodejs.org/api/http.html
 
 Recuerda que el módulo `fs` tiene APIs para streaming de archivos. Debes usar `fs.createReadStream()` para crear un stream que represente el archivo de entrada. Luego puedes concatenar el stream con pipe `src.pipe(dst)` para pasar los datos del stream `src` al stream writer de salida `dst`. Es decir puedes conectar un filesystem stream a un HTTP response stream.

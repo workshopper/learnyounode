@@ -36,7 +36,7 @@ $ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 Xem thêm chi tiết về mô-đun `url` tại:
-  {rootdir:/node_apidoc/url.html}
+  https://nodejs.org/api/url.html
 
 Response sẽ được trả lại dưới dạng JSON. Bạn tìm hiểu `JSON.stringify()` để biết thêm nhé.
 

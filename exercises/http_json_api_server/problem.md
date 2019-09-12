@@ -36,7 +36,7 @@ $ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 Documentation on the `url` module can be found by pointing your browser here:
-  {rootdir:/node_apidoc/url.html}
+  https://nodejs.org/api/url.html
 
 Your response should be in a JSON string format. Look at `JSON.stringify()` for more information.
 

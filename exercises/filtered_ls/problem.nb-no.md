@@ -16,9 +16,9 @@ function callback (err, list) { /* ... */ }
 der `list` er et array med filnavn stringer.
 
 Dokumentasjonen til `fs` finner du her:
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html
 
 Det kan også være hjelpsomt å se på node's `path` modul. Spesielt funksjonen `extname`.
 
 Dokumentasjonen til `path` finner du her:
-  {rootdir:/node_apidoc/path.html}
+  https://nodejs.org/api/path.html

@@ -59,7 +59,7 @@ server.listen(8000)
 
 `net` モジュールのドキュメントは、このリンクをブラウザで見てください:
 
-  {rootdir:/node_apidoc/net.html}
+  https://nodejs.org/api/net.html
 
 問題に書いてある通り `new Date()` の日付を整形する必要があります。`date` には色々な役に立つ関数があります：
 

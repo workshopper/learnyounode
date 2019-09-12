@@ -31,7 +31,7 @@ server.listen(8000)
 ```
 
 Dokumentasjonen til `http` finner du her:
-  {rootdir:/node_apidoc/http.html}
+  https://nodejs.org/api/http.html
 
 
 `fs` modulen i Node har noen streaming APIer for filer. Når du benytter deg av `fs.createReadStream()` vil du få et stream objekt tilbake som representerer filen du vil lese. På et stream objekt kan du kalle på `src.pipe(dst)` for å pipe dataene fra en stream til en annen (Her fra `src` til `dst`). Du kan på den måte koble filsystem streamen med HTTP response streamen.

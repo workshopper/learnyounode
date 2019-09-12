@@ -18,9 +18,9 @@ function callback (err, list) { /* ... */ }
 where `list` is an array of filename strings.
 
 Documentation on the `fs` module can be found by pointing your browser here:
-  {rootdir:/node_apidoc/fs.html}
+  https://nodejs.org/api/fs.html
 
 You may also find node's `path` module helpful, particularly the `extname` method.
 
 Documentation on the `path` module can be found by pointing your browser here:
-  {rootdir:/node_apidoc/path.html}
+  https://nodejs.org/api/path.html

@@ -32,6 +32,6 @@ server.listen(8000)
 ```
 
 Dokumentacja dla modułu `http` znajduje się tutaj:
-  {rootdir:/node_apidoc/http.html}
+  https://nodejs.org/api/http.html
 
 Moduł podstawowy `fs` również udostępnia kilka strumieniowych metod dla plików. Potrzebna będzie Ci metoda `fs.createReadSteam()` aby utworzyć strumień reprezentujący plik, którego nazwa przekazana została jako argument wiersza poleceń. Metoda ta zwraca obiekt, za pomocą którego możesz przekierować dane ze strumienia `src` do strumienia `dst`: `src.pipe(dst)`. Tym sposobem możesz połączyć strumień pochodzący z systemu plików ze strumieniem odpowiedzi HTTP.

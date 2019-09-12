@@ -38,7 +38,7 @@ server.listen(8000)
 
 `http` モジュールのドキュメントは、このリンクをブラウザで見てください:
 
-  {rootdir:/node_apidoc/http.html}
+  https://nodejs.org/api/http.html
 
 `fs` と言う Node のコアモジュールには、ファイルを stream できる API があります。
 コマンドラインの第2引数（テキストファイルへのパス）を `fs.createReadStream()` に渡すとそのファイルを表す Stream オブジェクトがもらえます。

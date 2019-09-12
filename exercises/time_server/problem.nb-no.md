@@ -43,7 +43,7 @@ Benytt `socket.write(data)` for å skrive og `socket.end()` for å lukke sockete
 
 Dokumentasjonen til `net` finner du her:
 
-  {rootdir:/node_apidoc/net.html}
+  https://nodejs.org/api/net.html
 
 Etter å ha opprettet et `new Date()` object, vil disse funksjonene være til hjelp får å få riktig format:
 

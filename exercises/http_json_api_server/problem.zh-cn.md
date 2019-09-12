@@ -37,7 +37,7 @@ $ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 关于 `url` 模块的文档，你可以使用浏览器访问如下路径来访问：
-  {rootdir:/node_apidoc/url.html}
+  https://nodejs.org/api/url.html
 
 你的响应应该是一个 JSON 字符串的形式。请查看 `JSON.stringify()` 来获取更多信息。
 
