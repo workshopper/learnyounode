@@ -1,7 +1,13 @@
 # Change Log
 
-All notable changes to this project will be documented from version 3.5.9 forward
+All notable changes to this project will be documented from version 4.0.0 forward
 in this file.
 
-<a name="3.5.9"></a>
-## [3.5.9](https://github.com/workshopper/learnyounode/compare/v3.5.8...v3.5.9) (2017-02-16)
+## 4.0.0 - 2019-09-12
+
+- BREAKING: Dropped Node 8 support
+- No more security warnings in production dependencies!
+- All code, including in examples uses `const` and `let` instead of `var`
+- All code, including in markdown, is `standard` compliant and consistent
+- Replace code that uses deprecated 'url' module with `URL` class instead
+- Outdated offline docs removed; we now include live links to the nodejs.org docs.
