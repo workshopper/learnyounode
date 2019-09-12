@@ -1,10 +1,10 @@
-var http = require('http')
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
+const http = require('http')
+let exercise = require('workshopper-exercise')()
+const filecheck = require('workshopper-exercise/filecheck')
+const execute = require('workshopper-exercise/execute')
+const comparestdout = require('workshopper-exercise/comparestdout')
 
-var words = require('boganipsum')({ paragraphs: 2, sentenceMax: 1 }).split(' ')
+const words = require('boganipsum')({ paragraphs: 2, sentenceMax: 1 }).split(' ')
 
 // the output will be long lines so make the comparison take that into account
 exercise.longCompareOutput = true
@@ -40,7 +40,7 @@ exercise.addSetup(function (mode, callback) {
   }.bind(this))
 
   this.server.listen(0, function () {
-    var url = 'http://localhost:' + String(this.server.address().port)
+    const url = 'http://localhost:' + String(this.server.address().port)
 
     // give the url as the first cmdline arg to the child processes
     this.submissionArgs = [url]

@@ -24,7 +24,7 @@ $ npm install bl
 Với lệnh này, nó sẽ nó tải về và cài đặt phiên bản mới nhất của một gói thư viện trong thư mục con (con của thư mục hiện tại) tên là `node_modules`. Tất cả các gói trong thư mục con này đều có thể nạp được vào file chương trình chính của bạn với lệnh `require` mà không cần phải thêm tiền tố './'. Ví dụ:
 
 ```js
-var bl = require('bl')
+const bl = require('bl')
 ```
 
 Khi thực hiện lệnh `require`, Node sẽ tìm kiếm trong các mô-đun lõi của Node trước, sau đó mới tìm kiếm tới các mô-đun trong thư mục con `node_modules`.

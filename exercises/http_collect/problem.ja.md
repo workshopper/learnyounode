@@ -27,7 +27,7 @@ $ npm install bl
 そのフォルダにあるパッケージは `require` を使って `.` の接頭辞なしで利用できます：
 
 ```js
-var bl = require('bl')
+const bl = require('bl')
 ```
 
 メモ： Node.js のロードの優先順位は、まずNode.jsのコア、その後は上述の `node_modules`のフォルダの順です。

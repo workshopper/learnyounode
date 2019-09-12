@@ -1,10 +1,10 @@
-var http = require('http')
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
+const http = require('http')
+let exercise = require('workshopper-exercise')()
+const filecheck = require('workshopper-exercise/filecheck')
+const execute = require('workshopper-exercise/execute')
+const comparestdout = require('workshopper-exercise/comparestdout')
 
-var words = require('boganipsum/clean_words')
+const words = require('boganipsum/clean_words')
   .sort(function () { return 0.5 - Math.random() })
   .slice(0, 10)
 
@@ -33,7 +33,7 @@ exercise.addSetup(function (mode, callback) {
   })
 
   this.server.listen(0, function () {
-    var url = 'http://localhost:' + String(this.server.address().port)
+    const url = 'http://localhost:' + String(this.server.address().port)
 
     // give the url as the first cmdline arg to the child processes
     this.submissionArgs = [url]

@@ -24,7 +24,7 @@ $ npm install bl
 Den vil da laste ned og installere siste version av modulen i katalogen `node_modules`. Alle moduler som ligger i denne kataologen kan gjøres tilgjengelig med `require`. Husk at moduler i denne mappen ikke trenger å starte med './'.
 
 ```js
-var bl = require('bl')
+const bl = require('bl')
 ```
 
 Når du benytter require vil Node først lete i hoved modulene og deretter i `node_modules`.

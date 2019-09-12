@@ -1,17 +1,17 @@
-var fs = require('fs')
-var path = require('path')
-var os = require('os')
-var through2 = require('through2')
-var hyperquest = require('hyperquest')
-var rimraf = require('rimraf')
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
-var wrappedexec = require('workshopper-wrappedexec')
-var rndtxt = require('boganipsum')({ paragraphs: 1, sentenceMax: 1 }) + '\n'
-var testFile = path.join(os.tmpdir(), '_learnyounode_' + process.pid + '.txt')
-var rndport = require('../../lib/rndport')
+const fs = require('fs')
+const path = require('path')
+const os = require('os')
+const through2 = require('through2')
+const hyperquest = require('hyperquest')
+const rimraf = require('rimraf')
+let exercise = require('workshopper-exercise')()
+const filecheck = require('workshopper-exercise/filecheck')
+const execute = require('workshopper-exercise/execute')
+const comparestdout = require('workshopper-exercise/comparestdout')
+const wrappedexec = require('workshopper-wrappedexec')
+const rndtxt = require('boganipsum')({ paragraphs: 1, sentenceMax: 1 }) + '\n'
+const testFile = path.join(os.tmpdir(), '_learnyounode_' + process.pid + '.txt')
+const rndport = require('../../lib/rndport')
 
 // the output will be long lines so make the comparison take that into account
 exercise.longCompareOutput = true
@@ -74,12 +74,12 @@ exercise.addCleanup(function (mode, passed, callback) {
 // delayed for 500ms to wait for servers to start so we can start
 // playing with them
 function query (mode) {
-  var exercise = this
+  const exercise = this
 
   function connect (port, stream) {
     // TODO: introduce verification of content-type:text/plain and statusCode=200
-    var url = 'http://localhost:' + port
-    var req = hyperquest.get(url)
+    const url = 'http://localhost:' + port
+    const req = hyperquest.get(url)
       .on('error', function (err) {
         exercise.emit(
           'fail'
@@ -102,8 +102,8 @@ function query (mode) {
 
 // add a processor only for 'verify' calls
 exercise.addVerifyProcessor(function (callback) {
-  var exercise = this
-  var badCalls = Object.keys(exercise.wrapData.fsCalls).filter(function (m) {
+  const exercise = this
+  const badCalls = Object.keys(exercise.wrapData.fsCalls).filter(function (m) {
     exercise.emit('fail', exercise.__('fail.no_createReadStream', { method: 'fs.' + m + '()' }))
     return !(/createReadStream/).test(m)
   })

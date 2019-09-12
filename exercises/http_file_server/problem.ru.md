@@ -24,8 +24,8 @@ function callback (request, response) { /* ... */ }
 Типичный Node HTTP сервер выглядит так:
 
 ```js
-var http = require('http')
-var server = http.createServer(function (req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // обработка запросов
 })
 server.listen(8000)

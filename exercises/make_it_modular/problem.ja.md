@@ -52,7 +52,7 @@ module.exports = hoge
 あなたの Module の名前が `mymodule.js` の場合、以下のように使ってください:
 
 ```js
-var hogemodule = require('./mymodule.js')
+const hogemodule = require('./mymodule.js')
 ```
 
 （メモ： `'.js'` の拡張子は必ずしも必要ではありません。他のコードでは、それをよく省略しています。）

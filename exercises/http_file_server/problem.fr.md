@@ -41,8 +41,8 @@ particulier.
 Un serveur HTTP Node ressemble classiquement à ceci :
 
 ```js
-var http = require('http')
-var server = http.createServer(function (req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // logique de traitement de la requête…
 })
 server.listen(8000)
