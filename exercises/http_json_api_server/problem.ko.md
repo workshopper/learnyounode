@@ -27,12 +27,12 @@
 
 HTTP 서버의 `request` 객체는 요청을 두 엔드 포인트로 *"route"*하는데 필요한 `url` 속성을 가지고 있습니다.
 
-Node 핵심 'url' 모듈을 이용해 URL과 쿼리 문자열을 파스할 수 있습니다. `url.parse(request.url, true)`는 request.url의 내용을 구문 해석하고 도움이 되는 속성을 가진 객체를 줄 것입니다.
+Node 핵심 'url' 모듈을 이용해 URL과 쿼리 문자열을 파스할 수 있습니다. `new URL(request.url)`는 request.url의 내용을 구문 해석하고 도움이 되는 속성을 가진 객체를 줄 것입니다.
 
 예를 들어, 커맨드 프롬프트에 다음을 입력하세요.
 
 ```sh
-$ node -pe "require('url').parse('/test?q=1', true)"
+$ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 `url` 모듈의 문서는 브라우저에 이 주소를 넣으면 볼 수 있습니다.

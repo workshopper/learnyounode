@@ -39,13 +39,13 @@ L’objet `request` fourni par le serveur HTTP a une propriété `url` dont vous
 aurez besoin pour *« router »* les requêtes vers le bon point d’accès.
 
 Vous pouvez analyser l’URL et la *query string* en utilisant le module noyau
-Node `url`.  Un appel `url.parse(request.url, true)` analysera le contenu de
+Node `url`.  Un appel `new URL(request.url)` analysera le contenu de
 `request.url` et vous fournira un objet avec toutes les propriétés utiles.
 
 Par exemple, sur votre invite de commande, tapez :
 
 ```sh
-$ node -pe "require('url').parse('/test?q=1', true)"
+$ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 La documentation pour le module `url` peut être consultée hors-ligne à

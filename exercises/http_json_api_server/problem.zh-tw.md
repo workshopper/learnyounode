@@ -27,12 +27,12 @@
 
 來自 HTTP 伺服器的 `request` 物件會擁有一個 `url` 屬性，您可以使用這個屬性判斷請求究竟是針對哪個路徑。
 
-您可以使用 Node 核心模組 url 來解析 query 和網址。 `url.parse(request.url, true)` 會解析 request.url 的內容，並提供您一個擁有好用屬性的物件。
+您可以使用 Node 核心模組 url 來解析 query 和網址。 `new URL(request.url)` 會解析 request.url 的內容，並提供您一個擁有好用屬性的物件。
 
 舉例來說，在命令列中輸入：
 
 ```sh
-$ node -pe "require('url').parse('/test?q=1', true)"
+$ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 要閱讀 `url` 模組的文件，可以在瀏覽器中打開這個頁面：

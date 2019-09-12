@@ -1,5 +1,4 @@
 const http = require('http')
-const url = require('url')
 
 function parsetime (time) {
   return {
@@ -14,8 +13,8 @@ function unixtime (time) {
 }
 
 const server = http.createServer(function (req, res) {
-  const parsedUrl = url.parse(req.url, true) // eslint-disable-line
-  const time = new Date(parsedUrl.query.iso)
+  const parsedUrl = new URL(req.url, 'http://example.com')
+  const time = new Date(parsedUrl.searchParams.get('iso'))
   let result
 
   if (/^\/api\/parsetime/.test(req.url)) {

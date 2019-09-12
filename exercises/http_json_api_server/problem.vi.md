@@ -27,12 +27,12 @@ Máy chủ của bạn sẽ lắng nghe ở cổng được truyền vào chươ
 
 Đối tượng `request` từ một máy chủ HTTP có một  thuộc tính `url`, bạn sẽ cần sử dụng thuộc tính này để *"điều hướng"* (route) các request cho từng điểm cuối kết nối (endpoint).
 
-Bạn có thể phân tích (parse) URL và chuỗi truy vấn (query string) bằng cách sử dụng mô-đun 'url' trong lõi Node. `url.parse(request.url, true)` sẽ phân tích nội dung của request.url và trả lại cho bạn một đối tượng với các thuộc tính hữu ích.
+Bạn có thể phân tích (parse) URL và chuỗi truy vấn (query string) bằng cách sử dụng mô-đun 'url' trong lõi Node. `new URL(request.url)` sẽ phân tích nội dung của request.url và trả lại cho bạn một đối tượng với các thuộc tính hữu ích.
 
 Ví dụ, gõ lệnh sau trên giao diện dòng lệnh:
 
 ```sh
-$ node -pe "require('url').parse('/test?q=1', true)"
+$ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 Xem thêm chi tiết về mô-đun `url` tại:
