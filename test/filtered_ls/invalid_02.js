@@ -1,12 +1,12 @@
-var dir = process.argv[2]
-var ext = process.argv[3]
-var cmd = 'ls -1 ' + dir
+const dir = process.argv[2]
+const ext = process.argv[3]
+const cmd = 'ls -1 ' + dir
 const pathUtil = require('path')
 require('child_process').exec(cmd, function (err, stdout) {
   if (err) {
     console.log(err)
   }
-  var files = stdout.split('\n')
+  let files = stdout.split('\n')
   if (ext) {
     files = files.filter(function (file) {
       return pathUtil.extname(file) === '.' + ext

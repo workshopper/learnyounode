@@ -5,11 +5,11 @@ function wrap (ctx) {
 
   // wrap app fs calls
   Object.keys(fs).forEach(function (m) {
-    var orig = fs[m]
+    const orig = fs[m]
 
     fs[m] = function () {
       // $captureStack is a utility to capture a stacktrace array
-      var stack = ctx.$captureStack(fs[m])
+      const stack = ctx.$captureStack(fs[m])
 
       // inspect the first callsite of the stacktrace and see if the
       // filename matches the mainProgram we're running, if so, then

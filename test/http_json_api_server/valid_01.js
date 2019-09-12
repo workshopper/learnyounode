@@ -1,6 +1,6 @@
 require('http').createServer(function (req, res) {
-  var time = new Date(new URL(req.url, 'http://example.com').searchParams.get('iso')) // eslint-disable-line
-  var result =
+  const time = new Date(new URL(req.url, 'http://example.com').searchParams.get('iso'))
+  let result =
   /^\/api\/parsetime/.test(req.url)
     ? {
       hour: time.getHours(),

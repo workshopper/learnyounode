@@ -50,17 +50,15 @@ exercise = comparestdout(exercise)
 // delayed for 500ms to wait for servers to start so we can start
 // playing with them
 function query (mode) {
-  var exercise = this
+  const exercise = this
 
   function connect (port, stream) {
-    var input = through2()
-    var count = 0
-    var iv
-    var url = 'http://localhost:' + port
-    var req
+    const input = through2()
+    let count = 0
+    const url = 'http://localhost:' + port
 
     // TODO: test GET requests for #fail
-    req = input.pipe(hyperquest.post(url)
+    const req = input.pipe(hyperquest.post(url)
       .on('error', function (err) {
         exercise.emit(
           'fail'
@@ -74,7 +72,7 @@ function query (mode) {
       stream.end()
     }, 5000)
 
-    iv = setInterval(function () {
+    const iv = setInterval(function () {
       input.write(words[count].trim() + '\n')
 
       if (++count === words.length) {

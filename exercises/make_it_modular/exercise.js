@@ -11,7 +11,7 @@ const rimraf = require('rimraf')
 const verify = require('./verify')
 const files = require('../filtered_ls/file-list')
 
-var testDir = path.join(os.tmpdir(), '_learnyounode_' + process.pid)
+const testDir = path.join(os.tmpdir(), '_learnyounode_' + process.pid)
 
 // checks that the submission file actually exists
 exercise = filecheck(exercise)
@@ -52,7 +52,7 @@ exercise.addSetup(function (mode, callback) {
       return callback(err)
     }
 
-    var done = after(files.length, callback)
+    const done = after(files.length, callback)
 
     files.forEach(function (f) {
       fs.writeFile(

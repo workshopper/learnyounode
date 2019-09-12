@@ -22,7 +22,7 @@ exercise.addSetup(function (mode, callback) {
   // mode == 'run' || 'verify'
 
   // create a random batch of cmdline args
-  var args = [rndint(), rndint()]
+  const args = [rndint(), rndint()]
 
   while (Math.random() > 0.3) {
     args.push(rndint())

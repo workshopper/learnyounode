@@ -29,7 +29,7 @@ Un ejemplo de un servidor Node típico es como sigue:
 
 ```js
 const net = require('net')
-var server = net.createServer(function (socket) {
+const server = net.createServer(function (socket) {
   // manejo del socket
 })
 server.listen(8000)

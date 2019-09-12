@@ -29,7 +29,7 @@ Un tipico server TCP di Node si presenta così:
 
 ```js
 const net = require('net')
-var server = net.createServer(function (socket) {
+const server = net.createServer(function (socket) {
   // logica per gestire la socket
 })
 server.listen(8000)

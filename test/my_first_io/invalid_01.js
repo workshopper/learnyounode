@@ -7,6 +7,6 @@ function countNewLines (error, text) {
     return console.error(error)
   }
 
-  var lineCount = text.toString().split('\n').length - 1
+  const lineCount = text.toString().split('\n').length - 1
   console.log(lineCount)
 }

@@ -43,7 +43,7 @@ Un serveur TCP Node ressemble classiquement à ceci :
 
 ```js
 const net = require('net')
-var server = net.createServer(function (socket) {
+const server = net.createServer(function (socket) {
   // logique de gestion de la socket
 })
 server.listen(8000)

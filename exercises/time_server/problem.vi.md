@@ -29,7 +29,7 @@ Thường thì một máy chủ TCP đơn giản sẽ được thực hiện nh�
 
 ```js
 const net = require('net')
-var server = net.createServer(function (socket) {
+const server = net.createServer(function (socket) {
   // Xử lý logic của socket
 })
 server.listen(8000)

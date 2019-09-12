@@ -1,5 +1,5 @@
-var results = []
-var count = 0
+const results = []
+let count = 0
 
 function printResults () {
   results.forEach(function (data) {
@@ -23,6 +23,6 @@ function httpGet (index) {
   })
 }
 
-for (var i = 0; i < 3; i++) {
+for (let i = 0; i < 3; i++) {
   httpGet(i)
 }

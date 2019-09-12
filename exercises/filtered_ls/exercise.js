@@ -10,7 +10,7 @@ const after = require('after')
 const rimraf = require('rimraf')
 const files = require('./file-list')
 
-var testDir = path.join(os.tmpdir(), '_learnyounode_' + process.pid)
+const testDir = path.join(os.tmpdir(), '_learnyounode_' + process.pid)
 
 // checks that the submission file actually exists
 exercise = filecheck(exercise)
@@ -47,7 +47,7 @@ exercise.addSetup(function (mode, callback) {
       return callback(err)
     }
 
-    var done = after(files.length, callback)
+    const done = after(files.length, callback)
 
     files.forEach(function (f) {
       fs.writeFile(
@@ -62,8 +62,8 @@ exercise.addSetup(function (mode, callback) {
 
 // add a processor only for 'verify' calls
 exercise.addVerifyProcessor(function (callback) {
-  var usedSync = false
-  var usedAsync = false
+  let usedSync = false
+  let usedAsync = false
 
   Object.keys(exercise.wrapData.fsCalls).forEach(function (m) {
     if (/Sync$/.test(m)) {

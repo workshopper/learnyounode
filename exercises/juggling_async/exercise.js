@@ -7,7 +7,7 @@ const bogan = require('boganipsum')
 const after = require('after')
 
 // three separate chunks of words to spit out
-var words = [
+const words = [
   bogan({ paragraphs: 1, sentenceMax: 1 }).split(' '),
   bogan({ paragraphs: 1, sentenceMax: 1 }).split(' '),
   bogan({ paragraphs: 1, sentenceMax: 1 }).split(' ')
@@ -43,15 +43,15 @@ function writeWords (i, delay, res) {
 // shuffle an array of elements in JavaScript to randomize the range.
 // taken from http://stackoverflow.com/a/6274398/962452
 function shuffle (array) {
-  var counter = array.length
+  let counter = array.length
   // While there are elements in the array
   while (counter > 0) {
     // Pick a random index
-    var index = Math.floor(Math.random() * counter)
+    const index = Math.floor(Math.random() * counter)
     // Decrease counter by 1
     counter--
     // And swap the last element with it
-    var temp = array[counter]
+    const temp = array[counter]
     array[counter] = array[index]
     array[index] = temp
   }
@@ -69,13 +69,13 @@ function server (i, delay, callback) {
 exercise.addSetup(function (mode, callback) {
   // mode == 'run' || 'verify'
 
-  var done = after(3, function (err) {
+  const done = after(3, function (err) {
     if (err) {
       return callback(err)
     }
 
     // give the 3 server urls as cmdline args to the child processes
-    var args = this.servers.map(function (s) {
+    const args = this.servers.map(function (s) {
       return 'http://localhost:' + s.address().port
     })
 
@@ -85,7 +85,7 @@ exercise.addSetup(function (mode, callback) {
     callback()
   }.bind(this))
 
-  var times = []
+  let times = []
   times.push(1 + Math.random() * 100)
   times.push(times[0] + 100 + Math.random() * 100)
   times.push(times[1] + 100 + Math.random() * 100)
@@ -107,7 +107,7 @@ exercise.addCleanup(function (mode, passed, callback) {
   }
 
   // close all 3 servers
-  var done = after(3, callback)
+  const done = after(3, callback)
   this.servers.forEach(function (s) {
     s.close(done)
   })

@@ -31,7 +31,7 @@ function callback (socket) { /* ... */ }
 
 ```js
 const net = require('net')
-var server = net.createServer(function (socket) {
+const server = net.createServer(function (socket) {
   // socket 处理逻辑
 })
 server.listen(8000)

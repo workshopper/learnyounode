@@ -29,7 +29,7 @@ function callback (socket) { /* ... */ }
 
 ```js
 const net = require('net')
-var server = net.createServer(function (socket) {
+const server = net.createServer(function (socket) {
   // керування отриманими сокетами
 })
 server.listen(8000)

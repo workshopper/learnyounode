@@ -24,7 +24,7 @@ Slik er et typisk oppsett for å lage en HTTP server i Node:
 
 ```js
 const http = require('http')
-var server = http.createServer(function (req, res) {
+const server = http.createServer(function (req, res) {
   // Håndter forespørselen...
 })
 server.listen(8000)

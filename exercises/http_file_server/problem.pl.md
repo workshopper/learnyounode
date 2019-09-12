@@ -25,7 +25,7 @@ Typowy serwer HTTP w Node.js wygląda mniej więcej tak:
 
 ```js
 const http = require('http')
-var server = http.createServer(function (req, res) {
+const server = http.createServer(function (req, res) {
   // logika obsługi żądania...
 })
 server.listen(8000)

@@ -21,7 +21,7 @@ La llamada a `http.createServer()` devuelve una instancia del `server`. Debes ll
 
 ```js
 const http = require('http')
-var server = http.createServer(function (req, res) {
+const server = http.createServer(function (req, res) {
   // manejar cada petición aquí.
 })
 server.listen(8000)

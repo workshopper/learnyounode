@@ -25,7 +25,7 @@ Một máy chủ HTTP với Node thường có dạng như sau:
 
 ```js
 const http = require('http')
-var server = http.createServer(function (req, res) {
+const server = http.createServer(function (req, res) {
   // xử lý logic cho request...
 })
 server.listen(8000)

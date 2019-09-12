@@ -1,9 +1,9 @@
 module.exports = function () {
   const fs = require('fs')
   const path = require('path')
-  var dir = process.argv[2]
-  var fileExt = '.' + process.argv[3]
-  var files = []
+  const dir = process.argv[2]
+  const fileExt = '.' + process.argv[3]
+  const files = []
 
   function listFiles () {
     fs.readdir(dir, function (err, list) {
@@ -11,13 +11,13 @@ module.exports = function () {
         return console.error('There was an error:', err)
       }
 
-      for (var i = 0; i < list.length; i++) {
+      for (let i = 0; i < list.length; i++) {
         if (path.extname(list[i]) === fileExt) {
           files.push(list[i])
         }
       }
 
-      var answer = files.join('\n')
+      const answer = files.join('\n')
 
       console.log(answer)
     })

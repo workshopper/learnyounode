@@ -4,15 +4,15 @@ const util = require('util')
 const files = require('../filtered_ls/file-list')
 
 function validateModule (modFile, callback) {
-  var exercise = this
-  var __ = this.__
-  var __n = this.__n
-  var dir = this._testDir
-  var mod
-  var error = new Error('testing')
-  var returned = false
-  var _callback = callback
-  var callbackUsed
+  const exercise = this
+  const __ = this.__
+  const __n = this.__n
+  const dir = this._testDir
+  let mod
+  const error = new Error('testing')
+  let returned = false
+  const _callback = callback
+  let callbackUsed
 
   try {
     mod = require(modFile)
@@ -102,7 +102,7 @@ function validateModule (modFile, callback) {
         if (err) {
           return modFileError(__('fail.mod.callback_error', { error: util.inspect(err) }))
         }
-        var notexp = files.filter(function (f) { return (/\.dat$/).test(f) })
+        const notexp = files.filter(function (f) { return (/\.dat$/).test(f) })
         if (list.length === notexp.length) {
           return modFileError(__('fail.mod.dont_use_dot'))
         }
@@ -133,9 +133,9 @@ function validateModule (modFile, callback) {
 
         exercise.emit('pass', __('pass.array_argument'))
 
-        var exp = files.filter(function (f) { return (/\.md$/).test(f) })
-        var noDotExp = files.filter(function (f) { return (/md$/).test(f) })
-        var i
+        const exp = files.filter(function (f) { return (/\.md$/).test(f) })
+        const noDotExp = files.filter(function (f) { return (/md$/).test(f) })
+        let i
 
         // ---- Check for `ext` instead of `.ext`
         if (noDotExp.length === list.length) {
@@ -186,10 +186,10 @@ function validateModule (modFile, callback) {
 
 function requires (exercise) {
   // rule out these 4 things
-  var main = path.resolve(process.cwd(), exercise.args[0])
-  var exec = require.resolve('workshopper-wrappedexec/exec-wrap')
-  var wrap1 = require.resolve('../my_first_io/wrap')
-  var wrap2 = require.resolve('./wrap-requires')
+  const main = path.resolve(process.cwd(), exercise.args[0])
+  const exec = require.resolve('workshopper-wrappedexec/exec-wrap')
+  const wrap1 = require.resolve('../my_first_io/wrap')
+  const wrap2 = require.resolve('./wrap-requires')
 
   return exercise.wrapData.requires.filter(function (m) {
     return m !== main && m !== exec && m !== wrap1 && m !== wrap2
@@ -197,7 +197,7 @@ function requires (exercise) {
 }
 
 function verifyModuleUsed (callback) {
-  var required = requires(this)
+  const required = requires(this)
 
   if (required.length === 0) {
     this.emit('fail', this.__('fail.missing_module'))

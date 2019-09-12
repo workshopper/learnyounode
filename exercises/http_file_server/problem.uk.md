@@ -25,7 +25,7 @@ function callback (request, response) { /* ... */ }
 
 ```js
 const http = require('http')
-var server = http.createServer(function (req, res) {
+const server = http.createServer(function (req, res) {
   // обробка запитів...
 })
 server.listen(8000)

@@ -25,7 +25,7 @@ function callback (request, response) { /* ... */ }
 
 ```js
 const http = require('http')
-var server = http.createServer(function (req, res) {
+const server = http.createServer(function (req, res) {
   // 处理请求的逻辑...
 })
 server.listen(8000)

@@ -48,7 +48,7 @@ exercise = comparestdout(exercise)
 // delayed for 500ms to wait for servers to start so we can start
 // playing with them
 function query (mode) {
-  var exercise = this
+  const exercise = this
 
   // on error, write to the stream so that'll also be verified
 

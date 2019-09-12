@@ -1,7 +1,7 @@
 const http = require('http')
-var feed = []
-var count = 0
-var url = process.argv.slice(2)
+const feed = []
+let count = 0
+const url = process.argv.slice(2)
 
 function allDone () {
   count += 1
