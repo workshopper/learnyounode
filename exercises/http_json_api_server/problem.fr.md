@@ -51,7 +51,7 @@ $ node -pe "new URL('/test?q=1', 'http://example.com')"
 La documentation pour le module `url` peut être consultée hors-ligne à
 l’adresse suivante :
 
-  https://nodejs.org/api/url.html
+  {rootdir:/docs-nodejs/url.html}
 
 Votre réponse doit être un texte au format JSON.  Jetez un œil à
 `JSON.stringify()` pour de plus amples informations.

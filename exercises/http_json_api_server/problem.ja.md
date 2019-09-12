@@ -43,7 +43,7 @@ $ node -pe "new URL('/test?q=1', 'http://example.com')"
 
 `url` モジュールのドキュメントは、このリンクをブラウザで見てください:
 
-  https://nodejs.org/api/url.html
+  {rootdir:/docs-nodejs/url.html}
 
 サーバからのレスポンスは JSON 文字列の形式にしてください。`JSON.stringify()` について調べたほうがよいです。
 良きインターネットの住民であるために Content-Type ヘッダ をつけてください：

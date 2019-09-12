@@ -45,7 +45,7 @@ Obiekt `socket` zawiera mnóstwo metadanych na temat połączenia, ale jest rów
 Wywołaj `socket.write(data)` aby zapisać dane do gniazda i `socket.end()` aby je zamknąć. Metoda `end()` przyjmuje również obiekt z danymi jako argument więc możesz uprościć całość do `socket.end(data)` - zapiszesz wtedy dane do gniazda i od razu je zamkniesz.
 
 Dokumentację modułu `net` możesz przeczytać tutaj:
-  https://nodejs.org/api/net.html
+  {rootdir:/docs-nodejs/net.html}
 
 Aby utworzyć datę, musisz przygotować odpowiedni format z obiektu `new Date()`. Metody, które Ci się przydadzą to:
 

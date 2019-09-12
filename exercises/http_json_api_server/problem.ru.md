@@ -36,7 +36,7 @@ $ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 Документацию для `url` Вы cможете получить, набрав в браузере:
-  https://nodejs.org/api/url.html
+  {rootdir:/docs-nodejs/url.html}
 
 Ответ сервера должен быть в формате строки JSON. Обратитесь к `JSON.stringify()` за дополнительной информацией.
 

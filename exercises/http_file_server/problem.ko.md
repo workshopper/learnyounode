@@ -32,6 +32,6 @@ server.listen(8000)
 ```
 
 `http` 모듈의 문서는 브라우저에 이 주소를 넣으면 볼 수 있습니다.
-  https://nodejs.org/api/http.html
+  {rootdir:/docs-nodejs/http.html}
 
 `fs` 핵심 모듈도 파일을 위한 스트리밍 API를 가지고 있습니다. 커맨드 라인 인수로 넘겨준 파일을 나타내는 스트림을 만들기 위해 `fs.createReadStream()` 메소드를 사용할 필요가 있습니다. 이 메소드는 스트림 객체를 반환합니다. 이를 이용해 `src.pipe(dst)`로 `src` 스트림에서 `dst` 스트림으로 파이프하도록 할 수 있습니다. 이 방법을 사용하면 파일 시스템 스트림에 HTTP 응답 스트림을 연결할 수 있습니다.

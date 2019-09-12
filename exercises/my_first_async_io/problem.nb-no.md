@@ -18,4 +18,4 @@ function callback (err, data) { /* ... */ }
 og du kan derfor sjekke om **err argumentet**  inneholder en feil. Hvis det ikke var noen feil burde du ha et `Buffer` objekt i **data argumentet**. På samme måte som `readFileSync()` kan du oppgi 'utf8' som det andre argumentet, callback funksjonen som det tredje argumentet og du vil få en `String` i stede for et `Buffer`.
 
 Dokumentasjonen til `fs`s finner du her:
-  https://nodejs.org/api/fs.html
+  {rootdir:/docs-nodejs/fs.html}

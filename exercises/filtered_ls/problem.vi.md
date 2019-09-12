@@ -19,9 +19,9 @@ function callback (err, list) { /* ... */ }
 Trong đó  `list` là một mảng chứa các tên file trong thư mục tương ứng.
 
 Bạn có thể xem thêm về mô-đun `fs` ở đây:
-  https://nodejs.org/api/fs.html
+  {rootdir:/docs-nodejs/fs.html}
 
 Bạn cũng có thể tìm mô-đun `path` của nodejs để làm việc với hàm `extname` hiệu quả hơn.
 
 Tài liệu cho mô-đun `path` có thể xem ở đây:
-  https://nodejs.org/api/path.html
+  {rootdir:/docs-nodejs/path.html}

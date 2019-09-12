@@ -45,7 +45,7 @@ server.listen(8000)
 
 `net` 模块的文档可以通过浏览器访问如下连接来查看：
 
-  https://nodejs.org/api/net.html
+  {rootdir:/docs-nodejs/net.html}
 
 要创建一个日期，你需要使用 `new Date()` 并且自定义一个格式，这些方法将会很有用：
 

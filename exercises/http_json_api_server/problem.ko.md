@@ -36,7 +36,7 @@ $ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 `url` 모듈의 문서는 브라우저에 이 주소를 넣으면 볼 수 있습니다.
-  https://nodejs.org/api/url.html
+  {rootdir:/docs-nodejs/url.html}
 
 응답은 JSON 문자열 형식이어야 합니다. 더 자세한 정보는 `JSON.stringify()`를 보세요.
 

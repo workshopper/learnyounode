@@ -43,7 +43,7 @@ server.listen(8000)
 
 要閱讀 `net` 模組的文件，可以在瀏覽器中打開這個頁面：
 
-  https://nodejs.org/api/net.html
+  {rootdir:/docs-nodejs/net.html}
 
 您要從 `new Date()` 建立一個自定格式的日期。這個方法的使用方式如下：
 

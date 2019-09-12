@@ -32,6 +32,6 @@ server.listen(8000)
 ```
 
 La documentazione sul modulo `http` può essere ottenuta puntando il tuo browser all'indirizzo:
-  https://nodejs.org/api/http.html
+  {rootdir:/docs-nodejs/http.html}
 
 Il modulo core `fs` possiede anche delle API streaming per i file. Dovrai usare il metodo `fs.createReadStream()` per creare uno stream che rappresenta il file che ti viene passato come argomento da riga di comando. Il metodo restituisce un oggetto stream sul quale puoi usare `src.pipe(dst)` per effettuare il pipe dei dati dallo stream `src` allo stream `dst`. In questo modo puoi connettere uno stream del file system con uno stream della risposta HTTP.

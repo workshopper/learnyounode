@@ -51,7 +51,7 @@ server.listen(8000)
 La documentation du module `http` peut être consultée hors-ligne à l’adresse
 suivante :
 
-  https://nodejs.org/api/http.html
+  {rootdir:/docs-nodejs/http.html}
 
 Le module noyau `fs` fournit des APIs orientées flux pour les fichiers.  Vous
 aurez besoin d’utiliser la méthode `fs.createReadStream()` pour créer un flux

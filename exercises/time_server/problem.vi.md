@@ -43,7 +43,7 @@ Sử dụng `socket.write(data)` để viết dữ liệu cho socket và `socket
 
 Tài liệu cho mô-đun `net` có thể xem tại:
 
-  https://nodejs.org/api/net.html
+  {rootdir:/docs-nodejs/net.html}
 
 Để tạo thời gian, bạn có thể sử dụng đối tượng `new Date()`, sau đó dùng các phương thức hữu dụng như:
 

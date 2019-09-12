@@ -19,4 +19,4 @@ Puedes validar si ocurrió un error controlando si el primer parámetro es nulo.
 Al igual que pasa con `readFileSync()`, puedes pasar 'utf8' como segundo parámetro y luego el callback como tercero de modo de que data sea un `String` y no un `Buffer`.
 
 Puedes leer la documentación del módulo `fs` en:
-  https://nodejs.org/api/fs.html
+  {rootdir:/docs-nodejs/fs.html}

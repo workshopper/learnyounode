@@ -45,7 +45,7 @@ Use `socket.write(data)` to write data to the socket and `socket.end()` to close
 
 Documentation on the `net` module can be found by pointing your browser here:
 
-  https://nodejs.org/api/net.html
+  {rootdir:/docs-nodejs/net.html}
 
 To create the date, you'll need to create a custom format from a `new Date()` object. The methods that will be useful are:
 
