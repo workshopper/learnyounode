@@ -27,12 +27,12 @@ Your server should listen on the port provided by the first argument to your pro
 
 The `request` object from an HTTP server has a `url` property that you will need to use to *"route"* your requests for the two endpoints.
 
-You can parse the URL and query string using the Node core 'url' module. `url.parse(request.url, true)` will parse content of request.url and provide you with an object with helpful properties.
+You can parse the URL and query string using the Node core 'url' module. `new URL(request.url)` will parse content of request.url and provide you with an object with helpful properties.
 
 For example, on the command prompt, type:
 
 ```sh
-$ node -pe "require('url').parse('/test?q=1', true)"
+$ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 Documentation on the `url` module can be found by pointing your browser here:

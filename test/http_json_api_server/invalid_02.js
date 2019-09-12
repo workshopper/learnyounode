@@ -1,5 +1,5 @@
 require('http').createServer(function (req, res) {
-  var time = new Date(require('url').parse(req.url, true).query.iso)  // eslint-disable-line
+  var time = new Date(new URL(req.url, 'http://example.com').searchParams.get('iso'))  // eslint-disable-line
   var result =
   /^\/api\/parsetime/.test(req.url)
     ? {

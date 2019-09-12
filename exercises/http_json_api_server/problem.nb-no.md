@@ -27,12 +27,12 @@ Serveren din må lytte på porten som sendes inn som første argument til progra
 
 `request` objektet fra en HTTP server har et `url` felt som du vil ha bruk for til å kunne *"route"* (eller dirigere) forespørsler for dine to endepunkt.
 
-Du kan gjøre om URL med parametere om til objekter ved hjelp av Node sin 'url' modul. `url.parse(request.url, true)` vil ta innholdet i request.url og gi tilbake et objekt med egenskaper du vil trenge.
+Du kan gjøre om URL med parametere om til objekter ved hjelp av Node sin 'url' modul. `new URL(request.url)` vil ta innholdet i request.url og gi tilbake et objekt med egenskaper du vil trenge.
 
 For eksempel kan du skrive dette i en terminal:
 
 ```sh
-$ node -pe "require('url').parse('/test?q=1', true)"
+$ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 Dokumentasjon for `url` modulen finnes her:

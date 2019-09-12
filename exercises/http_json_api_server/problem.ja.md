@@ -34,11 +34,11 @@
 リクエストごとに正しいエンドポイントを選択するために `request` オブジェクトの `url` プロパティを使ってください。
 
 クエリを URL からパースするためには Node.js のコアモジュール `url` が役に立ちます。
-`url.parse(request.url, true)` は `request.url` のコンテンツを解釈して有用なオブジェクトを返します。
+`new URL(request.url)` は `request.url` のコンテンツを解釈して有用なオブジェクトを返します。
 例としてコマンドラインで以下のコマンドを実行してみてください：
 
 ```sh
-$ node -pe "require('url').parse('/test?q=1', true)"
+$ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 `url` モジュールのドキュメントは、このリンクをブラウザで見てください:

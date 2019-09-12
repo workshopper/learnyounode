@@ -27,12 +27,12 @@ Il tuo server deve ascoltare sulla porta fornita come primo argomento al tuo pro
 
 L'oggetto `request` di un server HTTP possiede una proprietà `url` di cui avrai bisogno per  *"instradare"* le tue richieste ai due endpoint.
 
-Puoi decodificare l'URL e la query string usando il modulo Node core 'url'. `url.parse(request.url, true)` decodificherà il contenuto di request.url e ti restituirà un oggetto con proprietà utili.
+Puoi decodificare l'URL e la query string usando il modulo Node core 'url'. `new URL(request.url)` decodificherà il contenuto di request.url e ti restituirà un oggetto con proprietà utili.
 
 Ad esempio, scrivi sulla riga di comando:
 
 ```sh
-$ node -pe "require('url').parse('/test?q=1', true)"
+$ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 La documentazione sul modulo `url` può essere ottenuta puntando il tuo browser all'indirizzo:
