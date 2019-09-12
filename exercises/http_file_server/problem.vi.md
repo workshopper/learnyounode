@@ -24,7 +24,7 @@ Cả 2 đối tượng `request` và `response` đều là dòng dữ liệu (No
 Một máy chủ HTTP với Node thường có dạng như sau:
 
 ```js
-var http = require('http')
+const http = require('http')
 var server = http.createServer(function (req, res) {
   // xử lý logic cho request...
 })

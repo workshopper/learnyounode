@@ -12,7 +12,7 @@ npm には、 Stream のデータを途中で書き換えるための色々な�
 `through2-map` が提供する関数を使うと、簡単に新しい「transform stream」が作成できます。`Array#map()` の Stream バーションと考えて良いです：
 
 ```js
-var map = require('through2-map')
+const map = require('through2-map')
 inStream.pipe(map(function (chunk) {
   return chunk.toString().split('').reverse().join('')
 })).pipe(outStream)

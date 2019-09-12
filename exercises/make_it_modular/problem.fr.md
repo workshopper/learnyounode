@@ -74,7 +74,7 @@ ici préfixés par './'.  Donc si votre module s’appelle `mymodule.js`,
 vous devriez faire :
 
 ```js
-var myModule = require('./mymodule')
+const myModule = require('./mymodule')
 ```
 
 Même s’il est possible de préciser aussi l’extension du fichier

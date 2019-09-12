@@ -31,7 +31,7 @@ Metoda `net.createServer()` zwraca instancję Twojego serwera. Aby rozpocząć n
 Typowy serwer TCP w Node.js wygląda tak:
 
 ```js
-var net = require('net')
+const net = require('net')
 var server = net.createServer(function (socket) {
   // logika obsługi gniazda
 })

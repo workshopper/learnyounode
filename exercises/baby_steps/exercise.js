@@ -1,7 +1,7 @@
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
+let exercise = require('workshopper-exercise')()
+const filecheck = require('workshopper-exercise/filecheck')
+const execute = require('workshopper-exercise/execute')
+const comparestdout = require('workshopper-exercise/comparestdout')
 
 // checks that the submission file actually exists
 exercise = filecheck(exercise)

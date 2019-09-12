@@ -27,7 +27,7 @@ function callback (socket) { /* ... */ }
 Типичный Node TCP сервер выглядит так:
 
 ```js
-var net = require('net')
+const net = require('net')
 var server = net.createServer(function (socket) {
   // socket handling logic
 })

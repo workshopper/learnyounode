@@ -33,7 +33,7 @@ Ou você pode usar uma função nominal e atribuir, então, o nome.
 Para usar seu novo módulo no seu arquivo original de programa, use a chamada `require()` da mesma maneira que você usou `require('fs')` para carregar o módulo `fs`. A única diferença é que no caso de serem módulos locais, eles devem ter './' prefixado. Então se o nome do seu arquivo é mymodule.js você teria algo como:
 
 ```js
-var mymodule = require('./mymodule.js')
+const mymodule = require('./mymodule.js')
 ```
 
 O '.js' é opcional e você frequentemente vai reparar que ele foi omitido.

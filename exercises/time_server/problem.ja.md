@@ -39,7 +39,7 @@ function handler (eventData) { /* ... */ }
 一般的な Node の TCP サーバは次のように記述されています：
 
 ```js
-var net = require('net')
+const net = require('net')
 var server = net.createServer(function (socket) {
   // socket handling logic
 })

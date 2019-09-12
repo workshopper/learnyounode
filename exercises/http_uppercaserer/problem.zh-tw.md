@@ -12,7 +12,7 @@
 `through2-map` 允許您只用一個傳入、回應一堆資料的簡單的函式建立一個 *transform stream* 。 *transform stream* 指的是會對資料進行處理或運算的串流，不是只有單純的 input/output，進去的資料會被處理過後才會輸出。 `through2-map` 這個套件可以對串流的傳輸內容做類似 `Array#map()` 的功能。
 
 ```js
-var map = require('through2-map')
+const map = require('through2-map')
 inStream.pipe(map(function (chunk) {
   return chunk.toString().split('').reverse().join('')
 })).pipe(outStream)

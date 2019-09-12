@@ -1,6 +1,6 @@
 module.exports = function () {
-  var fs = require('fs')
-  var path = require('path')
+  const fs = require('fs')
+  const path = require('path')
   var dir = process.argv[2]
   var fileExt = '.' + process.argv[3]
   var files = []

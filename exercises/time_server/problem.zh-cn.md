@@ -30,7 +30,7 @@ function callback (socket) { /* ... */ }
 一个典型的 Node TCP 服务器将会如下所示：
 
 ```js
-var net = require('net')
+const net = require('net')
 var server = net.createServer(function (socket) {
   // socket 处理逻辑
 })

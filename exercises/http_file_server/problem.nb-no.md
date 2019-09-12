@@ -23,7 +23,7 @@ Både `request` og `response` er Node streams. Dette betyr at du kan benytte deg
 Slik er et typisk oppsett for å lage en HTTP server i Node:
 
 ```js
-var http = require('http')
+const http = require('http')
 var server = http.createServer(function (req, res) {
   // Håndter forespørselen...
 })

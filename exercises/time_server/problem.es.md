@@ -28,7 +28,7 @@ function callback (socket) { /* ... */ }
 Un ejemplo de un servidor Node típico es como sigue:
 
 ```js
-var net = require('net')
+const net = require('net')
 var server = net.createServer(function (socket) {
   // manejo del socket
 })

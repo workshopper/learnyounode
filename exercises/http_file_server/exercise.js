@@ -1,17 +1,17 @@
-var fs = require('fs')
-var path = require('path')
-var os = require('os')
-var through2 = require('through2')
-var hyperquest = require('hyperquest')
-var rimraf = require('rimraf')
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
-var wrappedexec = require('workshopper-wrappedexec')
-var rndtxt = require('boganipsum')({ paragraphs: 1, sentenceMax: 1 }) + '\n'
+const fs = require('fs')
+const path = require('path')
+const os = require('os')
+const through2 = require('through2')
+const hyperquest = require('hyperquest')
+const rimraf = require('rimraf')
+let exercise = require('workshopper-exercise')()
+const filecheck = require('workshopper-exercise/filecheck')
+const execute = require('workshopper-exercise/execute')
+const comparestdout = require('workshopper-exercise/comparestdout')
+const wrappedexec = require('workshopper-wrappedexec')
+const rndtxt = require('boganipsum')({ paragraphs: 1, sentenceMax: 1 }) + '\n'
 var testFile = path.join(os.tmpdir(), '_learnyounode_' + process.pid + '.txt')
-var rndport = require('../../lib/rndport')
+const rndport = require('../../lib/rndport')
 
 // the output will be long lines so make the comparison take that into account
 exercise.longCompareOutput = true

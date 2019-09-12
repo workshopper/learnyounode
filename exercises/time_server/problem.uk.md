@@ -28,7 +28,7 @@ function callback (socket) { /* ... */ }
 Типовий Node TCP-сервер виглядає так:
 
 ```js
-var net = require('net')
+const net = require('net')
 var server = net.createServer(function (socket) {
   // керування отриманими сокетами
 })

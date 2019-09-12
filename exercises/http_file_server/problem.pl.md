@@ -24,7 +24,7 @@ Zarówno `request` jak i `response` są strumieniami! Oznacza to, że możesz wy
 Typowy serwer HTTP w Node.js wygląda mniej więcej tak:
 
 ```js
-var http = require('http')
+const http = require('http')
 var server = http.createServer(function (req, res) {
   // logika obsługi żądania...
 })

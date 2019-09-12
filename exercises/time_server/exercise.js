@@ -1,10 +1,10 @@
-var net = require('net')
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
-var through2 = require('through2')
-var rndport = require('../../lib/rndport')
+const net = require('net')
+let exercise = require('workshopper-exercise')()
+const filecheck = require('workshopper-exercise/filecheck')
+const execute = require('workshopper-exercise/execute')
+const comparestdout = require('workshopper-exercise/comparestdout')
+const through2 = require('through2')
+const rndport = require('../../lib/rndport')
 
 // checks that the submission file actually exists
 exercise = filecheck(exercise)

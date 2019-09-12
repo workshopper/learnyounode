@@ -1,4 +1,4 @@
-var http = require('http')
+const http = require('http')
 var feed = []
 var count = 0
 var url = process.argv.slice(2)

@@ -1,7 +1,7 @@
-var fs = require('fs')
-var path = require('path')
-var util = require('util')
-var files = require('../filtered_ls/file-list')
+const fs = require('fs')
+const path = require('path')
+const util = require('util')
+const files = require('../filtered_ls/file-list')
 
 function validateModule (modFile, callback) {
   var exercise = this

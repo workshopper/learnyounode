@@ -1,10 +1,10 @@
-var http = require('http')
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
-var bogan = require('boganipsum')
-var after = require('after')
+const http = require('http')
+let exercise = require('workshopper-exercise')()
+const filecheck = require('workshopper-exercise/filecheck')
+const execute = require('workshopper-exercise/execute')
+const comparestdout = require('workshopper-exercise/comparestdout')
+const bogan = require('boganipsum')
+const after = require('after')
 
 // three separate chunks of words to spit out
 var words = [

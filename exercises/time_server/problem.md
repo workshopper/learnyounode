@@ -30,7 +30,7 @@ function listener (socket) { /* ... */ }
 A typical Node TCP server looks like this:
 
 ```js
-var net = require('net')
+const net = require('net')
 var server = net.createServer(function (socket) {
   // socket handling logic
 })

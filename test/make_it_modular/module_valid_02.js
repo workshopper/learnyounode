@@ -1,5 +1,5 @@
-var fs = require('fs')
-var path = require('path')
+const fs = require('fs')
+const path = require('path')
 
 // call readdir with optional encoding parameter
 module.exports = function (directory, filter, callback) {

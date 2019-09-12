@@ -1,4 +1,4 @@
-var fs = require('fs')
+const fs = require('fs')
 module.exports = function (directory, filter, callback) {
   var stack = new Error().stack
   if (stack.split('\n').length === 4) {

@@ -1,5 +1,5 @@
-var fs = require('fs')
-var path = require('path')
+const fs = require('fs')
+const path = require('path')
 
 var list = fs.readdirSync(process.argv[2])
 list.filter(function (file) {
