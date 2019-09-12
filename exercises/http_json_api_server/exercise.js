@@ -61,7 +61,7 @@ function query (mode) {
 
   function verify (port, stream) {
     function timeRequest (method, callback) {
-      const url = 'http://localhost:' + port + '/api/' + method + '?iso=' + date.toISOString()
+      const url = `http://localhost:${port}/api/${method}?iso=${date.toISOString()}`
 
       function onData (err, _data) {
         if (err) {

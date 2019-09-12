@@ -1,3 +1,4 @@
+'use strict'
 const net = require('net')
 let exercise = require('workshopper-exercise')()
 const filecheck = require('workshopper-exercise/filecheck')

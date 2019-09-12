@@ -1,3 +1,4 @@
+'use strict'
 const http = require('http')
 
 function parsetime (time) {

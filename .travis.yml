@@ -3,5 +3,3 @@ node_js:
   - 12
   - 10
 sudo: false
-before_install:
-  - npm install -g npm@latest

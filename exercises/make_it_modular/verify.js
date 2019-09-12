@@ -203,8 +203,7 @@ function verifyModuleUsed (callback) {
     this.emit('fail', this.__('fail.missing_module'))
     return callback(null, false)
   }
-
-  validateModule.call(this, required[0], callback)
+  validateModule.call(this, required[required.length - 1], callback)
 }
 
 function verify (callback) {

@@ -1,3 +1,4 @@
+'use strict'
 const http = require('http')
 let exercise = require('workshopper-exercise')()
 const filecheck = require('workshopper-exercise/filecheck')
@@ -29,7 +30,7 @@ exercise = comparestdout(exercise)
 // and wait for `delay` until we start to make async handling a pain
 function writeWords (i, delay, res) {
   setTimeout(function () {
-    ;(function next (j) {
+    (function next (j) {
       if (j === words[i].length) {
         return res.end()
       }
