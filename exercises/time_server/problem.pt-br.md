@@ -43,7 +43,7 @@ Use `socket.write(data)` para escrever dados para o socket e `socket.end()` para
 
 Documentação do módulo `net` pode ser encontrada apontando seu navegador para:
 
-  https://nodejs.org/api/net.html
+  {rootdir:/docs-nodejs/net.html}
 
 Para criar uma data, você vai precisar de criar um formato customizado a partir do objeto `new Date()`. Os métodos que lhe serão úteis são:
 

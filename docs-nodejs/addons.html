@@ -1,0 +1,1389 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>C++ Addons | Node.js v12.10.0 Documentation</title>
+  <link rel="stylesheet" href="data:text/css;base64,LyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogaXRhbGljOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBJdGFsaWMnKSwgbG9jYWwoJ0xhdG8tSXRhbGljJyksIHVybChodHRwczovL2ZvbnRzLmdzdGF0aWMuY29tL3MvbGF0by92MTYvUzZ1OHc0Qk1VVFBIanhzQVVpLXFOaVhnN2VVMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBpdGFsaWM7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEl0YWxpYycpLCBsb2NhbCgnTGF0by1JdGFsaWMnKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnU4dzRCTVVUUEhqeHNBWEMtcU5pWGc3US53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0KLyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogbm9ybWFsOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBSZWd1bGFyJyksIGxvY2FsKCdMYXRvLVJlZ3VsYXInKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnV5dzRCTVVUUEhqeEF3WGlXdEZDZlE3QS53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIFJlZ3VsYXInKSwgbG9jYWwoJ0xhdG8tUmVndWxhcicpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dXl3NEJNVVRQSGp4NHdYaVd0RkNjLndvZmYyKSBmb3JtYXQoJ3dvZmYyJyk7CiAgdW5pY29kZS1yYW5nZTogVSswMDAwLTAwRkYsIFUrMDEzMSwgVSswMTUyLTAxNTMsIFUrMDJCQi0wMkJDLCBVKzAyQzYsIFUrMDJEQSwgVSswMkRDLCBVKzIwMDAtMjA2RiwgVSsyMDc0LCBVKzIwQUMsIFUrMjEyMiwgVSsyMTkxLCBVKzIxOTMsIFUrMjIxMiwgVSsyMjE1LCBVK0ZFRkYsIFUrRkZGRDsKfQovKiBsYXRpbi1leHQgKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2FQR1EzcTVkME43dy53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2lQR1EzcTVkMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LyotLS0tLS0tLS0tLS0tLS0tLS0tLS0gTGF5b3V0IGFuZCBUeXBvZ3JhcGh5IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwpodG1sIHsKICBmb250LXNpemU6IDFyZW07CiAgb3ZlcmZsb3ctd3JhcDogYnJlYWstd29yZDsKICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDsKICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlOwogIC13ZWJraXQtZm9udC12YXJpYW50LWxpZ2F0dXJlczogbm9uZTsKICAgICAgICAgIGZvbnQtdmFyaWFudC1saWdhdHVyZXM6IG5vbmU7Cn0KCiogewogIGJveC1zaXppbmc6IGJvcmRlci1ib3g7Cn0KCmJvZHkgewogIGZvbnQtZmFtaWx5OiAiTGF0byIsICJMdWNpZGEgR3JhbmRlIiwgIkx1Y2lkYSBTYW5zIFVuaWNvZGUiLCAiTHVjaWRhIFNhbnMiLCBWZXJkYW5hLCBUYWhvbWEsIHNhbnMtc2VyaWY7CiAgbWFyZ2luOiAwOwogIHBhZGRpbmc6IDA7CiAgY29sb3I6ICMzMzM7CiAgYmFja2dyb3VuZDogI2ZmZjsKfQoKaDEgeyBmb250LXNpemU6IDIuNXJlbSB9CmgyIHsgZm9udC1zaXplOiAycmVtIH0KaDMgeyBmb250LXNpemU6IDEuNzVyZW0gfQpoNCB7IGZvbnQtc2l6ZTogMS41cmVtIH0KaDUgeyBmb250LXNpemU6IDEuMjVyZW0gfQpoNiB7IGZvbnQtc2l6ZTogMXJlbSB9CgpoMSwgaDIsIGgzLCBoNCwgaDUsIGg2IHsKICBtYXJnaW46IDEuNXJlbSAwIDFyZW07CiAgdGV4dC1yZW5kZXJpbmc6IG9wdGltaXplTGVnaWJpbGl0eTsKICBmb250LXdlaWdodDogNzAwOwogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKcHJlLCB0dCwgY29kZSwgLnByZSwgc3Bhbi50eXBlLCBhLnR5cGUgewogIGZvbnQtZmFtaWx5OiBTRk1vbm8tUmVndWxhciwgTWVubG8sIENvbnNvbGFzLCAiTGliZXJhdGlvbiBNb25vIiwgIkNvdXJpZXIgTmV3IiwgbW9ub3NwYWNlOwogIGZvbnQtc2l6ZTogLjllbTsKfQoKI2NvbnRlbnQgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKYSwgYTpsaW5rLCBhOmFjdGl2ZSB7CiAgY29sb3I6ICM0Mzg1M2Q7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGJvcmRlci1yYWRpdXM6IDJweDsKICBwYWRkaW5nOiAxcHggM3B4Owp9CgphOmhvdmVyLCBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDM4NTNkOwogIG91dGxpbmU6IG5vbmU7Cn0KCnN0cm9uZyB7CiAgZm9udC13ZWlnaHQ6IDcwMDsKfQoKY29kZSBhOmhvdmVyIHsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgplbSBjb2RlIHsKICBmb250LXN0eWxlOiBub3JtYWw7Cn0KCiNjaGFuZ2Vsb2cgI2d0b2MgewogIGRpc3BsYXk6IG5vbmU7Cn0KCiNndG9jIHsKICBtYXJnaW4tdG9wOiAuNXJlbTsKICBtYXJnaW4tYm90dG9tOiAxcmVtOwp9CgojZ3RvYyB1bCB7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBtYXJnaW4tbGVmdDogMDsKICBsaW5lLWhlaWdodDogMS41cmVtOwp9CgojZ3RvYyA+IHVsID4gbGkgewogIGRpc3BsYXk6IGlubGluZTsKICBib3JkZXItcmlnaHQ6IDFweCAjMDAwIHNvbGlkOwogIG1hcmdpbi1yaWdodDogMC40cmVtOwogIHBhZGRpbmctcmlnaHQ6IDAuNHJlbTsKfQoKI2d0b2MgPiB1bCA+IGxpOmxhc3QtY2hpbGQgewogIGJvcmRlci1yaWdodDogbm9uZTsKICBtYXJnaW4tcmlnaHQ6IDA7CiAgcGFkZGluZy1yaWdodDogMDsKfQoKbGkudmVyc2lvbi1waWNrZXIgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBhIHsKICBib3JkZXItcmFkaXVzOiAycHggMnB4IDAgMDsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBvbCB7CiAgZGlzcGxheTogYmxvY2s7CiAgei1pbmRleDogMTsKfQoKbGkudmVyc2lvbi1waWNrZXIgYSBzcGFuIHsKICBmb250LXNpemU6IC43cmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciB7CiAgYmFja2dyb3VuZDogI2ZmZjsKICBib3JkZXI6IDFweCAjNDM4NTNkIHNvbGlkOwogIGJvcmRlci1yYWRpdXM6IDAgMCAycHggMnB4OwogIGRpc3BsYXk6IG5vbmU7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgcmlnaHQ6IDA7CiAgdG9wOiAxLjI1cmVtOwogIHdpZHRoOiAxMDAlOwp9CgojZ3RvYyBvbC52ZXJzaW9uLXBpY2tlciBsaSB7CiAgZGlzcGxheTogYmxvY2s7CiAgYm9yZGVyLXJpZ2h0OiAwOwogIG1hcmdpbi1yaWdodDogMDsKfQoKb2wudmVyc2lvbi1waWNrZXIgbGkgYSB7CiAgYm9yZGVyLXJhZGl1czogMDsKICBkaXNwbGF5OiBibG9jazsKICBtYXJnaW46IDA7CiAgcGFkZGluZzogLjFyZW07CiAgcGFkZGluZy1sZWZ0OiAxcmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciBsaTpsYXN0LWNoaWxkIGEgewogIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAxcHg7CiAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMXB4Owp9CgoubGluZSB7CiAgd2lkdGg6IGNhbGMoMTAwJSAtIDFyZW0pOwogIGRpc3BsYXk6IGJsb2NrOwogIHBhZGRpbmctYm90dG9tOiAxcHg7Cn0KCi5hcGlfc3RhYmlsaXR5IHsKICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDsKICBtYXJnaW46IDAgMCAxcmVtIDA7CiAgZm9udC1mYW1pbHk6ICJMYXRvIiwgIkx1Y2lkYSBHcmFuZGUiLCAiTHVjaWRhIFNhbnMgVW5pY29kZSIsICJMdWNpZGEgU2FucyIsIFZlcmRhbmEsIFRhaG9tYSwgc2Fucy1zZXJpZjsKICBwYWRkaW5nOiAxcmVtOwogIGxpbmUtaGVpZ2h0OiAxLjU7Cn0KCi5hcGlfc3RhYmlsaXR5ICogewogIGNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50Owp9CgouYXBpX3N0YWJpbGl0eSBhIHsKICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsKfQoKLmFwaV9zdGFiaWxpdHkgYTpob3ZlciwgLmFwaV9zdGFiaWxpdHkgYTphY3RpdmUsIC5hcGlfc3RhYmlsaXR5IGE6Zm9jdXMgewogIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjQpOwp9CgouYXBpX3N0YWJpbGl0eSBhIGNvZGUgewogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCi5hcGlfc3RhYmlsaXR5XzAgewogIGJhY2tncm91bmQtY29sb3I6ICNENjAwMjc7Cn0KCi5hcGlfc3RhYmlsaXR5XzEgewogIGJhY2tncm91bmQtY29sb3I6ICNFQzUzMTU7Cn0KCi5hcGlfc3RhYmlsaXR5XzIgewogIGJhY2tncm91bmQtY29sb3I6ICM0RUJBMEY7Cn0KCi5hcGlfbWV0YWRhdGEgewogIGZvbnQtc2l6ZTogLjg1cmVtOwogIG1hcmdpbi1ib3R0b206IDFyZW07Cn0KCi5hcGlfbWV0YWRhdGEgc3BhbiB7CiAgbWFyZ2luLXJpZ2h0OiAxcmVtOwp9CgouYXBpX21ldGFkYXRhIHNwYW46bGFzdC1jaGlsZCB7CiAgbWFyZ2luLXJpZ2h0OiAwcHg7Cn0KCnVsLnBsYWluIHsKICBsaXN0LXN0eWxlOiBub25lOwp9CgphYmJyIHsKICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkICM0NTQ1NDU7Cn0KCnAgewogIHRleHQtcmVuZGVyaW5nOiBvcHRpbWl6ZUxlZ2liaWxpdHk7CiAgbWFyZ2luOiAwIDAgMS4xMjVyZW0gMDsKICBsaW5lLWhlaWdodDogMS41Owp9CgojYXBpY29udGVudCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKICBwYWRkaW5nLWJvdHRvbTogMnJlbTsKfQoKdGFibGUgewogIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7CiAgbWFyZ2luOiAwIDAgMS41cmVtIDA7Cn0KCnRoLCB0ZCB7CiAgYm9yZGVyOiAxcHggc29saWQgI2FhYTsKICBwYWRkaW5nOiAuNzVyZW0gMXJlbSAuNzVyZW0gMXJlbTsKICB2ZXJ0aWNhbC1hbGlnbjogdG9wOwp9Cgp0aCB7CiAgdGV4dC1hbGlnbjpsZWZ0Owp9CgpvbCwgdWwsIGRsIHsKICBtYXJnaW46IDAgMCAuNnJlbSAwOwogIHBhZGRpbmc6IDA7Cn0KCm9sIHVsLCBvbCBvbCwgb2wgZGwsIHVsIHVsLCB1bCBvbCwgdWwgZGwsIGRsIHVsLCBkbCBvbCwgZGwgZGwgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCnVsLCBvbCB7CiAgbWFyZ2luLWxlZnQ6IDJyZW07Cn0KCmRsIGR0IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgbWFyZ2luOiAxLjVyZW0gMCAwOwp9CgpkbCBkZCB7CiAgcG9zaXRpb246IHJlbGF0aXZlOwogIG1hcmdpbjogMCAxcmVtIDA7Cn0KCmRkICsgZHQucHJlIHsKICBtYXJnaW4tdG9wOiAxLjZyZW07Cn0KCiNhcGljb250ZW50IHsKICBwYWRkaW5nLXRvcDogMXJlbTsKfQoKI2FwaWNvbnRlbnQgLmxpbmUgewogIHdpZHRoOiBjYWxjKDUwJSAtIDFyZW0pOwogIG1hcmdpbjogMXJlbSAxcmVtIC45NXJlbTsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2NjOwp9CgpoMiArIGgyIHsKICBtYXJnaW46IDAgMCAuNXJlbTsKfQoKaDMgKyBoMyB7CiAgbWFyZ2luOiAwIDAgLjVyZW07Cn0KCmgyLCBoMywgaDQsIGg1IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgcGFkZGluZy1yaWdodDogNDBweDsKfQoKLnNyY2xpbmsgewogIGZsb2F0OiByaWdodDsKICBmb250LXNpemU6IHNtYWxsZXI7Cn0KCmgxIHNwYW4sIGgyIHNwYW4sIGgzIHNwYW4sIGg0IHNwYW4gewogIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICBkaXNwbGF5OiBibG9jazsKICB0b3A6IDA7CiAgcmlnaHQ6IDA7Cn0KCmgxIHNwYW46aG92ZXIsIGgyIHNwYW46aG92ZXIsIGgzIHNwYW46aG92ZXIsIGg0IHNwYW46aG92ZXIgewogIG9wYWNpdHk6IDE7Cn0KCmgxIHNwYW4gYSwgaDIgc3BhbiBhLCBoMyBzcGFuIGEsIGg0IHNwYW4gYSB7CiAgY29sb3I6ICMwMDA7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGZvbnQtd2VpZ2h0OiBib2xkOwp9CgpwcmUsIHR0LCBjb2RlIHsKICBsaW5lLWhlaWdodDogMS41cmVtOwogIG1hcmdpbjogMDsgcGFkZGluZzogMDsKfQoKLnByZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKcHJlIHsKICBwYWRkaW5nOiAxcmVtOwogIHZlcnRpY2FsLWFsaWduOiB0b3A7CiAgYmFja2dyb3VuZDogI2YyZjJmMjsKICBtYXJnaW46IDFyZW07CiAgb3ZlcmZsb3cteDogYXV0bzsKfQoKcHJlID4gY29kZSB7CiAgcGFkZGluZzogMDsKfQoKcHJlICsgaDMgewogIG1hcmdpbi10b3A6IDIuMjI1cmVtOwp9Cgpjb2RlLnByZSB7CiAgd2hpdGUtc3BhY2U6IHByZTsKfQoKI2ludHJvIHsKICBtYXJnaW4tdG9wOiAxLjI1cmVtOwogIG1hcmdpbi1sZWZ0OiAxcmVtOwp9CgojaW50cm8gYSB7CiAgY29sb3I6ICNkZGQ7CiAgZm9udC13ZWlnaHQ6IGJvbGQ7Cn0KCmhyIHsKICBiYWNrZ3JvdW5kOiBub25lOwogIGJvcmRlcjogbWVkaXVtIG5vbmU7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM3YTdhN2E7CiAgbWFyZ2luOiAwIDAgMXJlbSAwOwp9CgojdG9jIGgyIHsKICBtYXJnaW4tdG9wOiAwOwogIG1hcmdpbjogMS41cmVtIDA7Cn0KCiN0b2MgcCB7CiAgbWFyZ2luOiAwOwp9CgojdG9jIHVsIGEgewogIHRleHQtZGVjb3JhdGlvbjpub25lOwp9CgojdG9jIHVsIGxpIHsKICBtYXJnaW4tYm90dG9tOiAuNjY2cmVtOwogIGxpc3Qtc3R5bGU6IHNxdWFyZSBvdXRzaWRlOwp9CgojdG9jIGxpID4gdWwgewogIG1hcmdpbi10b3A6IC42NjZyZW07Cn0KCiN0b2MgLnN0YWJpbGl0eV8wOjphZnRlciB7CiAgYmFja2dyb3VuZC1jb2xvcjogI2Q1MDAyNzsKICBjb2xvcjogI2ZmZjsKICBjb250ZW50OiAiZGVwcmVjYXRlZCI7CiAgbWFyZ2luLWxlZnQ6IC4yNXJlbTsKICBwYWRkaW5nOiAxcHggM3B4OwogIGJvcmRlci1yYWRpdXM6IDNweDsKfQoKI2FwaWNvbnRlbnQgbGkgewogIG1hcmdpbi1ib3R0b206IC41cmVtOwp9CgojYXBpY29udGVudCBsaTpsYXN0LWNoaWxkIHsKICBtYXJnaW4tYm90dG9tOiAwOwp9Cgp0dCwgY29kZSB7CiAgY29sb3I6ICMwNDA0MDQ7CiAgYmFja2dyb3VuZC1jb2xvcjogI2YyZjJmMjsKICBib3JkZXItcmFkaXVzOiAycHg7CiAgcGFkZGluZzogMXB4IDNweDsKfQoKLmFwaV9zdGFiaWxpdHkgY29kZSB7CiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAuMSk7Cn0KCmEgY29kZSB7CiAgY29sb3I6IGluaGVyaXQ7CiAgYmFja2dyb3VuZDogaW5oZXJpdDsKICBwYWRkaW5nOiAwOwp9CgoudHlwZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKI2NvbHVtbjEuaW50ZXJpb3IgewogIG1hcmdpbi1sZWZ0OiAyMzRweDsKICBwYWRkaW5nOiAwIDJyZW07CiAgLXdlYmtpdC1wYWRkaW5nLXN0YXJ0OiAxLjVyZW07Cn0KCiNjb2x1bW4yLmludGVyaW9yIHsKICB3aWR0aDogMjM0cHg7CiAgYmFja2dyb3VuZDogIzMzMzsKICBwb3NpdGlvbjogZml4ZWQ7CiAgbGVmdDogMDsKICB0b3A6IDA7CiAgYm90dG9tOiAwOwogIG92ZXJmbG93LXg6IGhpZGRlbjsKICBvdmVyZmxvdy15OiBzY3JvbGw7Cn0KCiNjb2x1bW4yIHVsIHsKICBsaXN0LXN0eWxlOiBub25lOwogIG1hcmdpbjogLjlyZW0gMCAuNXJlbTsKICBiYWNrZ3JvdW5kOiAjMzMzOwp9CgojY29sdW1uMiA+IDpmaXJzdC1jaGlsZCB7CiAgbWFyZ2luOiAxLjI1cmVtOwogIGZvbnQtc2l6ZTogMS41cmVtOwp9CgojY29sdW1uMiA+IHVsOm50aC1jaGlsZCgyKSB7CiAgbWFyZ2luOiAxLjI1cmVtIDAgLjVyZW07Cn0KCiNjb2x1bW4yID4gdWw6bGFzdC1jaGlsZCB7CiAgbWFyZ2luOiAuOXJlbSAwIDEuMjVyZW07Cn0KCiNjb2x1bW4yIHVsIGxpIHsKICBwYWRkaW5nLWxlZnQ6IDEuMjVyZW07CiAgbWFyZ2luLWJvdHRvbTogLjVyZW07CiAgcGFkZGluZy1ib3R0b206IC41cmVtOwp9CgojY29sdW1uMiAubGluZSB7CiAgbWFyZ2luOiAwIC41cmVtOwogIGJhY2tncm91bmQtY29sb3I6ICM3MDcwNzA7Cn0KCiNjb2x1bW4yIHVsIGxpOmxhc3QtY2hpbGQgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEgewogIGNvbG9yOiAjY2NjOwogIGJvcmRlci1yYWRpdXM6IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEuYWN0aXZlLCAjY29sdW1uMiB1bCBsaSBhLmFjdGl2ZTpob3ZlciwKI2NvbHVtbjIgdWwgbGkgYS5hY3RpdmU6Zm9jdXMgewogIGNvbG9yOiAjNDM4NTNkOwogIGJvcmRlci1yYWRpdXM6IDA7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM0Mzg1M2Q7CiAgYmFja2dyb3VuZDogbm9uZTsKfQoKI2ludHJvIGE6aG92ZXIsICNpbnRybyBhOmZvY3VzLAojY29sdW1uMiB1bCBsaSBhOmhvdmVyLCAjY29sdW1uMiB1bCBsaSBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgpzcGFuID4gLm1hcmssIHNwYW4gPiAubWFyazp2aXNpdGVkIHsKICBjb2xvcjogIzcwNzA3MDsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgdG9wOiAwcHg7CiAgcmlnaHQ6IDBweDsKfQoKc3BhbiA+IC5tYXJrOmhvdmVyLCBzcGFuID4gLm1hcms6Zm9jdXMsIHNwYW4gPiAubWFyazphY3RpdmUgewogIGNvbG9yOiAjNDM4NTNkOwogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCnRoID4gKjpsYXN0LWNoaWxkLCB0ZCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKfQoKLmNoYW5nZWxvZyA+IHN1bW1hcnkgewogIG1hcmdpbjogLjVyZW0gMDsKICBwYWRkaW5nOiAuNXJlbSAwOwogIGN1cnNvcjogcG9pbnRlcjsKfQoKLyogc2ltcGxlciBjbGVhcmZpeCAqLwouY2xlYXJmaXg6YWZ0ZXIgewogIGNvbnRlbnQ6ICIuIjsKICBkaXNwbGF5OiBibG9jazsKICBoZWlnaHQ6IDA7CiAgY2xlYXI6IGJvdGg7CiAgdmlzaWJpbGl0eTogaGlkZGVuOwp9CgouZ2l0aHViX2ljb24gewogIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7CiAgbWFyZ2luOiAtMnB4IDNweCAwIDA7Cn0KCkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogMTAyNHB4KSB7CiAgI2NvbnRlbnQgewogICAgb3ZlcmZsb3c6IHZpc2libGU7CiAgfQogICNjb2x1bW4xLmludGVyaW9yIHsKICAgIG1hcmdpbi1sZWZ0OiAwOwogICAgcGFkZGluZy1sZWZ0OiAuNXJlbTsKICAgIHBhZGRpbmctcmlnaHQ6IC41cmVtOwogICAgd2lkdGg6IGF1dG87CiAgICBvdmVyZmxvdy15OiB2aXNpYmxlOwogIH0KICAjY29sdW1uMiB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KfQoKQG1lZGlhIHByaW50IHsKICBodG1sIHsKICAgIGhlaWdodDogYXV0bzsKICAgIGZvbnQtc2l6ZTogMC43NWVtOwogIH0KICAjY29sdW1uMi5pbnRlcmlvciB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KICAjY29sdW1uMS5pbnRlcmlvciB7CiAgICBtYXJnaW4tbGVmdDogMHB4OwogICAgcGFkZGluZzogMHB4OwogICAgb3ZlcmZsb3cteTogYXV0bzsKICB9CiAgLmFwaV9tZXRhZGF0YSwKICAjdG9jLAogIC5zcmNsaW5rLAogICNndG9jLAogIC5tYXJrIHsKICAgIGRpc3BsYXk6IG5vbmU7CiAgfQogIGgxIHsKICAgIGZvbnQtc2l6ZTogMnJlbTsKICB9CiAgaDIgewogICAgZm9udC1zaXplOiAxLjc1cmVtOwogIH0KICBoMyB7CiAgICBmb250LXNpemU6IDEuNXJlbTsKICB9CiAgaDQgewogICAgZm9udC1zaXplOiAxLjNyZW07CiAgfQogIGg1IHsKICAgIGZvbnQtc2l6ZTogMS4ycmVtOwogIH0KICBoNiB7CiAgICBmb250LXNpemU6IDEuMXJlbTsKICB9CiAgLmFwaV9zdGFiaWxpdHkgewogICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogIH0KICAuYXBpX3N0YWJpbGl0eSBhIHsKICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsKICB9CiAgYSB7CiAgICBjb2xvcjogaW5oZXJpdDsKICB9CiAgI2FwaWNvbnRlbnQgewogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICB9Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LnNoX3NvdXJjZUNvZGUgewogIGZvbnQtd2VpZ2h0OiBub3JtYWw7CiAgZm9udC1zdHlsZTogbm9ybWFsOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfc3ltYm9sLAouc2hfc291cmNlQ29kZSAuc2hfY2JyYWNrZXQgewogIGNvbG9yOiAjMzMzOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfa2V5d29yZCB7CiAgY29sb3I6ICMzMzg7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9zdHJpbmcsCi5zaF9zb3VyY2VDb2RlIC5zaF9yZWdleHAsCi5zaF9zb3VyY2VDb2RlIC5zaF9udW1iZXIsCi5zaF9zb3VyY2VDb2RlIC5zaF9zcGVjaWFsY2hhciB7CiAgY29sb3I6ICNFNTQzMDU7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9jb21tZW50IHsKICBjb2xvcjogIzY2NjsKICBmb250LXdlaWdodDogbGlnaHRlcjsKfQo=">
+  <link rel="canonical" href="https://nodejs.org/api/addons.html">
+</head>
+<body class="alt apidoc" id="api-section-addons">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="https://nodejs.org/" title="Go back to the home page">
+          Node.js
+        </a>
+      </div>
+      <ul>
+<li><a href="https://nodejs.org/api/documentation.html" class="nav-documentation">About these Docs</a></li>
+<li><a href="https://nodejs.org/api/synopsis.html" class="nav-synopsis">Usage &amp; Example</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://nodejs.org/api/assert.html" class="nav-assert">Assertion Testing</a></li>
+<li><a href="https://nodejs.org/api/async_hooks.html" class="nav-async_hooks">Async Hooks</a></li>
+<li><a href="https://nodejs.org/api/buffer.html" class="nav-buffer">Buffer</a></li>
+<li><a href="https://nodejs.org/api/addons.html" class="nav-addons active">C++ Addons</a></li>
+<li><a href="https://nodejs.org/api/n-api.html" class="nav-n-api">C/C++ Addons - N-API</a></li>
+<li><a href="https://nodejs.org/api/child_process.html" class="nav-child_process">Child Processes</a></li>
+<li><a href="https://nodejs.org/api/cluster.html" class="nav-cluster">Cluster</a></li>
+<li><a href="https://nodejs.org/api/cli.html" class="nav-cli">Command Line Options</a></li>
+<li><a href="https://nodejs.org/api/console.html" class="nav-console">Console</a></li>
+<li><a href="https://nodejs.org/api/crypto.html" class="nav-crypto">Crypto</a></li>
+<li><a href="https://nodejs.org/api/debugger.html" class="nav-debugger">Debugger</a></li>
+<li><a href="https://nodejs.org/api/deprecations.html" class="nav-deprecations">Deprecated APIs</a></li>
+<li><a href="https://nodejs.org/api/dns.html" class="nav-dns">DNS</a></li>
+<li><a href="https://nodejs.org/api/domain.html" class="nav-domain">Domain</a></li>
+<li><a href="https://nodejs.org/api/esm.html" class="nav-esm">ECMAScript Modules</a></li>
+<li><a href="https://nodejs.org/api/errors.html" class="nav-errors">Errors</a></li>
+<li><a href="https://nodejs.org/api/events.html" class="nav-events">Events</a></li>
+<li><a href="https://nodejs.org/api/fs.html" class="nav-fs">File System</a></li>
+<li><a href="https://nodejs.org/api/globals.html" class="nav-globals">Globals</a></li>
+<li><a href="https://nodejs.org/api/http.html" class="nav-http">HTTP</a></li>
+<li><a href="https://nodejs.org/api/http2.html" class="nav-http2">HTTP/2</a></li>
+<li><a href="https://nodejs.org/api/https.html" class="nav-https">HTTPS</a></li>
+<li><a href="https://nodejs.org/api/inspector.html" class="nav-inspector">Inspector</a></li>
+<li><a href="https://nodejs.org/api/intl.html" class="nav-intl">Internationalization</a></li>
+<li><a href="https://nodejs.org/api/modules.html" class="nav-modules">Modules</a></li>
+<li><a href="https://nodejs.org/api/net.html" class="nav-net">Net</a></li>
+<li><a href="https://nodejs.org/api/os.html" class="nav-os">OS</a></li>
+<li><a href="https://nodejs.org/api/path.html" class="nav-path">Path</a></li>
+<li><a href="https://nodejs.org/api/perf_hooks.html" class="nav-perf_hooks">Performance Hooks</a></li>
+<li><a href="https://nodejs.org/api/policy.html" class="nav-policy">Policies</a></li>
+<li><a href="https://nodejs.org/api/process.html" class="nav-process">Process</a></li>
+<li><a href="https://nodejs.org/api/punycode.html" class="nav-punycode">Punycode</a></li>
+<li><a href="https://nodejs.org/api/querystring.html" class="nav-querystring">Query Strings</a></li>
+<li><a href="https://nodejs.org/api/readline.html" class="nav-readline">Readline</a></li>
+<li><a href="https://nodejs.org/api/repl.html" class="nav-repl">REPL</a></li>
+<li><a href="https://nodejs.org/api/report.html" class="nav-report">Report</a></li>
+<li><a href="https://nodejs.org/api/stream.html" class="nav-stream">Stream</a></li>
+<li><a href="https://nodejs.org/api/string_decoder.html" class="nav-string_decoder">String Decoder</a></li>
+<li><a href="https://nodejs.org/api/timers.html" class="nav-timers">Timers</a></li>
+<li><a href="https://nodejs.org/api/tls.html" class="nav-tls">TLS/SSL</a></li>
+<li><a href="https://nodejs.org/api/tracing.html" class="nav-tracing">Trace Events</a></li>
+<li><a href="https://nodejs.org/api/tty.html" class="nav-tty">TTY</a></li>
+<li><a href="https://nodejs.org/api/dgram.html" class="nav-dgram">UDP/Datagram</a></li>
+<li><a href="https://nodejs.org/api/url.html" class="nav-url">URL</a></li>
+<li><a href="https://nodejs.org/api/util.html" class="nav-util">Utilities</a></li>
+<li><a href="https://nodejs.org/api/v8.html" class="nav-v8">V8</a></li>
+<li><a href="https://nodejs.org/api/vm.html" class="nav-vm">VM</a></li>
+<li><a href="https://nodejs.org/api/worker_threads.html" class="nav-worker_threads">Worker Threads</a></li>
+<li><a href="https://nodejs.org/api/zlib.html" class="nav-zlib">Zlib</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://github.com/nodejs/node" class="nav-https-github-com-nodejs-node">GitHub Repo &amp; Issue Tracker</a></li>
+</ul>
+    </div>
+
+    <div id="column1" data-id="addons" class="interior">
+      <header>
+        <h1>Node.js v12.10.0 Documentation</h1>
+        <div id="gtoc">
+          <ul>
+            <li>
+              <a href="https://nodejs.org/api/index.html" name="toc">Index</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/all.html">View on single page</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/addons.json">View as JSON</a>
+            </li>
+            
+    <li class="version-picker">
+      <a href="#">View another version <span>▼</span></a>
+      <ol class="version-picker"><li><a href="https://nodejs.org/docs/latest-v12.x/api/addons.html">12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v11.x/api/addons.html">11.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v10.x/api/addons.html">10.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v9.x/api/addons.html">9.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/addons.html">8.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v7.x/api/addons.html">7.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v6.x/api/addons.html">6.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v5.x/api/addons.html">5.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v4.x/api/addons.html">4.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.12.x/api/addons.html">0.12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.10.x/api/addons.html">0.10.x</a></li></ol>
+    </li>
+  
+            <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/addons.md"><span class="github_icon"><svg height="16" width="16" viewBox="0 0 16.1 16.1" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8z"></path></svg></span>Edit on GitHub</a></li>
+          </ul>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+<li>
+<p><a href="#addons_c_addons">C++ Addons</a></p>
+<ul>
+<li>
+<p><a href="#addons_hello_world">Hello world</a></p>
+<ul>
+<li>
+<p><a href="#addons_context_aware_addons">Context-aware addons</a></p>
+<ul>
+<li><a href="#addons_worker_support">Worker support</a></li>
+</ul>
+</li>
+<li><a href="#addons_building">Building</a></li>
+<li><a href="#addons_linking_to_node_js_own_dependencies">Linking to Node.js' own dependencies</a></li>
+<li><a href="#addons_loading_addons_using_require">Loading Addons using require()</a></li>
+</ul>
+</li>
+<li><a href="#addons_native_abstractions_for_node_js">Native Abstractions for Node.js</a></li>
+<li><a href="#addons_n_api">N-API</a></li>
+<li>
+<p><a href="#addons_addon_examples">Addon examples</a></p>
+<ul>
+<li><a href="#addons_function_arguments">Function arguments</a></li>
+<li><a href="#addons_callbacks">Callbacks</a></li>
+<li><a href="#addons_object_factory">Object factory</a></li>
+<li><a href="#addons_function_factory">Function factory</a></li>
+<li><a href="#addons_wrapping_c_objects">Wrapping C++ objects</a></li>
+<li><a href="#addons_factory_of_wrapped_objects">Factory of wrapped objects</a></li>
+<li><a href="#addons_passing_wrapped_objects_around">Passing wrapped objects around</a></li>
+<li>
+<p><a href="#addons_atexit_hooks">AtExit hooks</a></p>
+<ul>
+<li><a href="#addons_void_atexit_callback_args">void AtExit(callback, args)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+      </div>
+
+      <div id="apicontent">
+        <h1>C++ Addons<span><a class="mark" href="#addons_c_addons" id="addons_c_addons">#</a></span></h1>
+
+
+<p>Node.js Addons are dynamically-linked shared objects, written in C++, that
+can be loaded into Node.js using the <a href="https://nodejs.org/api/modules.html#modules_require_id"><code>require()</code></a> function, and used
+just as if they were an ordinary Node.js module. They are used primarily to
+provide an interface between JavaScript running in Node.js and C/C++ libraries.</p>
+<p>There are three options for implementing Addons: N-API, nan, or direct
+use of internal V8, libuv and Node.js libraries. Unless you need direct
+access to functionality which is not exposed by N-API, use N-API.
+Refer to the section <a href="https://nodejs.org/api/n-api.html">C/C++ Addons - N-API</a>
+for more information on N-API.</p>
+<p>When not using N-API, implementing Addons is complicated,
+involving knowledge of several components and APIs:</p>
+<ul>
+<li>
+<p>V8: the C++ library Node.js currently uses to provide the
+JavaScript implementation. V8 provides the mechanisms for creating objects,
+calling functions, etc. V8's API is documented mostly in the
+<code>v8.h</code> header file (<code>deps/v8/include/v8.h</code> in the Node.js source
+tree), which is also available <a href="https://v8docs.nodesource.com/">online</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/libuv/libuv">libuv</a>: The C library that implements the Node.js event loop, its worker
+threads and all of the asynchronous behaviors of the platform. It also
+serves as a cross-platform abstraction library, giving easy, POSIX-like
+access across all major operating systems to many common system tasks, such
+as interacting with the filesystem, sockets, timers, and system events. libuv
+also provides a pthreads-like threading abstraction that may be used to
+power more sophisticated asynchronous Addons that need to move beyond the
+standard event loop. Addon authors are encouraged to think about how to
+avoid blocking the event loop with I/O or other time-intensive tasks by
+off-loading work via libuv to non-blocking system operations, worker threads
+or a custom use of libuv's threads.</p>
+</li>
+<li>
+<p>Internal Node.js libraries. Node.js itself exports a number of C++ APIs
+that Addons can use — the most important of which is the
+<code>node::ObjectWrap</code> class.</p>
+</li>
+<li>
+<p>Node.js includes a number of other statically linked libraries including
+OpenSSL. These other libraries are located in the <code>deps/</code> directory in the
+Node.js source tree. Only the libuv, OpenSSL, V8 and zlib symbols are
+purposefully re-exported by Node.js and may be used to various extents by
+Addons.
+See <a href="#addons_linking_to_node_js_own_dependencies">Linking to Node.js' own dependencies</a> for additional information.</p>
+</li>
+</ul>
+<p>All of the following examples are available for <a href="https://github.com/nodejs/node-addon-examples">download</a> and may
+be used as the starting-point for an Addon.</p>
+<h2>Hello world<span><a class="mark" href="#addons_hello_world" id="addons_hello_world">#</a></span></h2>
+<p>This "Hello world" example is a simple Addon, written in C++, that is the
+equivalent of the following JavaScript code:</p>
+<pre><code class="language-js">module.exports.hello = () =&gt; 'world';
+</code></pre>
+<p>First, create the file <code>hello.cc</code>:</p>
+<pre><code class="language-cpp">// hello.cc
+#include &lt;node.h&gt;
+
+namespace demo {
+
+using v8::FunctionCallbackInfo;
+using v8::Isolate;
+using v8::Local;
+using v8::NewStringType;
+using v8::Object;
+using v8::String;
+using v8::Value;
+
+void Method(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+  args.GetReturnValue().Set(String::NewFromUtf8(
+      isolate, "world", NewStringType::kNormal).ToLocalChecked());
+}
+
+void Initialize(Local&lt;Object&gt; exports) {
+  NODE_SET_METHOD(exports, "hello", Method);
+}
+
+NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize)
+
+}  // namespace demo
+</code></pre>
+<p>All Node.js Addons must export an initialization function following
+the pattern:</p>
+<pre><code class="language-cpp">void Initialize(Local&lt;Object&gt; exports);
+NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize)
+</code></pre>
+<p>There is no semi-colon after <code>NODE_MODULE</code> as it's not a function (see
+<code>node.h</code>).</p>
+<p>The <code>module_name</code> must match the filename of the final binary (excluding
+the <code>.node</code> suffix).</p>
+<p>In the <code>hello.cc</code> example, then, the initialization function is <code>Initialize</code>
+and the addon module name is <code>addon</code>.</p>
+<p>When building addons with <code>node-gyp</code>, using the macro <code>NODE_GYP_MODULE_NAME</code> as
+the first parameter of <code>NODE_MODULE()</code> will ensure that the name of the final
+binary will be passed to <code>NODE_MODULE()</code>.</p>
+<h3>Context-aware addons<span><a class="mark" href="#addons_context_aware_addons" id="addons_context_aware_addons">#</a></span></h3>
+<p>There are environments in which Node.js addons may need to be loaded multiple
+times in multiple contexts. For example, the <a href="https://electronjs.org/">Electron</a> runtime runs multiple
+instances of Node.js in a single process. Each instance will have its own
+<code>require()</code> cache, and thus each instance will need a native addon to behave
+correctly when loaded via <code>require()</code>. From the addon's perspective, this means
+that it must support multiple initializations.</p>
+<p>A context-aware addon can be constructed by using the macro
+<code>NODE_MODULE_INITIALIZER</code>, which expands to the name of a function which Node.js
+will expect to find when it loads an addon. An addon can thus be initialized as
+in the following example:</p>
+<pre><code class="language-cpp">using namespace v8;
+
+extern "C" NODE_MODULE_EXPORT void
+NODE_MODULE_INITIALIZER(Local&lt;Object&gt; exports,
+                        Local&lt;Value&gt; module,
+                        Local&lt;Context&gt; context) {
+  /* Perform addon initialization steps here. */
+}
+</code></pre>
+<p>Another option is to use the macro <code>NODE_MODULE_INIT()</code>, which will also
+construct a context-aware addon. Unlike <code>NODE_MODULE()</code>, which is used to
+construct an addon around a given addon initializer function,
+<code>NODE_MODULE_INIT()</code> serves as the declaration of such an initializer to be
+followed by a function body.</p>
+<p>The following three variables may be used inside the function body following an
+invocation of <code>NODE_MODULE_INIT()</code>:</p>
+<ul>
+<li><code>Local&lt;Object&gt; exports</code>,</li>
+<li><code>Local&lt;Value&gt; module</code>, and</li>
+<li><code>Local&lt;Context&gt; context</code></li>
+</ul>
+<p>The choice to build a context-aware addon carries with it the responsibility of
+carefully managing global static data. Since the addon may be loaded multiple
+times, potentially even from different threads, any global static data stored
+in the addon must be properly protected, and must not contain any persistent
+references to JavaScript objects. The reason for this is that JavaScript
+objects are only valid in one context, and will likely cause a crash when
+accessed from the wrong context or from a different thread than the one on which
+they were created.</p>
+<p>The context-aware addon can be structured to avoid global static data by
+performing the following steps:</p>
+<ul>
+<li>defining a class which will hold per-addon-instance data. Such
+a class should include a <code>v8::Persistent&lt;v8::Object&gt;</code> which will hold a weak
+reference to the addon's <code>exports</code> object. The callback associated with the weak
+reference will then destroy the instance of the class.</li>
+<li>constructing an instance of this class in the addon initializer such that the
+<code>v8::Persistent&lt;v8::Object&gt;</code> is set to the <code>exports</code> object.</li>
+<li>storing the instance of the class in a <code>v8::External</code>, and</li>
+<li>passing the <code>v8::External</code> to all methods exposed to JavaScript by passing it
+to the <code>v8::FunctionTemplate</code> constructor which creates the native-backed
+JavaScript functions. The <code>v8::FunctionTemplate</code> constructor's third parameter
+accepts the <code>v8::External</code>.</li>
+</ul>
+<p>This will ensure that the per-addon-instance data reaches each binding that can
+be called from JavaScript. The per-addon-instance data must also be passed into
+any asynchronous callbacks the addon may create.</p>
+<p>The following example illustrates the implementation of a context-aware addon:</p>
+<pre><code class="language-cpp">#include &lt;node.h&gt;
+
+using namespace v8;
+
+class AddonData {
+ public:
+  AddonData(Isolate* isolate, Local&lt;Object&gt; exports):
+      call_count(0) {
+    // Link the existence of this object instance to the existence of exports.
+    exports_.Reset(isolate, exports);
+    exports_.SetWeak(this, DeleteMe, WeakCallbackType::kParameter);
+  }
+
+  ~AddonData() {
+    if (!exports_.IsEmpty()) {
+      // Reset the reference to avoid leaking data.
+      exports_.ClearWeak();
+      exports_.Reset();
+    }
+  }
+
+  // Per-addon data.
+  int call_count;
+
+ private:
+  // Method to call when "exports" is about to be garbage-collected.
+  static void DeleteMe(const WeakCallbackInfo&lt;AddonData&gt;&amp; info) {
+    delete info.GetParameter();
+  }
+
+  // Weak handle to the "exports" object. An instance of this class will be
+  // destroyed along with the exports object to which it is weakly bound.
+  v8::Persistent&lt;v8::Object&gt; exports_;
+};
+
+static void Method(const v8::FunctionCallbackInfo&lt;v8::Value&gt;&amp; info) {
+  // Retrieve the per-addon-instance data.
+  AddonData* data =
+      reinterpret_cast&lt;AddonData*&gt;(info.Data().As&lt;External&gt;()-&gt;Value());
+  data-&gt;call_count++;
+  info.GetReturnValue().Set((double)data-&gt;call_count);
+}
+
+// Initialize this addon to be context-aware.
+NODE_MODULE_INIT(/* exports, module, context */) {
+  Isolate* isolate = context-&gt;GetIsolate();
+
+  // Create a new instance of AddonData for this instance of the addon.
+  AddonData* data = new AddonData(isolate, exports);
+  // Wrap the data in a v8::External so we can pass it to the method we expose.
+  Local&lt;External&gt; external = External::New(isolate, data);
+
+  // Expose the method "Method" to JavaScript, and make sure it receives the
+  // per-addon-instance data we created above by passing `external` as the
+  // third parameter to the FunctionTemplate constructor.
+  exports-&gt;Set(context,
+               String::NewFromUtf8(isolate, "method", NewStringType::kNormal)
+                  .ToLocalChecked(),
+               FunctionTemplate::New(isolate, Method, external)
+                  -&gt;GetFunction(context).ToLocalChecked()).FromJust();
+}
+</code></pre>
+<h4>Worker support<span><a class="mark" href="#addons_worker_support" id="addons_worker_support">#</a></span></h4>
+<p>In order to support <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads, addons need to clean up any resources
+they may have allocated when such a thread exists. This can be achieved through
+the usage of the <code>AddEnvironmentCleanupHook()</code> function:</p>
+<pre><code class="language-c++">void AddEnvironmentCleanupHook(v8::Isolate* isolate,
+                               void (*fun)(void* arg),
+                               void* arg);
+</code></pre>
+<p>This function adds a hook that will run before a given Node.js instance shuts
+down. If necessary, such hooks can be removed using
+<code>RemoveEnvironmentCleanupHook()</code> before they are run, which has the same
+signature.</p>
+<p>In order to be loaded from multiple Node.js environments,
+such as a main thread and a Worker thread, an add-on needs to either:</p>
+<ul>
+<li>Be an N-API addon, or</li>
+<li>Be declared as context-aware using <code>NODE_MODULE_INIT()</code> as described above</li>
+</ul>
+<h3>Building<span><a class="mark" href="#addons_building" id="addons_building">#</a></span></h3>
+<p>Once the source code has been written, it must be compiled into the binary
+<code>addon.node</code> file. To do so, create a file called <code>binding.gyp</code> in the
+top-level of the project describing the build configuration of the module
+using a JSON-like format. This file is used by <a href="https://github.com/nodejs/node-gyp">node-gyp</a> — a tool written
+specifically to compile Node.js Addons.</p>
+<pre><code class="language-json">{
+  "targets": [
+    {
+      "target_name": "addon",
+      "sources": [ "hello.cc" ]
+    }
+  ]
+}
+</code></pre>
+<p>A version of the <code>node-gyp</code> utility is bundled and distributed with
+Node.js as part of <code>npm</code>. This version is not made directly available for
+developers to use and is intended only to support the ability to use the
+<code>npm install</code> command to compile and install Addons. Developers who wish to
+use <code>node-gyp</code> directly can install it using the command
+<code>npm install -g node-gyp</code>. See the <code>node-gyp</code> <a href="https://github.com/nodejs/node-gyp#installation">installation instructions</a> for
+more information, including platform-specific requirements.</p>
+<p>Once the <code>binding.gyp</code> file has been created, use <code>node-gyp configure</code> to
+generate the appropriate project build files for the current platform. This
+will generate either a <code>Makefile</code> (on Unix platforms) or a <code>vcxproj</code> file
+(on Windows) in the <code>build/</code> directory.</p>
+<p>Next, invoke the <code>node-gyp build</code> command to generate the compiled <code>addon.node</code>
+file. This will be put into the <code>build/Release/</code> directory.</p>
+<p>When using <code>npm install</code> to install a Node.js Addon, npm uses its own bundled
+version of <code>node-gyp</code> to perform this same set of actions, generating a
+compiled version of the Addon for the user's platform on demand.</p>
+<p>Once built, the binary Addon can be used from within Node.js by pointing
+<a href="https://nodejs.org/api/modules.html#modules_require_id"><code>require()</code></a> to the built <code>addon.node</code> module:</p>
+<pre><code class="language-js">// hello.js
+const addon = require('./build/Release/addon');
+
+console.log(addon.hello());
+// Prints: 'world'
+</code></pre>
+<p>Because the exact path to the compiled Addon binary can vary depending on how
+it is compiled (i.e. sometimes it may be in <code>./build/Debug/</code>), Addons can use
+the <a href="https://github.com/TooTallNate/node-bindings">bindings</a> package to load the compiled module.</p>
+<p>While the <code>bindings</code> package implementation is more sophisticated in how it
+locates Addon modules, it is essentially using a <code>try…catch</code> pattern similar to:</p>
+<pre><code class="language-js">try {
+  return require('./build/Release/addon.node');
+} catch (err) {
+  return require('./build/Debug/addon.node');
+}
+</code></pre>
+<h3>Linking to Node.js' own dependencies<span><a class="mark" href="#addons_linking_to_node_js_own_dependencies" id="addons_linking_to_node_js_own_dependencies">#</a></span></h3>
+<p>Node.js uses a number of statically linked libraries such as V8, libuv and
+OpenSSL. All Addons are required to link to V8 and may link to any of the
+other dependencies as well. Typically, this is as simple as including
+the appropriate <code>#include &lt;...&gt;</code> statements (e.g. <code>#include &lt;v8.h&gt;</code>) and
+<code>node-gyp</code> will locate the appropriate headers automatically. However, there
+are a few caveats to be aware of:</p>
+<ul>
+<li>
+<p>When <code>node-gyp</code> runs, it will detect the specific release version of Node.js
+and download either the full source tarball or just the headers. If the full
+source is downloaded, Addons will have complete access to the full set of
+Node.js dependencies. However, if only the Node.js headers are downloaded, then
+only the symbols exported by Node.js will be available.</p>
+</li>
+<li>
+<p><code>node-gyp</code> can be run using the <code>--nodedir</code> flag pointing at a local Node.js
+source image. Using this option, the Addon will have access to the full set of
+dependencies.</p>
+</li>
+</ul>
+<h3>Loading Addons using require()<span><a class="mark" href="#addons_loading_addons_using_require" id="addons_loading_addons_using_require">#</a></span></h3>
+<p>The filename extension of the compiled Addon binary is <code>.node</code> (as opposed
+to <code>.dll</code> or <code>.so</code>). The <a href="https://nodejs.org/api/modules.html#modules_require_id"><code>require()</code></a> function is written to look for
+files with the <code>.node</code> file extension and initialize those as dynamically-linked
+libraries.</p>
+<p>When calling <a href="https://nodejs.org/api/modules.html#modules_require_id"><code>require()</code></a>, the <code>.node</code> extension can usually be
+omitted and Node.js will still find and initialize the Addon. One caveat,
+however, is that Node.js will first attempt to locate and load modules or
+JavaScript files that happen to share the same base name. For instance, if
+there is a file <code>addon.js</code> in the same directory as the binary <code>addon.node</code>,
+then <a href="https://nodejs.org/api/modules.html#modules_require_id"><code>require('addon')</code></a> will give precedence to the <code>addon.js</code> file
+and load it instead.</p>
+<h2>Native Abstractions for Node.js<span><a class="mark" href="#addons_native_abstractions_for_node_js" id="addons_native_abstractions_for_node_js">#</a></span></h2>
+<p>Each of the examples illustrated in this document make direct use of the
+Node.js and V8 APIs for implementing Addons. It is important to understand
+that the V8 API can, and has, changed dramatically from one V8 release to the
+next (and one major Node.js release to the next). With each change, Addons may
+need to be updated and recompiled in order to continue functioning. The Node.js
+release schedule is designed to minimize the frequency and impact of such
+changes but there is little that Node.js can do currently to ensure stability
+of the V8 APIs.</p>
+<p>The <a href="https://github.com/nodejs/nan">Native Abstractions for Node.js</a> (or <code>nan</code>) provide a set of tools that
+Addon developers are recommended to use to keep compatibility between past and
+future releases of V8 and Node.js. See the <code>nan</code> <a href="https://github.com/nodejs/nan/tree/master/examples/">examples</a> for an
+illustration of how it can be used.</p>
+<h2>N-API<span><a class="mark" href="#addons_n_api" id="addons_n_api">#</a></span></h2>
+<p></p><div class="api_stability api_stability_2"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 2</a> - Stable</div><p></p>
+<p>N-API is an API for building native Addons. It is independent from
+the underlying JavaScript runtime (e.g. V8) and is maintained as part of
+Node.js itself. This API will be Application Binary Interface (ABI) stable
+across versions of Node.js. It is intended to insulate Addons from
+changes in the underlying JavaScript engine and allow modules
+compiled for one version to run on later versions of Node.js without
+recompilation. Addons are built/packaged with the same approach/tools
+outlined in this document (node-gyp, etc.). The only difference is the
+set of APIs that are used by the native code. Instead of using the V8
+or <a href="https://github.com/nodejs/nan">Native Abstractions for Node.js</a> APIs, the functions available
+in the N-API are used.</p>
+<p>Creating and maintaining an addon that benefits from the ABI stability
+provided by N-API carries with it certain
+<a href="https://nodejs.org/api/n-api.html#n_api_implications_of_abi_stability">implementation considerations</a>.</p>
+<p>To use N-API in the above "Hello world" example, replace the content of
+<code>hello.cc</code> with the following. All other instructions remain the same.</p>
+<pre><code class="language-cpp">// hello.cc using N-API
+#include &lt;node_api.h&gt;
+
+namespace demo {
+
+napi_value Method(napi_env env, napi_callback_info args) {
+  napi_value greeting;
+  napi_status status;
+
+  status = napi_create_string_utf8(env, "world", NAPI_AUTO_LENGTH, &amp;greeting);
+  if (status != napi_ok) return nullptr;
+  return greeting;
+}
+
+napi_value init(napi_env env, napi_value exports) {
+  napi_status status;
+  napi_value fn;
+
+  status = napi_create_function(env, nullptr, 0, Method, nullptr, &amp;fn);
+  if (status != napi_ok) return nullptr;
+
+  status = napi_set_named_property(env, exports, "hello", fn);
+  if (status != napi_ok) return nullptr;
+  return exports;
+}
+
+NAPI_MODULE(NODE_GYP_MODULE_NAME, init)
+
+}  // namespace demo
+</code></pre>
+<p>The functions available and how to use them are documented in the
+section titled <a href="https://nodejs.org/api/n-api.html">C/C++ Addons - N-API</a>.</p>
+<h2>Addon examples<span><a class="mark" href="#addons_addon_examples" id="addons_addon_examples">#</a></span></h2>
+<p>Following are some example Addons intended to help developers get started. The
+examples make use of the V8 APIs. Refer to the online <a href="https://v8docs.nodesource.com/">V8 reference</a>
+for help with the various V8 calls, and V8's <a href="https://github.com/v8/v8/wiki/Embedder's%20Guide">Embedder's Guide</a> for an
+explanation of several concepts used such as handles, scopes, function
+templates, etc.</p>
+<p>Each of these examples using the following <code>binding.gyp</code> file:</p>
+<pre><code class="language-json">{
+  "targets": [
+    {
+      "target_name": "addon",
+      "sources": [ "addon.cc" ]
+    }
+  ]
+}
+</code></pre>
+<p>In cases where there is more than one <code>.cc</code> file, simply add the additional
+filename to the <code>sources</code> array:</p>
+<pre><code class="language-json">"sources": ["addon.cc", "myexample.cc"]
+</code></pre>
+<p>Once the <code>binding.gyp</code> file is ready, the example Addons can be configured and
+built using <code>node-gyp</code>:</p>
+<pre><code class="language-console">$ node-gyp configure build
+</code></pre>
+<h3>Function arguments<span><a class="mark" href="#addons_function_arguments" id="addons_function_arguments">#</a></span></h3>
+<p>Addons will typically expose objects and functions that can be accessed from
+JavaScript running within Node.js. When functions are invoked from JavaScript,
+the input arguments and return value must be mapped to and from the C/C++
+code.</p>
+<p>The following example illustrates how to read function arguments passed from
+JavaScript and how to return a result:</p>
+<pre><code class="language-cpp">// addon.cc
+#include &lt;node.h&gt;
+
+namespace demo {
+
+using v8::Exception;
+using v8::FunctionCallbackInfo;
+using v8::Isolate;
+using v8::Local;
+using v8::NewStringType;
+using v8::Number;
+using v8::Object;
+using v8::String;
+using v8::Value;
+
+// This is the implementation of the "add" method
+// Input arguments are passed using the
+// const FunctionCallbackInfo&lt;Value&gt;&amp; args struct
+void Add(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+
+  // Check the number of arguments passed.
+  if (args.Length() &lt; 2) {
+    // Throw an Error that is passed back to JavaScript
+    isolate-&gt;ThrowException(Exception::TypeError(
+        String::NewFromUtf8(isolate,
+                            "Wrong number of arguments",
+                            NewStringType::kNormal).ToLocalChecked()));
+    return;
+  }
+
+  // Check the argument types
+  if (!args[0]-&gt;IsNumber() || !args[1]-&gt;IsNumber()) {
+    isolate-&gt;ThrowException(Exception::TypeError(
+        String::NewFromUtf8(isolate,
+                            "Wrong arguments",
+                            NewStringType::kNormal).ToLocalChecked()));
+    return;
+  }
+
+  // Perform the operation
+  double value =
+      args[0].As&lt;Number&gt;()-&gt;Value() + args[1].As&lt;Number&gt;()-&gt;Value();
+  Local&lt;Number&gt; num = Number::New(isolate, value);
+
+  // Set the return value (using the passed in
+  // FunctionCallbackInfo&lt;Value&gt;&amp;)
+  args.GetReturnValue().Set(num);
+}
+
+void Init(Local&lt;Object&gt; exports) {
+  NODE_SET_METHOD(exports, "add", Add);
+}
+
+NODE_MODULE(NODE_GYP_MODULE_NAME, Init)
+
+}  // namespace demo
+</code></pre>
+<p>Once compiled, the example Addon can be required and used from within Node.js:</p>
+<pre><code class="language-js">// test.js
+const addon = require('./build/Release/addon');
+
+console.log('This should be eight:', addon.add(3, 5));
+</code></pre>
+<h3>Callbacks<span><a class="mark" href="#addons_callbacks" id="addons_callbacks">#</a></span></h3>
+<p>It is common practice within Addons to pass JavaScript functions to a C++
+function and execute them from there. The following example illustrates how
+to invoke such callbacks:</p>
+<pre><code class="language-cpp">// addon.cc
+#include &lt;node.h&gt;
+
+namespace demo {
+
+using v8::Context;
+using v8::Function;
+using v8::FunctionCallbackInfo;
+using v8::Isolate;
+using v8::Local;
+using v8::NewStringType;
+using v8::Null;
+using v8::Object;
+using v8::String;
+using v8::Value;
+
+void RunCallback(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+  Local&lt;Context&gt; context = isolate-&gt;GetCurrentContext();
+  Local&lt;Function&gt; cb = Local&lt;Function&gt;::Cast(args[0]);
+  const unsigned argc = 1;
+  Local&lt;Value&gt; argv[argc] = {
+      String::NewFromUtf8(isolate,
+                          "hello world",
+                          NewStringType::kNormal).ToLocalChecked() };
+  cb-&gt;Call(context, Null(isolate), argc, argv).ToLocalChecked();
+}
+
+void Init(Local&lt;Object&gt; exports, Local&lt;Object&gt; module) {
+  NODE_SET_METHOD(module, "exports", RunCallback);
+}
+
+NODE_MODULE(NODE_GYP_MODULE_NAME, Init)
+
+}  // namespace demo
+</code></pre>
+<p>This example uses a two-argument form of <code>Init()</code> that receives the full
+<code>module</code> object as the second argument. This allows the Addon to completely
+overwrite <code>exports</code> with a single function instead of adding the function as a
+property of <code>exports</code>.</p>
+<p>To test it, run the following JavaScript:</p>
+<pre><code class="language-js">// test.js
+const addon = require('./build/Release/addon');
+
+addon((msg) =&gt; {
+  console.log(msg);
+// Prints: 'hello world'
+});
+</code></pre>
+<p>In this example, the callback function is invoked synchronously.</p>
+<h3>Object factory<span><a class="mark" href="#addons_object_factory" id="addons_object_factory">#</a></span></h3>
+<p>Addons can create and return new objects from within a C++ function as
+illustrated in the following example. An object is created and returned with a
+property <code>msg</code> that echoes the string passed to <code>createObject()</code>:</p>
+<pre><code class="language-cpp">// addon.cc
+#include &lt;node.h&gt;
+
+namespace demo {
+
+using v8::Context;
+using v8::FunctionCallbackInfo;
+using v8::Isolate;
+using v8::Local;
+using v8::NewStringType;
+using v8::Object;
+using v8::String;
+using v8::Value;
+
+void CreateObject(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+  Local&lt;Context&gt; context = isolate-&gt;GetCurrentContext();
+
+  Local&lt;Object&gt; obj = Object::New(isolate);
+  obj-&gt;Set(context,
+           String::NewFromUtf8(isolate,
+                               "msg",
+                               NewStringType::kNormal).ToLocalChecked(),
+                               args[0]-&gt;ToString(context).ToLocalChecked())
+           .FromJust();
+
+  args.GetReturnValue().Set(obj);
+}
+
+void Init(Local&lt;Object&gt; exports, Local&lt;Object&gt; module) {
+  NODE_SET_METHOD(module, "exports", CreateObject);
+}
+
+NODE_MODULE(NODE_GYP_MODULE_NAME, Init)
+
+}  // namespace demo
+</code></pre>
+<p>To test it in JavaScript:</p>
+<pre><code class="language-js">// test.js
+const addon = require('./build/Release/addon');
+
+const obj1 = addon('hello');
+const obj2 = addon('world');
+console.log(obj1.msg, obj2.msg);
+// Prints: 'hello world'
+</code></pre>
+<h3>Function factory<span><a class="mark" href="#addons_function_factory" id="addons_function_factory">#</a></span></h3>
+<p>Another common scenario is creating JavaScript functions that wrap C++
+functions and returning those back to JavaScript:</p>
+<pre><code class="language-cpp">// addon.cc
+#include &lt;node.h&gt;
+
+namespace demo {
+
+using v8::Context;
+using v8::Function;
+using v8::FunctionCallbackInfo;
+using v8::FunctionTemplate;
+using v8::Isolate;
+using v8::Local;
+using v8::NewStringType;
+using v8::Object;
+using v8::String;
+using v8::Value;
+
+void MyFunction(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+  args.GetReturnValue().Set(String::NewFromUtf8(
+      isolate, "hello world", NewStringType::kNormal).ToLocalChecked());
+}
+
+void CreateFunction(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+
+  Local&lt;Context&gt; context = isolate-&gt;GetCurrentContext();
+  Local&lt;FunctionTemplate&gt; tpl = FunctionTemplate::New(isolate, MyFunction);
+  Local&lt;Function&gt; fn = tpl-&gt;GetFunction(context).ToLocalChecked();
+
+  // omit this to make it anonymous
+  fn-&gt;SetName(String::NewFromUtf8(
+      isolate, "theFunction", NewStringType::kNormal).ToLocalChecked());
+
+  args.GetReturnValue().Set(fn);
+}
+
+void Init(Local&lt;Object&gt; exports, Local&lt;Object&gt; module) {
+  NODE_SET_METHOD(module, "exports", CreateFunction);
+}
+
+NODE_MODULE(NODE_GYP_MODULE_NAME, Init)
+
+}  // namespace demo
+</code></pre>
+<p>To test:</p>
+<pre><code class="language-js">// test.js
+const addon = require('./build/Release/addon');
+
+const fn = addon();
+console.log(fn());
+// Prints: 'hello world'
+</code></pre>
+<h3>Wrapping C++ objects<span><a class="mark" href="#addons_wrapping_c_objects" id="addons_wrapping_c_objects">#</a></span></h3>
+<p>It is also possible to wrap C++ objects/classes in a way that allows new
+instances to be created using the JavaScript <code>new</code> operator:</p>
+<pre><code class="language-cpp">// addon.cc
+#include &lt;node.h&gt;
+#include "myobject.h"
+
+namespace demo {
+
+using v8::Local;
+using v8::Object;
+
+void InitAll(Local&lt;Object&gt; exports) {
+  MyObject::Init(exports);
+}
+
+NODE_MODULE(NODE_GYP_MODULE_NAME, InitAll)
+
+}  // namespace demo
+</code></pre>
+<p>Then, in <code>myobject.h</code>, the wrapper class inherits from <code>node::ObjectWrap</code>:</p>
+<pre><code class="language-cpp">// myobject.h
+#ifndef MYOBJECT_H
+#define MYOBJECT_H
+
+#include &lt;node.h&gt;
+#include &lt;node_object_wrap.h&gt;
+
+namespace demo {
+
+class MyObject : public node::ObjectWrap {
+ public:
+  static void Init(v8::Local&lt;v8::Object&gt; exports);
+
+ private:
+  explicit MyObject(double value = 0);
+  ~MyObject();
+
+  static void New(const v8::FunctionCallbackInfo&lt;v8::Value&gt;&amp; args);
+  static void PlusOne(const v8::FunctionCallbackInfo&lt;v8::Value&gt;&amp; args);
+  static v8::Persistent&lt;v8::Function&gt; constructor;
+  double value_;
+};
+
+}  // namespace demo
+
+#endif
+</code></pre>
+<p>In <code>myobject.cc</code>, implement the various methods that are to be exposed.
+Below, the method <code>plusOne()</code> is exposed by adding it to the constructor's
+prototype:</p>
+<pre><code class="language-cpp">// myobject.cc
+#include "myobject.h"
+
+namespace demo {
+
+using v8::Context;
+using v8::Function;
+using v8::FunctionCallbackInfo;
+using v8::FunctionTemplate;
+using v8::Isolate;
+using v8::Local;
+using v8::NewStringType;
+using v8::Number;
+using v8::Object;
+using v8::Persistent;
+using v8::String;
+using v8::Value;
+
+Persistent&lt;Function&gt; MyObject::constructor;
+
+MyObject::MyObject(double value) : value_(value) {
+}
+
+MyObject::~MyObject() {
+}
+
+void MyObject::Init(Local&lt;Object&gt; exports) {
+  Isolate* isolate = exports-&gt;GetIsolate();
+
+  // Prepare constructor template
+  Local&lt;FunctionTemplate&gt; tpl = FunctionTemplate::New(isolate, New);
+  tpl-&gt;SetClassName(String::NewFromUtf8(
+      isolate, "MyObject", NewStringType::kNormal).ToLocalChecked());
+  tpl-&gt;InstanceTemplate()-&gt;SetInternalFieldCount(1);
+
+  // Prototype
+  NODE_SET_PROTOTYPE_METHOD(tpl, "plusOne", PlusOne);
+
+  Local&lt;Context&gt; context = isolate-&gt;GetCurrentContext();
+  constructor.Reset(isolate, tpl-&gt;GetFunction(context).ToLocalChecked());
+  exports-&gt;Set(context, String::NewFromUtf8(
+      isolate, "MyObject", NewStringType::kNormal).ToLocalChecked(),
+               tpl-&gt;GetFunction(context).ToLocalChecked()).FromJust();
+}
+
+void MyObject::New(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+  Local&lt;Context&gt; context = isolate-&gt;GetCurrentContext();
+
+  if (args.IsConstructCall()) {
+    // Invoked as constructor: `new MyObject(...)`
+    double value = args[0]-&gt;IsUndefined() ?
+        0 : args[0]-&gt;NumberValue(context).FromMaybe(0);
+    MyObject* obj = new MyObject(value);
+    obj-&gt;Wrap(args.This());
+    args.GetReturnValue().Set(args.This());
+  } else {
+    // Invoked as plain function `MyObject(...)`, turn into construct call.
+    const int argc = 1;
+    Local&lt;Value&gt; argv[argc] = { args[0] };
+    Local&lt;Function&gt; cons = Local&lt;Function&gt;::New(isolate, constructor);
+    Local&lt;Object&gt; result =
+        cons-&gt;NewInstance(context, argc, argv).ToLocalChecked();
+    args.GetReturnValue().Set(result);
+  }
+}
+
+void MyObject::PlusOne(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+
+  MyObject* obj = ObjectWrap::Unwrap&lt;MyObject&gt;(args.Holder());
+  obj-&gt;value_ += 1;
+
+  args.GetReturnValue().Set(Number::New(isolate, obj-&gt;value_));
+}
+
+}  // namespace demo
+</code></pre>
+<p>To build this example, the <code>myobject.cc</code> file must be added to the
+<code>binding.gyp</code>:</p>
+<pre><code class="language-json">{
+  "targets": [
+    {
+      "target_name": "addon",
+      "sources": [
+        "addon.cc",
+        "myobject.cc"
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>Test it with:</p>
+<pre><code class="language-js">// test.js
+const addon = require('./build/Release/addon');
+
+const obj = new addon.MyObject(10);
+console.log(obj.plusOne());
+// Prints: 11
+console.log(obj.plusOne());
+// Prints: 12
+console.log(obj.plusOne());
+// Prints: 13
+</code></pre>
+<p>The destructor for a wrapper object will run when the object is
+garbage-collected. For destructor testing, there are command-line flags that
+can be used to make it possible to force garbage collection. These flags are
+provided by the underlying V8 JavaScript engine. They are subject to change
+or removal at any time. They are not documented by Node.js or V8, and they
+should never be used outside of testing.</p>
+<h3>Factory of wrapped objects<span><a class="mark" href="#addons_factory_of_wrapped_objects" id="addons_factory_of_wrapped_objects">#</a></span></h3>
+<p>Alternatively, it is possible to use a factory pattern to avoid explicitly
+creating object instances using the JavaScript <code>new</code> operator:</p>
+<pre><code class="language-js">const obj = addon.createObject();
+// instead of:
+// const obj = new addon.Object();
+</code></pre>
+<p>First, the <code>createObject()</code> method is implemented in <code>addon.cc</code>:</p>
+<pre><code class="language-cpp">// addon.cc
+#include &lt;node.h&gt;
+#include "myobject.h"
+
+namespace demo {
+
+using v8::FunctionCallbackInfo;
+using v8::Isolate;
+using v8::Local;
+using v8::Object;
+using v8::String;
+using v8::Value;
+
+void CreateObject(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  MyObject::NewInstance(args);
+}
+
+void InitAll(Local&lt;Object&gt; exports, Local&lt;Object&gt; module) {
+  MyObject::Init(exports-&gt;GetIsolate());
+
+  NODE_SET_METHOD(module, "exports", CreateObject);
+}
+
+NODE_MODULE(NODE_GYP_MODULE_NAME, InitAll)
+
+}  // namespace demo
+</code></pre>
+<p>In <code>myobject.h</code>, the static method <code>NewInstance()</code> is added to handle
+instantiating the object. This method takes the place of using <code>new</code> in
+JavaScript:</p>
+<pre><code class="language-cpp">// myobject.h
+#ifndef MYOBJECT_H
+#define MYOBJECT_H
+
+#include &lt;node.h&gt;
+#include &lt;node_object_wrap.h&gt;
+
+namespace demo {
+
+class MyObject : public node::ObjectWrap {
+ public:
+  static void Init(v8::Isolate* isolate);
+  static void NewInstance(const v8::FunctionCallbackInfo&lt;v8::Value&gt;&amp; args);
+
+ private:
+  explicit MyObject(double value = 0);
+  ~MyObject();
+
+  static void New(const v8::FunctionCallbackInfo&lt;v8::Value&gt;&amp; args);
+  static void PlusOne(const v8::FunctionCallbackInfo&lt;v8::Value&gt;&amp; args);
+  static v8::Persistent&lt;v8::Function&gt; constructor;
+  double value_;
+};
+
+}  // namespace demo
+
+#endif
+</code></pre>
+<p>The implementation in <code>myobject.cc</code> is similar to the previous example:</p>
+<pre><code class="language-cpp">// myobject.cc
+#include &lt;node.h&gt;
+#include "myobject.h"
+
+namespace demo {
+
+using v8::Context;
+using v8::Function;
+using v8::FunctionCallbackInfo;
+using v8::FunctionTemplate;
+using v8::Isolate;
+using v8::Local;
+using v8::NewStringType;
+using v8::Number;
+using v8::Object;
+using v8::Persistent;
+using v8::String;
+using v8::Value;
+
+Persistent&lt;Function&gt; MyObject::constructor;
+
+MyObject::MyObject(double value) : value_(value) {
+}
+
+MyObject::~MyObject() {
+}
+
+void MyObject::Init(Isolate* isolate) {
+  // Prepare constructor template
+  Local&lt;FunctionTemplate&gt; tpl = FunctionTemplate::New(isolate, New);
+  tpl-&gt;SetClassName(String::NewFromUtf8(
+      isolate, "MyObject", NewStringType::kNormal).ToLocalChecked());
+  tpl-&gt;InstanceTemplate()-&gt;SetInternalFieldCount(1);
+
+  // Prototype
+  NODE_SET_PROTOTYPE_METHOD(tpl, "plusOne", PlusOne);
+
+  Local&lt;Context&gt; context = isolate-&gt;GetCurrentContext();
+  constructor.Reset(isolate, tpl-&gt;GetFunction(context).ToLocalChecked());
+}
+
+void MyObject::New(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+  Local&lt;Context&gt; context = isolate-&gt;GetCurrentContext();
+
+  if (args.IsConstructCall()) {
+    // Invoked as constructor: `new MyObject(...)`
+    double value = args[0]-&gt;IsUndefined() ?
+        0 : args[0]-&gt;NumberValue(context).FromMaybe(0);
+    MyObject* obj = new MyObject(value);
+    obj-&gt;Wrap(args.This());
+    args.GetReturnValue().Set(args.This());
+  } else {
+    // Invoked as plain function `MyObject(...)`, turn into construct call.
+    const int argc = 1;
+    Local&lt;Value&gt; argv[argc] = { args[0] };
+    Local&lt;Function&gt; cons = Local&lt;Function&gt;::New(isolate, constructor);
+    Local&lt;Object&gt; instance =
+        cons-&gt;NewInstance(context, argc, argv).ToLocalChecked();
+    args.GetReturnValue().Set(instance);
+  }
+}
+
+void MyObject::NewInstance(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+
+  const unsigned argc = 1;
+  Local&lt;Value&gt; argv[argc] = { args[0] };
+  Local&lt;Function&gt; cons = Local&lt;Function&gt;::New(isolate, constructor);
+  Local&lt;Context&gt; context = isolate-&gt;GetCurrentContext();
+  Local&lt;Object&gt; instance =
+      cons-&gt;NewInstance(context, argc, argv).ToLocalChecked();
+
+  args.GetReturnValue().Set(instance);
+}
+
+void MyObject::PlusOne(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+
+  MyObject* obj = ObjectWrap::Unwrap&lt;MyObject&gt;(args.Holder());
+  obj-&gt;value_ += 1;
+
+  args.GetReturnValue().Set(Number::New(isolate, obj-&gt;value_));
+}
+
+}  // namespace demo
+</code></pre>
+<p>Once again, to build this example, the <code>myobject.cc</code> file must be added to the
+<code>binding.gyp</code>:</p>
+<pre><code class="language-json">{
+  "targets": [
+    {
+      "target_name": "addon",
+      "sources": [
+        "addon.cc",
+        "myobject.cc"
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>Test it with:</p>
+<pre><code class="language-js">// test.js
+const createObject = require('./build/Release/addon');
+
+const obj = createObject(10);
+console.log(obj.plusOne());
+// Prints: 11
+console.log(obj.plusOne());
+// Prints: 12
+console.log(obj.plusOne());
+// Prints: 13
+
+const obj2 = createObject(20);
+console.log(obj2.plusOne());
+// Prints: 21
+console.log(obj2.plusOne());
+// Prints: 22
+console.log(obj2.plusOne());
+// Prints: 23
+</code></pre>
+<h3>Passing wrapped objects around<span><a class="mark" href="#addons_passing_wrapped_objects_around" id="addons_passing_wrapped_objects_around">#</a></span></h3>
+<p>In addition to wrapping and returning C++ objects, it is possible to pass
+wrapped objects around by unwrapping them with the Node.js helper function
+<code>node::ObjectWrap::Unwrap</code>. The following examples shows a function <code>add()</code>
+that can take two <code>MyObject</code> objects as input arguments:</p>
+<pre><code class="language-cpp">// addon.cc
+#include &lt;node.h&gt;
+#include &lt;node_object_wrap.h&gt;
+#include "myobject.h"
+
+namespace demo {
+
+using v8::Context;
+using v8::FunctionCallbackInfo;
+using v8::Isolate;
+using v8::Local;
+using v8::Number;
+using v8::Object;
+using v8::String;
+using v8::Value;
+
+void CreateObject(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  MyObject::NewInstance(args);
+}
+
+void Add(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+  Local&lt;Context&gt; context = isolate-&gt;GetCurrentContext();
+
+  MyObject* obj1 = node::ObjectWrap::Unwrap&lt;MyObject&gt;(
+      args[0]-&gt;ToObject(context).ToLocalChecked());
+  MyObject* obj2 = node::ObjectWrap::Unwrap&lt;MyObject&gt;(
+      args[1]-&gt;ToObject(context).ToLocalChecked());
+
+  double sum = obj1-&gt;value() + obj2-&gt;value();
+  args.GetReturnValue().Set(Number::New(isolate, sum));
+}
+
+void InitAll(Local&lt;Object&gt; exports) {
+  MyObject::Init(exports-&gt;GetIsolate());
+
+  NODE_SET_METHOD(exports, "createObject", CreateObject);
+  NODE_SET_METHOD(exports, "add", Add);
+}
+
+NODE_MODULE(NODE_GYP_MODULE_NAME, InitAll)
+
+}  // namespace demo
+</code></pre>
+<p>In <code>myobject.h</code>, a new public method is added to allow access to private values
+after unwrapping the object.</p>
+<pre><code class="language-cpp">// myobject.h
+#ifndef MYOBJECT_H
+#define MYOBJECT_H
+
+#include &lt;node.h&gt;
+#include &lt;node_object_wrap.h&gt;
+
+namespace demo {
+
+class MyObject : public node::ObjectWrap {
+ public:
+  static void Init(v8::Isolate* isolate);
+  static void NewInstance(const v8::FunctionCallbackInfo&lt;v8::Value&gt;&amp; args);
+  inline double value() const { return value_; }
+
+ private:
+  explicit MyObject(double value = 0);
+  ~MyObject();
+
+  static void New(const v8::FunctionCallbackInfo&lt;v8::Value&gt;&amp; args);
+  static v8::Persistent&lt;v8::Function&gt; constructor;
+  double value_;
+};
+
+}  // namespace demo
+
+#endif
+</code></pre>
+<p>The implementation of <code>myobject.cc</code> is similar to before:</p>
+<pre><code class="language-cpp">// myobject.cc
+#include &lt;node.h&gt;
+#include "myobject.h"
+
+namespace demo {
+
+using v8::Context;
+using v8::Function;
+using v8::FunctionCallbackInfo;
+using v8::FunctionTemplate;
+using v8::Isolate;
+using v8::Local;
+using v8::NewStringType;
+using v8::Object;
+using v8::Persistent;
+using v8::String;
+using v8::Value;
+
+Persistent&lt;Function&gt; MyObject::constructor;
+
+MyObject::MyObject(double value) : value_(value) {
+}
+
+MyObject::~MyObject() {
+}
+
+void MyObject::Init(Isolate* isolate) {
+  // Prepare constructor template
+  Local&lt;FunctionTemplate&gt; tpl = FunctionTemplate::New(isolate, New);
+  tpl-&gt;SetClassName(String::NewFromUtf8(
+      isolate, "MyObject", NewStringType::kNormal).ToLocalChecked());
+  tpl-&gt;InstanceTemplate()-&gt;SetInternalFieldCount(1);
+
+  Local&lt;Context&gt; context = isolate-&gt;GetCurrentContext();
+  constructor.Reset(isolate, tpl-&gt;GetFunction(context).ToLocalChecked());
+}
+
+void MyObject::New(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+  Local&lt;Context&gt; context = isolate-&gt;GetCurrentContext();
+
+  if (args.IsConstructCall()) {
+    // Invoked as constructor: `new MyObject(...)`
+    double value = args[0]-&gt;IsUndefined() ?
+        0 : args[0]-&gt;NumberValue(context).FromMaybe(0);
+    MyObject* obj = new MyObject(value);
+    obj-&gt;Wrap(args.This());
+    args.GetReturnValue().Set(args.This());
+  } else {
+    // Invoked as plain function `MyObject(...)`, turn into construct call.
+    const int argc = 1;
+    Local&lt;Value&gt; argv[argc] = { args[0] };
+    Local&lt;Function&gt; cons = Local&lt;Function&gt;::New(isolate, constructor);
+    Local&lt;Object&gt; instance =
+        cons-&gt;NewInstance(context, argc, argv).ToLocalChecked();
+    args.GetReturnValue().Set(instance);
+  }
+}
+
+void MyObject::NewInstance(const FunctionCallbackInfo&lt;Value&gt;&amp; args) {
+  Isolate* isolate = args.GetIsolate();
+
+  const unsigned argc = 1;
+  Local&lt;Value&gt; argv[argc] = { args[0] };
+  Local&lt;Function&gt; cons = Local&lt;Function&gt;::New(isolate, constructor);
+  Local&lt;Context&gt; context = isolate-&gt;GetCurrentContext();
+  Local&lt;Object&gt; instance =
+      cons-&gt;NewInstance(context, argc, argv).ToLocalChecked();
+
+  args.GetReturnValue().Set(instance);
+}
+
+}  // namespace demo
+</code></pre>
+<p>Test it with:</p>
+<pre><code class="language-js">// test.js
+const addon = require('./build/Release/addon');
+
+const obj1 = addon.createObject(10);
+const obj2 = addon.createObject(20);
+const result = addon.add(obj1, obj2);
+
+console.log(result);
+// Prints: 30
+</code></pre>
+<h3>AtExit hooks<span><a class="mark" href="#addons_atexit_hooks" id="addons_atexit_hooks">#</a></span></h3>
+<p>An <code>AtExit</code> hook is a function that is invoked after the Node.js event loop
+has ended but before the JavaScript VM is terminated and Node.js shuts down.
+<code>AtExit</code> hooks are registered using the <code>node::AtExit</code> API.</p>
+<h4>void AtExit(callback, args)<span><a class="mark" href="#addons_void_atexit_callback_args" id="addons_void_atexit_callback_args">#</a></span></h4>
+<ul>
+<li><code>callback</code> <span class="type">&lt;void (*)(void*)&gt;</span>
+A pointer to the function to call at exit.</li>
+<li><code>args</code> <span class="type">&lt;void*&gt;</span>
+A pointer to pass to the callback at exit.</li>
+</ul>
+<p>Registers exit hooks that run after the event loop has ended but before the VM
+is killed.</p>
+<p><code>AtExit</code> takes two parameters: a pointer to a callback function to run at exit,
+and a pointer to untyped context data to be passed to that callback.</p>
+<p>Callbacks are run in last-in first-out order.</p>
+<p>The following <code>addon.cc</code> implements <code>AtExit</code>:</p>
+<pre><code class="language-cpp">// addon.cc
+#include &lt;assert.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;node.h&gt;
+
+namespace demo {
+
+using node::AtExit;
+using v8::HandleScope;
+using v8::Isolate;
+using v8::Local;
+using v8::Object;
+
+static char cookie[] = "yum yum";
+static int at_exit_cb1_called = 0;
+static int at_exit_cb2_called = 0;
+
+static void at_exit_cb1(void* arg) {
+  Isolate* isolate = static_cast&lt;Isolate*&gt;(arg);
+  HandleScope scope(isolate);
+  Local&lt;Object&gt; obj = Object::New(isolate);
+  assert(!obj.IsEmpty());  // assert VM is still alive
+  assert(obj-&gt;IsObject());
+  at_exit_cb1_called++;
+}
+
+static void at_exit_cb2(void* arg) {
+  assert(arg == static_cast&lt;void*&gt;(cookie));
+  at_exit_cb2_called++;
+}
+
+static void sanity_check(void*) {
+  assert(at_exit_cb1_called == 1);
+  assert(at_exit_cb2_called == 2);
+}
+
+void init(Local&lt;Object&gt; exports) {
+  AtExit(at_exit_cb2, cookie);
+  AtExit(at_exit_cb2, cookie);
+  AtExit(at_exit_cb1, exports-&gt;GetIsolate());
+  AtExit(sanity_check);
+}
+
+NODE_MODULE(NODE_GYP_MODULE_NAME, init)
+
+}  // namespace demo
+</code></pre>
+<p>Test in JavaScript by running:</p>
+<pre><code class="language-js">// test.js
+require('./build/Release/addon');
+</code></pre>
+      </div>
+    </div>
+  </div>
+  <script src="data:application/javascript;base64,LyoKU0hKUyAtIFN5bnRheCBIaWdobGlnaHRpbmcgaW4gSmF2YVNjcmlwdApDb3B5cmlnaHQgKEMpIDIwMDcsIDIwMDggZ25vbWJhdEB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQKTGljZW5zZTogaHR0cDovL3NoanMuc291cmNlZm9yZ2UubmV0L2RvYy9ncGx2My5odG1sCiovCgppZiAoISB0aGlzLnNoX2xhbmd1YWdlcykgewogIHRoaXMuc2hfbGFuZ3VhZ2VzID0ge307Cn0KdmFyIHNoX3JlcXVlc3RzID0ge307CgpmdW5jdGlvbiBzaF9pc0VtYWlsQWRkcmVzcyh1cmwpIHsKICBpZiAoL15tYWlsdG86Ly50ZXN0KHVybCkpIHsKICAgIHJldHVybiBmYWxzZTsKICB9CiAgcmV0dXJuIHVybC5pbmRleE9mKCdAJykgIT09IC0xOwp9CgpmdW5jdGlvbiBzaF9zZXRIcmVmKHRhZ3MsIG51bVRhZ3MsIGlucHV0U3RyaW5nKSB7CiAgdmFyIHVybCA9IGlucHV0U3RyaW5nLnN1YnN0cmluZyh0YWdzW251bVRhZ3MgLSAyXS5wb3MsIHRhZ3NbbnVtVGFncyAtIDFdLnBvcyk7CiAgaWYgKHVybC5sZW5ndGggPj0gMiAmJiB1cmwuY2hhckF0KDApID09PSAnPCcgJiYgdXJsLmNoYXJBdCh1cmwubGVuZ3RoIC0gMSkgPT09ICc+JykgewogICAgdXJsID0gdXJsLnN1YnN0cigxLCB1cmwubGVuZ3RoIC0gMik7CiAgfQogIGlmIChzaF9pc0VtYWlsQWRkcmVzcyh1cmwpKSB7CiAgICB1cmwgPSAnbWFpbHRvOicgKyB1cmw7CiAgfQogIHRhZ3NbbnVtVGFncyAtIDJdLm5vZGUuaHJlZiA9IHVybDsKfQoKLyoKS29ucXVlcm9yIGhhcyBhIGJ1ZyB3aGVyZSB0aGUgcmVndWxhciBleHByZXNzaW9uIC8kL2cgd2lsbCBub3QgbWF0Y2ggYXQgdGhlIGVuZApvZiBhIGxpbmUgbW9yZSB0aGFuIG9uY2U6CgogIHZhciByZWdleCA9IC8kL2c7CiAgdmFyIG1hdGNoOwoKICB2YXIgbGluZSA9ICcxMjM0NTY3ODkwJzsKICByZWdleC5sYXN0SW5kZXggPSAxMDsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZSk7CgogIHZhciBsaW5lMiA9ICdhYmNkZSc7CiAgcmVnZXgubGFzdEluZGV4ID0gNTsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZTIpOyAgLy8gZmFpbHMKKi8KZnVuY3Rpb24gc2hfa29ucXVlcm9yRXhlYyhzKSB7CiAgdmFyIHJlc3VsdCA9IFsnJ107CiAgcmVzdWx0LmluZGV4ID0gcy5sZW5ndGg7CiAgcmVzdWx0LmlucHV0ID0gczsKICByZXR1cm4gcmVzdWx0Owp9CgovKioKSGlnaGxpZ2h0cyBhbGwgZWxlbWVudHMgY29udGFpbmluZyBzb3VyY2UgY29kZSBpbiBhIHRleHQgc3RyaW5nLiAgVGhlIHJldHVybgp2YWx1ZSBpcyBhbiBhcnJheSBvZiBvYmplY3RzLCBlYWNoIHJlcHJlc2VudGluZyBhbiBIVE1MIHN0YXJ0IG9yIGVuZCB0YWcuICBFYWNoCm9iamVjdCBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBwb3MsIHdoaWNoIGlzIGFuIGludGVnZXIgcmVwcmVzZW50aW5nIHRoZSB0ZXh0Cm9mZnNldCBvZiB0aGUgdGFnLiBFdmVyeSBzdGFydCB0YWcgYWxzbyBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBub2RlLCB3aGljaCBpcyB0aGUKRE9NIGVsZW1lbnQgc3RhcnRlZCBieSB0aGUgdGFnLiBFbmQgdGFncyBkbyBub3QgaGF2ZSB0aGlzIHByb3BlcnR5LgpAcGFyYW0gIGlucHV0U3RyaW5nICBhIHRleHQgc3RyaW5nCkBwYXJhbSAgbGFuZ3VhZ2UgIGEgbGFuZ3VhZ2UgZGVmaW5pdGlvbiBvYmplY3QKQHJldHVybiAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKKi8KZnVuY3Rpb24gc2hfaGlnaGxpZ2h0U3RyaW5nKGlucHV0U3RyaW5nLCBsYW5ndWFnZSkgewogIGlmICgvS29ucXVlcm9yLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICBpZiAoISBsYW5ndWFnZS5rb25xdWVyZWQpIHsKICAgICAgZm9yICh2YXIgcyA9IDA7IHMgPCBsYW5ndWFnZS5sZW5ndGg7IHMrKykgewogICAgICAgIGZvciAodmFyIHAgPSAwOyBwIDwgbGFuZ3VhZ2Vbc10ubGVuZ3RoOyBwKyspIHsKICAgICAgICAgIHZhciByID0gbGFuZ3VhZ2Vbc11bcF1bMF07CiAgICAgICAgICBpZiAoci5zb3VyY2UgPT09ICckJykgewogICAgICAgICAgICByLmV4ZWMgPSBzaF9rb25xdWVyb3JFeGVjOwogICAgICAgICAgfQogICAgICAgIH0KICAgICAgfQogICAgICBsYW5ndWFnZS5rb25xdWVyZWQgPSB0cnVlOwogICAgfQogIH0KCiAgdmFyIGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgdmFyIHNwYW4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJyk7CgogIC8vIHRoZSByZXN1bHQKICB2YXIgdGFncyA9IFtdOwogIHZhciBudW1UYWdzID0gMDsKCiAgLy8gZWFjaCBlbGVtZW50IGlzIGEgcGF0dGVybiBvYmplY3QgZnJvbSBsYW5ndWFnZQogIHZhciBwYXR0ZXJuU3RhY2sgPSBbXTsKCiAgLy8gdGhlIGN1cnJlbnQgcG9zaXRpb24gd2l0aGluIGlucHV0U3RyaW5nCiAgdmFyIHBvcyA9IDA7CgogIC8vIHRoZSBuYW1lIG9mIHRoZSBjdXJyZW50IHN0eWxlLCBvciBudWxsIGlmIHRoZXJlIGlzIG5vIGN1cnJlbnQgc3R5bGUKICB2YXIgY3VycmVudFN0eWxlID0gbnVsbDsKCiAgdmFyIG91dHB1dCA9IGZ1bmN0aW9uKHMsIHN0eWxlKSB7CiAgICB2YXIgbGVuZ3RoID0gcy5sZW5ndGg7CiAgICAvLyB0aGlzIGlzIG1vcmUgdGhhbiBqdXN0IGFuIG9wdGltaXphdGlvbiAtIHdlIGRvbid0IHdhbnQgdG8gb3V0cHV0IGVtcHR5IDxzcGFuPjwvc3Bhbj4gZWxlbWVudHMKICAgIGlmIChsZW5ndGggPT09IDApIHsKICAgICAgcmV0dXJuOwogICAgfQogICAgaWYgKCEgc3R5bGUpIHsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoICE9PSAwKSB7CiAgICAgICAgdmFyIHBhdHRlcm4gPSBwYXR0ZXJuU3RhY2tbc3RhY2tMZW5ndGggLSAxXTsKICAgICAgICAvLyBjaGVjayB3aGV0aGVyIHRoaXMgaXMgYSBzdGF0ZSBvciBhbiBlbnZpcm9ubWVudAogICAgICAgIGlmICghIHBhdHRlcm5bM10pIHsKICAgICAgICAgIC8vIGl0J3Mgbm90IGEgc3RhdGUgLSBpdCdzIGFuIGVudmlyb25tZW50OyB1c2UgdGhlIHN0eWxlIGZvciB0aGlzIGVudmlyb25tZW50CiAgICAgICAgICBzdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgfQogICAgICB9CiAgICB9CiAgICBpZiAoY3VycmVudFN0eWxlICE9PSBzdHlsZSkgewogICAgICBpZiAoY3VycmVudFN0eWxlKSB7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge3BvczogcG9zfTsKICAgICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgICAgc2hfc2V0SHJlZih0YWdzLCBudW1UYWdzLCBpbnB1dFN0cmluZyk7CiAgICAgICAgfQogICAgICB9CiAgICAgIGlmIChzdHlsZSkgewogICAgICAgIHZhciBjbG9uZTsKICAgICAgICBpZiAoc3R5bGUgPT09ICdzaF91cmwnKSB7CiAgICAgICAgICBjbG9uZSA9IGEuY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICBjbG9uZSA9IHNwYW4uY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgY2xvbmUuY2xhc3NOYW1lID0gc3R5bGU7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge25vZGU6IGNsb25lLCBwb3M6IHBvc307CiAgICAgIH0KICAgIH0KICAgIHBvcyArPSBsZW5ndGg7CiAgICBjdXJyZW50U3R5bGUgPSBzdHlsZTsKICB9OwoKICB2YXIgZW5kT2ZMaW5lUGF0dGVybiA9IC9cclxufFxyfFxuL2c7CiAgZW5kT2ZMaW5lUGF0dGVybi5sYXN0SW5kZXggPSAwOwogIHZhciBpbnB1dFN0cmluZ0xlbmd0aCA9IGlucHV0U3RyaW5nLmxlbmd0aDsKICB3aGlsZSAocG9zIDwgaW5wdXRTdHJpbmdMZW5ndGgpIHsKICAgIHZhciBzdGFydCA9IHBvczsKICAgIHZhciBlbmQ7CiAgICB2YXIgc3RhcnRPZk5leHRMaW5lOwogICAgdmFyIGVuZE9mTGluZU1hdGNoID0gZW5kT2ZMaW5lUGF0dGVybi5leGVjKGlucHV0U3RyaW5nKTsKICAgIGlmIChlbmRPZkxpbmVNYXRjaCA9PT0gbnVsbCkgewogICAgICBlbmQgPSBpbnB1dFN0cmluZ0xlbmd0aDsKICAgICAgc3RhcnRPZk5leHRMaW5lID0gaW5wdXRTdHJpbmdMZW5ndGg7CiAgICB9CiAgICBlbHNlIHsKICAgICAgZW5kID0gZW5kT2ZMaW5lTWF0Y2guaW5kZXg7CiAgICAgIHN0YXJ0T2ZOZXh0TGluZSA9IGVuZE9mTGluZVBhdHRlcm4ubGFzdEluZGV4OwogICAgfQoKICAgIHZhciBsaW5lID0gaW5wdXRTdHJpbmcuc3Vic3RyaW5nKHN0YXJ0LCBlbmQpOwoKICAgIHZhciBtYXRjaENhY2hlID0gW107CiAgICBmb3IgKDs7KSB7CiAgICAgIHZhciBwb3NXaXRoaW5MaW5lID0gcG9zIC0gc3RhcnQ7CgogICAgICB2YXIgc3RhdGVJbmRleDsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoID09PSAwKSB7CiAgICAgICAgc3RhdGVJbmRleCA9IDA7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gZ2V0IHRoZSBuZXh0IHN0YXRlCiAgICAgICAgc3RhdGVJbmRleCA9IHBhdHRlcm5TdGFja1tzdGFja0xlbmd0aCAtIDFdWzJdOwogICAgICB9CgogICAgICB2YXIgc3RhdGUgPSBsYW5ndWFnZVtzdGF0ZUluZGV4XTsKICAgICAgdmFyIG51bVBhdHRlcm5zID0gc3RhdGUubGVuZ3RoOwogICAgICB2YXIgbWMgPSBtYXRjaENhY2hlW3N0YXRlSW5kZXhdOwogICAgICBpZiAoISBtYykgewogICAgICAgIG1jID0gbWF0Y2hDYWNoZVtzdGF0ZUluZGV4XSA9IFtdOwogICAgICB9CiAgICAgIHZhciBiZXN0TWF0Y2ggPSBudWxsOwogICAgICB2YXIgYmVzdFBhdHRlcm5JbmRleCA9IC0xOwogICAgICBmb3IgKHZhciBpID0gMDsgaSA8IG51bVBhdHRlcm5zOyBpKyspIHsKICAgICAgICB2YXIgbWF0Y2g7CiAgICAgICAgaWYgKGkgPCBtYy5sZW5ndGggJiYgKG1jW2ldID09PSBudWxsIHx8IHBvc1dpdGhpbkxpbmUgPD0gbWNbaV0uaW5kZXgpKSB7CiAgICAgICAgICBtYXRjaCA9IG1jW2ldOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHZhciByZWdleCA9IHN0YXRlW2ldWzBdOwogICAgICAgICAgcmVnZXgubGFzdEluZGV4ID0gcG9zV2l0aGluTGluZTsKICAgICAgICAgIG1hdGNoID0gcmVnZXguZXhlYyhsaW5lKTsKICAgICAgICAgIG1jW2ldID0gbWF0Y2g7CiAgICAgICAgfQogICAgICAgIGlmIChtYXRjaCAhPT0gbnVsbCAmJiAoYmVzdE1hdGNoID09PSBudWxsIHx8IG1hdGNoLmluZGV4IDwgYmVzdE1hdGNoLmluZGV4KSkgewogICAgICAgICAgYmVzdE1hdGNoID0gbWF0Y2g7CiAgICAgICAgICBiZXN0UGF0dGVybkluZGV4ID0gaTsKICAgICAgICAgIGlmIChtYXRjaC5pbmRleCA9PT0gcG9zV2l0aGluTGluZSkgewogICAgICAgICAgICBicmVhazsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KCiAgICAgIGlmIChiZXN0TWF0Y2ggPT09IG51bGwpIHsKICAgICAgICBvdXRwdXQobGluZS5zdWJzdHJpbmcocG9zV2l0aGluTGluZSksIG51bGwpOwogICAgICAgIGJyZWFrOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGdvdCBhIG1hdGNoCiAgICAgICAgaWYgKGJlc3RNYXRjaC5pbmRleCA+IHBvc1dpdGhpbkxpbmUpIHsKICAgICAgICAgIG91dHB1dChsaW5lLnN1YnN0cmluZyhwb3NXaXRoaW5MaW5lLCBiZXN0TWF0Y2guaW5kZXgpLCBudWxsKTsKICAgICAgICB9CgogICAgICAgIHZhciBwYXR0ZXJuID0gc3RhdGVbYmVzdFBhdHRlcm5JbmRleF07CgogICAgICAgIHZhciBuZXdTdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgdmFyIG1hdGNoZWRTdHJpbmc7CiAgICAgICAgaWYgKG5ld1N0eWxlIGluc3RhbmNlb2YgQXJyYXkpIHsKICAgICAgICAgIGZvciAodmFyIHN1YmV4cHJlc3Npb24gPSAwOyBzdWJleHByZXNzaW9uIDwgbmV3U3R5bGUubGVuZ3RoOyBzdWJleHByZXNzaW9uKyspIHsKICAgICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFtzdWJleHByZXNzaW9uICsgMV07CiAgICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZVtzdWJleHByZXNzaW9uXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFswXTsKICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZSk7CiAgICAgICAgfQoKICAgICAgICBzd2l0Y2ggKHBhdHRlcm5bMl0pIHsKICAgICAgICBjYXNlIC0xOgogICAgICAgICAgLy8gZG8gbm90aGluZwogICAgICAgICAgYnJlYWs7CiAgICAgICAgY2FzZSAtMjoKICAgICAgICAgIC8vIGV4aXQKICAgICAgICAgIHBhdHRlcm5TdGFjay5wb3AoKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGNhc2UgLTM6CiAgICAgICAgICAvLyBleGl0YWxsCiAgICAgICAgICBwYXR0ZXJuU3RhY2subGVuZ3RoID0gMDsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGRlZmF1bHQ6CiAgICAgICAgICAvLyB0aGlzIHdhcyB0aGUgc3RhcnQgb2YgYSBkZWxpbWl0ZWQgcGF0dGVybiBvciBhIHN0YXRlL2Vudmlyb25tZW50CiAgICAgICAgICBwYXR0ZXJuU3RhY2sucHVzaChwYXR0ZXJuKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIH0KICAgICAgfQogICAgfQoKICAgIC8vIGVuZCBvZiB0aGUgbGluZQogICAgaWYgKGN1cnJlbnRTdHlsZSkgewogICAgICB0YWdzW251bVRhZ3MrK10gPSB7cG9zOiBwb3N9OwogICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgIHNoX3NldEhyZWYodGFncywgbnVtVGFncywgaW5wdXRTdHJpbmcpOwogICAgICB9CiAgICAgIGN1cnJlbnRTdHlsZSA9IG51bGw7CiAgICB9CiAgICBwb3MgPSBzdGFydE9mTmV4dExpbmU7CiAgfQoKICByZXR1cm4gdGFnczsKfQoKLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KLy8gRE9NLWRlcGVuZGVudCBmdW5jdGlvbnMKCmZ1bmN0aW9uIHNoX2dldENsYXNzZXMoZWxlbWVudCkgewogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgaHRtbENsYXNzID0gZWxlbWVudC5jbGFzc05hbWU7CiAgaWYgKGh0bWxDbGFzcyAmJiBodG1sQ2xhc3MubGVuZ3RoID4gMCkgewogICAgdmFyIGh0bWxDbGFzc2VzID0gaHRtbENsYXNzLnNwbGl0KCcgJyk7CiAgICBmb3IgKHZhciBpID0gMDsgaSA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaSsrKSB7CiAgICAgIGlmIChodG1sQ2xhc3Nlc1tpXS5sZW5ndGggPiAwKSB7CiAgICAgICAgcmVzdWx0LnB1c2goaHRtbENsYXNzZXNbaV0pOwogICAgICB9CiAgICB9CiAgfQogIHJldHVybiByZXN1bHQ7Cn0KCmZ1bmN0aW9uIHNoX2FkZENsYXNzKGVsZW1lbnQsIG5hbWUpIHsKICB2YXIgaHRtbENsYXNzZXMgPSBzaF9nZXRDbGFzc2VzKGVsZW1lbnQpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgaHRtbENsYXNzZXMubGVuZ3RoOyBpKyspIHsKICAgIGlmIChuYW1lLnRvTG93ZXJDYXNlKCkgPT09IGh0bWxDbGFzc2VzW2ldLnRvTG93ZXJDYXNlKCkpIHsKICAgICAgcmV0dXJuOwogICAgfQogIH0KICBodG1sQ2xhc3Nlcy5wdXNoKG5hbWUpOwogIGVsZW1lbnQuY2xhc3NOYW1lID0gaHRtbENsYXNzZXMuam9pbignICcpOwp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSBhbiBIVE1MIERPTSBOb2RlTGlzdC4KQHBhcmFtICBub2RlTGlzdCAgYSBET00gTm9kZUxpc3QKQHBhcmFtICByZXN1bHQgIGFuIG9iamVjdCB3aXRoIHRleHQsIHRhZ3MgYW5kIHBvcyBwcm9wZXJ0aWVzCiovCmZ1bmN0aW9uIHNoX2V4dHJhY3RUYWdzRnJvbU5vZGVMaXN0KG5vZGVMaXN0LCByZXN1bHQpIHsKICB2YXIgbGVuZ3RoID0gbm9kZUxpc3QubGVuZ3RoOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbGVuZ3RoOyBpKyspIHsKICAgIHZhciBub2RlID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHN3aXRjaCAobm9kZS5ub2RlVHlwZSkgewogICAgY2FzZSAxOgogICAgICBpZiAobm9kZS5ub2RlTmFtZS50b0xvd2VyQ2FzZSgpID09PSAnYnInKSB7CiAgICAgICAgdmFyIHRlcm1pbmF0b3I7CiAgICAgICAgaWYgKC9NU0lFLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xyJzsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xuJzsKICAgICAgICB9CiAgICAgICAgcmVzdWx0LnRleHQucHVzaCh0ZXJtaW5hdG9yKTsKICAgICAgICByZXN1bHQucG9zKys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7bm9kZTogbm9kZS5jbG9uZU5vZGUoZmFsc2UpLCBwb3M6IHJlc3VsdC5wb3N9KTsKICAgICAgICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChub2RlLmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7cG9zOiByZXN1bHQucG9zfSk7CiAgICAgIH0KICAgICAgYnJlYWs7CiAgICBjYXNlIDM6CiAgICBjYXNlIDQ6CiAgICAgIHJlc3VsdC50ZXh0LnB1c2gobm9kZS5kYXRhKTsKICAgICAgcmVzdWx0LnBvcyArPSBub2RlLmxlbmd0aDsKICAgICAgYnJlYWs7CiAgICB9CiAgfQp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSB0aGUgdGV4dCBvZiBhbiBIVE1MIGVsZW1lbnQuIFRoZSBleHRyYWN0ZWQgdGFncyB3aWxsIGJlCnJldHVybmVkIGFzIGFuIGFycmF5IG9mIHRhZyBvYmplY3RzLiBTZWUgc2hfaGlnaGxpZ2h0U3RyaW5nIGZvciB0aGUgZm9ybWF0IG9mCnRoZSB0YWcgb2JqZWN0cy4KQHBhcmFtICBlbGVtZW50ICBhIERPTSBlbGVtZW50CkBwYXJhbSAgdGFncyAgYW4gZW1wdHkgYXJyYXk7IHRoZSBleHRyYWN0ZWQgdGFnIG9iamVjdHMgd2lsbCBiZSByZXR1cm5lZCBpbiBpdApAcmV0dXJuICB0aGUgdGV4dCBvZiB0aGUgZWxlbWVudApAc2VlICBzaF9oaWdobGlnaHRTdHJpbmcKKi8KZnVuY3Rpb24gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgdGFncykgewogIHZhciByZXN1bHQgPSB7fTsKICByZXN1bHQudGV4dCA9IFtdOwogIHJlc3VsdC50YWdzID0gdGFnczsKICByZXN1bHQucG9zID0gMDsKICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChlbGVtZW50LmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgcmV0dXJuIHJlc3VsdC50ZXh0LmpvaW4oJycpOwp9CgovKioKTWVyZ2VzIHRoZSBvcmlnaW5hbCB0YWdzIGZyb20gYW4gZWxlbWVudCB3aXRoIHRoZSB0YWdzIHByb2R1Y2VkIGJ5IGhpZ2hsaWdodGluZy4KQHBhcmFtICBvcmlnaW5hbFRhZ3MgIGFuIGFycmF5IGNvbnRhaW5pbmcgdGhlIG9yaWdpbmFsIHRhZ3MKQHBhcmFtICBoaWdobGlnaHRUYWdzICBhbiBhcnJheSBjb250YWluaW5nIHRoZSBoaWdobGlnaHRpbmcgdGFncyAtIHRoZXNlIG11c3Qgbm90IG92ZXJsYXAKQHJlc3VsdCAgYW4gYXJyYXkgY29udGFpbmluZyB0aGUgbWVyZ2VkIHRhZ3MKKi8KZnVuY3Rpb24gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncykgewogIHZhciBudW1PcmlnaW5hbFRhZ3MgPSBvcmlnaW5hbFRhZ3MubGVuZ3RoOwogIGlmIChudW1PcmlnaW5hbFRhZ3MgPT09IDApIHsKICAgIHJldHVybiBoaWdobGlnaHRUYWdzOwogIH0KCiAgdmFyIG51bUhpZ2hsaWdodFRhZ3MgPSBoaWdobGlnaHRUYWdzLmxlbmd0aDsKICBpZiAobnVtSGlnaGxpZ2h0VGFncyA9PT0gMCkgewogICAgcmV0dXJuIG9yaWdpbmFsVGFnczsKICB9CgogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgb3JpZ2luYWxJbmRleCA9IDA7CiAgdmFyIGhpZ2hsaWdodEluZGV4ID0gMDsKCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MgJiYgaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICB2YXIgb3JpZ2luYWxUYWcgPSBvcmlnaW5hbFRhZ3Nbb3JpZ2luYWxJbmRleF07CiAgICB2YXIgaGlnaGxpZ2h0VGFnID0gaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF07CgogICAgaWYgKG9yaWdpbmFsVGFnLnBvcyA8PSBoaWdobGlnaHRUYWcucG9zKSB7CiAgICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnKTsKICAgICAgb3JpZ2luYWxJbmRleCsrOwogICAgfQogICAgZWxzZSB7CiAgICAgIHJlc3VsdC5wdXNoKGhpZ2hsaWdodFRhZyk7CiAgICAgIGlmIChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4ICsgMV0ucG9zIDw9IG9yaWdpbmFsVGFnLnBvcykgewogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgICAgcmVzdWx0LnB1c2goaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF0pOwogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gbmV3IGVuZCB0YWcKICAgICAgICByZXN1bHQucHVzaCh7cG9zOiBvcmlnaW5hbFRhZy5wb3N9KTsKCiAgICAgICAgLy8gbmV3IHN0YXJ0IHRhZwogICAgICAgIGhpZ2hsaWdodFRhZ3NbaGlnaGxpZ2h0SW5kZXhdID0ge25vZGU6IGhpZ2hsaWdodFRhZy5ub2RlLmNsb25lTm9kZShmYWxzZSksIHBvczogb3JpZ2luYWxUYWcucG9zfTsKICAgICAgfQogICAgfQogIH0KCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MpIHsKICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnc1tvcmlnaW5hbEluZGV4XSk7CiAgICBvcmlnaW5hbEluZGV4Kys7CiAgfQoKICB3aGlsZSAoaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICByZXN1bHQucHVzaChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4XSk7CiAgICBoaWdobGlnaHRJbmRleCsrOwogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkluc2VydHMgdGFncyBpbnRvIHRleHQuCkBwYXJhbSAgdGFncyAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKQHBhcmFtICB0ZXh0ICBhIHN0cmluZyByZXByZXNlbnRpbmcgdGhlIHRleHQKQHJldHVybiAgYSBET00gRG9jdW1lbnRGcmFnbWVudCByZXByZXNlbnRpbmcgdGhlIHJlc3VsdGluZyBIVE1MCiovCmZ1bmN0aW9uIHNoX2luc2VydFRhZ3ModGFncywgdGV4dCkgewogIHZhciBkb2MgPSBkb2N1bWVudDsKCiAgdmFyIHJlc3VsdCA9IGRvY3VtZW50LmNyZWF0ZURvY3VtZW50RnJhZ21lbnQoKTsKICB2YXIgdGFnSW5kZXggPSAwOwogIHZhciBudW1UYWdzID0gdGFncy5sZW5ndGg7CiAgdmFyIHRleHRQb3MgPSAwOwogIHZhciB0ZXh0TGVuZ3RoID0gdGV4dC5sZW5ndGg7CiAgdmFyIGN1cnJlbnROb2RlID0gcmVzdWx0OwoKICAvLyBvdXRwdXQgb25lIHRhZyBvciB0ZXh0IG5vZGUgZXZlcnkgaXRlcmF0aW9uCiAgd2hpbGUgKHRleHRQb3MgPCB0ZXh0TGVuZ3RoIHx8IHRhZ0luZGV4IDwgbnVtVGFncykgewogICAgdmFyIHRhZzsKICAgIHZhciB0YWdQb3M7CiAgICBpZiAodGFnSW5kZXggPCBudW1UYWdzKSB7CiAgICAgIHRhZyA9IHRhZ3NbdGFnSW5kZXhdOwogICAgICB0YWdQb3MgPSB0YWcucG9zOwogICAgfQogICAgZWxzZSB7CiAgICAgIHRhZ1BvcyA9IHRleHRMZW5ndGg7CiAgICB9CgogICAgaWYgKHRhZ1BvcyA8PSB0ZXh0UG9zKSB7CiAgICAgIC8vIG91dHB1dCB0aGUgdGFnCiAgICAgIGlmICh0YWcubm9kZSkgewogICAgICAgIC8vIHN0YXJ0IHRhZwogICAgICAgIHZhciBuZXdOb2RlID0gdGFnLm5vZGU7CiAgICAgICAgY3VycmVudE5vZGUuYXBwZW5kQ2hpbGQobmV3Tm9kZSk7CiAgICAgICAgY3VycmVudE5vZGUgPSBuZXdOb2RlOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGVuZCB0YWcKICAgICAgICBjdXJyZW50Tm9kZSA9IGN1cnJlbnROb2RlLnBhcmVudE5vZGU7CiAgICAgIH0KICAgICAgdGFnSW5kZXgrKzsKICAgIH0KICAgIGVsc2UgewogICAgICAvLyBvdXRwdXQgdGV4dAogICAgICBjdXJyZW50Tm9kZS5hcHBlbmRDaGlsZChkb2MuY3JlYXRlVGV4dE5vZGUodGV4dC5zdWJzdHJpbmcodGV4dFBvcywgdGFnUG9zKSkpOwogICAgICB0ZXh0UG9zID0gdGFnUG9zOwogICAgfQogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkhpZ2hsaWdodHMgYW4gZWxlbWVudCBjb250YWluaW5nIHNvdXJjZSBjb2RlLiAgVXBvbiBjb21wbGV0aW9uIG9mIHRoaXMgZnVuY3Rpb24sCnRoZSBlbGVtZW50IHdpbGwgaGF2ZSBiZWVuIHBsYWNlZCBpbiB0aGUgInNoX3NvdXJjZUNvZGUiIGNsYXNzLgpAcGFyYW0gIGVsZW1lbnQgIGEgRE9NIDxwcmU+IGVsZW1lbnQgY29udGFpbmluZyB0aGUgc291cmNlIGNvZGUgdG8gYmUgaGlnaGxpZ2h0ZWQKQHBhcmFtICBsYW5ndWFnZSAgYSBsYW5ndWFnZSBkZWZpbml0aW9uIG9iamVjdAoqLwpmdW5jdGlvbiBzaF9oaWdobGlnaHRFbGVtZW50KGVsZW1lbnQsIGxhbmd1YWdlKSB7CiAgc2hfYWRkQ2xhc3MoZWxlbWVudCwgJ3NoX3NvdXJjZUNvZGUnKTsKICB2YXIgb3JpZ2luYWxUYWdzID0gW107CiAgdmFyIGlucHV0U3RyaW5nID0gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgb3JpZ2luYWxUYWdzKTsKICB2YXIgaGlnaGxpZ2h0VGFncyA9IHNoX2hpZ2hsaWdodFN0cmluZyhpbnB1dFN0cmluZywgbGFuZ3VhZ2UpOwogIHZhciB0YWdzID0gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncyk7CiAgdmFyIGRvY3VtZW50RnJhZ21lbnQgPSBzaF9pbnNlcnRUYWdzKHRhZ3MsIGlucHV0U3RyaW5nKTsKICB3aGlsZSAoZWxlbWVudC5oYXNDaGlsZE5vZGVzKCkpIHsKICAgIGVsZW1lbnQucmVtb3ZlQ2hpbGQoZWxlbWVudC5maXJzdENoaWxkKTsKICB9CiAgZWxlbWVudC5hcHBlbmRDaGlsZChkb2N1bWVudEZyYWdtZW50KTsKfQoKZnVuY3Rpb24gc2hfZ2V0WE1MSHR0cFJlcXVlc3QoKSB7CiAgaWYgKHdpbmRvdy5BY3RpdmVYT2JqZWN0KSB7CiAgICByZXR1cm4gbmV3IEFjdGl2ZVhPYmplY3QoJ01zeG1sMi5YTUxIVFRQJyk7CiAgfQogIGVsc2UgaWYgKHdpbmRvdy5YTUxIdHRwUmVxdWVzdCkgewogICAgcmV0dXJuIG5ldyBYTUxIdHRwUmVxdWVzdCgpOwogIH0KICB0aHJvdyAnTm8gWE1MSHR0cFJlcXVlc3QgaW1wbGVtZW50YXRpb24gYXZhaWxhYmxlJzsKfQoKZnVuY3Rpb24gc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpIHsKICBpZiAobGFuZ3VhZ2UgaW4gc2hfcmVxdWVzdHMpIHsKICAgIHNoX3JlcXVlc3RzW2xhbmd1YWdlXS5wdXNoKGVsZW1lbnQpOwogICAgcmV0dXJuOwogIH0KICBzaF9yZXF1ZXN0c1tsYW5ndWFnZV0gPSBbZWxlbWVudF07CiAgdmFyIHJlcXVlc3QgPSBzaF9nZXRYTUxIdHRwUmVxdWVzdCgpOwogIHZhciB1cmwgPSBwcmVmaXggKyAnc2hfJyArIGxhbmd1YWdlICsgc3VmZml4OwogIHJlcXVlc3Qub3BlbignR0VUJywgdXJsLCB0cnVlKTsKICByZXF1ZXN0Lm9ucmVhZHlzdGF0ZWNoYW5nZSA9IGZ1bmN0aW9uICgpIHsKICAgIGlmIChyZXF1ZXN0LnJlYWR5U3RhdGUgPT09IDQpIHsKICAgICAgdHJ5IHsKICAgICAgICBpZiAoISByZXF1ZXN0LnN0YXR1cyB8fCByZXF1ZXN0LnN0YXR1cyA9PT0gMjAwKSB7CiAgICAgICAgICBldmFsKHJlcXVlc3QucmVzcG9uc2VUZXh0KTsKICAgICAgICAgIHZhciBlbGVtZW50cyA9IHNoX3JlcXVlc3RzW2xhbmd1YWdlXTsKICAgICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgZWxlbWVudHMubGVuZ3RoOyBpKyspIHsKICAgICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50c1tpXSwgc2hfbGFuZ3VhZ2VzW2xhbmd1YWdlXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgdGhyb3cgJ0hUVFAgZXJyb3I6IHN0YXR1cyAnICsgcmVxdWVzdC5zdGF0dXM7CiAgICAgICAgfQogICAgICB9CiAgICAgIGZpbmFsbHkgewogICAgICAgIHJlcXVlc3QgPSBudWxsOwogICAgICB9CiAgICB9CiAgfTsKICByZXF1ZXN0LnNlbmQobnVsbCk7Cn0KCi8qKgpIaWdobGlnaHRzIGFsbCBlbGVtZW50cyBjb250YWluaW5nIHNvdXJjZSBjb2RlIG9uIHRoZSBjdXJyZW50IHBhZ2UuIEVsZW1lbnRzCmNvbnRhaW5pbmcgc291cmNlIGNvZGUgbXVzdCBiZSAicHJlIiBlbGVtZW50cyB3aXRoIGEgImNsYXNzIiBhdHRyaWJ1dGUgb2YKInNoX0xBTkdVQUdFIiwgd2hlcmUgTEFOR1VBR0UgaXMgYSB2YWxpZCBsYW5ndWFnZSBpZGVudGlmaWVyOyBlLmcuLCAic2hfamF2YSIKaWRlbnRpZmllcyB0aGUgZWxlbWVudCBhcyBjb250YWluaW5nICJqYXZhIiBsYW5ndWFnZSBzb3VyY2UgY29kZS4KKi8KZnVuY3Rpb24gaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCB0YWcpIHsKICB2YXIgbm9kZUxpc3QgPSBkb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSh0YWcpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbm9kZUxpc3QubGVuZ3RoOyBpKyspIHsKICAgIHZhciBlbGVtZW50ID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHZhciBodG1sQ2xhc3NlcyA9IHNoX2dldENsYXNzZXMoZWxlbWVudCk7CiAgICB2YXIgaGlnaGxpZ2h0ZWQgPSBmYWxzZTsKICAgIHZhciBkb250aGlnaGxpZ2h0ID0gZmFsc2U7CiAgICBmb3IgKHZhciBqID0gMDsgaiA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaisrKSB7CiAgICAgIHZhciBodG1sQ2xhc3MgPSBodG1sQ2xhc3Nlc1tqXS50b0xvd2VyQ2FzZSgpOwogICAgICBpZiAoaHRtbENsYXNzID09PSAnc2hfbm9uZScpIHsKICAgICAgICBkb250aGlnaGxpZ2h0ID0gdHJ1ZQogICAgICAgIGNvbnRpbnVlOwogICAgICB9CiAgICAgIGlmIChodG1sQ2xhc3Muc3Vic3RyKDAsIDMpID09PSAnc2hfJykgewogICAgICAgIHZhciBsYW5ndWFnZSA9IGh0bWxDbGFzcy5zdWJzdHJpbmcoMyk7CiAgICAgICAgaWYgKGxhbmd1YWdlIGluIHNoX2xhbmd1YWdlcykgewogICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50LCBzaF9sYW5ndWFnZXNbbGFuZ3VhZ2VdKTsKICAgICAgICAgIGhpZ2hsaWdodGVkID0gdHJ1ZTsKICAgICAgICB9CiAgICAgICAgZWxzZSBpZiAodHlwZW9mKHByZWZpeCkgPT09ICdzdHJpbmcnICYmIHR5cGVvZihzdWZmaXgpID09PSAnc3RyaW5nJykgewogICAgICAgICAgc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHRocm93ICdGb3VuZCA8JyArIHRhZyArICc+IGVsZW1lbnQgd2l0aCBjbGFzcz0iJyArIGh0bWxDbGFzcyArICciLCBidXQgbm8gc3VjaCBsYW5ndWFnZSBleGlzdHMnOwogICAgICAgIH0KICAgICAgICBicmVhazsKICAgICAgfQogICAgfQogICAgaWYgKGhpZ2hsaWdodGVkID09PSBmYWxzZSAmJiBkb250aGlnaGxpZ2h0ID09IGZhbHNlKSB7CiAgICAgIHNoX2hpZ2hsaWdodEVsZW1lbnQoZWxlbWVudCwgc2hfbGFuZ3VhZ2VzWyJqYXZhc2NyaXB0Il0pOwogICAgfQogIH0KfQoKCgpmdW5jdGlvbiBzaF9oaWdobGlnaHREb2N1bWVudChwcmVmaXgsIHN1ZmZpeCkgewogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3R0Jyk7CiAgaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCAnY29kZScpOwogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3ByZScpOwp9Cg=="></script>
+  <script src="data:application/javascript;base64,aWYoIXRoaXMuc2hfbGFuZ3VhZ2VzKXt0aGlzLnNoX2xhbmd1YWdlcz17fX1zaF9sYW5ndWFnZXMuamF2YXNjcmlwdD1bW1svXC9cL1wvL2csInNoX2NvbW1lbnQiLDFdLFsvXC9cLy9nLCJzaF9jb21tZW50Iiw3XSxbL1wvXCpcKi9nLCJzaF9jb21tZW50Iiw4XSxbL1wvXCovZywic2hfY29tbWVudCIsOV0sWy9cYig/OmFic3RyYWN0fGJyZWFrfGNhc2V8Y2F0Y2h8Y2xhc3N8Y29uc3R8Y29udGludWV8ZGVidWdnZXJ8ZGVmYXVsdHxkZWxldGV8ZG98ZWxzZXxlbnVtfGV4cG9ydHxleHRlbmRzfGZhbHNlfGZpbmFsfGZpbmFsbHl8Zm9yfGZ1bmN0aW9ufGdvdG98aWZ8aW1wbGVtZW50c3xpbnxpbnN0YW5jZW9mfGludGVyZmFjZXxuYXRpdmV8bmV3fG51bGx8cHJpdmF0ZXxwcm90ZWN0ZWR8cHJvdG90eXBlfHB1YmxpY3xyZXR1cm58c3RhdGljfHN1cGVyfHN3aXRjaHxzeW5jaHJvbml6ZWR8dGhyb3d8dGhyb3dzfHRoaXN8dHJhbnNpZW50fHRydWV8dHJ5fHR5cGVvZnx2YXJ8dm9sYXRpbGV8d2hpbGV8d2l0aClcYi9nLCJzaF9rZXl3b3JkIiwtMV0sWy8oXCtcK3wtLXxcKXxcXSkoXHMqKShcLz0/KD8hWypcL10pKS9nLFsic2hfc3ltYm9sIiwic2hfbm9ybWFsIiwic2hfc3ltYm9sIl0sLTFdLFsvKDB4W0EtRmEtZjAtOV0rfCg/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykoXHMqKShcLyg/IVsqXC9dKSkvZyxbInNoX251bWJlciIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyhbQS1aYS16JF9dW0EtWmEtejAtOSRfXSpccyopKFwvPT8oPyFbKlwvXSkpL2csWyJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy9cLyg/OlxcLnxbXipcXFwvXSkoPzpcXC58W15cXFwvXSkqXC9bZ2ltXSovZywic2hfcmVnZXhwIiwtMV0sWy9cYlsrLV0/KD86KD86MHhbQS1GYS1mMC05XSspfCg/Oig/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykpdT8oPzooPzppbnQoPzo4fDE2fDMyfDY0KSl8TCk/XGIvZywic2hfbnVtYmVyIiwtMV0sWy8iL2csInNoX3N0cmluZyIsMTBdLFsvJy9nLCJzaF9zdHJpbmciLDExXSxbL358IXwlfFxefFwqfFwofFwpfC18XCt8PXxcW3xcXXxcXHw6fDt8LHxcLnxcL3xcP3wmfDx8PnxcfC9nLCJzaF9zeW1ib2wiLC0xXSxbL1x7fFx9L2csInNoX2NicmFja2V0IiwtMV0sWy9cYig/Ok1hdGh8SW5maW5pdHl8TmFOfHVuZGVmaW5lZHxhcmd1bWVudHMpXGIvZywic2hfcHJlZGVmX3ZhciIsLTFdLFsvXGIoPzpBcnJheXxCb29sZWFufERhdGV8RXJyb3J8RXZhbEVycm9yfEZ1bmN0aW9ufE51bWJlcnxPYmplY3R8UmFuZ2VFcnJvcnxSZWZlcmVuY2VFcnJvcnxSZWdFeHB8U3RyaW5nfFN5bnRheEVycm9yfFR5cGVFcnJvcnxVUklFcnJvcnxkZWNvZGVVUkl8ZGVjb2RlVVJJQ29tcG9uZW50fGVuY29kZVVSSXxlbmNvZGVVUklDb21wb25lbnR8ZXZhbHxpc0Zpbml0ZXxpc05hTnxwYXJzZUZsb2F0fHBhcnNlSW50KVxiL2csInNoX3ByZWRlZl9mdW5jIiwtMV0sWy8oPzpbQS1aYS16XXxfKVtBLVphLXowLTlfXSooPz1bIFx0XSpcKCkvZywic2hfZnVuY3Rpb24iLC0xXV0sW1svJC9nLG51bGwsLTJdLFsvKD86PD8pW0EtWmEtejAtOV9cLlwvXC1ffl0rQFtBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KXwoPzo8PylbQS1aYS16MC05X10rOlwvXC9bQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+PykvZywic2hfdXJsIiwtMV0sWy88XD94bWwvZywic2hfcHJlcHJvYyIsMiwxXSxbLzwhRE9DVFlQRS9nLCJzaF9wcmVwcm9jIiw0LDFdLFsvPCEtLS9nLCJzaF9jb21tZW50Iiw1XSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKSg/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKS9nLCJzaF9rZXl3b3JkIiw2LDFdLFsvJig/OltBLVphLXowLTldKyk7L2csInNoX3ByZXByb2MiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSooPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMV0sWy88KD86XC8pP1tBLVphLXpdW0EtWmEtejAtOV0qL2csInNoX2tleXdvcmQiLDYsMV0sWy9AW0EtWmEtel0rL2csInNoX3R5cGUiLC0xXSxbLyg/OlRPRE98RklYTUV8QlVHKSg/Ols6XT8pL2csInNoX3RvZG8iLC0xXV0sW1svXD8+L2csInNoX3ByZXByb2MiLC0yXSxbLyhbXj0iIFx0Pl0rKShbIFx0XSopKD0/KS9nLFsic2hfdHlwZSIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyIvZywic2hfc3RyaW5nIiwzXV0sW1svXFwoPzpcXHwiKS9nLG51bGwsLTFdLFsvIi9nLCJzaF9zdHJpbmciLC0yXV0sW1svPi9nLCJzaF9wcmVwcm9jIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLy0tPi9nLCJzaF9jb21tZW50IiwtMl0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdXSxbWy8oPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLyQvZyxudWxsLC0yXV0sW1svXCpcLy9nLCJzaF9jb21tZW50IiwtMl0sWy8oPzo8PylbQS1aYS16MC05X1wuXC9cLV9+XStAW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pfCg/Ojw/KVtBLVphLXowLTlfXSs6XC9cL1tBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KS9nLCJzaF91cmwiLC0xXSxbLzxcP3htbC9nLCJzaF9wcmVwcm9jIiwyLDFdLFsvPCFET0NUWVBFL2csInNoX3ByZXByb2MiLDQsMV0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopKD86XC8pPz4vZywic2hfa2V5d29yZCIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopL2csInNoX2tleXdvcmQiLDYsMV0sWy8mKD86W0EtWmEtejAtOV0rKTsvZywic2hfcHJlcHJvYyIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XVtBLVphLXowLTldKig/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSovZywic2hfa2V5d29yZCIsNiwxXSxbL0BbQS1aYS16XSsvZywic2hfdHlwZSIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy9cKlwvL2csInNoX2NvbW1lbnQiLC0yXSxbLyg/Ojw/KVtBLVphLXowLTlfXC5cL1wtX35dK0BbQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+Pyl8KD86PD8pW0EtWmEtejAtOV9dKzpcL1wvW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pL2csInNoX3VybCIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy8iL2csInNoX3N0cmluZyIsLTJdLFsvXFwuL2csInNoX3NwZWNpYWxjaGFyIiwtMV1dLFtbLycvZywic2hfc3RyaW5nIiwtMl0sWy9cXC4vZywic2hfc3BlY2lhbGNoYXIiLC0xXV1dOw=="></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+
+</body></html>

@@ -6,7 +6,7 @@
 이 연습 문제에는 `http` 핵심 모듈이 필요할 것입니다.
 
 `http` 모듈의 문서는 브라우저에 이 주소를 넣으면 볼 수 있습니다.
-  https://nodejs.org/api/http.html
+  {rootdir:/docs-nodejs/http.html}
 
 `http.get()` 메소드는 간단한 GET 요청의 단축입니다. 간단한 답을 작성하기 위해 사용하세요. `http.get()`의 첫 번째 인자는 GET해야할 URL입니다. 두 번째 인자는 콜백입니다.
 

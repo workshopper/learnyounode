@@ -1,0 +1,2302 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Process | Node.js v12.10.0 Documentation</title>
+  <link rel="stylesheet" href="data:text/css;base64,LyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogaXRhbGljOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBJdGFsaWMnKSwgbG9jYWwoJ0xhdG8tSXRhbGljJyksIHVybChodHRwczovL2ZvbnRzLmdzdGF0aWMuY29tL3MvbGF0by92MTYvUzZ1OHc0Qk1VVFBIanhzQVVpLXFOaVhnN2VVMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBpdGFsaWM7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEl0YWxpYycpLCBsb2NhbCgnTGF0by1JdGFsaWMnKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnU4dzRCTVVUUEhqeHNBWEMtcU5pWGc3US53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0KLyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogbm9ybWFsOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBSZWd1bGFyJyksIGxvY2FsKCdMYXRvLVJlZ3VsYXInKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnV5dzRCTVVUUEhqeEF3WGlXdEZDZlE3QS53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIFJlZ3VsYXInKSwgbG9jYWwoJ0xhdG8tUmVndWxhcicpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dXl3NEJNVVRQSGp4NHdYaVd0RkNjLndvZmYyKSBmb3JtYXQoJ3dvZmYyJyk7CiAgdW5pY29kZS1yYW5nZTogVSswMDAwLTAwRkYsIFUrMDEzMSwgVSswMTUyLTAxNTMsIFUrMDJCQi0wMkJDLCBVKzAyQzYsIFUrMDJEQSwgVSswMkRDLCBVKzIwMDAtMjA2RiwgVSsyMDc0LCBVKzIwQUMsIFUrMjEyMiwgVSsyMTkxLCBVKzIxOTMsIFUrMjIxMiwgVSsyMjE1LCBVK0ZFRkYsIFUrRkZGRDsKfQovKiBsYXRpbi1leHQgKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2FQR1EzcTVkME43dy53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2lQR1EzcTVkMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LyotLS0tLS0tLS0tLS0tLS0tLS0tLS0gTGF5b3V0IGFuZCBUeXBvZ3JhcGh5IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwpodG1sIHsKICBmb250LXNpemU6IDFyZW07CiAgb3ZlcmZsb3ctd3JhcDogYnJlYWstd29yZDsKICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDsKICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlOwogIC13ZWJraXQtZm9udC12YXJpYW50LWxpZ2F0dXJlczogbm9uZTsKICAgICAgICAgIGZvbnQtdmFyaWFudC1saWdhdHVyZXM6IG5vbmU7Cn0KCiogewogIGJveC1zaXppbmc6IGJvcmRlci1ib3g7Cn0KCmJvZHkgewogIGZvbnQtZmFtaWx5OiAiTGF0byIsICJMdWNpZGEgR3JhbmRlIiwgIkx1Y2lkYSBTYW5zIFVuaWNvZGUiLCAiTHVjaWRhIFNhbnMiLCBWZXJkYW5hLCBUYWhvbWEsIHNhbnMtc2VyaWY7CiAgbWFyZ2luOiAwOwogIHBhZGRpbmc6IDA7CiAgY29sb3I6ICMzMzM7CiAgYmFja2dyb3VuZDogI2ZmZjsKfQoKaDEgeyBmb250LXNpemU6IDIuNXJlbSB9CmgyIHsgZm9udC1zaXplOiAycmVtIH0KaDMgeyBmb250LXNpemU6IDEuNzVyZW0gfQpoNCB7IGZvbnQtc2l6ZTogMS41cmVtIH0KaDUgeyBmb250LXNpemU6IDEuMjVyZW0gfQpoNiB7IGZvbnQtc2l6ZTogMXJlbSB9CgpoMSwgaDIsIGgzLCBoNCwgaDUsIGg2IHsKICBtYXJnaW46IDEuNXJlbSAwIDFyZW07CiAgdGV4dC1yZW5kZXJpbmc6IG9wdGltaXplTGVnaWJpbGl0eTsKICBmb250LXdlaWdodDogNzAwOwogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKcHJlLCB0dCwgY29kZSwgLnByZSwgc3Bhbi50eXBlLCBhLnR5cGUgewogIGZvbnQtZmFtaWx5OiBTRk1vbm8tUmVndWxhciwgTWVubG8sIENvbnNvbGFzLCAiTGliZXJhdGlvbiBNb25vIiwgIkNvdXJpZXIgTmV3IiwgbW9ub3NwYWNlOwogIGZvbnQtc2l6ZTogLjllbTsKfQoKI2NvbnRlbnQgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKYSwgYTpsaW5rLCBhOmFjdGl2ZSB7CiAgY29sb3I6ICM0Mzg1M2Q7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGJvcmRlci1yYWRpdXM6IDJweDsKICBwYWRkaW5nOiAxcHggM3B4Owp9CgphOmhvdmVyLCBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDM4NTNkOwogIG91dGxpbmU6IG5vbmU7Cn0KCnN0cm9uZyB7CiAgZm9udC13ZWlnaHQ6IDcwMDsKfQoKY29kZSBhOmhvdmVyIHsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgplbSBjb2RlIHsKICBmb250LXN0eWxlOiBub3JtYWw7Cn0KCiNjaGFuZ2Vsb2cgI2d0b2MgewogIGRpc3BsYXk6IG5vbmU7Cn0KCiNndG9jIHsKICBtYXJnaW4tdG9wOiAuNXJlbTsKICBtYXJnaW4tYm90dG9tOiAxcmVtOwp9CgojZ3RvYyB1bCB7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBtYXJnaW4tbGVmdDogMDsKICBsaW5lLWhlaWdodDogMS41cmVtOwp9CgojZ3RvYyA+IHVsID4gbGkgewogIGRpc3BsYXk6IGlubGluZTsKICBib3JkZXItcmlnaHQ6IDFweCAjMDAwIHNvbGlkOwogIG1hcmdpbi1yaWdodDogMC40cmVtOwogIHBhZGRpbmctcmlnaHQ6IDAuNHJlbTsKfQoKI2d0b2MgPiB1bCA+IGxpOmxhc3QtY2hpbGQgewogIGJvcmRlci1yaWdodDogbm9uZTsKICBtYXJnaW4tcmlnaHQ6IDA7CiAgcGFkZGluZy1yaWdodDogMDsKfQoKbGkudmVyc2lvbi1waWNrZXIgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBhIHsKICBib3JkZXItcmFkaXVzOiAycHggMnB4IDAgMDsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBvbCB7CiAgZGlzcGxheTogYmxvY2s7CiAgei1pbmRleDogMTsKfQoKbGkudmVyc2lvbi1waWNrZXIgYSBzcGFuIHsKICBmb250LXNpemU6IC43cmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciB7CiAgYmFja2dyb3VuZDogI2ZmZjsKICBib3JkZXI6IDFweCAjNDM4NTNkIHNvbGlkOwogIGJvcmRlci1yYWRpdXM6IDAgMCAycHggMnB4OwogIGRpc3BsYXk6IG5vbmU7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgcmlnaHQ6IDA7CiAgdG9wOiAxLjI1cmVtOwogIHdpZHRoOiAxMDAlOwp9CgojZ3RvYyBvbC52ZXJzaW9uLXBpY2tlciBsaSB7CiAgZGlzcGxheTogYmxvY2s7CiAgYm9yZGVyLXJpZ2h0OiAwOwogIG1hcmdpbi1yaWdodDogMDsKfQoKb2wudmVyc2lvbi1waWNrZXIgbGkgYSB7CiAgYm9yZGVyLXJhZGl1czogMDsKICBkaXNwbGF5OiBibG9jazsKICBtYXJnaW46IDA7CiAgcGFkZGluZzogLjFyZW07CiAgcGFkZGluZy1sZWZ0OiAxcmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciBsaTpsYXN0LWNoaWxkIGEgewogIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAxcHg7CiAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMXB4Owp9CgoubGluZSB7CiAgd2lkdGg6IGNhbGMoMTAwJSAtIDFyZW0pOwogIGRpc3BsYXk6IGJsb2NrOwogIHBhZGRpbmctYm90dG9tOiAxcHg7Cn0KCi5hcGlfc3RhYmlsaXR5IHsKICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDsKICBtYXJnaW46IDAgMCAxcmVtIDA7CiAgZm9udC1mYW1pbHk6ICJMYXRvIiwgIkx1Y2lkYSBHcmFuZGUiLCAiTHVjaWRhIFNhbnMgVW5pY29kZSIsICJMdWNpZGEgU2FucyIsIFZlcmRhbmEsIFRhaG9tYSwgc2Fucy1zZXJpZjsKICBwYWRkaW5nOiAxcmVtOwogIGxpbmUtaGVpZ2h0OiAxLjU7Cn0KCi5hcGlfc3RhYmlsaXR5ICogewogIGNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50Owp9CgouYXBpX3N0YWJpbGl0eSBhIHsKICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsKfQoKLmFwaV9zdGFiaWxpdHkgYTpob3ZlciwgLmFwaV9zdGFiaWxpdHkgYTphY3RpdmUsIC5hcGlfc3RhYmlsaXR5IGE6Zm9jdXMgewogIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjQpOwp9CgouYXBpX3N0YWJpbGl0eSBhIGNvZGUgewogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCi5hcGlfc3RhYmlsaXR5XzAgewogIGJhY2tncm91bmQtY29sb3I6ICNENjAwMjc7Cn0KCi5hcGlfc3RhYmlsaXR5XzEgewogIGJhY2tncm91bmQtY29sb3I6ICNFQzUzMTU7Cn0KCi5hcGlfc3RhYmlsaXR5XzIgewogIGJhY2tncm91bmQtY29sb3I6ICM0RUJBMEY7Cn0KCi5hcGlfbWV0YWRhdGEgewogIGZvbnQtc2l6ZTogLjg1cmVtOwogIG1hcmdpbi1ib3R0b206IDFyZW07Cn0KCi5hcGlfbWV0YWRhdGEgc3BhbiB7CiAgbWFyZ2luLXJpZ2h0OiAxcmVtOwp9CgouYXBpX21ldGFkYXRhIHNwYW46bGFzdC1jaGlsZCB7CiAgbWFyZ2luLXJpZ2h0OiAwcHg7Cn0KCnVsLnBsYWluIHsKICBsaXN0LXN0eWxlOiBub25lOwp9CgphYmJyIHsKICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkICM0NTQ1NDU7Cn0KCnAgewogIHRleHQtcmVuZGVyaW5nOiBvcHRpbWl6ZUxlZ2liaWxpdHk7CiAgbWFyZ2luOiAwIDAgMS4xMjVyZW0gMDsKICBsaW5lLWhlaWdodDogMS41Owp9CgojYXBpY29udGVudCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKICBwYWRkaW5nLWJvdHRvbTogMnJlbTsKfQoKdGFibGUgewogIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7CiAgbWFyZ2luOiAwIDAgMS41cmVtIDA7Cn0KCnRoLCB0ZCB7CiAgYm9yZGVyOiAxcHggc29saWQgI2FhYTsKICBwYWRkaW5nOiAuNzVyZW0gMXJlbSAuNzVyZW0gMXJlbTsKICB2ZXJ0aWNhbC1hbGlnbjogdG9wOwp9Cgp0aCB7CiAgdGV4dC1hbGlnbjpsZWZ0Owp9CgpvbCwgdWwsIGRsIHsKICBtYXJnaW46IDAgMCAuNnJlbSAwOwogIHBhZGRpbmc6IDA7Cn0KCm9sIHVsLCBvbCBvbCwgb2wgZGwsIHVsIHVsLCB1bCBvbCwgdWwgZGwsIGRsIHVsLCBkbCBvbCwgZGwgZGwgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCnVsLCBvbCB7CiAgbWFyZ2luLWxlZnQ6IDJyZW07Cn0KCmRsIGR0IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgbWFyZ2luOiAxLjVyZW0gMCAwOwp9CgpkbCBkZCB7CiAgcG9zaXRpb246IHJlbGF0aXZlOwogIG1hcmdpbjogMCAxcmVtIDA7Cn0KCmRkICsgZHQucHJlIHsKICBtYXJnaW4tdG9wOiAxLjZyZW07Cn0KCiNhcGljb250ZW50IHsKICBwYWRkaW5nLXRvcDogMXJlbTsKfQoKI2FwaWNvbnRlbnQgLmxpbmUgewogIHdpZHRoOiBjYWxjKDUwJSAtIDFyZW0pOwogIG1hcmdpbjogMXJlbSAxcmVtIC45NXJlbTsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2NjOwp9CgpoMiArIGgyIHsKICBtYXJnaW46IDAgMCAuNXJlbTsKfQoKaDMgKyBoMyB7CiAgbWFyZ2luOiAwIDAgLjVyZW07Cn0KCmgyLCBoMywgaDQsIGg1IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgcGFkZGluZy1yaWdodDogNDBweDsKfQoKLnNyY2xpbmsgewogIGZsb2F0OiByaWdodDsKICBmb250LXNpemU6IHNtYWxsZXI7Cn0KCmgxIHNwYW4sIGgyIHNwYW4sIGgzIHNwYW4sIGg0IHNwYW4gewogIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICBkaXNwbGF5OiBibG9jazsKICB0b3A6IDA7CiAgcmlnaHQ6IDA7Cn0KCmgxIHNwYW46aG92ZXIsIGgyIHNwYW46aG92ZXIsIGgzIHNwYW46aG92ZXIsIGg0IHNwYW46aG92ZXIgewogIG9wYWNpdHk6IDE7Cn0KCmgxIHNwYW4gYSwgaDIgc3BhbiBhLCBoMyBzcGFuIGEsIGg0IHNwYW4gYSB7CiAgY29sb3I6ICMwMDA7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGZvbnQtd2VpZ2h0OiBib2xkOwp9CgpwcmUsIHR0LCBjb2RlIHsKICBsaW5lLWhlaWdodDogMS41cmVtOwogIG1hcmdpbjogMDsgcGFkZGluZzogMDsKfQoKLnByZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKcHJlIHsKICBwYWRkaW5nOiAxcmVtOwogIHZlcnRpY2FsLWFsaWduOiB0b3A7CiAgYmFja2dyb3VuZDogI2YyZjJmMjsKICBtYXJnaW46IDFyZW07CiAgb3ZlcmZsb3cteDogYXV0bzsKfQoKcHJlID4gY29kZSB7CiAgcGFkZGluZzogMDsKfQoKcHJlICsgaDMgewogIG1hcmdpbi10b3A6IDIuMjI1cmVtOwp9Cgpjb2RlLnByZSB7CiAgd2hpdGUtc3BhY2U6IHByZTsKfQoKI2ludHJvIHsKICBtYXJnaW4tdG9wOiAxLjI1cmVtOwogIG1hcmdpbi1sZWZ0OiAxcmVtOwp9CgojaW50cm8gYSB7CiAgY29sb3I6ICNkZGQ7CiAgZm9udC13ZWlnaHQ6IGJvbGQ7Cn0KCmhyIHsKICBiYWNrZ3JvdW5kOiBub25lOwogIGJvcmRlcjogbWVkaXVtIG5vbmU7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM3YTdhN2E7CiAgbWFyZ2luOiAwIDAgMXJlbSAwOwp9CgojdG9jIGgyIHsKICBtYXJnaW4tdG9wOiAwOwogIG1hcmdpbjogMS41cmVtIDA7Cn0KCiN0b2MgcCB7CiAgbWFyZ2luOiAwOwp9CgojdG9jIHVsIGEgewogIHRleHQtZGVjb3JhdGlvbjpub25lOwp9CgojdG9jIHVsIGxpIHsKICBtYXJnaW4tYm90dG9tOiAuNjY2cmVtOwogIGxpc3Qtc3R5bGU6IHNxdWFyZSBvdXRzaWRlOwp9CgojdG9jIGxpID4gdWwgewogIG1hcmdpbi10b3A6IC42NjZyZW07Cn0KCiN0b2MgLnN0YWJpbGl0eV8wOjphZnRlciB7CiAgYmFja2dyb3VuZC1jb2xvcjogI2Q1MDAyNzsKICBjb2xvcjogI2ZmZjsKICBjb250ZW50OiAiZGVwcmVjYXRlZCI7CiAgbWFyZ2luLWxlZnQ6IC4yNXJlbTsKICBwYWRkaW5nOiAxcHggM3B4OwogIGJvcmRlci1yYWRpdXM6IDNweDsKfQoKI2FwaWNvbnRlbnQgbGkgewogIG1hcmdpbi1ib3R0b206IC41cmVtOwp9CgojYXBpY29udGVudCBsaTpsYXN0LWNoaWxkIHsKICBtYXJnaW4tYm90dG9tOiAwOwp9Cgp0dCwgY29kZSB7CiAgY29sb3I6ICMwNDA0MDQ7CiAgYmFja2dyb3VuZC1jb2xvcjogI2YyZjJmMjsKICBib3JkZXItcmFkaXVzOiAycHg7CiAgcGFkZGluZzogMXB4IDNweDsKfQoKLmFwaV9zdGFiaWxpdHkgY29kZSB7CiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAuMSk7Cn0KCmEgY29kZSB7CiAgY29sb3I6IGluaGVyaXQ7CiAgYmFja2dyb3VuZDogaW5oZXJpdDsKICBwYWRkaW5nOiAwOwp9CgoudHlwZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKI2NvbHVtbjEuaW50ZXJpb3IgewogIG1hcmdpbi1sZWZ0OiAyMzRweDsKICBwYWRkaW5nOiAwIDJyZW07CiAgLXdlYmtpdC1wYWRkaW5nLXN0YXJ0OiAxLjVyZW07Cn0KCiNjb2x1bW4yLmludGVyaW9yIHsKICB3aWR0aDogMjM0cHg7CiAgYmFja2dyb3VuZDogIzMzMzsKICBwb3NpdGlvbjogZml4ZWQ7CiAgbGVmdDogMDsKICB0b3A6IDA7CiAgYm90dG9tOiAwOwogIG92ZXJmbG93LXg6IGhpZGRlbjsKICBvdmVyZmxvdy15OiBzY3JvbGw7Cn0KCiNjb2x1bW4yIHVsIHsKICBsaXN0LXN0eWxlOiBub25lOwogIG1hcmdpbjogLjlyZW0gMCAuNXJlbTsKICBiYWNrZ3JvdW5kOiAjMzMzOwp9CgojY29sdW1uMiA+IDpmaXJzdC1jaGlsZCB7CiAgbWFyZ2luOiAxLjI1cmVtOwogIGZvbnQtc2l6ZTogMS41cmVtOwp9CgojY29sdW1uMiA+IHVsOm50aC1jaGlsZCgyKSB7CiAgbWFyZ2luOiAxLjI1cmVtIDAgLjVyZW07Cn0KCiNjb2x1bW4yID4gdWw6bGFzdC1jaGlsZCB7CiAgbWFyZ2luOiAuOXJlbSAwIDEuMjVyZW07Cn0KCiNjb2x1bW4yIHVsIGxpIHsKICBwYWRkaW5nLWxlZnQ6IDEuMjVyZW07CiAgbWFyZ2luLWJvdHRvbTogLjVyZW07CiAgcGFkZGluZy1ib3R0b206IC41cmVtOwp9CgojY29sdW1uMiAubGluZSB7CiAgbWFyZ2luOiAwIC41cmVtOwogIGJhY2tncm91bmQtY29sb3I6ICM3MDcwNzA7Cn0KCiNjb2x1bW4yIHVsIGxpOmxhc3QtY2hpbGQgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEgewogIGNvbG9yOiAjY2NjOwogIGJvcmRlci1yYWRpdXM6IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEuYWN0aXZlLCAjY29sdW1uMiB1bCBsaSBhLmFjdGl2ZTpob3ZlciwKI2NvbHVtbjIgdWwgbGkgYS5hY3RpdmU6Zm9jdXMgewogIGNvbG9yOiAjNDM4NTNkOwogIGJvcmRlci1yYWRpdXM6IDA7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM0Mzg1M2Q7CiAgYmFja2dyb3VuZDogbm9uZTsKfQoKI2ludHJvIGE6aG92ZXIsICNpbnRybyBhOmZvY3VzLAojY29sdW1uMiB1bCBsaSBhOmhvdmVyLCAjY29sdW1uMiB1bCBsaSBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgpzcGFuID4gLm1hcmssIHNwYW4gPiAubWFyazp2aXNpdGVkIHsKICBjb2xvcjogIzcwNzA3MDsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgdG9wOiAwcHg7CiAgcmlnaHQ6IDBweDsKfQoKc3BhbiA+IC5tYXJrOmhvdmVyLCBzcGFuID4gLm1hcms6Zm9jdXMsIHNwYW4gPiAubWFyazphY3RpdmUgewogIGNvbG9yOiAjNDM4NTNkOwogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCnRoID4gKjpsYXN0LWNoaWxkLCB0ZCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKfQoKLmNoYW5nZWxvZyA+IHN1bW1hcnkgewogIG1hcmdpbjogLjVyZW0gMDsKICBwYWRkaW5nOiAuNXJlbSAwOwogIGN1cnNvcjogcG9pbnRlcjsKfQoKLyogc2ltcGxlciBjbGVhcmZpeCAqLwouY2xlYXJmaXg6YWZ0ZXIgewogIGNvbnRlbnQ6ICIuIjsKICBkaXNwbGF5OiBibG9jazsKICBoZWlnaHQ6IDA7CiAgY2xlYXI6IGJvdGg7CiAgdmlzaWJpbGl0eTogaGlkZGVuOwp9CgouZ2l0aHViX2ljb24gewogIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7CiAgbWFyZ2luOiAtMnB4IDNweCAwIDA7Cn0KCkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogMTAyNHB4KSB7CiAgI2NvbnRlbnQgewogICAgb3ZlcmZsb3c6IHZpc2libGU7CiAgfQogICNjb2x1bW4xLmludGVyaW9yIHsKICAgIG1hcmdpbi1sZWZ0OiAwOwogICAgcGFkZGluZy1sZWZ0OiAuNXJlbTsKICAgIHBhZGRpbmctcmlnaHQ6IC41cmVtOwogICAgd2lkdGg6IGF1dG87CiAgICBvdmVyZmxvdy15OiB2aXNpYmxlOwogIH0KICAjY29sdW1uMiB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KfQoKQG1lZGlhIHByaW50IHsKICBodG1sIHsKICAgIGhlaWdodDogYXV0bzsKICAgIGZvbnQtc2l6ZTogMC43NWVtOwogIH0KICAjY29sdW1uMi5pbnRlcmlvciB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KICAjY29sdW1uMS5pbnRlcmlvciB7CiAgICBtYXJnaW4tbGVmdDogMHB4OwogICAgcGFkZGluZzogMHB4OwogICAgb3ZlcmZsb3cteTogYXV0bzsKICB9CiAgLmFwaV9tZXRhZGF0YSwKICAjdG9jLAogIC5zcmNsaW5rLAogICNndG9jLAogIC5tYXJrIHsKICAgIGRpc3BsYXk6IG5vbmU7CiAgfQogIGgxIHsKICAgIGZvbnQtc2l6ZTogMnJlbTsKICB9CiAgaDIgewogICAgZm9udC1zaXplOiAxLjc1cmVtOwogIH0KICBoMyB7CiAgICBmb250LXNpemU6IDEuNXJlbTsKICB9CiAgaDQgewogICAgZm9udC1zaXplOiAxLjNyZW07CiAgfQogIGg1IHsKICAgIGZvbnQtc2l6ZTogMS4ycmVtOwogIH0KICBoNiB7CiAgICBmb250LXNpemU6IDEuMXJlbTsKICB9CiAgLmFwaV9zdGFiaWxpdHkgewogICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogIH0KICAuYXBpX3N0YWJpbGl0eSBhIHsKICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsKICB9CiAgYSB7CiAgICBjb2xvcjogaW5oZXJpdDsKICB9CiAgI2FwaWNvbnRlbnQgewogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICB9Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LnNoX3NvdXJjZUNvZGUgewogIGZvbnQtd2VpZ2h0OiBub3JtYWw7CiAgZm9udC1zdHlsZTogbm9ybWFsOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfc3ltYm9sLAouc2hfc291cmNlQ29kZSAuc2hfY2JyYWNrZXQgewogIGNvbG9yOiAjMzMzOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfa2V5d29yZCB7CiAgY29sb3I6ICMzMzg7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9zdHJpbmcsCi5zaF9zb3VyY2VDb2RlIC5zaF9yZWdleHAsCi5zaF9zb3VyY2VDb2RlIC5zaF9udW1iZXIsCi5zaF9zb3VyY2VDb2RlIC5zaF9zcGVjaWFsY2hhciB7CiAgY29sb3I6ICNFNTQzMDU7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9jb21tZW50IHsKICBjb2xvcjogIzY2NjsKICBmb250LXdlaWdodDogbGlnaHRlcjsKfQo=">
+  <link rel="canonical" href="https://nodejs.org/api/process.html">
+</head>
+<body class="alt apidoc" id="api-section-process">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="https://nodejs.org/" title="Go back to the home page">
+          Node.js
+        </a>
+      </div>
+      <ul>
+<li><a href="https://nodejs.org/api/documentation.html" class="nav-documentation">About these Docs</a></li>
+<li><a href="https://nodejs.org/api/synopsis.html" class="nav-synopsis">Usage &amp; Example</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://nodejs.org/api/assert.html" class="nav-assert">Assertion Testing</a></li>
+<li><a href="https://nodejs.org/api/async_hooks.html" class="nav-async_hooks">Async Hooks</a></li>
+<li><a href="https://nodejs.org/api/buffer.html" class="nav-buffer">Buffer</a></li>
+<li><a href="https://nodejs.org/api/addons.html" class="nav-addons">C++ Addons</a></li>
+<li><a href="https://nodejs.org/api/n-api.html" class="nav-n-api">C/C++ Addons - N-API</a></li>
+<li><a href="https://nodejs.org/api/child_process.html" class="nav-child_process">Child Processes</a></li>
+<li><a href="https://nodejs.org/api/cluster.html" class="nav-cluster">Cluster</a></li>
+<li><a href="https://nodejs.org/api/cli.html" class="nav-cli">Command Line Options</a></li>
+<li><a href="https://nodejs.org/api/console.html" class="nav-console">Console</a></li>
+<li><a href="https://nodejs.org/api/crypto.html" class="nav-crypto">Crypto</a></li>
+<li><a href="https://nodejs.org/api/debugger.html" class="nav-debugger">Debugger</a></li>
+<li><a href="https://nodejs.org/api/deprecations.html" class="nav-deprecations">Deprecated APIs</a></li>
+<li><a href="https://nodejs.org/api/dns.html" class="nav-dns">DNS</a></li>
+<li><a href="https://nodejs.org/api/domain.html" class="nav-domain">Domain</a></li>
+<li><a href="https://nodejs.org/api/esm.html" class="nav-esm">ECMAScript Modules</a></li>
+<li><a href="https://nodejs.org/api/errors.html" class="nav-errors">Errors</a></li>
+<li><a href="https://nodejs.org/api/events.html" class="nav-events">Events</a></li>
+<li><a href="https://nodejs.org/api/fs.html" class="nav-fs">File System</a></li>
+<li><a href="https://nodejs.org/api/globals.html" class="nav-globals">Globals</a></li>
+<li><a href="https://nodejs.org/api/http.html" class="nav-http">HTTP</a></li>
+<li><a href="https://nodejs.org/api/http2.html" class="nav-http2">HTTP/2</a></li>
+<li><a href="https://nodejs.org/api/https.html" class="nav-https">HTTPS</a></li>
+<li><a href="https://nodejs.org/api/inspector.html" class="nav-inspector">Inspector</a></li>
+<li><a href="https://nodejs.org/api/intl.html" class="nav-intl">Internationalization</a></li>
+<li><a href="https://nodejs.org/api/modules.html" class="nav-modules">Modules</a></li>
+<li><a href="https://nodejs.org/api/net.html" class="nav-net">Net</a></li>
+<li><a href="https://nodejs.org/api/os.html" class="nav-os">OS</a></li>
+<li><a href="https://nodejs.org/api/path.html" class="nav-path">Path</a></li>
+<li><a href="https://nodejs.org/api/perf_hooks.html" class="nav-perf_hooks">Performance Hooks</a></li>
+<li><a href="https://nodejs.org/api/policy.html" class="nav-policy">Policies</a></li>
+<li><a href="https://nodejs.org/api/process.html" class="nav-process active">Process</a></li>
+<li><a href="https://nodejs.org/api/punycode.html" class="nav-punycode">Punycode</a></li>
+<li><a href="https://nodejs.org/api/querystring.html" class="nav-querystring">Query Strings</a></li>
+<li><a href="https://nodejs.org/api/readline.html" class="nav-readline">Readline</a></li>
+<li><a href="https://nodejs.org/api/repl.html" class="nav-repl">REPL</a></li>
+<li><a href="https://nodejs.org/api/report.html" class="nav-report">Report</a></li>
+<li><a href="https://nodejs.org/api/stream.html" class="nav-stream">Stream</a></li>
+<li><a href="https://nodejs.org/api/string_decoder.html" class="nav-string_decoder">String Decoder</a></li>
+<li><a href="https://nodejs.org/api/timers.html" class="nav-timers">Timers</a></li>
+<li><a href="https://nodejs.org/api/tls.html" class="nav-tls">TLS/SSL</a></li>
+<li><a href="https://nodejs.org/api/tracing.html" class="nav-tracing">Trace Events</a></li>
+<li><a href="https://nodejs.org/api/tty.html" class="nav-tty">TTY</a></li>
+<li><a href="https://nodejs.org/api/dgram.html" class="nav-dgram">UDP/Datagram</a></li>
+<li><a href="https://nodejs.org/api/url.html" class="nav-url">URL</a></li>
+<li><a href="https://nodejs.org/api/util.html" class="nav-util">Utilities</a></li>
+<li><a href="https://nodejs.org/api/v8.html" class="nav-v8">V8</a></li>
+<li><a href="https://nodejs.org/api/vm.html" class="nav-vm">VM</a></li>
+<li><a href="https://nodejs.org/api/worker_threads.html" class="nav-worker_threads">Worker Threads</a></li>
+<li><a href="https://nodejs.org/api/zlib.html" class="nav-zlib">Zlib</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://github.com/nodejs/node" class="nav-https-github-com-nodejs-node">GitHub Repo &amp; Issue Tracker</a></li>
+</ul>
+    </div>
+
+    <div id="column1" data-id="process" class="interior">
+      <header>
+        <h1>Node.js v12.10.0 Documentation</h1>
+        <div id="gtoc">
+          <ul>
+            <li>
+              <a href="https://nodejs.org/api/index.html" name="toc">Index</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/all.html">View on single page</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/process.json">View as JSON</a>
+            </li>
+            
+    <li class="version-picker">
+      <a href="#">View another version <span>▼</span></a>
+      <ol class="version-picker"><li><a href="https://nodejs.org/docs/latest-v12.x/api/process.html">12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v11.x/api/process.html">11.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v10.x/api/process.html">10.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v9.x/api/process.html">9.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/process.html">8.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v7.x/api/process.html">7.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v6.x/api/process.html">6.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v5.x/api/process.html">5.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v4.x/api/process.html">4.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.12.x/api/process.html">0.12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.10.x/api/process.html">0.10.x</a></li></ol>
+    </li>
+  
+            <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/process.md"><span class="github_icon"><svg height="16" width="16" viewBox="0 0 16.1 16.1" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8z"></path></svg></span>Edit on GitHub</a></li>
+          </ul>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+<li>
+<p><a href="#process_process">Process</a></p>
+<ul>
+<li>
+<p><a href="#process_process_events">Process Events</a></p>
+<ul>
+<li><a href="#process_event_beforeexit">Event: 'beforeExit'</a></li>
+<li><a href="#process_event_disconnect">Event: 'disconnect'</a></li>
+<li><a href="#process_event_exit">Event: 'exit'</a></li>
+<li><a href="#process_event_message">Event: 'message'</a></li>
+<li><a href="#process_event_multipleresolves">Event: 'multipleResolves'</a></li>
+<li><a href="#process_event_rejectionhandled">Event: 'rejectionHandled'</a></li>
+<li>
+<p><a href="#process_event_uncaughtexception">Event: 'uncaughtException'</a></p>
+<ul>
+<li><a href="#process_warning_using_uncaughtexception_correctly">Warning: Using <code>'uncaughtException'</code> correctly</a></li>
+</ul>
+</li>
+<li><a href="#process_event_unhandledrejection">Event: 'unhandledRejection'</a></li>
+<li>
+<p><a href="#process_event_warning">Event: 'warning'</a></p>
+<ul>
+<li><a href="#process_emitting_custom_warnings">Emitting custom warnings</a></li>
+</ul>
+</li>
+<li><a href="#process_signal_events">Signal Events</a></li>
+</ul>
+</li>
+<li><a href="#process_process_abort">process.abort()</a></li>
+<li><a href="#process_process_allowednodeenvironmentflags">process.allowedNodeEnvironmentFlags</a></li>
+<li><a href="#process_process_arch">process.arch</a></li>
+<li><a href="#process_process_argv">process.argv</a></li>
+<li><a href="#process_process_argv0">process.argv0</a></li>
+<li><a href="#process_process_channel">process.channel</a></li>
+<li><a href="#process_process_chdir_directory">process.chdir(directory)</a></li>
+<li><a href="#process_process_config">process.config</a></li>
+<li><a href="#process_process_connected">process.connected</a></li>
+<li><a href="#process_process_cpuusage_previousvalue">process.cpuUsage([previousValue])</a></li>
+<li><a href="#process_process_cwd">process.cwd()</a></li>
+<li><a href="#process_process_debugport">process.debugPort</a></li>
+<li><a href="#process_process_disconnect">process.disconnect()</a></li>
+<li><a href="#process_process_dlopen_module_filename_flags">process.dlopen(module, filename[, flags])</a></li>
+<li><a href="#process_process_emitwarning_warning_options">process.emitWarning(warning[, options])</a></li>
+<li>
+<p><a href="#process_process_emitwarning_warning_type_code_ctor">process.emitWarning(warning[, type[, code]][, ctor])</a></p>
+<ul>
+<li><a href="#process_avoiding_duplicate_warnings">Avoiding duplicate warnings</a></li>
+</ul>
+</li>
+<li><a href="#process_process_env">process.env</a></li>
+<li><a href="#process_process_execargv">process.execArgv</a></li>
+<li><a href="#process_process_execpath">process.execPath</a></li>
+<li><a href="#process_process_exit_code">process.exit([code])</a></li>
+<li><a href="#process_process_exitcode">process.exitCode</a></li>
+<li><a href="#process_process_getegid">process.getegid()</a></li>
+<li><a href="#process_process_geteuid">process.geteuid()</a></li>
+<li><a href="#process_process_getgid">process.getgid()</a></li>
+<li><a href="#process_process_getgroups">process.getgroups()</a></li>
+<li><a href="#process_process_getuid">process.getuid()</a></li>
+<li><a href="#process_process_hasuncaughtexceptioncapturecallback">process.hasUncaughtExceptionCaptureCallback()</a></li>
+<li><a href="#process_process_hrtime_time">process.hrtime([time])</a></li>
+<li><a href="#process_process_hrtime_bigint">process.hrtime.bigint()</a></li>
+<li><a href="#process_process_initgroups_user_extragroup">process.initgroups(user, extraGroup)</a></li>
+<li><a href="#process_process_kill_pid_signal">process.kill(pid[, signal])</a></li>
+<li><a href="#process_process_mainmodule">process.mainModule</a></li>
+<li><a href="#process_process_memoryusage">process.memoryUsage()</a></li>
+<li><a href="#process_process_nexttick_callback_args">process.nextTick(callback[, ...args])</a></li>
+<li><a href="#process_process_nodeprecation">process.noDeprecation</a></li>
+<li><a href="#process_process_pid">process.pid</a></li>
+<li><a href="#process_process_platform">process.platform</a></li>
+<li><a href="#process_process_ppid">process.ppid</a></li>
+<li><a href="#process_process_release">process.release</a></li>
+<li>
+<p><span class="stability_1"><a href="#process_process_report">process.report</a></span></p>
+<ul>
+<li><span class="stability_1"><a href="#process_process_report_directory">process.report.directory</a></span></li>
+<li><span class="stability_1"><a href="#process_process_report_filename">process.report.filename</a></span></li>
+<li><span class="stability_1"><a href="#process_process_report_getreport_err">process.report.getReport([err])</a></span></li>
+<li><span class="stability_1"><a href="#process_process_report_reportonfatalerror">process.report.reportOnFatalError</a></span></li>
+<li><span class="stability_1"><a href="#process_process_report_reportonsignal">process.report.reportOnSignal</a></span></li>
+<li><span class="stability_1"><a href="#process_process_report_reportonuncaughtexception">process.report.reportOnUncaughtException</a></span></li>
+<li><span class="stability_1"><a href="#process_process_report_signal">process.report.signal</a></span></li>
+<li><span class="stability_1"><a href="#process_process_report_writereport_filename_err">process.report.writeReport([filename][, err])</a></span></li>
+</ul>
+</li>
+<li><a href="#process_process_resourceusage">process.resourceUsage()</a></li>
+<li><a href="#process_process_send_message_sendhandle_options_callback">process.send(message[, sendHandle[, options]][, callback])</a></li>
+<li><a href="#process_process_setegid_id">process.setegid(id)</a></li>
+<li><a href="#process_process_seteuid_id">process.seteuid(id)</a></li>
+<li><a href="#process_process_setgid_id">process.setgid(id)</a></li>
+<li><a href="#process_process_setgroups_groups">process.setgroups(groups)</a></li>
+<li><a href="#process_process_setuid_id">process.setuid(id)</a></li>
+<li><a href="#process_process_setuncaughtexceptioncapturecallback_fn">process.setUncaughtExceptionCaptureCallback(fn)</a></li>
+<li><a href="#process_process_stderr">process.stderr</a></li>
+<li><a href="#process_process_stdin">process.stdin</a></li>
+<li>
+<p><a href="#process_process_stdout">process.stdout</a></p>
+<ul>
+<li><a href="#process_a_note_on_process_i_o">A note on process I/O</a></li>
+</ul>
+</li>
+<li><a href="#process_process_throwdeprecation">process.throwDeprecation</a></li>
+<li><a href="#process_process_title">process.title</a></li>
+<li><a href="#process_process_tracedeprecation">process.traceDeprecation</a></li>
+<li><a href="#process_process_umask_mask">process.umask([mask])</a></li>
+<li><a href="#process_process_uptime">process.uptime()</a></li>
+<li><a href="#process_process_version">process.version</a></li>
+<li><a href="#process_process_versions">process.versions</a></li>
+<li><a href="#process_exit_codes">Exit Codes</a></li>
+</ul>
+</li>
+</ul>
+      </div>
+
+      <div id="apicontent">
+        <h1>Process<span><a class="mark" href="#process_process" id="process_process">#</a></span></h1>
+
+
+<p>The <code>process</code> object is a <code>global</code> that provides information about, and control
+over, the current Node.js process. As a global, it is always available to
+Node.js applications without using <code>require()</code>. It can also be explicitly
+accessed using <code>require()</code>:</p>
+<pre><code class="language-js">const process = require('process');
+</code></pre>
+<h2>Process Events<span><a class="mark" href="#process_process_events" id="process_process_events">#</a></span></h2>
+<p>The <code>process</code> object is an instance of <a href="https://nodejs.org/api/events.html#events_class_eventemitter"><code>EventEmitter</code></a>.</p>
+<h3>Event: 'beforeExit'<span><a class="mark" href="#process_event_beforeexit" id="process_event_beforeexit">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.12</span>
+</div>
+<p>The <code>'beforeExit'</code> event is emitted when Node.js empties its event loop and has
+no additional work to schedule. Normally, the Node.js process will exit when
+there is no work scheduled, but a listener registered on the <code>'beforeExit'</code>
+event can make asynchronous calls, and thereby cause the Node.js process to
+continue.</p>
+<p>The listener callback function is invoked with the value of
+<a href="#process_process_exitcode"><code>process.exitCode</code></a> passed as the only argument.</p>
+<p>The <code>'beforeExit'</code> event is <em>not</em> emitted for conditions causing explicit
+termination, such as calling <a href="#process_process_exit_code"><code>process.exit()</code></a> or uncaught exceptions.</p>
+<p>The <code>'beforeExit'</code> should <em>not</em> be used as an alternative to the <code>'exit'</code> event
+unless the intention is to schedule additional work.</p>
+<pre><code class="language-js">process.on('beforeExit', (code) =&gt; {
+  console.log('Process beforeExit event with code: ', code);
+});
+
+process.on('exit', (code) =&gt; {
+  console.log('Process exit event with code: ', code);
+});
+
+console.log('This message is displayed first.');
+
+// Prints:
+// This message is displayed first.
+// Process beforeExit event with code: 0
+// Process exit event with code: 0
+</code></pre>
+<h3>Event: 'disconnect'<span><a class="mark" href="#process_event_disconnect" id="process_event_disconnect">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.7</span>
+</div>
+<p>If the Node.js process is spawned with an IPC channel (see the <a href="https://nodejs.org/api/child_process.html">Child Process</a>
+and <a href="https://nodejs.org/api/cluster.html">Cluster</a> documentation), the <code>'disconnect'</code> event will be emitted when
+the IPC channel is closed.</p>
+<h3>Event: 'exit'<span><a class="mark" href="#process_event_exit" id="process_event_exit">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.7</span>
+</div>
+<ul>
+<li><code>code</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+</ul>
+<p>The <code>'exit'</code> event is emitted when the Node.js process is about to exit as a
+result of either:</p>
+<ul>
+<li>The <code>process.exit()</code> method being called explicitly;</li>
+<li>The Node.js event loop no longer having any additional work to perform.</li>
+</ul>
+<p>There is no way to prevent the exiting of the event loop at this point, and once
+all <code>'exit'</code> listeners have finished running the Node.js process will terminate.</p>
+<p>The listener callback function is invoked with the exit code specified either
+by the <a href="#process_process_exitcode"><code>process.exitCode</code></a> property, or the <code>exitCode</code> argument passed to the
+<a href="#process_process_exit_code"><code>process.exit()</code></a> method.</p>
+<pre><code class="language-js">process.on('exit', (code) =&gt; {
+  console.log(`About to exit with code: ${code}`);
+});
+</code></pre>
+<p>Listener functions <strong>must</strong> only perform <strong>synchronous</strong> operations. The Node.js
+process will exit immediately after calling the <code>'exit'</code> event listeners
+causing any additional work still queued in the event loop to be abandoned.
+In the following example, for instance, the timeout will never occur:</p>
+<pre><code class="language-js">process.on('exit', (code) =&gt; {
+  setTimeout(() =&gt; {
+    console.log('This will not run');
+  }, 0);
+});
+</code></pre>
+<h3>Event: 'message'<span><a class="mark" href="#process_event_message" id="process_event_message">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.5.10</span>
+</div>
+<ul>
+<li><code>message</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type" class="type">&lt;null&gt;</a> a parsed JSON object
+or a serializable primitive value.</li>
+<li><code>sendHandle</code> <a href="https://nodejs.org/api/net.html#net_class_net_server" class="type">&lt;net.Server&gt;</a> | <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a> a <a href="https://nodejs.org/api/net.html#net_class_net_server"><code>net.Server</code></a> or <a href="https://nodejs.org/api/net.html#net_class_net_socket"><code>net.Socket</code></a>
+object, or undefined.</li>
+</ul>
+<p>If the Node.js process is spawned with an IPC channel (see the <a href="https://nodejs.org/api/child_process.html">Child Process</a>
+and <a href="https://nodejs.org/api/cluster.html">Cluster</a> documentation), the <code>'message'</code> event is emitted whenever a
+message sent by a parent process using <a href="https://nodejs.org/api/child_process.html#child_process_subprocess_send_message_sendhandle_options_callback"><code>childprocess.send()</code></a> is received by
+the child process.</p>
+<p>The message goes through serialization and parsing. The resulting message might
+not be the same as what is originally sent.</p>
+<h3>Event: 'multipleResolves'<span><a class="mark" href="#process_event_multipleresolves" id="process_event_multipleresolves">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.12.0</span>
+</div>
+<ul>
+<li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The resolution type. One of <code>'resolve'</code> or <code>'reject'</code>.</li>
+<li><code>promise</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" class="type">&lt;Promise&gt;</a> The promise that resolved or rejected more than once.</li>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a> The value with which the promise was either resolved or
+rejected after the original resolve.</li>
+</ul>
+<p>The <code>'multipleResolves'</code> event is emitted whenever a <code>Promise</code> has been either:</p>
+<ul>
+<li>Resolved more than once.</li>
+<li>Rejected more than once.</li>
+<li>Rejected after resolve.</li>
+<li>Resolved after reject.</li>
+</ul>
+<p>This is useful for tracking potential errors in an application while using the
+<code>Promise</code> constructor, as multiple resolutions are silently swallowed. However,
+the occurrence of this event does not necessarily indicate an error. For
+example, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race"><code>Promise.race()</code></a> can trigger a <code>'multipleResolves'</code> event.</p>
+<pre><code class="language-js">process.on('multipleResolves', (type, promise, reason) =&gt; {
+  console.error(type, promise, reason);
+  setImmediate(() =&gt; process.exit(1));
+});
+
+async function main() {
+  try {
+    return await new Promise((resolve, reject) =&gt; {
+      resolve('First call');
+      resolve('Swallowed resolve');
+      reject(new Error('Swallowed reject'));
+    });
+  } catch {
+    throw new Error('Failed');
+  }
+}
+
+main().then(console.log);
+// resolve: Promise { 'First call' } 'Swallowed resolve'
+// reject: Promise { 'First call' } Error: Swallowed reject
+//     at Promise (*)
+//     at new Promise (&lt;anonymous&gt;)
+//     at main (*)
+// First call
+</code></pre>
+<h3>Event: 'rejectionHandled'<span><a class="mark" href="#process_event_rejectionhandled" id="process_event_rejectionhandled">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v1.4.1</span>
+</div>
+<ul>
+<li><code>promise</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" class="type">&lt;Promise&gt;</a> The late handled promise.</li>
+</ul>
+<p>The <code>'rejectionHandled'</code> event is emitted whenever a <code>Promise</code> has been rejected
+and an error handler was attached to it (using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch"><code>promise.catch()</code></a>, for
+example) later than one turn of the Node.js event loop.</p>
+<p>The <code>Promise</code> object would have previously been emitted in an
+<code>'unhandledRejection'</code> event, but during the course of processing gained a
+rejection handler.</p>
+<p>There is no notion of a top level for a <code>Promise</code> chain at which rejections can
+always be handled. Being inherently asynchronous in nature, a <code>Promise</code>
+rejection can be handled at a future point in time — possibly much later than
+the event loop turn it takes for the <code>'unhandledRejection'</code> event to be emitted.</p>
+<p>Another way of stating this is that, unlike in synchronous code where there is
+an ever-growing list of unhandled exceptions, with Promises there can be a
+growing-and-shrinking list of unhandled rejections.</p>
+<p>In synchronous code, the <code>'uncaughtException'</code> event is emitted when the list of
+unhandled exceptions grows.</p>
+<p>In asynchronous code, the <code>'unhandledRejection'</code> event is emitted when the list
+of unhandled rejections grows, and the <code>'rejectionHandled'</code> event is emitted
+when the list of unhandled rejections shrinks.</p>
+<pre><code class="language-js">const unhandledRejections = new Map();
+process.on('unhandledRejection', (reason, promise) =&gt; {
+  unhandledRejections.set(promise, reason);
+});
+process.on('rejectionHandled', (promise) =&gt; {
+  unhandledRejections.delete(promise);
+});
+</code></pre>
+<p>In this example, the <code>unhandledRejections</code> <code>Map</code> will grow and shrink over time,
+reflecting rejections that start unhandled and then become handled. It is
+possible to record such errors in an error log, either periodically (which is
+likely best for long-running application) or upon process exit (which is likely
+most convenient for scripts).</p>
+<h3>Event: 'uncaughtException'<span><a class="mark" href="#process_event_uncaughtexception" id="process_event_uncaughtexception">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>Added the <code>origin</code> argument.</p></td></tr>
+<tr><td>v0.1.18</td>
+<td><p><span>Added in: v0.1.18</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> The uncaught exception.</li>
+<li><code>origin</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Indicates if the exception originates from an unhandled
+rejection or from synchronous errors. Can either be <code>'uncaughtException'</code> or
+<code>'unhandledRejection'</code>.</li>
+</ul>
+<p>The <code>'uncaughtException'</code> event is emitted when an uncaught JavaScript
+exception bubbles all the way back to the event loop. By default, Node.js
+handles such exceptions by printing the stack trace to <code>stderr</code> and exiting
+with code 1, overriding any previously set <a href="#process_process_exitcode"><code>process.exitCode</code></a>.
+Adding a handler for the <code>'uncaughtException'</code> event overrides this default
+behavior. Alternatively, change the <a href="#process_process_exitcode"><code>process.exitCode</code></a> in the
+<code>'uncaughtException'</code> handler which will result in the process exiting with the
+provided exit code. Otherwise, in the presence of such handler the process will
+exit with 0.</p>
+<pre><code class="language-js">process.on('uncaughtException', (err, origin) =&gt; {
+  fs.writeSync(
+    process.stderr.fd,
+    `Caught exception: ${err}\n` +
+    `Exception origin: ${origin}`
+  );
+});
+
+setTimeout(() =&gt; {
+  console.log('This will still run.');
+}, 500);
+
+// Intentionally cause an exception, but don't catch it.
+nonexistentFunc();
+console.log('This will not run.');
+</code></pre>
+<h4>Warning: Using <code>'uncaughtException'</code> correctly<span><a class="mark" href="#process_warning_using_uncaughtexception_correctly" id="process_warning_using_uncaughtexception_correctly">#</a></span></h4>
+<p><code>'uncaughtException'</code> is a crude mechanism for exception handling
+intended to be used only as a last resort. The event <em>should not</em> be used as
+an equivalent to <code>On Error Resume Next</code>. Unhandled exceptions inherently mean
+that an application is in an undefined state. Attempting to resume application
+code without properly recovering from the exception can cause additional
+unforeseen and unpredictable issues.</p>
+<p>Exceptions thrown from within the event handler will not be caught. Instead the
+process will exit with a non-zero exit code and the stack trace will be printed.
+This is to avoid infinite recursion.</p>
+<p>Attempting to resume normally after an uncaught exception can be similar to
+pulling out of the power cord when upgrading a computer — nine out of ten
+times nothing happens - but the 10th time, the system becomes corrupted.</p>
+<p>The correct use of <code>'uncaughtException'</code> is to perform synchronous cleanup
+of allocated resources (e.g. file descriptors, handles, etc) before shutting
+down the process. <strong>It is not safe to resume normal operation after
+<code>'uncaughtException'</code>.</strong></p>
+<p>To restart a crashed application in a more reliable way, whether
+<code>'uncaughtException'</code> is emitted or not, an external monitor should be employed
+in a separate process to detect application failures and recover or restart as
+needed.</p>
+<h3>Event: 'unhandledRejection'<span><a class="mark" href="#process_event_unhandledrejection" id="process_event_unhandledrejection">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v7.0.0</td>
+<td><p>Not handling <code>Promise</code> rejections is deprecated.</p></td></tr>
+<tr><td>v6.6.0</td>
+<td><p>Unhandled <code>Promise</code> rejections will now emit a process warning.</p></td></tr>
+<tr><td>v1.4.1</td>
+<td><p><span>Added in: v1.4.1</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>reason</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a> The object with which the promise was rejected
+(typically an <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> object).</li>
+<li><code>promise</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" class="type">&lt;Promise&gt;</a> The rejected promise.</li>
+</ul>
+<p>The <code>'unhandledRejection'</code> event is emitted whenever a <code>Promise</code> is rejected and
+no error handler is attached to the promise within a turn of the event loop.
+When programming with Promises, exceptions are encapsulated as "rejected
+promises". Rejections can be caught and handled using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch"><code>promise.catch()</code></a> and
+are propagated through a <code>Promise</code> chain. The <code>'unhandledRejection'</code> event is
+useful for detecting and keeping track of promises that were rejected whose
+rejections have not yet been handled.</p>
+<pre><code class="language-js">process.on('unhandledRejection', (reason, promise) =&gt; {
+  console.log('Unhandled Rejection at:', promise, 'reason:', reason);
+  // Application specific logging, throwing an error, or other logic here
+});
+
+somePromise.then((res) =&gt; {
+  return reportToUser(JSON.pasre(res)); // Note the typo (`pasre`)
+}); // No `.catch()` or `.then()`
+</code></pre>
+<p>The following will also trigger the <code>'unhandledRejection'</code> event to be
+emitted:</p>
+<pre><code class="language-js">function SomeResource() {
+  // Initially set the loaded status to a rejected promise
+  this.loaded = Promise.reject(new Error('Resource not yet loaded!'));
+}
+
+const resource = new SomeResource();
+// no .catch or .then on resource.loaded for at least a turn
+</code></pre>
+<p>In this example case, it is possible to track the rejection as a developer error
+as would typically be the case for other <code>'unhandledRejection'</code> events. To
+address such failures, a non-operational
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch"><code>.catch(() =&gt; { })</code></a> handler may be attached to
+<code>resource.loaded</code>, which would prevent the <code>'unhandledRejection'</code> event from
+being emitted.</p>
+<h3>Event: 'warning'<span><a class="mark" href="#process_event_warning" id="process_event_warning">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.0.0</span>
+</div>
+<ul>
+<li>
+<p><code>warning</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> Key properties of the warning are:</p>
+<ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The name of the warning. <strong>Default:</strong> <code>'Warning'</code>.</li>
+<li><code>message</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A system-provided description of the warning.</li>
+<li><code>stack</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A stack trace to the location in the code where the warning
+was issued.</li>
+</ul>
+</li>
+</ul>
+<p>The <code>'warning'</code> event is emitted whenever Node.js emits a process warning.</p>
+<p>A process warning is similar to an error in that it describes exceptional
+conditions that are being brought to the user's attention. However, warnings
+are not part of the normal Node.js and JavaScript error handling flow.
+Node.js can emit warnings whenever it detects bad coding practices that could
+lead to sub-optimal application performance, bugs, or security vulnerabilities.</p>
+<pre><code class="language-js">process.on('warning', (warning) =&gt; {
+  console.warn(warning.name);    // Print the warning name
+  console.warn(warning.message); // Print the warning message
+  console.warn(warning.stack);   // Print the stack trace
+});
+</code></pre>
+<p>By default, Node.js will print process warnings to <code>stderr</code>. The <code>--no-warnings</code>
+command-line option can be used to suppress the default console output but the
+<code>'warning'</code> event will still be emitted by the <code>process</code> object.</p>
+<p>The following example illustrates the warning that is printed to <code>stderr</code> when
+too many listeners have been added to an event:</p>
+<pre><code class="language-txt">$ node
+&gt; events.defaultMaxListeners = 1;
+&gt; process.on('foo', () =&gt; {});
+&gt; process.on('foo', () =&gt; {});
+&gt; (node:38638) MaxListenersExceededWarning: Possible EventEmitter memory leak
+detected. 2 foo listeners added. Use emitter.setMaxListeners() to increase limit
+</code></pre>
+<p>In contrast, the following example turns off the default warning output and
+adds a custom handler to the <code>'warning'</code> event:</p>
+<pre><code class="language-txt">$ node --no-warnings
+&gt; const p = process.on('warning', (warning) =&gt; console.warn('Do not do that!'));
+&gt; events.defaultMaxListeners = 1;
+&gt; process.on('foo', () =&gt; {});
+&gt; process.on('foo', () =&gt; {});
+&gt; Do not do that!
+</code></pre>
+<p>The <code>--trace-warnings</code> command-line option can be used to have the default
+console output for warnings include the full stack trace of the warning.</p>
+<p>Launching Node.js using the <code>--throw-deprecation</code> command line flag will
+cause custom deprecation warnings to be thrown as exceptions.</p>
+<p>Using the <code>--trace-deprecation</code> command line flag will cause the custom
+deprecation to be printed to <code>stderr</code> along with the stack trace.</p>
+<p>Using the <code>--no-deprecation</code> command line flag will suppress all reporting
+of the custom deprecation.</p>
+<p>The <code>*-deprecation</code> command line flags only affect warnings that use the name
+<code>'DeprecationWarning'</code>.</p>
+<h4>Emitting custom warnings<span><a class="mark" href="#process_emitting_custom_warnings" id="process_emitting_custom_warnings">#</a></span></h4>
+<p>See the <a href="#process_process_emitwarning_warning_type_code_ctor"><code>process.emitWarning()</code></a> method for issuing
+custom or application-specific warnings.</p>
+<h3>Signal Events<span><a class="mark" href="#process_signal_events" id="process_signal_events">#</a></span></h3>
+
+
+<p>Signal events will be emitted when the Node.js process receives a signal. Please
+refer to <a href="http://man7.org/linux/man-pages/man7/signal.7.html"><code>signal(7)</code></a> for a listing of standard POSIX signal names such as
+<code>'SIGINT'</code>, <code>'SIGHUP'</code>, etc.</p>
+<p>The signal handler will receive the signal's name (<code>'SIGINT'</code>,
+<code>'SIGTERM'</code>, etc.) as the first argument.</p>
+<p>The name of each event will be the uppercase common name for the signal (e.g.
+<code>'SIGINT'</code> for <code>SIGINT</code> signals).</p>
+<pre><code class="language-js">// Begin reading from stdin so the process does not exit.
+process.stdin.resume();
+
+process.on('SIGINT', () =&gt; {
+  console.log('Received SIGINT. Press Control-D to exit.');
+});
+
+// Using a single function to handle multiple signals
+function handle(signal) {
+  console.log(`Received ${signal}`);
+}
+
+process.on('SIGINT', handle);
+process.on('SIGTERM', handle);
+</code></pre>
+<ul>
+<li><code>'SIGUSR1'</code> is reserved by Node.js to start the <a href="https://nodejs.org/api/debugger.html">debugger</a>. It's possible to
+install a listener but doing so might interfere with the debugger.</li>
+<li><code>'SIGTERM'</code> and <code>'SIGINT'</code> have default handlers on non-Windows platforms that
+reset the terminal mode before exiting with code <code>128 + signal number</code>. If one
+of these signals has a listener installed, its default behavior will be
+removed (Node.js will no longer exit).</li>
+<li><code>'SIGPIPE'</code> is ignored by default. It can have a listener installed.</li>
+<li><code>'SIGHUP'</code> is generated on Windows when the console window is closed, and on
+other platforms under various similar conditions. See <a href="http://man7.org/linux/man-pages/man7/signal.7.html"><code>signal(7)</code></a>. It can have a
+listener installed, however Node.js will be unconditionally terminated by
+Windows about 10 seconds later. On non-Windows platforms, the default
+behavior of <code>SIGHUP</code> is to terminate Node.js, but once a listener has been
+installed its default behavior will be removed.</li>
+<li><code>'SIGTERM'</code> is not supported on Windows, it can be listened on.</li>
+<li><code>'SIGINT'</code> from the terminal is supported on all platforms, and can usually be
+generated with <code>&lt;Ctrl&gt;+C</code> (though this may be configurable). It is not
+generated when terminal raw mode is enabled.</li>
+<li><code>'SIGBREAK'</code> is delivered on Windows when <code>&lt;Ctrl&gt;+&lt;Break&gt;</code> is pressed, on
+non-Windows platforms it can be listened on, but there is no way to send or
+generate it.</li>
+<li><code>'SIGWINCH'</code> is delivered when the console has been resized. On Windows, this
+will only happen on write to the console when the cursor is being moved, or
+when a readable tty is used in raw mode.</li>
+<li><code>'SIGKILL'</code> cannot have a listener installed, it will unconditionally
+terminate Node.js on all platforms.</li>
+<li><code>'SIGSTOP'</code> cannot have a listener installed.</li>
+<li><code>'SIGBUS'</code>, <code>'SIGFPE'</code>, <code>'SIGSEGV'</code> and <code>'SIGILL'</code>, when not raised
+ artificially using <a href="http://man7.org/linux/man-pages/man2/kill.2.html"><code>kill(2)</code></a>, inherently leave the process in a state from
+ which it is not safe to attempt to call JS listeners. Doing so might lead to
+ the process hanging in an endless loop, since listeners attached using
+ <code>process.on()</code> are called asynchronously and therefore unable to correct the
+underlying problem.</li>
+</ul>
+<p>Windows does not support sending signals, but Node.js offers some emulation
+with <a href="#process_process_kill_pid_signal"><code>process.kill()</code></a>, and <a href="https://nodejs.org/api/child_process.html#child_process_subprocess_kill_signal"><code>subprocess.kill()</code></a>. Sending signal <code>0</code> can
+be used to test for the existence of a process. Sending <code>SIGINT</code>, <code>SIGTERM</code>,
+and <code>SIGKILL</code> cause the unconditional termination of the target process.</p>
+<h2>process.abort()<span><a class="mark" href="#process_process_abort" id="process_process_abort">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.7.0</span>
+</div>
+<p>The <code>process.abort()</code> method causes the Node.js process to exit immediately and
+generate a core file.</p>
+<p>This feature is not available in <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads.</p>
+<h2>process.allowedNodeEnvironmentFlags<span><a class="mark" href="#process_process_allowednodeenvironmentflags" id="process_process_allowednodeenvironmentflags">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v10.10.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set" class="type">&lt;Set&gt;</a></li>
+</ul>
+<p>The <code>process.allowedNodeEnvironmentFlags</code> property is a special,
+read-only <code>Set</code> of flags allowable within the <a href="https://nodejs.org/api/cli.html#cli_node_options_options"><code>NODE_OPTIONS</code></a>
+environment variable.</p>
+<p><code>process.allowedNodeEnvironmentFlags</code> extends <code>Set</code>, but overrides
+<code>Set.prototype.has</code> to recognize several different possible flag
+representations.  <code>process.allowedNodeEnvironmentFlags.has()</code> will
+return <code>true</code> in the following cases:</p>
+<ul>
+<li>Flags may omit leading single (<code>-</code>) or double (<code>--</code>) dashes; e.g.,
+<code>inspect-brk</code> for <code>--inspect-brk</code>, or <code>r</code> for <code>-r</code>.</li>
+<li>Flags passed through to V8 (as listed in <code>--v8-options</code>) may replace
+one or more <em>non-leading</em> dashes for an underscore, or vice-versa;
+e.g., <code>--perf_basic_prof</code>, <code>--perf-basic-prof</code>, <code>--perf_basic-prof</code>,
+etc.</li>
+<li>Flags may contain one or more equals (<code>=</code>) characters; all
+characters after and including the first equals will be ignored;
+e.g., <code>--stack-trace-limit=100</code>.</li>
+<li>Flags <em>must</em> be allowable within <a href="https://nodejs.org/api/cli.html#cli_node_options_options"><code>NODE_OPTIONS</code></a>.</li>
+</ul>
+<p>When iterating over <code>process.allowedNodeEnvironmentFlags</code>, flags will
+appear only <em>once</em>; each will begin with one or more dashes. Flags
+passed through to V8 will contain underscores instead of non-leading
+dashes:</p>
+<pre><code class="language-js">process.allowedNodeEnvironmentFlags.forEach((flag) =&gt; {
+  // -r
+  // --inspect-brk
+  // --abort_on_uncaught_exception
+  // ...
+});
+</code></pre>
+<p>The methods <code>add()</code>, <code>clear()</code>, and <code>delete()</code> of
+<code>process.allowedNodeEnvironmentFlags</code> do nothing, and will fail
+silently.</p>
+<p>If Node.js was compiled <em>without</em> <a href="https://nodejs.org/api/cli.html#cli_node_options_options"><code>NODE_OPTIONS</code></a> support (shown in
+<a href="#process_process_config"><code>process.config</code></a>), <code>process.allowedNodeEnvironmentFlags</code> will
+contain what <em>would have</em> been allowable.</p>
+<h2>process.arch<span><a class="mark" href="#process_process_arch" id="process_process_arch">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.5.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The <code>process.arch</code> property returns a string identifying the operating system
+CPU architecture for which the Node.js binary was compiled.</p>
+<p>The current possible values are: <code>'arm'</code>, <code>'arm64'</code>, <code>'ia32'</code>, <code>'mips'</code>,
+<code>'mipsel'</code>, <code>'ppc'</code>, <code>'ppc64'</code>, <code>'s390'</code>, <code>'s390x'</code>, <code>'x32'</code>, and <code>'x64'</code>.</p>
+<pre><code class="language-js">console.log(`This processor architecture is ${process.arch}`);
+</code></pre>
+<h2>process.argv<span><a class="mark" href="#process_process_argv" id="process_process_argv">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.27</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+<p>The <code>process.argv</code> property returns an array containing the command line
+arguments passed when the Node.js process was launched. The first element will
+be <a href="#process_process_execpath"><code>process.execPath</code></a>. See <code>process.argv0</code> if access to the original value of
+<code>argv[0]</code> is needed. The second element will be the path to the JavaScript
+file being executed. The remaining elements will be any additional command line
+arguments.</p>
+<p>For example, assuming the following script for <code>process-args.js</code>:</p>
+<pre><code class="language-js">// print process.argv
+process.argv.forEach((val, index) =&gt; {
+  console.log(`${index}: ${val}`);
+});
+</code></pre>
+<p>Launching the Node.js process as:</p>
+<pre><code class="language-console">$ node process-args.js one two=three four
+</code></pre>
+<p>Would generate the output:</p>
+<pre><code class="language-text">0: /usr/local/bin/node
+1: /Users/mjr/work/node/process-args.js
+2: one
+3: two=three
+4: four
+</code></pre>
+<h2>process.argv0<span><a class="mark" href="#process_process_argv0" id="process_process_argv0">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v6.4.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The <code>process.argv0</code> property stores a read-only copy of the original value of
+<code>argv[0]</code> passed when Node.js starts.</p>
+<pre><code class="language-console">$ bash -c 'exec -a customArgv0 ./node'
+&gt; process.argv[0]
+'/Volumes/code/external/node/out/Release/node'
+&gt; process.argv0
+'customArgv0'
+</code></pre>
+<h2>process.channel<span><a class="mark" href="#process_process_channel" id="process_process_channel">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v7.1.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>If the Node.js process was spawned with an IPC channel (see the
+<a href="https://nodejs.org/api/child_process.html">Child Process</a> documentation), the <code>process.channel</code>
+property is a reference to the IPC channel. If no IPC channel exists, this
+property is <code>undefined</code>.</p>
+<h2>process.chdir(directory)<span><a class="mark" href="#process_process_chdir_directory" id="process_process_chdir_directory">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.17</span>
+</div>
+<ul>
+<li><code>directory</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The <code>process.chdir()</code> method changes the current working directory of the
+Node.js process or throws an exception if doing so fails (for instance, if
+the specified <code>directory</code> does not exist).</p>
+<pre><code class="language-js">console.log(`Starting directory: ${process.cwd()}`);
+try {
+  process.chdir('/tmp');
+  console.log(`New directory: ${process.cwd()}`);
+} catch (err) {
+  console.error(`chdir: ${err}`);
+}
+</code></pre>
+<p>This feature is not available in <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads.</p>
+<h2>process.config<span><a class="mark" href="#process_process_config" id="process_process_config">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.7.7</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>The <code>process.config</code> property returns an <code>Object</code> containing the JavaScript
+representation of the configure options used to compile the current Node.js
+executable. This is the same as the <code>config.gypi</code> file that was produced when
+running the <code>./configure</code> script.</p>
+<p>An example of the possible output looks like:</p>
+<!-- eslint-skip -->
+<pre><code class="language-js">{
+  target_defaults:
+   { cflags: [],
+     default_configuration: 'Release',
+     defines: [],
+     include_dirs: [],
+     libraries: [] },
+  variables:
+   {
+     host_arch: 'x64',
+     napi_build_version: 4,
+     node_install_npm: 'true',
+     node_prefix: '',
+     node_shared_cares: 'false',
+     node_shared_http_parser: 'false',
+     node_shared_libuv: 'false',
+     node_shared_zlib: 'false',
+     node_use_dtrace: 'false',
+     node_use_openssl: 'true',
+     node_shared_openssl: 'false',
+     strict_aliasing: 'true',
+     target_arch: 'x64',
+     v8_use_snapshot: 1
+   }
+}
+</code></pre>
+<p>The <code>process.config</code> property is <strong>not</strong> read-only and there are existing
+modules in the ecosystem that are known to extend, modify, or entirely replace
+the value of <code>process.config</code>.</p>
+<h2>process.connected<span><a class="mark" href="#process_process_connected" id="process_process_connected">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.7.2</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>If the Node.js process is spawned with an IPC channel (see the <a href="https://nodejs.org/api/child_process.html">Child Process</a>
+and <a href="https://nodejs.org/api/cluster.html">Cluster</a> documentation), the <code>process.connected</code> property will return
+<code>true</code> so long as the IPC channel is connected and will return <code>false</code> after
+<code>process.disconnect()</code> is called.</p>
+<p>Once <code>process.connected</code> is <code>false</code>, it is no longer possible to send messages
+over the IPC channel using <code>process.send()</code>.</p>
+<h2>process.cpuUsage([previousValue])<span><a class="mark" href="#process_process_cpuusage_previousvalue" id="process_process_cpuusage_previousvalue">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v6.1.0</span>
+</div>
+<ul>
+<li><code>previousValue</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> A previous return value from calling
+<code>process.cpuUsage()</code></li>
+<li>
+<p>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>user</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+<li><code>system</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>The <code>process.cpuUsage()</code> method returns the user and system CPU time usage of
+the current process, in an object with properties <code>user</code> and <code>system</code>, whose
+values are microsecond values (millionth of a second). These values measure time
+spent in user and system code respectively, and may end up being greater than
+actual elapsed time if multiple CPU cores are performing work for this process.</p>
+<p>The result of a previous call to <code>process.cpuUsage()</code> can be passed as the
+argument to the function, to get a diff reading.</p>
+<pre><code class="language-js">const startUsage = process.cpuUsage();
+// { user: 38579, system: 6986 }
+
+// spin the CPU for 500 milliseconds
+const now = Date.now();
+while (Date.now() - now &lt; 500);
+
+console.log(process.cpuUsage(startUsage));
+// { user: 514883, system: 11226 }
+</code></pre>
+<h2>process.cwd()<span><a class="mark" href="#process_process_cwd" id="process_process_cwd">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.8</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The <code>process.cwd()</code> method returns the current working directory of the Node.js
+process.</p>
+<pre><code class="language-js">console.log(`Current directory: ${process.cwd()}`);
+</code></pre>
+<h2>process.debugPort<span><a class="mark" href="#process_process_debugport" id="process_process_debugport">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.7.2</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p>The port used by Node.js's debugger when enabled.</p>
+<pre><code class="language-js">process.debugPort = 5858;
+</code></pre>
+<h2>process.disconnect()<span><a class="mark" href="#process_process_disconnect" id="process_process_disconnect">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.7.2</span>
+</div>
+<p>If the Node.js process is spawned with an IPC channel (see the <a href="https://nodejs.org/api/child_process.html">Child Process</a>
+and <a href="https://nodejs.org/api/cluster.html">Cluster</a> documentation), the <code>process.disconnect()</code> method will close the
+IPC channel to the parent process, allowing the child process to exit gracefully
+once there are no other connections keeping it alive.</p>
+<p>The effect of calling <code>process.disconnect()</code> is the same as calling
+<a href="https://nodejs.org/api/child_process.html#child_process_subprocess_disconnect"><code>ChildProcess.disconnect()</code></a> from the parent process.</p>
+<p>If the Node.js process was not spawned with an IPC channel,
+<code>process.disconnect()</code> will be <code>undefined</code>.</p>
+<h2>process.dlopen(module, filename[, flags])<span><a class="mark" href="#process_process_dlopen_module_filename_flags" id="process_process_dlopen_module_filename_flags">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>Added support for the <code>flags</code> argument.</p></td></tr>
+<tr><td>v0.1.16</td>
+<td><p><span>Added in: v0.1.16</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>module</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+<li><code>filename</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li><code>flags</code> <a href="https://nodejs.org/api/os.html#os_dlopen_constants" class="type">&lt;os.constants.dlopen&gt;</a> <strong>Default:</strong> <code>os.constants.dlopen.RTLD_LAZY</code></li>
+</ul>
+<p>The <code>process.dlopen()</code> method allows to dynamically load shared
+objects. It is primarily used by <code>require()</code> to load
+C++ Addons, and should not be used directly, except in special
+cases. In other words, <a href="https://nodejs.org/api/globals.html#globals_require"><code>require()</code></a> should be preferred over
+<code>process.dlopen()</code>, unless there are specific reasons.</p>
+<p>The <code>flags</code> argument is an integer that allows to specify dlopen
+behavior. See the <a href="https://nodejs.org/api/os.html#os_dlopen_constants"><code>os.constants.dlopen</code></a> documentation for details.</p>
+<p>If there are specific reasons to use <code>process.dlopen()</code> (for instance,
+to specify dlopen flags), it's often useful to use <a href="https://nodejs.org/api/modules.html#modules_require_resolve_request_options"><code>require.resolve()</code></a>
+to look up the module's path.</p>
+<p>An important drawback when calling <code>process.dlopen()</code> is that the <code>module</code>
+instance must be passed. Functions exported by the C++ Addon will be accessible
+via <code>module.exports</code>.</p>
+<p>The example below shows how to load a C++ Addon, named as <code>binding</code>,
+that exports a <code>foo</code> function. All the symbols will be loaded before
+the call returns, by passing the <code>RTLD_NOW</code> constant. In this example
+the constant is assumed to be available.</p>
+<pre><code class="language-js">const os = require('os');
+process.dlopen(module, require.resolve('binding'),
+               os.constants.dlopen.RTLD_NOW);
+module.exports.foo();
+</code></pre>
+<h2>process.emitWarning(warning[, options])<span><a class="mark" href="#process_process_emitwarning_warning_options" id="process_process_emitwarning_warning_options">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v8.0.0</span>
+</div>
+<ul>
+<li><code>warning</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> The warning to emit.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> When <code>warning</code> is a <code>String</code>, <code>type</code> is the name to use
+for the <em>type</em> of warning being emitted. <strong>Default:</strong> <code>'Warning'</code>.</li>
+<li><code>code</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A unique identifier for the warning instance being emitted.</li>
+<li><code>ctor</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> When <code>warning</code> is a <code>String</code>, <code>ctor</code> is an optional
+function used to limit the generated stack trace. <strong>Default:</strong>
+<code>process.emitWarning</code>.</li>
+<li><code>detail</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Additional text to include with the error.</li>
+</ul>
+</li>
+</ul>
+<p>The <code>process.emitWarning()</code> method can be used to emit custom or application
+specific process warnings. These can be listened for by adding a handler to the
+<a href="#process_event_warning"><code>'warning'</code></a> event.</p>
+<pre><code class="language-js">// Emit a warning with a code and additional detail.
+process.emitWarning('Something happened!', {
+  code: 'MY_WARNING',
+  detail: 'This is some additional information'
+});
+// Emits:
+// (node:56338) [MY_WARNING] Warning: Something happened!
+// This is some additional information
+</code></pre>
+<p>In this example, an <code>Error</code> object is generated internally by
+<code>process.emitWarning()</code> and passed through to the
+<a href="#process_event_warning"><code>'warning'</code></a> handler.</p>
+<pre><code class="language-js">process.on('warning', (warning) =&gt; {
+  console.warn(warning.name);    // 'Warning'
+  console.warn(warning.message); // 'Something happened!'
+  console.warn(warning.code);    // 'MY_WARNING'
+  console.warn(warning.stack);   // Stack trace
+  console.warn(warning.detail);  // 'This is some additional information'
+});
+</code></pre>
+<p>If <code>warning</code> is passed as an <code>Error</code> object, the <code>options</code> argument is ignored.</p>
+<h2>process.emitWarning(warning[, type[, code]][, ctor])<span><a class="mark" href="#process_process_emitwarning_warning_type_code_ctor" id="process_process_emitwarning_warning_type_code_ctor">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v6.0.0</span>
+</div>
+<ul>
+<li><code>warning</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> The warning to emit.</li>
+<li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> When <code>warning</code> is a <code>String</code>, <code>type</code> is the name to use
+for the <em>type</em> of warning being emitted. <strong>Default:</strong> <code>'Warning'</code>.</li>
+<li><code>code</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A unique identifier for the warning instance being emitted.</li>
+<li><code>ctor</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> When <code>warning</code> is a <code>String</code>, <code>ctor</code> is an optional
+function used to limit the generated stack trace. <strong>Default:</strong>
+<code>process.emitWarning</code>.</li>
+</ul>
+<p>The <code>process.emitWarning()</code> method can be used to emit custom or application
+specific process warnings. These can be listened for by adding a handler to the
+<a href="#process_event_warning"><code>'warning'</code></a> event.</p>
+<pre><code class="language-js">// Emit a warning using a string.
+process.emitWarning('Something happened!');
+// Emits: (node: 56338) Warning: Something happened!
+</code></pre>
+<pre><code class="language-js">// Emit a warning using a string and a type.
+process.emitWarning('Something Happened!', 'CustomWarning');
+// Emits: (node:56338) CustomWarning: Something Happened!
+</code></pre>
+<pre><code class="language-js">process.emitWarning('Something happened!', 'CustomWarning', 'WARN001');
+// Emits: (node:56338) [WARN001] CustomWarning: Something happened!
+</code></pre>
+<p>In each of the previous examples, an <code>Error</code> object is generated internally by
+<code>process.emitWarning()</code> and passed through to the <a href="#process_event_warning"><code>'warning'</code></a>
+handler.</p>
+<pre><code class="language-js">process.on('warning', (warning) =&gt; {
+  console.warn(warning.name);
+  console.warn(warning.message);
+  console.warn(warning.code);
+  console.warn(warning.stack);
+});
+</code></pre>
+<p>If <code>warning</code> is passed as an <code>Error</code> object, it will be passed through to the
+<code>'warning'</code> event handler unmodified (and the optional <code>type</code>,
+<code>code</code> and <code>ctor</code> arguments will be ignored):</p>
+<pre><code class="language-js">// Emit a warning using an Error object.
+const myWarning = new Error('Something happened!');
+// Use the Error name property to specify the type name
+myWarning.name = 'CustomWarning';
+myWarning.code = 'WARN001';
+
+process.emitWarning(myWarning);
+// Emits: (node:56338) [WARN001] CustomWarning: Something happened!
+</code></pre>
+<p>A <code>TypeError</code> is thrown if <code>warning</code> is anything other than a string or <code>Error</code>
+object.</p>
+<p>While process warnings use <code>Error</code> objects, the process warning
+mechanism is <strong>not</strong> a replacement for normal error handling mechanisms.</p>
+<p>The following additional handling is implemented if the warning <code>type</code> is
+<code>'DeprecationWarning'</code>:</p>
+<ul>
+<li>If the <code>--throw-deprecation</code> command-line flag is used, the deprecation
+warning is thrown as an exception rather than being emitted as an event.</li>
+<li>If the <code>--no-deprecation</code> command-line flag is used, the deprecation
+warning is suppressed.</li>
+<li>If the <code>--trace-deprecation</code> command-line flag is used, the deprecation
+warning is printed to <code>stderr</code> along with the full stack trace.</li>
+</ul>
+<h3>Avoiding duplicate warnings<span><a class="mark" href="#process_avoiding_duplicate_warnings" id="process_avoiding_duplicate_warnings">#</a></span></h3>
+<p>As a best practice, warnings should be emitted only once per process. To do
+so, it is recommended to place the <code>emitWarning()</code> behind a simple boolean
+flag as illustrated in the example below:</p>
+<pre><code class="language-js">function emitMyWarning() {
+  if (!emitMyWarning.warned) {
+    emitMyWarning.warned = true;
+    process.emitWarning('Only warn once!');
+  }
+}
+emitMyWarning();
+// Emits: (node: 56339) Warning: Only warn once!
+emitMyWarning();
+// Emits nothing
+</code></pre>
+<h2>process.env<span><a class="mark" href="#process_process_env" id="process_process_env">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.14.0</td>
+<td><p>Worker threads will now use a copy of the parent thread’s <code>process.env</code> by default, configurable through the <code>env</code> option of the <code>Worker</code> constructor.</p></td></tr>
+<tr><td>v10.0.0</td>
+<td><p>Implicit conversion of variable value to string is deprecated.</p></td></tr>
+<tr><td>v0.1.27</td>
+<td><p><span>Added in: v0.1.27</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>The <code>process.env</code> property returns an object containing the user environment.
+See <a href="http://man7.org/linux/man-pages/man7/environ.7.html"><code>environ(7)</code></a>.</p>
+<p>An example of this object looks like:</p>
+<!-- eslint-skip -->
+<pre><code class="language-js">{
+  TERM: 'xterm-256color',
+  SHELL: '/usr/local/bin/bash',
+  USER: 'maciej',
+  PATH: '~/.bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
+  PWD: '/Users/maciej',
+  EDITOR: 'vim',
+  SHLVL: '1',
+  HOME: '/Users/maciej',
+  LOGNAME: 'maciej',
+  _: '/usr/local/bin/node'
+}
+</code></pre>
+<p>It is possible to modify this object, but such modifications will not be
+reflected outside the Node.js process, or (unless explicitly requested)
+to other <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads.
+In other words, the following example would not work:</p>
+<pre><code class="language-console">$ node -e 'process.env.foo = "bar"' &amp;&amp; echo $foo
+</code></pre>
+<p>While the following will:</p>
+<pre><code class="language-js">process.env.foo = 'bar';
+console.log(process.env.foo);
+</code></pre>
+<p>Assigning a property on <code>process.env</code> will implicitly convert the value
+to a string. <strong>This behavior is deprecated.</strong> Future versions of Node.js may
+throw an error when the value is not a string, number, or boolean.</p>
+<pre><code class="language-js">process.env.test = null;
+console.log(process.env.test);
+// =&gt; 'null'
+process.env.test = undefined;
+console.log(process.env.test);
+// =&gt; 'undefined'
+</code></pre>
+<p>Use <code>delete</code> to delete a property from <code>process.env</code>.</p>
+<pre><code class="language-js">process.env.TEST = 1;
+delete process.env.TEST;
+console.log(process.env.TEST);
+// =&gt; undefined
+</code></pre>
+<p>On Windows operating systems, environment variables are case-insensitive.</p>
+<pre><code class="language-js">process.env.TEST = 1;
+console.log(process.env.test);
+// =&gt; 1
+</code></pre>
+<p>Unless explicitly specified when creating a <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> instance,
+each <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> thread has its own copy of <code>process.env</code>, based on its
+parent thread’s <code>process.env</code>, or whatever was specified as the <code>env</code> option
+to the <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> constructor. Changes to <code>process.env</code> will not be visible
+across <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads, and only the main thread can make changes that
+are visible to the operating system or to native add-ons.</p>
+<h2>process.execArgv<span><a class="mark" href="#process_process_execargv" id="process_process_execargv">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.7.7</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+<p>The <code>process.execArgv</code> property returns the set of Node.js-specific command-line
+options passed when the Node.js process was launched. These options do not
+appear in the array returned by the <a href="#process_process_argv"><code>process.argv</code></a> property, and do not
+include the Node.js executable, the name of the script, or any options following
+the script name. These options are useful in order to spawn child processes with
+the same execution environment as the parent.</p>
+<pre><code class="language-console">$ node --harmony script.js --version
+</code></pre>
+<p>Results in <code>process.execArgv</code>:</p>
+<!-- eslint-disable semi -->
+<pre><code class="language-js">['--harmony']
+</code></pre>
+<p>And <code>process.argv</code>:</p>
+<!-- eslint-disable semi -->
+<pre><code class="language-js">['/usr/local/bin/node', 'script.js', '--version']
+</code></pre>
+<h2>process.execPath<span><a class="mark" href="#process_process_execpath" id="process_process_execpath">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.100</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The <code>process.execPath</code> property returns the absolute pathname of the executable
+that started the Node.js process.</p>
+<!-- eslint-disable semi -->
+<pre><code class="language-js">'/usr/local/bin/node'
+</code></pre>
+<h2>process.exit([code])<span><a class="mark" href="#process_process_exit_code" id="process_process_exit_code">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.13</span>
+</div>
+<ul>
+<li><code>code</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> The exit code. <strong>Default:</strong> <code>0</code>.</li>
+</ul>
+<p>The <code>process.exit()</code> method instructs Node.js to terminate the process
+synchronously with an exit status of <code>code</code>. If <code>code</code> is omitted, exit uses
+either the 'success' code <code>0</code> or the value of <code>process.exitCode</code> if it has been
+set. Node.js will not terminate until all the <a href="#process_event_exit"><code>'exit'</code></a> event listeners are
+called.</p>
+<p>To exit with a 'failure' code:</p>
+<pre><code class="language-js">process.exit(1);
+</code></pre>
+<p>The shell that executed Node.js should see the exit code as <code>1</code>.</p>
+<p>Calling <code>process.exit()</code> will force the process to exit as quickly as possible
+even if there are still asynchronous operations pending that have not yet
+completed fully, including I/O operations to <code>process.stdout</code> and
+<code>process.stderr</code>.</p>
+<p>In most situations, it is not actually necessary to call <code>process.exit()</code>
+explicitly. The Node.js process will exit on its own <em>if there is no additional
+work pending</em> in the event loop. The <code>process.exitCode</code> property can be set to
+tell the process which exit code to use when the process exits gracefully.</p>
+<p>For instance, the following example illustrates a <em>misuse</em> of the
+<code>process.exit()</code> method that could lead to data printed to stdout being
+truncated and lost:</p>
+<pre><code class="language-js">// This is an example of what *not* to do:
+if (someConditionNotMet()) {
+  printUsageToStdout();
+  process.exit(1);
+}
+</code></pre>
+<p>The reason this is problematic is because writes to <code>process.stdout</code> in Node.js
+are sometimes <em>asynchronous</em> and may occur over multiple ticks of the Node.js
+event loop. Calling <code>process.exit()</code>, however, forces the process to exit
+<em>before</em> those additional writes to <code>stdout</code> can be performed.</p>
+<p>Rather than calling <code>process.exit()</code> directly, the code <em>should</em> set the
+<code>process.exitCode</code> and allow the process to exit naturally by avoiding
+scheduling any additional work for the event loop:</p>
+<pre><code class="language-js">// How to properly set the exit code while letting
+// the process exit gracefully.
+if (someConditionNotMet()) {
+  printUsageToStdout();
+  process.exitCode = 1;
+}
+</code></pre>
+<p>If it is necessary to terminate the Node.js process due to an error condition,
+throwing an <em>uncaught</em> error and allowing the process to terminate accordingly
+is safer than calling <code>process.exit()</code>.</p>
+<p>In <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads, this function stops the current thread rather
+than the current process.</p>
+<h2>process.exitCode<span><a class="mark" href="#process_process_exitcode" id="process_process_exitcode">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.11.8</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+</ul>
+<p>A number which will be the process exit code, when the process either
+exits gracefully, or is exited via <a href="#process_process_exit_code"><code>process.exit()</code></a> without specifying
+a code.</p>
+<p>Specifying a code to <a href="#process_process_exit_code"><code>process.exit(code)</code></a> will override any
+previous setting of <code>process.exitCode</code>.</p>
+<h2>process.getegid()<span><a class="mark" href="#process_process_getegid" id="process_process_getegid">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v2.0.0</span>
+</div>
+<p>The <code>process.getegid()</code> method returns the numerical effective group identity
+of the Node.js process. (See <a href="http://man7.org/linux/man-pages/man2/getegid.2.html"><code>getegid(2)</code></a>.)</p>
+<pre><code class="language-js">if (process.getegid) {
+  console.log(`Current gid: ${process.getegid()}`);
+}
+</code></pre>
+<p>This function is only available on POSIX platforms (i.e. not Windows or
+Android).</p>
+<h2>process.geteuid()<span><a class="mark" href="#process_process_geteuid" id="process_process_geteuid">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v2.0.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>The <code>process.geteuid()</code> method returns the numerical effective user identity of
+the process. (See <a href="http://man7.org/linux/man-pages/man2/geteuid.2.html"><code>geteuid(2)</code></a>.)</p>
+<pre><code class="language-js">if (process.geteuid) {
+  console.log(`Current uid: ${process.geteuid()}`);
+}
+</code></pre>
+<p>This function is only available on POSIX platforms (i.e. not Windows or
+Android).</p>
+<h2>process.getgid()<span><a class="mark" href="#process_process_getgid" id="process_process_getgid">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.31</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>The <code>process.getgid()</code> method returns the numerical group identity of the
+process. (See <a href="http://man7.org/linux/man-pages/man2/getgid.2.html"><code>getgid(2)</code></a>.)</p>
+<pre><code class="language-js">if (process.getgid) {
+  console.log(`Current gid: ${process.getgid()}`);
+}
+</code></pre>
+<p>This function is only available on POSIX platforms (i.e. not Windows or
+Android).</p>
+<h2>process.getgroups()<span><a class="mark" href="#process_process_getgroups" id="process_process_getgroups">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.9.4</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer[]&gt;</a></li>
+</ul>
+<p>The <code>process.getgroups()</code> method returns an array with the supplementary group
+IDs. POSIX leaves it unspecified if the effective group ID is included but
+Node.js ensures it always is.</p>
+<p>This function is only available on POSIX platforms (i.e. not Windows or
+Android).</p>
+<h2>process.getuid()<span><a class="mark" href="#process_process_getuid" id="process_process_getuid">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.28</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+</ul>
+<p>The <code>process.getuid()</code> method returns the numeric user identity of the process.
+(See <a href="http://man7.org/linux/man-pages/man2/getuid.2.html"><code>getuid(2)</code></a>.)</p>
+<pre><code class="language-js">if (process.getuid) {
+  console.log(`Current uid: ${process.getuid()}`);
+}
+</code></pre>
+<p>This function is only available on POSIX platforms (i.e. not Windows or
+Android).</p>
+<h2>process.hasUncaughtExceptionCaptureCallback()<span><a class="mark" href="#process_process_hasuncaughtexceptioncapturecallback" id="process_process_hasuncaughtexceptioncapturecallback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v9.3.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Indicates whether a callback has been set using
+<a href="https://nodejs.org/api/process.html#process_process_setuncaughtexceptioncapturecallback_fn"><code>process.setUncaughtExceptionCaptureCallback()</code></a>.</p>
+<h2>process.hrtime([time])<span><a class="mark" href="#process_process_hrtime_time" id="process_process_hrtime_time">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.7.6</span>
+</div>
+<ul>
+<li><code>time</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer[]&gt;</a> The result of a previous call to <code>process.hrtime()</code></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer[]&gt;</a></li>
+</ul>
+<p>This is the legacy version of <a href="#process_process_hrtime_bigint"><code>process.hrtime.bigint()</code></a>
+before <code>bigint</code> was introduced in JavaScript.</p>
+<p>The <code>process.hrtime()</code> method returns the current high-resolution real time
+in a <code>[seconds, nanoseconds]</code> tuple <code>Array</code>, where <code>nanoseconds</code> is the
+remaining part of the real time that can't be represented in second precision.</p>
+<p><code>time</code> is an optional parameter that must be the result of a previous
+<code>process.hrtime()</code> call to diff with the current time. If the parameter
+passed in is not a tuple <code>Array</code>, a <code>TypeError</code> will be thrown. Passing in a
+user-defined array instead of the result of a previous call to
+<code>process.hrtime()</code> will lead to undefined behavior.</p>
+<p>These times are relative to an arbitrary time in the
+past, and not related to the time of day and therefore not subject to clock
+drift. The primary use is for measuring performance between intervals:</p>
+<pre><code class="language-js">const NS_PER_SEC = 1e9;
+const time = process.hrtime();
+// [ 1800216, 25 ]
+
+setTimeout(() =&gt; {
+  const diff = process.hrtime(time);
+  // [ 1, 552 ]
+
+  console.log(`Benchmark took ${diff[0] * NS_PER_SEC + diff[1]} nanoseconds`);
+  // Benchmark took 1000000552 nanoseconds
+}, 1000);
+</code></pre>
+<h2>process.hrtime.bigint()<span><a class="mark" href="#process_process_hrtime_bigint" id="process_process_hrtime_bigint">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v10.7.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt" class="type">&lt;bigint&gt;</a></li>
+</ul>
+<p>The <code>bigint</code> version of the <a href="#process_process_hrtime_time"><code>process.hrtime()</code></a> method returning the
+current high-resolution real time in a <code>bigint</code>.</p>
+<p>Unlike <a href="#process_process_hrtime_time"><code>process.hrtime()</code></a>, it does not support an additional <code>time</code>
+argument since the difference can just be computed directly
+by subtraction of the two <code>bigint</code>s.</p>
+<pre><code class="language-js">const start = process.hrtime.bigint();
+// 191051479007711n
+
+setTimeout(() =&gt; {
+  const end = process.hrtime.bigint();
+  // 191052633396993n
+
+  console.log(`Benchmark took ${end - start} nanoseconds`);
+  // Benchmark took 1154389282 nanoseconds
+}, 1000);
+</code></pre>
+<h2>process.initgroups(user, extraGroup)<span><a class="mark" href="#process_process_initgroups_user_extragroup" id="process_process_initgroups_user_extragroup">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.9.4</span>
+</div>
+<ul>
+<li><code>user</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The user name or numeric identifier.</li>
+<li><code>extraGroup</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> A group name or numeric identifier.</li>
+</ul>
+<p>The <code>process.initgroups()</code> method reads the <code>/etc/group</code> file and initializes
+the group access list, using all groups of which the user is a member. This is
+a privileged operation that requires that the Node.js process either have <code>root</code>
+access or the <code>CAP_SETGID</code> capability.</p>
+<p>Use care when dropping privileges:</p>
+<pre><code class="language-js">console.log(process.getgroups());         // [ 0 ]
+process.initgroups('bnoordhuis', 1000);   // switch user
+console.log(process.getgroups());         // [ 27, 30, 46, 1000, 0 ]
+process.setgid(1000);                     // drop root gid
+console.log(process.getgroups());         // [ 27, 30, 46, 1000 ]
+</code></pre>
+<p>This function is only available on POSIX platforms (i.e. not Windows or
+Android).
+This feature is not available in <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads.</p>
+<h2>process.kill(pid[, signal])<span><a class="mark" href="#process_process_kill_pid_signal" id="process_process_kill_pid_signal">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.0.6</span>
+</div>
+<ul>
+<li><code>pid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> A process ID</li>
+<li><code>signal</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The signal to send, either as a string or number.
+<strong>Default:</strong> <code>'SIGTERM'</code>.</li>
+</ul>
+<p>The <code>process.kill()</code> method sends the <code>signal</code> to the process identified by
+<code>pid</code>.</p>
+<p>Signal names are strings such as <code>'SIGINT'</code> or <code>'SIGHUP'</code>. See <a href="#process_signal_events">Signal Events</a>
+and <a href="http://man7.org/linux/man-pages/man2/kill.2.html"><code>kill(2)</code></a> for more information.</p>
+<p>This method will throw an error if the target <code>pid</code> does not exist. As a special
+case, a signal of <code>0</code> can be used to test for the existence of a process.
+Windows platforms will throw an error if the <code>pid</code> is used to kill a process
+group.</p>
+<p>Even though the name of this function is <code>process.kill()</code>, it is really just a
+signal sender, like the <code>kill</code> system call. The signal sent may do something
+other than kill the target process.</p>
+<pre><code class="language-js">process.on('SIGHUP', () =&gt; {
+  console.log('Got SIGHUP signal.');
+});
+
+setTimeout(() =&gt; {
+  console.log('Exiting.');
+  process.exit(0);
+}, 100);
+
+process.kill(process.pid, 'SIGHUP');
+</code></pre>
+<p>When <code>SIGUSR1</code> is received by a Node.js process, Node.js will start the
+debugger. See <a href="#process_signal_events">Signal Events</a>.</p>
+<h2>process.mainModule<span><a class="mark" href="#process_process_mainmodule" id="process_process_mainmodule">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.17</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>The <code>process.mainModule</code> property provides an alternative way of retrieving
+<a href="https://nodejs.org/api/modules.html#modules_accessing_the_main_module"><code>require.main</code></a>. The difference is that if the main module changes at
+runtime, <a href="https://nodejs.org/api/modules.html#modules_accessing_the_main_module"><code>require.main</code></a> may still refer to the original main module in
+modules that were required before the change occurred. Generally, it's
+safe to assume that the two refer to the same module.</p>
+<p>As with <a href="https://nodejs.org/api/modules.html#modules_accessing_the_main_module"><code>require.main</code></a>, <code>process.mainModule</code> will be <code>undefined</code> if there
+is no entry script.</p>
+<h2>process.memoryUsage()<span><a class="mark" href="#process_process_memoryusage" id="process_process_memoryusage">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v7.2.0</td>
+<td><p>Added <code>external</code> to the returned object.</p></td></tr>
+<tr><td>v0.1.16</td>
+<td><p><span>Added in: v0.1.16</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li>
+<p>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>rss</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+<li><code>heapTotal</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+<li><code>heapUsed</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+<li><code>external</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>The <code>process.memoryUsage()</code> method returns an object describing the memory usage
+of the Node.js process measured in bytes.</p>
+<p>For example, the code:</p>
+<pre><code class="language-js">console.log(process.memoryUsage());
+</code></pre>
+<p>Will generate:</p>
+<!-- eslint-skip -->
+<pre><code class="language-js">{
+  rss: 4935680,
+  heapTotal: 1826816,
+  heapUsed: 650472,
+  external: 49879
+}
+</code></pre>
+<p><code>heapTotal</code> and <code>heapUsed</code> refer to V8's memory usage.
+<code>external</code> refers to the memory usage of C++ objects bound to JavaScript
+objects managed by V8. <code>rss</code>, Resident Set Size, is the amount of space
+occupied in the main memory device (that is a subset of the total allocated
+memory) for the process, which includes the <em>heap</em>, <em>code segment</em> and <em>stack</em>.</p>
+<p>The <em>heap</em> is where objects, strings, and closures are stored. Variables are
+stored in the <em>stack</em> and the actual JavaScript code resides in the
+<em>code segment</em>.</p>
+<p>When using <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads, <code>rss</code> will be a value that is valid for the
+entire process, while the other fields will only refer to the current thread.</p>
+<h2>process.nextTick(callback[, ...args])<span><a class="mark" href="#process_process_nexttick_callback_args" id="process_process_nexttick_callback_args">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v1.8.1</td>
+<td><p>Additional arguments after <code>callback</code> are now supported.</p></td></tr>
+<tr><td>v0.1.26</td>
+<td><p><span>Added in: v0.1.26</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li><code>...args</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a> Additional arguments to pass when invoking the <code>callback</code></li>
+</ul>
+<p><code>process.nextTick()</code> adds <code>callback</code> to the "next tick queue". This queue is
+fully drained after the current operation on the JavaScript stack runs to
+completion and before the event loop is allowed to continue. It's possible to
+create an infinite loop if one were to recursively call <code>process.nextTick()</code>.
+See the <a href="https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/#process-nexttick">Event Loop</a> guide for more background.</p>
+<pre><code class="language-js">console.log('start');
+process.nextTick(() =&gt; {
+  console.log('nextTick callback');
+});
+console.log('scheduled');
+// Output:
+// start
+// scheduled
+// nextTick callback
+</code></pre>
+<p>This is important when developing APIs in order to give users the opportunity
+to assign event handlers <em>after</em> an object has been constructed but before any
+I/O has occurred:</p>
+<pre><code class="language-js">function MyThing(options) {
+  this.setupOptions(options);
+
+  process.nextTick(() =&gt; {
+    this.startDoingStuff();
+  });
+}
+
+const thing = new MyThing();
+thing.getReadyForStuff();
+
+// thing.startDoingStuff() gets called now, not before.
+</code></pre>
+<p>It is very important for APIs to be either 100% synchronous or 100%
+asynchronous. Consider this example:</p>
+<pre><code class="language-js">// WARNING!  DO NOT USE!  BAD UNSAFE HAZARD!
+function maybeSync(arg, cb) {
+  if (arg) {
+    cb();
+    return;
+  }
+
+  fs.stat('file', cb);
+}
+</code></pre>
+<p>This API is hazardous because in the following case:</p>
+<pre><code class="language-js">const maybeTrue = Math.random() &gt; 0.5;
+
+maybeSync(maybeTrue, () =&gt; {
+  foo();
+});
+
+bar();
+</code></pre>
+<p>It is not clear whether <code>foo()</code> or <code>bar()</code> will be called first.</p>
+<p>The following approach is much better:</p>
+<pre><code class="language-js">function definitelyAsync(arg, cb) {
+  if (arg) {
+    process.nextTick(cb);
+    return;
+  }
+
+  fs.stat('file', cb);
+}
+</code></pre>
+<h2>process.noDeprecation<span><a class="mark" href="#process_process_nodeprecation" id="process_process_nodeprecation">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.8.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>The <code>process.noDeprecation</code> property indicates whether the <code>--no-deprecation</code>
+flag is set on the current Node.js process. See the documentation for
+the <a href="#process_event_warning"><code>'warning'</code> event</a> and the
+<a href="#process_process_emitwarning_warning_type_code_ctor"><code>emitWarning()</code> method</a> for more information about this
+flag's behavior.</p>
+<h2>process.pid<span><a class="mark" href="#process_process_pid" id="process_process_pid">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.15</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+</ul>
+<p>The <code>process.pid</code> property returns the PID of the process.</p>
+<pre><code class="language-js">console.log(`This process is pid ${process.pid}`);
+</code></pre>
+<h2>process.platform<span><a class="mark" href="#process_process_platform" id="process_process_platform">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.16</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The <code>process.platform</code> property returns a string identifying the operating
+system platform on which the Node.js process is running.</p>
+<p>Currently possible values are:</p>
+<ul>
+<li><code>'aix'</code></li>
+<li><code>'darwin'</code></li>
+<li><code>'freebsd'</code></li>
+<li><code>'linux'</code></li>
+<li><code>'openbsd'</code></li>
+<li><code>'sunos'</code></li>
+<li><code>'win32'</code></li>
+</ul>
+<pre><code class="language-js">console.log(`This platform is ${process.platform}`);
+</code></pre>
+<p>The value <code>'android'</code> may also be returned if the Node.js is built on the
+Android operating system. However, Android support in Node.js
+<a href="https://github.com/nodejs/node/blob/master/BUILDING.md#androidandroid-based-devices-eg-firefox-os">is experimental</a>.</p>
+<h2>process.ppid<span><a class="mark" href="#process_process_ppid" id="process_process_ppid">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v9.2.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+</ul>
+<p>The <code>process.ppid</code> property returns the PID of the current parent process.</p>
+<pre><code class="language-js">console.log(`The parent process is pid ${process.ppid}`);
+</code></pre>
+<h2>process.release<span><a class="mark" href="#process_process_release" id="process_process_release">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.2.0</td>
+<td><p>The <code>lts</code> property is now supported.</p></td></tr>
+<tr><td>v3.0.0</td>
+<td><p><span>Added in: v3.0.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>The <code>process.release</code> property returns an <code>Object</code> containing metadata related
+to the current release, including URLs for the source tarball and headers-only
+tarball.</p>
+<p><code>process.release</code> contains the following properties:</p>
+<ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A value that will always be <code>'node'</code> for Node.js. For
+legacy io.js releases, this will be <code>'io.js'</code>.</li>
+<li><code>sourceUrl</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> an absolute URL pointing to a <em><code>.tar.gz</code></em> file containing
+the source code of the current release.</li>
+<li><code>headersUrl</code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> an absolute URL pointing to a <em><code>.tar.gz</code></em> file containing
+only the source header files for the current release. This file is
+significantly smaller than the full source file and can be used for compiling
+Node.js native add-ons.</li>
+<li><code>libUrl</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> an absolute URL pointing to a <em><code>node.lib</code></em> file matching the
+architecture and version of the current release. This file is used for
+compiling Node.js native add-ons. <em>This property is only present on Windows
+builds of Node.js and will be missing on all other platforms.</em></li>
+<li>
+<p><code>lts</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> a string label identifying the <a href="https://github.com/nodejs/Release">LTS</a> label for this release.
+This property only exists for LTS releases and is <code>undefined</code> for all other
+release types, including <em>Current</em> releases. Currently the valid values are:</p>
+<ul>
+<li><code>'Argon'</code> for the 4.x LTS line beginning with 4.2.0.</li>
+<li><code>'Boron'</code> for the 6.x LTS line beginning with 6.9.0.</li>
+<li><code>'Carbon'</code> for the 8.x LTS line beginning with 8.9.1.</li>
+</ul>
+</li>
+</ul>
+<!-- eslint-skip -->
+<pre><code class="language-js">{
+  name: 'node',
+  lts: 'Argon',
+  sourceUrl: 'https://nodejs.org/download/release/v4.4.5/node-v4.4.5.tar.gz',
+  headersUrl: 'https://nodejs.org/download/release/v4.4.5/node-v4.4.5-headers.tar.gz',
+  libUrl: 'https://nodejs.org/download/release/v4.4.5/win-x64/node.lib'
+}
+</code></pre>
+<p>In custom builds from non-release versions of the source tree, only the
+<code>name</code> property may be present. The additional properties should not be
+relied upon to exist.</p>
+<h2>process.report<span><a class="mark" href="#process_process_report" id="process_process_report">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v11.8.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p><code>process.report</code> is an object whose methods are used to generate diagnostic
+reports for the current process. Additional documentation is available in the
+<a href="https://nodejs.org/api/report.html">report documentation</a>.</p>
+<h3>process.report.directory<span><a class="mark" href="#process_process_report_directory" id="process_process_report_directory">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.12.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Directory where the report is written. The default value is the empty string,
+indicating that reports are written to the current working directory of the
+Node.js process.</p>
+<pre><code class="language-js">console.log(`Report directory is ${process.report.directory}`);
+</code></pre>
+<h3>process.report.filename<span><a class="mark" href="#process_process_report_filename" id="process_process_report_filename">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.12.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Filename where the report is written. If set to the empty string, the output
+filename will be comprised of a timestamp, PID, and sequence number. The default
+value is the empty string.</p>
+<pre><code class="language-js">console.log(`Report filename is ${process.report.filename}`);
+</code></pre>
+<h3>process.report.getReport([err])<span><a class="mark" href="#process_process_report_getreport_err" id="process_process_report_getreport_err">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.8.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> A custom error used for reporting the JavaScript stack.</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>Returns a JavaScript Object representation of a diagnostic report for the
+running process. The report's JavaScript stack trace is taken from <code>err</code>, if
+present.</p>
+<pre><code class="language-js">const data = process.report.getReport();
+console.log(data.header.nodeJsVersion);
+
+// Similar to process.report.writeReport()
+const fs = require('fs');
+fs.writeFileSync(util.inspect(data), 'my-report.log', 'utf8');
+</code></pre>
+<p>Additional documentation is available in the <a href="https://nodejs.org/api/report.html">report documentation</a>.</p>
+<h3>process.report.reportOnFatalError<span><a class="mark" href="#process_process_report_reportonfatalerror" id="process_process_report_reportonfatalerror">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.12.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>If <code>true</code>, a diagnostic report is generated on fatal errors, such as out of
+memory errors or failed C++ assertions.</p>
+<pre><code class="language-js">console.log(`Report on fatal error: ${process.report.reportOnFatalError}`);
+</code></pre>
+<h3>process.report.reportOnSignal<span><a class="mark" href="#process_process_report_reportonsignal" id="process_process_report_reportonsignal">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.12.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>If <code>true</code>, a diagnostic report is generated when the process receives the
+signal specified by <code>process.report.signal</code>.</p>
+<pre><code class="language-js">console.log(`Report on signal: ${process.report.reportOnSignal}`);
+</code></pre>
+<h3>process.report.reportOnUncaughtException<span><a class="mark" href="#process_process_report_reportonuncaughtexception" id="process_process_report_reportonuncaughtexception">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.12.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>If <code>true</code>, a diagnostic report is generated on uncaught exception.</p>
+<pre><code class="language-js">console.log(`Report on exception: ${process.report.reportOnUncaughtException}`);
+</code></pre>
+<h3>process.report.signal<span><a class="mark" href="#process_process_report_signal" id="process_process_report_signal">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.12.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The signal used to trigger the creation of a diagnostic report. Defaults to
+<code>'SIGUSR2'</code>.</p>
+<pre><code class="language-js">console.log(`Report signal: ${process.report.signal}`);
+</code></pre>
+<h3>process.report.writeReport([filename][, err])<span><a class="mark" href="#process_process_report_writereport_filename_err" id="process_process_report_writereport_filename_err">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.8.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<ul>
+<li>
+<p><code>filename</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Name of the file where the report is written. This
+should be a relative path, that will be appended to the directory specified in
+<code>process.report.directory</code>, or the current working directory of the Node.js
+process, if unspecified.</p>
+</li>
+<li>
+<p><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> A custom error used for reporting the JavaScript stack.</p>
+</li>
+<li>
+<p>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Returns the filename of the generated report.</p>
+</li>
+</ul>
+<p>Writes a diagnostic report to a file. If <code>filename</code> is not provided, the default
+filename includes the date, time, PID, and a sequence number. The report's
+JavaScript stack trace is taken from <code>err</code>, if present.</p>
+<pre><code class="language-js">process.report.writeReport();
+</code></pre>
+<p>Additional documentation is available in the <a href="https://nodejs.org/api/report.html">report documentation</a>.</p>
+<h2>process.resourceUsage()<span><a class="mark" href="#process_process_resourceusage" id="process_process_resourceusage">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v12.6.0</span>
+</div>
+<ul>
+<li>
+<p>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> the resource usage for the current process. All of these
+values come from the <code>uv_getrusage</code> call which returns
+a <a href="http://docs.libuv.org/en/v1.x/misc.html#c.uv_rusage_t"><code>uv_rusage_t</code> struct</a>.</p>
+<ul>
+<li><code>userCPUTime</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_utime</code> computed in microseconds.
+It is the same value as <a href="#process_process_cpuusage_previousvalue"><code>process.cpuUsage().user</code></a>.</li>
+<li><code>systemCPUTime</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_stime</code> computed in microseconds.
+It is the same value as <a href="#process_process_cpuusage_previousvalue"><code>process.cpuUsage().system</code></a>.</li>
+<li><code>maxRSS</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_maxrss</code> which is the maximum resident set
+size used in kilobytes.</li>
+<li><code>sharedMemorySize</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_ixrss</code> but is not supported by
+any platform.</li>
+<li><code>unsharedDataSize</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_idrss</code> but is not supported by
+any platform.</li>
+<li><code>unsharedStackSize</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_isrss</code> but is not supported by
+any platform.</li>
+<li><code>minorPageFault</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_minflt</code> which is the number of
+minor page faults for the process, see
+<a href="https://en.wikipedia.org/wiki/Page_fault#Minor">this article for more details</a>.</li>
+<li><code>majorPageFault</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_majflt</code> which is the number of
+major page faults for the process, see
+<a href="https://en.wikipedia.org/wiki/Page_fault#Major">this article for more details</a>. This field is not
+supported on Windows.</li>
+<li><code>swappedOut</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_nswap</code> but is not supported by any
+platform.</li>
+<li><code>fsRead</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_inblock</code> which is the number of times the
+file system had to perform input.</li>
+<li><code>fsWrite</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_oublock</code> which is the number of times the
+file system had to perform output.</li>
+<li><code>ipcSent</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_msgsnd</code> but is not supported by any
+platform.</li>
+<li><code>ipcReceived</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_msgrcv</code> but is not supported by any
+platform.</li>
+<li><code>signalsCount</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_nsignals</code> but is not supported by any
+platform.</li>
+<li><code>voluntaryContextSwitches</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_nvcsw</code> which is the
+number of times a CPU context switch resulted due to a process voluntarily
+giving up the processor before its time slice was completed (usually to
+await availability of a resource). This field is not supported on Windows.</li>
+<li><code>involuntaryContextSwitches</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> maps to <code>ru_nivcsw</code> which is the
+number of times a CPU context switch resulted due to a higher priority
+process becoming runnable or because the current process exceeded its
+time slice. This field is not supported on Windows.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-js">console.log(process.resourceUsage());
+/*
+  Will output:
+  {
+    userCPUTime: 82872,
+    systemCPUTime: 4143,
+    maxRSS: 33164,
+    sharedMemorySize: 0,
+    unsharedDataSize: 0,
+    unsharedStackSize: 0,
+    minorPageFault: 2469,
+    majorPageFault: 0,
+    swappedOut: 0,
+    fsRead: 0,
+    fsWrite: 8,
+    ipcSent: 0,
+    ipcReceived: 0,
+    signalsCount: 0,
+    voluntaryContextSwitches: 79,
+    involuntaryContextSwitches: 1
+  }
+*/
+</code></pre>
+<h2>process.send(message[, sendHandle[, options]][, callback])<span><a class="mark" href="#process_process_send_message_sendhandle_options_callback" id="process_process_send_message_sendhandle_options_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.5.9</span>
+</div>
+<ul>
+<li><code>message</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+<li><code>sendHandle</code> <a href="https://nodejs.org/api/net.html#net_class_net_server" class="type">&lt;net.Server&gt;</a> | <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>If Node.js is spawned with an IPC channel, the <code>process.send()</code> method can be
+used to send messages to the parent process. Messages will be received as a
+<a href="https://nodejs.org/api/child_process.html#child_process_event_message"><code>'message'</code></a> event on the parent's <a href="https://nodejs.org/api/child_process.html#child_process_class_childprocess"><code>ChildProcess</code></a> object.</p>
+<p>If Node.js was not spawned with an IPC channel, <code>process.send()</code> will be
+<code>undefined</code>.</p>
+<p>The message goes through serialization and parsing. The resulting message might
+not be the same as what is originally sent.</p>
+<h2>process.setegid(id)<span><a class="mark" href="#process_process_setegid_id" id="process_process_setegid_id">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v2.0.0</span>
+</div>
+<ul>
+<li><code>id</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> A group name or ID</li>
+</ul>
+<p>The <code>process.setegid()</code> method sets the effective group identity of the process.
+(See <a href="http://man7.org/linux/man-pages/man2/setegid.2.html"><code>setegid(2)</code></a>.) The <code>id</code> can be passed as either a numeric ID or a group
+name string. If a group name is specified, this method blocks while resolving
+the associated a numeric ID.</p>
+<pre><code class="language-js">if (process.getegid &amp;&amp; process.setegid) {
+  console.log(`Current gid: ${process.getegid()}`);
+  try {
+    process.setegid(501);
+    console.log(`New gid: ${process.getegid()}`);
+  } catch (err) {
+    console.log(`Failed to set gid: ${err}`);
+  }
+}
+</code></pre>
+<p>This function is only available on POSIX platforms (i.e. not Windows or
+Android).
+This feature is not available in <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads.</p>
+<h2>process.seteuid(id)<span><a class="mark" href="#process_process_seteuid_id" id="process_process_seteuid_id">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v2.0.0</span>
+</div>
+<ul>
+<li><code>id</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> A user name or ID</li>
+</ul>
+<p>The <code>process.seteuid()</code> method sets the effective user identity of the process.
+(See <a href="http://man7.org/linux/man-pages/man2/seteuid.2.html"><code>seteuid(2)</code></a>.) The <code>id</code> can be passed as either a numeric ID or a username
+string. If a username is specified, the method blocks while resolving the
+associated numeric ID.</p>
+<pre><code class="language-js">if (process.geteuid &amp;&amp; process.seteuid) {
+  console.log(`Current uid: ${process.geteuid()}`);
+  try {
+    process.seteuid(501);
+    console.log(`New uid: ${process.geteuid()}`);
+  } catch (err) {
+    console.log(`Failed to set uid: ${err}`);
+  }
+}
+</code></pre>
+<p>This function is only available on POSIX platforms (i.e. not Windows or
+Android).
+This feature is not available in <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads.</p>
+<h2>process.setgid(id)<span><a class="mark" href="#process_process_setgid_id" id="process_process_setgid_id">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.31</span>
+</div>
+<ul>
+<li><code>id</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The group name or ID</li>
+</ul>
+<p>The <code>process.setgid()</code> method sets the group identity of the process. (See
+<a href="http://man7.org/linux/man-pages/man2/setgid.2.html"><code>setgid(2)</code></a>.) The <code>id</code> can be passed as either a numeric ID or a group name
+string. If a group name is specified, this method blocks while resolving the
+associated numeric ID.</p>
+<pre><code class="language-js">if (process.getgid &amp;&amp; process.setgid) {
+  console.log(`Current gid: ${process.getgid()}`);
+  try {
+    process.setgid(501);
+    console.log(`New gid: ${process.getgid()}`);
+  } catch (err) {
+    console.log(`Failed to set gid: ${err}`);
+  }
+}
+</code></pre>
+<p>This function is only available on POSIX platforms (i.e. not Windows or
+Android).
+This feature is not available in <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads.</p>
+<h2>process.setgroups(groups)<span><a class="mark" href="#process_process_setgroups_groups" id="process_process_setgroups_groups">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.9.4</span>
+</div>
+<ul>
+<li><code>groups</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer[]&gt;</a></li>
+</ul>
+<p>The <code>process.setgroups()</code> method sets the supplementary group IDs for the
+Node.js process. This is a privileged operation that requires the Node.js
+process to have <code>root</code> or the <code>CAP_SETGID</code> capability.</p>
+<p>The <code>groups</code> array can contain numeric group IDs, group names or both.</p>
+<p>This function is only available on POSIX platforms (i.e. not Windows or
+Android).
+This feature is not available in <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads.</p>
+<h2>process.setuid(id)<span><a class="mark" href="#process_process_setuid_id" id="process_process_setuid_id">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.28</span>
+</div>
+<ul>
+<li><code>id</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The <code>process.setuid(id)</code> method sets the user identity of the process. (See
+<a href="http://man7.org/linux/man-pages/man2/setuid.2.html"><code>setuid(2)</code></a>.) The <code>id</code> can be passed as either a numeric ID or a username string.
+If a username is specified, the method blocks while resolving the associated
+numeric ID.</p>
+<pre><code class="language-js">if (process.getuid &amp;&amp; process.setuid) {
+  console.log(`Current uid: ${process.getuid()}`);
+  try {
+    process.setuid(501);
+    console.log(`New uid: ${process.getuid()}`);
+  } catch (err) {
+    console.log(`Failed to set uid: ${err}`);
+  }
+}
+</code></pre>
+<p>This function is only available on POSIX platforms (i.e. not Windows or
+Android).
+This feature is not available in <a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads.</p>
+<h2>process.setUncaughtExceptionCaptureCallback(fn)<span><a class="mark" href="#process_process_setuncaughtexceptioncapturecallback_fn" id="process_process_setuncaughtexceptioncapturecallback_fn">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v9.3.0</span>
+</div>
+<ul>
+<li><code>fn</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type" class="type">&lt;null&gt;</a></li>
+</ul>
+<p>The <code>process.setUncaughtExceptionCaptureCallback()</code> function sets a function
+that will be invoked when an uncaught exception occurs, which will receive the
+exception value itself as its first argument.</p>
+<p>If such a function is set, the <a href="#process_event_uncaughtexception"><code>'uncaughtException'</code></a> event will
+not be emitted. If <code>--abort-on-uncaught-exception</code> was passed from the
+command line or set through <a href="https://nodejs.org/api/v8.html#v8_v8_setflagsfromstring_flags"><code>v8.setFlagsFromString()</code></a>, the process will
+not abort.</p>
+<p>To unset the capture function,
+<code>process.setUncaughtExceptionCaptureCallback(null)</code> may be used. Calling this
+method with a non-<code>null</code> argument while another capture function is set will
+throw an error.</p>
+<p>Using this function is mutually exclusive with using the deprecated
+<a href="https://nodejs.org/api/domain.html"><code>domain</code></a> built-in module.</p>
+<h2>process.stderr<span><a class="mark" href="#process_process_stderr" id="process_process_stderr">#</a></span></h2>
+<ul>
+<li><a href="https://nodejs.org/api/stream.html#stream_stream" class="type">&lt;Stream&gt;</a></li>
+</ul>
+<p>The <code>process.stderr</code> property returns a stream connected to
+<code>stderr</code> (fd <code>2</code>). It is a <a href="https://nodejs.org/api/net.html#net_class_net_socket"><code>net.Socket</code></a> (which is a <a href="https://nodejs.org/api/stream.html#stream_duplex_and_transform_streams">Duplex</a>
+stream) unless fd <code>2</code> refers to a file, in which case it is
+a <a href="https://nodejs.org/api/stream.html#stream_writable_streams">Writable</a> stream.</p>
+<p><code>process.stderr</code> differs from other Node.js streams in important ways. See
+<a href="https://nodejs.org/api/process.html#process_a_note_on_process_i_o">note on process I/O</a> for more information.</p>
+<h2>process.stdin<span><a class="mark" href="#process_process_stdin" id="process_process_stdin">#</a></span></h2>
+<ul>
+<li><a href="https://nodejs.org/api/stream.html#stream_stream" class="type">&lt;Stream&gt;</a></li>
+</ul>
+<p>The <code>process.stdin</code> property returns a stream connected to
+<code>stdin</code> (fd <code>0</code>). It is a <a href="https://nodejs.org/api/net.html#net_class_net_socket"><code>net.Socket</code></a> (which is a <a href="https://nodejs.org/api/stream.html#stream_duplex_and_transform_streams">Duplex</a>
+stream) unless fd <code>0</code> refers to a file, in which case it is
+a <a href="https://nodejs.org/api/stream.html#stream_readable_streams">Readable</a> stream.</p>
+<pre><code class="language-js">process.stdin.setEncoding('utf8');
+
+process.stdin.on('readable', () =&gt; {
+  let chunk;
+  // Use a loop to make sure we read all available data.
+  while ((chunk = process.stdin.read()) !== null) {
+    process.stdout.write(`data: ${chunk}`);
+  }
+});
+
+process.stdin.on('end', () =&gt; {
+  process.stdout.write('end');
+});
+</code></pre>
+<p>As a <a href="https://nodejs.org/api/stream.html#stream_duplex_and_transform_streams">Duplex</a> stream, <code>process.stdin</code> can also be used in "old" mode that
+is compatible with scripts written for Node.js prior to v0.10.
+For more information see <a href="https://nodejs.org/api/stream.html#stream_compatibility_with_older_node_js_versions">Stream compatibility</a>.</p>
+<p>In "old" streams mode the <code>stdin</code> stream is paused by default, so one
+must call <code>process.stdin.resume()</code> to read from it. Note also that calling
+<code>process.stdin.resume()</code> itself would switch stream to "old" mode.</p>
+<h2>process.stdout<span><a class="mark" href="#process_process_stdout" id="process_process_stdout">#</a></span></h2>
+<ul>
+<li><a href="https://nodejs.org/api/stream.html#stream_stream" class="type">&lt;Stream&gt;</a></li>
+</ul>
+<p>The <code>process.stdout</code> property returns a stream connected to
+<code>stdout</code> (fd <code>1</code>). It is a <a href="https://nodejs.org/api/net.html#net_class_net_socket"><code>net.Socket</code></a> (which is a <a href="https://nodejs.org/api/stream.html#stream_duplex_and_transform_streams">Duplex</a>
+stream) unless fd <code>1</code> refers to a file, in which case it is
+a <a href="https://nodejs.org/api/stream.html#stream_writable_streams">Writable</a> stream.</p>
+<p>For example, to copy <code>process.stdin</code> to <code>process.stdout</code>:</p>
+<pre><code class="language-js">process.stdin.pipe(process.stdout);
+</code></pre>
+<p><code>process.stdout</code> differs from other Node.js streams in important ways. See
+<a href="https://nodejs.org/api/process.html#process_a_note_on_process_i_o">note on process I/O</a> for more information.</p>
+<h3>A note on process I/O<span><a class="mark" href="#process_a_note_on_process_i_o" id="process_a_note_on_process_i_o">#</a></span></h3>
+<p><code>process.stdout</code> and <code>process.stderr</code> differ from other Node.js streams in
+important ways:</p>
+<ol>
+<li>They are used internally by <a href="https://nodejs.org/api/console.html#console_console_log_data_args"><code>console.log()</code></a> and <a href="https://nodejs.org/api/console.html#console_console_error_data_args"><code>console.error()</code></a>,
+respectively.</li>
+<li>
+<p>Writes may be synchronous depending on what the stream is connected to
+and whether the system is Windows or POSIX:</p>
+<ul>
+<li>Files: <em>synchronous</em> on Windows and POSIX</li>
+<li>TTYs (Terminals): <em>asynchronous</em> on Windows, <em>synchronous</em> on POSIX</li>
+<li>Pipes (and sockets): <em>synchronous</em> on Windows, <em>asynchronous</em> on POSIX</li>
+</ul>
+</li>
+</ol>
+<p>These behaviors are partly for historical reasons, as changing them would
+create backwards incompatibility, but they are also expected by some users.</p>
+<p>Synchronous writes avoid problems such as output written with <code>console.log()</code> or
+<code>console.error()</code> being unexpectedly interleaved, or not written at all if
+<code>process.exit()</code> is called before an asynchronous write completes. See
+<a href="#process_process_exit_code"><code>process.exit()</code></a> for more information.</p>
+<p><strong><em>Warning</em></strong>: Synchronous writes block the event loop until the write has
+completed. This can be near instantaneous in the case of output to a file, but
+under high system load, pipes that are not being read at the receiving end, or
+with slow terminals or file systems, its possible for the event loop to be
+blocked often enough and long enough to have severe negative performance
+impacts. This may not be a problem when writing to an interactive terminal
+session, but consider this particularly careful when doing production logging to
+the process output streams.</p>
+<p>To check if a stream is connected to a <a href="https://nodejs.org/api/tty.html#tty_tty">TTY</a> context, check the <code>isTTY</code>
+property.</p>
+<p>For instance:</p>
+<pre><code class="language-console">$ node -p "Boolean(process.stdin.isTTY)"
+true
+$ echo "foo" | node -p "Boolean(process.stdin.isTTY)"
+false
+$ node -p "Boolean(process.stdout.isTTY)"
+true
+$ node -p "Boolean(process.stdout.isTTY)" | cat
+false
+</code></pre>
+<p>See the <a href="https://nodejs.org/api/tty.html#tty_tty">TTY</a> documentation for more information.</p>
+<h2>process.throwDeprecation<span><a class="mark" href="#process_process_throwdeprecation" id="process_process_throwdeprecation">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.9.12</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>The <code>process.throwDeprecation</code> property indicates whether the
+<code>--throw-deprecation</code> flag is set on the current Node.js process. See the
+documentation for the <a href="#process_event_warning"><code>'warning'</code> event</a> and the
+<a href="#process_process_emitwarning_warning_type_code_ctor"><code>emitWarning()</code> method</a> for more information about this
+flag's behavior.</p>
+<h2>process.title<span><a class="mark" href="#process_process_title" id="process_process_title">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.104</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The <code>process.title</code> property returns the current process title (i.e. returns
+the current value of <code>ps</code>). Assigning a new value to <code>process.title</code> modifies
+the current value of <code>ps</code>.</p>
+<p>When a new value is assigned, different platforms will impose different maximum
+length restrictions on the title. Usually such restrictions are quite limited.
+For instance, on Linux and macOS, <code>process.title</code> is limited to the size of the
+binary name plus the length of the command line arguments because setting the
+<code>process.title</code> overwrites the <code>argv</code> memory of the process. Node.js v0.8
+allowed for longer process title strings by also overwriting the <code>environ</code>
+memory but that was potentially insecure and confusing in some (rather obscure)
+cases.</p>
+<h2>process.traceDeprecation<span><a class="mark" href="#process_process_tracedeprecation" id="process_process_tracedeprecation">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.8.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>The <code>process.traceDeprecation</code> property indicates whether the
+<code>--trace-deprecation</code> flag is set on the current Node.js process. See the
+documentation for the <a href="#process_event_warning"><code>'warning'</code> event</a> and the
+<a href="#process_process_emitwarning_warning_type_code_ctor"><code>emitWarning()</code> method</a> for more information about this
+flag's behavior.</p>
+<h2>process.umask([mask])<span><a class="mark" href="#process_process_umask_mask" id="process_process_umask_mask">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.19</span>
+</div>
+<ul>
+<li><code>mask</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p>The <code>process.umask()</code> method sets or returns the Node.js process's file mode
+creation mask. Child processes inherit the mask from the parent process. Invoked
+without an argument, the current mask is returned, otherwise the umask is set to
+the argument value and the previous mask is returned.</p>
+<pre><code class="language-js">const newmask = 0o022;
+const oldmask = process.umask(newmask);
+console.log(
+  `Changed umask from ${oldmask.toString(8)} to ${newmask.toString(8)}`
+);
+</code></pre>
+<p><a href="https://nodejs.org/api/worker_threads.html#worker_threads_class_worker"><code>Worker</code></a> threads are able to read the umask, however attempting to set the
+umask will result in a thrown exception.</p>
+<h2>process.uptime()<span><a class="mark" href="#process_process_uptime" id="process_process_uptime">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.5.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p>The <code>process.uptime()</code> method returns the number of seconds the current Node.js
+process has been running.</p>
+<p>The return value includes fractions of a second. Use <code>Math.floor()</code> to get whole
+seconds.</p>
+<h2>process.version<span><a class="mark" href="#process_process_version" id="process_process_version">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.3</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The <code>process.version</code> property returns the Node.js version string.</p>
+<pre><code class="language-js">console.log(`Version: ${process.version}`);
+</code></pre>
+<h2>process.versions<span><a class="mark" href="#process_process_versions" id="process_process_versions">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>The <code>v8</code> property now includes a Node.js specific suffix.</p></td></tr>
+<tr><td>v4.2.0</td>
+<td><p>The <code>icu</code> property is now supported.</p></td></tr>
+<tr><td>v0.2.0</td>
+<td><p><span>Added in: v0.2.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>The <code>process.versions</code> property returns an object listing the version strings of
+Node.js and its dependencies. <code>process.versions.modules</code> indicates the current
+ABI version, which is increased whenever a C++ API changes. Node.js will refuse
+to load modules that were compiled against a different module ABI version.</p>
+<pre><code class="language-js">console.log(process.versions);
+</code></pre>
+<p>Will generate an object similar to:</p>
+<pre><code class="language-console">{ node: '11.13.0',
+  v8: '7.0.276.38-node.18',
+  uv: '1.27.0',
+  zlib: '1.2.11',
+  brotli: '1.0.7',
+  ares: '1.15.0',
+  modules: '67',
+  nghttp2: '1.34.0',
+  napi: '4',
+  llhttp: '1.1.1',
+  http_parser: '2.8.0',
+  openssl: '1.1.1b',
+  cldr: '34.0',
+  icu: '63.1',
+  tz: '2018e',
+  unicode: '11.0' }
+</code></pre>
+<h2>Exit Codes<span><a class="mark" href="#process_exit_codes" id="process_exit_codes">#</a></span></h2>
+<p>Node.js will normally exit with a <code>0</code> status code when no more async
+operations are pending. The following status codes are used in other
+cases:</p>
+<ul>
+<li><code>1</code> <strong>Uncaught Fatal Exception</strong> - There was an uncaught exception,
+and it was not handled by a domain or an <a href="#process_event_uncaughtexception"><code>'uncaughtException'</code></a> event
+handler.</li>
+<li><code>2</code> - Unused (reserved by Bash for builtin misuse)</li>
+<li><code>3</code> <strong>Internal JavaScript Parse Error</strong> - The JavaScript source code
+internal in Node.js's bootstrapping process caused a parse error. This
+is extremely rare, and generally can only happen during development
+of Node.js itself.</li>
+<li><code>4</code> <strong>Internal JavaScript Evaluation Failure</strong> - The JavaScript
+source code internal in Node.js's bootstrapping process failed to
+return a function value when evaluated. This is extremely rare, and
+generally can only happen during development of Node.js itself.</li>
+<li><code>5</code> <strong>Fatal Error</strong> - There was a fatal unrecoverable error in V8.
+Typically a message will be printed to stderr with the prefix <code>FATAL ERROR</code>.</li>
+<li><code>6</code> <strong>Non-function Internal Exception Handler</strong> - There was an
+uncaught exception, but the internal fatal exception handler
+function was somehow set to a non-function, and could not be called.</li>
+<li><code>7</code> <strong>Internal Exception Handler Run-Time Failure</strong> - There was an
+uncaught exception, and the internal fatal exception handler
+function itself threw an error while attempting to handle it. This
+can happen, for example, if an <a href="#process_event_uncaughtexception"><code>'uncaughtException'</code></a> or
+<code>domain.on('error')</code> handler throws an error.</li>
+<li><code>8</code> - Unused. In previous versions of Node.js, exit code 8 sometimes
+indicated an uncaught exception.</li>
+<li><code>9</code> - <strong>Invalid Argument</strong> - Either an unknown option was specified,
+or an option requiring a value was provided without a value.</li>
+<li><code>10</code> <strong>Internal JavaScript Run-Time Failure</strong> - The JavaScript
+source code internal in Node.js's bootstrapping process threw an error
+when the bootstrapping function was called. This is extremely rare,
+and generally can only happen during development of Node.js itself.</li>
+<li><code>12</code> <strong>Invalid Debug Argument</strong> - The <code>--inspect</code> and/or <code>--inspect-brk</code>
+options were set, but the port number chosen was invalid or unavailable.</li>
+<li><code>&gt;128</code> <strong>Signal Exits</strong> - If Node.js receives a fatal signal such as
+<code>SIGKILL</code> or <code>SIGHUP</code>, then its exit code will be <code>128</code> plus the
+value of the signal code. This is a standard POSIX practice, since
+exit codes are defined to be 7-bit integers, and signal exits set
+the high-order bit, and then contain the value of the signal code.
+For example, signal <code>SIGABRT</code> has value <code>6</code>, so the expected exit
+code will be <code>128</code> + <code>6</code>, or <code>134</code>.</li>
+</ul>
+      </div>
+    </div>
+  </div>
+  <script src="data:application/javascript;base64,LyoKU0hKUyAtIFN5bnRheCBIaWdobGlnaHRpbmcgaW4gSmF2YVNjcmlwdApDb3B5cmlnaHQgKEMpIDIwMDcsIDIwMDggZ25vbWJhdEB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQKTGljZW5zZTogaHR0cDovL3NoanMuc291cmNlZm9yZ2UubmV0L2RvYy9ncGx2My5odG1sCiovCgppZiAoISB0aGlzLnNoX2xhbmd1YWdlcykgewogIHRoaXMuc2hfbGFuZ3VhZ2VzID0ge307Cn0KdmFyIHNoX3JlcXVlc3RzID0ge307CgpmdW5jdGlvbiBzaF9pc0VtYWlsQWRkcmVzcyh1cmwpIHsKICBpZiAoL15tYWlsdG86Ly50ZXN0KHVybCkpIHsKICAgIHJldHVybiBmYWxzZTsKICB9CiAgcmV0dXJuIHVybC5pbmRleE9mKCdAJykgIT09IC0xOwp9CgpmdW5jdGlvbiBzaF9zZXRIcmVmKHRhZ3MsIG51bVRhZ3MsIGlucHV0U3RyaW5nKSB7CiAgdmFyIHVybCA9IGlucHV0U3RyaW5nLnN1YnN0cmluZyh0YWdzW251bVRhZ3MgLSAyXS5wb3MsIHRhZ3NbbnVtVGFncyAtIDFdLnBvcyk7CiAgaWYgKHVybC5sZW5ndGggPj0gMiAmJiB1cmwuY2hhckF0KDApID09PSAnPCcgJiYgdXJsLmNoYXJBdCh1cmwubGVuZ3RoIC0gMSkgPT09ICc+JykgewogICAgdXJsID0gdXJsLnN1YnN0cigxLCB1cmwubGVuZ3RoIC0gMik7CiAgfQogIGlmIChzaF9pc0VtYWlsQWRkcmVzcyh1cmwpKSB7CiAgICB1cmwgPSAnbWFpbHRvOicgKyB1cmw7CiAgfQogIHRhZ3NbbnVtVGFncyAtIDJdLm5vZGUuaHJlZiA9IHVybDsKfQoKLyoKS29ucXVlcm9yIGhhcyBhIGJ1ZyB3aGVyZSB0aGUgcmVndWxhciBleHByZXNzaW9uIC8kL2cgd2lsbCBub3QgbWF0Y2ggYXQgdGhlIGVuZApvZiBhIGxpbmUgbW9yZSB0aGFuIG9uY2U6CgogIHZhciByZWdleCA9IC8kL2c7CiAgdmFyIG1hdGNoOwoKICB2YXIgbGluZSA9ICcxMjM0NTY3ODkwJzsKICByZWdleC5sYXN0SW5kZXggPSAxMDsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZSk7CgogIHZhciBsaW5lMiA9ICdhYmNkZSc7CiAgcmVnZXgubGFzdEluZGV4ID0gNTsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZTIpOyAgLy8gZmFpbHMKKi8KZnVuY3Rpb24gc2hfa29ucXVlcm9yRXhlYyhzKSB7CiAgdmFyIHJlc3VsdCA9IFsnJ107CiAgcmVzdWx0LmluZGV4ID0gcy5sZW5ndGg7CiAgcmVzdWx0LmlucHV0ID0gczsKICByZXR1cm4gcmVzdWx0Owp9CgovKioKSGlnaGxpZ2h0cyBhbGwgZWxlbWVudHMgY29udGFpbmluZyBzb3VyY2UgY29kZSBpbiBhIHRleHQgc3RyaW5nLiAgVGhlIHJldHVybgp2YWx1ZSBpcyBhbiBhcnJheSBvZiBvYmplY3RzLCBlYWNoIHJlcHJlc2VudGluZyBhbiBIVE1MIHN0YXJ0IG9yIGVuZCB0YWcuICBFYWNoCm9iamVjdCBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBwb3MsIHdoaWNoIGlzIGFuIGludGVnZXIgcmVwcmVzZW50aW5nIHRoZSB0ZXh0Cm9mZnNldCBvZiB0aGUgdGFnLiBFdmVyeSBzdGFydCB0YWcgYWxzbyBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBub2RlLCB3aGljaCBpcyB0aGUKRE9NIGVsZW1lbnQgc3RhcnRlZCBieSB0aGUgdGFnLiBFbmQgdGFncyBkbyBub3QgaGF2ZSB0aGlzIHByb3BlcnR5LgpAcGFyYW0gIGlucHV0U3RyaW5nICBhIHRleHQgc3RyaW5nCkBwYXJhbSAgbGFuZ3VhZ2UgIGEgbGFuZ3VhZ2UgZGVmaW5pdGlvbiBvYmplY3QKQHJldHVybiAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKKi8KZnVuY3Rpb24gc2hfaGlnaGxpZ2h0U3RyaW5nKGlucHV0U3RyaW5nLCBsYW5ndWFnZSkgewogIGlmICgvS29ucXVlcm9yLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICBpZiAoISBsYW5ndWFnZS5rb25xdWVyZWQpIHsKICAgICAgZm9yICh2YXIgcyA9IDA7IHMgPCBsYW5ndWFnZS5sZW5ndGg7IHMrKykgewogICAgICAgIGZvciAodmFyIHAgPSAwOyBwIDwgbGFuZ3VhZ2Vbc10ubGVuZ3RoOyBwKyspIHsKICAgICAgICAgIHZhciByID0gbGFuZ3VhZ2Vbc11bcF1bMF07CiAgICAgICAgICBpZiAoci5zb3VyY2UgPT09ICckJykgewogICAgICAgICAgICByLmV4ZWMgPSBzaF9rb25xdWVyb3JFeGVjOwogICAgICAgICAgfQogICAgICAgIH0KICAgICAgfQogICAgICBsYW5ndWFnZS5rb25xdWVyZWQgPSB0cnVlOwogICAgfQogIH0KCiAgdmFyIGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgdmFyIHNwYW4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJyk7CgogIC8vIHRoZSByZXN1bHQKICB2YXIgdGFncyA9IFtdOwogIHZhciBudW1UYWdzID0gMDsKCiAgLy8gZWFjaCBlbGVtZW50IGlzIGEgcGF0dGVybiBvYmplY3QgZnJvbSBsYW5ndWFnZQogIHZhciBwYXR0ZXJuU3RhY2sgPSBbXTsKCiAgLy8gdGhlIGN1cnJlbnQgcG9zaXRpb24gd2l0aGluIGlucHV0U3RyaW5nCiAgdmFyIHBvcyA9IDA7CgogIC8vIHRoZSBuYW1lIG9mIHRoZSBjdXJyZW50IHN0eWxlLCBvciBudWxsIGlmIHRoZXJlIGlzIG5vIGN1cnJlbnQgc3R5bGUKICB2YXIgY3VycmVudFN0eWxlID0gbnVsbDsKCiAgdmFyIG91dHB1dCA9IGZ1bmN0aW9uKHMsIHN0eWxlKSB7CiAgICB2YXIgbGVuZ3RoID0gcy5sZW5ndGg7CiAgICAvLyB0aGlzIGlzIG1vcmUgdGhhbiBqdXN0IGFuIG9wdGltaXphdGlvbiAtIHdlIGRvbid0IHdhbnQgdG8gb3V0cHV0IGVtcHR5IDxzcGFuPjwvc3Bhbj4gZWxlbWVudHMKICAgIGlmIChsZW5ndGggPT09IDApIHsKICAgICAgcmV0dXJuOwogICAgfQogICAgaWYgKCEgc3R5bGUpIHsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoICE9PSAwKSB7CiAgICAgICAgdmFyIHBhdHRlcm4gPSBwYXR0ZXJuU3RhY2tbc3RhY2tMZW5ndGggLSAxXTsKICAgICAgICAvLyBjaGVjayB3aGV0aGVyIHRoaXMgaXMgYSBzdGF0ZSBvciBhbiBlbnZpcm9ubWVudAogICAgICAgIGlmICghIHBhdHRlcm5bM10pIHsKICAgICAgICAgIC8vIGl0J3Mgbm90IGEgc3RhdGUgLSBpdCdzIGFuIGVudmlyb25tZW50OyB1c2UgdGhlIHN0eWxlIGZvciB0aGlzIGVudmlyb25tZW50CiAgICAgICAgICBzdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgfQogICAgICB9CiAgICB9CiAgICBpZiAoY3VycmVudFN0eWxlICE9PSBzdHlsZSkgewogICAgICBpZiAoY3VycmVudFN0eWxlKSB7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge3BvczogcG9zfTsKICAgICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgICAgc2hfc2V0SHJlZih0YWdzLCBudW1UYWdzLCBpbnB1dFN0cmluZyk7CiAgICAgICAgfQogICAgICB9CiAgICAgIGlmIChzdHlsZSkgewogICAgICAgIHZhciBjbG9uZTsKICAgICAgICBpZiAoc3R5bGUgPT09ICdzaF91cmwnKSB7CiAgICAgICAgICBjbG9uZSA9IGEuY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICBjbG9uZSA9IHNwYW4uY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgY2xvbmUuY2xhc3NOYW1lID0gc3R5bGU7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge25vZGU6IGNsb25lLCBwb3M6IHBvc307CiAgICAgIH0KICAgIH0KICAgIHBvcyArPSBsZW5ndGg7CiAgICBjdXJyZW50U3R5bGUgPSBzdHlsZTsKICB9OwoKICB2YXIgZW5kT2ZMaW5lUGF0dGVybiA9IC9cclxufFxyfFxuL2c7CiAgZW5kT2ZMaW5lUGF0dGVybi5sYXN0SW5kZXggPSAwOwogIHZhciBpbnB1dFN0cmluZ0xlbmd0aCA9IGlucHV0U3RyaW5nLmxlbmd0aDsKICB3aGlsZSAocG9zIDwgaW5wdXRTdHJpbmdMZW5ndGgpIHsKICAgIHZhciBzdGFydCA9IHBvczsKICAgIHZhciBlbmQ7CiAgICB2YXIgc3RhcnRPZk5leHRMaW5lOwogICAgdmFyIGVuZE9mTGluZU1hdGNoID0gZW5kT2ZMaW5lUGF0dGVybi5leGVjKGlucHV0U3RyaW5nKTsKICAgIGlmIChlbmRPZkxpbmVNYXRjaCA9PT0gbnVsbCkgewogICAgICBlbmQgPSBpbnB1dFN0cmluZ0xlbmd0aDsKICAgICAgc3RhcnRPZk5leHRMaW5lID0gaW5wdXRTdHJpbmdMZW5ndGg7CiAgICB9CiAgICBlbHNlIHsKICAgICAgZW5kID0gZW5kT2ZMaW5lTWF0Y2guaW5kZXg7CiAgICAgIHN0YXJ0T2ZOZXh0TGluZSA9IGVuZE9mTGluZVBhdHRlcm4ubGFzdEluZGV4OwogICAgfQoKICAgIHZhciBsaW5lID0gaW5wdXRTdHJpbmcuc3Vic3RyaW5nKHN0YXJ0LCBlbmQpOwoKICAgIHZhciBtYXRjaENhY2hlID0gW107CiAgICBmb3IgKDs7KSB7CiAgICAgIHZhciBwb3NXaXRoaW5MaW5lID0gcG9zIC0gc3RhcnQ7CgogICAgICB2YXIgc3RhdGVJbmRleDsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoID09PSAwKSB7CiAgICAgICAgc3RhdGVJbmRleCA9IDA7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gZ2V0IHRoZSBuZXh0IHN0YXRlCiAgICAgICAgc3RhdGVJbmRleCA9IHBhdHRlcm5TdGFja1tzdGFja0xlbmd0aCAtIDFdWzJdOwogICAgICB9CgogICAgICB2YXIgc3RhdGUgPSBsYW5ndWFnZVtzdGF0ZUluZGV4XTsKICAgICAgdmFyIG51bVBhdHRlcm5zID0gc3RhdGUubGVuZ3RoOwogICAgICB2YXIgbWMgPSBtYXRjaENhY2hlW3N0YXRlSW5kZXhdOwogICAgICBpZiAoISBtYykgewogICAgICAgIG1jID0gbWF0Y2hDYWNoZVtzdGF0ZUluZGV4XSA9IFtdOwogICAgICB9CiAgICAgIHZhciBiZXN0TWF0Y2ggPSBudWxsOwogICAgICB2YXIgYmVzdFBhdHRlcm5JbmRleCA9IC0xOwogICAgICBmb3IgKHZhciBpID0gMDsgaSA8IG51bVBhdHRlcm5zOyBpKyspIHsKICAgICAgICB2YXIgbWF0Y2g7CiAgICAgICAgaWYgKGkgPCBtYy5sZW5ndGggJiYgKG1jW2ldID09PSBudWxsIHx8IHBvc1dpdGhpbkxpbmUgPD0gbWNbaV0uaW5kZXgpKSB7CiAgICAgICAgICBtYXRjaCA9IG1jW2ldOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHZhciByZWdleCA9IHN0YXRlW2ldWzBdOwogICAgICAgICAgcmVnZXgubGFzdEluZGV4ID0gcG9zV2l0aGluTGluZTsKICAgICAgICAgIG1hdGNoID0gcmVnZXguZXhlYyhsaW5lKTsKICAgICAgICAgIG1jW2ldID0gbWF0Y2g7CiAgICAgICAgfQogICAgICAgIGlmIChtYXRjaCAhPT0gbnVsbCAmJiAoYmVzdE1hdGNoID09PSBudWxsIHx8IG1hdGNoLmluZGV4IDwgYmVzdE1hdGNoLmluZGV4KSkgewogICAgICAgICAgYmVzdE1hdGNoID0gbWF0Y2g7CiAgICAgICAgICBiZXN0UGF0dGVybkluZGV4ID0gaTsKICAgICAgICAgIGlmIChtYXRjaC5pbmRleCA9PT0gcG9zV2l0aGluTGluZSkgewogICAgICAgICAgICBicmVhazsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KCiAgICAgIGlmIChiZXN0TWF0Y2ggPT09IG51bGwpIHsKICAgICAgICBvdXRwdXQobGluZS5zdWJzdHJpbmcocG9zV2l0aGluTGluZSksIG51bGwpOwogICAgICAgIGJyZWFrOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGdvdCBhIG1hdGNoCiAgICAgICAgaWYgKGJlc3RNYXRjaC5pbmRleCA+IHBvc1dpdGhpbkxpbmUpIHsKICAgICAgICAgIG91dHB1dChsaW5lLnN1YnN0cmluZyhwb3NXaXRoaW5MaW5lLCBiZXN0TWF0Y2guaW5kZXgpLCBudWxsKTsKICAgICAgICB9CgogICAgICAgIHZhciBwYXR0ZXJuID0gc3RhdGVbYmVzdFBhdHRlcm5JbmRleF07CgogICAgICAgIHZhciBuZXdTdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgdmFyIG1hdGNoZWRTdHJpbmc7CiAgICAgICAgaWYgKG5ld1N0eWxlIGluc3RhbmNlb2YgQXJyYXkpIHsKICAgICAgICAgIGZvciAodmFyIHN1YmV4cHJlc3Npb24gPSAwOyBzdWJleHByZXNzaW9uIDwgbmV3U3R5bGUubGVuZ3RoOyBzdWJleHByZXNzaW9uKyspIHsKICAgICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFtzdWJleHByZXNzaW9uICsgMV07CiAgICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZVtzdWJleHByZXNzaW9uXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFswXTsKICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZSk7CiAgICAgICAgfQoKICAgICAgICBzd2l0Y2ggKHBhdHRlcm5bMl0pIHsKICAgICAgICBjYXNlIC0xOgogICAgICAgICAgLy8gZG8gbm90aGluZwogICAgICAgICAgYnJlYWs7CiAgICAgICAgY2FzZSAtMjoKICAgICAgICAgIC8vIGV4aXQKICAgICAgICAgIHBhdHRlcm5TdGFjay5wb3AoKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGNhc2UgLTM6CiAgICAgICAgICAvLyBleGl0YWxsCiAgICAgICAgICBwYXR0ZXJuU3RhY2subGVuZ3RoID0gMDsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGRlZmF1bHQ6CiAgICAgICAgICAvLyB0aGlzIHdhcyB0aGUgc3RhcnQgb2YgYSBkZWxpbWl0ZWQgcGF0dGVybiBvciBhIHN0YXRlL2Vudmlyb25tZW50CiAgICAgICAgICBwYXR0ZXJuU3RhY2sucHVzaChwYXR0ZXJuKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIH0KICAgICAgfQogICAgfQoKICAgIC8vIGVuZCBvZiB0aGUgbGluZQogICAgaWYgKGN1cnJlbnRTdHlsZSkgewogICAgICB0YWdzW251bVRhZ3MrK10gPSB7cG9zOiBwb3N9OwogICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgIHNoX3NldEhyZWYodGFncywgbnVtVGFncywgaW5wdXRTdHJpbmcpOwogICAgICB9CiAgICAgIGN1cnJlbnRTdHlsZSA9IG51bGw7CiAgICB9CiAgICBwb3MgPSBzdGFydE9mTmV4dExpbmU7CiAgfQoKICByZXR1cm4gdGFnczsKfQoKLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KLy8gRE9NLWRlcGVuZGVudCBmdW5jdGlvbnMKCmZ1bmN0aW9uIHNoX2dldENsYXNzZXMoZWxlbWVudCkgewogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgaHRtbENsYXNzID0gZWxlbWVudC5jbGFzc05hbWU7CiAgaWYgKGh0bWxDbGFzcyAmJiBodG1sQ2xhc3MubGVuZ3RoID4gMCkgewogICAgdmFyIGh0bWxDbGFzc2VzID0gaHRtbENsYXNzLnNwbGl0KCcgJyk7CiAgICBmb3IgKHZhciBpID0gMDsgaSA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaSsrKSB7CiAgICAgIGlmIChodG1sQ2xhc3Nlc1tpXS5sZW5ndGggPiAwKSB7CiAgICAgICAgcmVzdWx0LnB1c2goaHRtbENsYXNzZXNbaV0pOwogICAgICB9CiAgICB9CiAgfQogIHJldHVybiByZXN1bHQ7Cn0KCmZ1bmN0aW9uIHNoX2FkZENsYXNzKGVsZW1lbnQsIG5hbWUpIHsKICB2YXIgaHRtbENsYXNzZXMgPSBzaF9nZXRDbGFzc2VzKGVsZW1lbnQpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgaHRtbENsYXNzZXMubGVuZ3RoOyBpKyspIHsKICAgIGlmIChuYW1lLnRvTG93ZXJDYXNlKCkgPT09IGh0bWxDbGFzc2VzW2ldLnRvTG93ZXJDYXNlKCkpIHsKICAgICAgcmV0dXJuOwogICAgfQogIH0KICBodG1sQ2xhc3Nlcy5wdXNoKG5hbWUpOwogIGVsZW1lbnQuY2xhc3NOYW1lID0gaHRtbENsYXNzZXMuam9pbignICcpOwp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSBhbiBIVE1MIERPTSBOb2RlTGlzdC4KQHBhcmFtICBub2RlTGlzdCAgYSBET00gTm9kZUxpc3QKQHBhcmFtICByZXN1bHQgIGFuIG9iamVjdCB3aXRoIHRleHQsIHRhZ3MgYW5kIHBvcyBwcm9wZXJ0aWVzCiovCmZ1bmN0aW9uIHNoX2V4dHJhY3RUYWdzRnJvbU5vZGVMaXN0KG5vZGVMaXN0LCByZXN1bHQpIHsKICB2YXIgbGVuZ3RoID0gbm9kZUxpc3QubGVuZ3RoOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbGVuZ3RoOyBpKyspIHsKICAgIHZhciBub2RlID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHN3aXRjaCAobm9kZS5ub2RlVHlwZSkgewogICAgY2FzZSAxOgogICAgICBpZiAobm9kZS5ub2RlTmFtZS50b0xvd2VyQ2FzZSgpID09PSAnYnInKSB7CiAgICAgICAgdmFyIHRlcm1pbmF0b3I7CiAgICAgICAgaWYgKC9NU0lFLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xyJzsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xuJzsKICAgICAgICB9CiAgICAgICAgcmVzdWx0LnRleHQucHVzaCh0ZXJtaW5hdG9yKTsKICAgICAgICByZXN1bHQucG9zKys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7bm9kZTogbm9kZS5jbG9uZU5vZGUoZmFsc2UpLCBwb3M6IHJlc3VsdC5wb3N9KTsKICAgICAgICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChub2RlLmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7cG9zOiByZXN1bHQucG9zfSk7CiAgICAgIH0KICAgICAgYnJlYWs7CiAgICBjYXNlIDM6CiAgICBjYXNlIDQ6CiAgICAgIHJlc3VsdC50ZXh0LnB1c2gobm9kZS5kYXRhKTsKICAgICAgcmVzdWx0LnBvcyArPSBub2RlLmxlbmd0aDsKICAgICAgYnJlYWs7CiAgICB9CiAgfQp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSB0aGUgdGV4dCBvZiBhbiBIVE1MIGVsZW1lbnQuIFRoZSBleHRyYWN0ZWQgdGFncyB3aWxsIGJlCnJldHVybmVkIGFzIGFuIGFycmF5IG9mIHRhZyBvYmplY3RzLiBTZWUgc2hfaGlnaGxpZ2h0U3RyaW5nIGZvciB0aGUgZm9ybWF0IG9mCnRoZSB0YWcgb2JqZWN0cy4KQHBhcmFtICBlbGVtZW50ICBhIERPTSBlbGVtZW50CkBwYXJhbSAgdGFncyAgYW4gZW1wdHkgYXJyYXk7IHRoZSBleHRyYWN0ZWQgdGFnIG9iamVjdHMgd2lsbCBiZSByZXR1cm5lZCBpbiBpdApAcmV0dXJuICB0aGUgdGV4dCBvZiB0aGUgZWxlbWVudApAc2VlICBzaF9oaWdobGlnaHRTdHJpbmcKKi8KZnVuY3Rpb24gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgdGFncykgewogIHZhciByZXN1bHQgPSB7fTsKICByZXN1bHQudGV4dCA9IFtdOwogIHJlc3VsdC50YWdzID0gdGFnczsKICByZXN1bHQucG9zID0gMDsKICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChlbGVtZW50LmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgcmV0dXJuIHJlc3VsdC50ZXh0LmpvaW4oJycpOwp9CgovKioKTWVyZ2VzIHRoZSBvcmlnaW5hbCB0YWdzIGZyb20gYW4gZWxlbWVudCB3aXRoIHRoZSB0YWdzIHByb2R1Y2VkIGJ5IGhpZ2hsaWdodGluZy4KQHBhcmFtICBvcmlnaW5hbFRhZ3MgIGFuIGFycmF5IGNvbnRhaW5pbmcgdGhlIG9yaWdpbmFsIHRhZ3MKQHBhcmFtICBoaWdobGlnaHRUYWdzICBhbiBhcnJheSBjb250YWluaW5nIHRoZSBoaWdobGlnaHRpbmcgdGFncyAtIHRoZXNlIG11c3Qgbm90IG92ZXJsYXAKQHJlc3VsdCAgYW4gYXJyYXkgY29udGFpbmluZyB0aGUgbWVyZ2VkIHRhZ3MKKi8KZnVuY3Rpb24gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncykgewogIHZhciBudW1PcmlnaW5hbFRhZ3MgPSBvcmlnaW5hbFRhZ3MubGVuZ3RoOwogIGlmIChudW1PcmlnaW5hbFRhZ3MgPT09IDApIHsKICAgIHJldHVybiBoaWdobGlnaHRUYWdzOwogIH0KCiAgdmFyIG51bUhpZ2hsaWdodFRhZ3MgPSBoaWdobGlnaHRUYWdzLmxlbmd0aDsKICBpZiAobnVtSGlnaGxpZ2h0VGFncyA9PT0gMCkgewogICAgcmV0dXJuIG9yaWdpbmFsVGFnczsKICB9CgogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgb3JpZ2luYWxJbmRleCA9IDA7CiAgdmFyIGhpZ2hsaWdodEluZGV4ID0gMDsKCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MgJiYgaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICB2YXIgb3JpZ2luYWxUYWcgPSBvcmlnaW5hbFRhZ3Nbb3JpZ2luYWxJbmRleF07CiAgICB2YXIgaGlnaGxpZ2h0VGFnID0gaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF07CgogICAgaWYgKG9yaWdpbmFsVGFnLnBvcyA8PSBoaWdobGlnaHRUYWcucG9zKSB7CiAgICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnKTsKICAgICAgb3JpZ2luYWxJbmRleCsrOwogICAgfQogICAgZWxzZSB7CiAgICAgIHJlc3VsdC5wdXNoKGhpZ2hsaWdodFRhZyk7CiAgICAgIGlmIChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4ICsgMV0ucG9zIDw9IG9yaWdpbmFsVGFnLnBvcykgewogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgICAgcmVzdWx0LnB1c2goaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF0pOwogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gbmV3IGVuZCB0YWcKICAgICAgICByZXN1bHQucHVzaCh7cG9zOiBvcmlnaW5hbFRhZy5wb3N9KTsKCiAgICAgICAgLy8gbmV3IHN0YXJ0IHRhZwogICAgICAgIGhpZ2hsaWdodFRhZ3NbaGlnaGxpZ2h0SW5kZXhdID0ge25vZGU6IGhpZ2hsaWdodFRhZy5ub2RlLmNsb25lTm9kZShmYWxzZSksIHBvczogb3JpZ2luYWxUYWcucG9zfTsKICAgICAgfQogICAgfQogIH0KCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MpIHsKICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnc1tvcmlnaW5hbEluZGV4XSk7CiAgICBvcmlnaW5hbEluZGV4Kys7CiAgfQoKICB3aGlsZSAoaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICByZXN1bHQucHVzaChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4XSk7CiAgICBoaWdobGlnaHRJbmRleCsrOwogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkluc2VydHMgdGFncyBpbnRvIHRleHQuCkBwYXJhbSAgdGFncyAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKQHBhcmFtICB0ZXh0ICBhIHN0cmluZyByZXByZXNlbnRpbmcgdGhlIHRleHQKQHJldHVybiAgYSBET00gRG9jdW1lbnRGcmFnbWVudCByZXByZXNlbnRpbmcgdGhlIHJlc3VsdGluZyBIVE1MCiovCmZ1bmN0aW9uIHNoX2luc2VydFRhZ3ModGFncywgdGV4dCkgewogIHZhciBkb2MgPSBkb2N1bWVudDsKCiAgdmFyIHJlc3VsdCA9IGRvY3VtZW50LmNyZWF0ZURvY3VtZW50RnJhZ21lbnQoKTsKICB2YXIgdGFnSW5kZXggPSAwOwogIHZhciBudW1UYWdzID0gdGFncy5sZW5ndGg7CiAgdmFyIHRleHRQb3MgPSAwOwogIHZhciB0ZXh0TGVuZ3RoID0gdGV4dC5sZW5ndGg7CiAgdmFyIGN1cnJlbnROb2RlID0gcmVzdWx0OwoKICAvLyBvdXRwdXQgb25lIHRhZyBvciB0ZXh0IG5vZGUgZXZlcnkgaXRlcmF0aW9uCiAgd2hpbGUgKHRleHRQb3MgPCB0ZXh0TGVuZ3RoIHx8IHRhZ0luZGV4IDwgbnVtVGFncykgewogICAgdmFyIHRhZzsKICAgIHZhciB0YWdQb3M7CiAgICBpZiAodGFnSW5kZXggPCBudW1UYWdzKSB7CiAgICAgIHRhZyA9IHRhZ3NbdGFnSW5kZXhdOwogICAgICB0YWdQb3MgPSB0YWcucG9zOwogICAgfQogICAgZWxzZSB7CiAgICAgIHRhZ1BvcyA9IHRleHRMZW5ndGg7CiAgICB9CgogICAgaWYgKHRhZ1BvcyA8PSB0ZXh0UG9zKSB7CiAgICAgIC8vIG91dHB1dCB0aGUgdGFnCiAgICAgIGlmICh0YWcubm9kZSkgewogICAgICAgIC8vIHN0YXJ0IHRhZwogICAgICAgIHZhciBuZXdOb2RlID0gdGFnLm5vZGU7CiAgICAgICAgY3VycmVudE5vZGUuYXBwZW5kQ2hpbGQobmV3Tm9kZSk7CiAgICAgICAgY3VycmVudE5vZGUgPSBuZXdOb2RlOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGVuZCB0YWcKICAgICAgICBjdXJyZW50Tm9kZSA9IGN1cnJlbnROb2RlLnBhcmVudE5vZGU7CiAgICAgIH0KICAgICAgdGFnSW5kZXgrKzsKICAgIH0KICAgIGVsc2UgewogICAgICAvLyBvdXRwdXQgdGV4dAogICAgICBjdXJyZW50Tm9kZS5hcHBlbmRDaGlsZChkb2MuY3JlYXRlVGV4dE5vZGUodGV4dC5zdWJzdHJpbmcodGV4dFBvcywgdGFnUG9zKSkpOwogICAgICB0ZXh0UG9zID0gdGFnUG9zOwogICAgfQogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkhpZ2hsaWdodHMgYW4gZWxlbWVudCBjb250YWluaW5nIHNvdXJjZSBjb2RlLiAgVXBvbiBjb21wbGV0aW9uIG9mIHRoaXMgZnVuY3Rpb24sCnRoZSBlbGVtZW50IHdpbGwgaGF2ZSBiZWVuIHBsYWNlZCBpbiB0aGUgInNoX3NvdXJjZUNvZGUiIGNsYXNzLgpAcGFyYW0gIGVsZW1lbnQgIGEgRE9NIDxwcmU+IGVsZW1lbnQgY29udGFpbmluZyB0aGUgc291cmNlIGNvZGUgdG8gYmUgaGlnaGxpZ2h0ZWQKQHBhcmFtICBsYW5ndWFnZSAgYSBsYW5ndWFnZSBkZWZpbml0aW9uIG9iamVjdAoqLwpmdW5jdGlvbiBzaF9oaWdobGlnaHRFbGVtZW50KGVsZW1lbnQsIGxhbmd1YWdlKSB7CiAgc2hfYWRkQ2xhc3MoZWxlbWVudCwgJ3NoX3NvdXJjZUNvZGUnKTsKICB2YXIgb3JpZ2luYWxUYWdzID0gW107CiAgdmFyIGlucHV0U3RyaW5nID0gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgb3JpZ2luYWxUYWdzKTsKICB2YXIgaGlnaGxpZ2h0VGFncyA9IHNoX2hpZ2hsaWdodFN0cmluZyhpbnB1dFN0cmluZywgbGFuZ3VhZ2UpOwogIHZhciB0YWdzID0gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncyk7CiAgdmFyIGRvY3VtZW50RnJhZ21lbnQgPSBzaF9pbnNlcnRUYWdzKHRhZ3MsIGlucHV0U3RyaW5nKTsKICB3aGlsZSAoZWxlbWVudC5oYXNDaGlsZE5vZGVzKCkpIHsKICAgIGVsZW1lbnQucmVtb3ZlQ2hpbGQoZWxlbWVudC5maXJzdENoaWxkKTsKICB9CiAgZWxlbWVudC5hcHBlbmRDaGlsZChkb2N1bWVudEZyYWdtZW50KTsKfQoKZnVuY3Rpb24gc2hfZ2V0WE1MSHR0cFJlcXVlc3QoKSB7CiAgaWYgKHdpbmRvdy5BY3RpdmVYT2JqZWN0KSB7CiAgICByZXR1cm4gbmV3IEFjdGl2ZVhPYmplY3QoJ01zeG1sMi5YTUxIVFRQJyk7CiAgfQogIGVsc2UgaWYgKHdpbmRvdy5YTUxIdHRwUmVxdWVzdCkgewogICAgcmV0dXJuIG5ldyBYTUxIdHRwUmVxdWVzdCgpOwogIH0KICB0aHJvdyAnTm8gWE1MSHR0cFJlcXVlc3QgaW1wbGVtZW50YXRpb24gYXZhaWxhYmxlJzsKfQoKZnVuY3Rpb24gc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpIHsKICBpZiAobGFuZ3VhZ2UgaW4gc2hfcmVxdWVzdHMpIHsKICAgIHNoX3JlcXVlc3RzW2xhbmd1YWdlXS5wdXNoKGVsZW1lbnQpOwogICAgcmV0dXJuOwogIH0KICBzaF9yZXF1ZXN0c1tsYW5ndWFnZV0gPSBbZWxlbWVudF07CiAgdmFyIHJlcXVlc3QgPSBzaF9nZXRYTUxIdHRwUmVxdWVzdCgpOwogIHZhciB1cmwgPSBwcmVmaXggKyAnc2hfJyArIGxhbmd1YWdlICsgc3VmZml4OwogIHJlcXVlc3Qub3BlbignR0VUJywgdXJsLCB0cnVlKTsKICByZXF1ZXN0Lm9ucmVhZHlzdGF0ZWNoYW5nZSA9IGZ1bmN0aW9uICgpIHsKICAgIGlmIChyZXF1ZXN0LnJlYWR5U3RhdGUgPT09IDQpIHsKICAgICAgdHJ5IHsKICAgICAgICBpZiAoISByZXF1ZXN0LnN0YXR1cyB8fCByZXF1ZXN0LnN0YXR1cyA9PT0gMjAwKSB7CiAgICAgICAgICBldmFsKHJlcXVlc3QucmVzcG9uc2VUZXh0KTsKICAgICAgICAgIHZhciBlbGVtZW50cyA9IHNoX3JlcXVlc3RzW2xhbmd1YWdlXTsKICAgICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgZWxlbWVudHMubGVuZ3RoOyBpKyspIHsKICAgICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50c1tpXSwgc2hfbGFuZ3VhZ2VzW2xhbmd1YWdlXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgdGhyb3cgJ0hUVFAgZXJyb3I6IHN0YXR1cyAnICsgcmVxdWVzdC5zdGF0dXM7CiAgICAgICAgfQogICAgICB9CiAgICAgIGZpbmFsbHkgewogICAgICAgIHJlcXVlc3QgPSBudWxsOwogICAgICB9CiAgICB9CiAgfTsKICByZXF1ZXN0LnNlbmQobnVsbCk7Cn0KCi8qKgpIaWdobGlnaHRzIGFsbCBlbGVtZW50cyBjb250YWluaW5nIHNvdXJjZSBjb2RlIG9uIHRoZSBjdXJyZW50IHBhZ2UuIEVsZW1lbnRzCmNvbnRhaW5pbmcgc291cmNlIGNvZGUgbXVzdCBiZSAicHJlIiBlbGVtZW50cyB3aXRoIGEgImNsYXNzIiBhdHRyaWJ1dGUgb2YKInNoX0xBTkdVQUdFIiwgd2hlcmUgTEFOR1VBR0UgaXMgYSB2YWxpZCBsYW5ndWFnZSBpZGVudGlmaWVyOyBlLmcuLCAic2hfamF2YSIKaWRlbnRpZmllcyB0aGUgZWxlbWVudCBhcyBjb250YWluaW5nICJqYXZhIiBsYW5ndWFnZSBzb3VyY2UgY29kZS4KKi8KZnVuY3Rpb24gaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCB0YWcpIHsKICB2YXIgbm9kZUxpc3QgPSBkb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSh0YWcpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbm9kZUxpc3QubGVuZ3RoOyBpKyspIHsKICAgIHZhciBlbGVtZW50ID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHZhciBodG1sQ2xhc3NlcyA9IHNoX2dldENsYXNzZXMoZWxlbWVudCk7CiAgICB2YXIgaGlnaGxpZ2h0ZWQgPSBmYWxzZTsKICAgIHZhciBkb250aGlnaGxpZ2h0ID0gZmFsc2U7CiAgICBmb3IgKHZhciBqID0gMDsgaiA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaisrKSB7CiAgICAgIHZhciBodG1sQ2xhc3MgPSBodG1sQ2xhc3Nlc1tqXS50b0xvd2VyQ2FzZSgpOwogICAgICBpZiAoaHRtbENsYXNzID09PSAnc2hfbm9uZScpIHsKICAgICAgICBkb250aGlnaGxpZ2h0ID0gdHJ1ZQogICAgICAgIGNvbnRpbnVlOwogICAgICB9CiAgICAgIGlmIChodG1sQ2xhc3Muc3Vic3RyKDAsIDMpID09PSAnc2hfJykgewogICAgICAgIHZhciBsYW5ndWFnZSA9IGh0bWxDbGFzcy5zdWJzdHJpbmcoMyk7CiAgICAgICAgaWYgKGxhbmd1YWdlIGluIHNoX2xhbmd1YWdlcykgewogICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50LCBzaF9sYW5ndWFnZXNbbGFuZ3VhZ2VdKTsKICAgICAgICAgIGhpZ2hsaWdodGVkID0gdHJ1ZTsKICAgICAgICB9CiAgICAgICAgZWxzZSBpZiAodHlwZW9mKHByZWZpeCkgPT09ICdzdHJpbmcnICYmIHR5cGVvZihzdWZmaXgpID09PSAnc3RyaW5nJykgewogICAgICAgICAgc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHRocm93ICdGb3VuZCA8JyArIHRhZyArICc+IGVsZW1lbnQgd2l0aCBjbGFzcz0iJyArIGh0bWxDbGFzcyArICciLCBidXQgbm8gc3VjaCBsYW5ndWFnZSBleGlzdHMnOwogICAgICAgIH0KICAgICAgICBicmVhazsKICAgICAgfQogICAgfQogICAgaWYgKGhpZ2hsaWdodGVkID09PSBmYWxzZSAmJiBkb250aGlnaGxpZ2h0ID09IGZhbHNlKSB7CiAgICAgIHNoX2hpZ2hsaWdodEVsZW1lbnQoZWxlbWVudCwgc2hfbGFuZ3VhZ2VzWyJqYXZhc2NyaXB0Il0pOwogICAgfQogIH0KfQoKCgpmdW5jdGlvbiBzaF9oaWdobGlnaHREb2N1bWVudChwcmVmaXgsIHN1ZmZpeCkgewogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3R0Jyk7CiAgaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCAnY29kZScpOwogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3ByZScpOwp9Cg=="></script>
+  <script src="data:application/javascript;base64,aWYoIXRoaXMuc2hfbGFuZ3VhZ2VzKXt0aGlzLnNoX2xhbmd1YWdlcz17fX1zaF9sYW5ndWFnZXMuamF2YXNjcmlwdD1bW1svXC9cL1wvL2csInNoX2NvbW1lbnQiLDFdLFsvXC9cLy9nLCJzaF9jb21tZW50Iiw3XSxbL1wvXCpcKi9nLCJzaF9jb21tZW50Iiw4XSxbL1wvXCovZywic2hfY29tbWVudCIsOV0sWy9cYig/OmFic3RyYWN0fGJyZWFrfGNhc2V8Y2F0Y2h8Y2xhc3N8Y29uc3R8Y29udGludWV8ZGVidWdnZXJ8ZGVmYXVsdHxkZWxldGV8ZG98ZWxzZXxlbnVtfGV4cG9ydHxleHRlbmRzfGZhbHNlfGZpbmFsfGZpbmFsbHl8Zm9yfGZ1bmN0aW9ufGdvdG98aWZ8aW1wbGVtZW50c3xpbnxpbnN0YW5jZW9mfGludGVyZmFjZXxuYXRpdmV8bmV3fG51bGx8cHJpdmF0ZXxwcm90ZWN0ZWR8cHJvdG90eXBlfHB1YmxpY3xyZXR1cm58c3RhdGljfHN1cGVyfHN3aXRjaHxzeW5jaHJvbml6ZWR8dGhyb3d8dGhyb3dzfHRoaXN8dHJhbnNpZW50fHRydWV8dHJ5fHR5cGVvZnx2YXJ8dm9sYXRpbGV8d2hpbGV8d2l0aClcYi9nLCJzaF9rZXl3b3JkIiwtMV0sWy8oXCtcK3wtLXxcKXxcXSkoXHMqKShcLz0/KD8hWypcL10pKS9nLFsic2hfc3ltYm9sIiwic2hfbm9ybWFsIiwic2hfc3ltYm9sIl0sLTFdLFsvKDB4W0EtRmEtZjAtOV0rfCg/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykoXHMqKShcLyg/IVsqXC9dKSkvZyxbInNoX251bWJlciIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyhbQS1aYS16JF9dW0EtWmEtejAtOSRfXSpccyopKFwvPT8oPyFbKlwvXSkpL2csWyJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy9cLyg/OlxcLnxbXipcXFwvXSkoPzpcXC58W15cXFwvXSkqXC9bZ2ltXSovZywic2hfcmVnZXhwIiwtMV0sWy9cYlsrLV0/KD86KD86MHhbQS1GYS1mMC05XSspfCg/Oig/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykpdT8oPzooPzppbnQoPzo4fDE2fDMyfDY0KSl8TCk/XGIvZywic2hfbnVtYmVyIiwtMV0sWy8iL2csInNoX3N0cmluZyIsMTBdLFsvJy9nLCJzaF9zdHJpbmciLDExXSxbL358IXwlfFxefFwqfFwofFwpfC18XCt8PXxcW3xcXXxcXHw6fDt8LHxcLnxcL3xcP3wmfDx8PnxcfC9nLCJzaF9zeW1ib2wiLC0xXSxbL1x7fFx9L2csInNoX2NicmFja2V0IiwtMV0sWy9cYig/Ok1hdGh8SW5maW5pdHl8TmFOfHVuZGVmaW5lZHxhcmd1bWVudHMpXGIvZywic2hfcHJlZGVmX3ZhciIsLTFdLFsvXGIoPzpBcnJheXxCb29sZWFufERhdGV8RXJyb3J8RXZhbEVycm9yfEZ1bmN0aW9ufE51bWJlcnxPYmplY3R8UmFuZ2VFcnJvcnxSZWZlcmVuY2VFcnJvcnxSZWdFeHB8U3RyaW5nfFN5bnRheEVycm9yfFR5cGVFcnJvcnxVUklFcnJvcnxkZWNvZGVVUkl8ZGVjb2RlVVJJQ29tcG9uZW50fGVuY29kZVVSSXxlbmNvZGVVUklDb21wb25lbnR8ZXZhbHxpc0Zpbml0ZXxpc05hTnxwYXJzZUZsb2F0fHBhcnNlSW50KVxiL2csInNoX3ByZWRlZl9mdW5jIiwtMV0sWy8oPzpbQS1aYS16XXxfKVtBLVphLXowLTlfXSooPz1bIFx0XSpcKCkvZywic2hfZnVuY3Rpb24iLC0xXV0sW1svJC9nLG51bGwsLTJdLFsvKD86PD8pW0EtWmEtejAtOV9cLlwvXC1ffl0rQFtBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KXwoPzo8PylbQS1aYS16MC05X10rOlwvXC9bQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+PykvZywic2hfdXJsIiwtMV0sWy88XD94bWwvZywic2hfcHJlcHJvYyIsMiwxXSxbLzwhRE9DVFlQRS9nLCJzaF9wcmVwcm9jIiw0LDFdLFsvPCEtLS9nLCJzaF9jb21tZW50Iiw1XSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKSg/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKS9nLCJzaF9rZXl3b3JkIiw2LDFdLFsvJig/OltBLVphLXowLTldKyk7L2csInNoX3ByZXByb2MiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSooPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMV0sWy88KD86XC8pP1tBLVphLXpdW0EtWmEtejAtOV0qL2csInNoX2tleXdvcmQiLDYsMV0sWy9AW0EtWmEtel0rL2csInNoX3R5cGUiLC0xXSxbLyg/OlRPRE98RklYTUV8QlVHKSg/Ols6XT8pL2csInNoX3RvZG8iLC0xXV0sW1svXD8+L2csInNoX3ByZXByb2MiLC0yXSxbLyhbXj0iIFx0Pl0rKShbIFx0XSopKD0/KS9nLFsic2hfdHlwZSIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyIvZywic2hfc3RyaW5nIiwzXV0sW1svXFwoPzpcXHwiKS9nLG51bGwsLTFdLFsvIi9nLCJzaF9zdHJpbmciLC0yXV0sW1svPi9nLCJzaF9wcmVwcm9jIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLy0tPi9nLCJzaF9jb21tZW50IiwtMl0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdXSxbWy8oPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLyQvZyxudWxsLC0yXV0sW1svXCpcLy9nLCJzaF9jb21tZW50IiwtMl0sWy8oPzo8PylbQS1aYS16MC05X1wuXC9cLV9+XStAW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pfCg/Ojw/KVtBLVphLXowLTlfXSs6XC9cL1tBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KS9nLCJzaF91cmwiLC0xXSxbLzxcP3htbC9nLCJzaF9wcmVwcm9jIiwyLDFdLFsvPCFET0NUWVBFL2csInNoX3ByZXByb2MiLDQsMV0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopKD86XC8pPz4vZywic2hfa2V5d29yZCIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopL2csInNoX2tleXdvcmQiLDYsMV0sWy8mKD86W0EtWmEtejAtOV0rKTsvZywic2hfcHJlcHJvYyIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XVtBLVphLXowLTldKig/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSovZywic2hfa2V5d29yZCIsNiwxXSxbL0BbQS1aYS16XSsvZywic2hfdHlwZSIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy9cKlwvL2csInNoX2NvbW1lbnQiLC0yXSxbLyg/Ojw/KVtBLVphLXowLTlfXC5cL1wtX35dK0BbQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+Pyl8KD86PD8pW0EtWmEtejAtOV9dKzpcL1wvW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pL2csInNoX3VybCIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy8iL2csInNoX3N0cmluZyIsLTJdLFsvXFwuL2csInNoX3NwZWNpYWxjaGFyIiwtMV1dLFtbLycvZywic2hfc3RyaW5nIiwtMl0sWy9cXC4vZywic2hfc3BlY2lhbGNoYXIiLC0xXV1dOw=="></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+
+</body></html>

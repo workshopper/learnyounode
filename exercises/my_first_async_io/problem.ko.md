@@ -18,4 +18,4 @@ function callback (err, data) { /* ... */ }
 첫 번째 인자가 있는 지로 에러가 발생했는지를 확인할 수 있게 됩니다. 에러가 없다면, 두 번째 인자로 `Buffer` 객체를 받게 됩니다. `readFileSync()`처럼, 두 번째 인자로 'utf8'를 넣을 수 있고 세 번째 인자로 콜백을 넣어 `Buffer` 대신 `String`을 받을 수 있습니다.
 
 `fs` 모듈의 문서는 브라우저에 이 주소를 넣으면 볼 수 있습니다.
-  https://nodejs.org/api/fs.html
+  {rootdir:/docs-nodejs/fs.html}

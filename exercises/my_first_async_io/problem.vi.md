@@ -18,4 +18,4 @@ function callback (err, data) { /* ... */ }
 vì vậy, bạn có thể kiểm tra được lỗi phát sinh nếu có qua tham số đầu tiên là `err`. Nếu không có lỗi xảy ra thì bạn sẽ nhận được một đối tượng `Buffer` qua tham số thứ 2 là `data`. Cũng như với `readFileSync()`, bạn có thể truyền 'utf8' qua tham số thứ 2 và truyền hàm phản hồi qua tham số thứ 3, khi đó bạn sẽ nhận được một `String` thay vì một `Buffer` ở hàm phản hồi của bạn.
 
 Tài liệu về mô-đun `fs` có thể xem ở đây:
-  https://nodejs.org/api/fs.html
+  {rootdir:/docs-nodejs/fs.html}

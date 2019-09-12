@@ -6,7 +6,7 @@ Viết một chương trình nhận một URL qua tham số đầu tiên và l�
 Với bài tập này bạn cần sử dụng mô-đun `http` trong lõi của Node.
 
 Bạn có thể xem thêm  tài liệu về mô-đun `http` tại đây:
-  https://nodejs.org/api/http.html
+  {rootdir:/docs-nodejs/http.html}
 
 Bạn có thể sử dụng phương thức `http.get()` để tạo một GET request đơn giản. Tham số đầu tiên của `http.get()` có thể là một URL bạn muốn thực hiện GET, và tham số thứ 2 là một hàm phản hồi.
 

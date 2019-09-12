@@ -6,7 +6,7 @@ Napisz program wysyłający żądanie HTTP GET na URL przekazany jako pierwszy a
 Do tego ćwiczenia potrzebny będzie Ci moduł `http`.
 
 Dokumentację modułu `http` możesz znaleźć tutaj:
-  https://nodejs.org/api/http.html
+  {rootdir:/docs-nodejs/http.html}
 
 Metoda `http.get()` jest użytecznym skrótem do wykonywania prostych żądań GET - wykorzystaj ją by uprościć Twoje rozwiązanie. Pierwszy argument metody `http.get()` to URL, na który chcesz wysłać żądanie. Jako drugi argument przekaż funkcję callback.
 

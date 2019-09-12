@@ -38,7 +38,7 @@ $ node -pe "new URL('/test?q=1', 'http://example.com')"
 要閱讀 `url` 模組的文件，可以在瀏覽器中打開這個頁面：
 
 Documentation on the `url` module can be found by pointing your browser here:
-  https://nodejs.org/api/url.html
+  {rootdir:/docs-nodejs/url.html}
 
 您的回應應該是 JSON 格式。要了解更多資訊，可以參考 `JSON.stringify()` 。
 

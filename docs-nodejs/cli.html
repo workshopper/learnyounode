@@ -1,0 +1,1217 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Command Line Options | Node.js v12.10.0 Documentation</title>
+  <link rel="stylesheet" href="data:text/css;base64,LyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogaXRhbGljOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBJdGFsaWMnKSwgbG9jYWwoJ0xhdG8tSXRhbGljJyksIHVybChodHRwczovL2ZvbnRzLmdzdGF0aWMuY29tL3MvbGF0by92MTYvUzZ1OHc0Qk1VVFBIanhzQVVpLXFOaVhnN2VVMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBpdGFsaWM7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEl0YWxpYycpLCBsb2NhbCgnTGF0by1JdGFsaWMnKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnU4dzRCTVVUUEhqeHNBWEMtcU5pWGc3US53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0KLyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogbm9ybWFsOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBSZWd1bGFyJyksIGxvY2FsKCdMYXRvLVJlZ3VsYXInKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnV5dzRCTVVUUEhqeEF3WGlXdEZDZlE3QS53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIFJlZ3VsYXInKSwgbG9jYWwoJ0xhdG8tUmVndWxhcicpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dXl3NEJNVVRQSGp4NHdYaVd0RkNjLndvZmYyKSBmb3JtYXQoJ3dvZmYyJyk7CiAgdW5pY29kZS1yYW5nZTogVSswMDAwLTAwRkYsIFUrMDEzMSwgVSswMTUyLTAxNTMsIFUrMDJCQi0wMkJDLCBVKzAyQzYsIFUrMDJEQSwgVSswMkRDLCBVKzIwMDAtMjA2RiwgVSsyMDc0LCBVKzIwQUMsIFUrMjEyMiwgVSsyMTkxLCBVKzIxOTMsIFUrMjIxMiwgVSsyMjE1LCBVK0ZFRkYsIFUrRkZGRDsKfQovKiBsYXRpbi1leHQgKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2FQR1EzcTVkME43dy53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2lQR1EzcTVkMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LyotLS0tLS0tLS0tLS0tLS0tLS0tLS0gTGF5b3V0IGFuZCBUeXBvZ3JhcGh5IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwpodG1sIHsKICBmb250LXNpemU6IDFyZW07CiAgb3ZlcmZsb3ctd3JhcDogYnJlYWstd29yZDsKICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDsKICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlOwogIC13ZWJraXQtZm9udC12YXJpYW50LWxpZ2F0dXJlczogbm9uZTsKICAgICAgICAgIGZvbnQtdmFyaWFudC1saWdhdHVyZXM6IG5vbmU7Cn0KCiogewogIGJveC1zaXppbmc6IGJvcmRlci1ib3g7Cn0KCmJvZHkgewogIGZvbnQtZmFtaWx5OiAiTGF0byIsICJMdWNpZGEgR3JhbmRlIiwgIkx1Y2lkYSBTYW5zIFVuaWNvZGUiLCAiTHVjaWRhIFNhbnMiLCBWZXJkYW5hLCBUYWhvbWEsIHNhbnMtc2VyaWY7CiAgbWFyZ2luOiAwOwogIHBhZGRpbmc6IDA7CiAgY29sb3I6ICMzMzM7CiAgYmFja2dyb3VuZDogI2ZmZjsKfQoKaDEgeyBmb250LXNpemU6IDIuNXJlbSB9CmgyIHsgZm9udC1zaXplOiAycmVtIH0KaDMgeyBmb250LXNpemU6IDEuNzVyZW0gfQpoNCB7IGZvbnQtc2l6ZTogMS41cmVtIH0KaDUgeyBmb250LXNpemU6IDEuMjVyZW0gfQpoNiB7IGZvbnQtc2l6ZTogMXJlbSB9CgpoMSwgaDIsIGgzLCBoNCwgaDUsIGg2IHsKICBtYXJnaW46IDEuNXJlbSAwIDFyZW07CiAgdGV4dC1yZW5kZXJpbmc6IG9wdGltaXplTGVnaWJpbGl0eTsKICBmb250LXdlaWdodDogNzAwOwogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKcHJlLCB0dCwgY29kZSwgLnByZSwgc3Bhbi50eXBlLCBhLnR5cGUgewogIGZvbnQtZmFtaWx5OiBTRk1vbm8tUmVndWxhciwgTWVubG8sIENvbnNvbGFzLCAiTGliZXJhdGlvbiBNb25vIiwgIkNvdXJpZXIgTmV3IiwgbW9ub3NwYWNlOwogIGZvbnQtc2l6ZTogLjllbTsKfQoKI2NvbnRlbnQgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKYSwgYTpsaW5rLCBhOmFjdGl2ZSB7CiAgY29sb3I6ICM0Mzg1M2Q7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGJvcmRlci1yYWRpdXM6IDJweDsKICBwYWRkaW5nOiAxcHggM3B4Owp9CgphOmhvdmVyLCBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDM4NTNkOwogIG91dGxpbmU6IG5vbmU7Cn0KCnN0cm9uZyB7CiAgZm9udC13ZWlnaHQ6IDcwMDsKfQoKY29kZSBhOmhvdmVyIHsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgplbSBjb2RlIHsKICBmb250LXN0eWxlOiBub3JtYWw7Cn0KCiNjaGFuZ2Vsb2cgI2d0b2MgewogIGRpc3BsYXk6IG5vbmU7Cn0KCiNndG9jIHsKICBtYXJnaW4tdG9wOiAuNXJlbTsKICBtYXJnaW4tYm90dG9tOiAxcmVtOwp9CgojZ3RvYyB1bCB7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBtYXJnaW4tbGVmdDogMDsKICBsaW5lLWhlaWdodDogMS41cmVtOwp9CgojZ3RvYyA+IHVsID4gbGkgewogIGRpc3BsYXk6IGlubGluZTsKICBib3JkZXItcmlnaHQ6IDFweCAjMDAwIHNvbGlkOwogIG1hcmdpbi1yaWdodDogMC40cmVtOwogIHBhZGRpbmctcmlnaHQ6IDAuNHJlbTsKfQoKI2d0b2MgPiB1bCA+IGxpOmxhc3QtY2hpbGQgewogIGJvcmRlci1yaWdodDogbm9uZTsKICBtYXJnaW4tcmlnaHQ6IDA7CiAgcGFkZGluZy1yaWdodDogMDsKfQoKbGkudmVyc2lvbi1waWNrZXIgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBhIHsKICBib3JkZXItcmFkaXVzOiAycHggMnB4IDAgMDsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBvbCB7CiAgZGlzcGxheTogYmxvY2s7CiAgei1pbmRleDogMTsKfQoKbGkudmVyc2lvbi1waWNrZXIgYSBzcGFuIHsKICBmb250LXNpemU6IC43cmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciB7CiAgYmFja2dyb3VuZDogI2ZmZjsKICBib3JkZXI6IDFweCAjNDM4NTNkIHNvbGlkOwogIGJvcmRlci1yYWRpdXM6IDAgMCAycHggMnB4OwogIGRpc3BsYXk6IG5vbmU7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgcmlnaHQ6IDA7CiAgdG9wOiAxLjI1cmVtOwogIHdpZHRoOiAxMDAlOwp9CgojZ3RvYyBvbC52ZXJzaW9uLXBpY2tlciBsaSB7CiAgZGlzcGxheTogYmxvY2s7CiAgYm9yZGVyLXJpZ2h0OiAwOwogIG1hcmdpbi1yaWdodDogMDsKfQoKb2wudmVyc2lvbi1waWNrZXIgbGkgYSB7CiAgYm9yZGVyLXJhZGl1czogMDsKICBkaXNwbGF5OiBibG9jazsKICBtYXJnaW46IDA7CiAgcGFkZGluZzogLjFyZW07CiAgcGFkZGluZy1sZWZ0OiAxcmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciBsaTpsYXN0LWNoaWxkIGEgewogIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAxcHg7CiAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMXB4Owp9CgoubGluZSB7CiAgd2lkdGg6IGNhbGMoMTAwJSAtIDFyZW0pOwogIGRpc3BsYXk6IGJsb2NrOwogIHBhZGRpbmctYm90dG9tOiAxcHg7Cn0KCi5hcGlfc3RhYmlsaXR5IHsKICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDsKICBtYXJnaW46IDAgMCAxcmVtIDA7CiAgZm9udC1mYW1pbHk6ICJMYXRvIiwgIkx1Y2lkYSBHcmFuZGUiLCAiTHVjaWRhIFNhbnMgVW5pY29kZSIsICJMdWNpZGEgU2FucyIsIFZlcmRhbmEsIFRhaG9tYSwgc2Fucy1zZXJpZjsKICBwYWRkaW5nOiAxcmVtOwogIGxpbmUtaGVpZ2h0OiAxLjU7Cn0KCi5hcGlfc3RhYmlsaXR5ICogewogIGNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50Owp9CgouYXBpX3N0YWJpbGl0eSBhIHsKICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsKfQoKLmFwaV9zdGFiaWxpdHkgYTpob3ZlciwgLmFwaV9zdGFiaWxpdHkgYTphY3RpdmUsIC5hcGlfc3RhYmlsaXR5IGE6Zm9jdXMgewogIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjQpOwp9CgouYXBpX3N0YWJpbGl0eSBhIGNvZGUgewogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCi5hcGlfc3RhYmlsaXR5XzAgewogIGJhY2tncm91bmQtY29sb3I6ICNENjAwMjc7Cn0KCi5hcGlfc3RhYmlsaXR5XzEgewogIGJhY2tncm91bmQtY29sb3I6ICNFQzUzMTU7Cn0KCi5hcGlfc3RhYmlsaXR5XzIgewogIGJhY2tncm91bmQtY29sb3I6ICM0RUJBMEY7Cn0KCi5hcGlfbWV0YWRhdGEgewogIGZvbnQtc2l6ZTogLjg1cmVtOwogIG1hcmdpbi1ib3R0b206IDFyZW07Cn0KCi5hcGlfbWV0YWRhdGEgc3BhbiB7CiAgbWFyZ2luLXJpZ2h0OiAxcmVtOwp9CgouYXBpX21ldGFkYXRhIHNwYW46bGFzdC1jaGlsZCB7CiAgbWFyZ2luLXJpZ2h0OiAwcHg7Cn0KCnVsLnBsYWluIHsKICBsaXN0LXN0eWxlOiBub25lOwp9CgphYmJyIHsKICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkICM0NTQ1NDU7Cn0KCnAgewogIHRleHQtcmVuZGVyaW5nOiBvcHRpbWl6ZUxlZ2liaWxpdHk7CiAgbWFyZ2luOiAwIDAgMS4xMjVyZW0gMDsKICBsaW5lLWhlaWdodDogMS41Owp9CgojYXBpY29udGVudCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKICBwYWRkaW5nLWJvdHRvbTogMnJlbTsKfQoKdGFibGUgewogIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7CiAgbWFyZ2luOiAwIDAgMS41cmVtIDA7Cn0KCnRoLCB0ZCB7CiAgYm9yZGVyOiAxcHggc29saWQgI2FhYTsKICBwYWRkaW5nOiAuNzVyZW0gMXJlbSAuNzVyZW0gMXJlbTsKICB2ZXJ0aWNhbC1hbGlnbjogdG9wOwp9Cgp0aCB7CiAgdGV4dC1hbGlnbjpsZWZ0Owp9CgpvbCwgdWwsIGRsIHsKICBtYXJnaW46IDAgMCAuNnJlbSAwOwogIHBhZGRpbmc6IDA7Cn0KCm9sIHVsLCBvbCBvbCwgb2wgZGwsIHVsIHVsLCB1bCBvbCwgdWwgZGwsIGRsIHVsLCBkbCBvbCwgZGwgZGwgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCnVsLCBvbCB7CiAgbWFyZ2luLWxlZnQ6IDJyZW07Cn0KCmRsIGR0IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgbWFyZ2luOiAxLjVyZW0gMCAwOwp9CgpkbCBkZCB7CiAgcG9zaXRpb246IHJlbGF0aXZlOwogIG1hcmdpbjogMCAxcmVtIDA7Cn0KCmRkICsgZHQucHJlIHsKICBtYXJnaW4tdG9wOiAxLjZyZW07Cn0KCiNhcGljb250ZW50IHsKICBwYWRkaW5nLXRvcDogMXJlbTsKfQoKI2FwaWNvbnRlbnQgLmxpbmUgewogIHdpZHRoOiBjYWxjKDUwJSAtIDFyZW0pOwogIG1hcmdpbjogMXJlbSAxcmVtIC45NXJlbTsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2NjOwp9CgpoMiArIGgyIHsKICBtYXJnaW46IDAgMCAuNXJlbTsKfQoKaDMgKyBoMyB7CiAgbWFyZ2luOiAwIDAgLjVyZW07Cn0KCmgyLCBoMywgaDQsIGg1IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgcGFkZGluZy1yaWdodDogNDBweDsKfQoKLnNyY2xpbmsgewogIGZsb2F0OiByaWdodDsKICBmb250LXNpemU6IHNtYWxsZXI7Cn0KCmgxIHNwYW4sIGgyIHNwYW4sIGgzIHNwYW4sIGg0IHNwYW4gewogIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICBkaXNwbGF5OiBibG9jazsKICB0b3A6IDA7CiAgcmlnaHQ6IDA7Cn0KCmgxIHNwYW46aG92ZXIsIGgyIHNwYW46aG92ZXIsIGgzIHNwYW46aG92ZXIsIGg0IHNwYW46aG92ZXIgewogIG9wYWNpdHk6IDE7Cn0KCmgxIHNwYW4gYSwgaDIgc3BhbiBhLCBoMyBzcGFuIGEsIGg0IHNwYW4gYSB7CiAgY29sb3I6ICMwMDA7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGZvbnQtd2VpZ2h0OiBib2xkOwp9CgpwcmUsIHR0LCBjb2RlIHsKICBsaW5lLWhlaWdodDogMS41cmVtOwogIG1hcmdpbjogMDsgcGFkZGluZzogMDsKfQoKLnByZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKcHJlIHsKICBwYWRkaW5nOiAxcmVtOwogIHZlcnRpY2FsLWFsaWduOiB0b3A7CiAgYmFja2dyb3VuZDogI2YyZjJmMjsKICBtYXJnaW46IDFyZW07CiAgb3ZlcmZsb3cteDogYXV0bzsKfQoKcHJlID4gY29kZSB7CiAgcGFkZGluZzogMDsKfQoKcHJlICsgaDMgewogIG1hcmdpbi10b3A6IDIuMjI1cmVtOwp9Cgpjb2RlLnByZSB7CiAgd2hpdGUtc3BhY2U6IHByZTsKfQoKI2ludHJvIHsKICBtYXJnaW4tdG9wOiAxLjI1cmVtOwogIG1hcmdpbi1sZWZ0OiAxcmVtOwp9CgojaW50cm8gYSB7CiAgY29sb3I6ICNkZGQ7CiAgZm9udC13ZWlnaHQ6IGJvbGQ7Cn0KCmhyIHsKICBiYWNrZ3JvdW5kOiBub25lOwogIGJvcmRlcjogbWVkaXVtIG5vbmU7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM3YTdhN2E7CiAgbWFyZ2luOiAwIDAgMXJlbSAwOwp9CgojdG9jIGgyIHsKICBtYXJnaW4tdG9wOiAwOwogIG1hcmdpbjogMS41cmVtIDA7Cn0KCiN0b2MgcCB7CiAgbWFyZ2luOiAwOwp9CgojdG9jIHVsIGEgewogIHRleHQtZGVjb3JhdGlvbjpub25lOwp9CgojdG9jIHVsIGxpIHsKICBtYXJnaW4tYm90dG9tOiAuNjY2cmVtOwogIGxpc3Qtc3R5bGU6IHNxdWFyZSBvdXRzaWRlOwp9CgojdG9jIGxpID4gdWwgewogIG1hcmdpbi10b3A6IC42NjZyZW07Cn0KCiN0b2MgLnN0YWJpbGl0eV8wOjphZnRlciB7CiAgYmFja2dyb3VuZC1jb2xvcjogI2Q1MDAyNzsKICBjb2xvcjogI2ZmZjsKICBjb250ZW50OiAiZGVwcmVjYXRlZCI7CiAgbWFyZ2luLWxlZnQ6IC4yNXJlbTsKICBwYWRkaW5nOiAxcHggM3B4OwogIGJvcmRlci1yYWRpdXM6IDNweDsKfQoKI2FwaWNvbnRlbnQgbGkgewogIG1hcmdpbi1ib3R0b206IC41cmVtOwp9CgojYXBpY29udGVudCBsaTpsYXN0LWNoaWxkIHsKICBtYXJnaW4tYm90dG9tOiAwOwp9Cgp0dCwgY29kZSB7CiAgY29sb3I6ICMwNDA0MDQ7CiAgYmFja2dyb3VuZC1jb2xvcjogI2YyZjJmMjsKICBib3JkZXItcmFkaXVzOiAycHg7CiAgcGFkZGluZzogMXB4IDNweDsKfQoKLmFwaV9zdGFiaWxpdHkgY29kZSB7CiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAuMSk7Cn0KCmEgY29kZSB7CiAgY29sb3I6IGluaGVyaXQ7CiAgYmFja2dyb3VuZDogaW5oZXJpdDsKICBwYWRkaW5nOiAwOwp9CgoudHlwZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKI2NvbHVtbjEuaW50ZXJpb3IgewogIG1hcmdpbi1sZWZ0OiAyMzRweDsKICBwYWRkaW5nOiAwIDJyZW07CiAgLXdlYmtpdC1wYWRkaW5nLXN0YXJ0OiAxLjVyZW07Cn0KCiNjb2x1bW4yLmludGVyaW9yIHsKICB3aWR0aDogMjM0cHg7CiAgYmFja2dyb3VuZDogIzMzMzsKICBwb3NpdGlvbjogZml4ZWQ7CiAgbGVmdDogMDsKICB0b3A6IDA7CiAgYm90dG9tOiAwOwogIG92ZXJmbG93LXg6IGhpZGRlbjsKICBvdmVyZmxvdy15OiBzY3JvbGw7Cn0KCiNjb2x1bW4yIHVsIHsKICBsaXN0LXN0eWxlOiBub25lOwogIG1hcmdpbjogLjlyZW0gMCAuNXJlbTsKICBiYWNrZ3JvdW5kOiAjMzMzOwp9CgojY29sdW1uMiA+IDpmaXJzdC1jaGlsZCB7CiAgbWFyZ2luOiAxLjI1cmVtOwogIGZvbnQtc2l6ZTogMS41cmVtOwp9CgojY29sdW1uMiA+IHVsOm50aC1jaGlsZCgyKSB7CiAgbWFyZ2luOiAxLjI1cmVtIDAgLjVyZW07Cn0KCiNjb2x1bW4yID4gdWw6bGFzdC1jaGlsZCB7CiAgbWFyZ2luOiAuOXJlbSAwIDEuMjVyZW07Cn0KCiNjb2x1bW4yIHVsIGxpIHsKICBwYWRkaW5nLWxlZnQ6IDEuMjVyZW07CiAgbWFyZ2luLWJvdHRvbTogLjVyZW07CiAgcGFkZGluZy1ib3R0b206IC41cmVtOwp9CgojY29sdW1uMiAubGluZSB7CiAgbWFyZ2luOiAwIC41cmVtOwogIGJhY2tncm91bmQtY29sb3I6ICM3MDcwNzA7Cn0KCiNjb2x1bW4yIHVsIGxpOmxhc3QtY2hpbGQgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEgewogIGNvbG9yOiAjY2NjOwogIGJvcmRlci1yYWRpdXM6IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEuYWN0aXZlLCAjY29sdW1uMiB1bCBsaSBhLmFjdGl2ZTpob3ZlciwKI2NvbHVtbjIgdWwgbGkgYS5hY3RpdmU6Zm9jdXMgewogIGNvbG9yOiAjNDM4NTNkOwogIGJvcmRlci1yYWRpdXM6IDA7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM0Mzg1M2Q7CiAgYmFja2dyb3VuZDogbm9uZTsKfQoKI2ludHJvIGE6aG92ZXIsICNpbnRybyBhOmZvY3VzLAojY29sdW1uMiB1bCBsaSBhOmhvdmVyLCAjY29sdW1uMiB1bCBsaSBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgpzcGFuID4gLm1hcmssIHNwYW4gPiAubWFyazp2aXNpdGVkIHsKICBjb2xvcjogIzcwNzA3MDsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgdG9wOiAwcHg7CiAgcmlnaHQ6IDBweDsKfQoKc3BhbiA+IC5tYXJrOmhvdmVyLCBzcGFuID4gLm1hcms6Zm9jdXMsIHNwYW4gPiAubWFyazphY3RpdmUgewogIGNvbG9yOiAjNDM4NTNkOwogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCnRoID4gKjpsYXN0LWNoaWxkLCB0ZCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKfQoKLmNoYW5nZWxvZyA+IHN1bW1hcnkgewogIG1hcmdpbjogLjVyZW0gMDsKICBwYWRkaW5nOiAuNXJlbSAwOwogIGN1cnNvcjogcG9pbnRlcjsKfQoKLyogc2ltcGxlciBjbGVhcmZpeCAqLwouY2xlYXJmaXg6YWZ0ZXIgewogIGNvbnRlbnQ6ICIuIjsKICBkaXNwbGF5OiBibG9jazsKICBoZWlnaHQ6IDA7CiAgY2xlYXI6IGJvdGg7CiAgdmlzaWJpbGl0eTogaGlkZGVuOwp9CgouZ2l0aHViX2ljb24gewogIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7CiAgbWFyZ2luOiAtMnB4IDNweCAwIDA7Cn0KCkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogMTAyNHB4KSB7CiAgI2NvbnRlbnQgewogICAgb3ZlcmZsb3c6IHZpc2libGU7CiAgfQogICNjb2x1bW4xLmludGVyaW9yIHsKICAgIG1hcmdpbi1sZWZ0OiAwOwogICAgcGFkZGluZy1sZWZ0OiAuNXJlbTsKICAgIHBhZGRpbmctcmlnaHQ6IC41cmVtOwogICAgd2lkdGg6IGF1dG87CiAgICBvdmVyZmxvdy15OiB2aXNpYmxlOwogIH0KICAjY29sdW1uMiB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KfQoKQG1lZGlhIHByaW50IHsKICBodG1sIHsKICAgIGhlaWdodDogYXV0bzsKICAgIGZvbnQtc2l6ZTogMC43NWVtOwogIH0KICAjY29sdW1uMi5pbnRlcmlvciB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KICAjY29sdW1uMS5pbnRlcmlvciB7CiAgICBtYXJnaW4tbGVmdDogMHB4OwogICAgcGFkZGluZzogMHB4OwogICAgb3ZlcmZsb3cteTogYXV0bzsKICB9CiAgLmFwaV9tZXRhZGF0YSwKICAjdG9jLAogIC5zcmNsaW5rLAogICNndG9jLAogIC5tYXJrIHsKICAgIGRpc3BsYXk6IG5vbmU7CiAgfQogIGgxIHsKICAgIGZvbnQtc2l6ZTogMnJlbTsKICB9CiAgaDIgewogICAgZm9udC1zaXplOiAxLjc1cmVtOwogIH0KICBoMyB7CiAgICBmb250LXNpemU6IDEuNXJlbTsKICB9CiAgaDQgewogICAgZm9udC1zaXplOiAxLjNyZW07CiAgfQogIGg1IHsKICAgIGZvbnQtc2l6ZTogMS4ycmVtOwogIH0KICBoNiB7CiAgICBmb250LXNpemU6IDEuMXJlbTsKICB9CiAgLmFwaV9zdGFiaWxpdHkgewogICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogIH0KICAuYXBpX3N0YWJpbGl0eSBhIHsKICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsKICB9CiAgYSB7CiAgICBjb2xvcjogaW5oZXJpdDsKICB9CiAgI2FwaWNvbnRlbnQgewogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICB9Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LnNoX3NvdXJjZUNvZGUgewogIGZvbnQtd2VpZ2h0OiBub3JtYWw7CiAgZm9udC1zdHlsZTogbm9ybWFsOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfc3ltYm9sLAouc2hfc291cmNlQ29kZSAuc2hfY2JyYWNrZXQgewogIGNvbG9yOiAjMzMzOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfa2V5d29yZCB7CiAgY29sb3I6ICMzMzg7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9zdHJpbmcsCi5zaF9zb3VyY2VDb2RlIC5zaF9yZWdleHAsCi5zaF9zb3VyY2VDb2RlIC5zaF9udW1iZXIsCi5zaF9zb3VyY2VDb2RlIC5zaF9zcGVjaWFsY2hhciB7CiAgY29sb3I6ICNFNTQzMDU7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9jb21tZW50IHsKICBjb2xvcjogIzY2NjsKICBmb250LXdlaWdodDogbGlnaHRlcjsKfQo=">
+  <link rel="canonical" href="https://nodejs.org/api/cli.html">
+</head>
+<body class="alt apidoc" id="api-section-cli">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="https://nodejs.org/" title="Go back to the home page">
+          Node.js
+        </a>
+      </div>
+      <ul>
+<li><a href="https://nodejs.org/api/documentation.html" class="nav-documentation">About these Docs</a></li>
+<li><a href="https://nodejs.org/api/synopsis.html" class="nav-synopsis">Usage &amp; Example</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://nodejs.org/api/assert.html" class="nav-assert">Assertion Testing</a></li>
+<li><a href="https://nodejs.org/api/async_hooks.html" class="nav-async_hooks">Async Hooks</a></li>
+<li><a href="https://nodejs.org/api/buffer.html" class="nav-buffer">Buffer</a></li>
+<li><a href="https://nodejs.org/api/addons.html" class="nav-addons">C++ Addons</a></li>
+<li><a href="https://nodejs.org/api/n-api.html" class="nav-n-api">C/C++ Addons - N-API</a></li>
+<li><a href="https://nodejs.org/api/child_process.html" class="nav-child_process">Child Processes</a></li>
+<li><a href="https://nodejs.org/api/cluster.html" class="nav-cluster">Cluster</a></li>
+<li><a href="https://nodejs.org/api/cli.html" class="nav-cli active">Command Line Options</a></li>
+<li><a href="https://nodejs.org/api/console.html" class="nav-console">Console</a></li>
+<li><a href="https://nodejs.org/api/crypto.html" class="nav-crypto">Crypto</a></li>
+<li><a href="https://nodejs.org/api/debugger.html" class="nav-debugger">Debugger</a></li>
+<li><a href="https://nodejs.org/api/deprecations.html" class="nav-deprecations">Deprecated APIs</a></li>
+<li><a href="https://nodejs.org/api/dns.html" class="nav-dns">DNS</a></li>
+<li><a href="https://nodejs.org/api/domain.html" class="nav-domain">Domain</a></li>
+<li><a href="https://nodejs.org/api/esm.html" class="nav-esm">ECMAScript Modules</a></li>
+<li><a href="https://nodejs.org/api/errors.html" class="nav-errors">Errors</a></li>
+<li><a href="https://nodejs.org/api/events.html" class="nav-events">Events</a></li>
+<li><a href="https://nodejs.org/api/fs.html" class="nav-fs">File System</a></li>
+<li><a href="https://nodejs.org/api/globals.html" class="nav-globals">Globals</a></li>
+<li><a href="https://nodejs.org/api/http.html" class="nav-http">HTTP</a></li>
+<li><a href="https://nodejs.org/api/http2.html" class="nav-http2">HTTP/2</a></li>
+<li><a href="https://nodejs.org/api/https.html" class="nav-https">HTTPS</a></li>
+<li><a href="https://nodejs.org/api/inspector.html" class="nav-inspector">Inspector</a></li>
+<li><a href="https://nodejs.org/api/intl.html" class="nav-intl">Internationalization</a></li>
+<li><a href="https://nodejs.org/api/modules.html" class="nav-modules">Modules</a></li>
+<li><a href="https://nodejs.org/api/net.html" class="nav-net">Net</a></li>
+<li><a href="https://nodejs.org/api/os.html" class="nav-os">OS</a></li>
+<li><a href="https://nodejs.org/api/path.html" class="nav-path">Path</a></li>
+<li><a href="https://nodejs.org/api/perf_hooks.html" class="nav-perf_hooks">Performance Hooks</a></li>
+<li><a href="https://nodejs.org/api/policy.html" class="nav-policy">Policies</a></li>
+<li><a href="https://nodejs.org/api/process.html" class="nav-process">Process</a></li>
+<li><a href="https://nodejs.org/api/punycode.html" class="nav-punycode">Punycode</a></li>
+<li><a href="https://nodejs.org/api/querystring.html" class="nav-querystring">Query Strings</a></li>
+<li><a href="https://nodejs.org/api/readline.html" class="nav-readline">Readline</a></li>
+<li><a href="https://nodejs.org/api/repl.html" class="nav-repl">REPL</a></li>
+<li><a href="https://nodejs.org/api/report.html" class="nav-report">Report</a></li>
+<li><a href="https://nodejs.org/api/stream.html" class="nav-stream">Stream</a></li>
+<li><a href="https://nodejs.org/api/string_decoder.html" class="nav-string_decoder">String Decoder</a></li>
+<li><a href="https://nodejs.org/api/timers.html" class="nav-timers">Timers</a></li>
+<li><a href="https://nodejs.org/api/tls.html" class="nav-tls">TLS/SSL</a></li>
+<li><a href="https://nodejs.org/api/tracing.html" class="nav-tracing">Trace Events</a></li>
+<li><a href="https://nodejs.org/api/tty.html" class="nav-tty">TTY</a></li>
+<li><a href="https://nodejs.org/api/dgram.html" class="nav-dgram">UDP/Datagram</a></li>
+<li><a href="https://nodejs.org/api/url.html" class="nav-url">URL</a></li>
+<li><a href="https://nodejs.org/api/util.html" class="nav-util">Utilities</a></li>
+<li><a href="https://nodejs.org/api/v8.html" class="nav-v8">V8</a></li>
+<li><a href="https://nodejs.org/api/vm.html" class="nav-vm">VM</a></li>
+<li><a href="https://nodejs.org/api/worker_threads.html" class="nav-worker_threads">Worker Threads</a></li>
+<li><a href="https://nodejs.org/api/zlib.html" class="nav-zlib">Zlib</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://github.com/nodejs/node" class="nav-https-github-com-nodejs-node">GitHub Repo &amp; Issue Tracker</a></li>
+</ul>
+    </div>
+
+    <div id="column1" data-id="cli" class="interior">
+      <header>
+        <h1>Node.js v12.10.0 Documentation</h1>
+        <div id="gtoc">
+          <ul>
+            <li>
+              <a href="https://nodejs.org/api/index.html" name="toc">Index</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/all.html">View on single page</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/cli.json">View as JSON</a>
+            </li>
+            
+    <li class="version-picker">
+      <a href="#">View another version <span>▼</span></a>
+      <ol class="version-picker"><li><a href="https://nodejs.org/docs/latest-v12.x/api/cli.html">12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v11.x/api/cli.html">11.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v10.x/api/cli.html">10.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v9.x/api/cli.html">9.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/cli.html">8.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v7.x/api/cli.html">7.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v6.x/api/cli.html">6.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v5.x/api/cli.html">5.x</a></li></ol>
+    </li>
+  
+            <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/cli.md"><span class="github_icon"><svg height="16" width="16" viewBox="0 0 16.1 16.1" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8z"></path></svg></span>Edit on GitHub</a></li>
+          </ul>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+<li>
+<p><a href="#cli_command_line_options">Command Line Options</a></p>
+<ul>
+<li><a href="#cli_synopsis">Synopsis</a></li>
+<li>
+<p><a href="#cli_options">Options</a></p>
+<ul>
+<li><a href="#cli"><code>-</code></a></li>
+<li><a href="#cli_1"><code>--</code></a></li>
+<li><a href="#cli_abort_on_uncaught_exception"><code>--abort-on-uncaught-exception</code></a></li>
+<li><a href="#cli_completion_bash"><code>--completion-bash</code></a></li>
+<li><span class="stability_1"><a href="#cli_cpu_prof"><code>--cpu-prof</code></a></span></li>
+<li><span class="stability_1"><a href="#cli_cpu_prof_dir"><code>--cpu-prof-dir</code></a></span></li>
+<li><span class="stability_1"><a href="#cli_cpu_prof_interval"><code>--cpu-prof-interval</code></a></span></li>
+<li><span class="stability_1"><a href="#cli_cpu_prof_name"><code>--cpu-prof-name</code></a></span></li>
+<li><a href="#cli_enable_fips"><code>--enable-fips</code></a></li>
+<li><a href="#cli_es_module_specifier_resolution_mode"><code>--es-module-specifier-resolution=mode</code></a></li>
+<li><a href="#cli_experimental_exports"><code>--experimental-exports</code></a></li>
+<li><a href="#cli_experimental_modules"><code>--experimental-modules</code></a></li>
+<li><a href="#cli_experimental_policy"><code>--experimental-policy</code></a></li>
+<li><a href="#cli_experimental_repl_await"><code>--experimental-repl-await</code></a></li>
+<li><a href="#cli_experimental_report"><code>--experimental-report</code></a></li>
+<li><a href="#cli_experimental_vm_modules"><code>--experimental-vm-modules</code></a></li>
+<li><a href="#cli_experimental_wasm_modules"><code>--experimental-wasm-modules</code></a></li>
+<li><a href="#cli_force_fips"><code>--force-fips</code></a></li>
+<li><span class="stability_1"><a href="#cli_frozen_intrinsics"><code>--frozen-intrinsics</code></a></span></li>
+<li><a href="#cli_heapsnapshot_signal_signal"><code>--heapsnapshot-signal=signal</code></a></li>
+<li><span class="stability_1"><a href="#cli_heap_prof"><code>--heap-prof</code></a></span></li>
+<li><span class="stability_1"><a href="#cli_heap_prof_dir"><code>--heap-prof-dir</code></a></span></li>
+<li><span class="stability_1"><a href="#cli_heap_prof_interval"><code>--heap-prof-interval</code></a></span></li>
+<li><span class="stability_1"><a href="#cli_heap_prof_name"><code>--heap-prof-name</code></a></span></li>
+<li><a href="#cli_http_parser_library"><code>--http-parser=library</code></a></li>
+<li><a href="#cli_http_server_default_timeout_milliseconds"><code>--http-server-default-timeout=milliseconds</code></a></li>
+<li><a href="#cli_icu_data_dir_file"><code>--icu-data-dir=file</code></a></li>
+<li><a href="#cli_input_type_type"><code>--input-type=type</code></a></li>
+<li><a href="#cli_inspect_brk_host_port"><code>--inspect-brk[=[host:]port]</code></a></li>
+<li><a href="#cli_inspect_port_host_port"><code>--inspect-port=[host:]port</code></a></li>
+<li>
+<p><a href="#cli_inspect_host_port"><code>--inspect[=[host:]port]</code></a></p>
+<ul>
+<li><a href="#cli_warning_binding_inspector_to_a_public_ip_port_combination_is_insecure">Warning: binding inspector to a public IP:port combination is insecure</a></li>
+</ul>
+</li>
+<li><a href="#cli_inspect_publish_uid_stderr_http"><code>--inspect-publish-uid=stderr,http</code></a></li>
+<li><a href="#cli_loader_file"><code>--loader=file</code></a></li>
+<li><a href="#cli_max_http_header_size_size"><code>--max-http-header-size=size</code></a></li>
+<li><a href="#cli_napi_modules"><code>--napi-modules</code></a></li>
+<li><a href="#cli_no_deprecation"><code>--no-deprecation</code></a></li>
+<li><a href="#cli_no_force_async_hooks_checks"><code>--no-force-async-hooks-checks</code></a></li>
+<li><a href="#cli_no_warnings"><code>--no-warnings</code></a></li>
+<li><a href="#cli_openssl_config_file"><code>--openssl-config=file</code></a></li>
+<li><a href="#cli_pending_deprecation"><code>--pending-deprecation</code></a></li>
+<li><span class="stability_1"><a href="#cli_policy_integrity_sri"><code>--policy-integrity=sri</code></a></span></li>
+<li><a href="#cli_preserve_symlinks"><code>--preserve-symlinks</code></a></li>
+<li><a href="#cli_preserve_symlinks_main"><code>--preserve-symlinks-main</code></a></li>
+<li><a href="#cli_prof"><code>--prof</code></a></li>
+<li><a href="#cli_prof_process"><code>--prof-process</code></a></li>
+<li><a href="#cli_redirect_warnings_file"><code>--redirect-warnings=file</code></a></li>
+<li><a href="#cli_report_directory_directory"><code>--report-directory=directory</code></a></li>
+<li><a href="#cli_report_filename_filename"><code>--report-filename=filename</code></a></li>
+<li><a href="#cli_report_on_fatalerror"><code>--report-on-fatalerror</code></a></li>
+<li><a href="#cli_report_on_signal"><code>--report-on-signal</code></a></li>
+<li><a href="#cli_report_signal_signal"><code>--report-signal=signal</code></a></li>
+<li><a href="#cli_report_uncaught_exception"><code>--report-uncaught-exception</code></a></li>
+<li><a href="#cli_throw_deprecation"><code>--throw-deprecation</code></a></li>
+<li><a href="#cli_title_title"><code>--title=title</code></a></li>
+<li><a href="#cli_tls_cipher_list_list"><code>--tls-cipher-list=list</code></a></li>
+<li><a href="#cli_tls_max_v1_2"><code>--tls-max-v1.2</code></a></li>
+<li><a href="#cli_tls_max_v1_3"><code>--tls-max-v1.3</code></a></li>
+<li><a href="#cli_tls_min_v1_0"><code>--tls-min-v1.0</code></a></li>
+<li><a href="#cli_tls_min_v1_1"><code>--tls-min-v1.1</code></a></li>
+<li><a href="#cli_tls_min_v1_2"><code>--tls-min-v1.2</code></a></li>
+<li><a href="#cli_tls_min_v1_3"><code>--tls-min-v1.3</code></a></li>
+<li><a href="#cli_trace_deprecation"><code>--trace-deprecation</code></a></li>
+<li><a href="#cli_trace_event_categories"><code>--trace-event-categories</code></a></li>
+<li><a href="#cli_trace_event_file_pattern"><code>--trace-event-file-pattern</code></a></li>
+<li><a href="#cli_trace_events_enabled"><code>--trace-events-enabled</code></a></li>
+<li><a href="#cli_trace_sync_io"><code>--trace-sync-io</code></a></li>
+<li><a href="#cli_trace_tls"><code>--trace-tls</code></a></li>
+<li><a href="#cli_trace_warnings"><code>--trace-warnings</code></a></li>
+<li><a href="#cli_track_heap_objects"><code>--track-heap-objects</code></a></li>
+<li><a href="#cli_unhandled_rejections_mode"><code>--unhandled-rejections=mode</code></a></li>
+<li><a href="#cli_use_bundled_ca_use_openssl_ca"><code>--use-bundled-ca</code>, <code>--use-openssl-ca</code></a></li>
+<li><a href="#cli_v8_options"><code>--v8-options</code></a></li>
+<li><a href="#cli_v8_pool_size_num"><code>--v8-pool-size=num</code></a></li>
+<li><a href="#cli_zero_fill_buffers"><code>--zero-fill-buffers</code></a></li>
+<li><a href="#cli_c_check"><code>-c</code>, <code>--check</code></a></li>
+<li><a href="#cli_e_eval_script"><code>-e</code>, <code>--eval "script"</code></a></li>
+<li><a href="#cli_h_help"><code>-h</code>, <code>--help</code></a></li>
+<li><a href="#cli_i_interactive"><code>-i</code>, <code>--interactive</code></a></li>
+<li><a href="#cli_p_print_script"><code>-p</code>, <code>--print "script"</code></a></li>
+<li><a href="#cli_r_require_module"><code>-r</code>, <code>--require module</code></a></li>
+<li><a href="#cli_v_version"><code>-v</code>, <code>--version</code></a></li>
+</ul>
+</li>
+<li>
+<p><a href="#cli_environment_variables">Environment Variables</a></p>
+<ul>
+<li><a href="#cli_node_debug_module"><code>NODE_DEBUG=module[,…]</code></a></li>
+<li><a href="#cli_node_debug_native_module"><code>NODE_DEBUG_NATIVE=module[,…]</code></a></li>
+<li><a href="#cli_node_disable_colors_1"><code>NODE_DISABLE_COLORS=1</code></a></li>
+<li><a href="#cli_node_extra_ca_certs_file"><code>NODE_EXTRA_CA_CERTS=file</code></a></li>
+<li><a href="#cli_node_icu_data_file"><code>NODE_ICU_DATA=file</code></a></li>
+<li><a href="#cli_node_no_warnings_1"><code>NODE_NO_WARNINGS=1</code></a></li>
+<li><a href="#cli_node_options_options"><code>NODE_OPTIONS=options...</code></a></li>
+<li><a href="#cli_node_path_path"><code>NODE_PATH=path[:…]</code></a></li>
+<li><a href="#cli_node_pending_deprecation_1"><code>NODE_PENDING_DEPRECATION=1</code></a></li>
+<li><a href="#cli_node_pending_pipe_instances_instances"><code>NODE_PENDING_PIPE_INSTANCES=instances</code></a></li>
+<li><a href="#cli_node_preserve_symlinks_1"><code>NODE_PRESERVE_SYMLINKS=1</code></a></li>
+<li><a href="#cli_node_redirect_warnings_file"><code>NODE_REDIRECT_WARNINGS=file</code></a></li>
+<li><a href="#cli_node_repl_history_file"><code>NODE_REPL_HISTORY=file</code></a></li>
+<li><a href="#cli_node_tls_reject_unauthorized_value"><code>NODE_TLS_REJECT_UNAUTHORIZED=value</code></a></li>
+<li><a href="#cli_node_v8_coverage_dir"><code>NODE_V8_COVERAGE=dir</code></a></li>
+<li><a href="#cli_openssl_conf_file"><code>OPENSSL_CONF=file</code></a></li>
+<li><a href="#cli_ssl_cert_dir_dir"><code>SSL_CERT_DIR=dir</code></a></li>
+<li><a href="#cli_ssl_cert_file_file"><code>SSL_CERT_FILE=file</code></a></li>
+<li><a href="#cli_uv_threadpool_size_size"><code>UV_THREADPOOL_SIZE=size</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+      </div>
+
+      <div id="apicontent">
+        <h1>Command Line Options<span><a class="mark" href="#cli_command_line_options" id="cli_command_line_options">#</a></span></h1>
+
+
+<p>Node.js comes with a variety of CLI options. These options expose built-in
+debugging, multiple ways to execute scripts, and other helpful runtime options.</p>
+<p>To view this documentation as a manual page in a terminal, run <code>man node</code>.</p>
+<h2>Synopsis<span><a class="mark" href="#cli_synopsis" id="cli_synopsis">#</a></span></h2>
+<p><code>node [options] [V8 options] [script.js | -e "script" | -] [--] [arguments]</code></p>
+<p><code>node inspect [script.js | -e "script" | &lt;host&gt;:&lt;port&gt;] …</code></p>
+<p><code>node --v8-options</code></p>
+<p>Execute without arguments to start the <a href="https://nodejs.org/api/repl.html">REPL</a>.</p>
+<p><em>For more info about <code>node inspect</code>, please see the <a href="https://nodejs.org/api/debugger.html">debugger</a> documentation.</em></p>
+<h2>Options<span><a class="mark" href="#cli_options" id="cli_options">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.12.0</td>
+<td><p>Underscores instead of dashes are now allowed for Node.js options as well, in addition to V8 options.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>All options, including V8 options, allow words to be separated by both
+dashes (<code>-</code>) or underscores (<code>_</code>).</p>
+<p>For example, <code>--pending-deprecation</code> is equivalent to <code>--pending_deprecation</code>.</p>
+<h3><code>-</code><span><a class="mark" href="#cli" id="cli">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.0.0</span>
+</div>
+<p>Alias for stdin, analogous to the use of - in other command line utilities,
+meaning that the script will be read from stdin, and the rest of the options
+are passed to that script.</p>
+<h3><code>--</code><span><a class="mark" href="#cli_1" id="cli_1">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.11.0</span>
+</div>
+<p>Indicate the end of node options. Pass the rest of the arguments to the script.
+If no script filename or eval/print script is supplied prior to this, then
+the next argument will be used as a script filename.</p>
+<h3><code>--abort-on-uncaught-exception</code><span><a class="mark" href="#cli_abort_on_uncaught_exception" id="cli_abort_on_uncaught_exception">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.10</span>
+</div>
+<p>Aborting instead of exiting causes a core file to be generated for post-mortem
+analysis using a debugger (such as <code>lldb</code>, <code>gdb</code>, and <code>mdb</code>).</p>
+<p>If this flag is passed, the behavior can still be set to not abort through
+<a href="https://nodejs.org/api/process.html#process_process_setuncaughtexceptioncapturecallback_fn"><code>process.setUncaughtExceptionCaptureCallback()</code></a> (and through usage of the
+<code>domain</code> module that uses it).</p>
+<h3><code>--completion-bash</code><span><a class="mark" href="#cli_completion_bash" id="cli_completion_bash">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.12.0</span>
+</div>
+<p>Print source-able bash completion script for Node.js.</p>
+<pre><code class="language-console">$ node --completion-bash &gt; node_bash_completion
+$ source node_bash_completion
+</code></pre>
+<h3><code>--cpu-prof</code><span><a class="mark" href="#cli_cpu_prof" id="cli_cpu_prof">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<p>Starts the V8 CPU profiler on start up, and writes the CPU profile to disk
+before exit.</p>
+<p>If <code>--cpu-prof-dir</code> is not specified, the generated profile will be placed
+in the current working directory.</p>
+<p>If <code>--cpu-prof-name</code> is not specified, the generated profile will be
+named <code>CPU.${yyyymmdd}.${hhmmss}.${pid}.${tid}.${seq}.cpuprofile</code>.</p>
+<pre><code class="language-console">$ node --cpu-prof index.js
+$ ls *.cpuprofile
+CPU.20190409.202950.15293.0.0.cpuprofile
+</code></pre>
+<h3><code>--cpu-prof-dir</code><span><a class="mark" href="#cli_cpu_prof_dir" id="cli_cpu_prof_dir">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<p>Specify the directory where the CPU profiles generated by <code>--cpu-prof</code> will
+be placed.</p>
+<h3><code>--cpu-prof-interval</code><span><a class="mark" href="#cli_cpu_prof_interval" id="cli_cpu_prof_interval">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.2.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<p>Specify the sampling interval in microseconds for the CPU profiles generated
+by <code>--cpu-prof</code>. The default is 1000 microseconds.</p>
+<h3><code>--cpu-prof-name</code><span><a class="mark" href="#cli_cpu_prof_name" id="cli_cpu_prof_name">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<p>Specify the file name of the CPU profile generated by <code>--cpu-prof</code>.</p>
+<h3><code>--enable-fips</code><span><a class="mark" href="#cli_enable_fips" id="cli_enable_fips">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.0.0</span>
+</div>
+<p>Enable FIPS-compliant crypto at startup. (Requires Node.js to be built with
+<code>./configure --openssl-fips</code>.)</p>
+<h3><code>--es-module-specifier-resolution=mode</code><span><a class="mark" href="#cli_es_module_specifier_resolution_mode" id="cli_es_module_specifier_resolution_mode">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.0.0</span>
+</div>
+<p>To be used in conjunction with <code>--experimental-modules</code>. Sets the resolution
+algorithm for resolving specifiers. Valid options are <code>explicit</code> and <code>node</code>.</p>
+<p>The default is <code>explicit</code>, which requires providing the full path to a
+module. The <code>node</code> mode will enable support for optional file extensions and
+the ability to import a directory that has an index file.</p>
+<p>Please see <a href="https://nodejs.org/api/esm.html#esm_customizing_esm_specifier_resolution_algorithm">customizing esm specifier resolution</a> for example usage.</p>
+<h3><code>--experimental-exports</code><span><a class="mark" href="#cli_experimental_exports" id="cli_experimental_exports">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.7.0</span>
+</div>
+<p>Enable experimental resolution using the <code>exports</code> field in <code>package.json</code>.</p>
+<h3><code>--experimental-modules</code><span><a class="mark" href="#cli_experimental_modules" id="cli_experimental_modules">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.5.0</span>
+</div>
+<p>Enable experimental ES module support and caching modules.</p>
+<h3><code>--experimental-policy</code><span><a class="mark" href="#cli_experimental_policy" id="cli_experimental_policy">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.8.0</span>
+</div>
+<p>Use the specified file as a security policy.</p>
+<h3><code>--experimental-repl-await</code><span><a class="mark" href="#cli_experimental_repl_await" id="cli_experimental_repl_await">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<p>Enable experimental top-level <code>await</code> keyword support in REPL.</p>
+<h3><code>--experimental-report</code><span><a class="mark" href="#cli_experimental_report" id="cli_experimental_report">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.8.0</span>
+</div>
+<p>Enable experimental diagnostic report feature.</p>
+<h3><code>--experimental-vm-modules</code><span><a class="mark" href="#cli_experimental_vm_modules" id="cli_experimental_vm_modules">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v9.6.0</span>
+</div>
+<p>Enable experimental ES Module support in the <code>vm</code> module.</p>
+<h3><code>--experimental-wasm-modules</code><span><a class="mark" href="#cli_experimental_wasm_modules" id="cli_experimental_wasm_modules">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.3.0</span>
+</div>
+<p>Enable experimental WebAssembly module support.</p>
+<h3><code>--force-fips</code><span><a class="mark" href="#cli_force_fips" id="cli_force_fips">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.0.0</span>
+</div>
+<p>Force FIPS-compliant crypto on startup. (Cannot be disabled from script code.)
+(Same requirements as <code>--enable-fips</code>.)</p>
+<h3><code>--frozen-intrinsics</code><span><a class="mark" href="#cli_frozen_intrinsics" id="cli_frozen_intrinsics">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.12.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<p>Enable experimental frozen intrinsics like <code>Array</code> and <code>Object</code>.</p>
+<p>Support is currently only provided for the root context and no guarantees are
+currently provided that <code>global.Array</code> is indeed the default intrinsic
+reference. Code may break under this flag.</p>
+<p><code>--require</code> runs prior to freezing intrinsics in order to allow polyfills to
+be added.</p>
+<h3><code>--heapsnapshot-signal=signal</code><span><a class="mark" href="#cli_heapsnapshot_signal_signal" id="cli_heapsnapshot_signal_signal">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.0.0</span>
+</div>
+<p>Enables a signal handler that causes the Node.js process to write a heap dump
+when the specified signal is received.</p>
+<pre><code class="language-console">$ node --heapsnapshot-signal=SIGUSR2 index.js &amp;
+$ ps aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+node         1  5.5  6.1 787252 247004 ?       Ssl  16:43   0:02 node --heapsnapshot-signal=SIGUSR2 index.js
+$ kill -USR2 1
+$ ls
+Heap.20190718.133405.15554.0.001.heapsnapshot
+</code></pre>
+<h3><code>--heap-prof</code><span><a class="mark" href="#cli_heap_prof" id="cli_heap_prof">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.4.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<p>Starts the V8 heap profiler on start up, and writes the heap profile to disk
+before exit.</p>
+<p>If <code>--heap-prof-dir</code> is not specified, the generated profile will be placed
+in the current working directory.</p>
+<p>If <code>--heap-prof-name</code> is not specified, the generated profile will be
+named <code>Heap.${yyyymmdd}.${hhmmss}.${pid}.${tid}.${seq}.heapprofile</code>.</p>
+<pre><code class="language-console">$ node --heap-prof index.js
+$ ls *.heapprofile
+Heap.20190409.202950.15293.0.001.heapprofile
+</code></pre>
+<h3><code>--heap-prof-dir</code><span><a class="mark" href="#cli_heap_prof_dir" id="cli_heap_prof_dir">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.4.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<p>Specify the directory where the heap profiles generated by <code>--heap-prof</code> will
+be placed.</p>
+<h3><code>--heap-prof-interval</code><span><a class="mark" href="#cli_heap_prof_interval" id="cli_heap_prof_interval">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.4.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<p>Specify the average sampling interval in bytes for the heap profiles generated
+by <code>--heap-prof</code>. The default is 512 * 1024 bytes.</p>
+<h3><code>--heap-prof-name</code><span><a class="mark" href="#cli_heap_prof_name" id="cli_heap_prof_name">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.4.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<p>Specify the file name of the heap profile generated by <code>--heap-prof</code>.</p>
+<p>Generates a heap snapshot each time the process receives the specified signal.
+<code>signal</code> must be a valid signal name. Disabled by default.</p>
+<h3><code>--http-parser=library</code><span><a class="mark" href="#cli_http_parser_library" id="cli_http_parser_library">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.4.0</span>
+</div>
+<p>Chooses an HTTP parser library. Available values are:</p>
+<ul>
+<li><code>llhttp</code> for <a href="https://llhttp.org/">https://llhttp.org/</a></li>
+<li><code>legacy</code> for <a href="https://github.com/nodejs/http-parser">https://github.com/nodejs/http-parser</a></li>
+</ul>
+<p>The default is <code>llhttp</code>, unless otherwise specified when building Node.js.</p>
+<p>This flag exists to aid in experimentation with the internal implementation of
+the Node.js http parser.
+This flag is likely to become a no-op and removed at some point in the future.</p>
+<h3><code>--http-server-default-timeout=milliseconds</code><span><a class="mark" href="#cli_http_server_default_timeout_milliseconds" id="cli_http_server_default_timeout_milliseconds">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.4.0</span>
+</div>
+<p>Overrides the default value of <code>http</code>, <code>https</code> and <code>http2</code> server socket
+timeout. Setting the value to 0 disables server socket timeout. Unless
+provided, http server sockets timeout after 120s (2 minutes). Programmatic
+setting of the timeout takes precedence over the value set through this
+flag.</p>
+<h3><code>--icu-data-dir=file</code><span><a class="mark" href="#cli_icu_data_dir_file" id="cli_icu_data_dir_file">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.15</span>
+</div>
+<p>Specify ICU data load path. (Overrides <code>NODE_ICU_DATA</code>.)</p>
+<h3><code>--input-type=type</code><span><a class="mark" href="#cli_input_type_type" id="cli_input_type_type">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.0.0</span>
+</div>
+<p>Used with <code>--experimental-modules</code>, this configures Node.js to interpret string
+input as CommonJS or as an ES module. String input is input via <code>--eval</code>,
+<code>--print</code>, or <code>STDIN</code>.</p>
+<p>Valid values are <code>"commonjs"</code> and <code>"module"</code>. The default is <code>"commonjs"</code>.</p>
+<h3><code>--inspect-brk[=[host:]port]</code><span><a class="mark" href="#cli_inspect_brk_host_port" id="cli_inspect_brk_host_port">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.6.0</span>
+</div>
+<p>Activate inspector on <code>host:port</code> and break at start of user script.
+Default <code>host:port</code> is <code>127.0.0.1:9229</code>.</p>
+<h3><code>--inspect-port=[host:]port</code><span><a class="mark" href="#cli_inspect_port_host_port" id="cli_inspect_port_host_port">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.6.0</span>
+</div>
+<p>Set the <code>host:port</code> to be used when the inspector is activated.
+Useful when activating the inspector by sending the <code>SIGUSR1</code> signal.</p>
+<p>Default host is <code>127.0.0.1</code>.</p>
+<p>See the <a href="#inspector_security">security warning</a> below regarding the <code>host</code>
+parameter usage.</p>
+<h3><code>--inspect[=[host:]port]</code><span><a class="mark" href="#cli_inspect_host_port" id="cli_inspect_host_port">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.3.0</span>
+</div>
+<p>Activate inspector on <code>host:port</code>. Default is <code>127.0.0.1:9229</code>.</p>
+<p>V8 inspector integration allows tools such as Chrome DevTools and IDEs to debug
+and profile Node.js instances. The tools attach to Node.js instances via a
+tcp port and communicate using the <a href="https://chromedevtools.github.io/devtools-protocol/">Chrome DevTools Protocol</a>.</p>
+<p><a id="inspector_security"></a></p>
+<h4>Warning: binding inspector to a public IP:port combination is insecure<span><a class="mark" href="#cli_warning_binding_inspector_to_a_public_ip_port_combination_is_insecure" id="cli_warning_binding_inspector_to_a_public_ip_port_combination_is_insecure">#</a></span></h4>
+<p>Binding the inspector to a public IP (including <code>0.0.0.0</code>) with an open port is
+insecure, as it allows external hosts to connect to the inspector and perform
+a <a href="https://www.owasp.org/index.php/Code_Injection">remote code execution</a> attack.</p>
+<p>If specifying a host, make sure that either:</p>
+<ul>
+<li>The host is not accessible from public networks.</li>
+<li>A firewall disallows unwanted connections on the port.</li>
+</ul>
+<p><strong>More specifically, <code>--inspect=0.0.0.0</code> is insecure if the port (<code>9229</code> by
+default) is not firewall-protected.</strong></p>
+<p>See the <a href="https://nodejs.org/en/docs/guides/debugging-getting-started/#security-implications">debugging security implications</a> section for more information.</p>
+<h3><code>--inspect-publish-uid=stderr,http</code><span><a class="mark" href="#cli_inspect_publish_uid_stderr_http" id="cli_inspect_publish_uid_stderr_http">#</a></span></h3>
+<p>Specify ways of the inspector web socket url exposure.</p>
+<p>By default inspector websocket url is available in stderr and under <code>/json/list</code>
+endpoint on <code>http://host:port/json/list</code>.</p>
+<h3><code>--loader=file</code><span><a class="mark" href="#cli_loader_file" id="cli_loader_file">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v9.0.0</span>
+</div>
+<p>Specify the <code>file</code> of the custom <a href="https://nodejs.org/api/esm.html#esm_resolve_hook">experimental ECMAScript Module</a> loader.</p>
+<h3><code>--max-http-header-size=size</code><span><a class="mark" href="#cli_max_http_header_size_size" id="cli_max_http_header_size_size">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.6.0</span>
+</div>
+<p>Specify the maximum size, in bytes, of HTTP headers. Defaults to 8KB.</p>
+<h3><code>--napi-modules</code><span><a class="mark" href="#cli_napi_modules" id="cli_napi_modules">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.10.0</span>
+</div>
+<p>This option is a no-op. It is kept for compatibility.</p>
+<h3><code>--no-deprecation</code><span><a class="mark" href="#cli_no_deprecation" id="cli_no_deprecation">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.8.0</span>
+</div>
+<p>Silence deprecation warnings.</p>
+<h3><code>--no-force-async-hooks-checks</code><span><a class="mark" href="#cli_no_force_async_hooks_checks" id="cli_no_force_async_hooks_checks">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v9.0.0</span>
+</div>
+<p>Disables runtime checks for <code>async_hooks</code>. These will still be enabled
+dynamically when <code>async_hooks</code> is enabled.</p>
+<h3><code>--no-warnings</code><span><a class="mark" href="#cli_no_warnings" id="cli_no_warnings">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.0.0</span>
+</div>
+<p>Silence all process warnings (including deprecations).</p>
+<h3><code>--openssl-config=file</code><span><a class="mark" href="#cli_openssl_config_file" id="cli_openssl_config_file">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.9.0</span>
+</div>
+<p>Load an OpenSSL configuration file on startup. Among other uses, this can be
+used to enable FIPS-compliant crypto if Node.js is built with
+<code>./configure --openssl-fips</code>.</p>
+<h3><code>--pending-deprecation</code><span><a class="mark" href="#cli_pending_deprecation" id="cli_pending_deprecation">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.0.0</span>
+</div>
+<p>Emit pending deprecation warnings.</p>
+<p>Pending deprecations are generally identical to a runtime deprecation with the
+notable exception that they are turned <em>off</em> by default and will not be emitted
+unless either the <code>--pending-deprecation</code> command line flag, or the
+<code>NODE_PENDING_DEPRECATION=1</code> environment variable, is set. Pending deprecations
+are used to provide a kind of selective "early warning" mechanism that
+developers may leverage to detect deprecated API usage.</p>
+<h3><code>--policy-integrity=sri</code><span><a class="mark" href="#cli_policy_integrity_sri" id="cli_policy_integrity_sri">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.7.0</span>
+</div>
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<p>Instructs Node.js to error prior to running any code if the policy does not have
+the specified integrity. It expects a <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity">Subresource Integrity</a> string as a
+parameter.</p>
+<h3><code>--preserve-symlinks</code><span><a class="mark" href="#cli_preserve_symlinks" id="cli_preserve_symlinks">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.3.0</span>
+</div>
+<p>Instructs the module loader to preserve symbolic links when resolving and
+caching modules.</p>
+<p>By default, when Node.js loads a module from a path that is symbolically linked
+to a different on-disk location, Node.js will dereference the link and use the
+actual on-disk "real path" of the module as both an identifier and as a root
+path to locate other dependency modules. In most cases, this default behavior
+is acceptable. However, when using symbolically linked peer dependencies, as
+illustrated in the example below, the default behavior causes an exception to
+be thrown if <code>moduleA</code> attempts to require <code>moduleB</code> as a peer dependency:</p>
+<pre><code class="language-text">{appDir}
+ ├── app
+ │   ├── index.js
+ │   └── node_modules
+ │       ├── moduleA -&gt; {appDir}/moduleA
+ │       └── moduleB
+ │           ├── index.js
+ │           └── package.json
+ └── moduleA
+     ├── index.js
+     └── package.json
+</code></pre>
+<p>The <code>--preserve-symlinks</code> command line flag instructs Node.js to use the
+symlink path for modules as opposed to the real path, allowing symbolically
+linked peer dependencies to be found.</p>
+<p>Note, however, that using <code>--preserve-symlinks</code> can have other side effects.
+Specifically, symbolically linked <em>native</em> modules can fail to load if those
+are linked from more than one location in the dependency tree (Node.js would
+see those as two separate modules and would attempt to load the module multiple
+times, causing an exception to be thrown).</p>
+<p>The <code>--preserve-symlinks</code> flag does not apply to the main module, which allows
+<code>node --preserve-symlinks node_module/.bin/&lt;foo&gt;</code> to work. To apply the same
+behavior for the main module, also use <code>--preserve-symlinks-main</code>.</p>
+<h3><code>--preserve-symlinks-main</code><span><a class="mark" href="#cli_preserve_symlinks_main" id="cli_preserve_symlinks_main">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.2.0</span>
+</div>
+<p>Instructs the module loader to preserve symbolic links when resolving and
+caching the main module (<code>require.main</code>).</p>
+<p>This flag exists so that the main module can be opted-in to the same behavior
+that <code>--preserve-symlinks</code> gives to all other imports; they are separate flags,
+however, for backward compatibility with older Node.js versions.</p>
+<p><code>--preserve-symlinks-main</code> does not imply <code>--preserve-symlinks</code>; it
+is expected that <code>--preserve-symlinks-main</code> will be used in addition to
+<code>--preserve-symlinks</code> when it is not desirable to follow symlinks before
+resolving relative paths.</p>
+<p>See <code>--preserve-symlinks</code> for more information.</p>
+<h3><code>--prof</code><span><a class="mark" href="#cli_prof" id="cli_prof">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v2.0.0</span>
+</div>
+<p>Generate V8 profiler output.</p>
+<h3><code>--prof-process</code><span><a class="mark" href="#cli_prof_process" id="cli_prof_process">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v5.2.0</span>
+</div>
+<p>Process V8 profiler output generated using the V8 option <code>--prof</code>.</p>
+<h3><code>--redirect-warnings=file</code><span><a class="mark" href="#cli_redirect_warnings_file" id="cli_redirect_warnings_file">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.0.0</span>
+</div>
+<p>Write process warnings to the given file instead of printing to stderr. The
+file will be created if it does not exist, and will be appended to if it does.
+If an error occurs while attempting to write the warning to the file, the
+warning will be written to stderr instead.</p>
+<h3><code>--report-directory=directory</code><span><a class="mark" href="#cli_report_directory_directory" id="cli_report_directory_directory">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>Changed from <code>--diagnostic-report-directory</code> to <code>--report-directory</code></p></td></tr>
+<tr><td>v11.8.0</td>
+<td><p><span>Added in: v11.8.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Location at which the report will be generated.</p>
+<h3><code>--report-filename=filename</code><span><a class="mark" href="#cli_report_filename_filename" id="cli_report_filename_filename">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>changed from <code>--diagnostic-report-filename</code> to <code>--report-filename</code></p></td></tr>
+<tr><td>v11.8.0</td>
+<td><p><span>Added in: v11.8.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Name of the file to which the report will be written.</p>
+<h3><code>--report-on-fatalerror</code><span><a class="mark" href="#cli_report_on_fatalerror" id="cli_report_on_fatalerror">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>changed from <code>--diagnostic-report-on-fatalerror</code> to <code>--report-on-fatalerror</code></p></td></tr>
+<tr><td>v11.8.0</td>
+<td><p><span>Added in: v11.8.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Enables the report to be triggered on fatal errors (internal errors within
+the Node.js runtime such as out of memory) that lead to termination of the
+application, if <code>--experimental-report</code> is enabled. Useful to inspect various
+diagnostic data elements such as heap, stack, event loop state, resource
+consumption etc. to reason about the fatal error.</p>
+<h3><code>--report-on-signal</code><span><a class="mark" href="#cli_report_on_signal" id="cli_report_on_signal">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>changed from <code>--diagnostic-report-on-signal</code> to <code>--report-on-signal</code></p></td></tr>
+<tr><td>v11.8.0</td>
+<td><p><span>Added in: v11.8.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Enables report to be generated upon receiving the specified (or predefined)
+signal to the running Node.js process, if <code>--experimental-report</code> is enabled.
+The signal to trigger the report is specified through <code>--report-signal</code>.</p>
+<h3><code>--report-signal=signal</code><span><a class="mark" href="#cli_report_signal_signal" id="cli_report_signal_signal">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>changed from <code>--diagnostic-report-signal</code> to <code>--report-signal</code></p></td></tr>
+<tr><td>v11.8.0</td>
+<td><p><span>Added in: v11.8.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Sets or resets the signal for report generation (not supported on Windows).
+Default signal is <code>SIGUSR2</code>.</p>
+<h3><code>--report-uncaught-exception</code><span><a class="mark" href="#cli_report_uncaught_exception" id="cli_report_uncaught_exception">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>changed from <code>--diagnostic-report-uncaught-exception</code> to <code>--report-uncaught-exception</code></p></td></tr>
+<tr><td>v11.8.0</td>
+<td><p><span>Added in: v11.8.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Enables report to be generated on un-caught exceptions, if
+<code>--experimental-report</code> is enabled. Useful when inspecting JavaScript stack in
+conjunction with native stack and other runtime environment data.</p>
+<h3><code>--throw-deprecation</code><span><a class="mark" href="#cli_throw_deprecation" id="cli_throw_deprecation">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.14</span>
+</div>
+<p>Throw errors for deprecations.</p>
+<h3><code>--title=title</code><span><a class="mark" href="#cli_title_title" id="cli_title_title">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.7.0</span>
+</div>
+<p>Set <code>process.title</code> on startup.</p>
+<h3><code>--tls-cipher-list=list</code><span><a class="mark" href="#cli_tls_cipher_list_list" id="cli_tls_cipher_list_list">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v4.0.0</span>
+</div>
+<p>Specify an alternative default TLS cipher list. Requires Node.js to be built
+with crypto support (default).</p>
+<h3><code>--tls-max-v1.2</code><span><a class="mark" href="#cli_tls_max_v1_2" id="cli_tls_max_v1_2">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.0.0</span>
+</div>
+<p>Set <a href="https://nodejs.org/api/tls.html#tls_tls_default_max_version"><code>tls.DEFAULT_MAX_VERSION</code></a> to 'TLSv1.2'. Use to disable support for
+TLSv1.3.</p>
+<h3><code>--tls-max-v1.3</code><span><a class="mark" href="#cli_tls_max_v1_3" id="cli_tls_max_v1_3">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.0.0</span>
+</div>
+<p>Set default <a href="https://nodejs.org/api/tls.html#tls_tls_default_max_version"><code>tls.DEFAULT_MAX_VERSION</code></a> to 'TLSv1.3'. Use to enable support
+for TLSv1.3.</p>
+<h3><code>--tls-min-v1.0</code><span><a class="mark" href="#cli_tls_min_v1_0" id="cli_tls_min_v1_0">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.0.0</span>
+</div>
+<p>Set default <a href="https://nodejs.org/api/tls.html#tls_tls_default_min_version"><code>tls.DEFAULT_MIN_VERSION</code></a> to 'TLSv1'. Use for compatibility with
+old TLS clients or servers.</p>
+<h3><code>--tls-min-v1.1</code><span><a class="mark" href="#cli_tls_min_v1_1" id="cli_tls_min_v1_1">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.0.0</span>
+</div>
+<p>Set default <a href="https://nodejs.org/api/tls.html#tls_tls_default_min_version"><code>tls.DEFAULT_MIN_VERSION</code></a> to 'TLSv1.1'. Use for compatibility
+with old TLS clients or servers.</p>
+<h3><code>--tls-min-v1.2</code><span><a class="mark" href="#cli_tls_min_v1_2" id="cli_tls_min_v1_2">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.2.0</span>
+</div>
+<p>Set default <a href="https://nodejs.org/api/tls.html#tls_tls_default_min_version"><code>tls.DEFAULT_MIN_VERSION</code></a> to 'TLSv1.2'. This is the default for
+12.x and later, but the option is supported for compatibility with older Node.js
+versions.</p>
+<h3><code>--tls-min-v1.3</code><span><a class="mark" href="#cli_tls_min_v1_3" id="cli_tls_min_v1_3">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.0.0</span>
+</div>
+<p>Set default <a href="https://nodejs.org/api/tls.html#tls_tls_default_min_version"><code>tls.DEFAULT_MIN_VERSION</code></a> to 'TLSv1.3'. Use to disable support
+for TLSv1.2, which is not as secure as TLSv1.3.</p>
+<h3><code>--trace-deprecation</code><span><a class="mark" href="#cli_trace_deprecation" id="cli_trace_deprecation">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.8.0</span>
+</div>
+<p>Print stack traces for deprecations.</p>
+<h3><code>--trace-event-categories</code><span><a class="mark" href="#cli_trace_event_categories" id="cli_trace_event_categories">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.7.0</span>
+</div>
+<p>A comma separated list of categories that should be traced when trace event
+tracing is enabled using <code>--trace-events-enabled</code>.</p>
+<h3><code>--trace-event-file-pattern</code><span><a class="mark" href="#cli_trace_event_file_pattern" id="cli_trace_event_file_pattern">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v9.8.0</span>
+</div>
+<p>Template string specifying the filepath for the trace event data, it
+supports <code>${rotation}</code> and <code>${pid}</code>.</p>
+<h3><code>--trace-events-enabled</code><span><a class="mark" href="#cli_trace_events_enabled" id="cli_trace_events_enabled">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.7.0</span>
+</div>
+<p>Enables the collection of trace event tracing information.</p>
+<h3><code>--trace-sync-io</code><span><a class="mark" href="#cli_trace_sync_io" id="cli_trace_sync_io">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v2.1.0</span>
+</div>
+<p>Prints a stack trace whenever synchronous I/O is detected after the first turn
+of the event loop.</p>
+<h3><code>--trace-tls</code><span><a class="mark" href="#cli_trace_tls" id="cli_trace_tls">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.2.0</span>
+</div>
+<p>Prints TLS packet trace information to <code>stderr</code>. This can be used to debug TLS
+connection problems.</p>
+<h3><code>--trace-warnings</code><span><a class="mark" href="#cli_trace_warnings" id="cli_trace_warnings">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.0.0</span>
+</div>
+<p>Print stack traces for process warnings (including deprecations).</p>
+<h3><code>--track-heap-objects</code><span><a class="mark" href="#cli_track_heap_objects" id="cli_track_heap_objects">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v2.4.0</span>
+</div>
+<p>Track heap object allocations for heap snapshots.</p>
+<h3><code>--unhandled-rejections=mode</code><span><a class="mark" href="#cli_unhandled_rejections_mode" id="cli_unhandled_rejections_mode">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.0.0</span>
+</div>
+<p>By default all unhandled rejections trigger a warning plus a deprecation warning
+for the very first unhandled rejection in case no <a href="https://nodejs.org/api/process.html#process_event_unhandledrejection"><code>unhandledRejection</code></a> hook
+is used.</p>
+<p>Using this flag allows to change what should happen when an unhandled rejection
+occurs. One of three modes can be chosen:</p>
+<ul>
+<li><code>strict</code>: Raise the unhandled rejection as an uncaught exception.</li>
+<li><code>warn</code>: Always trigger a warning, no matter if the <a href="https://nodejs.org/api/process.html#process_event_unhandledrejection"><code>unhandledRejection</code></a>
+hook is set or not but do not print the deprecation warning.</li>
+<li><code>none</code>: Silence all warnings.</li>
+</ul>
+<h3><code>--use-bundled-ca</code>, <code>--use-openssl-ca</code><span><a class="mark" href="#cli_use_bundled_ca_use_openssl_ca" id="cli_use_bundled_ca_use_openssl_ca">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.11.0</span>
+</div>
+<p>Use bundled Mozilla CA store as supplied by current Node.js version
+or use OpenSSL's default CA store. The default store is selectable
+at build-time.</p>
+<p>The bundled CA store, as supplied by Node.js, is a snapshot of Mozilla CA store
+that is fixed at release time. It is identical on all supported platforms.</p>
+<p>Using OpenSSL store allows for external modifications of the store. For most
+Linux and BSD distributions, this store is maintained by the distribution
+maintainers and system administrators. OpenSSL CA store location is dependent on
+configuration of the OpenSSL library but this can be altered at runtime using
+environment variables.</p>
+<p>See <code>SSL_CERT_DIR</code> and <code>SSL_CERT_FILE</code>.</p>
+<h3><code>--v8-options</code><span><a class="mark" href="#cli_v8_options" id="cli_v8_options">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.3</span>
+</div>
+<p>Print V8 command line options.</p>
+<h3><code>--v8-pool-size=num</code><span><a class="mark" href="#cli_v8_pool_size_num" id="cli_v8_pool_size_num">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v5.10.0</span>
+</div>
+<p>Set V8's thread pool size which will be used to allocate background jobs.</p>
+<p>If set to <code>0</code> then V8 will choose an appropriate size of the thread pool based
+on the number of online processors.</p>
+<p>If the value provided is larger than V8's maximum, then the largest value
+will be chosen.</p>
+<h3><code>--zero-fill-buffers</code><span><a class="mark" href="#cli_zero_fill_buffers" id="cli_zero_fill_buffers">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.0.0</span>
+</div>
+<p>Automatically zero-fills all newly allocated <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer"><code>Buffer</code></a> and <a href="https://nodejs.org/api/buffer.html#buffer_class_slowbuffer"><code>SlowBuffer</code></a>
+instances.</p>
+<h3><code>-c</code>, <code>--check</code><span><a class="mark" href="#cli_c_check" id="cli_c_check">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>The <code>--require</code> option is now supported when checking a file.</p></td></tr>
+<tr><td>v5.0.0, v4.2.0</td>
+<td><p><span>Added in: v5.0.0, v4.2.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Syntax check the script without executing.</p>
+<h3><code>-e</code>, <code>--eval "script"</code><span><a class="mark" href="#cli_e_eval_script" id="cli_e_eval_script">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v5.11.0</td>
+<td><p>Built-in libraries are now available as predefined variables.</p></td></tr>
+<tr><td>v0.5.2</td>
+<td><p><span>Added in: v0.5.2</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Evaluate the following argument as JavaScript. The modules which are
+predefined in the REPL can also be used in <code>script</code>.</p>
+<p>On Windows, using <code>cmd.exe</code> a single quote will not work correctly because it
+only recognizes double <code>"</code> for quoting. In Powershell or Git bash, both <code>'</code>
+and <code>"</code> are usable.</p>
+<h3><code>-h</code>, <code>--help</code><span><a class="mark" href="#cli_h_help" id="cli_h_help">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.3</span>
+</div>
+<p>Print node command line options.
+The output of this option is less detailed than this document.</p>
+<h3><code>-i</code>, <code>--interactive</code><span><a class="mark" href="#cli_i_interactive" id="cli_i_interactive">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.7</span>
+</div>
+<p>Opens the REPL even if stdin does not appear to be a terminal.</p>
+<h3><code>-p</code>, <code>--print "script"</code><span><a class="mark" href="#cli_p_print_script" id="cli_p_print_script">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v5.11.0</td>
+<td><p>Built-in libraries are now available as predefined variables.</p></td></tr>
+<tr><td>v0.6.4</td>
+<td><p><span>Added in: v0.6.4</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Identical to <code>-e</code> but prints the result.</p>
+<h3><code>-r</code>, <code>--require module</code><span><a class="mark" href="#cli_r_require_module" id="cli_r_require_module">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v1.6.0</span>
+</div>
+<p>Preload the specified module at startup.</p>
+<p>Follows <code>require()</code>'s module resolution
+rules. <code>module</code> may be either a path to a file, or a node module name.</p>
+<h3><code>-v</code>, <code>--version</code><span><a class="mark" href="#cli_v_version" id="cli_v_version">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.3</span>
+</div>
+<p>Print node's version.</p>
+<h2>Environment Variables<span><a class="mark" href="#cli_environment_variables" id="cli_environment_variables">#</a></span></h2>
+<h3><code>NODE_DEBUG=module[,…]</code><span><a class="mark" href="#cli_node_debug_module" id="cli_node_debug_module">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.32</span>
+</div>
+<p><code>','</code>-separated list of core modules that should print debug information.</p>
+<h3><code>NODE_DEBUG_NATIVE=module[,…]</code><span><a class="mark" href="#cli_node_debug_native_module" id="cli_node_debug_native_module">#</a></span></h3>
+<p><code>','</code>-separated list of core C++ modules that should print debug information.</p>
+<h3><code>NODE_DISABLE_COLORS=1</code><span><a class="mark" href="#cli_node_disable_colors_1" id="cli_node_disable_colors_1">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span>
+</div>
+<p>When set, colors will not be used in the REPL.</p>
+<h3><code>NODE_EXTRA_CA_CERTS=file</code><span><a class="mark" href="#cli_node_extra_ca_certs_file" id="cli_node_extra_ca_certs_file">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.3.0</span>
+</div>
+<p>When set, the well known "root" CAs (like VeriSign) will be extended with the
+extra certificates in <code>file</code>. The file should consist of one or more trusted
+certificates in PEM format. A message will be emitted (once) with
+<a href="https://nodejs.org/api/process.html#process_process_emitwarning_warning_type_code_ctor"><code>process.emitWarning()</code></a> if the file is missing or
+malformed, but any errors are otherwise ignored.</p>
+<p>Neither the well known nor extra certificates are used when the <code>ca</code>
+options property is explicitly specified for a TLS or HTTPS client or server.</p>
+<p>This environment variable is ignored when <code>node</code> runs as setuid root or
+has Linux file capabilities set.</p>
+<h3><code>NODE_ICU_DATA=file</code><span><a class="mark" href="#cli_node_icu_data_file" id="cli_node_icu_data_file">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.15</span>
+</div>
+<p>Data path for ICU (<code>Intl</code> object) data. Will extend linked-in data when compiled
+with small-icu support.</p>
+<h3><code>NODE_NO_WARNINGS=1</code><span><a class="mark" href="#cli_node_no_warnings_1" id="cli_node_no_warnings_1">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.11.0</span>
+</div>
+<p>When set to <code>1</code>, process warnings are silenced.</p>
+<h3><code>NODE_OPTIONS=options...</code><span><a class="mark" href="#cli_node_options_options" id="cli_node_options_options">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.0.0</span>
+</div>
+<p>A space-separated list of command line options. <code>options...</code> are interpreted
+before command line options, so command line options will override or
+compound after anything in <code>options...</code>. Node.js will exit with an error if
+an option that is not allowed in the environment is used, such as <code>-p</code> or a
+script file.</p>
+<p>In case an option value happens to contain a space (for example a path listed
+in <code>--require</code>), it must be escaped using double quotes. For example:</p>
+<pre><code class="language-bash">NODE_OPTIONS='--require "./my path/file.js"'
+</code></pre>
+<p>A singleton flag passed as a command line option will override the same flag
+passed into <code>NODE_OPTIONS</code>:</p>
+<pre><code class="language-bash"># The inspector will be available on port 5555
+NODE_OPTIONS='--inspect=localhost:4444' node --inspect=localhost:5555
+</code></pre>
+<p>A flag that can be passed multiple times will be treated as if its
+<code>NODE_OPTIONS</code> instances were passed first, and then its command line
+instances afterwards:</p>
+<pre><code class="language-bash">NODE_OPTIONS='--require "./a.js"' node --require "./b.js"
+# is equivalent to:
+node --require "./a.js" --require "./b.js"
+</code></pre>
+<p>Node.js options that are allowed are:</p>
+<!-- node-options-node start -->
+<ul>
+<li><code>--enable-fips</code></li>
+<li><code>--es-module-specifier-resolution</code></li>
+<li><code>--experimental-exports</code></li>
+<li><code>--experimental-modules</code></li>
+<li><code>--experimental-policy</code></li>
+<li><code>--experimental-repl-await</code></li>
+<li><code>--experimental-report</code></li>
+<li><code>--experimental-vm-modules</code></li>
+<li><code>--experimental-wasm-modules</code></li>
+<li><code>--force-fips</code></li>
+<li><code>--frozen-intrinsics</code></li>
+<li><code>--heapsnapshot-signal</code></li>
+<li><code>--http-parser</code></li>
+<li><code>--http-server-default-timeout</code></li>
+<li><code>--icu-data-dir</code></li>
+<li><code>--input-type</code></li>
+<li><code>--inspect-brk</code></li>
+<li><code>--inspect-port</code>, <code>--debug-port</code></li>
+<li><code>--inspect-publish-uid</code></li>
+<li><code>--inspect</code></li>
+<li><code>--loader</code></li>
+<li><code>--max-http-header-size</code></li>
+<li><code>--napi-modules</code></li>
+<li><code>--no-deprecation</code></li>
+<li><code>--no-force-async-hooks-checks</code></li>
+<li><code>--no-warnings</code></li>
+<li><code>--openssl-config</code></li>
+<li><code>--pending-deprecation</code></li>
+<li><code>--policy-integrity</code></li>
+<li><code>--preserve-symlinks-main</code></li>
+<li><code>--preserve-symlinks</code></li>
+<li><code>--prof-process</code></li>
+<li><code>--redirect-warnings</code></li>
+<li><code>--report-directory</code></li>
+<li><code>--report-filename</code></li>
+<li><code>--report-on-fatalerror</code></li>
+<li><code>--report-on-signal</code></li>
+<li><code>--report-signal</code></li>
+<li><code>--report-uncaught-exception</code></li>
+<li><code>--require</code>, <code>-r</code></li>
+<li><code>--throw-deprecation</code></li>
+<li><code>--title</code></li>
+<li><code>--tls-cipher-list</code></li>
+<li><code>--tls-max-v1.2</code></li>
+<li><code>--tls-max-v1.3</code></li>
+<li><code>--tls-min-v1.0</code></li>
+<li><code>--tls-min-v1.1</code></li>
+<li><code>--tls-min-v1.2</code></li>
+<li><code>--tls-min-v1.3</code></li>
+<li><code>--trace-deprecation</code></li>
+<li><code>--trace-event-categories</code></li>
+<li><code>--trace-event-file-pattern</code></li>
+<li><code>--trace-events-enabled</code></li>
+<li><code>--trace-sync-io</code></li>
+<li><code>--trace-tls</code></li>
+<li><code>--trace-warnings</code></li>
+<li><code>--track-heap-objects</code></li>
+<li><code>--unhandled-rejections</code></li>
+<li><code>--use-bundled-ca</code></li>
+<li><code>--use-openssl-ca</code></li>
+<li><code>--v8-pool-size</code></li>
+<li>
+<p><code>--zero-fill-buffers</code></p>
+<!-- node-options-node end -->
+</li>
+</ul>
+<p>V8 options that are allowed are:</p>
+<!-- node-options-v8 start -->
+<ul>
+<li><code>--abort-on-uncaught-exception</code></li>
+<li><code>--interpreted-frames-native-stack</code></li>
+<li><code>--max-old-space-size</code></li>
+<li><code>--perf-basic-prof-only-functions</code></li>
+<li><code>--perf-basic-prof</code></li>
+<li><code>--perf-prof-unwinding-info</code></li>
+<li><code>--perf-prof</code></li>
+<li>
+<p><code>--stack-trace-limit</code></p>
+<!-- node-options-v8 end -->
+</li>
+</ul>
+<h3><code>NODE_PATH=path[:…]</code><span><a class="mark" href="#cli_node_path_path" id="cli_node_path_path">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.32</span>
+</div>
+<p><code>':'</code>-separated list of directories prefixed to the module search path.</p>
+<p>On Windows, this is a <code>';'</code>-separated list instead.</p>
+<h3><code>NODE_PENDING_DEPRECATION=1</code><span><a class="mark" href="#cli_node_pending_deprecation_1" id="cli_node_pending_deprecation_1">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.0.0</span>
+</div>
+<p>When set to <code>1</code>, emit pending deprecation warnings.</p>
+<p>Pending deprecations are generally identical to a runtime deprecation with the
+notable exception that they are turned <em>off</em> by default and will not be emitted
+unless either the <code>--pending-deprecation</code> command line flag, or the
+<code>NODE_PENDING_DEPRECATION=1</code> environment variable, is set. Pending deprecations
+are used to provide a kind of selective "early warning" mechanism that
+developers may leverage to detect deprecated API usage.</p>
+<h3><code>NODE_PENDING_PIPE_INSTANCES=instances</code><span><a class="mark" href="#cli_node_pending_pipe_instances_instances" id="cli_node_pending_pipe_instances_instances">#</a></span></h3>
+<p>Set the number of pending pipe instance handles when the pipe server is waiting
+for connections. This setting applies to Windows only.</p>
+<h3><code>NODE_PRESERVE_SYMLINKS=1</code><span><a class="mark" href="#cli_node_preserve_symlinks_1" id="cli_node_preserve_symlinks_1">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.1.0</span>
+</div>
+<p>When set to <code>1</code>, instructs the module loader to preserve symbolic links when
+resolving and caching modules.</p>
+<h3><code>NODE_REDIRECT_WARNINGS=file</code><span><a class="mark" href="#cli_node_redirect_warnings_file" id="cli_node_redirect_warnings_file">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.0.0</span>
+</div>
+<p>When set, process warnings will be emitted to the given file instead of
+printing to stderr. The file will be created if it does not exist, and will be
+appended to if it does. If an error occurs while attempting to write the
+warning to the file, the warning will be written to stderr instead. This is
+equivalent to using the <code>--redirect-warnings=file</code> command-line flag.</p>
+<h3><code>NODE_REPL_HISTORY=file</code><span><a class="mark" href="#cli_node_repl_history_file" id="cli_node_repl_history_file">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v3.0.0</span>
+</div>
+<p>Path to the file used to store the persistent REPL history. The default path is
+<code>~/.node_repl_history</code>, which is overridden by this variable. Setting the value
+to an empty string (<code>''</code> or <code>' '</code>) disables persistent REPL history.</p>
+<h3><code>NODE_TLS_REJECT_UNAUTHORIZED=value</code><span><a class="mark" href="#cli_node_tls_reject_unauthorized_value" id="cli_node_tls_reject_unauthorized_value">#</a></span></h3>
+<p>If <code>value</code> equals <code>'0'</code>, certificate validation is disabled for TLS connections.
+This makes TLS, and HTTPS by extension, insecure. The use of this environment
+variable is strongly discouraged.</p>
+<h3><code>NODE_V8_COVERAGE=dir</code><span><a class="mark" href="#cli_node_v8_coverage_dir" id="cli_node_v8_coverage_dir">#</a></span></h3>
+<p>When set, Node.js will begin outputting <a href="https://v8project.blogspot.com/2017/12/javascript-code-coverage.html">V8 JavaScript code coverage</a> to the
+directory provided as an argument. Coverage is output as an array of
+<a href="https://chromedevtools.github.io/devtools-protocol/tot/Profiler#type-ScriptCoverage">ScriptCoverage</a> objects:</p>
+<pre><code class="language-json">{
+  "result": [
+    {
+      "scriptId": "67",
+      "url": "internal/tty.js",
+      "functions": []
+    }
+  ]
+}
+</code></pre>
+<p><code>NODE_V8_COVERAGE</code> will automatically propagate to subprocesses, making it
+easier to instrument applications that call the <code>child_process.spawn()</code> family
+of functions. <code>NODE_V8_COVERAGE</code> can be set to an empty string, to prevent
+propagation.</p>
+<p>At this time coverage is only collected in the main thread and will not be
+output for code executed by worker threads.</p>
+<h3><code>OPENSSL_CONF=file</code><span><a class="mark" href="#cli_openssl_conf_file" id="cli_openssl_conf_file">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.11.0</span>
+</div>
+<p>Load an OpenSSL configuration file on startup. Among other uses, this can be
+used to enable FIPS-compliant crypto if Node.js is built with <code>./configure --openssl-fips</code>.</p>
+<p>If the <a href="#cli_openssl_config_file"><code>--openssl-config</code></a> command line option is used, the environment
+variable is ignored.</p>
+<h3><code>SSL_CERT_DIR=dir</code><span><a class="mark" href="#cli_ssl_cert_dir_dir" id="cli_ssl_cert_dir_dir">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.7.0</span>
+</div>
+<p>If <code>--use-openssl-ca</code> is enabled, this overrides and sets OpenSSL's directory
+containing trusted certificates.</p>
+<p>Be aware that unless the child environment is explicitly set, this environment
+variable will be inherited by any child processes, and if they use OpenSSL, it
+may cause them to trust the same CAs as node.</p>
+<h3><code>SSL_CERT_FILE=file</code><span><a class="mark" href="#cli_ssl_cert_file_file" id="cli_ssl_cert_file_file">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.7.0</span>
+</div>
+<p>If <code>--use-openssl-ca</code> is enabled, this overrides and sets OpenSSL's file
+containing trusted certificates.</p>
+<p>Be aware that unless the child environment is explicitly set, this environment
+variable will be inherited by any child processes, and if they use OpenSSL, it
+may cause them to trust the same CAs as node.</p>
+<h3><code>UV_THREADPOOL_SIZE=size</code><span><a class="mark" href="#cli_uv_threadpool_size_size" id="cli_uv_threadpool_size_size">#</a></span></h3>
+<p>Set the number of threads used in libuv's threadpool to <code>size</code> threads.</p>
+<p>Asynchronous system APIs are used by Node.js whenever possible, but where they
+do not exist, libuv's threadpool is used to create asynchronous node APIs based
+on synchronous system APIs. Node.js APIs that use the threadpool are:</p>
+<ul>
+<li>all <code>fs</code> APIs, other than the file watcher APIs and those that are explicitly
+synchronous</li>
+<li>asynchronous crypto APIs such as <code>crypto.pbkdf2()</code>, <code>crypto.scrypt()</code>,
+<code>crypto.randomBytes()</code>, <code>crypto.randomFill()</code>, <code>crypto.generateKeyPair()</code></li>
+<li><code>dns.lookup()</code></li>
+<li>all <code>zlib</code> APIs, other than those that are explicitly synchronous</li>
+</ul>
+<p>Because libuv's threadpool has a fixed size, it means that if for whatever
+reason any of these APIs takes a long time, other (seemingly unrelated) APIs
+that run in libuv's threadpool will experience degraded performance. In order to
+mitigate this issue, one potential solution is to increase the size of libuv's
+threadpool by setting the <code>'UV_THREADPOOL_SIZE'</code> environment variable to a value
+greater than <code>4</code> (its current default value). For more information, see the
+<a href="http://docs.libuv.org/en/latest/threadpool.html">libuv threadpool documentation</a>.</p>
+      </div>
+    </div>
+  </div>
+  <script src="data:application/javascript;base64,LyoKU0hKUyAtIFN5bnRheCBIaWdobGlnaHRpbmcgaW4gSmF2YVNjcmlwdApDb3B5cmlnaHQgKEMpIDIwMDcsIDIwMDggZ25vbWJhdEB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQKTGljZW5zZTogaHR0cDovL3NoanMuc291cmNlZm9yZ2UubmV0L2RvYy9ncGx2My5odG1sCiovCgppZiAoISB0aGlzLnNoX2xhbmd1YWdlcykgewogIHRoaXMuc2hfbGFuZ3VhZ2VzID0ge307Cn0KdmFyIHNoX3JlcXVlc3RzID0ge307CgpmdW5jdGlvbiBzaF9pc0VtYWlsQWRkcmVzcyh1cmwpIHsKICBpZiAoL15tYWlsdG86Ly50ZXN0KHVybCkpIHsKICAgIHJldHVybiBmYWxzZTsKICB9CiAgcmV0dXJuIHVybC5pbmRleE9mKCdAJykgIT09IC0xOwp9CgpmdW5jdGlvbiBzaF9zZXRIcmVmKHRhZ3MsIG51bVRhZ3MsIGlucHV0U3RyaW5nKSB7CiAgdmFyIHVybCA9IGlucHV0U3RyaW5nLnN1YnN0cmluZyh0YWdzW251bVRhZ3MgLSAyXS5wb3MsIHRhZ3NbbnVtVGFncyAtIDFdLnBvcyk7CiAgaWYgKHVybC5sZW5ndGggPj0gMiAmJiB1cmwuY2hhckF0KDApID09PSAnPCcgJiYgdXJsLmNoYXJBdCh1cmwubGVuZ3RoIC0gMSkgPT09ICc+JykgewogICAgdXJsID0gdXJsLnN1YnN0cigxLCB1cmwubGVuZ3RoIC0gMik7CiAgfQogIGlmIChzaF9pc0VtYWlsQWRkcmVzcyh1cmwpKSB7CiAgICB1cmwgPSAnbWFpbHRvOicgKyB1cmw7CiAgfQogIHRhZ3NbbnVtVGFncyAtIDJdLm5vZGUuaHJlZiA9IHVybDsKfQoKLyoKS29ucXVlcm9yIGhhcyBhIGJ1ZyB3aGVyZSB0aGUgcmVndWxhciBleHByZXNzaW9uIC8kL2cgd2lsbCBub3QgbWF0Y2ggYXQgdGhlIGVuZApvZiBhIGxpbmUgbW9yZSB0aGFuIG9uY2U6CgogIHZhciByZWdleCA9IC8kL2c7CiAgdmFyIG1hdGNoOwoKICB2YXIgbGluZSA9ICcxMjM0NTY3ODkwJzsKICByZWdleC5sYXN0SW5kZXggPSAxMDsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZSk7CgogIHZhciBsaW5lMiA9ICdhYmNkZSc7CiAgcmVnZXgubGFzdEluZGV4ID0gNTsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZTIpOyAgLy8gZmFpbHMKKi8KZnVuY3Rpb24gc2hfa29ucXVlcm9yRXhlYyhzKSB7CiAgdmFyIHJlc3VsdCA9IFsnJ107CiAgcmVzdWx0LmluZGV4ID0gcy5sZW5ndGg7CiAgcmVzdWx0LmlucHV0ID0gczsKICByZXR1cm4gcmVzdWx0Owp9CgovKioKSGlnaGxpZ2h0cyBhbGwgZWxlbWVudHMgY29udGFpbmluZyBzb3VyY2UgY29kZSBpbiBhIHRleHQgc3RyaW5nLiAgVGhlIHJldHVybgp2YWx1ZSBpcyBhbiBhcnJheSBvZiBvYmplY3RzLCBlYWNoIHJlcHJlc2VudGluZyBhbiBIVE1MIHN0YXJ0IG9yIGVuZCB0YWcuICBFYWNoCm9iamVjdCBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBwb3MsIHdoaWNoIGlzIGFuIGludGVnZXIgcmVwcmVzZW50aW5nIHRoZSB0ZXh0Cm9mZnNldCBvZiB0aGUgdGFnLiBFdmVyeSBzdGFydCB0YWcgYWxzbyBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBub2RlLCB3aGljaCBpcyB0aGUKRE9NIGVsZW1lbnQgc3RhcnRlZCBieSB0aGUgdGFnLiBFbmQgdGFncyBkbyBub3QgaGF2ZSB0aGlzIHByb3BlcnR5LgpAcGFyYW0gIGlucHV0U3RyaW5nICBhIHRleHQgc3RyaW5nCkBwYXJhbSAgbGFuZ3VhZ2UgIGEgbGFuZ3VhZ2UgZGVmaW5pdGlvbiBvYmplY3QKQHJldHVybiAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKKi8KZnVuY3Rpb24gc2hfaGlnaGxpZ2h0U3RyaW5nKGlucHV0U3RyaW5nLCBsYW5ndWFnZSkgewogIGlmICgvS29ucXVlcm9yLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICBpZiAoISBsYW5ndWFnZS5rb25xdWVyZWQpIHsKICAgICAgZm9yICh2YXIgcyA9IDA7IHMgPCBsYW5ndWFnZS5sZW5ndGg7IHMrKykgewogICAgICAgIGZvciAodmFyIHAgPSAwOyBwIDwgbGFuZ3VhZ2Vbc10ubGVuZ3RoOyBwKyspIHsKICAgICAgICAgIHZhciByID0gbGFuZ3VhZ2Vbc11bcF1bMF07CiAgICAgICAgICBpZiAoci5zb3VyY2UgPT09ICckJykgewogICAgICAgICAgICByLmV4ZWMgPSBzaF9rb25xdWVyb3JFeGVjOwogICAgICAgICAgfQogICAgICAgIH0KICAgICAgfQogICAgICBsYW5ndWFnZS5rb25xdWVyZWQgPSB0cnVlOwogICAgfQogIH0KCiAgdmFyIGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgdmFyIHNwYW4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJyk7CgogIC8vIHRoZSByZXN1bHQKICB2YXIgdGFncyA9IFtdOwogIHZhciBudW1UYWdzID0gMDsKCiAgLy8gZWFjaCBlbGVtZW50IGlzIGEgcGF0dGVybiBvYmplY3QgZnJvbSBsYW5ndWFnZQogIHZhciBwYXR0ZXJuU3RhY2sgPSBbXTsKCiAgLy8gdGhlIGN1cnJlbnQgcG9zaXRpb24gd2l0aGluIGlucHV0U3RyaW5nCiAgdmFyIHBvcyA9IDA7CgogIC8vIHRoZSBuYW1lIG9mIHRoZSBjdXJyZW50IHN0eWxlLCBvciBudWxsIGlmIHRoZXJlIGlzIG5vIGN1cnJlbnQgc3R5bGUKICB2YXIgY3VycmVudFN0eWxlID0gbnVsbDsKCiAgdmFyIG91dHB1dCA9IGZ1bmN0aW9uKHMsIHN0eWxlKSB7CiAgICB2YXIgbGVuZ3RoID0gcy5sZW5ndGg7CiAgICAvLyB0aGlzIGlzIG1vcmUgdGhhbiBqdXN0IGFuIG9wdGltaXphdGlvbiAtIHdlIGRvbid0IHdhbnQgdG8gb3V0cHV0IGVtcHR5IDxzcGFuPjwvc3Bhbj4gZWxlbWVudHMKICAgIGlmIChsZW5ndGggPT09IDApIHsKICAgICAgcmV0dXJuOwogICAgfQogICAgaWYgKCEgc3R5bGUpIHsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoICE9PSAwKSB7CiAgICAgICAgdmFyIHBhdHRlcm4gPSBwYXR0ZXJuU3RhY2tbc3RhY2tMZW5ndGggLSAxXTsKICAgICAgICAvLyBjaGVjayB3aGV0aGVyIHRoaXMgaXMgYSBzdGF0ZSBvciBhbiBlbnZpcm9ubWVudAogICAgICAgIGlmICghIHBhdHRlcm5bM10pIHsKICAgICAgICAgIC8vIGl0J3Mgbm90IGEgc3RhdGUgLSBpdCdzIGFuIGVudmlyb25tZW50OyB1c2UgdGhlIHN0eWxlIGZvciB0aGlzIGVudmlyb25tZW50CiAgICAgICAgICBzdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgfQogICAgICB9CiAgICB9CiAgICBpZiAoY3VycmVudFN0eWxlICE9PSBzdHlsZSkgewogICAgICBpZiAoY3VycmVudFN0eWxlKSB7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge3BvczogcG9zfTsKICAgICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgICAgc2hfc2V0SHJlZih0YWdzLCBudW1UYWdzLCBpbnB1dFN0cmluZyk7CiAgICAgICAgfQogICAgICB9CiAgICAgIGlmIChzdHlsZSkgewogICAgICAgIHZhciBjbG9uZTsKICAgICAgICBpZiAoc3R5bGUgPT09ICdzaF91cmwnKSB7CiAgICAgICAgICBjbG9uZSA9IGEuY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICBjbG9uZSA9IHNwYW4uY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgY2xvbmUuY2xhc3NOYW1lID0gc3R5bGU7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge25vZGU6IGNsb25lLCBwb3M6IHBvc307CiAgICAgIH0KICAgIH0KICAgIHBvcyArPSBsZW5ndGg7CiAgICBjdXJyZW50U3R5bGUgPSBzdHlsZTsKICB9OwoKICB2YXIgZW5kT2ZMaW5lUGF0dGVybiA9IC9cclxufFxyfFxuL2c7CiAgZW5kT2ZMaW5lUGF0dGVybi5sYXN0SW5kZXggPSAwOwogIHZhciBpbnB1dFN0cmluZ0xlbmd0aCA9IGlucHV0U3RyaW5nLmxlbmd0aDsKICB3aGlsZSAocG9zIDwgaW5wdXRTdHJpbmdMZW5ndGgpIHsKICAgIHZhciBzdGFydCA9IHBvczsKICAgIHZhciBlbmQ7CiAgICB2YXIgc3RhcnRPZk5leHRMaW5lOwogICAgdmFyIGVuZE9mTGluZU1hdGNoID0gZW5kT2ZMaW5lUGF0dGVybi5leGVjKGlucHV0U3RyaW5nKTsKICAgIGlmIChlbmRPZkxpbmVNYXRjaCA9PT0gbnVsbCkgewogICAgICBlbmQgPSBpbnB1dFN0cmluZ0xlbmd0aDsKICAgICAgc3RhcnRPZk5leHRMaW5lID0gaW5wdXRTdHJpbmdMZW5ndGg7CiAgICB9CiAgICBlbHNlIHsKICAgICAgZW5kID0gZW5kT2ZMaW5lTWF0Y2guaW5kZXg7CiAgICAgIHN0YXJ0T2ZOZXh0TGluZSA9IGVuZE9mTGluZVBhdHRlcm4ubGFzdEluZGV4OwogICAgfQoKICAgIHZhciBsaW5lID0gaW5wdXRTdHJpbmcuc3Vic3RyaW5nKHN0YXJ0LCBlbmQpOwoKICAgIHZhciBtYXRjaENhY2hlID0gW107CiAgICBmb3IgKDs7KSB7CiAgICAgIHZhciBwb3NXaXRoaW5MaW5lID0gcG9zIC0gc3RhcnQ7CgogICAgICB2YXIgc3RhdGVJbmRleDsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoID09PSAwKSB7CiAgICAgICAgc3RhdGVJbmRleCA9IDA7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gZ2V0IHRoZSBuZXh0IHN0YXRlCiAgICAgICAgc3RhdGVJbmRleCA9IHBhdHRlcm5TdGFja1tzdGFja0xlbmd0aCAtIDFdWzJdOwogICAgICB9CgogICAgICB2YXIgc3RhdGUgPSBsYW5ndWFnZVtzdGF0ZUluZGV4XTsKICAgICAgdmFyIG51bVBhdHRlcm5zID0gc3RhdGUubGVuZ3RoOwogICAgICB2YXIgbWMgPSBtYXRjaENhY2hlW3N0YXRlSW5kZXhdOwogICAgICBpZiAoISBtYykgewogICAgICAgIG1jID0gbWF0Y2hDYWNoZVtzdGF0ZUluZGV4XSA9IFtdOwogICAgICB9CiAgICAgIHZhciBiZXN0TWF0Y2ggPSBudWxsOwogICAgICB2YXIgYmVzdFBhdHRlcm5JbmRleCA9IC0xOwogICAgICBmb3IgKHZhciBpID0gMDsgaSA8IG51bVBhdHRlcm5zOyBpKyspIHsKICAgICAgICB2YXIgbWF0Y2g7CiAgICAgICAgaWYgKGkgPCBtYy5sZW5ndGggJiYgKG1jW2ldID09PSBudWxsIHx8IHBvc1dpdGhpbkxpbmUgPD0gbWNbaV0uaW5kZXgpKSB7CiAgICAgICAgICBtYXRjaCA9IG1jW2ldOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHZhciByZWdleCA9IHN0YXRlW2ldWzBdOwogICAgICAgICAgcmVnZXgubGFzdEluZGV4ID0gcG9zV2l0aGluTGluZTsKICAgICAgICAgIG1hdGNoID0gcmVnZXguZXhlYyhsaW5lKTsKICAgICAgICAgIG1jW2ldID0gbWF0Y2g7CiAgICAgICAgfQogICAgICAgIGlmIChtYXRjaCAhPT0gbnVsbCAmJiAoYmVzdE1hdGNoID09PSBudWxsIHx8IG1hdGNoLmluZGV4IDwgYmVzdE1hdGNoLmluZGV4KSkgewogICAgICAgICAgYmVzdE1hdGNoID0gbWF0Y2g7CiAgICAgICAgICBiZXN0UGF0dGVybkluZGV4ID0gaTsKICAgICAgICAgIGlmIChtYXRjaC5pbmRleCA9PT0gcG9zV2l0aGluTGluZSkgewogICAgICAgICAgICBicmVhazsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KCiAgICAgIGlmIChiZXN0TWF0Y2ggPT09IG51bGwpIHsKICAgICAgICBvdXRwdXQobGluZS5zdWJzdHJpbmcocG9zV2l0aGluTGluZSksIG51bGwpOwogICAgICAgIGJyZWFrOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGdvdCBhIG1hdGNoCiAgICAgICAgaWYgKGJlc3RNYXRjaC5pbmRleCA+IHBvc1dpdGhpbkxpbmUpIHsKICAgICAgICAgIG91dHB1dChsaW5lLnN1YnN0cmluZyhwb3NXaXRoaW5MaW5lLCBiZXN0TWF0Y2guaW5kZXgpLCBudWxsKTsKICAgICAgICB9CgogICAgICAgIHZhciBwYXR0ZXJuID0gc3RhdGVbYmVzdFBhdHRlcm5JbmRleF07CgogICAgICAgIHZhciBuZXdTdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgdmFyIG1hdGNoZWRTdHJpbmc7CiAgICAgICAgaWYgKG5ld1N0eWxlIGluc3RhbmNlb2YgQXJyYXkpIHsKICAgICAgICAgIGZvciAodmFyIHN1YmV4cHJlc3Npb24gPSAwOyBzdWJleHByZXNzaW9uIDwgbmV3U3R5bGUubGVuZ3RoOyBzdWJleHByZXNzaW9uKyspIHsKICAgICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFtzdWJleHByZXNzaW9uICsgMV07CiAgICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZVtzdWJleHByZXNzaW9uXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFswXTsKICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZSk7CiAgICAgICAgfQoKICAgICAgICBzd2l0Y2ggKHBhdHRlcm5bMl0pIHsKICAgICAgICBjYXNlIC0xOgogICAgICAgICAgLy8gZG8gbm90aGluZwogICAgICAgICAgYnJlYWs7CiAgICAgICAgY2FzZSAtMjoKICAgICAgICAgIC8vIGV4aXQKICAgICAgICAgIHBhdHRlcm5TdGFjay5wb3AoKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGNhc2UgLTM6CiAgICAgICAgICAvLyBleGl0YWxsCiAgICAgICAgICBwYXR0ZXJuU3RhY2subGVuZ3RoID0gMDsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGRlZmF1bHQ6CiAgICAgICAgICAvLyB0aGlzIHdhcyB0aGUgc3RhcnQgb2YgYSBkZWxpbWl0ZWQgcGF0dGVybiBvciBhIHN0YXRlL2Vudmlyb25tZW50CiAgICAgICAgICBwYXR0ZXJuU3RhY2sucHVzaChwYXR0ZXJuKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIH0KICAgICAgfQogICAgfQoKICAgIC8vIGVuZCBvZiB0aGUgbGluZQogICAgaWYgKGN1cnJlbnRTdHlsZSkgewogICAgICB0YWdzW251bVRhZ3MrK10gPSB7cG9zOiBwb3N9OwogICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgIHNoX3NldEhyZWYodGFncywgbnVtVGFncywgaW5wdXRTdHJpbmcpOwogICAgICB9CiAgICAgIGN1cnJlbnRTdHlsZSA9IG51bGw7CiAgICB9CiAgICBwb3MgPSBzdGFydE9mTmV4dExpbmU7CiAgfQoKICByZXR1cm4gdGFnczsKfQoKLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KLy8gRE9NLWRlcGVuZGVudCBmdW5jdGlvbnMKCmZ1bmN0aW9uIHNoX2dldENsYXNzZXMoZWxlbWVudCkgewogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgaHRtbENsYXNzID0gZWxlbWVudC5jbGFzc05hbWU7CiAgaWYgKGh0bWxDbGFzcyAmJiBodG1sQ2xhc3MubGVuZ3RoID4gMCkgewogICAgdmFyIGh0bWxDbGFzc2VzID0gaHRtbENsYXNzLnNwbGl0KCcgJyk7CiAgICBmb3IgKHZhciBpID0gMDsgaSA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaSsrKSB7CiAgICAgIGlmIChodG1sQ2xhc3Nlc1tpXS5sZW5ndGggPiAwKSB7CiAgICAgICAgcmVzdWx0LnB1c2goaHRtbENsYXNzZXNbaV0pOwogICAgICB9CiAgICB9CiAgfQogIHJldHVybiByZXN1bHQ7Cn0KCmZ1bmN0aW9uIHNoX2FkZENsYXNzKGVsZW1lbnQsIG5hbWUpIHsKICB2YXIgaHRtbENsYXNzZXMgPSBzaF9nZXRDbGFzc2VzKGVsZW1lbnQpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgaHRtbENsYXNzZXMubGVuZ3RoOyBpKyspIHsKICAgIGlmIChuYW1lLnRvTG93ZXJDYXNlKCkgPT09IGh0bWxDbGFzc2VzW2ldLnRvTG93ZXJDYXNlKCkpIHsKICAgICAgcmV0dXJuOwogICAgfQogIH0KICBodG1sQ2xhc3Nlcy5wdXNoKG5hbWUpOwogIGVsZW1lbnQuY2xhc3NOYW1lID0gaHRtbENsYXNzZXMuam9pbignICcpOwp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSBhbiBIVE1MIERPTSBOb2RlTGlzdC4KQHBhcmFtICBub2RlTGlzdCAgYSBET00gTm9kZUxpc3QKQHBhcmFtICByZXN1bHQgIGFuIG9iamVjdCB3aXRoIHRleHQsIHRhZ3MgYW5kIHBvcyBwcm9wZXJ0aWVzCiovCmZ1bmN0aW9uIHNoX2V4dHJhY3RUYWdzRnJvbU5vZGVMaXN0KG5vZGVMaXN0LCByZXN1bHQpIHsKICB2YXIgbGVuZ3RoID0gbm9kZUxpc3QubGVuZ3RoOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbGVuZ3RoOyBpKyspIHsKICAgIHZhciBub2RlID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHN3aXRjaCAobm9kZS5ub2RlVHlwZSkgewogICAgY2FzZSAxOgogICAgICBpZiAobm9kZS5ub2RlTmFtZS50b0xvd2VyQ2FzZSgpID09PSAnYnInKSB7CiAgICAgICAgdmFyIHRlcm1pbmF0b3I7CiAgICAgICAgaWYgKC9NU0lFLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xyJzsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xuJzsKICAgICAgICB9CiAgICAgICAgcmVzdWx0LnRleHQucHVzaCh0ZXJtaW5hdG9yKTsKICAgICAgICByZXN1bHQucG9zKys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7bm9kZTogbm9kZS5jbG9uZU5vZGUoZmFsc2UpLCBwb3M6IHJlc3VsdC5wb3N9KTsKICAgICAgICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChub2RlLmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7cG9zOiByZXN1bHQucG9zfSk7CiAgICAgIH0KICAgICAgYnJlYWs7CiAgICBjYXNlIDM6CiAgICBjYXNlIDQ6CiAgICAgIHJlc3VsdC50ZXh0LnB1c2gobm9kZS5kYXRhKTsKICAgICAgcmVzdWx0LnBvcyArPSBub2RlLmxlbmd0aDsKICAgICAgYnJlYWs7CiAgICB9CiAgfQp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSB0aGUgdGV4dCBvZiBhbiBIVE1MIGVsZW1lbnQuIFRoZSBleHRyYWN0ZWQgdGFncyB3aWxsIGJlCnJldHVybmVkIGFzIGFuIGFycmF5IG9mIHRhZyBvYmplY3RzLiBTZWUgc2hfaGlnaGxpZ2h0U3RyaW5nIGZvciB0aGUgZm9ybWF0IG9mCnRoZSB0YWcgb2JqZWN0cy4KQHBhcmFtICBlbGVtZW50ICBhIERPTSBlbGVtZW50CkBwYXJhbSAgdGFncyAgYW4gZW1wdHkgYXJyYXk7IHRoZSBleHRyYWN0ZWQgdGFnIG9iamVjdHMgd2lsbCBiZSByZXR1cm5lZCBpbiBpdApAcmV0dXJuICB0aGUgdGV4dCBvZiB0aGUgZWxlbWVudApAc2VlICBzaF9oaWdobGlnaHRTdHJpbmcKKi8KZnVuY3Rpb24gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgdGFncykgewogIHZhciByZXN1bHQgPSB7fTsKICByZXN1bHQudGV4dCA9IFtdOwogIHJlc3VsdC50YWdzID0gdGFnczsKICByZXN1bHQucG9zID0gMDsKICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChlbGVtZW50LmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgcmV0dXJuIHJlc3VsdC50ZXh0LmpvaW4oJycpOwp9CgovKioKTWVyZ2VzIHRoZSBvcmlnaW5hbCB0YWdzIGZyb20gYW4gZWxlbWVudCB3aXRoIHRoZSB0YWdzIHByb2R1Y2VkIGJ5IGhpZ2hsaWdodGluZy4KQHBhcmFtICBvcmlnaW5hbFRhZ3MgIGFuIGFycmF5IGNvbnRhaW5pbmcgdGhlIG9yaWdpbmFsIHRhZ3MKQHBhcmFtICBoaWdobGlnaHRUYWdzICBhbiBhcnJheSBjb250YWluaW5nIHRoZSBoaWdobGlnaHRpbmcgdGFncyAtIHRoZXNlIG11c3Qgbm90IG92ZXJsYXAKQHJlc3VsdCAgYW4gYXJyYXkgY29udGFpbmluZyB0aGUgbWVyZ2VkIHRhZ3MKKi8KZnVuY3Rpb24gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncykgewogIHZhciBudW1PcmlnaW5hbFRhZ3MgPSBvcmlnaW5hbFRhZ3MubGVuZ3RoOwogIGlmIChudW1PcmlnaW5hbFRhZ3MgPT09IDApIHsKICAgIHJldHVybiBoaWdobGlnaHRUYWdzOwogIH0KCiAgdmFyIG51bUhpZ2hsaWdodFRhZ3MgPSBoaWdobGlnaHRUYWdzLmxlbmd0aDsKICBpZiAobnVtSGlnaGxpZ2h0VGFncyA9PT0gMCkgewogICAgcmV0dXJuIG9yaWdpbmFsVGFnczsKICB9CgogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgb3JpZ2luYWxJbmRleCA9IDA7CiAgdmFyIGhpZ2hsaWdodEluZGV4ID0gMDsKCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MgJiYgaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICB2YXIgb3JpZ2luYWxUYWcgPSBvcmlnaW5hbFRhZ3Nbb3JpZ2luYWxJbmRleF07CiAgICB2YXIgaGlnaGxpZ2h0VGFnID0gaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF07CgogICAgaWYgKG9yaWdpbmFsVGFnLnBvcyA8PSBoaWdobGlnaHRUYWcucG9zKSB7CiAgICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnKTsKICAgICAgb3JpZ2luYWxJbmRleCsrOwogICAgfQogICAgZWxzZSB7CiAgICAgIHJlc3VsdC5wdXNoKGhpZ2hsaWdodFRhZyk7CiAgICAgIGlmIChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4ICsgMV0ucG9zIDw9IG9yaWdpbmFsVGFnLnBvcykgewogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgICAgcmVzdWx0LnB1c2goaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF0pOwogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gbmV3IGVuZCB0YWcKICAgICAgICByZXN1bHQucHVzaCh7cG9zOiBvcmlnaW5hbFRhZy5wb3N9KTsKCiAgICAgICAgLy8gbmV3IHN0YXJ0IHRhZwogICAgICAgIGhpZ2hsaWdodFRhZ3NbaGlnaGxpZ2h0SW5kZXhdID0ge25vZGU6IGhpZ2hsaWdodFRhZy5ub2RlLmNsb25lTm9kZShmYWxzZSksIHBvczogb3JpZ2luYWxUYWcucG9zfTsKICAgICAgfQogICAgfQogIH0KCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MpIHsKICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnc1tvcmlnaW5hbEluZGV4XSk7CiAgICBvcmlnaW5hbEluZGV4Kys7CiAgfQoKICB3aGlsZSAoaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICByZXN1bHQucHVzaChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4XSk7CiAgICBoaWdobGlnaHRJbmRleCsrOwogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkluc2VydHMgdGFncyBpbnRvIHRleHQuCkBwYXJhbSAgdGFncyAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKQHBhcmFtICB0ZXh0ICBhIHN0cmluZyByZXByZXNlbnRpbmcgdGhlIHRleHQKQHJldHVybiAgYSBET00gRG9jdW1lbnRGcmFnbWVudCByZXByZXNlbnRpbmcgdGhlIHJlc3VsdGluZyBIVE1MCiovCmZ1bmN0aW9uIHNoX2luc2VydFRhZ3ModGFncywgdGV4dCkgewogIHZhciBkb2MgPSBkb2N1bWVudDsKCiAgdmFyIHJlc3VsdCA9IGRvY3VtZW50LmNyZWF0ZURvY3VtZW50RnJhZ21lbnQoKTsKICB2YXIgdGFnSW5kZXggPSAwOwogIHZhciBudW1UYWdzID0gdGFncy5sZW5ndGg7CiAgdmFyIHRleHRQb3MgPSAwOwogIHZhciB0ZXh0TGVuZ3RoID0gdGV4dC5sZW5ndGg7CiAgdmFyIGN1cnJlbnROb2RlID0gcmVzdWx0OwoKICAvLyBvdXRwdXQgb25lIHRhZyBvciB0ZXh0IG5vZGUgZXZlcnkgaXRlcmF0aW9uCiAgd2hpbGUgKHRleHRQb3MgPCB0ZXh0TGVuZ3RoIHx8IHRhZ0luZGV4IDwgbnVtVGFncykgewogICAgdmFyIHRhZzsKICAgIHZhciB0YWdQb3M7CiAgICBpZiAodGFnSW5kZXggPCBudW1UYWdzKSB7CiAgICAgIHRhZyA9IHRhZ3NbdGFnSW5kZXhdOwogICAgICB0YWdQb3MgPSB0YWcucG9zOwogICAgfQogICAgZWxzZSB7CiAgICAgIHRhZ1BvcyA9IHRleHRMZW5ndGg7CiAgICB9CgogICAgaWYgKHRhZ1BvcyA8PSB0ZXh0UG9zKSB7CiAgICAgIC8vIG91dHB1dCB0aGUgdGFnCiAgICAgIGlmICh0YWcubm9kZSkgewogICAgICAgIC8vIHN0YXJ0IHRhZwogICAgICAgIHZhciBuZXdOb2RlID0gdGFnLm5vZGU7CiAgICAgICAgY3VycmVudE5vZGUuYXBwZW5kQ2hpbGQobmV3Tm9kZSk7CiAgICAgICAgY3VycmVudE5vZGUgPSBuZXdOb2RlOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGVuZCB0YWcKICAgICAgICBjdXJyZW50Tm9kZSA9IGN1cnJlbnROb2RlLnBhcmVudE5vZGU7CiAgICAgIH0KICAgICAgdGFnSW5kZXgrKzsKICAgIH0KICAgIGVsc2UgewogICAgICAvLyBvdXRwdXQgdGV4dAogICAgICBjdXJyZW50Tm9kZS5hcHBlbmRDaGlsZChkb2MuY3JlYXRlVGV4dE5vZGUodGV4dC5zdWJzdHJpbmcodGV4dFBvcywgdGFnUG9zKSkpOwogICAgICB0ZXh0UG9zID0gdGFnUG9zOwogICAgfQogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkhpZ2hsaWdodHMgYW4gZWxlbWVudCBjb250YWluaW5nIHNvdXJjZSBjb2RlLiAgVXBvbiBjb21wbGV0aW9uIG9mIHRoaXMgZnVuY3Rpb24sCnRoZSBlbGVtZW50IHdpbGwgaGF2ZSBiZWVuIHBsYWNlZCBpbiB0aGUgInNoX3NvdXJjZUNvZGUiIGNsYXNzLgpAcGFyYW0gIGVsZW1lbnQgIGEgRE9NIDxwcmU+IGVsZW1lbnQgY29udGFpbmluZyB0aGUgc291cmNlIGNvZGUgdG8gYmUgaGlnaGxpZ2h0ZWQKQHBhcmFtICBsYW5ndWFnZSAgYSBsYW5ndWFnZSBkZWZpbml0aW9uIG9iamVjdAoqLwpmdW5jdGlvbiBzaF9oaWdobGlnaHRFbGVtZW50KGVsZW1lbnQsIGxhbmd1YWdlKSB7CiAgc2hfYWRkQ2xhc3MoZWxlbWVudCwgJ3NoX3NvdXJjZUNvZGUnKTsKICB2YXIgb3JpZ2luYWxUYWdzID0gW107CiAgdmFyIGlucHV0U3RyaW5nID0gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgb3JpZ2luYWxUYWdzKTsKICB2YXIgaGlnaGxpZ2h0VGFncyA9IHNoX2hpZ2hsaWdodFN0cmluZyhpbnB1dFN0cmluZywgbGFuZ3VhZ2UpOwogIHZhciB0YWdzID0gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncyk7CiAgdmFyIGRvY3VtZW50RnJhZ21lbnQgPSBzaF9pbnNlcnRUYWdzKHRhZ3MsIGlucHV0U3RyaW5nKTsKICB3aGlsZSAoZWxlbWVudC5oYXNDaGlsZE5vZGVzKCkpIHsKICAgIGVsZW1lbnQucmVtb3ZlQ2hpbGQoZWxlbWVudC5maXJzdENoaWxkKTsKICB9CiAgZWxlbWVudC5hcHBlbmRDaGlsZChkb2N1bWVudEZyYWdtZW50KTsKfQoKZnVuY3Rpb24gc2hfZ2V0WE1MSHR0cFJlcXVlc3QoKSB7CiAgaWYgKHdpbmRvdy5BY3RpdmVYT2JqZWN0KSB7CiAgICByZXR1cm4gbmV3IEFjdGl2ZVhPYmplY3QoJ01zeG1sMi5YTUxIVFRQJyk7CiAgfQogIGVsc2UgaWYgKHdpbmRvdy5YTUxIdHRwUmVxdWVzdCkgewogICAgcmV0dXJuIG5ldyBYTUxIdHRwUmVxdWVzdCgpOwogIH0KICB0aHJvdyAnTm8gWE1MSHR0cFJlcXVlc3QgaW1wbGVtZW50YXRpb24gYXZhaWxhYmxlJzsKfQoKZnVuY3Rpb24gc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpIHsKICBpZiAobGFuZ3VhZ2UgaW4gc2hfcmVxdWVzdHMpIHsKICAgIHNoX3JlcXVlc3RzW2xhbmd1YWdlXS5wdXNoKGVsZW1lbnQpOwogICAgcmV0dXJuOwogIH0KICBzaF9yZXF1ZXN0c1tsYW5ndWFnZV0gPSBbZWxlbWVudF07CiAgdmFyIHJlcXVlc3QgPSBzaF9nZXRYTUxIdHRwUmVxdWVzdCgpOwogIHZhciB1cmwgPSBwcmVmaXggKyAnc2hfJyArIGxhbmd1YWdlICsgc3VmZml4OwogIHJlcXVlc3Qub3BlbignR0VUJywgdXJsLCB0cnVlKTsKICByZXF1ZXN0Lm9ucmVhZHlzdGF0ZWNoYW5nZSA9IGZ1bmN0aW9uICgpIHsKICAgIGlmIChyZXF1ZXN0LnJlYWR5U3RhdGUgPT09IDQpIHsKICAgICAgdHJ5IHsKICAgICAgICBpZiAoISByZXF1ZXN0LnN0YXR1cyB8fCByZXF1ZXN0LnN0YXR1cyA9PT0gMjAwKSB7CiAgICAgICAgICBldmFsKHJlcXVlc3QucmVzcG9uc2VUZXh0KTsKICAgICAgICAgIHZhciBlbGVtZW50cyA9IHNoX3JlcXVlc3RzW2xhbmd1YWdlXTsKICAgICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgZWxlbWVudHMubGVuZ3RoOyBpKyspIHsKICAgICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50c1tpXSwgc2hfbGFuZ3VhZ2VzW2xhbmd1YWdlXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgdGhyb3cgJ0hUVFAgZXJyb3I6IHN0YXR1cyAnICsgcmVxdWVzdC5zdGF0dXM7CiAgICAgICAgfQogICAgICB9CiAgICAgIGZpbmFsbHkgewogICAgICAgIHJlcXVlc3QgPSBudWxsOwogICAgICB9CiAgICB9CiAgfTsKICByZXF1ZXN0LnNlbmQobnVsbCk7Cn0KCi8qKgpIaWdobGlnaHRzIGFsbCBlbGVtZW50cyBjb250YWluaW5nIHNvdXJjZSBjb2RlIG9uIHRoZSBjdXJyZW50IHBhZ2UuIEVsZW1lbnRzCmNvbnRhaW5pbmcgc291cmNlIGNvZGUgbXVzdCBiZSAicHJlIiBlbGVtZW50cyB3aXRoIGEgImNsYXNzIiBhdHRyaWJ1dGUgb2YKInNoX0xBTkdVQUdFIiwgd2hlcmUgTEFOR1VBR0UgaXMgYSB2YWxpZCBsYW5ndWFnZSBpZGVudGlmaWVyOyBlLmcuLCAic2hfamF2YSIKaWRlbnRpZmllcyB0aGUgZWxlbWVudCBhcyBjb250YWluaW5nICJqYXZhIiBsYW5ndWFnZSBzb3VyY2UgY29kZS4KKi8KZnVuY3Rpb24gaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCB0YWcpIHsKICB2YXIgbm9kZUxpc3QgPSBkb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSh0YWcpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbm9kZUxpc3QubGVuZ3RoOyBpKyspIHsKICAgIHZhciBlbGVtZW50ID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHZhciBodG1sQ2xhc3NlcyA9IHNoX2dldENsYXNzZXMoZWxlbWVudCk7CiAgICB2YXIgaGlnaGxpZ2h0ZWQgPSBmYWxzZTsKICAgIHZhciBkb250aGlnaGxpZ2h0ID0gZmFsc2U7CiAgICBmb3IgKHZhciBqID0gMDsgaiA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaisrKSB7CiAgICAgIHZhciBodG1sQ2xhc3MgPSBodG1sQ2xhc3Nlc1tqXS50b0xvd2VyQ2FzZSgpOwogICAgICBpZiAoaHRtbENsYXNzID09PSAnc2hfbm9uZScpIHsKICAgICAgICBkb250aGlnaGxpZ2h0ID0gdHJ1ZQogICAgICAgIGNvbnRpbnVlOwogICAgICB9CiAgICAgIGlmIChodG1sQ2xhc3Muc3Vic3RyKDAsIDMpID09PSAnc2hfJykgewogICAgICAgIHZhciBsYW5ndWFnZSA9IGh0bWxDbGFzcy5zdWJzdHJpbmcoMyk7CiAgICAgICAgaWYgKGxhbmd1YWdlIGluIHNoX2xhbmd1YWdlcykgewogICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50LCBzaF9sYW5ndWFnZXNbbGFuZ3VhZ2VdKTsKICAgICAgICAgIGhpZ2hsaWdodGVkID0gdHJ1ZTsKICAgICAgICB9CiAgICAgICAgZWxzZSBpZiAodHlwZW9mKHByZWZpeCkgPT09ICdzdHJpbmcnICYmIHR5cGVvZihzdWZmaXgpID09PSAnc3RyaW5nJykgewogICAgICAgICAgc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHRocm93ICdGb3VuZCA8JyArIHRhZyArICc+IGVsZW1lbnQgd2l0aCBjbGFzcz0iJyArIGh0bWxDbGFzcyArICciLCBidXQgbm8gc3VjaCBsYW5ndWFnZSBleGlzdHMnOwogICAgICAgIH0KICAgICAgICBicmVhazsKICAgICAgfQogICAgfQogICAgaWYgKGhpZ2hsaWdodGVkID09PSBmYWxzZSAmJiBkb250aGlnaGxpZ2h0ID09IGZhbHNlKSB7CiAgICAgIHNoX2hpZ2hsaWdodEVsZW1lbnQoZWxlbWVudCwgc2hfbGFuZ3VhZ2VzWyJqYXZhc2NyaXB0Il0pOwogICAgfQogIH0KfQoKCgpmdW5jdGlvbiBzaF9oaWdobGlnaHREb2N1bWVudChwcmVmaXgsIHN1ZmZpeCkgewogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3R0Jyk7CiAgaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCAnY29kZScpOwogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3ByZScpOwp9Cg=="></script>
+  <script src="data:application/javascript;base64,aWYoIXRoaXMuc2hfbGFuZ3VhZ2VzKXt0aGlzLnNoX2xhbmd1YWdlcz17fX1zaF9sYW5ndWFnZXMuamF2YXNjcmlwdD1bW1svXC9cL1wvL2csInNoX2NvbW1lbnQiLDFdLFsvXC9cLy9nLCJzaF9jb21tZW50Iiw3XSxbL1wvXCpcKi9nLCJzaF9jb21tZW50Iiw4XSxbL1wvXCovZywic2hfY29tbWVudCIsOV0sWy9cYig/OmFic3RyYWN0fGJyZWFrfGNhc2V8Y2F0Y2h8Y2xhc3N8Y29uc3R8Y29udGludWV8ZGVidWdnZXJ8ZGVmYXVsdHxkZWxldGV8ZG98ZWxzZXxlbnVtfGV4cG9ydHxleHRlbmRzfGZhbHNlfGZpbmFsfGZpbmFsbHl8Zm9yfGZ1bmN0aW9ufGdvdG98aWZ8aW1wbGVtZW50c3xpbnxpbnN0YW5jZW9mfGludGVyZmFjZXxuYXRpdmV8bmV3fG51bGx8cHJpdmF0ZXxwcm90ZWN0ZWR8cHJvdG90eXBlfHB1YmxpY3xyZXR1cm58c3RhdGljfHN1cGVyfHN3aXRjaHxzeW5jaHJvbml6ZWR8dGhyb3d8dGhyb3dzfHRoaXN8dHJhbnNpZW50fHRydWV8dHJ5fHR5cGVvZnx2YXJ8dm9sYXRpbGV8d2hpbGV8d2l0aClcYi9nLCJzaF9rZXl3b3JkIiwtMV0sWy8oXCtcK3wtLXxcKXxcXSkoXHMqKShcLz0/KD8hWypcL10pKS9nLFsic2hfc3ltYm9sIiwic2hfbm9ybWFsIiwic2hfc3ltYm9sIl0sLTFdLFsvKDB4W0EtRmEtZjAtOV0rfCg/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykoXHMqKShcLyg/IVsqXC9dKSkvZyxbInNoX251bWJlciIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyhbQS1aYS16JF9dW0EtWmEtejAtOSRfXSpccyopKFwvPT8oPyFbKlwvXSkpL2csWyJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy9cLyg/OlxcLnxbXipcXFwvXSkoPzpcXC58W15cXFwvXSkqXC9bZ2ltXSovZywic2hfcmVnZXhwIiwtMV0sWy9cYlsrLV0/KD86KD86MHhbQS1GYS1mMC05XSspfCg/Oig/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykpdT8oPzooPzppbnQoPzo4fDE2fDMyfDY0KSl8TCk/XGIvZywic2hfbnVtYmVyIiwtMV0sWy8iL2csInNoX3N0cmluZyIsMTBdLFsvJy9nLCJzaF9zdHJpbmciLDExXSxbL358IXwlfFxefFwqfFwofFwpfC18XCt8PXxcW3xcXXxcXHw6fDt8LHxcLnxcL3xcP3wmfDx8PnxcfC9nLCJzaF9zeW1ib2wiLC0xXSxbL1x7fFx9L2csInNoX2NicmFja2V0IiwtMV0sWy9cYig/Ok1hdGh8SW5maW5pdHl8TmFOfHVuZGVmaW5lZHxhcmd1bWVudHMpXGIvZywic2hfcHJlZGVmX3ZhciIsLTFdLFsvXGIoPzpBcnJheXxCb29sZWFufERhdGV8RXJyb3J8RXZhbEVycm9yfEZ1bmN0aW9ufE51bWJlcnxPYmplY3R8UmFuZ2VFcnJvcnxSZWZlcmVuY2VFcnJvcnxSZWdFeHB8U3RyaW5nfFN5bnRheEVycm9yfFR5cGVFcnJvcnxVUklFcnJvcnxkZWNvZGVVUkl8ZGVjb2RlVVJJQ29tcG9uZW50fGVuY29kZVVSSXxlbmNvZGVVUklDb21wb25lbnR8ZXZhbHxpc0Zpbml0ZXxpc05hTnxwYXJzZUZsb2F0fHBhcnNlSW50KVxiL2csInNoX3ByZWRlZl9mdW5jIiwtMV0sWy8oPzpbQS1aYS16XXxfKVtBLVphLXowLTlfXSooPz1bIFx0XSpcKCkvZywic2hfZnVuY3Rpb24iLC0xXV0sW1svJC9nLG51bGwsLTJdLFsvKD86PD8pW0EtWmEtejAtOV9cLlwvXC1ffl0rQFtBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KXwoPzo8PylbQS1aYS16MC05X10rOlwvXC9bQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+PykvZywic2hfdXJsIiwtMV0sWy88XD94bWwvZywic2hfcHJlcHJvYyIsMiwxXSxbLzwhRE9DVFlQRS9nLCJzaF9wcmVwcm9jIiw0LDFdLFsvPCEtLS9nLCJzaF9jb21tZW50Iiw1XSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKSg/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKS9nLCJzaF9rZXl3b3JkIiw2LDFdLFsvJig/OltBLVphLXowLTldKyk7L2csInNoX3ByZXByb2MiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSooPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMV0sWy88KD86XC8pP1tBLVphLXpdW0EtWmEtejAtOV0qL2csInNoX2tleXdvcmQiLDYsMV0sWy9AW0EtWmEtel0rL2csInNoX3R5cGUiLC0xXSxbLyg/OlRPRE98RklYTUV8QlVHKSg/Ols6XT8pL2csInNoX3RvZG8iLC0xXV0sW1svXD8+L2csInNoX3ByZXByb2MiLC0yXSxbLyhbXj0iIFx0Pl0rKShbIFx0XSopKD0/KS9nLFsic2hfdHlwZSIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyIvZywic2hfc3RyaW5nIiwzXV0sW1svXFwoPzpcXHwiKS9nLG51bGwsLTFdLFsvIi9nLCJzaF9zdHJpbmciLC0yXV0sW1svPi9nLCJzaF9wcmVwcm9jIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLy0tPi9nLCJzaF9jb21tZW50IiwtMl0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdXSxbWy8oPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLyQvZyxudWxsLC0yXV0sW1svXCpcLy9nLCJzaF9jb21tZW50IiwtMl0sWy8oPzo8PylbQS1aYS16MC05X1wuXC9cLV9+XStAW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pfCg/Ojw/KVtBLVphLXowLTlfXSs6XC9cL1tBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KS9nLCJzaF91cmwiLC0xXSxbLzxcP3htbC9nLCJzaF9wcmVwcm9jIiwyLDFdLFsvPCFET0NUWVBFL2csInNoX3ByZXByb2MiLDQsMV0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopKD86XC8pPz4vZywic2hfa2V5d29yZCIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopL2csInNoX2tleXdvcmQiLDYsMV0sWy8mKD86W0EtWmEtejAtOV0rKTsvZywic2hfcHJlcHJvYyIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XVtBLVphLXowLTldKig/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSovZywic2hfa2V5d29yZCIsNiwxXSxbL0BbQS1aYS16XSsvZywic2hfdHlwZSIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy9cKlwvL2csInNoX2NvbW1lbnQiLC0yXSxbLyg/Ojw/KVtBLVphLXowLTlfXC5cL1wtX35dK0BbQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+Pyl8KD86PD8pW0EtWmEtejAtOV9dKzpcL1wvW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pL2csInNoX3VybCIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy8iL2csInNoX3N0cmluZyIsLTJdLFsvXFwuL2csInNoX3NwZWNpYWxjaGFyIiwtMV1dLFtbLycvZywic2hfc3RyaW5nIiwtMl0sWy9cXC4vZywic2hfc3BlY2lhbGNoYXIiLC0xXV1dOw=="></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+
+</body></html>

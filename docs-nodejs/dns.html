@@ -1,0 +1,1505 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>DNS | Node.js v12.10.0 Documentation</title>
+  <link rel="stylesheet" href="data:text/css;base64,LyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogaXRhbGljOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBJdGFsaWMnKSwgbG9jYWwoJ0xhdG8tSXRhbGljJyksIHVybChodHRwczovL2ZvbnRzLmdzdGF0aWMuY29tL3MvbGF0by92MTYvUzZ1OHc0Qk1VVFBIanhzQVVpLXFOaVhnN2VVMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBpdGFsaWM7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEl0YWxpYycpLCBsb2NhbCgnTGF0by1JdGFsaWMnKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnU4dzRCTVVUUEhqeHNBWEMtcU5pWGc3US53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0KLyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogbm9ybWFsOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBSZWd1bGFyJyksIGxvY2FsKCdMYXRvLVJlZ3VsYXInKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnV5dzRCTVVUUEhqeEF3WGlXdEZDZlE3QS53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIFJlZ3VsYXInKSwgbG9jYWwoJ0xhdG8tUmVndWxhcicpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dXl3NEJNVVRQSGp4NHdYaVd0RkNjLndvZmYyKSBmb3JtYXQoJ3dvZmYyJyk7CiAgdW5pY29kZS1yYW5nZTogVSswMDAwLTAwRkYsIFUrMDEzMSwgVSswMTUyLTAxNTMsIFUrMDJCQi0wMkJDLCBVKzAyQzYsIFUrMDJEQSwgVSswMkRDLCBVKzIwMDAtMjA2RiwgVSsyMDc0LCBVKzIwQUMsIFUrMjEyMiwgVSsyMTkxLCBVKzIxOTMsIFUrMjIxMiwgVSsyMjE1LCBVK0ZFRkYsIFUrRkZGRDsKfQovKiBsYXRpbi1leHQgKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2FQR1EzcTVkME43dy53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2lQR1EzcTVkMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LyotLS0tLS0tLS0tLS0tLS0tLS0tLS0gTGF5b3V0IGFuZCBUeXBvZ3JhcGh5IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwpodG1sIHsKICBmb250LXNpemU6IDFyZW07CiAgb3ZlcmZsb3ctd3JhcDogYnJlYWstd29yZDsKICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDsKICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlOwogIC13ZWJraXQtZm9udC12YXJpYW50LWxpZ2F0dXJlczogbm9uZTsKICAgICAgICAgIGZvbnQtdmFyaWFudC1saWdhdHVyZXM6IG5vbmU7Cn0KCiogewogIGJveC1zaXppbmc6IGJvcmRlci1ib3g7Cn0KCmJvZHkgewogIGZvbnQtZmFtaWx5OiAiTGF0byIsICJMdWNpZGEgR3JhbmRlIiwgIkx1Y2lkYSBTYW5zIFVuaWNvZGUiLCAiTHVjaWRhIFNhbnMiLCBWZXJkYW5hLCBUYWhvbWEsIHNhbnMtc2VyaWY7CiAgbWFyZ2luOiAwOwogIHBhZGRpbmc6IDA7CiAgY29sb3I6ICMzMzM7CiAgYmFja2dyb3VuZDogI2ZmZjsKfQoKaDEgeyBmb250LXNpemU6IDIuNXJlbSB9CmgyIHsgZm9udC1zaXplOiAycmVtIH0KaDMgeyBmb250LXNpemU6IDEuNzVyZW0gfQpoNCB7IGZvbnQtc2l6ZTogMS41cmVtIH0KaDUgeyBmb250LXNpemU6IDEuMjVyZW0gfQpoNiB7IGZvbnQtc2l6ZTogMXJlbSB9CgpoMSwgaDIsIGgzLCBoNCwgaDUsIGg2IHsKICBtYXJnaW46IDEuNXJlbSAwIDFyZW07CiAgdGV4dC1yZW5kZXJpbmc6IG9wdGltaXplTGVnaWJpbGl0eTsKICBmb250LXdlaWdodDogNzAwOwogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKcHJlLCB0dCwgY29kZSwgLnByZSwgc3Bhbi50eXBlLCBhLnR5cGUgewogIGZvbnQtZmFtaWx5OiBTRk1vbm8tUmVndWxhciwgTWVubG8sIENvbnNvbGFzLCAiTGliZXJhdGlvbiBNb25vIiwgIkNvdXJpZXIgTmV3IiwgbW9ub3NwYWNlOwogIGZvbnQtc2l6ZTogLjllbTsKfQoKI2NvbnRlbnQgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKYSwgYTpsaW5rLCBhOmFjdGl2ZSB7CiAgY29sb3I6ICM0Mzg1M2Q7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGJvcmRlci1yYWRpdXM6IDJweDsKICBwYWRkaW5nOiAxcHggM3B4Owp9CgphOmhvdmVyLCBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDM4NTNkOwogIG91dGxpbmU6IG5vbmU7Cn0KCnN0cm9uZyB7CiAgZm9udC13ZWlnaHQ6IDcwMDsKfQoKY29kZSBhOmhvdmVyIHsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgplbSBjb2RlIHsKICBmb250LXN0eWxlOiBub3JtYWw7Cn0KCiNjaGFuZ2Vsb2cgI2d0b2MgewogIGRpc3BsYXk6IG5vbmU7Cn0KCiNndG9jIHsKICBtYXJnaW4tdG9wOiAuNXJlbTsKICBtYXJnaW4tYm90dG9tOiAxcmVtOwp9CgojZ3RvYyB1bCB7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBtYXJnaW4tbGVmdDogMDsKICBsaW5lLWhlaWdodDogMS41cmVtOwp9CgojZ3RvYyA+IHVsID4gbGkgewogIGRpc3BsYXk6IGlubGluZTsKICBib3JkZXItcmlnaHQ6IDFweCAjMDAwIHNvbGlkOwogIG1hcmdpbi1yaWdodDogMC40cmVtOwogIHBhZGRpbmctcmlnaHQ6IDAuNHJlbTsKfQoKI2d0b2MgPiB1bCA+IGxpOmxhc3QtY2hpbGQgewogIGJvcmRlci1yaWdodDogbm9uZTsKICBtYXJnaW4tcmlnaHQ6IDA7CiAgcGFkZGluZy1yaWdodDogMDsKfQoKbGkudmVyc2lvbi1waWNrZXIgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBhIHsKICBib3JkZXItcmFkaXVzOiAycHggMnB4IDAgMDsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBvbCB7CiAgZGlzcGxheTogYmxvY2s7CiAgei1pbmRleDogMTsKfQoKbGkudmVyc2lvbi1waWNrZXIgYSBzcGFuIHsKICBmb250LXNpemU6IC43cmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciB7CiAgYmFja2dyb3VuZDogI2ZmZjsKICBib3JkZXI6IDFweCAjNDM4NTNkIHNvbGlkOwogIGJvcmRlci1yYWRpdXM6IDAgMCAycHggMnB4OwogIGRpc3BsYXk6IG5vbmU7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgcmlnaHQ6IDA7CiAgdG9wOiAxLjI1cmVtOwogIHdpZHRoOiAxMDAlOwp9CgojZ3RvYyBvbC52ZXJzaW9uLXBpY2tlciBsaSB7CiAgZGlzcGxheTogYmxvY2s7CiAgYm9yZGVyLXJpZ2h0OiAwOwogIG1hcmdpbi1yaWdodDogMDsKfQoKb2wudmVyc2lvbi1waWNrZXIgbGkgYSB7CiAgYm9yZGVyLXJhZGl1czogMDsKICBkaXNwbGF5OiBibG9jazsKICBtYXJnaW46IDA7CiAgcGFkZGluZzogLjFyZW07CiAgcGFkZGluZy1sZWZ0OiAxcmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciBsaTpsYXN0LWNoaWxkIGEgewogIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAxcHg7CiAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMXB4Owp9CgoubGluZSB7CiAgd2lkdGg6IGNhbGMoMTAwJSAtIDFyZW0pOwogIGRpc3BsYXk6IGJsb2NrOwogIHBhZGRpbmctYm90dG9tOiAxcHg7Cn0KCi5hcGlfc3RhYmlsaXR5IHsKICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDsKICBtYXJnaW46IDAgMCAxcmVtIDA7CiAgZm9udC1mYW1pbHk6ICJMYXRvIiwgIkx1Y2lkYSBHcmFuZGUiLCAiTHVjaWRhIFNhbnMgVW5pY29kZSIsICJMdWNpZGEgU2FucyIsIFZlcmRhbmEsIFRhaG9tYSwgc2Fucy1zZXJpZjsKICBwYWRkaW5nOiAxcmVtOwogIGxpbmUtaGVpZ2h0OiAxLjU7Cn0KCi5hcGlfc3RhYmlsaXR5ICogewogIGNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50Owp9CgouYXBpX3N0YWJpbGl0eSBhIHsKICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsKfQoKLmFwaV9zdGFiaWxpdHkgYTpob3ZlciwgLmFwaV9zdGFiaWxpdHkgYTphY3RpdmUsIC5hcGlfc3RhYmlsaXR5IGE6Zm9jdXMgewogIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjQpOwp9CgouYXBpX3N0YWJpbGl0eSBhIGNvZGUgewogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCi5hcGlfc3RhYmlsaXR5XzAgewogIGJhY2tncm91bmQtY29sb3I6ICNENjAwMjc7Cn0KCi5hcGlfc3RhYmlsaXR5XzEgewogIGJhY2tncm91bmQtY29sb3I6ICNFQzUzMTU7Cn0KCi5hcGlfc3RhYmlsaXR5XzIgewogIGJhY2tncm91bmQtY29sb3I6ICM0RUJBMEY7Cn0KCi5hcGlfbWV0YWRhdGEgewogIGZvbnQtc2l6ZTogLjg1cmVtOwogIG1hcmdpbi1ib3R0b206IDFyZW07Cn0KCi5hcGlfbWV0YWRhdGEgc3BhbiB7CiAgbWFyZ2luLXJpZ2h0OiAxcmVtOwp9CgouYXBpX21ldGFkYXRhIHNwYW46bGFzdC1jaGlsZCB7CiAgbWFyZ2luLXJpZ2h0OiAwcHg7Cn0KCnVsLnBsYWluIHsKICBsaXN0LXN0eWxlOiBub25lOwp9CgphYmJyIHsKICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkICM0NTQ1NDU7Cn0KCnAgewogIHRleHQtcmVuZGVyaW5nOiBvcHRpbWl6ZUxlZ2liaWxpdHk7CiAgbWFyZ2luOiAwIDAgMS4xMjVyZW0gMDsKICBsaW5lLWhlaWdodDogMS41Owp9CgojYXBpY29udGVudCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKICBwYWRkaW5nLWJvdHRvbTogMnJlbTsKfQoKdGFibGUgewogIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7CiAgbWFyZ2luOiAwIDAgMS41cmVtIDA7Cn0KCnRoLCB0ZCB7CiAgYm9yZGVyOiAxcHggc29saWQgI2FhYTsKICBwYWRkaW5nOiAuNzVyZW0gMXJlbSAuNzVyZW0gMXJlbTsKICB2ZXJ0aWNhbC1hbGlnbjogdG9wOwp9Cgp0aCB7CiAgdGV4dC1hbGlnbjpsZWZ0Owp9CgpvbCwgdWwsIGRsIHsKICBtYXJnaW46IDAgMCAuNnJlbSAwOwogIHBhZGRpbmc6IDA7Cn0KCm9sIHVsLCBvbCBvbCwgb2wgZGwsIHVsIHVsLCB1bCBvbCwgdWwgZGwsIGRsIHVsLCBkbCBvbCwgZGwgZGwgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCnVsLCBvbCB7CiAgbWFyZ2luLWxlZnQ6IDJyZW07Cn0KCmRsIGR0IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgbWFyZ2luOiAxLjVyZW0gMCAwOwp9CgpkbCBkZCB7CiAgcG9zaXRpb246IHJlbGF0aXZlOwogIG1hcmdpbjogMCAxcmVtIDA7Cn0KCmRkICsgZHQucHJlIHsKICBtYXJnaW4tdG9wOiAxLjZyZW07Cn0KCiNhcGljb250ZW50IHsKICBwYWRkaW5nLXRvcDogMXJlbTsKfQoKI2FwaWNvbnRlbnQgLmxpbmUgewogIHdpZHRoOiBjYWxjKDUwJSAtIDFyZW0pOwogIG1hcmdpbjogMXJlbSAxcmVtIC45NXJlbTsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2NjOwp9CgpoMiArIGgyIHsKICBtYXJnaW46IDAgMCAuNXJlbTsKfQoKaDMgKyBoMyB7CiAgbWFyZ2luOiAwIDAgLjVyZW07Cn0KCmgyLCBoMywgaDQsIGg1IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgcGFkZGluZy1yaWdodDogNDBweDsKfQoKLnNyY2xpbmsgewogIGZsb2F0OiByaWdodDsKICBmb250LXNpemU6IHNtYWxsZXI7Cn0KCmgxIHNwYW4sIGgyIHNwYW4sIGgzIHNwYW4sIGg0IHNwYW4gewogIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICBkaXNwbGF5OiBibG9jazsKICB0b3A6IDA7CiAgcmlnaHQ6IDA7Cn0KCmgxIHNwYW46aG92ZXIsIGgyIHNwYW46aG92ZXIsIGgzIHNwYW46aG92ZXIsIGg0IHNwYW46aG92ZXIgewogIG9wYWNpdHk6IDE7Cn0KCmgxIHNwYW4gYSwgaDIgc3BhbiBhLCBoMyBzcGFuIGEsIGg0IHNwYW4gYSB7CiAgY29sb3I6ICMwMDA7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGZvbnQtd2VpZ2h0OiBib2xkOwp9CgpwcmUsIHR0LCBjb2RlIHsKICBsaW5lLWhlaWdodDogMS41cmVtOwogIG1hcmdpbjogMDsgcGFkZGluZzogMDsKfQoKLnByZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKcHJlIHsKICBwYWRkaW5nOiAxcmVtOwogIHZlcnRpY2FsLWFsaWduOiB0b3A7CiAgYmFja2dyb3VuZDogI2YyZjJmMjsKICBtYXJnaW46IDFyZW07CiAgb3ZlcmZsb3cteDogYXV0bzsKfQoKcHJlID4gY29kZSB7CiAgcGFkZGluZzogMDsKfQoKcHJlICsgaDMgewogIG1hcmdpbi10b3A6IDIuMjI1cmVtOwp9Cgpjb2RlLnByZSB7CiAgd2hpdGUtc3BhY2U6IHByZTsKfQoKI2ludHJvIHsKICBtYXJnaW4tdG9wOiAxLjI1cmVtOwogIG1hcmdpbi1sZWZ0OiAxcmVtOwp9CgojaW50cm8gYSB7CiAgY29sb3I6ICNkZGQ7CiAgZm9udC13ZWlnaHQ6IGJvbGQ7Cn0KCmhyIHsKICBiYWNrZ3JvdW5kOiBub25lOwogIGJvcmRlcjogbWVkaXVtIG5vbmU7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM3YTdhN2E7CiAgbWFyZ2luOiAwIDAgMXJlbSAwOwp9CgojdG9jIGgyIHsKICBtYXJnaW4tdG9wOiAwOwogIG1hcmdpbjogMS41cmVtIDA7Cn0KCiN0b2MgcCB7CiAgbWFyZ2luOiAwOwp9CgojdG9jIHVsIGEgewogIHRleHQtZGVjb3JhdGlvbjpub25lOwp9CgojdG9jIHVsIGxpIHsKICBtYXJnaW4tYm90dG9tOiAuNjY2cmVtOwogIGxpc3Qtc3R5bGU6IHNxdWFyZSBvdXRzaWRlOwp9CgojdG9jIGxpID4gdWwgewogIG1hcmdpbi10b3A6IC42NjZyZW07Cn0KCiN0b2MgLnN0YWJpbGl0eV8wOjphZnRlciB7CiAgYmFja2dyb3VuZC1jb2xvcjogI2Q1MDAyNzsKICBjb2xvcjogI2ZmZjsKICBjb250ZW50OiAiZGVwcmVjYXRlZCI7CiAgbWFyZ2luLWxlZnQ6IC4yNXJlbTsKICBwYWRkaW5nOiAxcHggM3B4OwogIGJvcmRlci1yYWRpdXM6IDNweDsKfQoKI2FwaWNvbnRlbnQgbGkgewogIG1hcmdpbi1ib3R0b206IC41cmVtOwp9CgojYXBpY29udGVudCBsaTpsYXN0LWNoaWxkIHsKICBtYXJnaW4tYm90dG9tOiAwOwp9Cgp0dCwgY29kZSB7CiAgY29sb3I6ICMwNDA0MDQ7CiAgYmFja2dyb3VuZC1jb2xvcjogI2YyZjJmMjsKICBib3JkZXItcmFkaXVzOiAycHg7CiAgcGFkZGluZzogMXB4IDNweDsKfQoKLmFwaV9zdGFiaWxpdHkgY29kZSB7CiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAuMSk7Cn0KCmEgY29kZSB7CiAgY29sb3I6IGluaGVyaXQ7CiAgYmFja2dyb3VuZDogaW5oZXJpdDsKICBwYWRkaW5nOiAwOwp9CgoudHlwZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKI2NvbHVtbjEuaW50ZXJpb3IgewogIG1hcmdpbi1sZWZ0OiAyMzRweDsKICBwYWRkaW5nOiAwIDJyZW07CiAgLXdlYmtpdC1wYWRkaW5nLXN0YXJ0OiAxLjVyZW07Cn0KCiNjb2x1bW4yLmludGVyaW9yIHsKICB3aWR0aDogMjM0cHg7CiAgYmFja2dyb3VuZDogIzMzMzsKICBwb3NpdGlvbjogZml4ZWQ7CiAgbGVmdDogMDsKICB0b3A6IDA7CiAgYm90dG9tOiAwOwogIG92ZXJmbG93LXg6IGhpZGRlbjsKICBvdmVyZmxvdy15OiBzY3JvbGw7Cn0KCiNjb2x1bW4yIHVsIHsKICBsaXN0LXN0eWxlOiBub25lOwogIG1hcmdpbjogLjlyZW0gMCAuNXJlbTsKICBiYWNrZ3JvdW5kOiAjMzMzOwp9CgojY29sdW1uMiA+IDpmaXJzdC1jaGlsZCB7CiAgbWFyZ2luOiAxLjI1cmVtOwogIGZvbnQtc2l6ZTogMS41cmVtOwp9CgojY29sdW1uMiA+IHVsOm50aC1jaGlsZCgyKSB7CiAgbWFyZ2luOiAxLjI1cmVtIDAgLjVyZW07Cn0KCiNjb2x1bW4yID4gdWw6bGFzdC1jaGlsZCB7CiAgbWFyZ2luOiAuOXJlbSAwIDEuMjVyZW07Cn0KCiNjb2x1bW4yIHVsIGxpIHsKICBwYWRkaW5nLWxlZnQ6IDEuMjVyZW07CiAgbWFyZ2luLWJvdHRvbTogLjVyZW07CiAgcGFkZGluZy1ib3R0b206IC41cmVtOwp9CgojY29sdW1uMiAubGluZSB7CiAgbWFyZ2luOiAwIC41cmVtOwogIGJhY2tncm91bmQtY29sb3I6ICM3MDcwNzA7Cn0KCiNjb2x1bW4yIHVsIGxpOmxhc3QtY2hpbGQgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEgewogIGNvbG9yOiAjY2NjOwogIGJvcmRlci1yYWRpdXM6IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEuYWN0aXZlLCAjY29sdW1uMiB1bCBsaSBhLmFjdGl2ZTpob3ZlciwKI2NvbHVtbjIgdWwgbGkgYS5hY3RpdmU6Zm9jdXMgewogIGNvbG9yOiAjNDM4NTNkOwogIGJvcmRlci1yYWRpdXM6IDA7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM0Mzg1M2Q7CiAgYmFja2dyb3VuZDogbm9uZTsKfQoKI2ludHJvIGE6aG92ZXIsICNpbnRybyBhOmZvY3VzLAojY29sdW1uMiB1bCBsaSBhOmhvdmVyLCAjY29sdW1uMiB1bCBsaSBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgpzcGFuID4gLm1hcmssIHNwYW4gPiAubWFyazp2aXNpdGVkIHsKICBjb2xvcjogIzcwNzA3MDsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgdG9wOiAwcHg7CiAgcmlnaHQ6IDBweDsKfQoKc3BhbiA+IC5tYXJrOmhvdmVyLCBzcGFuID4gLm1hcms6Zm9jdXMsIHNwYW4gPiAubWFyazphY3RpdmUgewogIGNvbG9yOiAjNDM4NTNkOwogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCnRoID4gKjpsYXN0LWNoaWxkLCB0ZCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKfQoKLmNoYW5nZWxvZyA+IHN1bW1hcnkgewogIG1hcmdpbjogLjVyZW0gMDsKICBwYWRkaW5nOiAuNXJlbSAwOwogIGN1cnNvcjogcG9pbnRlcjsKfQoKLyogc2ltcGxlciBjbGVhcmZpeCAqLwouY2xlYXJmaXg6YWZ0ZXIgewogIGNvbnRlbnQ6ICIuIjsKICBkaXNwbGF5OiBibG9jazsKICBoZWlnaHQ6IDA7CiAgY2xlYXI6IGJvdGg7CiAgdmlzaWJpbGl0eTogaGlkZGVuOwp9CgouZ2l0aHViX2ljb24gewogIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7CiAgbWFyZ2luOiAtMnB4IDNweCAwIDA7Cn0KCkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogMTAyNHB4KSB7CiAgI2NvbnRlbnQgewogICAgb3ZlcmZsb3c6IHZpc2libGU7CiAgfQogICNjb2x1bW4xLmludGVyaW9yIHsKICAgIG1hcmdpbi1sZWZ0OiAwOwogICAgcGFkZGluZy1sZWZ0OiAuNXJlbTsKICAgIHBhZGRpbmctcmlnaHQ6IC41cmVtOwogICAgd2lkdGg6IGF1dG87CiAgICBvdmVyZmxvdy15OiB2aXNpYmxlOwogIH0KICAjY29sdW1uMiB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KfQoKQG1lZGlhIHByaW50IHsKICBodG1sIHsKICAgIGhlaWdodDogYXV0bzsKICAgIGZvbnQtc2l6ZTogMC43NWVtOwogIH0KICAjY29sdW1uMi5pbnRlcmlvciB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KICAjY29sdW1uMS5pbnRlcmlvciB7CiAgICBtYXJnaW4tbGVmdDogMHB4OwogICAgcGFkZGluZzogMHB4OwogICAgb3ZlcmZsb3cteTogYXV0bzsKICB9CiAgLmFwaV9tZXRhZGF0YSwKICAjdG9jLAogIC5zcmNsaW5rLAogICNndG9jLAogIC5tYXJrIHsKICAgIGRpc3BsYXk6IG5vbmU7CiAgfQogIGgxIHsKICAgIGZvbnQtc2l6ZTogMnJlbTsKICB9CiAgaDIgewogICAgZm9udC1zaXplOiAxLjc1cmVtOwogIH0KICBoMyB7CiAgICBmb250LXNpemU6IDEuNXJlbTsKICB9CiAgaDQgewogICAgZm9udC1zaXplOiAxLjNyZW07CiAgfQogIGg1IHsKICAgIGZvbnQtc2l6ZTogMS4ycmVtOwogIH0KICBoNiB7CiAgICBmb250LXNpemU6IDEuMXJlbTsKICB9CiAgLmFwaV9zdGFiaWxpdHkgewogICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogIH0KICAuYXBpX3N0YWJpbGl0eSBhIHsKICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsKICB9CiAgYSB7CiAgICBjb2xvcjogaW5oZXJpdDsKICB9CiAgI2FwaWNvbnRlbnQgewogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICB9Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LnNoX3NvdXJjZUNvZGUgewogIGZvbnQtd2VpZ2h0OiBub3JtYWw7CiAgZm9udC1zdHlsZTogbm9ybWFsOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfc3ltYm9sLAouc2hfc291cmNlQ29kZSAuc2hfY2JyYWNrZXQgewogIGNvbG9yOiAjMzMzOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfa2V5d29yZCB7CiAgY29sb3I6ICMzMzg7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9zdHJpbmcsCi5zaF9zb3VyY2VDb2RlIC5zaF9yZWdleHAsCi5zaF9zb3VyY2VDb2RlIC5zaF9udW1iZXIsCi5zaF9zb3VyY2VDb2RlIC5zaF9zcGVjaWFsY2hhciB7CiAgY29sb3I6ICNFNTQzMDU7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9jb21tZW50IHsKICBjb2xvcjogIzY2NjsKICBmb250LXdlaWdodDogbGlnaHRlcjsKfQo=">
+  <link rel="canonical" href="https://nodejs.org/api/dns.html">
+</head>
+<body class="alt apidoc" id="api-section-dns">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="https://nodejs.org/" title="Go back to the home page">
+          Node.js
+        </a>
+      </div>
+      <ul>
+<li><a href="https://nodejs.org/api/documentation.html" class="nav-documentation">About these Docs</a></li>
+<li><a href="https://nodejs.org/api/synopsis.html" class="nav-synopsis">Usage &amp; Example</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://nodejs.org/api/assert.html" class="nav-assert">Assertion Testing</a></li>
+<li><a href="https://nodejs.org/api/async_hooks.html" class="nav-async_hooks">Async Hooks</a></li>
+<li><a href="https://nodejs.org/api/buffer.html" class="nav-buffer">Buffer</a></li>
+<li><a href="https://nodejs.org/api/addons.html" class="nav-addons">C++ Addons</a></li>
+<li><a href="https://nodejs.org/api/n-api.html" class="nav-n-api">C/C++ Addons - N-API</a></li>
+<li><a href="https://nodejs.org/api/child_process.html" class="nav-child_process">Child Processes</a></li>
+<li><a href="https://nodejs.org/api/cluster.html" class="nav-cluster">Cluster</a></li>
+<li><a href="https://nodejs.org/api/cli.html" class="nav-cli">Command Line Options</a></li>
+<li><a href="https://nodejs.org/api/console.html" class="nav-console">Console</a></li>
+<li><a href="https://nodejs.org/api/crypto.html" class="nav-crypto">Crypto</a></li>
+<li><a href="https://nodejs.org/api/debugger.html" class="nav-debugger">Debugger</a></li>
+<li><a href="https://nodejs.org/api/deprecations.html" class="nav-deprecations">Deprecated APIs</a></li>
+<li><a href="https://nodejs.org/api/dns.html" class="nav-dns active">DNS</a></li>
+<li><a href="https://nodejs.org/api/domain.html" class="nav-domain">Domain</a></li>
+<li><a href="https://nodejs.org/api/esm.html" class="nav-esm">ECMAScript Modules</a></li>
+<li><a href="https://nodejs.org/api/errors.html" class="nav-errors">Errors</a></li>
+<li><a href="https://nodejs.org/api/events.html" class="nav-events">Events</a></li>
+<li><a href="https://nodejs.org/api/fs.html" class="nav-fs">File System</a></li>
+<li><a href="https://nodejs.org/api/globals.html" class="nav-globals">Globals</a></li>
+<li><a href="https://nodejs.org/api/http.html" class="nav-http">HTTP</a></li>
+<li><a href="https://nodejs.org/api/http2.html" class="nav-http2">HTTP/2</a></li>
+<li><a href="https://nodejs.org/api/https.html" class="nav-https">HTTPS</a></li>
+<li><a href="https://nodejs.org/api/inspector.html" class="nav-inspector">Inspector</a></li>
+<li><a href="https://nodejs.org/api/intl.html" class="nav-intl">Internationalization</a></li>
+<li><a href="https://nodejs.org/api/modules.html" class="nav-modules">Modules</a></li>
+<li><a href="https://nodejs.org/api/net.html" class="nav-net">Net</a></li>
+<li><a href="https://nodejs.org/api/os.html" class="nav-os">OS</a></li>
+<li><a href="https://nodejs.org/api/path.html" class="nav-path">Path</a></li>
+<li><a href="https://nodejs.org/api/perf_hooks.html" class="nav-perf_hooks">Performance Hooks</a></li>
+<li><a href="https://nodejs.org/api/policy.html" class="nav-policy">Policies</a></li>
+<li><a href="https://nodejs.org/api/process.html" class="nav-process">Process</a></li>
+<li><a href="https://nodejs.org/api/punycode.html" class="nav-punycode">Punycode</a></li>
+<li><a href="https://nodejs.org/api/querystring.html" class="nav-querystring">Query Strings</a></li>
+<li><a href="https://nodejs.org/api/readline.html" class="nav-readline">Readline</a></li>
+<li><a href="https://nodejs.org/api/repl.html" class="nav-repl">REPL</a></li>
+<li><a href="https://nodejs.org/api/report.html" class="nav-report">Report</a></li>
+<li><a href="https://nodejs.org/api/stream.html" class="nav-stream">Stream</a></li>
+<li><a href="https://nodejs.org/api/string_decoder.html" class="nav-string_decoder">String Decoder</a></li>
+<li><a href="https://nodejs.org/api/timers.html" class="nav-timers">Timers</a></li>
+<li><a href="https://nodejs.org/api/tls.html" class="nav-tls">TLS/SSL</a></li>
+<li><a href="https://nodejs.org/api/tracing.html" class="nav-tracing">Trace Events</a></li>
+<li><a href="https://nodejs.org/api/tty.html" class="nav-tty">TTY</a></li>
+<li><a href="https://nodejs.org/api/dgram.html" class="nav-dgram">UDP/Datagram</a></li>
+<li><a href="https://nodejs.org/api/url.html" class="nav-url">URL</a></li>
+<li><a href="https://nodejs.org/api/util.html" class="nav-util">Utilities</a></li>
+<li><a href="https://nodejs.org/api/v8.html" class="nav-v8">V8</a></li>
+<li><a href="https://nodejs.org/api/vm.html" class="nav-vm">VM</a></li>
+<li><a href="https://nodejs.org/api/worker_threads.html" class="nav-worker_threads">Worker Threads</a></li>
+<li><a href="https://nodejs.org/api/zlib.html" class="nav-zlib">Zlib</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://github.com/nodejs/node" class="nav-https-github-com-nodejs-node">GitHub Repo &amp; Issue Tracker</a></li>
+</ul>
+    </div>
+
+    <div id="column1" data-id="dns" class="interior">
+      <header>
+        <h1>Node.js v12.10.0 Documentation</h1>
+        <div id="gtoc">
+          <ul>
+            <li>
+              <a href="https://nodejs.org/api/index.html" name="toc">Index</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/all.html">View on single page</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/dns.json">View as JSON</a>
+            </li>
+            
+    <li class="version-picker">
+      <a href="#">View another version <span>▼</span></a>
+      <ol class="version-picker"><li><a href="https://nodejs.org/docs/latest-v12.x/api/dns.html">12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v11.x/api/dns.html">11.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v10.x/api/dns.html">10.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v9.x/api/dns.html">9.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/dns.html">8.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v7.x/api/dns.html">7.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v6.x/api/dns.html">6.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v5.x/api/dns.html">5.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v4.x/api/dns.html">4.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.12.x/api/dns.html">0.12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.10.x/api/dns.html">0.10.x</a></li></ol>
+    </li>
+  
+            <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/dns.md"><span class="github_icon"><svg height="16" width="16" viewBox="0 0 16.1 16.1" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8z"></path></svg></span>Edit on GitHub</a></li>
+          </ul>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+<li>
+<p><span class="stability_2"><a href="#dns_dns">DNS</a></span></p>
+<ul>
+<li>
+<p><a href="#dns_class_dns_resolver">Class: dns.Resolver</a></p>
+<ul>
+<li><a href="#dns_resolver_cancel">resolver.cancel()</a></li>
+</ul>
+</li>
+<li><a href="#dns_dns_getservers">dns.getServers()</a></li>
+<li>
+<p><a href="#dns_dns_lookup_hostname_options_callback">dns.lookup(hostname[, options], callback)</a></p>
+<ul>
+<li><a href="#dns_supported_getaddrinfo_flags">Supported getaddrinfo flags</a></li>
+</ul>
+</li>
+<li><a href="#dns_dns_lookupservice_address_port_callback">dns.lookupService(address, port, callback)</a></li>
+<li><a href="#dns_dns_resolve_hostname_rrtype_callback">dns.resolve(hostname[, rrtype], callback)</a></li>
+<li><a href="#dns_dns_resolve4_hostname_options_callback">dns.resolve4(hostname[, options], callback)</a></li>
+<li><a href="#dns_dns_resolve6_hostname_options_callback">dns.resolve6(hostname[, options], callback)</a></li>
+<li><a href="#dns_dns_resolveany_hostname_callback">dns.resolveAny(hostname, callback)</a></li>
+<li><a href="#dns_dns_resolvecname_hostname_callback">dns.resolveCname(hostname, callback)</a></li>
+<li><a href="#dns_dns_resolvemx_hostname_callback">dns.resolveMx(hostname, callback)</a></li>
+<li><a href="#dns_dns_resolvenaptr_hostname_callback">dns.resolveNaptr(hostname, callback)</a></li>
+<li><a href="#dns_dns_resolvens_hostname_callback">dns.resolveNs(hostname, callback)</a></li>
+<li><a href="#dns_dns_resolveptr_hostname_callback">dns.resolvePtr(hostname, callback)</a></li>
+<li><a href="#dns_dns_resolvesoa_hostname_callback">dns.resolveSoa(hostname, callback)</a></li>
+<li><a href="#dns_dns_resolvesrv_hostname_callback">dns.resolveSrv(hostname, callback)</a></li>
+<li><a href="#dns_dns_resolvetxt_hostname_callback">dns.resolveTxt(hostname, callback)</a></li>
+<li><a href="#dns_dns_reverse_ip_callback">dns.reverse(ip, callback)</a></li>
+<li><a href="#dns_dns_setservers_servers">dns.setServers(servers)</a></li>
+<li>
+<p><a href="#dns_dns_promises_api">DNS Promises API</a></p>
+<ul>
+<li><a href="#dns_class_dnspromises_resolver">Class: dnsPromises.Resolver</a></li>
+<li><a href="#dns_dnspromises_getservers">dnsPromises.getServers()</a></li>
+<li><a href="#dns_dnspromises_lookup_hostname_options">dnsPromises.lookup(hostname[, options])</a></li>
+<li><a href="#dns_dnspromises_lookupservice_address_port">dnsPromises.lookupService(address, port)</a></li>
+<li><a href="#dns_dnspromises_resolve_hostname_rrtype">dnsPromises.resolve(hostname[, rrtype])</a></li>
+<li><a href="#dns_dnspromises_resolve4_hostname_options">dnsPromises.resolve4(hostname[, options])</a></li>
+<li><a href="#dns_dnspromises_resolve6_hostname_options">dnsPromises.resolve6(hostname[, options])</a></li>
+<li><a href="#dns_dnspromises_resolveany_hostname">dnsPromises.resolveAny(hostname)</a></li>
+<li><a href="#dns_dnspromises_resolvecname_hostname">dnsPromises.resolveCname(hostname)</a></li>
+<li><a href="#dns_dnspromises_resolvemx_hostname">dnsPromises.resolveMx(hostname)</a></li>
+<li><a href="#dns_dnspromises_resolvenaptr_hostname">dnsPromises.resolveNaptr(hostname)</a></li>
+<li><a href="#dns_dnspromises_resolvens_hostname">dnsPromises.resolveNs(hostname)</a></li>
+<li><a href="#dns_dnspromises_resolveptr_hostname">dnsPromises.resolvePtr(hostname)</a></li>
+<li><a href="#dns_dnspromises_resolvesoa_hostname">dnsPromises.resolveSoa(hostname)</a></li>
+<li><a href="#dns_dnspromises_resolvesrv_hostname">dnsPromises.resolveSrv(hostname)</a></li>
+<li><a href="#dns_dnspromises_resolvetxt_hostname">dnsPromises.resolveTxt(hostname)</a></li>
+<li><a href="#dns_dnspromises_reverse_ip">dnsPromises.reverse(ip)</a></li>
+<li><a href="#dns_dnspromises_setservers_servers">dnsPromises.setServers(servers)</a></li>
+</ul>
+</li>
+<li><a href="#dns_error_codes">Error codes</a></li>
+<li>
+<p><a href="#dns_implementation_considerations">Implementation considerations</a></p>
+<ul>
+<li><a href="#dns_dns_lookup"><code>dns.lookup()</code></a></li>
+<li><a href="#dns_dns_resolve_dns_resolve_and_dns_reverse"><code>dns.resolve()</code>, <code>dns.resolve*()</code> and <code>dns.reverse()</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+      </div>
+
+      <div id="apicontent">
+        <h1>DNS<span><a class="mark" href="#dns_dns" id="dns_dns">#</a></span></h1>
+
+<p></p><div class="api_stability api_stability_2"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 2</a> - Stable</div><p></p>
+<p>The <code>dns</code> module contains functions belonging to two different categories:</p>
+<p>1) Functions that use the underlying operating system facilities to perform
+name resolution, and that do not necessarily perform any network communication.
+This category contains only one function: <a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a>. <strong>Developers
+looking to perform name resolution in the same way that other applications on
+the same operating system behave should use <a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a>.</strong></p>
+<p>For example, looking up <code>iana.org</code>.</p>
+<pre><code class="language-js">const dns = require('dns');
+
+dns.lookup('iana.org', (err, address, family) =&gt; {
+  console.log('address: %j family: IPv%s', address, family);
+});
+// address: "192.0.43.8" family: IPv4
+</code></pre>
+<p>2) Functions that connect to an actual DNS server to perform name resolution,
+and that <em>always</em> use the network to perform DNS queries. This category
+contains all functions in the <code>dns</code> module <em>except</em> <a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a>. These
+functions do not use the same set of configuration files used by
+<a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a> (e.g. <code>/etc/hosts</code>). These functions should be used by
+developers who do not want to use the underlying operating system's facilities
+for name resolution, and instead want to <em>always</em> perform DNS queries.</p>
+<p>Below is an example that resolves <code>'archive.org'</code> then reverse resolves the IP
+addresses that are returned.</p>
+<pre><code class="language-js">const dns = require('dns');
+
+dns.resolve4('archive.org', (err, addresses) =&gt; {
+  if (err) throw err;
+
+  console.log(`addresses: ${JSON.stringify(addresses)}`);
+
+  addresses.forEach((a) =&gt; {
+    dns.reverse(a, (err, hostnames) =&gt; {
+      if (err) {
+        throw err;
+      }
+      console.log(`reverse for ${a}: ${JSON.stringify(hostnames)}`);
+    });
+  });
+});
+</code></pre>
+<p>There are subtle consequences in choosing one over the other, please consult
+the <a href="#dns_implementation_considerations">Implementation considerations section</a> for more information.</p>
+<h2>Class: dns.Resolver<span><a class="mark" href="#dns_class_dns_resolver" id="dns_class_dns_resolver">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v8.3.0</span>
+</div>
+<p>An independent resolver for DNS requests.</p>
+<p>Creating a new resolver uses the default server settings. Setting
+the servers used for a resolver using
+<a href="#dns_dns_setservers_servers"><code>resolver.setServers()</code></a> does not affect
+other resolvers:</p>
+<pre><code class="language-js">const { Resolver } = require('dns');
+const resolver = new Resolver();
+resolver.setServers(['4.4.4.4']);
+
+// This request will use the server at 4.4.4.4, independent of global settings.
+resolver.resolve4('example.org', (err, addresses) =&gt; {
+  // ...
+});
+</code></pre>
+<p>The following methods from the <code>dns</code> module are available:</p>
+<ul>
+<li><a href="#dns_dns_getservers"><code>resolver.getServers()</code></a></li>
+<li><a href="#dns_dns_resolve_hostname_rrtype_callback"><code>resolver.resolve()</code></a></li>
+<li><a href="#dns_dns_resolve4_hostname_options_callback"><code>resolver.resolve4()</code></a></li>
+<li><a href="#dns_dns_resolve6_hostname_options_callback"><code>resolver.resolve6()</code></a></li>
+<li><a href="#dns_dns_resolveany_hostname_callback"><code>resolver.resolveAny()</code></a></li>
+<li><a href="#dns_dns_resolvecname_hostname_callback"><code>resolver.resolveCname()</code></a></li>
+<li><a href="#dns_dns_resolvemx_hostname_callback"><code>resolver.resolveMx()</code></a></li>
+<li><a href="#dns_dns_resolvenaptr_hostname_callback"><code>resolver.resolveNaptr()</code></a></li>
+<li><a href="#dns_dns_resolvens_hostname_callback"><code>resolver.resolveNs()</code></a></li>
+<li><a href="#dns_dns_resolveptr_hostname_callback"><code>resolver.resolvePtr()</code></a></li>
+<li><a href="#dns_dns_resolvesoa_hostname_callback"><code>resolver.resolveSoa()</code></a></li>
+<li><a href="#dns_dns_resolvesrv_hostname_callback"><code>resolver.resolveSrv()</code></a></li>
+<li><a href="#dns_dns_resolvetxt_hostname_callback"><code>resolver.resolveTxt()</code></a></li>
+<li><a href="#dns_dns_reverse_ip_callback"><code>resolver.reverse()</code></a></li>
+<li><a href="#dns_dns_setservers_servers"><code>resolver.setServers()</code></a></li>
+</ul>
+<h3>resolver.cancel()<span><a class="mark" href="#dns_resolver_cancel" id="dns_resolver_cancel">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.3.0</span>
+</div>
+<p>Cancel all outstanding DNS queries made by this resolver. The corresponding
+callbacks will be called with an error with code <code>ECANCELLED</code>.</p>
+<h2>dns.getServers()<span><a class="mark" href="#dns_dns_getservers" id="dns_dns_getservers">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.11.3</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+<p>Returns an array of IP address strings, formatted according to <a href="https://tools.ietf.org/html/rfc5952#section-6">RFC 5952</a>,
+that are currently configured for DNS resolution. A string will include a port
+section if a custom port is used.</p>
+<!-- eslint-disable semi-->
+<pre><code class="language-js">[
+  '4.4.4.4',
+  '2001:4860:4860::8888',
+  '4.4.4.4:1053',
+  '[2001:4860:4860::8888]:1053'
+]
+</code></pre>
+<h2>dns.lookup(hostname[, options], callback)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/dns.js#L90">[src]</a><span><a class="mark" href="#dns_dns_lookup_hostname_options_callback" id="dns_dns_lookup_hostname_options_callback">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.5.0</td>
+<td><p>The <code>verbatim</code> option is supported now.</p></td></tr>
+<tr><td>v1.2.0</td>
+<td><p>The <code>all</code> option is supported now.</p></td></tr>
+<tr><td>v0.1.90</td>
+<td><p><span>Added in: v0.1.90</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>family</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> The record family. Must be <code>4</code>, <code>6</code>, or <code>0</code>. The value
+<code>0</code> indicates that IPv4 and IPv6 addresses are both returned. <strong>Default:</strong>
+<code>0</code>.</li>
+<li><code>hints</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> One or more <a href="#dns_supported_getaddrinfo_flags">supported <code>getaddrinfo</code> flags</a>. Multiple
+flags may be passed by bitwise <code>OR</code>ing their values.</li>
+<li><code>all</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> When <code>true</code>, the callback returns all resolved addresses in
+an array. Otherwise, returns a single address. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>verbatim</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> When <code>true</code>, the callback receives IPv4 and IPv6
+addresses in the order the DNS resolver returned them. When <code>false</code>,
+IPv4 addresses are placed before IPv6 addresses.
+<strong>Default:</strong> currently <code>false</code> (addresses are reordered) but this is
+expected to change in the not too distant future.
+New code should use <code>{ verbatim: true }</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>address</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A string representation of an IPv4 or IPv6 address.</li>
+<li><code>family</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> <code>4</code> or <code>6</code>, denoting the family of <code>address</code>, or <code>0</code> if
+the address is not an IPv4 or IPv6 address. <code>0</code> is a likely indicator of a
+bug in the name resolution service used by the operating system.</li>
+</ul>
+</li>
+</ul>
+<p>Resolves a hostname (e.g. <code>'nodejs.org'</code>) into the first found A (IPv4) or
+AAAA (IPv6) record. All <code>option</code> properties are optional. If <code>options</code> is an
+integer, then it must be <code>4</code> or <code>6</code> – if <code>options</code> is not provided, then IPv4
+and IPv6 addresses are both returned if found.</p>
+<p>With the <code>all</code> option set to <code>true</code>, the arguments for <code>callback</code> change to
+<code>(err, addresses)</code>, with <code>addresses</code> being an array of objects with the
+properties <code>address</code> and <code>family</code>.</p>
+<p>On error, <code>err</code> is an <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> object, where <code>err.code</code> is the error code.
+Keep in mind that <code>err.code</code> will be set to <code>'ENOTFOUND'</code> not only when
+the hostname does not exist but also when the lookup fails in other ways
+such as no available file descriptors.</p>
+<p><code>dns.lookup()</code> does not necessarily have anything to do with the DNS protocol.
+The implementation uses an operating system facility that can associate names
+with addresses, and vice versa. This implementation can have subtle but
+important consequences on the behavior of any Node.js program. Please take some
+time to consult the <a href="#dns_implementation_considerations">Implementation considerations section</a> before using
+<code>dns.lookup()</code>.</p>
+<p>Example usage:</p>
+<pre><code class="language-js">const dns = require('dns');
+const options = {
+  family: 6,
+  hints: dns.ADDRCONFIG | dns.V4MAPPED,
+};
+dns.lookup('example.com', options, (err, address, family) =&gt;
+  console.log('address: %j family: IPv%s', address, family));
+// address: "2606:2800:220:1:248:1893:25c8:1946" family: IPv6
+
+// When options.all is true, the result will be an Array.
+options.all = true;
+dns.lookup('example.com', options, (err, addresses) =&gt;
+  console.log('addresses: %j', addresses));
+// addresses: [{"address":"2606:2800:220:1:248:1893:25c8:1946","family":6}]
+</code></pre>
+<p>If this method is invoked as its <a href="https://nodejs.org/api/util.html#util_util_promisify_original"><code>util.promisify()</code></a>ed version, and <code>all</code>
+is not set to <code>true</code>, it returns a <code>Promise</code> for an <code>Object</code> with <code>address</code> and
+<code>family</code> properties.</p>
+<h3>Supported getaddrinfo flags<span><a class="mark" href="#dns_supported_getaddrinfo_flags" id="dns_supported_getaddrinfo_flags">#</a></span></h3>
+<p>The following flags can be passed as hints to <a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a>.</p>
+<ul>
+<li><code>dns.ADDRCONFIG</code>: Returned address types are determined by the types
+of addresses supported by the current system. For example, IPv4 addresses
+are only returned if the current system has at least one IPv4 address
+configured. Loopback addresses are not considered.</li>
+<li><code>dns.V4MAPPED</code>: If the IPv6 family was specified, but no IPv6 addresses were
+found, then return IPv4 mapped IPv6 addresses. It is not supported
+on some operating systems (e.g FreeBSD 10.1).</li>
+</ul>
+<h2>dns.lookupService(address, port, callback)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/dns.js#L167">[src]</a><span><a class="mark" href="#dns_dns_lookupservice_address_port_callback" id="dns_dns_lookupservice_address_port_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.11.14</span>
+</div>
+<ul>
+<li><code>address</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li><code>port</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> e.g. <code>example.com</code></li>
+<li><code>service</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> e.g. <code>http</code></li>
+</ul>
+</li>
+</ul>
+<p>Resolves the given <code>address</code> and <code>port</code> into a hostname and service using
+the operating system's underlying <code>getnameinfo</code> implementation.</p>
+<p>If <code>address</code> is not a valid IP address, a <code>TypeError</code> will be thrown.
+The <code>port</code> will be coerced to a number. If it is not a legal port, a <code>TypeError</code>
+will be thrown.</p>
+<p>On an error, <code>err</code> is an <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> object, where <code>err.code</code> is the error code.</p>
+<pre><code class="language-js">const dns = require('dns');
+dns.lookupService('127.0.0.1', 22, (err, hostname, service) =&gt; {
+  console.log(hostname, service);
+  // Prints: localhost ssh
+});
+</code></pre>
+<p>If this method is invoked as its <a href="https://nodejs.org/api/util.html#util_util_promisify_original"><code>util.promisify()</code></a>ed version, it returns a
+<code>Promise</code> for an <code>Object</code> with <code>hostname</code> and <code>service</code> properties.</p>
+<h2>dns.resolve(hostname[, rrtype], callback)<span><a class="mark" href="#dns_dns_resolve_hostname_rrtype_callback" id="dns_dns_resolve_hostname_rrtype_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.27</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Hostname to resolve.</li>
+<li><code>rrtype</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Resource record type. <strong>Default:</strong> <code>'A'</code>.</li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>records</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object[]&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve a hostname (e.g. <code>'nodejs.org'</code>) into an array
+of the resource records. The <code>callback</code> function has arguments
+<code>(err, records)</code>. When successful, <code>records</code> will be an array of resource
+records. The type and structure of individual results varies based on <code>rrtype</code>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th><code>rrtype</code></th><th><code>records</code> contains</th><th>Result type</th><th>Shorthand method</th></tr></thead><tbody><tr><td><code>'A'</code></td><td>IPv4 addresses (default)</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></td><td><a href="#dns_dns_resolve4_hostname_options_callback"><code>dns.resolve4()</code></a></td></tr><tr><td><code>'AAAA'</code></td><td>IPv6 addresses</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></td><td><a href="#dns_dns_resolve6_hostname_options_callback"><code>dns.resolve6()</code></a></td></tr><tr><td><code>'ANY'</code></td><td>any records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></td><td><a href="#dns_dns_resolveany_hostname_callback"><code>dns.resolveAny()</code></a></td></tr><tr><td><code>'CNAME'</code></td><td>canonical name records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></td><td><a href="#dns_dns_resolvecname_hostname_callback"><code>dns.resolveCname()</code></a></td></tr><tr><td><code>'MX'</code></td><td>mail exchange records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></td><td><a href="#dns_dns_resolvemx_hostname_callback"><code>dns.resolveMx()</code></a></td></tr><tr><td><code>'NAPTR'</code></td><td>name authority pointer records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></td><td><a href="#dns_dns_resolvenaptr_hostname_callback"><code>dns.resolveNaptr()</code></a></td></tr><tr><td><code>'NS'</code></td><td>name server records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></td><td><a href="#dns_dns_resolvens_hostname_callback"><code>dns.resolveNs()</code></a></td></tr><tr><td><code>'PTR'</code></td><td>pointer records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></td><td><a href="#dns_dns_resolveptr_hostname_callback"><code>dns.resolvePtr()</code></a></td></tr><tr><td><code>'SOA'</code></td><td>start of authority records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></td><td><a href="#dns_dns_resolvesoa_hostname_callback"><code>dns.resolveSoa()</code></a></td></tr><tr><td><code>'SRV'</code></td><td>service records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></td><td><a href="#dns_dns_resolvesrv_hostname_callback"><code>dns.resolveSrv()</code></a></td></tr><tr><td><code>'TXT'</code></td><td>text records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></td><td><a href="#dns_dns_resolvetxt_hostname_callback"><code>dns.resolveTxt()</code></a></td></tr></tbody></table>
+<p>On error, <code>err</code> is an <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> object, where <code>err.code</code> is one of the
+<a href="#dns_error_codes">DNS error codes</a>.</p>
+<h2>dns.resolve4(hostname[, options], callback)<span><a class="mark" href="#dns_dns_resolve4_hostname_options_callback" id="dns_dns_resolve4_hostname_options_callback">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v7.2.0</td>
+<td><p>This method now supports passing <code>options</code>, specifically <code>options.ttl</code>.</p></td></tr>
+<tr><td>v0.1.16</td>
+<td><p><span>Added in: v0.1.16</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Hostname to resolve.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>ttl</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Retrieve the Time-To-Live value (TTL) of each record.
+When <code>true</code>, the callback receives an array of
+<code>{ address: '1.2.3.4', ttl: 60 }</code> objects rather than an array of strings,
+with the TTL expressed in seconds.</li>
+</ul>
+</li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>addresses</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object[]&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve a IPv4 addresses (<code>A</code> records) for the
+<code>hostname</code>. The <code>addresses</code> argument passed to the <code>callback</code> function
+will contain an array of IPv4 addresses (e.g.
+<code>['74.125.79.104', '74.125.79.105', '74.125.79.106']</code>).</p>
+<h2>dns.resolve6(hostname[, options], callback)<span><a class="mark" href="#dns_dns_resolve6_hostname_options_callback" id="dns_dns_resolve6_hostname_options_callback">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v7.2.0</td>
+<td><p>This method now supports passing <code>options</code>, specifically <code>options.ttl</code>.</p></td></tr>
+<tr><td>v0.1.16</td>
+<td><p><span>Added in: v0.1.16</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Hostname to resolve.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>ttl</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Retrieve the Time-To-Live value (TTL) of each record.
+When <code>true</code>, the callback receives an array of
+<code>{ address: '0:1:2:3:4:5:6:7', ttl: 60 }</code> objects rather than an array of
+strings, with the TTL expressed in seconds.</li>
+</ul>
+</li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>addresses</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object[]&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve a IPv6 addresses (<code>AAAA</code> records) for the
+<code>hostname</code>. The <code>addresses</code> argument passed to the <code>callback</code> function
+will contain an array of IPv6 addresses.</p>
+<h2>dns.resolveAny(hostname, callback)<span><a class="mark" href="#dns_dns_resolveany_hostname_callback" id="dns_dns_resolveany_hostname_callback">#</a></span></h2>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>ret</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object[]&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve all records (also known as <code>ANY</code> or <code>*</code> query).
+The <code>ret</code> argument passed to the <code>callback</code> function will be an array containing
+various types of records. Each object has a property <code>type</code> that indicates the
+type of the current record. And depending on the <code>type</code>, additional properties
+will be present on the object:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Type</th><th>Properties</th></tr></thead><tbody><tr><td><code>'A'</code></td><td><code>address</code>/<code>ttl</code></td></tr><tr><td><code>'AAAA'</code></td><td><code>address</code>/<code>ttl</code></td></tr><tr><td><code>'CNAME'</code></td><td><code>value</code></td></tr><tr><td><code>'MX'</code></td><td>Refer to <a href="#dns_dns_resolvemx_hostname_callback"><code>dns.resolveMx()</code></a></td></tr><tr><td><code>'NAPTR'</code></td><td>Refer to <a href="#dns_dns_resolvenaptr_hostname_callback"><code>dns.resolveNaptr()</code></a></td></tr><tr><td><code>'NS'</code></td><td><code>value</code></td></tr><tr><td><code>'PTR'</code></td><td><code>value</code></td></tr><tr><td><code>'SOA'</code></td><td>Refer to <a href="#dns_dns_resolvesoa_hostname_callback"><code>dns.resolveSoa()</code></a></td></tr><tr><td><code>'SRV'</code></td><td>Refer to <a href="#dns_dns_resolvesrv_hostname_callback"><code>dns.resolveSrv()</code></a></td></tr><tr><td><code>'TXT'</code></td><td>This type of record contains an array property called <code>entries</code> which refers to <a href="#dns_dns_resolvetxt_hostname_callback"><code>dns.resolveTxt()</code></a>, e.g. <code>{ entries: ['...'], type: 'TXT' }</code></td></tr></tbody></table>
+<p>Here is an example of the <code>ret</code> object passed to the callback:</p>
+<!-- eslint-disable semi -->
+<pre><code class="language-js">[ { type: 'A', address: '127.0.0.1', ttl: 299 },
+  { type: 'CNAME', value: 'example.com' },
+  { type: 'MX', exchange: 'alt4.aspmx.l.example.com', priority: 50 },
+  { type: 'NS', value: 'ns1.example.com' },
+  { type: 'TXT', entries: [ 'v=spf1 include:_spf.example.com ~all' ] },
+  { type: 'SOA',
+    nsname: 'ns1.example.com',
+    hostmaster: 'admin.example.com',
+    serial: 156696742,
+    refresh: 900,
+    retry: 900,
+    expire: 1800,
+    minttl: 60 } ]
+</code></pre>
+<p>DNS server operators may choose not to respond to <code>ANY</code>
+queries. It may be better to call individual methods like <a href="#dns_dns_resolve4_hostname_options_callback"><code>dns.resolve4()</code></a>,
+<a href="#dns_dns_resolvemx_hostname_callback"><code>dns.resolveMx()</code></a>, and so on. For more details, see <a href="https://tools.ietf.org/html/rfc8482">RFC 8482</a>.</p>
+<h2>dns.resolveCname(hostname, callback)<span><a class="mark" href="#dns_dns_resolvecname_hostname_callback" id="dns_dns_resolvecname_hostname_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.3.2</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>addresses</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve <code>CNAME</code> records for the <code>hostname</code>. The
+<code>addresses</code> argument passed to the <code>callback</code> function
+will contain an array of canonical name records available for the <code>hostname</code>
+(e.g. <code>['bar.example.com']</code>).</p>
+<h2>dns.resolveMx(hostname, callback)<span><a class="mark" href="#dns_dns_resolvemx_hostname_callback" id="dns_dns_resolvemx_hostname_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.27</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>addresses</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object[]&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve mail exchange records (<code>MX</code> records) for the
+<code>hostname</code>. The <code>addresses</code> argument passed to the <code>callback</code> function will
+contain an array of objects containing both a <code>priority</code> and <code>exchange</code>
+property (e.g. <code>[{priority: 10, exchange: 'mx.example.com'}, ...]</code>).</p>
+<h2>dns.resolveNaptr(hostname, callback)<span><a class="mark" href="#dns_dns_resolvenaptr_hostname_callback" id="dns_dns_resolvenaptr_hostname_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.9.12</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>addresses</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object[]&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve regular expression based records (<code>NAPTR</code>
+records) for the <code>hostname</code>. The <code>addresses</code> argument passed to the <code>callback</code>
+function will contain an array of objects with the following properties:</p>
+<ul>
+<li><code>flags</code></li>
+<li><code>service</code></li>
+<li><code>regexp</code></li>
+<li><code>replacement</code></li>
+<li><code>order</code></li>
+<li><code>preference</code></li>
+</ul>
+<!-- eslint-skip -->
+<pre><code class="language-js">{
+  flags: 's',
+  service: 'SIP+D2U',
+  regexp: '',
+  replacement: '_sip._udp.example.com',
+  order: 30,
+  preference: 100
+}
+</code></pre>
+<h2>dns.resolveNs(hostname, callback)<span><a class="mark" href="#dns_dns_resolvens_hostname_callback" id="dns_dns_resolvens_hostname_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.90</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>addresses</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve name server records (<code>NS</code> records) for the
+<code>hostname</code>. The <code>addresses</code> argument passed to the <code>callback</code> function will
+contain an array of name server records available for <code>hostname</code>
+(e.g. <code>['ns1.example.com', 'ns2.example.com']</code>).</p>
+<h2>dns.resolvePtr(hostname, callback)<span><a class="mark" href="#dns_dns_resolveptr_hostname_callback" id="dns_dns_resolveptr_hostname_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v6.0.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>addresses</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve pointer records (<code>PTR</code> records) for the
+<code>hostname</code>. The <code>addresses</code> argument passed to the <code>callback</code> function will
+be an array of strings containing the reply records.</p>
+<h2>dns.resolveSoa(hostname, callback)<span><a class="mark" href="#dns_dns_resolvesoa_hostname_callback" id="dns_dns_resolvesoa_hostname_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.11.10</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>address</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve a start of authority record (<code>SOA</code> record) for
+the <code>hostname</code>. The <code>address</code> argument passed to the <code>callback</code> function will
+be an object with the following properties:</p>
+<ul>
+<li><code>nsname</code></li>
+<li><code>hostmaster</code></li>
+<li><code>serial</code></li>
+<li><code>refresh</code></li>
+<li><code>retry</code></li>
+<li><code>expire</code></li>
+<li><code>minttl</code></li>
+</ul>
+<!-- eslint-skip -->
+<pre><code class="language-js">{
+  nsname: 'ns.example.com',
+  hostmaster: 'root.example.com',
+  serial: 2013101809,
+  refresh: 10000,
+  retry: 2400,
+  expire: 604800,
+  minttl: 3600
+}
+</code></pre>
+<h2>dns.resolveSrv(hostname, callback)<span><a class="mark" href="#dns_dns_resolvesrv_hostname_callback" id="dns_dns_resolvesrv_hostname_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.27</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>addresses</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object[]&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve service records (<code>SRV</code> records) for the
+<code>hostname</code>. The <code>addresses</code> argument passed to the <code>callback</code> function will
+be an array of objects with the following properties:</p>
+<ul>
+<li><code>priority</code></li>
+<li><code>weight</code></li>
+<li><code>port</code></li>
+<li><code>name</code></li>
+</ul>
+<!-- eslint-skip -->
+<pre><code class="language-js">{
+  priority: 10,
+  weight: 5,
+  port: 21223,
+  name: 'service.example.com'
+}
+</code></pre>
+<h2>dns.resolveTxt(hostname, callback)<span><a class="mark" href="#dns_dns_resolvetxt_hostname_callback" id="dns_dns_resolvetxt_hostname_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.27</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>records</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[][]&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve text queries (<code>TXT</code> records) for the
+<code>hostname</code>. The <code>records</code> argument passed to the <code>callback</code> function is a
+two-dimensional array of the text records available for <code>hostname</code> (e.g.
+<code>[ ['v=spf1 ip4:0.0.0.0 ', '~all' ] ]</code>). Each sub-array contains TXT chunks of
+one record. Depending on the use case, these could be either joined together or
+treated separately.</p>
+<h2>dns.reverse(ip, callback)<span><a class="mark" href="#dns_dns_reverse_ip_callback" id="dns_dns_reverse_ip_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.16</span>
+</div>
+<ul>
+<li><code>ip</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>hostnames</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Performs a reverse DNS query that resolves an IPv4 or IPv6 address to an
+array of hostnames.</p>
+<p>On error, <code>err</code> is an <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> object, where <code>err.code</code> is
+one of the <a href="#dns_error_codes">DNS error codes</a>.</p>
+<h2>dns.setServers(servers)<span><a class="mark" href="#dns_dns_setservers_servers" id="dns_dns_setservers_servers">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.11.3</span>
+</div>
+<ul>
+<li><code>servers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> array of <a href="https://tools.ietf.org/html/rfc5952#section-6">RFC 5952</a> formatted addresses</li>
+</ul>
+<p>Sets the IP address and port of servers to be used when performing DNS
+resolution. The <code>servers</code> argument is an array of <a href="https://tools.ietf.org/html/rfc5952#section-6">RFC 5952</a> formatted
+addresses. If the port is the IANA default DNS port (53) it can be omitted.</p>
+<pre><code class="language-js">dns.setServers([
+  '4.4.4.4',
+  '[2001:4860:4860::8888]',
+  '4.4.4.4:1053',
+  '[2001:4860:4860::8888]:1053'
+]);
+</code></pre>
+<p>An error will be thrown if an invalid address is provided.</p>
+<p>The <code>dns.setServers()</code> method must not be called while a DNS query is in
+progress.</p>
+<p>The <a href="#dns_dns_setservers_servers"><code>dns.setServers()</code></a> method affects only <a href="#dns_dns_resolve_hostname_rrtype_callback"><code>dns.resolve()</code></a>,
+<code>dns.resolve*()</code> and <a href="#dns_dns_reverse_ip_callback"><code>dns.reverse()</code></a> (and specifically <em>not</em>
+<a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a>).</p>
+<p>This method works much like
+<a href="http://man7.org/linux/man-pages/man5/resolv.conf.5.html">resolve.conf</a>.
+That is, if attempting to resolve with the first server provided results in a
+<code>NOTFOUND</code> error, the <code>resolve()</code> method will <em>not</em> attempt to resolve with
+subsequent servers provided. Fallback DNS servers will only be used if the
+earlier ones time out or result in some other error.</p>
+<h2>DNS Promises API<span><a class="mark" href="#dns_dns_promises_api" id="dns_dns_promises_api">#</a></span></h2>
+<p>The <code>dns.promises</code> API provides an alternative set of asynchronous DNS methods
+that return <code>Promise</code> objects rather than using callbacks. The API is accessible
+via <code>require('dns').promises</code>.</p>
+<h3>Class: dnsPromises.Resolver<span><a class="mark" href="#dns_class_dnspromises_resolver" id="dns_class_dnspromises_resolver">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<p>An independent resolver for DNS requests.</p>
+<p>Creating a new resolver uses the default server settings. Setting
+the servers used for a resolver using
+<a href="#dns_dnspromises_setservers_servers"><code>resolver.setServers()</code></a> does not affect
+other resolvers:</p>
+<pre><code class="language-js">const { Resolver } = require('dns').promises;
+const resolver = new Resolver();
+resolver.setServers(['4.4.4.4']);
+
+// This request will use the server at 4.4.4.4, independent of global settings.
+resolver.resolve4('example.org').then((addresses) =&gt; {
+  // ...
+});
+
+// Alternatively, the same code can be written using async-await style.
+(async function() {
+  const addresses = await resolver.resolve4('example.org');
+})();
+</code></pre>
+<p>The following methods from the <code>dnsPromises</code> API are available:</p>
+<ul>
+<li><a href="#dns_dnspromises_getservers"><code>resolver.getServers()</code></a></li>
+<li><a href="#dns_dnspromises_resolve_hostname_rrtype"><code>resolver.resolve()</code></a></li>
+<li><a href="#dns_dnspromises_resolve4_hostname_options"><code>resolver.resolve4()</code></a></li>
+<li><a href="#dns_dnspromises_resolve6_hostname_options"><code>resolver.resolve6()</code></a></li>
+<li><a href="#dns_dnspromises_resolveany_hostname"><code>resolver.resolveAny()</code></a></li>
+<li><a href="#dns_dnspromises_resolvecname_hostname"><code>resolver.resolveCname()</code></a></li>
+<li><a href="#dns_dnspromises_resolvemx_hostname"><code>resolver.resolveMx()</code></a></li>
+<li><a href="#dns_dnspromises_resolvenaptr_hostname"><code>resolver.resolveNaptr()</code></a></li>
+<li><a href="#dns_dnspromises_resolvens_hostname"><code>resolver.resolveNs()</code></a></li>
+<li><a href="#dns_dnspromises_resolveptr_hostname"><code>resolver.resolvePtr()</code></a></li>
+<li><a href="#dns_dnspromises_resolvesoa_hostname"><code>resolver.resolveSoa()</code></a></li>
+<li><a href="#dns_dnspromises_resolvesrv_hostname"><code>resolver.resolveSrv()</code></a></li>
+<li><a href="#dns_dnspromises_resolvetxt_hostname"><code>resolver.resolveTxt()</code></a></li>
+<li><a href="#dns_dnspromises_reverse_ip"><code>resolver.reverse()</code></a></li>
+<li><a href="#dns_dnspromises_setservers_servers"><code>resolver.setServers()</code></a></li>
+</ul>
+<h3>dnsPromises.getServers()<span><a class="mark" href="#dns_dnspromises_getservers" id="dns_dnspromises_getservers">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+<p>Returns an array of IP address strings, formatted according to <a href="https://tools.ietf.org/html/rfc5952#section-6">RFC 5952</a>,
+that are currently configured for DNS resolution. A string will include a port
+section if a custom port is used.</p>
+<!-- eslint-disable semi-->
+<pre><code class="language-js">[
+  '4.4.4.4',
+  '2001:4860:4860::8888',
+  '4.4.4.4:1053',
+  '[2001:4860:4860::8888]:1053'
+]
+</code></pre>
+<h3>dnsPromises.lookup(hostname[, options])<span><a class="mark" href="#dns_dnspromises_lookup_hostname_options" id="dns_dnspromises_lookup_hostname_options">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>family</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> The record family. Must be <code>4</code>, <code>6</code>, or <code>0</code>. The value
+<code>0</code> indicates that IPv4 and IPv6 addresses are both returned. <strong>Default:</strong>
+<code>0</code>.</li>
+<li><code>hints</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> One or more <a href="#dns_supported_getaddrinfo_flags">supported <code>getaddrinfo</code> flags</a>. Multiple
+flags may be passed by bitwise <code>OR</code>ing their values.</li>
+<li><code>all</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> When <code>true</code>, the <code>Promise</code> is resolved with all addresses in
+an array. Otherwise, returns a single address. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>verbatim</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> When <code>true</code>, the <code>Promise</code> is resolved with IPv4 and
+IPv6 addresses in the order the DNS resolver returned them. When <code>false</code>,
+IPv4 addresses are placed before IPv6 addresses.
+<strong>Default:</strong> currently <code>false</code> (addresses are reordered) but this is
+expected to change in the not too distant future.
+New code should use <code>{ verbatim: true }</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Resolves a hostname (e.g. <code>'nodejs.org'</code>) into the first found A (IPv4) or
+AAAA (IPv6) record. All <code>option</code> properties are optional. If <code>options</code> is an
+integer, then it must be <code>4</code> or <code>6</code> – if <code>options</code> is not provided, then IPv4
+and IPv6 addresses are both returned if found.</p>
+<p>With the <code>all</code> option set to <code>true</code>, the <code>Promise</code> is resolved with <code>addresses</code>
+being an array of objects with the properties <code>address</code> and <code>family</code>.</p>
+<p>On error, the <code>Promise</code> is rejected with an <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> object, where <code>err.code</code>
+is the error code.
+Keep in mind that <code>err.code</code> will be set to <code>'ENOTFOUND'</code> not only when
+the hostname does not exist but also when the lookup fails in other ways
+such as no available file descriptors.</p>
+<p><a href="#dns_dnspromises_lookup_hostname_options"><code>dnsPromises.lookup()</code></a> does not necessarily have anything to do with the DNS
+protocol. The implementation uses an operating system facility that can
+associate names with addresses, and vice versa. This implementation can have
+subtle but important consequences on the behavior of any Node.js program. Please
+take some time to consult the <a href="#dns_implementation_considerations">Implementation considerations section</a> before
+using <code>dnsPromises.lookup()</code>.</p>
+<p>Example usage:</p>
+<pre><code class="language-js">const dns = require('dns');
+const dnsPromises = dns.promises;
+const options = {
+  family: 6,
+  hints: dns.ADDRCONFIG | dns.V4MAPPED,
+};
+
+dnsPromises.lookup('example.com', options).then((result) =&gt; {
+  console.log('address: %j family: IPv%s', result.address, result.family);
+  // address: "2606:2800:220:1:248:1893:25c8:1946" family: IPv6
+});
+
+// When options.all is true, the result will be an Array.
+options.all = true;
+dnsPromises.lookup('example.com', options).then((result) =&gt; {
+  console.log('addresses: %j', result);
+  // addresses: [{"address":"2606:2800:220:1:248:1893:25c8:1946","family":6}]
+});
+</code></pre>
+<h3>dnsPromises.lookupService(address, port)<span><a class="mark" href="#dns_dnspromises_lookupservice_address_port" id="dns_dnspromises_lookupservice_address_port">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>address</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li><code>port</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p>Resolves the given <code>address</code> and <code>port</code> into a hostname and service using
+the operating system's underlying <code>getnameinfo</code> implementation.</p>
+<p>If <code>address</code> is not a valid IP address, a <code>TypeError</code> will be thrown.
+The <code>port</code> will be coerced to a number. If it is not a legal port, a <code>TypeError</code>
+will be thrown.</p>
+<p>On error, the <code>Promise</code> is rejected with an <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> object, where <code>err.code</code>
+is the error code.</p>
+<pre><code class="language-js">const dnsPromises = require('dns').promises;
+dnsPromises.lookupService('127.0.0.1', 22).then((result) =&gt; {
+  console.log(result.hostname, result.service);
+  // Prints: localhost ssh
+});
+</code></pre>
+<h3>dnsPromises.resolve(hostname[, rrtype])<span><a class="mark" href="#dns_dnspromises_resolve_hostname_rrtype" id="dns_dnspromises_resolve_hostname_rrtype">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Hostname to resolve.</li>
+<li><code>rrtype</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Resource record type. <strong>Default:</strong> <code>'A'</code>.</li>
+</ul>
+<p>Uses the DNS protocol to resolve a hostname (e.g. <code>'nodejs.org'</code>) into an array
+of the resource records. When successful, the <code>Promise</code> is resolved with an
+array of resource records. The type and structure of individual results vary
+based on <code>rrtype</code>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th><code>rrtype</code></th><th><code>records</code> contains</th><th>Result type</th><th>Shorthand method</th></tr></thead><tbody><tr><td><code>'A'</code></td><td>IPv4 addresses (default)</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></td><td><a href="#dns_dnspromises_resolve4_hostname_options"><code>dnsPromises.resolve4()</code></a></td></tr><tr><td><code>'AAAA'</code></td><td>IPv6 addresses</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></td><td><a href="#dns_dnspromises_resolve6_hostname_options"><code>dnsPromises.resolve6()</code></a></td></tr><tr><td><code>'ANY'</code></td><td>any records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></td><td><a href="#dns_dnspromises_resolveany_hostname"><code>dnsPromises.resolveAny()</code></a></td></tr><tr><td><code>'CNAME'</code></td><td>canonical name records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></td><td><a href="#dns_dnspromises_resolvecname_hostname"><code>dnsPromises.resolveCname()</code></a></td></tr><tr><td><code>'MX'</code></td><td>mail exchange records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></td><td><a href="#dns_dnspromises_resolvemx_hostname"><code>dnsPromises.resolveMx()</code></a></td></tr><tr><td><code>'NAPTR'</code></td><td>name authority pointer records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></td><td><a href="#dns_dnspromises_resolvenaptr_hostname"><code>dnsPromises.resolveNaptr()</code></a></td></tr><tr><td><code>'NS'</code></td><td>name server records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></td><td><a href="#dns_dnspromises_resolvens_hostname"><code>dnsPromises.resolveNs()</code></a></td></tr><tr><td><code>'PTR'</code></td><td>pointer records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></td><td><a href="#dns_dnspromises_resolveptr_hostname"><code>dnsPromises.resolvePtr()</code></a></td></tr><tr><td><code>'SOA'</code></td><td>start of authority records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></td><td><a href="#dns_dnspromises_resolvesoa_hostname"><code>dnsPromises.resolveSoa()</code></a></td></tr><tr><td><code>'SRV'</code></td><td>service records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></td><td><a href="#dns_dnspromises_resolvesrv_hostname"><code>dnsPromises.resolveSrv()</code></a></td></tr><tr><td><code>'TXT'</code></td><td>text records</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></td><td><a href="#dns_dnspromises_resolvetxt_hostname"><code>dnsPromises.resolveTxt()</code></a></td></tr></tbody></table>
+<p>On error, the <code>Promise</code> is rejected with an <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> object, where <code>err.code</code>
+is one of the <a href="#dns_error_codes">DNS error codes</a>.</p>
+<h3>dnsPromises.resolve4(hostname[, options])<span><a class="mark" href="#dns_dnspromises_resolve4_hostname_options" id="dns_dnspromises_resolve4_hostname_options">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Hostname to resolve.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>ttl</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Retrieve the Time-To-Live value (TTL) of each record.
+When <code>true</code>, the <code>Promise</code> is resolved with an array of
+<code>{ address: '1.2.3.4', ttl: 60 }</code> objects rather than an array of strings,
+with the TTL expressed in seconds.</li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve IPv4 addresses (<code>A</code> records) for the
+<code>hostname</code>. On success, the <code>Promise</code> is resolved with an array of IPv4
+addresses (e.g. <code>['74.125.79.104', '74.125.79.105', '74.125.79.106']</code>).</p>
+<h3>dnsPromises.resolve6(hostname[, options])<span><a class="mark" href="#dns_dnspromises_resolve6_hostname_options" id="dns_dnspromises_resolve6_hostname_options">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Hostname to resolve.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>ttl</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Retrieve the Time-To-Live value (TTL) of each record.
+When <code>true</code>, the <code>Promise</code> is resolved with an array of
+<code>{ address: '0:1:2:3:4:5:6:7', ttl: 60 }</code> objects rather than an array of
+strings, with the TTL expressed in seconds.</li>
+</ul>
+</li>
+</ul>
+<p>Uses the DNS protocol to resolve IPv6 addresses (<code>AAAA</code> records) for the
+<code>hostname</code>. On success, the <code>Promise</code> is resolved with an array of IPv6
+addresses.</p>
+<h3>dnsPromises.resolveAny(hostname)<span><a class="mark" href="#dns_dnspromises_resolveany_hostname" id="dns_dnspromises_resolveany_hostname">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Uses the DNS protocol to resolve all records (also known as <code>ANY</code> or <code>*</code> query).
+On success, the <code>Promise</code> is resolved with an array containing various types of
+records. Each object has a property <code>type</code> that indicates the type of the
+current record. And depending on the <code>type</code>, additional properties will be
+present on the object:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Type</th><th>Properties</th></tr></thead><tbody><tr><td><code>'A'</code></td><td><code>address</code>/<code>ttl</code></td></tr><tr><td><code>'AAAA'</code></td><td><code>address</code>/<code>ttl</code></td></tr><tr><td><code>'CNAME'</code></td><td><code>value</code></td></tr><tr><td><code>'MX'</code></td><td>Refer to <a href="#dns_dnspromises_resolvemx_hostname"><code>dnsPromises.resolveMx()</code></a></td></tr><tr><td><code>'NAPTR'</code></td><td>Refer to <a href="#dns_dnspromises_resolvenaptr_hostname"><code>dnsPromises.resolveNaptr()</code></a></td></tr><tr><td><code>'NS'</code></td><td><code>value</code></td></tr><tr><td><code>'PTR'</code></td><td><code>value</code></td></tr><tr><td><code>'SOA'</code></td><td>Refer to <a href="#dns_dnspromises_resolvesoa_hostname"><code>dnsPromises.resolveSoa()</code></a></td></tr><tr><td><code>'SRV'</code></td><td>Refer to <a href="#dns_dnspromises_resolvesrv_hostname"><code>dnsPromises.resolveSrv()</code></a></td></tr><tr><td><code>'TXT'</code></td><td>This type of record contains an array property called <code>entries</code> which refers to <a href="#dns_dnspromises_resolvetxt_hostname"><code>dnsPromises.resolveTxt()</code></a>, e.g. <code>{ entries: ['...'], type: 'TXT' }</code></td></tr></tbody></table>
+<p>Here is an example of the result object:</p>
+<!-- eslint-disable semi -->
+<pre><code class="language-js">[ { type: 'A', address: '127.0.0.1', ttl: 299 },
+  { type: 'CNAME', value: 'example.com' },
+  { type: 'MX', exchange: 'alt4.aspmx.l.example.com', priority: 50 },
+  { type: 'NS', value: 'ns1.example.com' },
+  { type: 'TXT', entries: [ 'v=spf1 include:_spf.example.com ~all' ] },
+  { type: 'SOA',
+    nsname: 'ns1.example.com',
+    hostmaster: 'admin.example.com',
+    serial: 156696742,
+    refresh: 900,
+    retry: 900,
+    expire: 1800,
+    minttl: 60 } ]
+</code></pre>
+<h3>dnsPromises.resolveCname(hostname)<span><a class="mark" href="#dns_dnspromises_resolvecname_hostname" id="dns_dnspromises_resolvecname_hostname">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Uses the DNS protocol to resolve <code>CNAME</code> records for the <code>hostname</code>. On success,
+the <code>Promise</code> is resolved with an array of canonical name records available for
+the <code>hostname</code> (e.g. <code>['bar.example.com']</code>).</p>
+<h3>dnsPromises.resolveMx(hostname)<span><a class="mark" href="#dns_dnspromises_resolvemx_hostname" id="dns_dnspromises_resolvemx_hostname">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Uses the DNS protocol to resolve mail exchange records (<code>MX</code> records) for the
+<code>hostname</code>. On success, the <code>Promise</code> is resolved with an array of objects
+containing both a <code>priority</code> and <code>exchange</code> property (e.g.
+<code>[{priority: 10, exchange: 'mx.example.com'}, ...]</code>).</p>
+<h3>dnsPromises.resolveNaptr(hostname)<span><a class="mark" href="#dns_dnspromises_resolvenaptr_hostname" id="dns_dnspromises_resolvenaptr_hostname">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Uses the DNS protocol to resolve regular expression based records (<code>NAPTR</code>
+records) for the <code>hostname</code>. On success, the <code>Promise</code> is resolved with an array
+of objects with the following properties:</p>
+<ul>
+<li><code>flags</code></li>
+<li><code>service</code></li>
+<li><code>regexp</code></li>
+<li><code>replacement</code></li>
+<li><code>order</code></li>
+<li><code>preference</code></li>
+</ul>
+<!-- eslint-skip -->
+<pre><code class="language-js">{
+  flags: 's',
+  service: 'SIP+D2U',
+  regexp: '',
+  replacement: '_sip._udp.example.com',
+  order: 30,
+  preference: 100
+}
+</code></pre>
+<h3>dnsPromises.resolveNs(hostname)<span><a class="mark" href="#dns_dnspromises_resolvens_hostname" id="dns_dnspromises_resolvens_hostname">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Uses the DNS protocol to resolve name server records (<code>NS</code> records) for the
+<code>hostname</code>. On success, the <code>Promise</code> is resolved with an array of name server
+records available for <code>hostname</code> (e.g.
+<code>['ns1.example.com', 'ns2.example.com']</code>).</p>
+<h3>dnsPromises.resolvePtr(hostname)<span><a class="mark" href="#dns_dnspromises_resolveptr_hostname" id="dns_dnspromises_resolveptr_hostname">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Uses the DNS protocol to resolve pointer records (<code>PTR</code> records) for the
+<code>hostname</code>. On success, the <code>Promise</code> is resolved with an array of strings
+containing the reply records.</p>
+<h3>dnsPromises.resolveSoa(hostname)<span><a class="mark" href="#dns_dnspromises_resolvesoa_hostname" id="dns_dnspromises_resolvesoa_hostname">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Uses the DNS protocol to resolve a start of authority record (<code>SOA</code> record) for
+the <code>hostname</code>. On success, the <code>Promise</code> is resolved with an object with the
+following properties:</p>
+<ul>
+<li><code>nsname</code></li>
+<li><code>hostmaster</code></li>
+<li><code>serial</code></li>
+<li><code>refresh</code></li>
+<li><code>retry</code></li>
+<li><code>expire</code></li>
+<li><code>minttl</code></li>
+</ul>
+<!-- eslint-skip -->
+<pre><code class="language-js">{
+  nsname: 'ns.example.com',
+  hostmaster: 'root.example.com',
+  serial: 2013101809,
+  refresh: 10000,
+  retry: 2400,
+  expire: 604800,
+  minttl: 3600
+}
+</code></pre>
+<h3>dnsPromises.resolveSrv(hostname)<span><a class="mark" href="#dns_dnspromises_resolvesrv_hostname" id="dns_dnspromises_resolvesrv_hostname">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Uses the DNS protocol to resolve service records (<code>SRV</code> records) for the
+<code>hostname</code>. On success, the <code>Promise</code> is resolved with an array of objects with
+the following properties:</p>
+<ul>
+<li><code>priority</code></li>
+<li><code>weight</code></li>
+<li><code>port</code></li>
+<li><code>name</code></li>
+</ul>
+<!-- eslint-skip -->
+<pre><code class="language-js">{
+  priority: 10,
+  weight: 5,
+  port: 21223,
+  name: 'service.example.com'
+}
+</code></pre>
+<h3>dnsPromises.resolveTxt(hostname)<span><a class="mark" href="#dns_dnspromises_resolvetxt_hostname" id="dns_dnspromises_resolvetxt_hostname">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Uses the DNS protocol to resolve text queries (<code>TXT</code> records) for the
+<code>hostname</code>. On success, the <code>Promise</code> is resolved with a two-dimensional array
+of the text records available for <code>hostname</code> (e.g.
+<code>[ ['v=spf1 ip4:0.0.0.0 ', '~all' ] ]</code>). Each sub-array contains TXT chunks of
+one record. Depending on the use case, these could be either joined together or
+treated separately.</p>
+<h3>dnsPromises.reverse(ip)<span><a class="mark" href="#dns_dnspromises_reverse_ip" id="dns_dnspromises_reverse_ip">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>ip</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Performs a reverse DNS query that resolves an IPv4 or IPv6 address to an
+array of hostnames.</p>
+<p>On error, the <code>Promise</code> is rejected with an <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> object, where <code>err.code</code>
+is one of the <a href="#dns_error_codes">DNS error codes</a>.</p>
+<h3>dnsPromises.setServers(servers)<span><a class="mark" href="#dns_dnspromises_setservers_servers" id="dns_dnspromises_setservers_servers">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.6.0</span>
+</div>
+<ul>
+<li><code>servers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> array of <a href="https://tools.ietf.org/html/rfc5952#section-6">RFC 5952</a> formatted addresses</li>
+</ul>
+<p>Sets the IP address and port of servers to be used when performing DNS
+resolution. The <code>servers</code> argument is an array of <a href="https://tools.ietf.org/html/rfc5952#section-6">RFC 5952</a> formatted
+addresses. If the port is the IANA default DNS port (53) it can be omitted.</p>
+<pre><code class="language-js">dnsPromises.setServers([
+  '4.4.4.4',
+  '[2001:4860:4860::8888]',
+  '4.4.4.4:1053',
+  '[2001:4860:4860::8888]:1053'
+]);
+</code></pre>
+<p>An error will be thrown if an invalid address is provided.</p>
+<p>The <code>dnsPromises.setServers()</code> method must not be called while a DNS query is in
+progress.</p>
+<p>This method works much like
+<a href="http://man7.org/linux/man-pages/man5/resolv.conf.5.html">resolve.conf</a>.
+That is, if attempting to resolve with the first server provided results in a
+<code>NOTFOUND</code> error, the <code>resolve()</code> method will <em>not</em> attempt to resolve with
+subsequent servers provided. Fallback DNS servers will only be used if the
+earlier ones time out or result in some other error.</p>
+<h2>Error codes<span><a class="mark" href="#dns_error_codes" id="dns_error_codes">#</a></span></h2>
+<p>Each DNS query can return one of the following error codes:</p>
+<ul>
+<li><code>dns.NODATA</code>: DNS server returned answer with no data.</li>
+<li><code>dns.FORMERR</code>: DNS server claims query was misformatted.</li>
+<li><code>dns.SERVFAIL</code>: DNS server returned general failure.</li>
+<li><code>dns.NOTFOUND</code>: Domain name not found.</li>
+<li><code>dns.NOTIMP</code>: DNS server does not implement requested operation.</li>
+<li><code>dns.REFUSED</code>: DNS server refused query.</li>
+<li><code>dns.BADQUERY</code>: Misformatted DNS query.</li>
+<li><code>dns.BADNAME</code>: Misformatted hostname.</li>
+<li><code>dns.BADFAMILY</code>: Unsupported address family.</li>
+<li><code>dns.BADRESP</code>: Misformatted DNS reply.</li>
+<li><code>dns.CONNREFUSED</code>: Could not contact DNS servers.</li>
+<li><code>dns.TIMEOUT</code>: Timeout while contacting DNS servers.</li>
+<li><code>dns.EOF</code>: End of file.</li>
+<li><code>dns.FILE</code>: Error reading file.</li>
+<li><code>dns.NOMEM</code>: Out of memory.</li>
+<li><code>dns.DESTRUCTION</code>: Channel is being destroyed.</li>
+<li><code>dns.BADSTR</code>: Misformatted string.</li>
+<li><code>dns.BADFLAGS</code>: Illegal flags specified.</li>
+<li><code>dns.NONAME</code>: Given hostname is not numeric.</li>
+<li><code>dns.BADHINTS</code>: Illegal hints flags specified.</li>
+<li><code>dns.NOTINITIALIZED</code>: c-ares library initialization not yet performed.</li>
+<li><code>dns.LOADIPHLPAPI</code>: Error loading <code>iphlpapi.dll</code>.</li>
+<li><code>dns.ADDRGETNETWORKPARAMS</code>: Could not find <code>GetNetworkParams</code> function.</li>
+<li><code>dns.CANCELLED</code>: DNS query cancelled.</li>
+</ul>
+<h2>Implementation considerations<span><a class="mark" href="#dns_implementation_considerations" id="dns_implementation_considerations">#</a></span></h2>
+<p>Although <a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a> and the various <code>dns.resolve*()/dns.reverse()</code>
+functions have the same goal of associating a network name with a network
+address (or vice versa), their behavior is quite different. These differences
+can have subtle but significant consequences on the behavior of Node.js
+programs.</p>
+<h3><code>dns.lookup()</code><span><a class="mark" href="#dns_dns_lookup" id="dns_dns_lookup">#</a></span></h3>
+<p>Under the hood, <a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a> uses the same operating system facilities
+as most other programs. For instance, <a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a> will almost always
+resolve a given name the same way as the <code>ping</code> command. On most POSIX-like
+operating systems, the behavior of the <a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a> function can be
+modified by changing settings in <a href="http://man7.org/linux/man-pages/man5/nsswitch.conf.5.html"><code>nsswitch.conf(5)</code></a> and/or <a href="http://man7.org/linux/man-pages/man5/resolv.conf.5.html"><code>resolv.conf(5)</code></a>,
+but changing these files will change the behavior of all other
+programs running on the same operating system.</p>
+<p>Though the call to <code>dns.lookup()</code> will be asynchronous from JavaScript's
+perspective, it is implemented as a synchronous call to <a href="http://man7.org/linux/man-pages/man3/getaddrinfo.3.html"><code>getaddrinfo(3)</code></a> that runs
+on libuv's threadpool. This can have surprising negative performance
+implications for some applications, see the <a href="https://nodejs.org/api/cli.html#cli_uv_threadpool_size_size"><code>UV_THREADPOOL_SIZE</code></a>
+documentation for more information.</p>
+<p>Various networking APIs will call <code>dns.lookup()</code> internally to resolve
+host names. If that is an issue, consider resolving the hostname to an address
+using <code>dns.resolve()</code> and using the address instead of a host name. Also, some
+networking APIs (such as <a href="https://nodejs.org/api/net.html#net_socket_connect_options_connectlistener"><code>socket.connect()</code></a> and <a href="https://nodejs.org/api/dgram.html#dgram_dgram_createsocket_options_callback"><code>dgram.createSocket()</code></a>)
+allow the default resolver, <code>dns.lookup()</code>, to be replaced.</p>
+<h3><code>dns.resolve()</code>, <code>dns.resolve*()</code> and <code>dns.reverse()</code><span><a class="mark" href="#dns_dns_resolve_dns_resolve_and_dns_reverse" id="dns_dns_resolve_dns_resolve_and_dns_reverse">#</a></span></h3>
+<p>These functions are implemented quite differently than <a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a>. They
+do not use <a href="http://man7.org/linux/man-pages/man3/getaddrinfo.3.html"><code>getaddrinfo(3)</code></a> and they <em>always</em> perform a DNS query on the
+network. This network communication is always done asynchronously, and does not
+use libuv's threadpool.</p>
+<p>As a result, these functions cannot have the same negative impact on other
+processing that happens on libuv's threadpool that <a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a> can have.</p>
+<p>They do not use the same set of configuration files than what <a href="#dns_dns_lookup_hostname_options_callback"><code>dns.lookup()</code></a>
+uses. For instance, <em>they do not use the configuration from <code>/etc/hosts</code></em>.</p>
+      </div>
+    </div>
+  </div>
+  <script src="data:application/javascript;base64,LyoKU0hKUyAtIFN5bnRheCBIaWdobGlnaHRpbmcgaW4gSmF2YVNjcmlwdApDb3B5cmlnaHQgKEMpIDIwMDcsIDIwMDggZ25vbWJhdEB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQKTGljZW5zZTogaHR0cDovL3NoanMuc291cmNlZm9yZ2UubmV0L2RvYy9ncGx2My5odG1sCiovCgppZiAoISB0aGlzLnNoX2xhbmd1YWdlcykgewogIHRoaXMuc2hfbGFuZ3VhZ2VzID0ge307Cn0KdmFyIHNoX3JlcXVlc3RzID0ge307CgpmdW5jdGlvbiBzaF9pc0VtYWlsQWRkcmVzcyh1cmwpIHsKICBpZiAoL15tYWlsdG86Ly50ZXN0KHVybCkpIHsKICAgIHJldHVybiBmYWxzZTsKICB9CiAgcmV0dXJuIHVybC5pbmRleE9mKCdAJykgIT09IC0xOwp9CgpmdW5jdGlvbiBzaF9zZXRIcmVmKHRhZ3MsIG51bVRhZ3MsIGlucHV0U3RyaW5nKSB7CiAgdmFyIHVybCA9IGlucHV0U3RyaW5nLnN1YnN0cmluZyh0YWdzW251bVRhZ3MgLSAyXS5wb3MsIHRhZ3NbbnVtVGFncyAtIDFdLnBvcyk7CiAgaWYgKHVybC5sZW5ndGggPj0gMiAmJiB1cmwuY2hhckF0KDApID09PSAnPCcgJiYgdXJsLmNoYXJBdCh1cmwubGVuZ3RoIC0gMSkgPT09ICc+JykgewogICAgdXJsID0gdXJsLnN1YnN0cigxLCB1cmwubGVuZ3RoIC0gMik7CiAgfQogIGlmIChzaF9pc0VtYWlsQWRkcmVzcyh1cmwpKSB7CiAgICB1cmwgPSAnbWFpbHRvOicgKyB1cmw7CiAgfQogIHRhZ3NbbnVtVGFncyAtIDJdLm5vZGUuaHJlZiA9IHVybDsKfQoKLyoKS29ucXVlcm9yIGhhcyBhIGJ1ZyB3aGVyZSB0aGUgcmVndWxhciBleHByZXNzaW9uIC8kL2cgd2lsbCBub3QgbWF0Y2ggYXQgdGhlIGVuZApvZiBhIGxpbmUgbW9yZSB0aGFuIG9uY2U6CgogIHZhciByZWdleCA9IC8kL2c7CiAgdmFyIG1hdGNoOwoKICB2YXIgbGluZSA9ICcxMjM0NTY3ODkwJzsKICByZWdleC5sYXN0SW5kZXggPSAxMDsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZSk7CgogIHZhciBsaW5lMiA9ICdhYmNkZSc7CiAgcmVnZXgubGFzdEluZGV4ID0gNTsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZTIpOyAgLy8gZmFpbHMKKi8KZnVuY3Rpb24gc2hfa29ucXVlcm9yRXhlYyhzKSB7CiAgdmFyIHJlc3VsdCA9IFsnJ107CiAgcmVzdWx0LmluZGV4ID0gcy5sZW5ndGg7CiAgcmVzdWx0LmlucHV0ID0gczsKICByZXR1cm4gcmVzdWx0Owp9CgovKioKSGlnaGxpZ2h0cyBhbGwgZWxlbWVudHMgY29udGFpbmluZyBzb3VyY2UgY29kZSBpbiBhIHRleHQgc3RyaW5nLiAgVGhlIHJldHVybgp2YWx1ZSBpcyBhbiBhcnJheSBvZiBvYmplY3RzLCBlYWNoIHJlcHJlc2VudGluZyBhbiBIVE1MIHN0YXJ0IG9yIGVuZCB0YWcuICBFYWNoCm9iamVjdCBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBwb3MsIHdoaWNoIGlzIGFuIGludGVnZXIgcmVwcmVzZW50aW5nIHRoZSB0ZXh0Cm9mZnNldCBvZiB0aGUgdGFnLiBFdmVyeSBzdGFydCB0YWcgYWxzbyBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBub2RlLCB3aGljaCBpcyB0aGUKRE9NIGVsZW1lbnQgc3RhcnRlZCBieSB0aGUgdGFnLiBFbmQgdGFncyBkbyBub3QgaGF2ZSB0aGlzIHByb3BlcnR5LgpAcGFyYW0gIGlucHV0U3RyaW5nICBhIHRleHQgc3RyaW5nCkBwYXJhbSAgbGFuZ3VhZ2UgIGEgbGFuZ3VhZ2UgZGVmaW5pdGlvbiBvYmplY3QKQHJldHVybiAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKKi8KZnVuY3Rpb24gc2hfaGlnaGxpZ2h0U3RyaW5nKGlucHV0U3RyaW5nLCBsYW5ndWFnZSkgewogIGlmICgvS29ucXVlcm9yLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICBpZiAoISBsYW5ndWFnZS5rb25xdWVyZWQpIHsKICAgICAgZm9yICh2YXIgcyA9IDA7IHMgPCBsYW5ndWFnZS5sZW5ndGg7IHMrKykgewogICAgICAgIGZvciAodmFyIHAgPSAwOyBwIDwgbGFuZ3VhZ2Vbc10ubGVuZ3RoOyBwKyspIHsKICAgICAgICAgIHZhciByID0gbGFuZ3VhZ2Vbc11bcF1bMF07CiAgICAgICAgICBpZiAoci5zb3VyY2UgPT09ICckJykgewogICAgICAgICAgICByLmV4ZWMgPSBzaF9rb25xdWVyb3JFeGVjOwogICAgICAgICAgfQogICAgICAgIH0KICAgICAgfQogICAgICBsYW5ndWFnZS5rb25xdWVyZWQgPSB0cnVlOwogICAgfQogIH0KCiAgdmFyIGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgdmFyIHNwYW4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJyk7CgogIC8vIHRoZSByZXN1bHQKICB2YXIgdGFncyA9IFtdOwogIHZhciBudW1UYWdzID0gMDsKCiAgLy8gZWFjaCBlbGVtZW50IGlzIGEgcGF0dGVybiBvYmplY3QgZnJvbSBsYW5ndWFnZQogIHZhciBwYXR0ZXJuU3RhY2sgPSBbXTsKCiAgLy8gdGhlIGN1cnJlbnQgcG9zaXRpb24gd2l0aGluIGlucHV0U3RyaW5nCiAgdmFyIHBvcyA9IDA7CgogIC8vIHRoZSBuYW1lIG9mIHRoZSBjdXJyZW50IHN0eWxlLCBvciBudWxsIGlmIHRoZXJlIGlzIG5vIGN1cnJlbnQgc3R5bGUKICB2YXIgY3VycmVudFN0eWxlID0gbnVsbDsKCiAgdmFyIG91dHB1dCA9IGZ1bmN0aW9uKHMsIHN0eWxlKSB7CiAgICB2YXIgbGVuZ3RoID0gcy5sZW5ndGg7CiAgICAvLyB0aGlzIGlzIG1vcmUgdGhhbiBqdXN0IGFuIG9wdGltaXphdGlvbiAtIHdlIGRvbid0IHdhbnQgdG8gb3V0cHV0IGVtcHR5IDxzcGFuPjwvc3Bhbj4gZWxlbWVudHMKICAgIGlmIChsZW5ndGggPT09IDApIHsKICAgICAgcmV0dXJuOwogICAgfQogICAgaWYgKCEgc3R5bGUpIHsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoICE9PSAwKSB7CiAgICAgICAgdmFyIHBhdHRlcm4gPSBwYXR0ZXJuU3RhY2tbc3RhY2tMZW5ndGggLSAxXTsKICAgICAgICAvLyBjaGVjayB3aGV0aGVyIHRoaXMgaXMgYSBzdGF0ZSBvciBhbiBlbnZpcm9ubWVudAogICAgICAgIGlmICghIHBhdHRlcm5bM10pIHsKICAgICAgICAgIC8vIGl0J3Mgbm90IGEgc3RhdGUgLSBpdCdzIGFuIGVudmlyb25tZW50OyB1c2UgdGhlIHN0eWxlIGZvciB0aGlzIGVudmlyb25tZW50CiAgICAgICAgICBzdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgfQogICAgICB9CiAgICB9CiAgICBpZiAoY3VycmVudFN0eWxlICE9PSBzdHlsZSkgewogICAgICBpZiAoY3VycmVudFN0eWxlKSB7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge3BvczogcG9zfTsKICAgICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgICAgc2hfc2V0SHJlZih0YWdzLCBudW1UYWdzLCBpbnB1dFN0cmluZyk7CiAgICAgICAgfQogICAgICB9CiAgICAgIGlmIChzdHlsZSkgewogICAgICAgIHZhciBjbG9uZTsKICAgICAgICBpZiAoc3R5bGUgPT09ICdzaF91cmwnKSB7CiAgICAgICAgICBjbG9uZSA9IGEuY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICBjbG9uZSA9IHNwYW4uY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgY2xvbmUuY2xhc3NOYW1lID0gc3R5bGU7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge25vZGU6IGNsb25lLCBwb3M6IHBvc307CiAgICAgIH0KICAgIH0KICAgIHBvcyArPSBsZW5ndGg7CiAgICBjdXJyZW50U3R5bGUgPSBzdHlsZTsKICB9OwoKICB2YXIgZW5kT2ZMaW5lUGF0dGVybiA9IC9cclxufFxyfFxuL2c7CiAgZW5kT2ZMaW5lUGF0dGVybi5sYXN0SW5kZXggPSAwOwogIHZhciBpbnB1dFN0cmluZ0xlbmd0aCA9IGlucHV0U3RyaW5nLmxlbmd0aDsKICB3aGlsZSAocG9zIDwgaW5wdXRTdHJpbmdMZW5ndGgpIHsKICAgIHZhciBzdGFydCA9IHBvczsKICAgIHZhciBlbmQ7CiAgICB2YXIgc3RhcnRPZk5leHRMaW5lOwogICAgdmFyIGVuZE9mTGluZU1hdGNoID0gZW5kT2ZMaW5lUGF0dGVybi5leGVjKGlucHV0U3RyaW5nKTsKICAgIGlmIChlbmRPZkxpbmVNYXRjaCA9PT0gbnVsbCkgewogICAgICBlbmQgPSBpbnB1dFN0cmluZ0xlbmd0aDsKICAgICAgc3RhcnRPZk5leHRMaW5lID0gaW5wdXRTdHJpbmdMZW5ndGg7CiAgICB9CiAgICBlbHNlIHsKICAgICAgZW5kID0gZW5kT2ZMaW5lTWF0Y2guaW5kZXg7CiAgICAgIHN0YXJ0T2ZOZXh0TGluZSA9IGVuZE9mTGluZVBhdHRlcm4ubGFzdEluZGV4OwogICAgfQoKICAgIHZhciBsaW5lID0gaW5wdXRTdHJpbmcuc3Vic3RyaW5nKHN0YXJ0LCBlbmQpOwoKICAgIHZhciBtYXRjaENhY2hlID0gW107CiAgICBmb3IgKDs7KSB7CiAgICAgIHZhciBwb3NXaXRoaW5MaW5lID0gcG9zIC0gc3RhcnQ7CgogICAgICB2YXIgc3RhdGVJbmRleDsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoID09PSAwKSB7CiAgICAgICAgc3RhdGVJbmRleCA9IDA7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gZ2V0IHRoZSBuZXh0IHN0YXRlCiAgICAgICAgc3RhdGVJbmRleCA9IHBhdHRlcm5TdGFja1tzdGFja0xlbmd0aCAtIDFdWzJdOwogICAgICB9CgogICAgICB2YXIgc3RhdGUgPSBsYW5ndWFnZVtzdGF0ZUluZGV4XTsKICAgICAgdmFyIG51bVBhdHRlcm5zID0gc3RhdGUubGVuZ3RoOwogICAgICB2YXIgbWMgPSBtYXRjaENhY2hlW3N0YXRlSW5kZXhdOwogICAgICBpZiAoISBtYykgewogICAgICAgIG1jID0gbWF0Y2hDYWNoZVtzdGF0ZUluZGV4XSA9IFtdOwogICAgICB9CiAgICAgIHZhciBiZXN0TWF0Y2ggPSBudWxsOwogICAgICB2YXIgYmVzdFBhdHRlcm5JbmRleCA9IC0xOwogICAgICBmb3IgKHZhciBpID0gMDsgaSA8IG51bVBhdHRlcm5zOyBpKyspIHsKICAgICAgICB2YXIgbWF0Y2g7CiAgICAgICAgaWYgKGkgPCBtYy5sZW5ndGggJiYgKG1jW2ldID09PSBudWxsIHx8IHBvc1dpdGhpbkxpbmUgPD0gbWNbaV0uaW5kZXgpKSB7CiAgICAgICAgICBtYXRjaCA9IG1jW2ldOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHZhciByZWdleCA9IHN0YXRlW2ldWzBdOwogICAgICAgICAgcmVnZXgubGFzdEluZGV4ID0gcG9zV2l0aGluTGluZTsKICAgICAgICAgIG1hdGNoID0gcmVnZXguZXhlYyhsaW5lKTsKICAgICAgICAgIG1jW2ldID0gbWF0Y2g7CiAgICAgICAgfQogICAgICAgIGlmIChtYXRjaCAhPT0gbnVsbCAmJiAoYmVzdE1hdGNoID09PSBudWxsIHx8IG1hdGNoLmluZGV4IDwgYmVzdE1hdGNoLmluZGV4KSkgewogICAgICAgICAgYmVzdE1hdGNoID0gbWF0Y2g7CiAgICAgICAgICBiZXN0UGF0dGVybkluZGV4ID0gaTsKICAgICAgICAgIGlmIChtYXRjaC5pbmRleCA9PT0gcG9zV2l0aGluTGluZSkgewogICAgICAgICAgICBicmVhazsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KCiAgICAgIGlmIChiZXN0TWF0Y2ggPT09IG51bGwpIHsKICAgICAgICBvdXRwdXQobGluZS5zdWJzdHJpbmcocG9zV2l0aGluTGluZSksIG51bGwpOwogICAgICAgIGJyZWFrOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGdvdCBhIG1hdGNoCiAgICAgICAgaWYgKGJlc3RNYXRjaC5pbmRleCA+IHBvc1dpdGhpbkxpbmUpIHsKICAgICAgICAgIG91dHB1dChsaW5lLnN1YnN0cmluZyhwb3NXaXRoaW5MaW5lLCBiZXN0TWF0Y2guaW5kZXgpLCBudWxsKTsKICAgICAgICB9CgogICAgICAgIHZhciBwYXR0ZXJuID0gc3RhdGVbYmVzdFBhdHRlcm5JbmRleF07CgogICAgICAgIHZhciBuZXdTdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgdmFyIG1hdGNoZWRTdHJpbmc7CiAgICAgICAgaWYgKG5ld1N0eWxlIGluc3RhbmNlb2YgQXJyYXkpIHsKICAgICAgICAgIGZvciAodmFyIHN1YmV4cHJlc3Npb24gPSAwOyBzdWJleHByZXNzaW9uIDwgbmV3U3R5bGUubGVuZ3RoOyBzdWJleHByZXNzaW9uKyspIHsKICAgICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFtzdWJleHByZXNzaW9uICsgMV07CiAgICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZVtzdWJleHByZXNzaW9uXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFswXTsKICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZSk7CiAgICAgICAgfQoKICAgICAgICBzd2l0Y2ggKHBhdHRlcm5bMl0pIHsKICAgICAgICBjYXNlIC0xOgogICAgICAgICAgLy8gZG8gbm90aGluZwogICAgICAgICAgYnJlYWs7CiAgICAgICAgY2FzZSAtMjoKICAgICAgICAgIC8vIGV4aXQKICAgICAgICAgIHBhdHRlcm5TdGFjay5wb3AoKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGNhc2UgLTM6CiAgICAgICAgICAvLyBleGl0YWxsCiAgICAgICAgICBwYXR0ZXJuU3RhY2subGVuZ3RoID0gMDsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGRlZmF1bHQ6CiAgICAgICAgICAvLyB0aGlzIHdhcyB0aGUgc3RhcnQgb2YgYSBkZWxpbWl0ZWQgcGF0dGVybiBvciBhIHN0YXRlL2Vudmlyb25tZW50CiAgICAgICAgICBwYXR0ZXJuU3RhY2sucHVzaChwYXR0ZXJuKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIH0KICAgICAgfQogICAgfQoKICAgIC8vIGVuZCBvZiB0aGUgbGluZQogICAgaWYgKGN1cnJlbnRTdHlsZSkgewogICAgICB0YWdzW251bVRhZ3MrK10gPSB7cG9zOiBwb3N9OwogICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgIHNoX3NldEhyZWYodGFncywgbnVtVGFncywgaW5wdXRTdHJpbmcpOwogICAgICB9CiAgICAgIGN1cnJlbnRTdHlsZSA9IG51bGw7CiAgICB9CiAgICBwb3MgPSBzdGFydE9mTmV4dExpbmU7CiAgfQoKICByZXR1cm4gdGFnczsKfQoKLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KLy8gRE9NLWRlcGVuZGVudCBmdW5jdGlvbnMKCmZ1bmN0aW9uIHNoX2dldENsYXNzZXMoZWxlbWVudCkgewogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgaHRtbENsYXNzID0gZWxlbWVudC5jbGFzc05hbWU7CiAgaWYgKGh0bWxDbGFzcyAmJiBodG1sQ2xhc3MubGVuZ3RoID4gMCkgewogICAgdmFyIGh0bWxDbGFzc2VzID0gaHRtbENsYXNzLnNwbGl0KCcgJyk7CiAgICBmb3IgKHZhciBpID0gMDsgaSA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaSsrKSB7CiAgICAgIGlmIChodG1sQ2xhc3Nlc1tpXS5sZW5ndGggPiAwKSB7CiAgICAgICAgcmVzdWx0LnB1c2goaHRtbENsYXNzZXNbaV0pOwogICAgICB9CiAgICB9CiAgfQogIHJldHVybiByZXN1bHQ7Cn0KCmZ1bmN0aW9uIHNoX2FkZENsYXNzKGVsZW1lbnQsIG5hbWUpIHsKICB2YXIgaHRtbENsYXNzZXMgPSBzaF9nZXRDbGFzc2VzKGVsZW1lbnQpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgaHRtbENsYXNzZXMubGVuZ3RoOyBpKyspIHsKICAgIGlmIChuYW1lLnRvTG93ZXJDYXNlKCkgPT09IGh0bWxDbGFzc2VzW2ldLnRvTG93ZXJDYXNlKCkpIHsKICAgICAgcmV0dXJuOwogICAgfQogIH0KICBodG1sQ2xhc3Nlcy5wdXNoKG5hbWUpOwogIGVsZW1lbnQuY2xhc3NOYW1lID0gaHRtbENsYXNzZXMuam9pbignICcpOwp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSBhbiBIVE1MIERPTSBOb2RlTGlzdC4KQHBhcmFtICBub2RlTGlzdCAgYSBET00gTm9kZUxpc3QKQHBhcmFtICByZXN1bHQgIGFuIG9iamVjdCB3aXRoIHRleHQsIHRhZ3MgYW5kIHBvcyBwcm9wZXJ0aWVzCiovCmZ1bmN0aW9uIHNoX2V4dHJhY3RUYWdzRnJvbU5vZGVMaXN0KG5vZGVMaXN0LCByZXN1bHQpIHsKICB2YXIgbGVuZ3RoID0gbm9kZUxpc3QubGVuZ3RoOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbGVuZ3RoOyBpKyspIHsKICAgIHZhciBub2RlID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHN3aXRjaCAobm9kZS5ub2RlVHlwZSkgewogICAgY2FzZSAxOgogICAgICBpZiAobm9kZS5ub2RlTmFtZS50b0xvd2VyQ2FzZSgpID09PSAnYnInKSB7CiAgICAgICAgdmFyIHRlcm1pbmF0b3I7CiAgICAgICAgaWYgKC9NU0lFLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xyJzsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xuJzsKICAgICAgICB9CiAgICAgICAgcmVzdWx0LnRleHQucHVzaCh0ZXJtaW5hdG9yKTsKICAgICAgICByZXN1bHQucG9zKys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7bm9kZTogbm9kZS5jbG9uZU5vZGUoZmFsc2UpLCBwb3M6IHJlc3VsdC5wb3N9KTsKICAgICAgICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChub2RlLmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7cG9zOiByZXN1bHQucG9zfSk7CiAgICAgIH0KICAgICAgYnJlYWs7CiAgICBjYXNlIDM6CiAgICBjYXNlIDQ6CiAgICAgIHJlc3VsdC50ZXh0LnB1c2gobm9kZS5kYXRhKTsKICAgICAgcmVzdWx0LnBvcyArPSBub2RlLmxlbmd0aDsKICAgICAgYnJlYWs7CiAgICB9CiAgfQp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSB0aGUgdGV4dCBvZiBhbiBIVE1MIGVsZW1lbnQuIFRoZSBleHRyYWN0ZWQgdGFncyB3aWxsIGJlCnJldHVybmVkIGFzIGFuIGFycmF5IG9mIHRhZyBvYmplY3RzLiBTZWUgc2hfaGlnaGxpZ2h0U3RyaW5nIGZvciB0aGUgZm9ybWF0IG9mCnRoZSB0YWcgb2JqZWN0cy4KQHBhcmFtICBlbGVtZW50ICBhIERPTSBlbGVtZW50CkBwYXJhbSAgdGFncyAgYW4gZW1wdHkgYXJyYXk7IHRoZSBleHRyYWN0ZWQgdGFnIG9iamVjdHMgd2lsbCBiZSByZXR1cm5lZCBpbiBpdApAcmV0dXJuICB0aGUgdGV4dCBvZiB0aGUgZWxlbWVudApAc2VlICBzaF9oaWdobGlnaHRTdHJpbmcKKi8KZnVuY3Rpb24gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgdGFncykgewogIHZhciByZXN1bHQgPSB7fTsKICByZXN1bHQudGV4dCA9IFtdOwogIHJlc3VsdC50YWdzID0gdGFnczsKICByZXN1bHQucG9zID0gMDsKICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChlbGVtZW50LmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgcmV0dXJuIHJlc3VsdC50ZXh0LmpvaW4oJycpOwp9CgovKioKTWVyZ2VzIHRoZSBvcmlnaW5hbCB0YWdzIGZyb20gYW4gZWxlbWVudCB3aXRoIHRoZSB0YWdzIHByb2R1Y2VkIGJ5IGhpZ2hsaWdodGluZy4KQHBhcmFtICBvcmlnaW5hbFRhZ3MgIGFuIGFycmF5IGNvbnRhaW5pbmcgdGhlIG9yaWdpbmFsIHRhZ3MKQHBhcmFtICBoaWdobGlnaHRUYWdzICBhbiBhcnJheSBjb250YWluaW5nIHRoZSBoaWdobGlnaHRpbmcgdGFncyAtIHRoZXNlIG11c3Qgbm90IG92ZXJsYXAKQHJlc3VsdCAgYW4gYXJyYXkgY29udGFpbmluZyB0aGUgbWVyZ2VkIHRhZ3MKKi8KZnVuY3Rpb24gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncykgewogIHZhciBudW1PcmlnaW5hbFRhZ3MgPSBvcmlnaW5hbFRhZ3MubGVuZ3RoOwogIGlmIChudW1PcmlnaW5hbFRhZ3MgPT09IDApIHsKICAgIHJldHVybiBoaWdobGlnaHRUYWdzOwogIH0KCiAgdmFyIG51bUhpZ2hsaWdodFRhZ3MgPSBoaWdobGlnaHRUYWdzLmxlbmd0aDsKICBpZiAobnVtSGlnaGxpZ2h0VGFncyA9PT0gMCkgewogICAgcmV0dXJuIG9yaWdpbmFsVGFnczsKICB9CgogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgb3JpZ2luYWxJbmRleCA9IDA7CiAgdmFyIGhpZ2hsaWdodEluZGV4ID0gMDsKCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MgJiYgaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICB2YXIgb3JpZ2luYWxUYWcgPSBvcmlnaW5hbFRhZ3Nbb3JpZ2luYWxJbmRleF07CiAgICB2YXIgaGlnaGxpZ2h0VGFnID0gaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF07CgogICAgaWYgKG9yaWdpbmFsVGFnLnBvcyA8PSBoaWdobGlnaHRUYWcucG9zKSB7CiAgICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnKTsKICAgICAgb3JpZ2luYWxJbmRleCsrOwogICAgfQogICAgZWxzZSB7CiAgICAgIHJlc3VsdC5wdXNoKGhpZ2hsaWdodFRhZyk7CiAgICAgIGlmIChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4ICsgMV0ucG9zIDw9IG9yaWdpbmFsVGFnLnBvcykgewogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgICAgcmVzdWx0LnB1c2goaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF0pOwogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gbmV3IGVuZCB0YWcKICAgICAgICByZXN1bHQucHVzaCh7cG9zOiBvcmlnaW5hbFRhZy5wb3N9KTsKCiAgICAgICAgLy8gbmV3IHN0YXJ0IHRhZwogICAgICAgIGhpZ2hsaWdodFRhZ3NbaGlnaGxpZ2h0SW5kZXhdID0ge25vZGU6IGhpZ2hsaWdodFRhZy5ub2RlLmNsb25lTm9kZShmYWxzZSksIHBvczogb3JpZ2luYWxUYWcucG9zfTsKICAgICAgfQogICAgfQogIH0KCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MpIHsKICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnc1tvcmlnaW5hbEluZGV4XSk7CiAgICBvcmlnaW5hbEluZGV4Kys7CiAgfQoKICB3aGlsZSAoaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICByZXN1bHQucHVzaChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4XSk7CiAgICBoaWdobGlnaHRJbmRleCsrOwogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkluc2VydHMgdGFncyBpbnRvIHRleHQuCkBwYXJhbSAgdGFncyAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKQHBhcmFtICB0ZXh0ICBhIHN0cmluZyByZXByZXNlbnRpbmcgdGhlIHRleHQKQHJldHVybiAgYSBET00gRG9jdW1lbnRGcmFnbWVudCByZXByZXNlbnRpbmcgdGhlIHJlc3VsdGluZyBIVE1MCiovCmZ1bmN0aW9uIHNoX2luc2VydFRhZ3ModGFncywgdGV4dCkgewogIHZhciBkb2MgPSBkb2N1bWVudDsKCiAgdmFyIHJlc3VsdCA9IGRvY3VtZW50LmNyZWF0ZURvY3VtZW50RnJhZ21lbnQoKTsKICB2YXIgdGFnSW5kZXggPSAwOwogIHZhciBudW1UYWdzID0gdGFncy5sZW5ndGg7CiAgdmFyIHRleHRQb3MgPSAwOwogIHZhciB0ZXh0TGVuZ3RoID0gdGV4dC5sZW5ndGg7CiAgdmFyIGN1cnJlbnROb2RlID0gcmVzdWx0OwoKICAvLyBvdXRwdXQgb25lIHRhZyBvciB0ZXh0IG5vZGUgZXZlcnkgaXRlcmF0aW9uCiAgd2hpbGUgKHRleHRQb3MgPCB0ZXh0TGVuZ3RoIHx8IHRhZ0luZGV4IDwgbnVtVGFncykgewogICAgdmFyIHRhZzsKICAgIHZhciB0YWdQb3M7CiAgICBpZiAodGFnSW5kZXggPCBudW1UYWdzKSB7CiAgICAgIHRhZyA9IHRhZ3NbdGFnSW5kZXhdOwogICAgICB0YWdQb3MgPSB0YWcucG9zOwogICAgfQogICAgZWxzZSB7CiAgICAgIHRhZ1BvcyA9IHRleHRMZW5ndGg7CiAgICB9CgogICAgaWYgKHRhZ1BvcyA8PSB0ZXh0UG9zKSB7CiAgICAgIC8vIG91dHB1dCB0aGUgdGFnCiAgICAgIGlmICh0YWcubm9kZSkgewogICAgICAgIC8vIHN0YXJ0IHRhZwogICAgICAgIHZhciBuZXdOb2RlID0gdGFnLm5vZGU7CiAgICAgICAgY3VycmVudE5vZGUuYXBwZW5kQ2hpbGQobmV3Tm9kZSk7CiAgICAgICAgY3VycmVudE5vZGUgPSBuZXdOb2RlOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGVuZCB0YWcKICAgICAgICBjdXJyZW50Tm9kZSA9IGN1cnJlbnROb2RlLnBhcmVudE5vZGU7CiAgICAgIH0KICAgICAgdGFnSW5kZXgrKzsKICAgIH0KICAgIGVsc2UgewogICAgICAvLyBvdXRwdXQgdGV4dAogICAgICBjdXJyZW50Tm9kZS5hcHBlbmRDaGlsZChkb2MuY3JlYXRlVGV4dE5vZGUodGV4dC5zdWJzdHJpbmcodGV4dFBvcywgdGFnUG9zKSkpOwogICAgICB0ZXh0UG9zID0gdGFnUG9zOwogICAgfQogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkhpZ2hsaWdodHMgYW4gZWxlbWVudCBjb250YWluaW5nIHNvdXJjZSBjb2RlLiAgVXBvbiBjb21wbGV0aW9uIG9mIHRoaXMgZnVuY3Rpb24sCnRoZSBlbGVtZW50IHdpbGwgaGF2ZSBiZWVuIHBsYWNlZCBpbiB0aGUgInNoX3NvdXJjZUNvZGUiIGNsYXNzLgpAcGFyYW0gIGVsZW1lbnQgIGEgRE9NIDxwcmU+IGVsZW1lbnQgY29udGFpbmluZyB0aGUgc291cmNlIGNvZGUgdG8gYmUgaGlnaGxpZ2h0ZWQKQHBhcmFtICBsYW5ndWFnZSAgYSBsYW5ndWFnZSBkZWZpbml0aW9uIG9iamVjdAoqLwpmdW5jdGlvbiBzaF9oaWdobGlnaHRFbGVtZW50KGVsZW1lbnQsIGxhbmd1YWdlKSB7CiAgc2hfYWRkQ2xhc3MoZWxlbWVudCwgJ3NoX3NvdXJjZUNvZGUnKTsKICB2YXIgb3JpZ2luYWxUYWdzID0gW107CiAgdmFyIGlucHV0U3RyaW5nID0gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgb3JpZ2luYWxUYWdzKTsKICB2YXIgaGlnaGxpZ2h0VGFncyA9IHNoX2hpZ2hsaWdodFN0cmluZyhpbnB1dFN0cmluZywgbGFuZ3VhZ2UpOwogIHZhciB0YWdzID0gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncyk7CiAgdmFyIGRvY3VtZW50RnJhZ21lbnQgPSBzaF9pbnNlcnRUYWdzKHRhZ3MsIGlucHV0U3RyaW5nKTsKICB3aGlsZSAoZWxlbWVudC5oYXNDaGlsZE5vZGVzKCkpIHsKICAgIGVsZW1lbnQucmVtb3ZlQ2hpbGQoZWxlbWVudC5maXJzdENoaWxkKTsKICB9CiAgZWxlbWVudC5hcHBlbmRDaGlsZChkb2N1bWVudEZyYWdtZW50KTsKfQoKZnVuY3Rpb24gc2hfZ2V0WE1MSHR0cFJlcXVlc3QoKSB7CiAgaWYgKHdpbmRvdy5BY3RpdmVYT2JqZWN0KSB7CiAgICByZXR1cm4gbmV3IEFjdGl2ZVhPYmplY3QoJ01zeG1sMi5YTUxIVFRQJyk7CiAgfQogIGVsc2UgaWYgKHdpbmRvdy5YTUxIdHRwUmVxdWVzdCkgewogICAgcmV0dXJuIG5ldyBYTUxIdHRwUmVxdWVzdCgpOwogIH0KICB0aHJvdyAnTm8gWE1MSHR0cFJlcXVlc3QgaW1wbGVtZW50YXRpb24gYXZhaWxhYmxlJzsKfQoKZnVuY3Rpb24gc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpIHsKICBpZiAobGFuZ3VhZ2UgaW4gc2hfcmVxdWVzdHMpIHsKICAgIHNoX3JlcXVlc3RzW2xhbmd1YWdlXS5wdXNoKGVsZW1lbnQpOwogICAgcmV0dXJuOwogIH0KICBzaF9yZXF1ZXN0c1tsYW5ndWFnZV0gPSBbZWxlbWVudF07CiAgdmFyIHJlcXVlc3QgPSBzaF9nZXRYTUxIdHRwUmVxdWVzdCgpOwogIHZhciB1cmwgPSBwcmVmaXggKyAnc2hfJyArIGxhbmd1YWdlICsgc3VmZml4OwogIHJlcXVlc3Qub3BlbignR0VUJywgdXJsLCB0cnVlKTsKICByZXF1ZXN0Lm9ucmVhZHlzdGF0ZWNoYW5nZSA9IGZ1bmN0aW9uICgpIHsKICAgIGlmIChyZXF1ZXN0LnJlYWR5U3RhdGUgPT09IDQpIHsKICAgICAgdHJ5IHsKICAgICAgICBpZiAoISByZXF1ZXN0LnN0YXR1cyB8fCByZXF1ZXN0LnN0YXR1cyA9PT0gMjAwKSB7CiAgICAgICAgICBldmFsKHJlcXVlc3QucmVzcG9uc2VUZXh0KTsKICAgICAgICAgIHZhciBlbGVtZW50cyA9IHNoX3JlcXVlc3RzW2xhbmd1YWdlXTsKICAgICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgZWxlbWVudHMubGVuZ3RoOyBpKyspIHsKICAgICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50c1tpXSwgc2hfbGFuZ3VhZ2VzW2xhbmd1YWdlXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgdGhyb3cgJ0hUVFAgZXJyb3I6IHN0YXR1cyAnICsgcmVxdWVzdC5zdGF0dXM7CiAgICAgICAgfQogICAgICB9CiAgICAgIGZpbmFsbHkgewogICAgICAgIHJlcXVlc3QgPSBudWxsOwogICAgICB9CiAgICB9CiAgfTsKICByZXF1ZXN0LnNlbmQobnVsbCk7Cn0KCi8qKgpIaWdobGlnaHRzIGFsbCBlbGVtZW50cyBjb250YWluaW5nIHNvdXJjZSBjb2RlIG9uIHRoZSBjdXJyZW50IHBhZ2UuIEVsZW1lbnRzCmNvbnRhaW5pbmcgc291cmNlIGNvZGUgbXVzdCBiZSAicHJlIiBlbGVtZW50cyB3aXRoIGEgImNsYXNzIiBhdHRyaWJ1dGUgb2YKInNoX0xBTkdVQUdFIiwgd2hlcmUgTEFOR1VBR0UgaXMgYSB2YWxpZCBsYW5ndWFnZSBpZGVudGlmaWVyOyBlLmcuLCAic2hfamF2YSIKaWRlbnRpZmllcyB0aGUgZWxlbWVudCBhcyBjb250YWluaW5nICJqYXZhIiBsYW5ndWFnZSBzb3VyY2UgY29kZS4KKi8KZnVuY3Rpb24gaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCB0YWcpIHsKICB2YXIgbm9kZUxpc3QgPSBkb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSh0YWcpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbm9kZUxpc3QubGVuZ3RoOyBpKyspIHsKICAgIHZhciBlbGVtZW50ID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHZhciBodG1sQ2xhc3NlcyA9IHNoX2dldENsYXNzZXMoZWxlbWVudCk7CiAgICB2YXIgaGlnaGxpZ2h0ZWQgPSBmYWxzZTsKICAgIHZhciBkb250aGlnaGxpZ2h0ID0gZmFsc2U7CiAgICBmb3IgKHZhciBqID0gMDsgaiA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaisrKSB7CiAgICAgIHZhciBodG1sQ2xhc3MgPSBodG1sQ2xhc3Nlc1tqXS50b0xvd2VyQ2FzZSgpOwogICAgICBpZiAoaHRtbENsYXNzID09PSAnc2hfbm9uZScpIHsKICAgICAgICBkb250aGlnaGxpZ2h0ID0gdHJ1ZQogICAgICAgIGNvbnRpbnVlOwogICAgICB9CiAgICAgIGlmIChodG1sQ2xhc3Muc3Vic3RyKDAsIDMpID09PSAnc2hfJykgewogICAgICAgIHZhciBsYW5ndWFnZSA9IGh0bWxDbGFzcy5zdWJzdHJpbmcoMyk7CiAgICAgICAgaWYgKGxhbmd1YWdlIGluIHNoX2xhbmd1YWdlcykgewogICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50LCBzaF9sYW5ndWFnZXNbbGFuZ3VhZ2VdKTsKICAgICAgICAgIGhpZ2hsaWdodGVkID0gdHJ1ZTsKICAgICAgICB9CiAgICAgICAgZWxzZSBpZiAodHlwZW9mKHByZWZpeCkgPT09ICdzdHJpbmcnICYmIHR5cGVvZihzdWZmaXgpID09PSAnc3RyaW5nJykgewogICAgICAgICAgc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHRocm93ICdGb3VuZCA8JyArIHRhZyArICc+IGVsZW1lbnQgd2l0aCBjbGFzcz0iJyArIGh0bWxDbGFzcyArICciLCBidXQgbm8gc3VjaCBsYW5ndWFnZSBleGlzdHMnOwogICAgICAgIH0KICAgICAgICBicmVhazsKICAgICAgfQogICAgfQogICAgaWYgKGhpZ2hsaWdodGVkID09PSBmYWxzZSAmJiBkb250aGlnaGxpZ2h0ID09IGZhbHNlKSB7CiAgICAgIHNoX2hpZ2hsaWdodEVsZW1lbnQoZWxlbWVudCwgc2hfbGFuZ3VhZ2VzWyJqYXZhc2NyaXB0Il0pOwogICAgfQogIH0KfQoKCgpmdW5jdGlvbiBzaF9oaWdobGlnaHREb2N1bWVudChwcmVmaXgsIHN1ZmZpeCkgewogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3R0Jyk7CiAgaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCAnY29kZScpOwogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3ByZScpOwp9Cg=="></script>
+  <script src="data:application/javascript;base64,aWYoIXRoaXMuc2hfbGFuZ3VhZ2VzKXt0aGlzLnNoX2xhbmd1YWdlcz17fX1zaF9sYW5ndWFnZXMuamF2YXNjcmlwdD1bW1svXC9cL1wvL2csInNoX2NvbW1lbnQiLDFdLFsvXC9cLy9nLCJzaF9jb21tZW50Iiw3XSxbL1wvXCpcKi9nLCJzaF9jb21tZW50Iiw4XSxbL1wvXCovZywic2hfY29tbWVudCIsOV0sWy9cYig/OmFic3RyYWN0fGJyZWFrfGNhc2V8Y2F0Y2h8Y2xhc3N8Y29uc3R8Y29udGludWV8ZGVidWdnZXJ8ZGVmYXVsdHxkZWxldGV8ZG98ZWxzZXxlbnVtfGV4cG9ydHxleHRlbmRzfGZhbHNlfGZpbmFsfGZpbmFsbHl8Zm9yfGZ1bmN0aW9ufGdvdG98aWZ8aW1wbGVtZW50c3xpbnxpbnN0YW5jZW9mfGludGVyZmFjZXxuYXRpdmV8bmV3fG51bGx8cHJpdmF0ZXxwcm90ZWN0ZWR8cHJvdG90eXBlfHB1YmxpY3xyZXR1cm58c3RhdGljfHN1cGVyfHN3aXRjaHxzeW5jaHJvbml6ZWR8dGhyb3d8dGhyb3dzfHRoaXN8dHJhbnNpZW50fHRydWV8dHJ5fHR5cGVvZnx2YXJ8dm9sYXRpbGV8d2hpbGV8d2l0aClcYi9nLCJzaF9rZXl3b3JkIiwtMV0sWy8oXCtcK3wtLXxcKXxcXSkoXHMqKShcLz0/KD8hWypcL10pKS9nLFsic2hfc3ltYm9sIiwic2hfbm9ybWFsIiwic2hfc3ltYm9sIl0sLTFdLFsvKDB4W0EtRmEtZjAtOV0rfCg/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykoXHMqKShcLyg/IVsqXC9dKSkvZyxbInNoX251bWJlciIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyhbQS1aYS16JF9dW0EtWmEtejAtOSRfXSpccyopKFwvPT8oPyFbKlwvXSkpL2csWyJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy9cLyg/OlxcLnxbXipcXFwvXSkoPzpcXC58W15cXFwvXSkqXC9bZ2ltXSovZywic2hfcmVnZXhwIiwtMV0sWy9cYlsrLV0/KD86KD86MHhbQS1GYS1mMC05XSspfCg/Oig/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykpdT8oPzooPzppbnQoPzo4fDE2fDMyfDY0KSl8TCk/XGIvZywic2hfbnVtYmVyIiwtMV0sWy8iL2csInNoX3N0cmluZyIsMTBdLFsvJy9nLCJzaF9zdHJpbmciLDExXSxbL358IXwlfFxefFwqfFwofFwpfC18XCt8PXxcW3xcXXxcXHw6fDt8LHxcLnxcL3xcP3wmfDx8PnxcfC9nLCJzaF9zeW1ib2wiLC0xXSxbL1x7fFx9L2csInNoX2NicmFja2V0IiwtMV0sWy9cYig/Ok1hdGh8SW5maW5pdHl8TmFOfHVuZGVmaW5lZHxhcmd1bWVudHMpXGIvZywic2hfcHJlZGVmX3ZhciIsLTFdLFsvXGIoPzpBcnJheXxCb29sZWFufERhdGV8RXJyb3J8RXZhbEVycm9yfEZ1bmN0aW9ufE51bWJlcnxPYmplY3R8UmFuZ2VFcnJvcnxSZWZlcmVuY2VFcnJvcnxSZWdFeHB8U3RyaW5nfFN5bnRheEVycm9yfFR5cGVFcnJvcnxVUklFcnJvcnxkZWNvZGVVUkl8ZGVjb2RlVVJJQ29tcG9uZW50fGVuY29kZVVSSXxlbmNvZGVVUklDb21wb25lbnR8ZXZhbHxpc0Zpbml0ZXxpc05hTnxwYXJzZUZsb2F0fHBhcnNlSW50KVxiL2csInNoX3ByZWRlZl9mdW5jIiwtMV0sWy8oPzpbQS1aYS16XXxfKVtBLVphLXowLTlfXSooPz1bIFx0XSpcKCkvZywic2hfZnVuY3Rpb24iLC0xXV0sW1svJC9nLG51bGwsLTJdLFsvKD86PD8pW0EtWmEtejAtOV9cLlwvXC1ffl0rQFtBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KXwoPzo8PylbQS1aYS16MC05X10rOlwvXC9bQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+PykvZywic2hfdXJsIiwtMV0sWy88XD94bWwvZywic2hfcHJlcHJvYyIsMiwxXSxbLzwhRE9DVFlQRS9nLCJzaF9wcmVwcm9jIiw0LDFdLFsvPCEtLS9nLCJzaF9jb21tZW50Iiw1XSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKSg/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKS9nLCJzaF9rZXl3b3JkIiw2LDFdLFsvJig/OltBLVphLXowLTldKyk7L2csInNoX3ByZXByb2MiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSooPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMV0sWy88KD86XC8pP1tBLVphLXpdW0EtWmEtejAtOV0qL2csInNoX2tleXdvcmQiLDYsMV0sWy9AW0EtWmEtel0rL2csInNoX3R5cGUiLC0xXSxbLyg/OlRPRE98RklYTUV8QlVHKSg/Ols6XT8pL2csInNoX3RvZG8iLC0xXV0sW1svXD8+L2csInNoX3ByZXByb2MiLC0yXSxbLyhbXj0iIFx0Pl0rKShbIFx0XSopKD0/KS9nLFsic2hfdHlwZSIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyIvZywic2hfc3RyaW5nIiwzXV0sW1svXFwoPzpcXHwiKS9nLG51bGwsLTFdLFsvIi9nLCJzaF9zdHJpbmciLC0yXV0sW1svPi9nLCJzaF9wcmVwcm9jIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLy0tPi9nLCJzaF9jb21tZW50IiwtMl0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdXSxbWy8oPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLyQvZyxudWxsLC0yXV0sW1svXCpcLy9nLCJzaF9jb21tZW50IiwtMl0sWy8oPzo8PylbQS1aYS16MC05X1wuXC9cLV9+XStAW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pfCg/Ojw/KVtBLVphLXowLTlfXSs6XC9cL1tBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KS9nLCJzaF91cmwiLC0xXSxbLzxcP3htbC9nLCJzaF9wcmVwcm9jIiwyLDFdLFsvPCFET0NUWVBFL2csInNoX3ByZXByb2MiLDQsMV0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopKD86XC8pPz4vZywic2hfa2V5d29yZCIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopL2csInNoX2tleXdvcmQiLDYsMV0sWy8mKD86W0EtWmEtejAtOV0rKTsvZywic2hfcHJlcHJvYyIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XVtBLVphLXowLTldKig/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSovZywic2hfa2V5d29yZCIsNiwxXSxbL0BbQS1aYS16XSsvZywic2hfdHlwZSIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy9cKlwvL2csInNoX2NvbW1lbnQiLC0yXSxbLyg/Ojw/KVtBLVphLXowLTlfXC5cL1wtX35dK0BbQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+Pyl8KD86PD8pW0EtWmEtejAtOV9dKzpcL1wvW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pL2csInNoX3VybCIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy8iL2csInNoX3N0cmluZyIsLTJdLFsvXFwuL2csInNoX3NwZWNpYWxjaGFyIiwtMV1dLFtbLycvZywic2hfc3RyaW5nIiwtMl0sWy9cXC4vZywic2hfc3BlY2lhbGNoYXIiLC0xXV1dOw=="></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+
+</body></html>

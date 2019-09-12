@@ -30,7 +30,7 @@ vous *renverra* un objet `Buffer` avec l’intégralité du contenu du fichier.
 La documentation du module `fs` est disponible ici, vous n’avez qu’à l’ouvrir
 dans votre navigateur :
 
-  https://nodejs.org/api/fs.html
+  {rootdir:/docs-nodejs/fs.html}
 
 Les objets `Buffer` sont l’approche retenue par Node pour représenter
 efficacement des tableaux de données, qu’il s’agisse de texte ASCII, de
@@ -41,7 +41,7 @@ par exemple `const str = buf.toString()`.
 La documentation des `Buffer`s est disponible en ouvrant le fichier
 suivant dans votre navigateur :
 
-  https://nodejs.org/api/buffer.html
+  {rootdir:/docs-nodejs/buffer.html}
 
 Si vous cherchez un moyen simple de compter les sauts de lignes dans une
 chaîne de caractères, souvenez-vous qu’une `String` JavaScript peut être

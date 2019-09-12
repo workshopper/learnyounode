@@ -43,7 +43,7 @@ Puedes usar `socket.write(data)` para escribir en el socket y luego `socket.end(
 
 La documentación del módulo `net` puede verse en:
 
-  https://nodejs.org/api/net.html
+  {rootdir:/docs-nodejs/net.html}
 
 Para calcular la fecha puedes usar `new Date()` y luego llamar a algunos métodos específicos:
 

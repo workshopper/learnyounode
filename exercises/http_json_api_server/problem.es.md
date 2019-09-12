@@ -37,7 +37,7 @@ Puedes probarlo en la línea de comandos escribiendo:
 $ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 La documentación del módulo `url` puede verse en:
-  https://nodejs.org/api/url.html
+  {rootdir:/docs-nodejs/url.html}
 
 Para enviar la respuesta del servidor en formato JSON puedes usar el método `JSON.stringify()`.
 Asimismo convendría que en la misma le agregaras un encabezado 'Content-Type' adecuado, por ejemplo:

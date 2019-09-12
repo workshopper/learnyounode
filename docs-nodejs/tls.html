@@ -1,0 +1,1799 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>TLS (SSL) | Node.js v12.10.0 Documentation</title>
+  <link rel="stylesheet" href="data:text/css;base64,LyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogaXRhbGljOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBJdGFsaWMnKSwgbG9jYWwoJ0xhdG8tSXRhbGljJyksIHVybChodHRwczovL2ZvbnRzLmdzdGF0aWMuY29tL3MvbGF0by92MTYvUzZ1OHc0Qk1VVFBIanhzQVVpLXFOaVhnN2VVMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBpdGFsaWM7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEl0YWxpYycpLCBsb2NhbCgnTGF0by1JdGFsaWMnKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnU4dzRCTVVUUEhqeHNBWEMtcU5pWGc3US53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0KLyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogbm9ybWFsOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBSZWd1bGFyJyksIGxvY2FsKCdMYXRvLVJlZ3VsYXInKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnV5dzRCTVVUUEhqeEF3WGlXdEZDZlE3QS53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIFJlZ3VsYXInKSwgbG9jYWwoJ0xhdG8tUmVndWxhcicpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dXl3NEJNVVRQSGp4NHdYaVd0RkNjLndvZmYyKSBmb3JtYXQoJ3dvZmYyJyk7CiAgdW5pY29kZS1yYW5nZTogVSswMDAwLTAwRkYsIFUrMDEzMSwgVSswMTUyLTAxNTMsIFUrMDJCQi0wMkJDLCBVKzAyQzYsIFUrMDJEQSwgVSswMkRDLCBVKzIwMDAtMjA2RiwgVSsyMDc0LCBVKzIwQUMsIFUrMjEyMiwgVSsyMTkxLCBVKzIxOTMsIFUrMjIxMiwgVSsyMjE1LCBVK0ZFRkYsIFUrRkZGRDsKfQovKiBsYXRpbi1leHQgKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2FQR1EzcTVkME43dy53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2lQR1EzcTVkMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LyotLS0tLS0tLS0tLS0tLS0tLS0tLS0gTGF5b3V0IGFuZCBUeXBvZ3JhcGh5IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwpodG1sIHsKICBmb250LXNpemU6IDFyZW07CiAgb3ZlcmZsb3ctd3JhcDogYnJlYWstd29yZDsKICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDsKICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlOwogIC13ZWJraXQtZm9udC12YXJpYW50LWxpZ2F0dXJlczogbm9uZTsKICAgICAgICAgIGZvbnQtdmFyaWFudC1saWdhdHVyZXM6IG5vbmU7Cn0KCiogewogIGJveC1zaXppbmc6IGJvcmRlci1ib3g7Cn0KCmJvZHkgewogIGZvbnQtZmFtaWx5OiAiTGF0byIsICJMdWNpZGEgR3JhbmRlIiwgIkx1Y2lkYSBTYW5zIFVuaWNvZGUiLCAiTHVjaWRhIFNhbnMiLCBWZXJkYW5hLCBUYWhvbWEsIHNhbnMtc2VyaWY7CiAgbWFyZ2luOiAwOwogIHBhZGRpbmc6IDA7CiAgY29sb3I6ICMzMzM7CiAgYmFja2dyb3VuZDogI2ZmZjsKfQoKaDEgeyBmb250LXNpemU6IDIuNXJlbSB9CmgyIHsgZm9udC1zaXplOiAycmVtIH0KaDMgeyBmb250LXNpemU6IDEuNzVyZW0gfQpoNCB7IGZvbnQtc2l6ZTogMS41cmVtIH0KaDUgeyBmb250LXNpemU6IDEuMjVyZW0gfQpoNiB7IGZvbnQtc2l6ZTogMXJlbSB9CgpoMSwgaDIsIGgzLCBoNCwgaDUsIGg2IHsKICBtYXJnaW46IDEuNXJlbSAwIDFyZW07CiAgdGV4dC1yZW5kZXJpbmc6IG9wdGltaXplTGVnaWJpbGl0eTsKICBmb250LXdlaWdodDogNzAwOwogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKcHJlLCB0dCwgY29kZSwgLnByZSwgc3Bhbi50eXBlLCBhLnR5cGUgewogIGZvbnQtZmFtaWx5OiBTRk1vbm8tUmVndWxhciwgTWVubG8sIENvbnNvbGFzLCAiTGliZXJhdGlvbiBNb25vIiwgIkNvdXJpZXIgTmV3IiwgbW9ub3NwYWNlOwogIGZvbnQtc2l6ZTogLjllbTsKfQoKI2NvbnRlbnQgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKYSwgYTpsaW5rLCBhOmFjdGl2ZSB7CiAgY29sb3I6ICM0Mzg1M2Q7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGJvcmRlci1yYWRpdXM6IDJweDsKICBwYWRkaW5nOiAxcHggM3B4Owp9CgphOmhvdmVyLCBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDM4NTNkOwogIG91dGxpbmU6IG5vbmU7Cn0KCnN0cm9uZyB7CiAgZm9udC13ZWlnaHQ6IDcwMDsKfQoKY29kZSBhOmhvdmVyIHsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgplbSBjb2RlIHsKICBmb250LXN0eWxlOiBub3JtYWw7Cn0KCiNjaGFuZ2Vsb2cgI2d0b2MgewogIGRpc3BsYXk6IG5vbmU7Cn0KCiNndG9jIHsKICBtYXJnaW4tdG9wOiAuNXJlbTsKICBtYXJnaW4tYm90dG9tOiAxcmVtOwp9CgojZ3RvYyB1bCB7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBtYXJnaW4tbGVmdDogMDsKICBsaW5lLWhlaWdodDogMS41cmVtOwp9CgojZ3RvYyA+IHVsID4gbGkgewogIGRpc3BsYXk6IGlubGluZTsKICBib3JkZXItcmlnaHQ6IDFweCAjMDAwIHNvbGlkOwogIG1hcmdpbi1yaWdodDogMC40cmVtOwogIHBhZGRpbmctcmlnaHQ6IDAuNHJlbTsKfQoKI2d0b2MgPiB1bCA+IGxpOmxhc3QtY2hpbGQgewogIGJvcmRlci1yaWdodDogbm9uZTsKICBtYXJnaW4tcmlnaHQ6IDA7CiAgcGFkZGluZy1yaWdodDogMDsKfQoKbGkudmVyc2lvbi1waWNrZXIgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBhIHsKICBib3JkZXItcmFkaXVzOiAycHggMnB4IDAgMDsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBvbCB7CiAgZGlzcGxheTogYmxvY2s7CiAgei1pbmRleDogMTsKfQoKbGkudmVyc2lvbi1waWNrZXIgYSBzcGFuIHsKICBmb250LXNpemU6IC43cmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciB7CiAgYmFja2dyb3VuZDogI2ZmZjsKICBib3JkZXI6IDFweCAjNDM4NTNkIHNvbGlkOwogIGJvcmRlci1yYWRpdXM6IDAgMCAycHggMnB4OwogIGRpc3BsYXk6IG5vbmU7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgcmlnaHQ6IDA7CiAgdG9wOiAxLjI1cmVtOwogIHdpZHRoOiAxMDAlOwp9CgojZ3RvYyBvbC52ZXJzaW9uLXBpY2tlciBsaSB7CiAgZGlzcGxheTogYmxvY2s7CiAgYm9yZGVyLXJpZ2h0OiAwOwogIG1hcmdpbi1yaWdodDogMDsKfQoKb2wudmVyc2lvbi1waWNrZXIgbGkgYSB7CiAgYm9yZGVyLXJhZGl1czogMDsKICBkaXNwbGF5OiBibG9jazsKICBtYXJnaW46IDA7CiAgcGFkZGluZzogLjFyZW07CiAgcGFkZGluZy1sZWZ0OiAxcmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciBsaTpsYXN0LWNoaWxkIGEgewogIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAxcHg7CiAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMXB4Owp9CgoubGluZSB7CiAgd2lkdGg6IGNhbGMoMTAwJSAtIDFyZW0pOwogIGRpc3BsYXk6IGJsb2NrOwogIHBhZGRpbmctYm90dG9tOiAxcHg7Cn0KCi5hcGlfc3RhYmlsaXR5IHsKICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDsKICBtYXJnaW46IDAgMCAxcmVtIDA7CiAgZm9udC1mYW1pbHk6ICJMYXRvIiwgIkx1Y2lkYSBHcmFuZGUiLCAiTHVjaWRhIFNhbnMgVW5pY29kZSIsICJMdWNpZGEgU2FucyIsIFZlcmRhbmEsIFRhaG9tYSwgc2Fucy1zZXJpZjsKICBwYWRkaW5nOiAxcmVtOwogIGxpbmUtaGVpZ2h0OiAxLjU7Cn0KCi5hcGlfc3RhYmlsaXR5ICogewogIGNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50Owp9CgouYXBpX3N0YWJpbGl0eSBhIHsKICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsKfQoKLmFwaV9zdGFiaWxpdHkgYTpob3ZlciwgLmFwaV9zdGFiaWxpdHkgYTphY3RpdmUsIC5hcGlfc3RhYmlsaXR5IGE6Zm9jdXMgewogIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjQpOwp9CgouYXBpX3N0YWJpbGl0eSBhIGNvZGUgewogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCi5hcGlfc3RhYmlsaXR5XzAgewogIGJhY2tncm91bmQtY29sb3I6ICNENjAwMjc7Cn0KCi5hcGlfc3RhYmlsaXR5XzEgewogIGJhY2tncm91bmQtY29sb3I6ICNFQzUzMTU7Cn0KCi5hcGlfc3RhYmlsaXR5XzIgewogIGJhY2tncm91bmQtY29sb3I6ICM0RUJBMEY7Cn0KCi5hcGlfbWV0YWRhdGEgewogIGZvbnQtc2l6ZTogLjg1cmVtOwogIG1hcmdpbi1ib3R0b206IDFyZW07Cn0KCi5hcGlfbWV0YWRhdGEgc3BhbiB7CiAgbWFyZ2luLXJpZ2h0OiAxcmVtOwp9CgouYXBpX21ldGFkYXRhIHNwYW46bGFzdC1jaGlsZCB7CiAgbWFyZ2luLXJpZ2h0OiAwcHg7Cn0KCnVsLnBsYWluIHsKICBsaXN0LXN0eWxlOiBub25lOwp9CgphYmJyIHsKICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkICM0NTQ1NDU7Cn0KCnAgewogIHRleHQtcmVuZGVyaW5nOiBvcHRpbWl6ZUxlZ2liaWxpdHk7CiAgbWFyZ2luOiAwIDAgMS4xMjVyZW0gMDsKICBsaW5lLWhlaWdodDogMS41Owp9CgojYXBpY29udGVudCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKICBwYWRkaW5nLWJvdHRvbTogMnJlbTsKfQoKdGFibGUgewogIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7CiAgbWFyZ2luOiAwIDAgMS41cmVtIDA7Cn0KCnRoLCB0ZCB7CiAgYm9yZGVyOiAxcHggc29saWQgI2FhYTsKICBwYWRkaW5nOiAuNzVyZW0gMXJlbSAuNzVyZW0gMXJlbTsKICB2ZXJ0aWNhbC1hbGlnbjogdG9wOwp9Cgp0aCB7CiAgdGV4dC1hbGlnbjpsZWZ0Owp9CgpvbCwgdWwsIGRsIHsKICBtYXJnaW46IDAgMCAuNnJlbSAwOwogIHBhZGRpbmc6IDA7Cn0KCm9sIHVsLCBvbCBvbCwgb2wgZGwsIHVsIHVsLCB1bCBvbCwgdWwgZGwsIGRsIHVsLCBkbCBvbCwgZGwgZGwgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCnVsLCBvbCB7CiAgbWFyZ2luLWxlZnQ6IDJyZW07Cn0KCmRsIGR0IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgbWFyZ2luOiAxLjVyZW0gMCAwOwp9CgpkbCBkZCB7CiAgcG9zaXRpb246IHJlbGF0aXZlOwogIG1hcmdpbjogMCAxcmVtIDA7Cn0KCmRkICsgZHQucHJlIHsKICBtYXJnaW4tdG9wOiAxLjZyZW07Cn0KCiNhcGljb250ZW50IHsKICBwYWRkaW5nLXRvcDogMXJlbTsKfQoKI2FwaWNvbnRlbnQgLmxpbmUgewogIHdpZHRoOiBjYWxjKDUwJSAtIDFyZW0pOwogIG1hcmdpbjogMXJlbSAxcmVtIC45NXJlbTsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2NjOwp9CgpoMiArIGgyIHsKICBtYXJnaW46IDAgMCAuNXJlbTsKfQoKaDMgKyBoMyB7CiAgbWFyZ2luOiAwIDAgLjVyZW07Cn0KCmgyLCBoMywgaDQsIGg1IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgcGFkZGluZy1yaWdodDogNDBweDsKfQoKLnNyY2xpbmsgewogIGZsb2F0OiByaWdodDsKICBmb250LXNpemU6IHNtYWxsZXI7Cn0KCmgxIHNwYW4sIGgyIHNwYW4sIGgzIHNwYW4sIGg0IHNwYW4gewogIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICBkaXNwbGF5OiBibG9jazsKICB0b3A6IDA7CiAgcmlnaHQ6IDA7Cn0KCmgxIHNwYW46aG92ZXIsIGgyIHNwYW46aG92ZXIsIGgzIHNwYW46aG92ZXIsIGg0IHNwYW46aG92ZXIgewogIG9wYWNpdHk6IDE7Cn0KCmgxIHNwYW4gYSwgaDIgc3BhbiBhLCBoMyBzcGFuIGEsIGg0IHNwYW4gYSB7CiAgY29sb3I6ICMwMDA7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGZvbnQtd2VpZ2h0OiBib2xkOwp9CgpwcmUsIHR0LCBjb2RlIHsKICBsaW5lLWhlaWdodDogMS41cmVtOwogIG1hcmdpbjogMDsgcGFkZGluZzogMDsKfQoKLnByZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKcHJlIHsKICBwYWRkaW5nOiAxcmVtOwogIHZlcnRpY2FsLWFsaWduOiB0b3A7CiAgYmFja2dyb3VuZDogI2YyZjJmMjsKICBtYXJnaW46IDFyZW07CiAgb3ZlcmZsb3cteDogYXV0bzsKfQoKcHJlID4gY29kZSB7CiAgcGFkZGluZzogMDsKfQoKcHJlICsgaDMgewogIG1hcmdpbi10b3A6IDIuMjI1cmVtOwp9Cgpjb2RlLnByZSB7CiAgd2hpdGUtc3BhY2U6IHByZTsKfQoKI2ludHJvIHsKICBtYXJnaW4tdG9wOiAxLjI1cmVtOwogIG1hcmdpbi1sZWZ0OiAxcmVtOwp9CgojaW50cm8gYSB7CiAgY29sb3I6ICNkZGQ7CiAgZm9udC13ZWlnaHQ6IGJvbGQ7Cn0KCmhyIHsKICBiYWNrZ3JvdW5kOiBub25lOwogIGJvcmRlcjogbWVkaXVtIG5vbmU7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM3YTdhN2E7CiAgbWFyZ2luOiAwIDAgMXJlbSAwOwp9CgojdG9jIGgyIHsKICBtYXJnaW4tdG9wOiAwOwogIG1hcmdpbjogMS41cmVtIDA7Cn0KCiN0b2MgcCB7CiAgbWFyZ2luOiAwOwp9CgojdG9jIHVsIGEgewogIHRleHQtZGVjb3JhdGlvbjpub25lOwp9CgojdG9jIHVsIGxpIHsKICBtYXJnaW4tYm90dG9tOiAuNjY2cmVtOwogIGxpc3Qtc3R5bGU6IHNxdWFyZSBvdXRzaWRlOwp9CgojdG9jIGxpID4gdWwgewogIG1hcmdpbi10b3A6IC42NjZyZW07Cn0KCiN0b2MgLnN0YWJpbGl0eV8wOjphZnRlciB7CiAgYmFja2dyb3VuZC1jb2xvcjogI2Q1MDAyNzsKICBjb2xvcjogI2ZmZjsKICBjb250ZW50OiAiZGVwcmVjYXRlZCI7CiAgbWFyZ2luLWxlZnQ6IC4yNXJlbTsKICBwYWRkaW5nOiAxcHggM3B4OwogIGJvcmRlci1yYWRpdXM6IDNweDsKfQoKI2FwaWNvbnRlbnQgbGkgewogIG1hcmdpbi1ib3R0b206IC41cmVtOwp9CgojYXBpY29udGVudCBsaTpsYXN0LWNoaWxkIHsKICBtYXJnaW4tYm90dG9tOiAwOwp9Cgp0dCwgY29kZSB7CiAgY29sb3I6ICMwNDA0MDQ7CiAgYmFja2dyb3VuZC1jb2xvcjogI2YyZjJmMjsKICBib3JkZXItcmFkaXVzOiAycHg7CiAgcGFkZGluZzogMXB4IDNweDsKfQoKLmFwaV9zdGFiaWxpdHkgY29kZSB7CiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAuMSk7Cn0KCmEgY29kZSB7CiAgY29sb3I6IGluaGVyaXQ7CiAgYmFja2dyb3VuZDogaW5oZXJpdDsKICBwYWRkaW5nOiAwOwp9CgoudHlwZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKI2NvbHVtbjEuaW50ZXJpb3IgewogIG1hcmdpbi1sZWZ0OiAyMzRweDsKICBwYWRkaW5nOiAwIDJyZW07CiAgLXdlYmtpdC1wYWRkaW5nLXN0YXJ0OiAxLjVyZW07Cn0KCiNjb2x1bW4yLmludGVyaW9yIHsKICB3aWR0aDogMjM0cHg7CiAgYmFja2dyb3VuZDogIzMzMzsKICBwb3NpdGlvbjogZml4ZWQ7CiAgbGVmdDogMDsKICB0b3A6IDA7CiAgYm90dG9tOiAwOwogIG92ZXJmbG93LXg6IGhpZGRlbjsKICBvdmVyZmxvdy15OiBzY3JvbGw7Cn0KCiNjb2x1bW4yIHVsIHsKICBsaXN0LXN0eWxlOiBub25lOwogIG1hcmdpbjogLjlyZW0gMCAuNXJlbTsKICBiYWNrZ3JvdW5kOiAjMzMzOwp9CgojY29sdW1uMiA+IDpmaXJzdC1jaGlsZCB7CiAgbWFyZ2luOiAxLjI1cmVtOwogIGZvbnQtc2l6ZTogMS41cmVtOwp9CgojY29sdW1uMiA+IHVsOm50aC1jaGlsZCgyKSB7CiAgbWFyZ2luOiAxLjI1cmVtIDAgLjVyZW07Cn0KCiNjb2x1bW4yID4gdWw6bGFzdC1jaGlsZCB7CiAgbWFyZ2luOiAuOXJlbSAwIDEuMjVyZW07Cn0KCiNjb2x1bW4yIHVsIGxpIHsKICBwYWRkaW5nLWxlZnQ6IDEuMjVyZW07CiAgbWFyZ2luLWJvdHRvbTogLjVyZW07CiAgcGFkZGluZy1ib3R0b206IC41cmVtOwp9CgojY29sdW1uMiAubGluZSB7CiAgbWFyZ2luOiAwIC41cmVtOwogIGJhY2tncm91bmQtY29sb3I6ICM3MDcwNzA7Cn0KCiNjb2x1bW4yIHVsIGxpOmxhc3QtY2hpbGQgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEgewogIGNvbG9yOiAjY2NjOwogIGJvcmRlci1yYWRpdXM6IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEuYWN0aXZlLCAjY29sdW1uMiB1bCBsaSBhLmFjdGl2ZTpob3ZlciwKI2NvbHVtbjIgdWwgbGkgYS5hY3RpdmU6Zm9jdXMgewogIGNvbG9yOiAjNDM4NTNkOwogIGJvcmRlci1yYWRpdXM6IDA7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM0Mzg1M2Q7CiAgYmFja2dyb3VuZDogbm9uZTsKfQoKI2ludHJvIGE6aG92ZXIsICNpbnRybyBhOmZvY3VzLAojY29sdW1uMiB1bCBsaSBhOmhvdmVyLCAjY29sdW1uMiB1bCBsaSBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgpzcGFuID4gLm1hcmssIHNwYW4gPiAubWFyazp2aXNpdGVkIHsKICBjb2xvcjogIzcwNzA3MDsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgdG9wOiAwcHg7CiAgcmlnaHQ6IDBweDsKfQoKc3BhbiA+IC5tYXJrOmhvdmVyLCBzcGFuID4gLm1hcms6Zm9jdXMsIHNwYW4gPiAubWFyazphY3RpdmUgewogIGNvbG9yOiAjNDM4NTNkOwogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCnRoID4gKjpsYXN0LWNoaWxkLCB0ZCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKfQoKLmNoYW5nZWxvZyA+IHN1bW1hcnkgewogIG1hcmdpbjogLjVyZW0gMDsKICBwYWRkaW5nOiAuNXJlbSAwOwogIGN1cnNvcjogcG9pbnRlcjsKfQoKLyogc2ltcGxlciBjbGVhcmZpeCAqLwouY2xlYXJmaXg6YWZ0ZXIgewogIGNvbnRlbnQ6ICIuIjsKICBkaXNwbGF5OiBibG9jazsKICBoZWlnaHQ6IDA7CiAgY2xlYXI6IGJvdGg7CiAgdmlzaWJpbGl0eTogaGlkZGVuOwp9CgouZ2l0aHViX2ljb24gewogIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7CiAgbWFyZ2luOiAtMnB4IDNweCAwIDA7Cn0KCkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogMTAyNHB4KSB7CiAgI2NvbnRlbnQgewogICAgb3ZlcmZsb3c6IHZpc2libGU7CiAgfQogICNjb2x1bW4xLmludGVyaW9yIHsKICAgIG1hcmdpbi1sZWZ0OiAwOwogICAgcGFkZGluZy1sZWZ0OiAuNXJlbTsKICAgIHBhZGRpbmctcmlnaHQ6IC41cmVtOwogICAgd2lkdGg6IGF1dG87CiAgICBvdmVyZmxvdy15OiB2aXNpYmxlOwogIH0KICAjY29sdW1uMiB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KfQoKQG1lZGlhIHByaW50IHsKICBodG1sIHsKICAgIGhlaWdodDogYXV0bzsKICAgIGZvbnQtc2l6ZTogMC43NWVtOwogIH0KICAjY29sdW1uMi5pbnRlcmlvciB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KICAjY29sdW1uMS5pbnRlcmlvciB7CiAgICBtYXJnaW4tbGVmdDogMHB4OwogICAgcGFkZGluZzogMHB4OwogICAgb3ZlcmZsb3cteTogYXV0bzsKICB9CiAgLmFwaV9tZXRhZGF0YSwKICAjdG9jLAogIC5zcmNsaW5rLAogICNndG9jLAogIC5tYXJrIHsKICAgIGRpc3BsYXk6IG5vbmU7CiAgfQogIGgxIHsKICAgIGZvbnQtc2l6ZTogMnJlbTsKICB9CiAgaDIgewogICAgZm9udC1zaXplOiAxLjc1cmVtOwogIH0KICBoMyB7CiAgICBmb250LXNpemU6IDEuNXJlbTsKICB9CiAgaDQgewogICAgZm9udC1zaXplOiAxLjNyZW07CiAgfQogIGg1IHsKICAgIGZvbnQtc2l6ZTogMS4ycmVtOwogIH0KICBoNiB7CiAgICBmb250LXNpemU6IDEuMXJlbTsKICB9CiAgLmFwaV9zdGFiaWxpdHkgewogICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogIH0KICAuYXBpX3N0YWJpbGl0eSBhIHsKICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsKICB9CiAgYSB7CiAgICBjb2xvcjogaW5oZXJpdDsKICB9CiAgI2FwaWNvbnRlbnQgewogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICB9Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LnNoX3NvdXJjZUNvZGUgewogIGZvbnQtd2VpZ2h0OiBub3JtYWw7CiAgZm9udC1zdHlsZTogbm9ybWFsOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfc3ltYm9sLAouc2hfc291cmNlQ29kZSAuc2hfY2JyYWNrZXQgewogIGNvbG9yOiAjMzMzOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfa2V5d29yZCB7CiAgY29sb3I6ICMzMzg7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9zdHJpbmcsCi5zaF9zb3VyY2VDb2RlIC5zaF9yZWdleHAsCi5zaF9zb3VyY2VDb2RlIC5zaF9udW1iZXIsCi5zaF9zb3VyY2VDb2RlIC5zaF9zcGVjaWFsY2hhciB7CiAgY29sb3I6ICNFNTQzMDU7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9jb21tZW50IHsKICBjb2xvcjogIzY2NjsKICBmb250LXdlaWdodDogbGlnaHRlcjsKfQo=">
+  <link rel="canonical" href="https://nodejs.org/api/tls.html">
+</head>
+<body class="alt apidoc" id="api-section-tls">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="https://nodejs.org/" title="Go back to the home page">
+          Node.js
+        </a>
+      </div>
+      <ul>
+<li><a href="https://nodejs.org/api/documentation.html" class="nav-documentation">About these Docs</a></li>
+<li><a href="https://nodejs.org/api/synopsis.html" class="nav-synopsis">Usage &amp; Example</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://nodejs.org/api/assert.html" class="nav-assert">Assertion Testing</a></li>
+<li><a href="https://nodejs.org/api/async_hooks.html" class="nav-async_hooks">Async Hooks</a></li>
+<li><a href="https://nodejs.org/api/buffer.html" class="nav-buffer">Buffer</a></li>
+<li><a href="https://nodejs.org/api/addons.html" class="nav-addons">C++ Addons</a></li>
+<li><a href="https://nodejs.org/api/n-api.html" class="nav-n-api">C/C++ Addons - N-API</a></li>
+<li><a href="https://nodejs.org/api/child_process.html" class="nav-child_process">Child Processes</a></li>
+<li><a href="https://nodejs.org/api/cluster.html" class="nav-cluster">Cluster</a></li>
+<li><a href="https://nodejs.org/api/cli.html" class="nav-cli">Command Line Options</a></li>
+<li><a href="https://nodejs.org/api/console.html" class="nav-console">Console</a></li>
+<li><a href="https://nodejs.org/api/crypto.html" class="nav-crypto">Crypto</a></li>
+<li><a href="https://nodejs.org/api/debugger.html" class="nav-debugger">Debugger</a></li>
+<li><a href="https://nodejs.org/api/deprecations.html" class="nav-deprecations">Deprecated APIs</a></li>
+<li><a href="https://nodejs.org/api/dns.html" class="nav-dns">DNS</a></li>
+<li><a href="https://nodejs.org/api/domain.html" class="nav-domain">Domain</a></li>
+<li><a href="https://nodejs.org/api/esm.html" class="nav-esm">ECMAScript Modules</a></li>
+<li><a href="https://nodejs.org/api/errors.html" class="nav-errors">Errors</a></li>
+<li><a href="https://nodejs.org/api/events.html" class="nav-events">Events</a></li>
+<li><a href="https://nodejs.org/api/fs.html" class="nav-fs">File System</a></li>
+<li><a href="https://nodejs.org/api/globals.html" class="nav-globals">Globals</a></li>
+<li><a href="https://nodejs.org/api/http.html" class="nav-http">HTTP</a></li>
+<li><a href="https://nodejs.org/api/http2.html" class="nav-http2">HTTP/2</a></li>
+<li><a href="https://nodejs.org/api/https.html" class="nav-https">HTTPS</a></li>
+<li><a href="https://nodejs.org/api/inspector.html" class="nav-inspector">Inspector</a></li>
+<li><a href="https://nodejs.org/api/intl.html" class="nav-intl">Internationalization</a></li>
+<li><a href="https://nodejs.org/api/modules.html" class="nav-modules">Modules</a></li>
+<li><a href="https://nodejs.org/api/net.html" class="nav-net">Net</a></li>
+<li><a href="https://nodejs.org/api/os.html" class="nav-os">OS</a></li>
+<li><a href="https://nodejs.org/api/path.html" class="nav-path">Path</a></li>
+<li><a href="https://nodejs.org/api/perf_hooks.html" class="nav-perf_hooks">Performance Hooks</a></li>
+<li><a href="https://nodejs.org/api/policy.html" class="nav-policy">Policies</a></li>
+<li><a href="https://nodejs.org/api/process.html" class="nav-process">Process</a></li>
+<li><a href="https://nodejs.org/api/punycode.html" class="nav-punycode">Punycode</a></li>
+<li><a href="https://nodejs.org/api/querystring.html" class="nav-querystring">Query Strings</a></li>
+<li><a href="https://nodejs.org/api/readline.html" class="nav-readline">Readline</a></li>
+<li><a href="https://nodejs.org/api/repl.html" class="nav-repl">REPL</a></li>
+<li><a href="https://nodejs.org/api/report.html" class="nav-report">Report</a></li>
+<li><a href="https://nodejs.org/api/stream.html" class="nav-stream">Stream</a></li>
+<li><a href="https://nodejs.org/api/string_decoder.html" class="nav-string_decoder">String Decoder</a></li>
+<li><a href="https://nodejs.org/api/timers.html" class="nav-timers">Timers</a></li>
+<li><a href="https://nodejs.org/api/tls.html" class="nav-tls active">TLS/SSL</a></li>
+<li><a href="https://nodejs.org/api/tracing.html" class="nav-tracing">Trace Events</a></li>
+<li><a href="https://nodejs.org/api/tty.html" class="nav-tty">TTY</a></li>
+<li><a href="https://nodejs.org/api/dgram.html" class="nav-dgram">UDP/Datagram</a></li>
+<li><a href="https://nodejs.org/api/url.html" class="nav-url">URL</a></li>
+<li><a href="https://nodejs.org/api/util.html" class="nav-util">Utilities</a></li>
+<li><a href="https://nodejs.org/api/v8.html" class="nav-v8">V8</a></li>
+<li><a href="https://nodejs.org/api/vm.html" class="nav-vm">VM</a></li>
+<li><a href="https://nodejs.org/api/worker_threads.html" class="nav-worker_threads">Worker Threads</a></li>
+<li><a href="https://nodejs.org/api/zlib.html" class="nav-zlib">Zlib</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://github.com/nodejs/node" class="nav-https-github-com-nodejs-node">GitHub Repo &amp; Issue Tracker</a></li>
+</ul>
+    </div>
+
+    <div id="column1" data-id="tls" class="interior">
+      <header>
+        <h1>Node.js v12.10.0 Documentation</h1>
+        <div id="gtoc">
+          <ul>
+            <li>
+              <a href="https://nodejs.org/api/index.html" name="toc">Index</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/all.html">View on single page</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/tls.json">View as JSON</a>
+            </li>
+            
+    <li class="version-picker">
+      <a href="#">View another version <span>▼</span></a>
+      <ol class="version-picker"><li><a href="https://nodejs.org/docs/latest-v12.x/api/tls.html">12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v11.x/api/tls.html">11.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v10.x/api/tls.html">10.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v9.x/api/tls.html">9.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/tls.html">8.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v7.x/api/tls.html">7.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v6.x/api/tls.html">6.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v5.x/api/tls.html">5.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v4.x/api/tls.html">4.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.12.x/api/tls.html">0.12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.10.x/api/tls.html">0.10.x</a></li></ol>
+    </li>
+  
+            <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/tls.md"><span class="github_icon"><svg height="16" width="16" viewBox="0 0 16.1 16.1" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8z"></path></svg></span>Edit on GitHub</a></li>
+          </ul>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+<li>
+<p><span class="stability_2"><a href="#tls_tls_ssl">TLS (SSL)</a></span></p>
+<ul>
+<li>
+<p><a href="#tls_tls_ssl_concepts">TLS/SSL Concepts</a></p>
+<ul>
+<li><a href="#tls_perfect_forward_secrecy">Perfect Forward Secrecy</a></li>
+<li><a href="#tls_alpn_and_sni">ALPN and SNI</a></li>
+<li><a href="#tls_client_initiated_renegotiation_attack_mitigation">Client-initiated renegotiation attack mitigation</a></li>
+<li><a href="#tls_session_resumption">Session Resumption</a></li>
+</ul>
+</li>
+<li><a href="#tls_modifying_the_default_tls_cipher_suite">Modifying the Default TLS Cipher suite</a></li>
+<li>
+<p><a href="#tls_class_tls_server">Class: tls.Server</a></p>
+<ul>
+<li><a href="#tls_event_keylog">Event: 'keylog'</a></li>
+<li><a href="#tls_event_newsession">Event: 'newSession'</a></li>
+<li><a href="#tls_event_ocsprequest">Event: 'OCSPRequest'</a></li>
+<li><a href="#tls_event_resumesession">Event: 'resumeSession'</a></li>
+<li><a href="#tls_event_secureconnection">Event: 'secureConnection'</a></li>
+<li><a href="#tls_event_tlsclienterror">Event: 'tlsClientError'</a></li>
+<li><a href="#tls_server_addcontext_hostname_context">server.addContext(hostname, context)</a></li>
+<li><a href="#tls_server_address">server.address()</a></li>
+<li><a href="#tls_server_close_callback">server.close([callback])</a></li>
+<li><span class="stability_0"><a href="#tls_server_connections">server.connections</a></span></li>
+<li><a href="#tls_server_getticketkeys">server.getTicketKeys()</a></li>
+<li><a href="#tls_server_listen">server.listen()</a></li>
+<li><a href="#tls_server_setsecurecontext_options">server.setSecureContext(options)</a></li>
+<li><a href="#tls_server_setticketkeys_keys">server.setTicketKeys(keys)</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#tls_class_tls_tlssocket">Class: tls.TLSSocket</a></p>
+<ul>
+<li><a href="#tls_new_tls_tlssocket_socket_options">new tls.TLSSocket(socket[, options])</a></li>
+<li><a href="#tls_event_keylog_1">Event: 'keylog'</a></li>
+<li><a href="#tls_event_ocspresponse">Event: 'OCSPResponse'</a></li>
+<li><a href="#tls_event_secureconnect">Event: 'secureConnect'</a></li>
+<li><a href="#tls_event_session">Event: 'session'</a></li>
+<li><a href="#tls_tlssocket_address">tlsSocket.address()</a></li>
+<li><a href="#tls_tlssocket_authorizationerror">tlsSocket.authorizationError</a></li>
+<li><a href="#tls_tlssocket_authorized">tlsSocket.authorized</a></li>
+<li><a href="#tls_tlssocket_disablerenegotiation">tlsSocket.disableRenegotiation()</a></li>
+<li><a href="#tls_tlssocket_enabletrace">tlsSocket.enableTrace()</a></li>
+<li><a href="#tls_tlssocket_encrypted">tlsSocket.encrypted</a></li>
+<li><a href="#tls_tlssocket_getcertificate">tlsSocket.getCertificate()</a></li>
+<li><a href="#tls_tlssocket_getcipher">tlsSocket.getCipher()</a></li>
+<li><a href="#tls_tlssocket_getephemeralkeyinfo">tlsSocket.getEphemeralKeyInfo()</a></li>
+<li><a href="#tls_tlssocket_getfinished">tlsSocket.getFinished()</a></li>
+<li>
+<p><a href="#tls_tlssocket_getpeercertificate_detailed">tlsSocket.getPeerCertificate([detailed])</a></p>
+<ul>
+<li><a href="#tls_certificate_object">Certificate Object</a></li>
+</ul>
+</li>
+<li><a href="#tls_tlssocket_getpeerfinished">tlsSocket.getPeerFinished()</a></li>
+<li><a href="#tls_tlssocket_getprotocol">tlsSocket.getProtocol()</a></li>
+<li><a href="#tls_tlssocket_getsession">tlsSocket.getSession()</a></li>
+<li><a href="#tls_tlssocket_gettlsticket">tlsSocket.getTLSTicket()</a></li>
+<li><a href="#tls_tlssocket_issessionreused">tlsSocket.isSessionReused()</a></li>
+<li><a href="#tls_tlssocket_localaddress">tlsSocket.localAddress</a></li>
+<li><a href="#tls_tlssocket_localport">tlsSocket.localPort</a></li>
+<li><a href="#tls_tlssocket_remoteaddress">tlsSocket.remoteAddress</a></li>
+<li><a href="#tls_tlssocket_remotefamily">tlsSocket.remoteFamily</a></li>
+<li><a href="#tls_tlssocket_remoteport">tlsSocket.remotePort</a></li>
+<li><a href="#tls_tlssocket_renegotiate_options_callback">tlsSocket.renegotiate(options, callback)</a></li>
+<li><a href="#tls_tlssocket_setmaxsendfragment_size">tlsSocket.setMaxSendFragment(size)</a></li>
+</ul>
+</li>
+<li><a href="#tls_tls_checkserveridentity_hostname_cert">tls.checkServerIdentity(hostname, cert)</a></li>
+<li><a href="#tls_tls_connect_options_callback">tls.connect(options[, callback])</a></li>
+<li><a href="#tls_tls_connect_path_options_callback">tls.connect(path[, options][, callback])</a></li>
+<li><a href="#tls_tls_connect_port_host_options_callback">tls.connect(port[, host][, options][, callback])</a></li>
+<li><a href="#tls_tls_createsecurecontext_options">tls.createSecureContext([options])</a></li>
+<li><a href="#tls_tls_createserver_options_secureconnectionlistener">tls.createServer([options][, secureConnectionListener])</a></li>
+<li><a href="#tls_tls_getciphers">tls.getCiphers()</a></li>
+<li><a href="#tls_tls_rootcertificates">tls.rootCertificates</a></li>
+<li><a href="#tls_tls_default_ecdh_curve">tls.DEFAULT_ECDH_CURVE</a></li>
+<li><a href="#tls_tls_default_max_version">tls.DEFAULT_MAX_VERSION</a></li>
+<li><a href="#tls_tls_default_min_version">tls.DEFAULT_MIN_VERSION</a></li>
+<li>
+<p><a href="#tls_deprecated_apis">Deprecated APIs</a></p>
+<ul>
+<li>
+<p><span class="stability_0"><a href="#tls_class_cryptostream">Class: CryptoStream</a></span></p>
+<ul>
+<li><a href="#tls_cryptostream_byteswritten">cryptoStream.bytesWritten</a></li>
+</ul>
+</li>
+<li>
+<p><span class="stability_0"><a href="#tls_class_securepair">Class: SecurePair</a></span></p>
+<ul>
+<li><a href="#tls_event_secure">Event: 'secure'</a></li>
+</ul>
+</li>
+<li><span class="stability_0"><a href="#tls_tls_createsecurepair_context_isserver_requestcert_rejectunauthorized_options">tls.createSecurePair([context][, isServer][, requestCert][, rejectUnauthorized][, options])</a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+      </div>
+
+      <div id="apicontent">
+        <h1>TLS (SSL)<span><a class="mark" href="#tls_tls_ssl" id="tls_tls_ssl">#</a></span></h1>
+
+<p></p><div class="api_stability api_stability_2"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 2</a> - Stable</div><p></p>
+<p>The <code>tls</code> module provides an implementation of the Transport Layer Security
+(TLS) and Secure Socket Layer (SSL) protocols that is built on top of OpenSSL.
+The module can be accessed using:</p>
+<pre><code class="language-js">const tls = require('tls');
+</code></pre>
+<h2>TLS/SSL Concepts<span><a class="mark" href="#tls_tls_ssl_concepts" id="tls_tls_ssl_concepts">#</a></span></h2>
+<p>The TLS/SSL is a public/private key infrastructure (PKI). For most common
+cases, each client and server must have a <em>private key</em>.</p>
+<p>Private keys can be generated in multiple ways. The example below illustrates
+use of the OpenSSL command-line interface to generate a 2048-bit RSA private
+key:</p>
+<pre><code class="language-sh">openssl genrsa -out ryans-key.pem 2048
+</code></pre>
+<p>With TLS/SSL, all servers (and some clients) must have a <em>certificate</em>.
+Certificates are <em>public keys</em> that correspond to a private key, and that are
+digitally signed either by a Certificate Authority or by the owner of the
+private key (such certificates are referred to as "self-signed"). The first
+step to obtaining a certificate is to create a <em>Certificate Signing Request</em>
+(CSR) file.</p>
+<p>The OpenSSL command-line interface can be used to generate a CSR for a private
+key:</p>
+<pre><code class="language-sh">openssl req -new -sha256 -key ryans-key.pem -out ryans-csr.pem
+</code></pre>
+<p>Once the CSR file is generated, it can either be sent to a Certificate
+Authority for signing or used to generate a self-signed certificate.</p>
+<p>Creating a self-signed certificate using the OpenSSL command-line interface
+is illustrated in the example below:</p>
+<pre><code class="language-sh">openssl x509 -req -in ryans-csr.pem -signkey ryans-key.pem -out ryans-cert.pem
+</code></pre>
+<p>Once the certificate is generated, it can be used to generate a <code>.pfx</code> or
+<code>.p12</code> file:</p>
+<pre><code class="language-sh">openssl pkcs12 -export -in ryans-cert.pem -inkey ryans-key.pem \
+      -certfile ca-cert.pem -out ryans.pfx
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><code>in</code>: is the signed certificate</li>
+<li><code>inkey</code>: is the associated private key</li>
+<li><code>certfile</code>: is a concatenation of all Certificate Authority (CA) certs into
+a single file, e.g. <code>cat ca1-cert.pem ca2-cert.pem &gt; ca-cert.pem</code></li>
+</ul>
+<h3>Perfect Forward Secrecy<span><a class="mark" href="#tls_perfect_forward_secrecy" id="tls_perfect_forward_secrecy">#</a></span></h3>
+
+<p>The term "<a href="https://en.wikipedia.org/wiki/Perfect_forward_secrecy">Forward Secrecy</a>" or "Perfect Forward Secrecy" describes a feature of
+key-agreement (i.e., key-exchange) methods. That is, the server and client keys
+are used to negotiate new temporary keys that are used specifically and only for
+the current communication session. Practically, this means that even if the
+server's private key is compromised, communication can only be decrypted by
+eavesdroppers if the attacker manages to obtain the key-pair specifically
+generated for the session.</p>
+<p>Perfect Forward Secrecy is achieved by randomly generating a key pair for
+key-agreement on every TLS/SSL handshake (in contrast to using the same key for
+all sessions). Methods implementing this technique are called "ephemeral".</p>
+<p>Currently two methods are commonly used to achieve Perfect Forward Secrecy (note
+the character "E" appended to the traditional abbreviations):</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange">DHE</a> - An ephemeral version of the Diffie Hellman key-agreement protocol.</li>
+<li><a href="https://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman">ECDHE</a> - An ephemeral version of the Elliptic Curve Diffie Hellman
+key-agreement protocol.</li>
+</ul>
+<p>Ephemeral methods may have some performance drawbacks, because key generation
+is expensive.</p>
+<p>To use Perfect Forward Secrecy using <code>DHE</code> with the <code>tls</code> module, it is required
+to generate Diffie-Hellman parameters and specify them with the <code>dhparam</code>
+option to <a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a>. The following illustrates the use of
+the OpenSSL command-line interface to generate such parameters:</p>
+<pre><code class="language-sh">openssl dhparam -outform PEM -out dhparam.pem 2048
+</code></pre>
+<p>If using Perfect Forward Secrecy using <code>ECDHE</code>, Diffie-Hellman parameters are
+not required and a default ECDHE curve will be used. The <code>ecdhCurve</code> property
+can be used when creating a TLS Server to specify the list of names of supported
+curves to use, see <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a> for more info.</p>
+<p>Perfect Forward Secrecy was optional up to TLSv1.2, but it is not optional for
+TLSv1.3, because all TLSv1.3 cipher suites use ECDHE.</p>
+<h3>ALPN and SNI<span><a class="mark" href="#tls_alpn_and_sni" id="tls_alpn_and_sni">#</a></span></h3>
+
+<p>ALPN (Application-Layer Protocol Negotiation Extension) and
+SNI (Server Name Indication) are TLS handshake extensions:</p>
+<ul>
+<li>ALPN - Allows the use of one TLS server for multiple protocols (HTTP, HTTP/2)</li>
+<li>SNI - Allows the use of one TLS server for multiple hostnames with different
+SSL certificates.</li>
+</ul>
+<h3>Client-initiated renegotiation attack mitigation<span><a class="mark" href="#tls_client_initiated_renegotiation_attack_mitigation" id="tls_client_initiated_renegotiation_attack_mitigation">#</a></span></h3>
+
+<p>The TLS protocol allows clients to renegotiate certain aspects of the TLS
+session. Unfortunately, session renegotiation requires a disproportionate amount
+of server-side resources, making it a potential vector for denial-of-service
+attacks.</p>
+<p>To mitigate the risk, renegotiation is limited to three times every ten minutes.
+An <code>'error'</code> event is emitted on the <a href="#tls_class_tls_tlssocket"><code>tls.TLSSocket</code></a> instance when this
+threshold is exceeded. The limits are configurable:</p>
+<ul>
+<li><code>tls.CLIENT_RENEG_LIMIT</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Specifies the number of renegotiation
+requests. <strong>Default:</strong> <code>3</code>.</li>
+<li><code>tls.CLIENT_RENEG_WINDOW</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Specifies the time renegotiation window
+in seconds. <strong>Default:</strong> <code>600</code> (10 minutes).</li>
+</ul>
+<p>The default renegotiation limits should not be modified without a full
+understanding of the implications and risks.</p>
+<p>TLSv1.3 does not support renegotiation.</p>
+<h3>Session Resumption<span><a class="mark" href="#tls_session_resumption" id="tls_session_resumption">#</a></span></h3>
+<p>Establishing a TLS session can be relatively slow. The process can be sped
+up by saving and later reusing the session state. There are several mechanisms
+to do so, discussed here from oldest to newest (and preferred).</p>
+<p><strong><em>Session Identifiers</em></strong> Servers generate a unique ID for new connections and
+send it to the client. Clients and servers save the session state. When
+reconnecting, clients send the ID of their saved session state and if the server
+also has the state for that ID, it can agree to use it. Otherwise, the server
+will create a new session. See <a href="https://www.ietf.org/rfc/rfc2246.txt">RFC 2246</a> for more information, page 23 and
+30.</p>
+<p>Resumption using session identifiers is supported by most web browsers when
+making HTTPS requests.</p>
+<p>For Node.js, clients wait for the <a href="#tls_event_session"><code>'session'</code></a> event to get the session data,
+and provide the data to the <code>session</code> option of a subsequent <a href="#tls_tls_connect_options_callback"><code>tls.connect()</code></a>
+to reuse the session. Servers must
+implement handlers for the <a href="#tls_event_newsession"><code>'newSession'</code></a> and <a href="#tls_event_resumesession"><code>'resumeSession'</code></a> events
+to save and restore the session data using the session ID as the lookup key to
+reuse sessions. To reuse sessions across load balancers or cluster workers,
+servers must use a shared session cache (such as Redis) in their session
+handlers.</p>
+<p><strong><em>Session Tickets</em></strong> The servers encrypt the entire session state and send it
+to the client as a "ticket". When reconnecting, the state is sent to the server
+in the initial connection. This mechanism avoids the need for server-side
+session cache. If the server doesn't use the ticket, for any reason (failure
+to decrypt it, it's too old, etc.), it will create a new session and send a new
+ticket. See <a href="https://tools.ietf.org/html/rfc5077">RFC 5077</a> for more information.</p>
+<p>Resumption using session tickets is becoming commonly supported by many web
+browsers when making HTTPS requests.</p>
+<p>For Node.js, clients use the same APIs for resumption with session identifiers
+as for resumption with session tickets. For debugging, if
+<a href="#tls_tlssocket_gettlsticket"><code>tls.TLSSocket.getTLSTicket()</code></a> returns a value, the session data contains a
+ticket, otherwise it contains client-side session state.</p>
+<p>With TLSv1.3, be aware that multiple tickets may be sent by the server,
+resulting in multiple <code>'session'</code> events, see <a href="#tls_event_session"><code>'session'</code></a> for more
+information.</p>
+<p>Single process servers need no specific implementation to use session tickets.
+To use session tickets across server restarts or load balancers, servers must
+all have the same ticket keys. There are three 16-byte keys internally, but the
+tls API exposes them as a single 48-byte buffer for convenience.</p>
+<p>Its possible to get the ticket keys by calling <a href="#tls_server_getticketkeys"><code>server.getTicketKeys()</code></a> on
+one server instance and then distribute them, but it is more reasonable to
+securely generate 48 bytes of secure random data and set them with the
+<code>ticketKeys</code> option of <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a>. The keys should be regularly
+regenerated and server's keys can be reset with
+<a href="#tls_server_setticketkeys_keys"><code>server.setTicketKeys()</code></a>.</p>
+<p>Session ticket keys are cryptographic keys, and they <strong><em>must be stored
+securely</em></strong>. With TLS 1.2 and below, if they are compromised all sessions that
+used tickets encrypted with them can be decrypted. They should not be stored
+on disk, and they should be regenerated regularly.</p>
+<p>If clients advertise support for tickets, the server will send them. The
+server can disable tickets by supplying
+<code>require('constants').SSL_OP_NO_TICKET</code> in <code>secureOptions</code>.</p>
+<p>Both session identifiers and session tickets timeout, causing the server to
+create new sessions. The timeout can be configured with the <code>sessionTimeout</code>
+option of <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a>.</p>
+<p>For all the mechanisms, when resumption fails, servers will create new sessions.
+Since failing to resume the session does not cause TLS/HTTPS connection
+failures, it is easy to not notice unnecessarily poor TLS performance. The
+OpenSSL CLI can be used to verify that servers are resuming sessions. Use the
+<code>-reconnect</code> option to <code>openssl s_client</code>, for example:</p>
+<pre><code class="language-sh">$ openssl s_client -connect localhost:443 -reconnect
+</code></pre>
+<p>Read through the debug output. The first connection should say "New", for
+example:</p>
+<pre><code class="language-text">New, TLSv1.2, Cipher is ECDHE-RSA-AES128-GCM-SHA256
+</code></pre>
+<p>Subsequent connections should say "Reused", for example:</p>
+<pre><code class="language-text">Reused, TLSv1.2, Cipher is ECDHE-RSA-AES128-GCM-SHA256
+</code></pre>
+<h2>Modifying the Default TLS Cipher suite<span><a class="mark" href="#tls_modifying_the_default_tls_cipher_suite" id="tls_modifying_the_default_tls_cipher_suite">#</a></span></h2>
+<p>Node.js is built with a default suite of enabled and disabled TLS ciphers.
+Currently, the default cipher suite is:</p>
+<pre><code class="language-txt">TLS_AES_256_GCM_SHA384:
+TLS_CHACHA20_POLY1305_SHA256:
+TLS_AES_128_GCM_SHA256:
+ECDHE-RSA-AES128-GCM-SHA256:
+ECDHE-ECDSA-AES128-GCM-SHA256:
+ECDHE-RSA-AES256-GCM-SHA384:
+ECDHE-ECDSA-AES256-GCM-SHA384:
+DHE-RSA-AES128-GCM-SHA256:
+ECDHE-RSA-AES128-SHA256:
+DHE-RSA-AES128-SHA256:
+ECDHE-RSA-AES256-SHA384:
+DHE-RSA-AES256-SHA384:
+ECDHE-RSA-AES256-SHA256:
+DHE-RSA-AES256-SHA256:
+HIGH:
+!aNULL:
+!eNULL:
+!EXPORT:
+!DES:
+!RC4:
+!MD5:
+!PSK:
+!SRP:
+!CAMELLIA
+</code></pre>
+<p>This default can be replaced entirely using the <a href="https://nodejs.org/api/cli.html#cli_tls_cipher_list_list"><code>--tls-cipher-list</code></a> command
+line switch (directly, or via the <a href="https://nodejs.org/api/cli.html#cli_node_options_options"><code>NODE_OPTIONS</code></a> environment variable). For
+instance, the following makes <code>ECDHE-RSA-AES128-GCM-SHA256:!RC4</code> the default TLS
+cipher suite:</p>
+<pre><code class="language-sh">node --tls-cipher-list="ECDHE-RSA-AES128-GCM-SHA256:!RC4" server.js
+
+export NODE_OPTIONS=--tls-cipher-list="ECDHE-RSA-AES128-GCM-SHA256:!RC4"
+node server.js
+</code></pre>
+<p>The default can also be replaced on a per client or server basis using the
+<code>ciphers</code> option from <a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a>, which is also available
+in <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a>, <a href="#tls_tls_connect_options_callback"><code>tls.connect()</code></a>, and when creating new
+<a href="#tls_class_tls_tlssocket"><code>tls.TLSSocket</code></a>s.</p>
+<p>The ciphers list can contain a mixture of TLSv1.3 cipher suite names, the ones
+that start with <code>'TLS_'</code>, and specifications for TLSv1.2 and below cipher
+suites.  The TLSv1.2 ciphers support a legacy specification format, consult
+the OpenSSL <a href="https://www.openssl.org/docs/man1.1.1/man1/ciphers.html#CIPHER-LIST-FORMAT">cipher list format</a> documentation for details, but those
+specifications do <em>not</em> apply to TLSv1.3 ciphers.  The TLSv1.3 suites can only
+be enabled by including their full name in the cipher list. They cannot, for
+example, be enabled or disabled by using the legacy TLSv1.2 <code>'EECDH'</code> or
+<code>'!EECDH'</code> specification.</p>
+<p>Despite the relative order of TLSv1.3 and TLSv1.2 cipher suites, the TLSv1.3
+protocol is significantly more secure than TLSv1.2, and will always be chosen
+over TLSv1.2 if the handshake indicates it is supported, and if any TLSv1.3
+cipher suites are enabled.</p>
+<p>The default cipher suite included within Node.js has been carefully
+selected to reflect current security best practices and risk mitigation.
+Changing the default cipher suite can have a significant impact on the security
+of an application. The <code>--tls-cipher-list</code> switch and <code>ciphers</code> option should by
+used only if absolutely necessary.</p>
+<p>The default cipher suite prefers GCM ciphers for <a href="https://www.chromium.org/Home/chromium-security/education/tls#TOC-Cipher-Suites">Chrome's 'modern
+cryptography' setting</a> and also prefers ECDHE and DHE ciphers for Perfect
+Forward Secrecy, while offering <em>some</em> backward compatibility.</p>
+<p>128 bit AES is preferred over 192 and 256 bit AES in light of <a href="https://www.schneier.com/blog/archives/2009/07/another_new_aes.html">specific
+attacks affecting larger AES key sizes</a>.</p>
+<p>Old clients that rely on insecure and deprecated RC4 or DES-based ciphers
+(like Internet Explorer 6) cannot complete the handshaking process with
+the default configuration. If these clients <em>must</em> be supported, the
+<a href="https://wiki.mozilla.org/Security/Server_Side_TLS">TLS recommendations</a> may offer a compatible cipher suite. For more details
+on the format, see the OpenSSL <a href="https://www.openssl.org/docs/man1.1.1/man1/ciphers.html#CIPHER-LIST-FORMAT">cipher list format</a> documentation.</p>
+<p>There are only 5 TLSv1.3 cipher suites:</p>
+<ul>
+<li><code>'TLS_AES_256_GCM_SHA384'</code></li>
+<li><code>'TLS_CHACHA20_POLY1305_SHA256'</code></li>
+<li><code>'TLS_AES_128_GCM_SHA256'</code></li>
+<li><code>'TLS_AES_128_CCM_SHA256'</code></li>
+<li><code>'TLS_AES_128_CCM_8_SHA256'</code></li>
+</ul>
+<p>The first 3 are enabled by default. The last 2 <code>CCM</code>-based suites are supported
+by TLSv1.3 because they may be more performant on constrained systems, but they
+are not enabled by default since they offer less security.</p>
+<h2>Class: tls.Server<span><a class="mark" href="#tls_class_tls_server" id="tls_class_tls_server">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.3.2</span>
+</div>
+<ul>
+<li>Extends: <a href="https://nodejs.org/api/net.html#net_class_net_server" class="type">&lt;net.Server&gt;</a></li>
+</ul>
+<p>Accepts encrypted connections using TLS or SSL.</p>
+<h3>Event: 'keylog'<span><a class="mark" href="#tls_event_keylog" id="tls_event_keylog">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.3.0</span>
+</div>
+<ul>
+<li><code>line</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> Line of ASCII text, in NSS <code>SSLKEYLOGFILE</code> format.</li>
+<li><code>tlsSocket</code> <a href="https://nodejs.org/api/tls.html#tls_class_tls_tlssocket" class="type">&lt;tls.TLSSocket&gt;</a> The <code>tls.TLSSocket</code> instance on which it was
+generated.</li>
+</ul>
+<p>The <code>keylog</code> event is emitted when key material is generated or received by
+a connection to this server (typically before handshake has completed, but not
+necessarily). This keying material can be stored for debugging, as it allows
+captured TLS traffic to be decrypted. It may be emitted multiple times for
+each socket.</p>
+<p>A typical use case is to append received lines to a common text file, which
+is later used by software (such as Wireshark) to decrypt the traffic:</p>
+<pre><code class="language-js">const logFile = fs.createWriteStream('/tmp/ssl-keys.log', { flags: 'a' });
+// ...
+server.on('keylog', (line, tlsSocket) =&gt; {
+  if (tlsSocket.remoteAddress !== '...')
+    return; // Only log keys for a particular IP
+  logFile.write(line);
+});
+</code></pre>
+<h3>Event: 'newSession'<span><a class="mark" href="#tls_event_newsession" id="tls_event_newsession">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.9.2</span>
+</div>
+<p>The <code>'newSession'</code> event is emitted upon creation of a new TLS session. This may
+be used to store sessions in external storage. The data should be provided to
+the <a href="#tls_event_resumesession"><code>'resumeSession'</code></a> callback.</p>
+<p>The listener callback is passed three arguments when called:</p>
+<ul>
+<li><code>sessionId</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> The TLS session identifier</li>
+<li><code>sessionData</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> The TLS session data</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> A callback function taking no arguments that must be
+invoked in order for data to be sent or received over the secure connection.</li>
+</ul>
+<p>Listening for this event will have an effect only on connections established
+after the addition of the event listener.</p>
+<h3>Event: 'OCSPRequest'<span><a class="mark" href="#tls_event_ocsprequest" id="tls_event_ocsprequest">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.13</span>
+</div>
+<p>The <code>'OCSPRequest'</code> event is emitted when the client sends a certificate status
+request. The listener callback is passed three arguments when called:</p>
+<ul>
+<li><code>certificate</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> The server certificate</li>
+<li><code>issuer</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> The issuer's certificate</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> A callback function that must be invoked to provide
+the results of the OCSP request.</li>
+</ul>
+<p>The server's current certificate can be parsed to obtain the OCSP URL
+and certificate ID; after obtaining an OCSP response, <code>callback(null, resp)</code> is
+then invoked, where <code>resp</code> is a <code>Buffer</code> instance containing the OCSP response.
+Both <code>certificate</code> and <code>issuer</code> are <code>Buffer</code> DER-representations of the
+primary and issuer's certificates. These can be used to obtain the OCSP
+certificate ID and OCSP endpoint URL.</p>
+<p>Alternatively, <code>callback(null, null)</code> may be called, indicating that there was
+no OCSP response.</p>
+<p>Calling <code>callback(err)</code> will result in a <code>socket.destroy(err)</code> call.</p>
+<p>The typical flow of an OCSP Request is as follows:</p>
+<ol>
+<li>Client connects to the server and sends an <code>'OCSPRequest'</code> (via the status
+info extension in ClientHello).</li>
+<li>Server receives the request and emits the <code>'OCSPRequest'</code> event, calling the
+listener if registered.</li>
+<li>Server extracts the OCSP URL from either the <code>certificate</code> or <code>issuer</code> and
+performs an <a href="https://en.wikipedia.org/wiki/OCSP_stapling">OCSP request</a> to the CA.</li>
+<li>Server receives <code>'OCSPResponse'</code> from the CA and sends it back to the client
+via the <code>callback</code> argument</li>
+<li>Client validates the response and either destroys the socket or performs a
+handshake.</li>
+</ol>
+<p>The <code>issuer</code> can be <code>null</code> if the certificate is either self-signed or the
+issuer is not in the root certificates list. (An issuer may be provided
+via the <code>ca</code> option when establishing the TLS connection.)</p>
+<p>Listening for this event will have an effect only on connections established
+after the addition of the event listener.</p>
+<p>An npm module like <a href="https://www.npmjs.com/package/asn1.js">asn1.js</a> may be used to parse the certificates.</p>
+<h3>Event: 'resumeSession'<span><a class="mark" href="#tls_event_resumesession" id="tls_event_resumesession">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.9.2</span>
+</div>
+<p>The <code>'resumeSession'</code> event is emitted when the client requests to resume a
+previous TLS session. The listener callback is passed two arguments when
+called:</p>
+<ul>
+<li><code>sessionId</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> The TLS session identifier</li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> A callback function to be called when the prior session
+has been recovered: <code>callback([err[, sessionData]])</code></p>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>sessionData</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>The event listener should perform a lookup in external storage for the
+<code>sessionData</code> saved by the <a href="#tls_event_newsession"><code>'newSession'</code></a> event handler using the given
+<code>sessionId</code>. If found, call <code>callback(null, sessionData)</code> to resume the session.
+If not found, the session cannot be resumed. <code>callback()</code> must be called
+without <code>sessionData</code> so that the handshake can continue and a new session can
+be created. It is possible to call <code>callback(err)</code> to terminate the incoming
+connection and destroy the socket.</p>
+<p>Listening for this event will have an effect only on connections established
+after the addition of the event listener.</p>
+<p>The following illustrates resuming a TLS session:</p>
+<pre><code class="language-js">const tlsSessionStore = {};
+server.on('newSession', (id, data, cb) =&gt; {
+  tlsSessionStore[id.toString('hex')] = data;
+  cb();
+});
+server.on('resumeSession', (id, cb) =&gt; {
+  cb(null, tlsSessionStore[id.toString('hex')] || null);
+});
+</code></pre>
+<h3>Event: 'secureConnection'<span><a class="mark" href="#tls_event_secureconnection" id="tls_event_secureconnection">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.2</span>
+</div>
+<p>The <code>'secureConnection'</code> event is emitted after the handshaking process for a
+new connection has successfully completed. The listener callback is passed a
+single argument when called:</p>
+<ul>
+<li><code>tlsSocket</code> <a href="https://nodejs.org/api/tls.html#tls_class_tls_tlssocket" class="type">&lt;tls.TLSSocket&gt;</a> The established TLS socket.</li>
+</ul>
+<p>The <code>tlsSocket.authorized</code> property is a <code>boolean</code> indicating whether the
+client has been verified by one of the supplied Certificate Authorities for the
+server. If <code>tlsSocket.authorized</code> is <code>false</code>, then <code>socket.authorizationError</code>
+is set to describe how authorization failed. Depending on the settings
+of the TLS server, unauthorized connections may still be accepted.</p>
+<p>The <code>tlsSocket.alpnProtocol</code> property is a string that contains the selected
+ALPN protocol. When ALPN has no selected protocol, <code>tlsSocket.alpnProtocol</code>
+equals <code>false</code>.</p>
+<p>The <code>tlsSocket.servername</code> property is a string containing the server name
+requested via SNI.</p>
+<h3>Event: 'tlsClientError'<span><a class="mark" href="#tls_event_tlsclienterror" id="tls_event_tlsclienterror">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.0.0</span>
+</div>
+<p>The <code>'tlsClientError'</code> event is emitted when an error occurs before a secure
+connection is established. The listener callback is passed two arguments when
+called:</p>
+<ul>
+<li><code>exception</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> The <code>Error</code> object describing the error</li>
+<li><code>tlsSocket</code> <a href="https://nodejs.org/api/tls.html#tls_class_tls_tlssocket" class="type">&lt;tls.TLSSocket&gt;</a> The <code>tls.TLSSocket</code> instance from which the
+error originated.</li>
+</ul>
+<h3>server.addContext(hostname, context)<span><a class="mark" href="#tls_server_addcontext_hostname_context" id="tls_server_addcontext_hostname_context">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.5.3</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A SNI hostname or wildcard (e.g. <code>'*'</code>)</li>
+<li><code>context</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> An object containing any of the possible properties
+from the <a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a> <code>options</code> arguments (e.g. <code>key</code>,
+<code>cert</code>, <code>ca</code>, etc).</li>
+</ul>
+<p>The <code>server.addContext()</code> method adds a secure context that will be used if
+the client request's SNI name matches the supplied <code>hostname</code> (or wildcard).</p>
+<h3>server.address()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/net.js#L1499">[src]</a><span><a class="mark" href="#tls_server_address" id="tls_server_address">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.6.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>Returns the bound address, the address family name, and port of the
+server as reported by the operating system. See <a href="https://nodejs.org/api/net.html#net_server_address"><code>net.Server.address()</code></a> for
+more information.</p>
+<h3>server.close([callback])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/net.js#L1585">[src]</a><span><a class="mark" href="#tls_server_close_callback" id="tls_server_close_callback">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.2</span>
+</div>
+<ul>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> A listener callback that will be registered to listen
+for the server instance's <code>'close'</code> event.</li>
+<li>Returns: <a href="https://nodejs.org/api/tls.html#tls_class_tls_server" class="type">&lt;tls.Server&gt;</a></li>
+</ul>
+<p>The <code>server.close()</code> method stops the server from accepting new connections.</p>
+<p>This function operates asynchronously. The <code>'close'</code> event will be emitted
+when the server has no more open connections.</p>
+<h3>server.connections<span><a class="mark" href="#tls_server_connections" id="tls_server_connections">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.2</span><span>Deprecated since: v0.9.7</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <a href="https://nodejs.org/api/net.html#net_server_getconnections_callback"><code>server.getConnections()</code></a> instead.</div><p></p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p>Returns the current number of concurrent connections on the server.</p>
+<h3>server.getTicketKeys()<span><a class="mark" href="#tls_server_getticketkeys" id="tls_server_getticketkeys">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v3.0.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> A 48-byte buffer containing the session ticket keys.</li>
+</ul>
+<p>Returns the session ticket keys.</p>
+<p>See <a href="#tls_session_resumption">Session Resumption</a> for more information.</p>
+<h3>server.listen()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/net.js#L1378">[src]</a><span><a class="mark" href="#tls_server_listen" id="tls_server_listen">#</a></span></h3>
+<p>Starts the server listening for encrypted connections.
+This method is identical to <a href="https://nodejs.org/api/net.html#net_server_listen"><code>server.listen()</code></a> from <a href="https://nodejs.org/api/net.html#net_class_net_server"><code>net.Server</code></a>.</p>
+<h3>server.setSecureContext(options)<span><a class="mark" href="#tls_server_setsecurecontext_options" id="tls_server_setsecurecontext_options">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.0.0</span>
+</div>
+<ul>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> An object containing any of the possible properties from
+the <a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a> <code>options</code> arguments (e.g. <code>key</code>, <code>cert</code>,
+<code>ca</code>, etc).</li>
+</ul>
+<p>The <code>server.setSecureContext()</code> method replaces the secure context of an
+existing server. Existing connections to the server are not interrupted.</p>
+<h3>server.setTicketKeys(keys)<span><a class="mark" href="#tls_server_setticketkeys_keys" id="tls_server_setticketkeys_keys">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v3.0.0</span>
+</div>
+<ul>
+<li><code>keys</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> A 48-byte buffer containing the session ticket keys.</li>
+</ul>
+<p>Sets the session ticket keys.</p>
+<p>Changes to the ticket keys are effective only for future server connections.
+Existing or currently pending server connections will use the previous keys.</p>
+<p>See <a href="#tls_session_resumption">Session Resumption</a> for more information.</p>
+<h2>Class: tls.TLSSocket<span><a class="mark" href="#tls_class_tls_tlssocket" id="tls_class_tls_tlssocket">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li>Extends: <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>Performs transparent encryption of written data and all required TLS
+negotiation.</p>
+<p>Instances of <code>tls.TLSSocket</code> implement the duplex <a href="https://nodejs.org/api/stream.html#stream_stream">Stream</a> interface.</p>
+<p>Methods that return TLS connection metadata (e.g.
+<a href="#tls_tlssocket_getpeercertificate_detailed"><code>tls.TLSSocket.getPeerCertificate()</code></a> will only return data while the
+connection is open.</p>
+<h3>new tls.TLSSocket(socket[, options])<span><a class="mark" href="#tls_new_tls_tlssocket_socket_options" id="tls_new_tls_tlssocket_socket_options">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.2.0</td>
+<td><p>The <code>enableTrace</code> option is now supported.</p></td></tr>
+<tr><td>v5.0.0</td>
+<td><p>ALPN options are supported now.</p></td></tr>
+<tr><td>v0.11.4</td>
+<td><p><span>Added in: v0.11.4</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>socket</code> <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a> | <a href="https://nodejs.org/api/stream.html#stream_class_stream_duplex" class="type">&lt;stream.Duplex&gt;</a>
+On the server side, any <code>Duplex</code> stream. On the client side, any
+instance of <a href="https://nodejs.org/api/net.html#net_class_net_socket"><code>net.Socket</code></a> (for generic <code>Duplex</code> stream support
+on the client side, <a href="#tls_tls_connect_options_callback"><code>tls.connect()</code></a> must be used).</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>enableTrace</code>: See <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a></li>
+<li><code>isServer</code>: The SSL/TLS protocol is asymmetrical, TLSSockets must know if
+they are to behave as a server or a client. If <code>true</code> the TLS socket will be
+instantiated as a server. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>server</code> <a href="https://nodejs.org/api/net.html#net_class_net_server" class="type">&lt;net.Server&gt;</a> A <a href="https://nodejs.org/api/net.html#net_class_net_server"><code>net.Server</code></a> instance.</li>
+<li><code>requestCert</code>: Whether to authenticate the remote peer by requesting a
+certificate. Clients always request a server certificate. Servers
+(<code>isServer</code> is true) may set <code>requestCert</code> to true to request a client
+certificate.</li>
+<li><code>rejectUnauthorized</code>: See <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a></li>
+<li><code>ALPNProtocols</code>: See <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a></li>
+<li><code>SNICallback</code>: See <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a></li>
+<li><code>session</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> A <code>Buffer</code> instance containing a TLS session.</li>
+<li><code>requestOCSP</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If <code>true</code>, specifies that the OCSP status request
+extension will be added to the client hello and an <code>'OCSPResponse'</code> event
+will be emitted on the socket before establishing a secure communication</li>
+<li><code>secureContext</code>: TLS context object created with
+<a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a>. If a <code>secureContext</code> is <em>not</em> provided, one
+will be created by passing the entire <code>options</code> object to
+<code>tls.createSecureContext()</code>.</li>
+<li>...: <a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a> options that are used if the
+<code>secureContext</code> option is missing. Otherwise, they are ignored.</li>
+</ul>
+</li>
+</ul>
+<p>Construct a new <code>tls.TLSSocket</code> object from an existing TCP socket.</p>
+<h3>Event: 'keylog'<span><a class="mark" href="#tls_event_keylog_1" id="tls_event_keylog_1">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.3.0</span>
+</div>
+<ul>
+<li><code>line</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> Line of ASCII text, in NSS <code>SSLKEYLOGFILE</code> format.</li>
+</ul>
+<p>The <code>keylog</code> event is emitted on a client <code>tls.TLSSocket</code> when key material
+is generated or received by the socket. This keying material can be stored
+for debugging, as it allows captured TLS traffic to be decrypted. It may
+be emitted multiple times, before or after the handshake completes.</p>
+<p>A typical use case is to append received lines to a common text file, which
+is later used by software (such as Wireshark) to decrypt the traffic:</p>
+<pre><code class="language-js">const logFile = fs.createWriteStream('/tmp/ssl-keys.log', { flags: 'a' });
+// ...
+tlsSocket.on('keylog', (line) =&gt; logFile.write(line));
+</code></pre>
+<h3>Event: 'OCSPResponse'<span><a class="mark" href="#tls_event_ocspresponse" id="tls_event_ocspresponse">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.13</span>
+</div>
+<p>The <code>'OCSPResponse'</code> event is emitted if the <code>requestOCSP</code> option was set
+when the <code>tls.TLSSocket</code> was created and an OCSP response has been received.
+The listener callback is passed a single argument when called:</p>
+<ul>
+<li><code>response</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> The server's OCSP response</li>
+</ul>
+<p>Typically, the <code>response</code> is a digitally signed object from the server's CA that
+contains information about server's certificate revocation status.</p>
+<h3>Event: 'secureConnect'<span><a class="mark" href="#tls_event_secureconnect" id="tls_event_secureconnect">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<p>The <code>'secureConnect'</code> event is emitted after the handshaking process for a new
+connection has successfully completed. The listener callback will be called
+regardless of whether or not the server's certificate has been authorized. It
+is the client's responsibility to check the <code>tlsSocket.authorized</code> property to
+determine if the server certificate was signed by one of the specified CAs. If
+<code>tlsSocket.authorized === false</code>, then the error can be found by examining the
+<code>tlsSocket.authorizationError</code> property. If ALPN was used, the
+<code>tlsSocket.alpnProtocol</code> property can be checked to determine the negotiated
+protocol.</p>
+<h3>Event: 'session'<span><a class="mark" href="#tls_event_session" id="tls_event_session">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.10.0</span>
+</div>
+<ul>
+<li><code>session</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>The <code>'session'</code> event is emitted on a client <code>tls.TLSSocket</code> when a new session
+or TLS ticket is available. This may or may not be before the handshake is
+complete, depending on the TLS protocol version that was negotiated. The event
+is not emitted on the server, or if a new session was not created, for example,
+when the connection was resumed. For some TLS protocol versions the event may be
+emitted multiple times, in which case all the sessions can be used for
+resumption.</p>
+<p>On the client, the <code>session</code> can be provided to the <code>session</code> option of
+<a href="#tls_tls_connect_options_callback"><code>tls.connect()</code></a> to resume the connection.</p>
+<p>See <a href="#tls_session_resumption">Session Resumption</a> for more information.</p>
+<p>Note: For TLSv1.2 and below, <a href="#tls_tlssocket_getsession"><code>tls.TLSSocket.getSession()</code></a> can be called once
+the handshake is complete.  For TLSv1.3, only ticket based resumption is allowed
+by the protocol, multiple tickets are sent, and the tickets aren't sent until
+later, after the handshake completes, so it is necessary to wait for the
+<code>'session'</code> event to get a resumable session.  Applications are
+recommended to use the <code>'session'</code> event instead of <code>getSession()</code> to ensure
+they will work for all TLS protocol versions.  Applications that only expect to
+get or use 1 session should listen for this event only once:</p>
+<pre><code class="language-js">tlsSocket.once('session', (session) =&gt; {
+  // The session can be used immediately or later.
+  tls.connect({
+    session: session,
+    // Other connect options...
+  });
+});
+</code></pre>
+<h3>tlsSocket.address()<span><a class="mark" href="#tls_tlssocket_address" id="tls_tlssocket_address">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>Returns the bound <code>address</code>, the address <code>family</code> name, and <code>port</code> of the
+underlying socket as reported by the operating system:
+<code>{ port: 12346, family: 'IPv4', address: '127.0.0.1' }</code>.</p>
+<h3>tlsSocket.authorizationError<span><a class="mark" href="#tls_tlssocket_authorizationerror" id="tls_tlssocket_authorizationerror">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<p>Returns the reason why the peer's certificate was not been verified. This
+property is set only when <code>tlsSocket.authorized === false</code>.</p>
+<h3>tlsSocket.authorized<span><a class="mark" href="#tls_tlssocket_authorized" id="tls_tlssocket_authorized">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the peer certificate was signed by one of the CAs specified
+when creating the <code>tls.TLSSocket</code> instance, otherwise <code>false</code>.</p>
+<h3>tlsSocket.disableRenegotiation()<span><a class="mark" href="#tls_tlssocket_disablerenegotiation" id="tls_tlssocket_disablerenegotiation">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.4.0</span>
+</div>
+<p>Disables TLS renegotiation for this <code>TLSSocket</code> instance. Once called, attempts
+to renegotiate will trigger an <code>'error'</code> event on the <code>TLSSocket</code>.</p>
+<h3>tlsSocket.enableTrace()<span><a class="mark" href="#tls_tlssocket_enabletrace" id="tls_tlssocket_enabletrace">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.2.0</span>
+</div>
+<p>When enabled, TLS packet trace information is written to <code>stderr</code>. This can be
+used to debug TLS connection problems.</p>
+<p>Note: The format of the output is identical to the output of <code>openssl s_client -trace</code> or <code>openssl s_server -trace</code>. While it is produced by OpenSSL's
+<code>SSL_trace()</code> function, the format is undocumented, can change without notice,
+and should not be relied on.</p>
+<h3>tlsSocket.encrypted<span><a class="mark" href="#tls_tlssocket_encrypted" id="tls_tlssocket_encrypted">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<p>Always returns <code>true</code>. This may be used to distinguish TLS sockets from regular
+<code>net.Socket</code> instances.</p>
+<h3>tlsSocket.getCertificate()<span><a class="mark" href="#tls_tlssocket_getcertificate" id="tls_tlssocket_getcertificate">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.2.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>Returns an object representing the local certificate. The returned object has
+some properties corresponding to the fields of the certificate.</p>
+<p>See <a href="#tls_tlssocket_getpeercertificate_detailed"><code>tls.TLSSocket.getPeerCertificate()</code></a> for an example of the certificate
+structure.</p>
+<p>If there is no local certificate, an empty object will be returned. If the
+socket has been destroyed, <code>null</code> will be returned.</p>
+<h3>tlsSocket.getCipher()<span><a class="mark" href="#tls_tlssocket_getcipher" id="tls_tlssocket_getcipher">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>Return the minimum cipher version, instead of a fixed string (<code>'TLSv1/SSLv3'</code>).</p></td></tr>
+<tr><td>v0.11.4</td>
+<td><p><span>Added in: v0.11.4</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li>
+<p>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The name of the cipher suite.</li>
+<li><code>version</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The minimum TLS protocol version supported by this cipher
+suite.</li>
+</ul>
+</li>
+</ul>
+<p>Returns an object containing information on the negotiated cipher suite.</p>
+<p>For example: <code>{ name: 'AES256-SHA', version: 'TLSv1.2' }</code>.</p>
+<p>See
+<a href="https://www.openssl.org/docs/man1.1.1/man3/SSL_CIPHER_get_name.html">OpenSSL</a>
+for more information.</p>
+<h3>tlsSocket.getEphemeralKeyInfo()<span><a class="mark" href="#tls_tlssocket_getephemeralkeyinfo" id="tls_tlssocket_getephemeralkeyinfo">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v5.0.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>Returns an object representing the type, name, and size of parameter of
+an ephemeral key exchange in <a href="#tls_perfect_forward_secrecy">Perfect Forward Secrecy</a> on a client
+connection. It returns an empty object when the key exchange is not
+ephemeral. As this is only supported on a client socket; <code>null</code> is returned
+if called on a server socket. The supported types are <code>'DH'</code> and <code>'ECDH'</code>. The
+<code>name</code> property is available only when type is <code>'ECDH'</code>.</p>
+<p>For example: <code>{ type: 'ECDH', name: 'prime256v1', size: 256 }</code>.</p>
+<h3>tlsSocket.getFinished()<span><a class="mark" href="#tls_tlssocket_getfinished" id="tls_tlssocket_getfinished">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v9.9.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Undefined_type" class="type">&lt;undefined&gt;</a> The latest <code>Finished</code> message that has been
+sent to the socket as part of a SSL/TLS handshake, or <code>undefined</code> if
+no <code>Finished</code> message has been sent yet.</li>
+</ul>
+<p>As the <code>Finished</code> messages are message digests of the complete handshake
+(with a total of 192 bits for TLS 1.0 and more for SSL 3.0), they can
+be used for external authentication procedures when the authentication
+provided by SSL/TLS is not desired or is not enough.</p>
+<p>Corresponds to the <code>SSL_get_finished</code> routine in OpenSSL and may be used
+to implement the <code>tls-unique</code> channel binding from <a href="https://tools.ietf.org/html/rfc5929">RFC 5929</a>.</p>
+<h3>tlsSocket.getPeerCertificate([detailed])<span><a class="mark" href="#tls_tlssocket_getpeercertificate_detailed" id="tls_tlssocket_getpeercertificate_detailed">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li><code>detailed</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Include the full certificate chain if <code>true</code>, otherwise
+include just the peer's certificate.</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> A certificate object.</li>
+</ul>
+<p>Returns an object representing the peer's certificate. If the peer does not
+provide a certificate, an empty object will be returned. If the socket has been
+destroyed, <code>null</code> will be returned.</p>
+<p>If the full certificate chain was requested, each certificate will include an
+<code>issuerCertificate</code> property containing an object representing its issuer's
+certificate.</p>
+<h4>Certificate Object<span><a class="mark" href="#tls_certificate_object" id="tls_certificate_object">#</a></span></h4>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.4.0</td>
+<td><p>Support Elliptic Curve public key info.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>A certificate object has properties corresponding to the fields of the
+certificate.</p>
+<ul>
+<li><code>raw</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> The DER encoded X.509 certificate data.</li>
+<li><code>subject</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> The certificate subject, described in terms of
+ Country (<code>C:</code>), StateOrProvince (<code>ST</code>), Locality (<code>L</code>), Organization (<code>O</code>),
+OrganizationalUnit (<code>OU</code>), and CommonName (<code>CN</code>). The CommonName is typically
+a DNS name with TLS certificates. Example:
+<code>{C: 'UK', ST: 'BC', L: 'Metro', O: 'Node Fans', OU: 'Docs', CN: 'example.com'}</code>.</li>
+<li><code>issuer</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> The certificate issuer, described in the same terms as the
+ <code>subject</code>.</li>
+<li><code>valid_from</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The date-time the certificate is valid from.</li>
+<li><code>valid_to</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The date-time the certificate is valid to.</li>
+<li><code>serialNumber</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The certificate serial number, as a hex string.
+ Example: <code>'B9B0D332A1AA5635'</code>.</li>
+<li><code>fingerprint</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The SHA-1 digest of the DER encoded certificate. It is
+returned as a <code>:</code> separated hexadecimal string. Example: <code>'2A:7A:C2:DD:...'</code>.</li>
+<li><code>fingerprint256</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The SHA-256 digest of the DER encoded certificate.
+ It is returned as a <code>:</code> separated hexadecimal string. Example:
+<code>'2A:7A:C2:DD:...'</code>.</li>
+<li><code>ext_key_usage</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a> (Optional) The extended key usage, a set of OIDs.</li>
+<li><code>subjectaltname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> (Optional) A string containing concatenated names
+for the subject, an alternative to the <code>subject</code> names.</li>
+<li><code>infoAccess</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a> (Optional) An array describing the AuthorityInfoAccess,
+ used with OCSP.</li>
+<li><code>issuerCertificate</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> (Optional) The issuer certificate object. For
+ self-signed certificates, this may be a circular reference.</li>
+</ul>
+<p>The certificate may contain information about the public key, depending on
+the key type.</p>
+<p>For RSA keys, the following properties may be defined:</p>
+<ul>
+<li><code>bits</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The RSA bit size. Example: <code>1024</code>.</li>
+<li><code>exponent</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The RSA exponent, as a string in hexadecimal number
+notation. Example: <code>'0x010001'</code>.</li>
+<li><code>modulus</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The RSA modulus, as a hexadecimal string. Example:
+ <code>'B56CE45CB7...'</code>.</li>
+<li><code>pubkey</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> The public key.</li>
+</ul>
+<p>For EC keys, the following properties may be defined:</p>
+<ul>
+<li><code>pubkey</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> The public key.</li>
+<li><code>bits</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The key size in bits. Example: <code>256</code>.</li>
+<li><code>asn1Curve</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> (Optional) The ASN.1 name of the OID of the elliptic
+curve. Well-known curves are identified by an OID. While it is unusual, it is
+possible that the curve is identified by its mathematical properties, in which
+case it will not have an OID. Example: <code>'prime256v1'</code>.</li>
+<li><code>nistCurve</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> (Optional) The NIST name for the elliptic curve, if it
+has one (not all well-known curves have been assigned names by NIST). Example:
+<code>'P-256'</code>.</li>
+</ul>
+<p>Example certificate:</p>
+<pre><code class="language-text">{ subject:
+   { OU: [ 'Domain Control Validated', 'PositiveSSL Wildcard' ],
+     CN: '*.nodejs.org' },
+  issuer:
+   { C: 'GB',
+     ST: 'Greater Manchester',
+     L: 'Salford',
+     O: 'COMODO CA Limited',
+     CN: 'COMODO RSA Domain Validation Secure Server CA' },
+  subjectaltname: 'DNS:*.nodejs.org, DNS:nodejs.org',
+  infoAccess:
+   { 'CA Issuers - URI':
+      [ 'http://crt.comodoca.com/COMODORSADomainValidationSecureServerCA.crt' ],
+     'OCSP - URI': [ 'http://ocsp.comodoca.com' ] },
+  modulus: 'B56CE45CB740B09A13F64AC543B712FF9EE8E4C284B542A1708A27E82A8D151CA178153E12E6DDA15BF70FFD96CB8A88618641BDFCCA03527E665B70D779C8A349A6F88FD4EF6557180BD4C98192872BCFE3AF56E863C09DDD8BC1EC58DF9D94F914F0369102B2870BECFA1348A0838C9C49BD1C20124B442477572347047506B1FCD658A80D0C44BCC16BC5C5496CFE6E4A8428EF654CD3D8972BF6E5BFAD59C93006830B5EB1056BBB38B53D1464FA6E02BFDF2FF66CD949486F0775EC43034EC2602AEFBF1703AD221DAA2A88353C3B6A688EFE8387811F645CEED7B3FE46E1F8B9F59FAD028F349B9BC14211D5830994D055EEA3D547911E07A0ADDEB8A82B9188E58720D95CD478EEC9AF1F17BE8141BE80906F1A339445A7EB5B285F68039B0F294598A7D1C0005FC22B5271B0752F58CCDEF8C8FD856FB7AE21C80B8A2CE983AE94046E53EDE4CB89F42502D31B5360771C01C80155918637490550E3F555E2EE75CC8C636DDE3633CFEDD62E91BF0F7688273694EEEBA20C2FC9F14A2A435517BC1D7373922463409AB603295CEB0BB53787A334C9CA3CA8B30005C5A62FC0715083462E00719A8FA3ED0A9828C3871360A73F8B04A4FC1E71302844E9BB9940B77E745C9D91F226D71AFCAD4B113AAF68D92B24DDB4A2136B55A1CD1ADF39605B63CB639038ED0F4C987689866743A68769CC55847E4A06D6E2E3F1',
+  exponent: '0x10001',
+  pubkey: &lt;Buffer ... &gt;,
+  valid_from: 'Aug 14 00:00:00 2017 GMT',
+  valid_to: 'Nov 20 23:59:59 2019 GMT',
+  fingerprint: '01:02:59:D9:C3:D2:0D:08:F7:82:4E:44:A4:B4:53:C5:E2:3A:87:4D',
+  fingerprint256: '69:AE:1A:6A:D4:3D:C6:C1:1B:EA:C6:23:DE:BA:2A:14:62:62:93:5C:7A:EA:06:41:9B:0B:BC:87:CE:48:4E:02',
+  ext_key_usage: [ '1.3.6.1.5.5.7.3.1', '1.3.6.1.5.5.7.3.2' ],
+  serialNumber: '66593D57F20CBC573E433381B5FEC280',
+  raw: &lt;Buffer ... &gt; }
+</code></pre>
+<h3>tlsSocket.getPeerFinished()<span><a class="mark" href="#tls_tlssocket_getpeerfinished" id="tls_tlssocket_getpeerfinished">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v9.9.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Undefined_type" class="type">&lt;undefined&gt;</a> The latest <code>Finished</code> message that is expected
+or has actually been received from the socket as part of a SSL/TLS handshake,
+or <code>undefined</code> if there is no <code>Finished</code> message so far.</li>
+</ul>
+<p>As the <code>Finished</code> messages are message digests of the complete handshake
+(with a total of 192 bits for TLS 1.0 and more for SSL 3.0), they can
+be used for external authentication procedures when the authentication
+provided by SSL/TLS is not desired or is not enough.</p>
+<p>Corresponds to the <code>SSL_get_peer_finished</code> routine in OpenSSL and may be used
+to implement the <code>tls-unique</code> channel binding from <a href="https://tools.ietf.org/html/rfc5929">RFC 5929</a>.</p>
+<h3>tlsSocket.getProtocol()<span><a class="mark" href="#tls_tlssocket_getprotocol" id="tls_tlssocket_getprotocol">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v5.7.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type" class="type">&lt;null&gt;</a></li>
+</ul>
+<p>Returns a string containing the negotiated SSL/TLS protocol version of the
+current connection. The value <code>'unknown'</code> will be returned for connected
+sockets that have not completed the handshaking process. The value <code>null</code> will
+be returned for server sockets or disconnected client sockets.</p>
+<p>Protocol versions are:</p>
+<ul>
+<li><code>'SSLv3'</code></li>
+<li><code>'TLSv1'</code></li>
+<li><code>'TLSv1.1'</code></li>
+<li><code>'TLSv1.2'</code></li>
+<li><code>'TLSv1.3'</code></li>
+</ul>
+<p>See the OpenSSL <a href="https://www.openssl.org/docs/man1.1.1/man3/SSL_get_version.html"><code>SSL_get_version</code></a> documentation for more information.</p>
+<h3>tlsSocket.getSession()<span><a class="mark" href="#tls_tlssocket_getsession" id="tls_tlssocket_getsession">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li><a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>Returns the TLS session data or <code>undefined</code> if no session was
+negotiated. On the client, the data can be provided to the <code>session</code> option of
+<a href="#tls_tls_connect_options_callback"><code>tls.connect()</code></a> to resume the connection. On the server, it may be useful
+for debugging.</p>
+<p>See <a href="#tls_session_resumption">Session Resumption</a> for more information.</p>
+<p>Note: <code>getSession()</code> works only for TLSv1.2 and below. For TLSv1.3, applications
+must use the <a href="#tls_event_session"><code>'session'</code></a> event (it also works for TLSv1.2 and below).</p>
+<h3>tlsSocket.getTLSTicket()<span><a class="mark" href="#tls_tlssocket_gettlsticket" id="tls_tlssocket_gettlsticket">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li><a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>For a client, returns the TLS session ticket if one is available, or
+<code>undefined</code>. For a server, always returns <code>undefined</code>.</p>
+<p>It may be useful for debugging.</p>
+<p>See <a href="#tls_session_resumption">Session Resumption</a> for more information.</p>
+<h3>tlsSocket.isSessionReused()<span><a class="mark" href="#tls_tlssocket_issessionreused" id="tls_tlssocket_issessionreused">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.5.6</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> <code>true</code> if the session was reused, <code>false</code> otherwise.</li>
+</ul>
+<p>See <a href="#tls_session_resumption">Session Resumption</a> for more information.</p>
+<h3>tlsSocket.localAddress<span><a class="mark" href="#tls_tlssocket_localaddress" id="tls_tlssocket_localaddress">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Returns the string representation of the local IP address.</p>
+<h3>tlsSocket.localPort<span><a class="mark" href="#tls_tlssocket_localport" id="tls_tlssocket_localport">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p>Returns the numeric representation of the local port.</p>
+<h3>tlsSocket.remoteAddress<span><a class="mark" href="#tls_tlssocket_remoteaddress" id="tls_tlssocket_remoteaddress">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Returns the string representation of the remote IP address. For example,
+<code>'74.125.127.100'</code> or <code>'2001:4860:a005::68'</code>.</p>
+<h3>tlsSocket.remoteFamily<span><a class="mark" href="#tls_tlssocket_remotefamily" id="tls_tlssocket_remotefamily">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Returns the string representation of the remote IP family. <code>'IPv4'</code> or <code>'IPv6'</code>.</p>
+<h3>tlsSocket.remotePort<span><a class="mark" href="#tls_tlssocket_remoteport" id="tls_tlssocket_remoteport">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p>Returns the numeric representation of the remote port. For example, <code>443</code>.</p>
+<h3>tlsSocket.renegotiate(options, callback)<span><a class="mark" href="#tls_tlssocket_renegotiate_options_callback" id="tls_tlssocket_renegotiate_options_callback">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.8</span>
+</div>
+<ul>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>rejectUnauthorized</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If not <code>false</code>, the server certificate is
+verified against the list of supplied CAs. An <code>'error'</code> event is emitted if
+verification fails; <code>err.code</code> contains the OpenSSL error code. <strong>Default:</strong>
+<code>true</code>.</li>
+<li><code>requestCert</code></li>
+</ul>
+</li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> If <code>renegotiate()</code> returned <code>true</code>, callback is
+attached once to the <code>'secure'</code> event. If <code>renegotiate()</code> returned <code>false</code>,
+<code>callback</code> will be called in the next tick with an error, unless the
+<code>tlsSocket</code> has been destroyed, in which case <code>callback</code> will not be called
+at all.</p>
+</li>
+<li>
+<p>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> <code>true</code> if renegotiation was initiated, <code>false</code> otherwise.</p>
+</li>
+</ul>
+<p>The <code>tlsSocket.renegotiate()</code> method initiates a TLS renegotiation process.
+Upon completion, the <code>callback</code> function will be passed a single argument
+that is either an <code>Error</code> (if the request failed) or <code>null</code>.</p>
+<p>This method can be used to request a peer's certificate after the secure
+connection has been established.</p>
+<p>When running as the server, the socket will be destroyed with an error after
+<code>handshakeTimeout</code> timeout.</p>
+<p>For TLSv1.3, renegotiation cannot be initiated, it is not supported by the
+protocol.</p>
+<h3>tlsSocket.setMaxSendFragment(size)<span><a class="mark" href="#tls_tlssocket_setmaxsendfragment_size" id="tls_tlssocket_setmaxsendfragment_size">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.11</span>
+</div>
+<ul>
+<li><code>size</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The maximum TLS fragment size. The maximum value is <code>16384</code>.
+<strong>Default:</strong> <code>16384</code>.</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>The <code>tlsSocket.setMaxSendFragment()</code> method sets the maximum TLS fragment size.
+Returns <code>true</code> if setting the limit succeeded; <code>false</code> otherwise.</p>
+<p>Smaller fragment sizes decrease the buffering latency on the client: larger
+fragments are buffered by the TLS layer until the entire fragment is received
+and its integrity is verified; large fragments can span multiple roundtrips
+and their processing can be delayed due to packet loss or reordering. However,
+smaller fragments add extra TLS framing bytes and CPU overhead, which may
+decrease overall server throughput.</p>
+<h2>tls.checkServerIdentity(hostname, cert)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/tls.js#L207">[src]</a><span><a class="mark" href="#tls_tls_checkserveridentity_hostname_cert" id="tls_tls_checkserveridentity_hostname_cert">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.8.4</span>
+</div>
+<ul>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The host name or IP address to verify the certificate
+against.</li>
+<li><code>cert</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> A <a href="#tls_certificate_object">certificate object</a> representing the peer's certificate.</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Undefined_type" class="type">&lt;undefined&gt;</a></li>
+</ul>
+<p>Verifies the certificate <code>cert</code> is issued to <code>hostname</code>.</p>
+<p>Returns <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> object, populating it with <code>reason</code>, <code>host</code>, and <code>cert</code> on
+failure. On success, returns <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Undefined_type" class="type">&lt;undefined&gt;</a>.</p>
+<p>This function can be overwritten by providing alternative function as part of
+the <code>options.checkServerIdentity</code> option passed to <code>tls.connect()</code>. The
+overwriting function can call <code>tls.checkServerIdentity()</code> of course, to augment
+the checks done with additional verification.</p>
+<p>This function is only called if the certificate passed all other checks, such as
+being issued by trusted CA (<code>options.ca</code>).</p>
+<h2>tls.connect(options[, callback])<span><a class="mark" href="#tls_tls_connect_options_callback" id="tls_tls_connect_options_callback">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.9.0</td>
+<td><p>Support the <code>allowHalfOpen</code> option.</p></td></tr>
+<tr><td>v12.4.0</td>
+<td><p>The <code>hints</code> option is now supported.</p></td></tr>
+<tr><td>v12.2.0</td>
+<td><p>The <code>enableTrace</code> option is now supported.</p></td></tr>
+<tr><td>v11.8.0</td>
+<td><p>The <code>timeout</code> option is supported now.</p></td></tr>
+<tr><td>v8.0.0</td>
+<td><p>The <code>lookup</code> option is supported now.</p></td></tr>
+<tr><td>v8.0.0</td>
+<td><p>The <code>ALPNProtocols</code> option can be a <code>TypedArray</code> or <code>DataView</code> now.</p></td></tr>
+<tr><td>v5.3.0, v4.7.0</td>
+<td><p>The <code>secureContext</code> option is supported now.</p></td></tr>
+<tr><td>v5.0.0</td>
+<td><p>ALPN options are supported now.</p></td></tr>
+<tr><td>v0.11.3</td>
+<td><p><span>Added in: v0.11.3</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>enableTrace</code>: See <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a></li>
+<li><code>host</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Host the client should connect to. <strong>Default:</strong>
+<code>'localhost'</code>.</li>
+<li><code>port</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Port the client should connect to.</li>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Creates Unix socket connection to path. If this option is
+specified, <code>host</code> and <code>port</code> are ignored.</li>
+<li><code>socket</code> <a href="https://nodejs.org/api/stream.html#stream_class_stream_duplex" class="type">&lt;stream.Duplex&gt;</a> Establish secure connection on a given socket
+rather than creating a new socket. Typically, this is an instance of
+<a href="https://nodejs.org/api/net.html#net_class_net_socket"><code>net.Socket</code></a>, but any <code>Duplex</code> stream is allowed.
+If this option is specified, <code>path</code>, <code>host</code> and <code>port</code> are ignored,
+except for certificate validation. Usually, a socket is already connected
+when passed to <code>tls.connect()</code>, but it can be connected later.
+Connection/disconnection/destruction of <code>socket</code> is the user's
+responsibility; calling <code>tls.connect()</code> will not cause <code>net.connect()</code> to be
+called.</li>
+<li><code>allowHalfOpen</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If the <code>socket</code> option is missing, indicates
+whether or not to allow the internally created socket to be half-open,
+otherwise the option is ignored. See the <code>allowHalfOpen</code> option of
+<a href="https://nodejs.org/api/net.html#net_class_net_socket"><code>net.Socket</code></a> for details. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>rejectUnauthorized</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If not <code>false</code>, the server certificate is
+verified against the list of supplied CAs. An <code>'error'</code> event is emitted if
+verification fails; <code>err.code</code> contains the OpenSSL error code. <strong>Default:</strong>
+<code>true</code>.</li>
+<li><code>ALPNProtocols</code>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer[]&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" class="type">&lt;TypedArray[]&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView" class="type">&lt;DataView[]&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" class="type">&lt;TypedArray&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView" class="type">&lt;DataView&gt;</a>
+An array of strings, <code>Buffer</code>s or <code>TypedArray</code>s or <code>DataView</code>s, or a
+single <code>Buffer</code> or <code>TypedArray</code> or <code>DataView</code> containing the supported ALPN
+protocols. <code>Buffer</code>s should have the format <code>[len][name][len][name]...</code>
+e.g. <code>'\x08http/1.1\x08http/1.0'</code>, where the <code>len</code> byte is the length of the
+next protocol name. Passing an array is usually much simpler, e.g.
+<code>['http/1.1', 'http/1.0']</code>. Protocols earlier in the list have higher
+preference than those later.</li>
+<li><code>servername</code>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Server name for the SNI (Server Name Indication) TLS
+extension. It is the name of the host being connected to, and must be a host
+name, and not an IP address. It can be used by a multi-homed server to
+choose the correct certificate to present to the client, see the
+<code>SNICallback</code> option to <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a>.</li>
+<li><code>checkServerIdentity(servername, cert)</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> A callback function
+to be used (instead of the builtin <code>tls.checkServerIdentity()</code> function)
+when checking the server's hostname (or the provided <code>servername</code> when
+explicitly set) against the certificate. This should return an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> if
+verification fails. The method should return <code>undefined</code> if the <code>servername</code>
+and <code>cert</code> are verified.</li>
+<li><code>session</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> A <code>Buffer</code> instance, containing TLS session.</li>
+<li><code>minDHSize</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Minimum size of the DH parameter in bits to accept a
+TLS connection. When a server offers a DH parameter with a size less
+than <code>minDHSize</code>, the TLS connection is destroyed and an error is thrown.
+<strong>Default:</strong> <code>1024</code>.</li>
+<li><code>secureContext</code>: TLS context object created with
+<a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a>. If a <code>secureContext</code> is <em>not</em> provided, one
+will be created by passing the entire <code>options</code> object to
+<code>tls.createSecureContext()</code>.</li>
+<li>...: <a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a> options that are used if the
+<code>secureContext</code> option is missing, otherwise they are ignored.</li>
+<li>...: Any <a href="https://nodejs.org/api/net.html#net_socket_connect_options_connectlistener"><code>socket.connect()</code></a> option not already listed.</li>
+</ul>
+</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://nodejs.org/api/tls.html#tls_class_tls_tlssocket" class="type">&lt;tls.TLSSocket&gt;</a></li>
+</ul>
+<p>The <code>callback</code> function, if specified, will be added as a listener for the
+<a href="#tls_event_secureconnect"><code>'secureConnect'</code></a> event.</p>
+<p><code>tls.connect()</code> returns a <a href="#tls_class_tls_tlssocket"><code>tls.TLSSocket</code></a> object.</p>
+<p>The following illustrates a client for the echo server example from
+<a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a>:</p>
+<pre><code class="language-js">// Assumes an echo server that is listening on port 8000.
+const tls = require('tls');
+const fs = require('fs');
+
+const options = {
+  // Necessary only if the server requires client certificate authentication.
+  key: fs.readFileSync('client-key.pem'),
+  cert: fs.readFileSync('client-cert.pem'),
+
+  // Necessary only if the server uses a self-signed certificate.
+  ca: [ fs.readFileSync('server-cert.pem') ],
+
+  // Necessary only if the server's cert isn't for "localhost".
+  checkServerIdentity: () =&gt; { return null; },
+};
+
+const socket = tls.connect(8000, options, () =&gt; {
+  console.log('client connected',
+              socket.authorized ? 'authorized' : 'unauthorized');
+  process.stdin.pipe(socket);
+  process.stdin.resume();
+});
+socket.setEncoding('utf8');
+socket.on('data', (data) =&gt; {
+  console.log(data);
+});
+socket.on('end', () =&gt; {
+  console.log('server ends connection');
+});
+</code></pre>
+<h2>tls.connect(path[, options][, callback])<span><a class="mark" href="#tls_tls_connect_path_options_callback" id="tls_tls_connect_path_options_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.11.3</span>
+</div>
+<ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Default value for <code>options.path</code>.</li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> See <a href="#tls_tls_connect_options_callback"><code>tls.connect()</code></a>.</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> See <a href="#tls_tls_connect_options_callback"><code>tls.connect()</code></a>.</li>
+<li>Returns: <a href="https://nodejs.org/api/tls.html#tls_class_tls_tlssocket" class="type">&lt;tls.TLSSocket&gt;</a></li>
+</ul>
+<p>Same as <a href="#tls_tls_connect_options_callback"><code>tls.connect()</code></a> except that <code>path</code> can be provided
+as an argument instead of an option.</p>
+<p>A path option, if specified, will take precedence over the path argument.</p>
+<h2>tls.connect(port[, host][, options][, callback])<span><a class="mark" href="#tls_tls_connect_port_host_options_callback" id="tls_tls_connect_port_host_options_callback">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.11.3</span>
+</div>
+<ul>
+<li><code>port</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Default value for <code>options.port</code>.</li>
+<li><code>host</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Default value for <code>options.host</code>.</li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> See <a href="#tls_tls_connect_options_callback"><code>tls.connect()</code></a>.</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> See <a href="#tls_tls_connect_options_callback"><code>tls.connect()</code></a>.</li>
+<li>Returns: <a href="https://nodejs.org/api/tls.html#tls_class_tls_tlssocket" class="type">&lt;tls.TLSSocket&gt;</a></li>
+</ul>
+<p>Same as <a href="#tls_tls_connect_options_callback"><code>tls.connect()</code></a> except that <code>port</code> and <code>host</code> can be provided
+as arguments instead of options.</p>
+<p>A port or host option, if specified, will take precedence over any port or host
+argument.</p>
+<h2>tls.createSecureContext([options])<span><a class="mark" href="#tls_tls_createsecurecontext_options" id="tls_tls_createsecurecontext_options">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>TLSv1.3 support added.</p></td></tr>
+<tr><td>v11.5.0</td>
+<td><p>The <code>ca:</code> option now supports <code>BEGIN TRUSTED CERTIFICATE</code>.</p></td></tr>
+<tr><td>v11.4.0</td>
+<td><p>The <code>minVersion</code> and <code>maxVersion</code> can be used to restrict the allowed TLS protocol versions.</p></td></tr>
+<tr><td>v10.0.0</td>
+<td><p>The <code>ecdhCurve</code> cannot be set to <code>false</code> anymore due to a change in OpenSSL.</p></td></tr>
+<tr><td>v9.3.0</td>
+<td><p>The <code>options</code> parameter can now include <code>clientCertEngine</code>.</p></td></tr>
+<tr><td>v9.0.0</td>
+<td><p>The <code>ecdhCurve</code> option can now be multiple <code>':'</code> separated curve names or <code>'auto'</code>.</p></td></tr>
+<tr><td>v7.3.0</td>
+<td><p>If the <code>key</code> option is an array, individual entries do not need a <code>passphrase</code> property anymore. <code>Array</code> entries can also just be <code>string</code>s or <code>Buffer</code>s now.</p></td></tr>
+<tr><td>v5.2.0</td>
+<td><p>The <code>ca</code> option can now be a single string containing multiple CA certificates.</p></td></tr>
+<tr><td>v0.11.13</td>
+<td><p><span>Added in: v0.11.13</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>ca</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer[]&gt;</a> Optionally override the trusted CA
+certificates. Default is to trust the well-known CAs curated by Mozilla.
+Mozilla's CAs are completely replaced when CAs are explicitly specified
+using this option. The value can be a string or <code>Buffer</code>, or an <code>Array</code> of
+strings and/or <code>Buffer</code>s. Any string or <code>Buffer</code> can contain multiple PEM
+CAs concatenated together. The peer's certificate must be chainable to a CA
+trusted by the server for the connection to be authenticated. When using
+certificates that are not chainable to a well-known CA, the certificate's CA
+must be explicitly specified as a trusted or the connection will fail to
+authenticate.
+If the peer uses a certificate that doesn't match or chain to one of the
+default CAs, use the <code>ca</code> option to provide a CA certificate that the peer's
+certificate can match or chain to.
+For self-signed certificates, the certificate is its own CA, and must be
+provided.
+For PEM encoded certificates, supported types are "TRUSTED CERTIFICATE",
+"X509 CERTIFICATE", and "CERTIFICATE".
+See also <a href="#tls_tls_rootcertificates"><code>tls.rootCertificates</code></a>.</li>
+<li><code>cert</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer[]&gt;</a> Cert chains in PEM format. One cert
+chain should be provided per private key. Each cert chain should consist of
+the PEM formatted certificate for a provided private <code>key</code>, followed by the
+PEM formatted intermediate certificates (if any), in order, and not
+including the root CA (the root CA must be pre-known to the peer, see <code>ca</code>).
+When providing multiple cert chains, they do not have to be in the same
+order as their private keys in <code>key</code>. If the intermediate certificates are
+not provided, the peer will not be able to validate the certificate, and the
+handshake will fail.</li>
+<li><code>ciphers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Cipher suite specification, replacing the default. For
+more information, see <a href="#tls_modifying_the_default_tls_cipher_suite">modifying the default cipher suite</a>. Permitted
+ciphers can be obtained via <a href="#tls_tls_getciphers"><code>tls.getCiphers()</code></a>. Cipher names must be
+uppercased in order for OpenSSL to accept them.</li>
+<li><code>clientCertEngine</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Name of an OpenSSL engine which can provide the
+client certificate.</li>
+<li><code>crl</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer[]&gt;</a> PEM formatted CRLs (Certificate
+Revocation Lists).</li>
+<li><code>dhparam</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> Diffie Hellman parameters, required for
+<a href="#tls_perfect_forward_secrecy">Perfect Forward Secrecy</a>. Use <code>openssl dhparam</code> to create the parameters.
+The key length must be greater than or equal to 1024 bits or else an error
+will be thrown. Although 1024 bits is permissible, use 2048 bits or larger
+for stronger security. If omitted or invalid, the parameters are silently
+discarded and DHE ciphers will not be available.</li>
+<li><code>ecdhCurve</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A string describing a named curve or a colon separated
+list of curve NIDs or names, for example <code>P-521:P-384:P-256</code>, to use for
+ECDH key agreement. Set to <code>auto</code> to select the
+curve automatically. Use <a href="https://nodejs.org/api/crypto.html#crypto_crypto_getcurves"><code>crypto.getCurves()</code></a> to obtain a list of
+available curve names. On recent releases, <code>openssl ecparam -list_curves</code>
+will also display the name and description of each available elliptic curve.
+<strong>Default:</strong> <a href="#tls_tls_default_ecdh_curve"><code>tls.DEFAULT_ECDH_CURVE</code></a>.</li>
+<li><code>honorCipherOrder</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Attempt to use the server's cipher suite
+preferences instead of the client's. When <code>true</code>, causes
+<code>SSL_OP_CIPHER_SERVER_PREFERENCE</code> to be set in <code>secureOptions</code>, see
+<a href="https://nodejs.org/api/crypto.html#crypto_openssl_options">OpenSSL Options</a> for more information.</li>
+<li><code>key</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer[]&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object[]&gt;</a> Private keys in PEM format.
+PEM allows the option of private keys being encrypted. Encrypted keys will
+be decrypted with <code>options.passphrase</code>. Multiple keys using different
+algorithms can be provided either as an array of unencrypted key strings or
+buffers, or an array of objects in the form
+<code>{pem: &lt;string|buffer&gt;[, passphrase: &lt;string&gt;]}</code>. The object form can only
+occur in an array. <code>object.passphrase</code> is optional. Encrypted keys will be
+decrypted with <code>object.passphrase</code> if provided, or <code>options.passphrase</code> if
+it is not.</li>
+<li><code>maxVersion</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Optionally set the maximum TLS version to allow. One
+of <code>TLSv1.3</code>, <code>TLSv1.2'</code>, <code>'TLSv1.1'</code>, or <code>'TLSv1'</code>. Cannot be specified
+along with the <code>secureProtocol</code> option, use one or the other.
+<strong>Default:</strong> <a href="#tls_tls_default_max_version"><code>tls.DEFAULT_MAX_VERSION</code></a>.</li>
+<li><code>minVersion</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Optionally set the minimum TLS version to allow. One
+of <code>TLSv1.3</code>, <code>TLSv1.2'</code>, <code>'TLSv1.1'</code>, or <code>'TLSv1'</code>. Cannot be specified
+along with the <code>secureProtocol</code> option, use one or the other. It is not
+recommended to use less than TLSv1.2, but it may be required for
+interoperability.
+<strong>Default:</strong> <a href="#tls_tls_default_min_version"><code>tls.DEFAULT_MIN_VERSION</code></a>.</li>
+<li><code>passphrase</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Shared passphrase used for a single private key and/or
+a PFX.</li>
+<li><code>pfx</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer[]&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object[]&gt;</a> PFX or PKCS12 encoded
+private key and certificate chain. <code>pfx</code> is an alternative to providing
+<code>key</code> and <code>cert</code> individually. PFX is usually encrypted, if it is,
+<code>passphrase</code> will be used to decrypt it. Multiple PFX can be provided either
+as an array of unencrypted PFX buffers, or an array of objects in the form
+<code>{buf: &lt;string|buffer&gt;[, passphrase: &lt;string&gt;]}</code>. The object form can only
+occur in an array. <code>object.passphrase</code> is optional. Encrypted PFX will be
+decrypted with <code>object.passphrase</code> if provided, or <code>options.passphrase</code> if
+it is not.</li>
+<li><code>secureOptions</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Optionally affect the OpenSSL protocol behavior,
+which is not usually necessary. This should be used carefully if at all!
+Value is a numeric bitmask of the <code>SSL_OP_*</code> options from
+<a href="https://nodejs.org/api/crypto.html#crypto_openssl_options">OpenSSL Options</a>.</li>
+<li><code>secureProtocol</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Legacy mechanism to select the TLS protocol
+version to use, it does not support independent control of the minimum and
+maximum version, and does not support limiting the protocol to TLSv1.3.  Use
+<code>minVersion</code> and <code>maxVersion</code> instead.  The possible values are listed as
+<a href="https://www.openssl.org/docs/man1.1.1/man7/ssl.html#Dealing-with-Protocol-Methods">SSL_METHODS</a>, use the function names as strings.  For example, use
+<code>'TLSv1_1_method'</code> to force TLS version 1.1, or <code>'TLS_method'</code> to allow any
+TLS protocol version up to TLSv1.3.  It is not recommended to use TLS
+versions less than 1.2, but it may be required for interoperability.
+<strong>Default:</strong> none, see <code>minVersion</code>.</li>
+<li><code>sessionIdContext</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Opaque identifier used by servers to ensure
+session state is not shared between applications. Unused by clients.</li>
+</ul>
+</li>
+</ul>
+<p><a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a> sets the default value of the <code>honorCipherOrder</code> option
+to <code>true</code>, other APIs that create secure contexts leave it unset.</p>
+<p><a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a> uses a 128 bit truncated SHA1 hash value generated
+from <code>process.argv</code> as the default value of the <code>sessionIdContext</code> option, other
+APIs that create secure contexts have no default value.</p>
+<p>The <code>tls.createSecureContext()</code> method creates a <code>SecureContext</code> object. It is
+usable as an argument to several <code>tls</code> APIs, such as <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a>
+and <a href="#tls_server_addcontext_hostname_context"><code>server.addContext()</code></a>, but has no public methods.</p>
+<p>A key is <em>required</em> for ciphers that make use of certificates. Either <code>key</code> or
+<code>pfx</code> can be used to provide it.</p>
+<p>If the <code>ca</code> option is not given, then Node.js will default to using
+<a href="https://hg.mozilla.org/mozilla-central/raw-file/tip/security/nss/lib/ckfw/builtins/certdata.txt">Mozilla's publicly trusted list of CAs</a>.</p>
+<h2>tls.createServer([options][, secureconnectionlistener])<span><a class="mark" href="#tls_tls_createserver_options_secureconnectionlistener" id="tls_tls_createserver_options_secureconnectionlistener">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.3.0</td>
+<td><p>The <code>options</code> parameter now supports <code>net.createServer()</code> options.</p></td></tr>
+<tr><td>v9.3.0</td>
+<td><p>The <code>options</code> parameter can now include <code>clientCertEngine</code>.</p></td></tr>
+<tr><td>v8.0.0</td>
+<td><p>The <code>ALPNProtocols</code> option can be a <code>TypedArray</code> or <code>DataView</code> now.</p></td></tr>
+<tr><td>v5.0.0</td>
+<td><p>ALPN options are supported now.</p></td></tr>
+<tr><td>v0.3.2</td>
+<td><p><span>Added in: v0.3.2</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>ALPNProtocols</code>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer[]&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" class="type">&lt;TypedArray[]&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView" class="type">&lt;DataView[]&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" class="type">&lt;TypedArray&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView" class="type">&lt;DataView&gt;</a>
+An array of strings, <code>Buffer</code>s or <code>TypedArray</code>s or <code>DataView</code>s, or a single
+<code>Buffer</code> or <code>TypedArray</code> or <code>DataView</code> containing the supported ALPN
+protocols. <code>Buffer</code>s should have the format <code>[len][name][len][name]...</code>
+e.g. <code>0x05hello0x05world</code>, where the first byte is the length of the next
+protocol name. Passing an array is usually much simpler, e.g.
+<code>['hello', 'world']</code>. (Protocols should be ordered by their priority.)</li>
+<li><code>clientCertEngine</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Name of an OpenSSL engine which can provide the
+client certificate.</li>
+<li><code>enableTrace</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If <code>true</code>, <a href="#tls_tlssocket_enabletrace"><code>tls.TLSSocket.enableTrace()</code></a> will be
+called on new connections. Tracing can be enabled after the secure
+connection is established, but this option must be used to trace the secure
+connection setup. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>handshakeTimeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Abort the connection if the SSL/TLS handshake
+does not finish in the specified number of milliseconds.
+A <code>'tlsClientError'</code> is emitted on the <code>tls.Server</code> object whenever
+a handshake times out. <strong>Default:</strong> <code>120000</code> (120 seconds).</li>
+<li><code>rejectUnauthorized</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If not <code>false</code> the server will reject any
+connection which is not authorized with the list of supplied CAs. This
+option only has an effect if <code>requestCert</code> is <code>true</code>. <strong>Default:</strong> <code>true</code>.</li>
+<li><code>requestCert</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If <code>true</code> the server will request a certificate from
+clients that connect and attempt to verify that certificate. <strong>Default:</strong>
+<code>false</code>.</li>
+<li><code>sessionTimeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The number of seconds after which a TLS session
+created by the server will no longer be resumable. See
+<a href="#tls_session_resumption">Session Resumption</a> for more information. <strong>Default:</strong> <code>300</code>.</li>
+<li><code>SNICallback(servername, cb)</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> A function that will be called if
+the client supports SNI TLS extension. Two arguments will be passed when
+called: <code>servername</code> and <code>cb</code>. <code>SNICallback</code> should invoke <code>cb(null, ctx)</code>,
+where <code>ctx</code> is a <code>SecureContext</code> instance. (<code>tls.createSecureContext(...)</code>
+can be used to get a proper <code>SecureContext</code>.) If <code>SNICallback</code> wasn't
+provided the default callback with high-level API will be used (see below).</li>
+<li><code>ticketKeys</code>: <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> 48-bytes of cryptographically strong pseudo-random
+data. See <a href="#tls_session_resumption">Session Resumption</a> for more information.</li>
+<li>...: Any <a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a> option can be provided. For
+servers, the identity options (<code>pfx</code> or <code>key</code>/<code>cert</code>) are usually required.</li>
+<li>...: Any <a href="https://nodejs.org/api/net.html#net_net_createserver_options_connectionlistener"><code>net.createServer()</code></a> option can be provided.</li>
+</ul>
+</li>
+<li><code>secureConnectionListener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://nodejs.org/api/tls.html#tls_class_tls_server" class="type">&lt;tls.Server&gt;</a></li>
+</ul>
+<p>Creates a new <a href="#tls_class_tls_server"><code>tls.Server</code></a>. The <code>secureConnectionListener</code>, if provided, is
+automatically set as a listener for the <a href="#tls_event_secureconnection"><code>'secureConnection'</code></a> event.</p>
+<p>The <code>ticketKeys</code> options is automatically shared between <code>cluster</code> module
+workers.</p>
+<p>The following illustrates a simple echo server:</p>
+<pre><code class="language-js">const tls = require('tls');
+const fs = require('fs');
+
+const options = {
+  key: fs.readFileSync('server-key.pem'),
+  cert: fs.readFileSync('server-cert.pem'),
+
+  // This is necessary only if using client certificate authentication.
+  requestCert: true,
+
+  // This is necessary only if the client uses a self-signed certificate.
+  ca: [ fs.readFileSync('client-cert.pem') ]
+};
+
+const server = tls.createServer(options, (socket) =&gt; {
+  console.log('server connected',
+              socket.authorized ? 'authorized' : 'unauthorized');
+  socket.write('welcome!\n');
+  socket.setEncoding('utf8');
+  socket.pipe(socket);
+});
+server.listen(8000, () =&gt; {
+  console.log('server bound');
+});
+</code></pre>
+<p>The server can be tested by connecting to it using the example client from
+<a href="#tls_tls_connect_options_callback"><code>tls.connect()</code></a>.</p>
+<h2>tls.getCiphers()<span><a class="mark" href="#tls_tls_getciphers" id="tls_tls_getciphers">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.10.2</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+<p>Returns an array with the names of the supported TLS ciphers. The names are
+lower-case for historical reasons, but must be uppercased to be used in
+the <code>ciphers</code> option of <a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a>.</p>
+<p>Cipher names that start with <code>'tls_'</code> are for TLSv1.3, all the others are for
+TLSv1.2 and below.</p>
+<pre><code class="language-js">console.log(tls.getCiphers()); // ['aes128-gcm-sha256', 'aes128-sha', ...]
+</code></pre>
+<h2>tls.rootCertificates<span><a class="mark" href="#tls_tls_rootcertificates" id="tls_tls_rootcertificates">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v12.3.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+<p>An immutable array of strings representing the root certificates (in PEM format)
+used for verifying peer certificates. This is the default value of the <code>ca</code>
+option to <a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a>.</p>
+<h2>tls.DEFAULT_ECDH_CURVE<span><a class="mark" href="#tls_tls_default_ecdh_curve" id="tls_tls_default_ecdh_curve">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Default value changed to <code>'auto'</code>.</p></td></tr>
+<tr><td>v0.11.13</td>
+<td><p><span>Added in: v0.11.13</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>The default curve name to use for ECDH key agreement in a tls server. The
+default value is <code>'auto'</code>. See <a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a> for further
+information.</p>
+<h2>tls.DEFAULT_MAX_VERSION<span><a class="mark" href="#tls_tls_default_max_version" id="tls_tls_default_max_version">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v11.4.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The default value of the <code>maxVersion</code> option of
+<a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a>. It can be assigned any of the supported TLS
+protocol versions, <code>TLSv1.3</code>, <code>TLSv1.2'</code>, <code>'TLSv1.1'</code>, or <code>'TLSv1'</code>.
+<strong>Default:</strong> <code>'TLSv1.3'</code>, unless changed using CLI options. Using
+<code>--tls-max-v1.2</code> sets the default to <code>'TLSv1.2</code>'.  Using <code>--tls-max-v1.3</code> sets
+the default to <code>'TLSv1.3'</code>. If multiple of the options are provided, the
+highest maximum is used.</li>
+</ul>
+<h2>tls.DEFAULT_MIN_VERSION<span><a class="mark" href="#tls_tls_default_min_version" id="tls_tls_default_min_version">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v11.4.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The default value of the <code>minVersion</code> option of
+<a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a>. It can be assigned any of the supported TLS
+protocol versions, <code>'TLSv1.3'</code>, <code>TLSv1.2'</code>, <code>'TLSv1.1'</code>, or <code>'TLSv1'</code>.
+<strong>Default:</strong> <code>'TLSv1.2'</code>, unless changed using CLI options. Using
+<code>--tls-min-v1.0</code> sets the default to <code>'TLSv1'</code>. Using <code>--tls-min-v1.1</code> sets
+the default to <code>'TLSv1.1'</code>. Using <code>--tls-min-v1.3</code> sets the default to
+<code>'TLSv1.3'</code>. If multiple of the options are provided, the lowest minimum is
+used.</li>
+</ul>
+<h2>Deprecated APIs<span><a class="mark" href="#tls_deprecated_apis" id="tls_deprecated_apis">#</a></span></h2>
+<h3>Class: CryptoStream<span><a class="mark" href="#tls_class_cryptostream" id="tls_class_cryptostream">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.4</span><span>Deprecated since: v0.11.3</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <a href="#tls_class_tls_tlssocket"><code>tls.TLSSocket</code></a> instead.</div><p></p>
+<p>The <code>tls.CryptoStream</code> class represents a stream of encrypted data. This class
+is deprecated and should no longer be used.</p>
+<h4>cryptoStream.bytesWritten<span><a class="mark" href="#tls_cryptostream_byteswritten" id="tls_cryptostream_byteswritten">#</a></span></h4>
+<div class="api_metadata">
+<span>Added in: v0.3.4</span><span>Deprecated since: v0.11.3</span>
+</div>
+<p>The <code>cryptoStream.bytesWritten</code> property returns the total number of bytes
+written to the underlying socket <em>including</em> the bytes required for the
+implementation of the TLS protocol.</p>
+<h3>Class: SecurePair<span><a class="mark" href="#tls_class_securepair" id="tls_class_securepair">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.2</span><span>Deprecated since: v0.11.3</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <a href="#tls_class_tls_tlssocket"><code>tls.TLSSocket</code></a> instead.</div><p></p>
+<p>Returned by <a href="#tls_tls_createsecurepair_context_isserver_requestcert_rejectunauthorized_options"><code>tls.createSecurePair()</code></a>.</p>
+<h4>Event: 'secure'<span><a class="mark" href="#tls_event_secure" id="tls_event_secure">#</a></span></h4>
+<div class="api_metadata">
+<span>Added in: v0.3.2</span><span>Deprecated since: v0.11.3</span>
+</div>
+<p>The <code>'secure'</code> event is emitted by the <code>SecurePair</code> object once a secure
+connection has been established.</p>
+<p>As with checking for the server
+<a href="#tls_event_secureconnection"><code>'secureConnection'</code></a>
+event, <code>pair.cleartext.authorized</code> should be inspected to confirm whether the
+certificate used is properly authorized.</p>
+<h3>tls.createSecurePair([context][, isserver][, requestCert][, rejectunauthorized][, options])<span><a class="mark" href="#tls_tls_createsecurepair_context_isserver_requestcert_rejectunauthorized_options" id="tls_tls_createsecurepair_context_isserver_requestcert_rejectunauthorized_options">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v5.0.0</td>
+<td><p>ALPN options are supported now.</p></td></tr>
+<tr><td>v0.11.3</td>
+<td><p><span>Deprecated since: v0.11.3</span></p></td></tr>
+<tr><td>v0.3.2</td>
+<td><p><span>Added in: v0.3.2</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <a href="#tls_class_tls_tlssocket"><code>tls.TLSSocket</code></a> instead.</div><p></p>
+<ul>
+<li><code>context</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> A secure context object as returned by
+<code>tls.createSecureContext()</code></li>
+<li><code>isServer</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> <code>true</code> to specify that this TLS connection should be
+opened as a server.</li>
+<li><code>requestCert</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> <code>true</code> to specify whether a server should request a
+certificate from a connecting client. Only applies when <code>isServer</code> is <code>true</code>.</li>
+<li><code>rejectUnauthorized</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If not <code>false</code> a server automatically reject
+clients with invalid certificates. Only applies when <code>isServer</code> is <code>true</code>.</li>
+<li>
+<p><code>options</code></p>
+<ul>
+<li><code>enableTrace</code>: See <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a></li>
+<li><code>secureContext</code>: A TLS context object from <a href="#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a></li>
+<li><code>isServer</code>: If <code>true</code> the TLS socket will be instantiated in server-mode.
+<strong>Default:</strong> <code>false</code>.</li>
+<li><code>server</code> <a href="https://nodejs.org/api/net.html#net_class_net_server" class="type">&lt;net.Server&gt;</a> A <a href="https://nodejs.org/api/net.html#net_class_net_server"><code>net.Server</code></a> instance</li>
+<li><code>requestCert</code>: See <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a></li>
+<li><code>rejectUnauthorized</code>: See <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a></li>
+<li><code>ALPNProtocols</code>: See <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a></li>
+<li><code>SNICallback</code>: See <a href="#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a></li>
+<li><code>session</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> A <code>Buffer</code> instance containing a TLS session.</li>
+<li><code>requestOCSP</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If <code>true</code>, specifies that the OCSP status request
+extension will be added to the client hello and an <code>'OCSPResponse'</code> event
+will be emitted on the socket before establishing a secure communication.</li>
+</ul>
+</li>
+</ul>
+<p>Creates a new secure pair object with two streams, one of which reads and writes
+the encrypted data and the other of which reads and writes the cleartext data.
+Generally, the encrypted stream is piped to/from an incoming encrypted data
+stream and the cleartext one is used as a replacement for the initial encrypted
+stream.</p>
+<p><code>tls.createSecurePair()</code> returns a <code>tls.SecurePair</code> object with <code>cleartext</code> and
+<code>encrypted</code> stream properties.</p>
+<p>Using <code>cleartext</code> has the same API as <a href="#tls_class_tls_tlssocket"><code>tls.TLSSocket</code></a>.</p>
+<p>The <code>tls.createSecurePair()</code> method is now deprecated in favor of
+<code>tls.TLSSocket()</code>. For example, the code:</p>
+<pre><code class="language-js">pair = tls.createSecurePair(/* ... */);
+pair.encrypted.pipe(socket);
+socket.pipe(pair.encrypted);
+</code></pre>
+<p>can be replaced by:</p>
+<pre><code class="language-js">secureSocket = tls.TLSSocket(socket, options);
+</code></pre>
+<p>where <code>secureSocket</code> has the same API as <code>pair.cleartext</code>.</p>
+      </div>
+    </div>
+  </div>
+  <script src="data:application/javascript;base64,LyoKU0hKUyAtIFN5bnRheCBIaWdobGlnaHRpbmcgaW4gSmF2YVNjcmlwdApDb3B5cmlnaHQgKEMpIDIwMDcsIDIwMDggZ25vbWJhdEB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQKTGljZW5zZTogaHR0cDovL3NoanMuc291cmNlZm9yZ2UubmV0L2RvYy9ncGx2My5odG1sCiovCgppZiAoISB0aGlzLnNoX2xhbmd1YWdlcykgewogIHRoaXMuc2hfbGFuZ3VhZ2VzID0ge307Cn0KdmFyIHNoX3JlcXVlc3RzID0ge307CgpmdW5jdGlvbiBzaF9pc0VtYWlsQWRkcmVzcyh1cmwpIHsKICBpZiAoL15tYWlsdG86Ly50ZXN0KHVybCkpIHsKICAgIHJldHVybiBmYWxzZTsKICB9CiAgcmV0dXJuIHVybC5pbmRleE9mKCdAJykgIT09IC0xOwp9CgpmdW5jdGlvbiBzaF9zZXRIcmVmKHRhZ3MsIG51bVRhZ3MsIGlucHV0U3RyaW5nKSB7CiAgdmFyIHVybCA9IGlucHV0U3RyaW5nLnN1YnN0cmluZyh0YWdzW251bVRhZ3MgLSAyXS5wb3MsIHRhZ3NbbnVtVGFncyAtIDFdLnBvcyk7CiAgaWYgKHVybC5sZW5ndGggPj0gMiAmJiB1cmwuY2hhckF0KDApID09PSAnPCcgJiYgdXJsLmNoYXJBdCh1cmwubGVuZ3RoIC0gMSkgPT09ICc+JykgewogICAgdXJsID0gdXJsLnN1YnN0cigxLCB1cmwubGVuZ3RoIC0gMik7CiAgfQogIGlmIChzaF9pc0VtYWlsQWRkcmVzcyh1cmwpKSB7CiAgICB1cmwgPSAnbWFpbHRvOicgKyB1cmw7CiAgfQogIHRhZ3NbbnVtVGFncyAtIDJdLm5vZGUuaHJlZiA9IHVybDsKfQoKLyoKS29ucXVlcm9yIGhhcyBhIGJ1ZyB3aGVyZSB0aGUgcmVndWxhciBleHByZXNzaW9uIC8kL2cgd2lsbCBub3QgbWF0Y2ggYXQgdGhlIGVuZApvZiBhIGxpbmUgbW9yZSB0aGFuIG9uY2U6CgogIHZhciByZWdleCA9IC8kL2c7CiAgdmFyIG1hdGNoOwoKICB2YXIgbGluZSA9ICcxMjM0NTY3ODkwJzsKICByZWdleC5sYXN0SW5kZXggPSAxMDsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZSk7CgogIHZhciBsaW5lMiA9ICdhYmNkZSc7CiAgcmVnZXgubGFzdEluZGV4ID0gNTsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZTIpOyAgLy8gZmFpbHMKKi8KZnVuY3Rpb24gc2hfa29ucXVlcm9yRXhlYyhzKSB7CiAgdmFyIHJlc3VsdCA9IFsnJ107CiAgcmVzdWx0LmluZGV4ID0gcy5sZW5ndGg7CiAgcmVzdWx0LmlucHV0ID0gczsKICByZXR1cm4gcmVzdWx0Owp9CgovKioKSGlnaGxpZ2h0cyBhbGwgZWxlbWVudHMgY29udGFpbmluZyBzb3VyY2UgY29kZSBpbiBhIHRleHQgc3RyaW5nLiAgVGhlIHJldHVybgp2YWx1ZSBpcyBhbiBhcnJheSBvZiBvYmplY3RzLCBlYWNoIHJlcHJlc2VudGluZyBhbiBIVE1MIHN0YXJ0IG9yIGVuZCB0YWcuICBFYWNoCm9iamVjdCBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBwb3MsIHdoaWNoIGlzIGFuIGludGVnZXIgcmVwcmVzZW50aW5nIHRoZSB0ZXh0Cm9mZnNldCBvZiB0aGUgdGFnLiBFdmVyeSBzdGFydCB0YWcgYWxzbyBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBub2RlLCB3aGljaCBpcyB0aGUKRE9NIGVsZW1lbnQgc3RhcnRlZCBieSB0aGUgdGFnLiBFbmQgdGFncyBkbyBub3QgaGF2ZSB0aGlzIHByb3BlcnR5LgpAcGFyYW0gIGlucHV0U3RyaW5nICBhIHRleHQgc3RyaW5nCkBwYXJhbSAgbGFuZ3VhZ2UgIGEgbGFuZ3VhZ2UgZGVmaW5pdGlvbiBvYmplY3QKQHJldHVybiAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKKi8KZnVuY3Rpb24gc2hfaGlnaGxpZ2h0U3RyaW5nKGlucHV0U3RyaW5nLCBsYW5ndWFnZSkgewogIGlmICgvS29ucXVlcm9yLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICBpZiAoISBsYW5ndWFnZS5rb25xdWVyZWQpIHsKICAgICAgZm9yICh2YXIgcyA9IDA7IHMgPCBsYW5ndWFnZS5sZW5ndGg7IHMrKykgewogICAgICAgIGZvciAodmFyIHAgPSAwOyBwIDwgbGFuZ3VhZ2Vbc10ubGVuZ3RoOyBwKyspIHsKICAgICAgICAgIHZhciByID0gbGFuZ3VhZ2Vbc11bcF1bMF07CiAgICAgICAgICBpZiAoci5zb3VyY2UgPT09ICckJykgewogICAgICAgICAgICByLmV4ZWMgPSBzaF9rb25xdWVyb3JFeGVjOwogICAgICAgICAgfQogICAgICAgIH0KICAgICAgfQogICAgICBsYW5ndWFnZS5rb25xdWVyZWQgPSB0cnVlOwogICAgfQogIH0KCiAgdmFyIGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgdmFyIHNwYW4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJyk7CgogIC8vIHRoZSByZXN1bHQKICB2YXIgdGFncyA9IFtdOwogIHZhciBudW1UYWdzID0gMDsKCiAgLy8gZWFjaCBlbGVtZW50IGlzIGEgcGF0dGVybiBvYmplY3QgZnJvbSBsYW5ndWFnZQogIHZhciBwYXR0ZXJuU3RhY2sgPSBbXTsKCiAgLy8gdGhlIGN1cnJlbnQgcG9zaXRpb24gd2l0aGluIGlucHV0U3RyaW5nCiAgdmFyIHBvcyA9IDA7CgogIC8vIHRoZSBuYW1lIG9mIHRoZSBjdXJyZW50IHN0eWxlLCBvciBudWxsIGlmIHRoZXJlIGlzIG5vIGN1cnJlbnQgc3R5bGUKICB2YXIgY3VycmVudFN0eWxlID0gbnVsbDsKCiAgdmFyIG91dHB1dCA9IGZ1bmN0aW9uKHMsIHN0eWxlKSB7CiAgICB2YXIgbGVuZ3RoID0gcy5sZW5ndGg7CiAgICAvLyB0aGlzIGlzIG1vcmUgdGhhbiBqdXN0IGFuIG9wdGltaXphdGlvbiAtIHdlIGRvbid0IHdhbnQgdG8gb3V0cHV0IGVtcHR5IDxzcGFuPjwvc3Bhbj4gZWxlbWVudHMKICAgIGlmIChsZW5ndGggPT09IDApIHsKICAgICAgcmV0dXJuOwogICAgfQogICAgaWYgKCEgc3R5bGUpIHsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoICE9PSAwKSB7CiAgICAgICAgdmFyIHBhdHRlcm4gPSBwYXR0ZXJuU3RhY2tbc3RhY2tMZW5ndGggLSAxXTsKICAgICAgICAvLyBjaGVjayB3aGV0aGVyIHRoaXMgaXMgYSBzdGF0ZSBvciBhbiBlbnZpcm9ubWVudAogICAgICAgIGlmICghIHBhdHRlcm5bM10pIHsKICAgICAgICAgIC8vIGl0J3Mgbm90IGEgc3RhdGUgLSBpdCdzIGFuIGVudmlyb25tZW50OyB1c2UgdGhlIHN0eWxlIGZvciB0aGlzIGVudmlyb25tZW50CiAgICAgICAgICBzdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgfQogICAgICB9CiAgICB9CiAgICBpZiAoY3VycmVudFN0eWxlICE9PSBzdHlsZSkgewogICAgICBpZiAoY3VycmVudFN0eWxlKSB7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge3BvczogcG9zfTsKICAgICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgICAgc2hfc2V0SHJlZih0YWdzLCBudW1UYWdzLCBpbnB1dFN0cmluZyk7CiAgICAgICAgfQogICAgICB9CiAgICAgIGlmIChzdHlsZSkgewogICAgICAgIHZhciBjbG9uZTsKICAgICAgICBpZiAoc3R5bGUgPT09ICdzaF91cmwnKSB7CiAgICAgICAgICBjbG9uZSA9IGEuY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICBjbG9uZSA9IHNwYW4uY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgY2xvbmUuY2xhc3NOYW1lID0gc3R5bGU7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge25vZGU6IGNsb25lLCBwb3M6IHBvc307CiAgICAgIH0KICAgIH0KICAgIHBvcyArPSBsZW5ndGg7CiAgICBjdXJyZW50U3R5bGUgPSBzdHlsZTsKICB9OwoKICB2YXIgZW5kT2ZMaW5lUGF0dGVybiA9IC9cclxufFxyfFxuL2c7CiAgZW5kT2ZMaW5lUGF0dGVybi5sYXN0SW5kZXggPSAwOwogIHZhciBpbnB1dFN0cmluZ0xlbmd0aCA9IGlucHV0U3RyaW5nLmxlbmd0aDsKICB3aGlsZSAocG9zIDwgaW5wdXRTdHJpbmdMZW5ndGgpIHsKICAgIHZhciBzdGFydCA9IHBvczsKICAgIHZhciBlbmQ7CiAgICB2YXIgc3RhcnRPZk5leHRMaW5lOwogICAgdmFyIGVuZE9mTGluZU1hdGNoID0gZW5kT2ZMaW5lUGF0dGVybi5leGVjKGlucHV0U3RyaW5nKTsKICAgIGlmIChlbmRPZkxpbmVNYXRjaCA9PT0gbnVsbCkgewogICAgICBlbmQgPSBpbnB1dFN0cmluZ0xlbmd0aDsKICAgICAgc3RhcnRPZk5leHRMaW5lID0gaW5wdXRTdHJpbmdMZW5ndGg7CiAgICB9CiAgICBlbHNlIHsKICAgICAgZW5kID0gZW5kT2ZMaW5lTWF0Y2guaW5kZXg7CiAgICAgIHN0YXJ0T2ZOZXh0TGluZSA9IGVuZE9mTGluZVBhdHRlcm4ubGFzdEluZGV4OwogICAgfQoKICAgIHZhciBsaW5lID0gaW5wdXRTdHJpbmcuc3Vic3RyaW5nKHN0YXJ0LCBlbmQpOwoKICAgIHZhciBtYXRjaENhY2hlID0gW107CiAgICBmb3IgKDs7KSB7CiAgICAgIHZhciBwb3NXaXRoaW5MaW5lID0gcG9zIC0gc3RhcnQ7CgogICAgICB2YXIgc3RhdGVJbmRleDsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoID09PSAwKSB7CiAgICAgICAgc3RhdGVJbmRleCA9IDA7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gZ2V0IHRoZSBuZXh0IHN0YXRlCiAgICAgICAgc3RhdGVJbmRleCA9IHBhdHRlcm5TdGFja1tzdGFja0xlbmd0aCAtIDFdWzJdOwogICAgICB9CgogICAgICB2YXIgc3RhdGUgPSBsYW5ndWFnZVtzdGF0ZUluZGV4XTsKICAgICAgdmFyIG51bVBhdHRlcm5zID0gc3RhdGUubGVuZ3RoOwogICAgICB2YXIgbWMgPSBtYXRjaENhY2hlW3N0YXRlSW5kZXhdOwogICAgICBpZiAoISBtYykgewogICAgICAgIG1jID0gbWF0Y2hDYWNoZVtzdGF0ZUluZGV4XSA9IFtdOwogICAgICB9CiAgICAgIHZhciBiZXN0TWF0Y2ggPSBudWxsOwogICAgICB2YXIgYmVzdFBhdHRlcm5JbmRleCA9IC0xOwogICAgICBmb3IgKHZhciBpID0gMDsgaSA8IG51bVBhdHRlcm5zOyBpKyspIHsKICAgICAgICB2YXIgbWF0Y2g7CiAgICAgICAgaWYgKGkgPCBtYy5sZW5ndGggJiYgKG1jW2ldID09PSBudWxsIHx8IHBvc1dpdGhpbkxpbmUgPD0gbWNbaV0uaW5kZXgpKSB7CiAgICAgICAgICBtYXRjaCA9IG1jW2ldOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHZhciByZWdleCA9IHN0YXRlW2ldWzBdOwogICAgICAgICAgcmVnZXgubGFzdEluZGV4ID0gcG9zV2l0aGluTGluZTsKICAgICAgICAgIG1hdGNoID0gcmVnZXguZXhlYyhsaW5lKTsKICAgICAgICAgIG1jW2ldID0gbWF0Y2g7CiAgICAgICAgfQogICAgICAgIGlmIChtYXRjaCAhPT0gbnVsbCAmJiAoYmVzdE1hdGNoID09PSBudWxsIHx8IG1hdGNoLmluZGV4IDwgYmVzdE1hdGNoLmluZGV4KSkgewogICAgICAgICAgYmVzdE1hdGNoID0gbWF0Y2g7CiAgICAgICAgICBiZXN0UGF0dGVybkluZGV4ID0gaTsKICAgICAgICAgIGlmIChtYXRjaC5pbmRleCA9PT0gcG9zV2l0aGluTGluZSkgewogICAgICAgICAgICBicmVhazsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KCiAgICAgIGlmIChiZXN0TWF0Y2ggPT09IG51bGwpIHsKICAgICAgICBvdXRwdXQobGluZS5zdWJzdHJpbmcocG9zV2l0aGluTGluZSksIG51bGwpOwogICAgICAgIGJyZWFrOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGdvdCBhIG1hdGNoCiAgICAgICAgaWYgKGJlc3RNYXRjaC5pbmRleCA+IHBvc1dpdGhpbkxpbmUpIHsKICAgICAgICAgIG91dHB1dChsaW5lLnN1YnN0cmluZyhwb3NXaXRoaW5MaW5lLCBiZXN0TWF0Y2guaW5kZXgpLCBudWxsKTsKICAgICAgICB9CgogICAgICAgIHZhciBwYXR0ZXJuID0gc3RhdGVbYmVzdFBhdHRlcm5JbmRleF07CgogICAgICAgIHZhciBuZXdTdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgdmFyIG1hdGNoZWRTdHJpbmc7CiAgICAgICAgaWYgKG5ld1N0eWxlIGluc3RhbmNlb2YgQXJyYXkpIHsKICAgICAgICAgIGZvciAodmFyIHN1YmV4cHJlc3Npb24gPSAwOyBzdWJleHByZXNzaW9uIDwgbmV3U3R5bGUubGVuZ3RoOyBzdWJleHByZXNzaW9uKyspIHsKICAgICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFtzdWJleHByZXNzaW9uICsgMV07CiAgICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZVtzdWJleHByZXNzaW9uXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFswXTsKICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZSk7CiAgICAgICAgfQoKICAgICAgICBzd2l0Y2ggKHBhdHRlcm5bMl0pIHsKICAgICAgICBjYXNlIC0xOgogICAgICAgICAgLy8gZG8gbm90aGluZwogICAgICAgICAgYnJlYWs7CiAgICAgICAgY2FzZSAtMjoKICAgICAgICAgIC8vIGV4aXQKICAgICAgICAgIHBhdHRlcm5TdGFjay5wb3AoKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGNhc2UgLTM6CiAgICAgICAgICAvLyBleGl0YWxsCiAgICAgICAgICBwYXR0ZXJuU3RhY2subGVuZ3RoID0gMDsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGRlZmF1bHQ6CiAgICAgICAgICAvLyB0aGlzIHdhcyB0aGUgc3RhcnQgb2YgYSBkZWxpbWl0ZWQgcGF0dGVybiBvciBhIHN0YXRlL2Vudmlyb25tZW50CiAgICAgICAgICBwYXR0ZXJuU3RhY2sucHVzaChwYXR0ZXJuKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIH0KICAgICAgfQogICAgfQoKICAgIC8vIGVuZCBvZiB0aGUgbGluZQogICAgaWYgKGN1cnJlbnRTdHlsZSkgewogICAgICB0YWdzW251bVRhZ3MrK10gPSB7cG9zOiBwb3N9OwogICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgIHNoX3NldEhyZWYodGFncywgbnVtVGFncywgaW5wdXRTdHJpbmcpOwogICAgICB9CiAgICAgIGN1cnJlbnRTdHlsZSA9IG51bGw7CiAgICB9CiAgICBwb3MgPSBzdGFydE9mTmV4dExpbmU7CiAgfQoKICByZXR1cm4gdGFnczsKfQoKLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KLy8gRE9NLWRlcGVuZGVudCBmdW5jdGlvbnMKCmZ1bmN0aW9uIHNoX2dldENsYXNzZXMoZWxlbWVudCkgewogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgaHRtbENsYXNzID0gZWxlbWVudC5jbGFzc05hbWU7CiAgaWYgKGh0bWxDbGFzcyAmJiBodG1sQ2xhc3MubGVuZ3RoID4gMCkgewogICAgdmFyIGh0bWxDbGFzc2VzID0gaHRtbENsYXNzLnNwbGl0KCcgJyk7CiAgICBmb3IgKHZhciBpID0gMDsgaSA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaSsrKSB7CiAgICAgIGlmIChodG1sQ2xhc3Nlc1tpXS5sZW5ndGggPiAwKSB7CiAgICAgICAgcmVzdWx0LnB1c2goaHRtbENsYXNzZXNbaV0pOwogICAgICB9CiAgICB9CiAgfQogIHJldHVybiByZXN1bHQ7Cn0KCmZ1bmN0aW9uIHNoX2FkZENsYXNzKGVsZW1lbnQsIG5hbWUpIHsKICB2YXIgaHRtbENsYXNzZXMgPSBzaF9nZXRDbGFzc2VzKGVsZW1lbnQpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgaHRtbENsYXNzZXMubGVuZ3RoOyBpKyspIHsKICAgIGlmIChuYW1lLnRvTG93ZXJDYXNlKCkgPT09IGh0bWxDbGFzc2VzW2ldLnRvTG93ZXJDYXNlKCkpIHsKICAgICAgcmV0dXJuOwogICAgfQogIH0KICBodG1sQ2xhc3Nlcy5wdXNoKG5hbWUpOwogIGVsZW1lbnQuY2xhc3NOYW1lID0gaHRtbENsYXNzZXMuam9pbignICcpOwp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSBhbiBIVE1MIERPTSBOb2RlTGlzdC4KQHBhcmFtICBub2RlTGlzdCAgYSBET00gTm9kZUxpc3QKQHBhcmFtICByZXN1bHQgIGFuIG9iamVjdCB3aXRoIHRleHQsIHRhZ3MgYW5kIHBvcyBwcm9wZXJ0aWVzCiovCmZ1bmN0aW9uIHNoX2V4dHJhY3RUYWdzRnJvbU5vZGVMaXN0KG5vZGVMaXN0LCByZXN1bHQpIHsKICB2YXIgbGVuZ3RoID0gbm9kZUxpc3QubGVuZ3RoOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbGVuZ3RoOyBpKyspIHsKICAgIHZhciBub2RlID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHN3aXRjaCAobm9kZS5ub2RlVHlwZSkgewogICAgY2FzZSAxOgogICAgICBpZiAobm9kZS5ub2RlTmFtZS50b0xvd2VyQ2FzZSgpID09PSAnYnInKSB7CiAgICAgICAgdmFyIHRlcm1pbmF0b3I7CiAgICAgICAgaWYgKC9NU0lFLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xyJzsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xuJzsKICAgICAgICB9CiAgICAgICAgcmVzdWx0LnRleHQucHVzaCh0ZXJtaW5hdG9yKTsKICAgICAgICByZXN1bHQucG9zKys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7bm9kZTogbm9kZS5jbG9uZU5vZGUoZmFsc2UpLCBwb3M6IHJlc3VsdC5wb3N9KTsKICAgICAgICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChub2RlLmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7cG9zOiByZXN1bHQucG9zfSk7CiAgICAgIH0KICAgICAgYnJlYWs7CiAgICBjYXNlIDM6CiAgICBjYXNlIDQ6CiAgICAgIHJlc3VsdC50ZXh0LnB1c2gobm9kZS5kYXRhKTsKICAgICAgcmVzdWx0LnBvcyArPSBub2RlLmxlbmd0aDsKICAgICAgYnJlYWs7CiAgICB9CiAgfQp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSB0aGUgdGV4dCBvZiBhbiBIVE1MIGVsZW1lbnQuIFRoZSBleHRyYWN0ZWQgdGFncyB3aWxsIGJlCnJldHVybmVkIGFzIGFuIGFycmF5IG9mIHRhZyBvYmplY3RzLiBTZWUgc2hfaGlnaGxpZ2h0U3RyaW5nIGZvciB0aGUgZm9ybWF0IG9mCnRoZSB0YWcgb2JqZWN0cy4KQHBhcmFtICBlbGVtZW50ICBhIERPTSBlbGVtZW50CkBwYXJhbSAgdGFncyAgYW4gZW1wdHkgYXJyYXk7IHRoZSBleHRyYWN0ZWQgdGFnIG9iamVjdHMgd2lsbCBiZSByZXR1cm5lZCBpbiBpdApAcmV0dXJuICB0aGUgdGV4dCBvZiB0aGUgZWxlbWVudApAc2VlICBzaF9oaWdobGlnaHRTdHJpbmcKKi8KZnVuY3Rpb24gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgdGFncykgewogIHZhciByZXN1bHQgPSB7fTsKICByZXN1bHQudGV4dCA9IFtdOwogIHJlc3VsdC50YWdzID0gdGFnczsKICByZXN1bHQucG9zID0gMDsKICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChlbGVtZW50LmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgcmV0dXJuIHJlc3VsdC50ZXh0LmpvaW4oJycpOwp9CgovKioKTWVyZ2VzIHRoZSBvcmlnaW5hbCB0YWdzIGZyb20gYW4gZWxlbWVudCB3aXRoIHRoZSB0YWdzIHByb2R1Y2VkIGJ5IGhpZ2hsaWdodGluZy4KQHBhcmFtICBvcmlnaW5hbFRhZ3MgIGFuIGFycmF5IGNvbnRhaW5pbmcgdGhlIG9yaWdpbmFsIHRhZ3MKQHBhcmFtICBoaWdobGlnaHRUYWdzICBhbiBhcnJheSBjb250YWluaW5nIHRoZSBoaWdobGlnaHRpbmcgdGFncyAtIHRoZXNlIG11c3Qgbm90IG92ZXJsYXAKQHJlc3VsdCAgYW4gYXJyYXkgY29udGFpbmluZyB0aGUgbWVyZ2VkIHRhZ3MKKi8KZnVuY3Rpb24gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncykgewogIHZhciBudW1PcmlnaW5hbFRhZ3MgPSBvcmlnaW5hbFRhZ3MubGVuZ3RoOwogIGlmIChudW1PcmlnaW5hbFRhZ3MgPT09IDApIHsKICAgIHJldHVybiBoaWdobGlnaHRUYWdzOwogIH0KCiAgdmFyIG51bUhpZ2hsaWdodFRhZ3MgPSBoaWdobGlnaHRUYWdzLmxlbmd0aDsKICBpZiAobnVtSGlnaGxpZ2h0VGFncyA9PT0gMCkgewogICAgcmV0dXJuIG9yaWdpbmFsVGFnczsKICB9CgogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgb3JpZ2luYWxJbmRleCA9IDA7CiAgdmFyIGhpZ2hsaWdodEluZGV4ID0gMDsKCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MgJiYgaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICB2YXIgb3JpZ2luYWxUYWcgPSBvcmlnaW5hbFRhZ3Nbb3JpZ2luYWxJbmRleF07CiAgICB2YXIgaGlnaGxpZ2h0VGFnID0gaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF07CgogICAgaWYgKG9yaWdpbmFsVGFnLnBvcyA8PSBoaWdobGlnaHRUYWcucG9zKSB7CiAgICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnKTsKICAgICAgb3JpZ2luYWxJbmRleCsrOwogICAgfQogICAgZWxzZSB7CiAgICAgIHJlc3VsdC5wdXNoKGhpZ2hsaWdodFRhZyk7CiAgICAgIGlmIChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4ICsgMV0ucG9zIDw9IG9yaWdpbmFsVGFnLnBvcykgewogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgICAgcmVzdWx0LnB1c2goaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF0pOwogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gbmV3IGVuZCB0YWcKICAgICAgICByZXN1bHQucHVzaCh7cG9zOiBvcmlnaW5hbFRhZy5wb3N9KTsKCiAgICAgICAgLy8gbmV3IHN0YXJ0IHRhZwogICAgICAgIGhpZ2hsaWdodFRhZ3NbaGlnaGxpZ2h0SW5kZXhdID0ge25vZGU6IGhpZ2hsaWdodFRhZy5ub2RlLmNsb25lTm9kZShmYWxzZSksIHBvczogb3JpZ2luYWxUYWcucG9zfTsKICAgICAgfQogICAgfQogIH0KCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MpIHsKICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnc1tvcmlnaW5hbEluZGV4XSk7CiAgICBvcmlnaW5hbEluZGV4Kys7CiAgfQoKICB3aGlsZSAoaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICByZXN1bHQucHVzaChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4XSk7CiAgICBoaWdobGlnaHRJbmRleCsrOwogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkluc2VydHMgdGFncyBpbnRvIHRleHQuCkBwYXJhbSAgdGFncyAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKQHBhcmFtICB0ZXh0ICBhIHN0cmluZyByZXByZXNlbnRpbmcgdGhlIHRleHQKQHJldHVybiAgYSBET00gRG9jdW1lbnRGcmFnbWVudCByZXByZXNlbnRpbmcgdGhlIHJlc3VsdGluZyBIVE1MCiovCmZ1bmN0aW9uIHNoX2luc2VydFRhZ3ModGFncywgdGV4dCkgewogIHZhciBkb2MgPSBkb2N1bWVudDsKCiAgdmFyIHJlc3VsdCA9IGRvY3VtZW50LmNyZWF0ZURvY3VtZW50RnJhZ21lbnQoKTsKICB2YXIgdGFnSW5kZXggPSAwOwogIHZhciBudW1UYWdzID0gdGFncy5sZW5ndGg7CiAgdmFyIHRleHRQb3MgPSAwOwogIHZhciB0ZXh0TGVuZ3RoID0gdGV4dC5sZW5ndGg7CiAgdmFyIGN1cnJlbnROb2RlID0gcmVzdWx0OwoKICAvLyBvdXRwdXQgb25lIHRhZyBvciB0ZXh0IG5vZGUgZXZlcnkgaXRlcmF0aW9uCiAgd2hpbGUgKHRleHRQb3MgPCB0ZXh0TGVuZ3RoIHx8IHRhZ0luZGV4IDwgbnVtVGFncykgewogICAgdmFyIHRhZzsKICAgIHZhciB0YWdQb3M7CiAgICBpZiAodGFnSW5kZXggPCBudW1UYWdzKSB7CiAgICAgIHRhZyA9IHRhZ3NbdGFnSW5kZXhdOwogICAgICB0YWdQb3MgPSB0YWcucG9zOwogICAgfQogICAgZWxzZSB7CiAgICAgIHRhZ1BvcyA9IHRleHRMZW5ndGg7CiAgICB9CgogICAgaWYgKHRhZ1BvcyA8PSB0ZXh0UG9zKSB7CiAgICAgIC8vIG91dHB1dCB0aGUgdGFnCiAgICAgIGlmICh0YWcubm9kZSkgewogICAgICAgIC8vIHN0YXJ0IHRhZwogICAgICAgIHZhciBuZXdOb2RlID0gdGFnLm5vZGU7CiAgICAgICAgY3VycmVudE5vZGUuYXBwZW5kQ2hpbGQobmV3Tm9kZSk7CiAgICAgICAgY3VycmVudE5vZGUgPSBuZXdOb2RlOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGVuZCB0YWcKICAgICAgICBjdXJyZW50Tm9kZSA9IGN1cnJlbnROb2RlLnBhcmVudE5vZGU7CiAgICAgIH0KICAgICAgdGFnSW5kZXgrKzsKICAgIH0KICAgIGVsc2UgewogICAgICAvLyBvdXRwdXQgdGV4dAogICAgICBjdXJyZW50Tm9kZS5hcHBlbmRDaGlsZChkb2MuY3JlYXRlVGV4dE5vZGUodGV4dC5zdWJzdHJpbmcodGV4dFBvcywgdGFnUG9zKSkpOwogICAgICB0ZXh0UG9zID0gdGFnUG9zOwogICAgfQogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkhpZ2hsaWdodHMgYW4gZWxlbWVudCBjb250YWluaW5nIHNvdXJjZSBjb2RlLiAgVXBvbiBjb21wbGV0aW9uIG9mIHRoaXMgZnVuY3Rpb24sCnRoZSBlbGVtZW50IHdpbGwgaGF2ZSBiZWVuIHBsYWNlZCBpbiB0aGUgInNoX3NvdXJjZUNvZGUiIGNsYXNzLgpAcGFyYW0gIGVsZW1lbnQgIGEgRE9NIDxwcmU+IGVsZW1lbnQgY29udGFpbmluZyB0aGUgc291cmNlIGNvZGUgdG8gYmUgaGlnaGxpZ2h0ZWQKQHBhcmFtICBsYW5ndWFnZSAgYSBsYW5ndWFnZSBkZWZpbml0aW9uIG9iamVjdAoqLwpmdW5jdGlvbiBzaF9oaWdobGlnaHRFbGVtZW50KGVsZW1lbnQsIGxhbmd1YWdlKSB7CiAgc2hfYWRkQ2xhc3MoZWxlbWVudCwgJ3NoX3NvdXJjZUNvZGUnKTsKICB2YXIgb3JpZ2luYWxUYWdzID0gW107CiAgdmFyIGlucHV0U3RyaW5nID0gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgb3JpZ2luYWxUYWdzKTsKICB2YXIgaGlnaGxpZ2h0VGFncyA9IHNoX2hpZ2hsaWdodFN0cmluZyhpbnB1dFN0cmluZywgbGFuZ3VhZ2UpOwogIHZhciB0YWdzID0gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncyk7CiAgdmFyIGRvY3VtZW50RnJhZ21lbnQgPSBzaF9pbnNlcnRUYWdzKHRhZ3MsIGlucHV0U3RyaW5nKTsKICB3aGlsZSAoZWxlbWVudC5oYXNDaGlsZE5vZGVzKCkpIHsKICAgIGVsZW1lbnQucmVtb3ZlQ2hpbGQoZWxlbWVudC5maXJzdENoaWxkKTsKICB9CiAgZWxlbWVudC5hcHBlbmRDaGlsZChkb2N1bWVudEZyYWdtZW50KTsKfQoKZnVuY3Rpb24gc2hfZ2V0WE1MSHR0cFJlcXVlc3QoKSB7CiAgaWYgKHdpbmRvdy5BY3RpdmVYT2JqZWN0KSB7CiAgICByZXR1cm4gbmV3IEFjdGl2ZVhPYmplY3QoJ01zeG1sMi5YTUxIVFRQJyk7CiAgfQogIGVsc2UgaWYgKHdpbmRvdy5YTUxIdHRwUmVxdWVzdCkgewogICAgcmV0dXJuIG5ldyBYTUxIdHRwUmVxdWVzdCgpOwogIH0KICB0aHJvdyAnTm8gWE1MSHR0cFJlcXVlc3QgaW1wbGVtZW50YXRpb24gYXZhaWxhYmxlJzsKfQoKZnVuY3Rpb24gc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpIHsKICBpZiAobGFuZ3VhZ2UgaW4gc2hfcmVxdWVzdHMpIHsKICAgIHNoX3JlcXVlc3RzW2xhbmd1YWdlXS5wdXNoKGVsZW1lbnQpOwogICAgcmV0dXJuOwogIH0KICBzaF9yZXF1ZXN0c1tsYW5ndWFnZV0gPSBbZWxlbWVudF07CiAgdmFyIHJlcXVlc3QgPSBzaF9nZXRYTUxIdHRwUmVxdWVzdCgpOwogIHZhciB1cmwgPSBwcmVmaXggKyAnc2hfJyArIGxhbmd1YWdlICsgc3VmZml4OwogIHJlcXVlc3Qub3BlbignR0VUJywgdXJsLCB0cnVlKTsKICByZXF1ZXN0Lm9ucmVhZHlzdGF0ZWNoYW5nZSA9IGZ1bmN0aW9uICgpIHsKICAgIGlmIChyZXF1ZXN0LnJlYWR5U3RhdGUgPT09IDQpIHsKICAgICAgdHJ5IHsKICAgICAgICBpZiAoISByZXF1ZXN0LnN0YXR1cyB8fCByZXF1ZXN0LnN0YXR1cyA9PT0gMjAwKSB7CiAgICAgICAgICBldmFsKHJlcXVlc3QucmVzcG9uc2VUZXh0KTsKICAgICAgICAgIHZhciBlbGVtZW50cyA9IHNoX3JlcXVlc3RzW2xhbmd1YWdlXTsKICAgICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgZWxlbWVudHMubGVuZ3RoOyBpKyspIHsKICAgICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50c1tpXSwgc2hfbGFuZ3VhZ2VzW2xhbmd1YWdlXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgdGhyb3cgJ0hUVFAgZXJyb3I6IHN0YXR1cyAnICsgcmVxdWVzdC5zdGF0dXM7CiAgICAgICAgfQogICAgICB9CiAgICAgIGZpbmFsbHkgewogICAgICAgIHJlcXVlc3QgPSBudWxsOwogICAgICB9CiAgICB9CiAgfTsKICByZXF1ZXN0LnNlbmQobnVsbCk7Cn0KCi8qKgpIaWdobGlnaHRzIGFsbCBlbGVtZW50cyBjb250YWluaW5nIHNvdXJjZSBjb2RlIG9uIHRoZSBjdXJyZW50IHBhZ2UuIEVsZW1lbnRzCmNvbnRhaW5pbmcgc291cmNlIGNvZGUgbXVzdCBiZSAicHJlIiBlbGVtZW50cyB3aXRoIGEgImNsYXNzIiBhdHRyaWJ1dGUgb2YKInNoX0xBTkdVQUdFIiwgd2hlcmUgTEFOR1VBR0UgaXMgYSB2YWxpZCBsYW5ndWFnZSBpZGVudGlmaWVyOyBlLmcuLCAic2hfamF2YSIKaWRlbnRpZmllcyB0aGUgZWxlbWVudCBhcyBjb250YWluaW5nICJqYXZhIiBsYW5ndWFnZSBzb3VyY2UgY29kZS4KKi8KZnVuY3Rpb24gaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCB0YWcpIHsKICB2YXIgbm9kZUxpc3QgPSBkb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSh0YWcpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbm9kZUxpc3QubGVuZ3RoOyBpKyspIHsKICAgIHZhciBlbGVtZW50ID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHZhciBodG1sQ2xhc3NlcyA9IHNoX2dldENsYXNzZXMoZWxlbWVudCk7CiAgICB2YXIgaGlnaGxpZ2h0ZWQgPSBmYWxzZTsKICAgIHZhciBkb250aGlnaGxpZ2h0ID0gZmFsc2U7CiAgICBmb3IgKHZhciBqID0gMDsgaiA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaisrKSB7CiAgICAgIHZhciBodG1sQ2xhc3MgPSBodG1sQ2xhc3Nlc1tqXS50b0xvd2VyQ2FzZSgpOwogICAgICBpZiAoaHRtbENsYXNzID09PSAnc2hfbm9uZScpIHsKICAgICAgICBkb250aGlnaGxpZ2h0ID0gdHJ1ZQogICAgICAgIGNvbnRpbnVlOwogICAgICB9CiAgICAgIGlmIChodG1sQ2xhc3Muc3Vic3RyKDAsIDMpID09PSAnc2hfJykgewogICAgICAgIHZhciBsYW5ndWFnZSA9IGh0bWxDbGFzcy5zdWJzdHJpbmcoMyk7CiAgICAgICAgaWYgKGxhbmd1YWdlIGluIHNoX2xhbmd1YWdlcykgewogICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50LCBzaF9sYW5ndWFnZXNbbGFuZ3VhZ2VdKTsKICAgICAgICAgIGhpZ2hsaWdodGVkID0gdHJ1ZTsKICAgICAgICB9CiAgICAgICAgZWxzZSBpZiAodHlwZW9mKHByZWZpeCkgPT09ICdzdHJpbmcnICYmIHR5cGVvZihzdWZmaXgpID09PSAnc3RyaW5nJykgewogICAgICAgICAgc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHRocm93ICdGb3VuZCA8JyArIHRhZyArICc+IGVsZW1lbnQgd2l0aCBjbGFzcz0iJyArIGh0bWxDbGFzcyArICciLCBidXQgbm8gc3VjaCBsYW5ndWFnZSBleGlzdHMnOwogICAgICAgIH0KICAgICAgICBicmVhazsKICAgICAgfQogICAgfQogICAgaWYgKGhpZ2hsaWdodGVkID09PSBmYWxzZSAmJiBkb250aGlnaGxpZ2h0ID09IGZhbHNlKSB7CiAgICAgIHNoX2hpZ2hsaWdodEVsZW1lbnQoZWxlbWVudCwgc2hfbGFuZ3VhZ2VzWyJqYXZhc2NyaXB0Il0pOwogICAgfQogIH0KfQoKCgpmdW5jdGlvbiBzaF9oaWdobGlnaHREb2N1bWVudChwcmVmaXgsIHN1ZmZpeCkgewogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3R0Jyk7CiAgaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCAnY29kZScpOwogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3ByZScpOwp9Cg=="></script>
+  <script src="data:application/javascript;base64,aWYoIXRoaXMuc2hfbGFuZ3VhZ2VzKXt0aGlzLnNoX2xhbmd1YWdlcz17fX1zaF9sYW5ndWFnZXMuamF2YXNjcmlwdD1bW1svXC9cL1wvL2csInNoX2NvbW1lbnQiLDFdLFsvXC9cLy9nLCJzaF9jb21tZW50Iiw3XSxbL1wvXCpcKi9nLCJzaF9jb21tZW50Iiw4XSxbL1wvXCovZywic2hfY29tbWVudCIsOV0sWy9cYig/OmFic3RyYWN0fGJyZWFrfGNhc2V8Y2F0Y2h8Y2xhc3N8Y29uc3R8Y29udGludWV8ZGVidWdnZXJ8ZGVmYXVsdHxkZWxldGV8ZG98ZWxzZXxlbnVtfGV4cG9ydHxleHRlbmRzfGZhbHNlfGZpbmFsfGZpbmFsbHl8Zm9yfGZ1bmN0aW9ufGdvdG98aWZ8aW1wbGVtZW50c3xpbnxpbnN0YW5jZW9mfGludGVyZmFjZXxuYXRpdmV8bmV3fG51bGx8cHJpdmF0ZXxwcm90ZWN0ZWR8cHJvdG90eXBlfHB1YmxpY3xyZXR1cm58c3RhdGljfHN1cGVyfHN3aXRjaHxzeW5jaHJvbml6ZWR8dGhyb3d8dGhyb3dzfHRoaXN8dHJhbnNpZW50fHRydWV8dHJ5fHR5cGVvZnx2YXJ8dm9sYXRpbGV8d2hpbGV8d2l0aClcYi9nLCJzaF9rZXl3b3JkIiwtMV0sWy8oXCtcK3wtLXxcKXxcXSkoXHMqKShcLz0/KD8hWypcL10pKS9nLFsic2hfc3ltYm9sIiwic2hfbm9ybWFsIiwic2hfc3ltYm9sIl0sLTFdLFsvKDB4W0EtRmEtZjAtOV0rfCg/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykoXHMqKShcLyg/IVsqXC9dKSkvZyxbInNoX251bWJlciIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyhbQS1aYS16JF9dW0EtWmEtejAtOSRfXSpccyopKFwvPT8oPyFbKlwvXSkpL2csWyJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy9cLyg/OlxcLnxbXipcXFwvXSkoPzpcXC58W15cXFwvXSkqXC9bZ2ltXSovZywic2hfcmVnZXhwIiwtMV0sWy9cYlsrLV0/KD86KD86MHhbQS1GYS1mMC05XSspfCg/Oig/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykpdT8oPzooPzppbnQoPzo4fDE2fDMyfDY0KSl8TCk/XGIvZywic2hfbnVtYmVyIiwtMV0sWy8iL2csInNoX3N0cmluZyIsMTBdLFsvJy9nLCJzaF9zdHJpbmciLDExXSxbL358IXwlfFxefFwqfFwofFwpfC18XCt8PXxcW3xcXXxcXHw6fDt8LHxcLnxcL3xcP3wmfDx8PnxcfC9nLCJzaF9zeW1ib2wiLC0xXSxbL1x7fFx9L2csInNoX2NicmFja2V0IiwtMV0sWy9cYig/Ok1hdGh8SW5maW5pdHl8TmFOfHVuZGVmaW5lZHxhcmd1bWVudHMpXGIvZywic2hfcHJlZGVmX3ZhciIsLTFdLFsvXGIoPzpBcnJheXxCb29sZWFufERhdGV8RXJyb3J8RXZhbEVycm9yfEZ1bmN0aW9ufE51bWJlcnxPYmplY3R8UmFuZ2VFcnJvcnxSZWZlcmVuY2VFcnJvcnxSZWdFeHB8U3RyaW5nfFN5bnRheEVycm9yfFR5cGVFcnJvcnxVUklFcnJvcnxkZWNvZGVVUkl8ZGVjb2RlVVJJQ29tcG9uZW50fGVuY29kZVVSSXxlbmNvZGVVUklDb21wb25lbnR8ZXZhbHxpc0Zpbml0ZXxpc05hTnxwYXJzZUZsb2F0fHBhcnNlSW50KVxiL2csInNoX3ByZWRlZl9mdW5jIiwtMV0sWy8oPzpbQS1aYS16XXxfKVtBLVphLXowLTlfXSooPz1bIFx0XSpcKCkvZywic2hfZnVuY3Rpb24iLC0xXV0sW1svJC9nLG51bGwsLTJdLFsvKD86PD8pW0EtWmEtejAtOV9cLlwvXC1ffl0rQFtBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KXwoPzo8PylbQS1aYS16MC05X10rOlwvXC9bQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+PykvZywic2hfdXJsIiwtMV0sWy88XD94bWwvZywic2hfcHJlcHJvYyIsMiwxXSxbLzwhRE9DVFlQRS9nLCJzaF9wcmVwcm9jIiw0LDFdLFsvPCEtLS9nLCJzaF9jb21tZW50Iiw1XSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKSg/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKS9nLCJzaF9rZXl3b3JkIiw2LDFdLFsvJig/OltBLVphLXowLTldKyk7L2csInNoX3ByZXByb2MiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSooPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMV0sWy88KD86XC8pP1tBLVphLXpdW0EtWmEtejAtOV0qL2csInNoX2tleXdvcmQiLDYsMV0sWy9AW0EtWmEtel0rL2csInNoX3R5cGUiLC0xXSxbLyg/OlRPRE98RklYTUV8QlVHKSg/Ols6XT8pL2csInNoX3RvZG8iLC0xXV0sW1svXD8+L2csInNoX3ByZXByb2MiLC0yXSxbLyhbXj0iIFx0Pl0rKShbIFx0XSopKD0/KS9nLFsic2hfdHlwZSIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyIvZywic2hfc3RyaW5nIiwzXV0sW1svXFwoPzpcXHwiKS9nLG51bGwsLTFdLFsvIi9nLCJzaF9zdHJpbmciLC0yXV0sW1svPi9nLCJzaF9wcmVwcm9jIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLy0tPi9nLCJzaF9jb21tZW50IiwtMl0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdXSxbWy8oPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLyQvZyxudWxsLC0yXV0sW1svXCpcLy9nLCJzaF9jb21tZW50IiwtMl0sWy8oPzo8PylbQS1aYS16MC05X1wuXC9cLV9+XStAW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pfCg/Ojw/KVtBLVphLXowLTlfXSs6XC9cL1tBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KS9nLCJzaF91cmwiLC0xXSxbLzxcP3htbC9nLCJzaF9wcmVwcm9jIiwyLDFdLFsvPCFET0NUWVBFL2csInNoX3ByZXByb2MiLDQsMV0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopKD86XC8pPz4vZywic2hfa2V5d29yZCIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopL2csInNoX2tleXdvcmQiLDYsMV0sWy8mKD86W0EtWmEtejAtOV0rKTsvZywic2hfcHJlcHJvYyIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XVtBLVphLXowLTldKig/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSovZywic2hfa2V5d29yZCIsNiwxXSxbL0BbQS1aYS16XSsvZywic2hfdHlwZSIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy9cKlwvL2csInNoX2NvbW1lbnQiLC0yXSxbLyg/Ojw/KVtBLVphLXowLTlfXC5cL1wtX35dK0BbQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+Pyl8KD86PD8pW0EtWmEtejAtOV9dKzpcL1wvW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pL2csInNoX3VybCIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy8iL2csInNoX3N0cmluZyIsLTJdLFsvXFwuL2csInNoX3NwZWNpYWxjaGFyIiwtMV1dLFtbLycvZywic2hfc3RyaW5nIiwtMl0sWy9cXC4vZywic2hfc3BlY2lhbGNoYXIiLC0xXV1dOw=="></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+
+</body></html>

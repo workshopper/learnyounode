@@ -1,0 +1,2232 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>HTTP | Node.js v12.10.0 Documentation</title>
+  <link rel="stylesheet" href="data:text/css;base64,LyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogaXRhbGljOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBJdGFsaWMnKSwgbG9jYWwoJ0xhdG8tSXRhbGljJyksIHVybChodHRwczovL2ZvbnRzLmdzdGF0aWMuY29tL3MvbGF0by92MTYvUzZ1OHc0Qk1VVFBIanhzQVVpLXFOaVhnN2VVMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBpdGFsaWM7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEl0YWxpYycpLCBsb2NhbCgnTGF0by1JdGFsaWMnKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnU4dzRCTVVUUEhqeHNBWEMtcU5pWGc3US53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0KLyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogbm9ybWFsOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBSZWd1bGFyJyksIGxvY2FsKCdMYXRvLVJlZ3VsYXInKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnV5dzRCTVVUUEhqeEF3WGlXdEZDZlE3QS53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIFJlZ3VsYXInKSwgbG9jYWwoJ0xhdG8tUmVndWxhcicpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dXl3NEJNVVRQSGp4NHdYaVd0RkNjLndvZmYyKSBmb3JtYXQoJ3dvZmYyJyk7CiAgdW5pY29kZS1yYW5nZTogVSswMDAwLTAwRkYsIFUrMDEzMSwgVSswMTUyLTAxNTMsIFUrMDJCQi0wMkJDLCBVKzAyQzYsIFUrMDJEQSwgVSswMkRDLCBVKzIwMDAtMjA2RiwgVSsyMDc0LCBVKzIwQUMsIFUrMjEyMiwgVSsyMTkxLCBVKzIxOTMsIFUrMjIxMiwgVSsyMjE1LCBVK0ZFRkYsIFUrRkZGRDsKfQovKiBsYXRpbi1leHQgKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2FQR1EzcTVkME43dy53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2lQR1EzcTVkMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LyotLS0tLS0tLS0tLS0tLS0tLS0tLS0gTGF5b3V0IGFuZCBUeXBvZ3JhcGh5IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwpodG1sIHsKICBmb250LXNpemU6IDFyZW07CiAgb3ZlcmZsb3ctd3JhcDogYnJlYWstd29yZDsKICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDsKICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlOwogIC13ZWJraXQtZm9udC12YXJpYW50LWxpZ2F0dXJlczogbm9uZTsKICAgICAgICAgIGZvbnQtdmFyaWFudC1saWdhdHVyZXM6IG5vbmU7Cn0KCiogewogIGJveC1zaXppbmc6IGJvcmRlci1ib3g7Cn0KCmJvZHkgewogIGZvbnQtZmFtaWx5OiAiTGF0byIsICJMdWNpZGEgR3JhbmRlIiwgIkx1Y2lkYSBTYW5zIFVuaWNvZGUiLCAiTHVjaWRhIFNhbnMiLCBWZXJkYW5hLCBUYWhvbWEsIHNhbnMtc2VyaWY7CiAgbWFyZ2luOiAwOwogIHBhZGRpbmc6IDA7CiAgY29sb3I6ICMzMzM7CiAgYmFja2dyb3VuZDogI2ZmZjsKfQoKaDEgeyBmb250LXNpemU6IDIuNXJlbSB9CmgyIHsgZm9udC1zaXplOiAycmVtIH0KaDMgeyBmb250LXNpemU6IDEuNzVyZW0gfQpoNCB7IGZvbnQtc2l6ZTogMS41cmVtIH0KaDUgeyBmb250LXNpemU6IDEuMjVyZW0gfQpoNiB7IGZvbnQtc2l6ZTogMXJlbSB9CgpoMSwgaDIsIGgzLCBoNCwgaDUsIGg2IHsKICBtYXJnaW46IDEuNXJlbSAwIDFyZW07CiAgdGV4dC1yZW5kZXJpbmc6IG9wdGltaXplTGVnaWJpbGl0eTsKICBmb250LXdlaWdodDogNzAwOwogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKcHJlLCB0dCwgY29kZSwgLnByZSwgc3Bhbi50eXBlLCBhLnR5cGUgewogIGZvbnQtZmFtaWx5OiBTRk1vbm8tUmVndWxhciwgTWVubG8sIENvbnNvbGFzLCAiTGliZXJhdGlvbiBNb25vIiwgIkNvdXJpZXIgTmV3IiwgbW9ub3NwYWNlOwogIGZvbnQtc2l6ZTogLjllbTsKfQoKI2NvbnRlbnQgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKYSwgYTpsaW5rLCBhOmFjdGl2ZSB7CiAgY29sb3I6ICM0Mzg1M2Q7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGJvcmRlci1yYWRpdXM6IDJweDsKICBwYWRkaW5nOiAxcHggM3B4Owp9CgphOmhvdmVyLCBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDM4NTNkOwogIG91dGxpbmU6IG5vbmU7Cn0KCnN0cm9uZyB7CiAgZm9udC13ZWlnaHQ6IDcwMDsKfQoKY29kZSBhOmhvdmVyIHsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgplbSBjb2RlIHsKICBmb250LXN0eWxlOiBub3JtYWw7Cn0KCiNjaGFuZ2Vsb2cgI2d0b2MgewogIGRpc3BsYXk6IG5vbmU7Cn0KCiNndG9jIHsKICBtYXJnaW4tdG9wOiAuNXJlbTsKICBtYXJnaW4tYm90dG9tOiAxcmVtOwp9CgojZ3RvYyB1bCB7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBtYXJnaW4tbGVmdDogMDsKICBsaW5lLWhlaWdodDogMS41cmVtOwp9CgojZ3RvYyA+IHVsID4gbGkgewogIGRpc3BsYXk6IGlubGluZTsKICBib3JkZXItcmlnaHQ6IDFweCAjMDAwIHNvbGlkOwogIG1hcmdpbi1yaWdodDogMC40cmVtOwogIHBhZGRpbmctcmlnaHQ6IDAuNHJlbTsKfQoKI2d0b2MgPiB1bCA+IGxpOmxhc3QtY2hpbGQgewogIGJvcmRlci1yaWdodDogbm9uZTsKICBtYXJnaW4tcmlnaHQ6IDA7CiAgcGFkZGluZy1yaWdodDogMDsKfQoKbGkudmVyc2lvbi1waWNrZXIgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBhIHsKICBib3JkZXItcmFkaXVzOiAycHggMnB4IDAgMDsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBvbCB7CiAgZGlzcGxheTogYmxvY2s7CiAgei1pbmRleDogMTsKfQoKbGkudmVyc2lvbi1waWNrZXIgYSBzcGFuIHsKICBmb250LXNpemU6IC43cmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciB7CiAgYmFja2dyb3VuZDogI2ZmZjsKICBib3JkZXI6IDFweCAjNDM4NTNkIHNvbGlkOwogIGJvcmRlci1yYWRpdXM6IDAgMCAycHggMnB4OwogIGRpc3BsYXk6IG5vbmU7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgcmlnaHQ6IDA7CiAgdG9wOiAxLjI1cmVtOwogIHdpZHRoOiAxMDAlOwp9CgojZ3RvYyBvbC52ZXJzaW9uLXBpY2tlciBsaSB7CiAgZGlzcGxheTogYmxvY2s7CiAgYm9yZGVyLXJpZ2h0OiAwOwogIG1hcmdpbi1yaWdodDogMDsKfQoKb2wudmVyc2lvbi1waWNrZXIgbGkgYSB7CiAgYm9yZGVyLXJhZGl1czogMDsKICBkaXNwbGF5OiBibG9jazsKICBtYXJnaW46IDA7CiAgcGFkZGluZzogLjFyZW07CiAgcGFkZGluZy1sZWZ0OiAxcmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciBsaTpsYXN0LWNoaWxkIGEgewogIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAxcHg7CiAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMXB4Owp9CgoubGluZSB7CiAgd2lkdGg6IGNhbGMoMTAwJSAtIDFyZW0pOwogIGRpc3BsYXk6IGJsb2NrOwogIHBhZGRpbmctYm90dG9tOiAxcHg7Cn0KCi5hcGlfc3RhYmlsaXR5IHsKICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDsKICBtYXJnaW46IDAgMCAxcmVtIDA7CiAgZm9udC1mYW1pbHk6ICJMYXRvIiwgIkx1Y2lkYSBHcmFuZGUiLCAiTHVjaWRhIFNhbnMgVW5pY29kZSIsICJMdWNpZGEgU2FucyIsIFZlcmRhbmEsIFRhaG9tYSwgc2Fucy1zZXJpZjsKICBwYWRkaW5nOiAxcmVtOwogIGxpbmUtaGVpZ2h0OiAxLjU7Cn0KCi5hcGlfc3RhYmlsaXR5ICogewogIGNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50Owp9CgouYXBpX3N0YWJpbGl0eSBhIHsKICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsKfQoKLmFwaV9zdGFiaWxpdHkgYTpob3ZlciwgLmFwaV9zdGFiaWxpdHkgYTphY3RpdmUsIC5hcGlfc3RhYmlsaXR5IGE6Zm9jdXMgewogIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjQpOwp9CgouYXBpX3N0YWJpbGl0eSBhIGNvZGUgewogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCi5hcGlfc3RhYmlsaXR5XzAgewogIGJhY2tncm91bmQtY29sb3I6ICNENjAwMjc7Cn0KCi5hcGlfc3RhYmlsaXR5XzEgewogIGJhY2tncm91bmQtY29sb3I6ICNFQzUzMTU7Cn0KCi5hcGlfc3RhYmlsaXR5XzIgewogIGJhY2tncm91bmQtY29sb3I6ICM0RUJBMEY7Cn0KCi5hcGlfbWV0YWRhdGEgewogIGZvbnQtc2l6ZTogLjg1cmVtOwogIG1hcmdpbi1ib3R0b206IDFyZW07Cn0KCi5hcGlfbWV0YWRhdGEgc3BhbiB7CiAgbWFyZ2luLXJpZ2h0OiAxcmVtOwp9CgouYXBpX21ldGFkYXRhIHNwYW46bGFzdC1jaGlsZCB7CiAgbWFyZ2luLXJpZ2h0OiAwcHg7Cn0KCnVsLnBsYWluIHsKICBsaXN0LXN0eWxlOiBub25lOwp9CgphYmJyIHsKICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkICM0NTQ1NDU7Cn0KCnAgewogIHRleHQtcmVuZGVyaW5nOiBvcHRpbWl6ZUxlZ2liaWxpdHk7CiAgbWFyZ2luOiAwIDAgMS4xMjVyZW0gMDsKICBsaW5lLWhlaWdodDogMS41Owp9CgojYXBpY29udGVudCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKICBwYWRkaW5nLWJvdHRvbTogMnJlbTsKfQoKdGFibGUgewogIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7CiAgbWFyZ2luOiAwIDAgMS41cmVtIDA7Cn0KCnRoLCB0ZCB7CiAgYm9yZGVyOiAxcHggc29saWQgI2FhYTsKICBwYWRkaW5nOiAuNzVyZW0gMXJlbSAuNzVyZW0gMXJlbTsKICB2ZXJ0aWNhbC1hbGlnbjogdG9wOwp9Cgp0aCB7CiAgdGV4dC1hbGlnbjpsZWZ0Owp9CgpvbCwgdWwsIGRsIHsKICBtYXJnaW46IDAgMCAuNnJlbSAwOwogIHBhZGRpbmc6IDA7Cn0KCm9sIHVsLCBvbCBvbCwgb2wgZGwsIHVsIHVsLCB1bCBvbCwgdWwgZGwsIGRsIHVsLCBkbCBvbCwgZGwgZGwgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCnVsLCBvbCB7CiAgbWFyZ2luLWxlZnQ6IDJyZW07Cn0KCmRsIGR0IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgbWFyZ2luOiAxLjVyZW0gMCAwOwp9CgpkbCBkZCB7CiAgcG9zaXRpb246IHJlbGF0aXZlOwogIG1hcmdpbjogMCAxcmVtIDA7Cn0KCmRkICsgZHQucHJlIHsKICBtYXJnaW4tdG9wOiAxLjZyZW07Cn0KCiNhcGljb250ZW50IHsKICBwYWRkaW5nLXRvcDogMXJlbTsKfQoKI2FwaWNvbnRlbnQgLmxpbmUgewogIHdpZHRoOiBjYWxjKDUwJSAtIDFyZW0pOwogIG1hcmdpbjogMXJlbSAxcmVtIC45NXJlbTsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2NjOwp9CgpoMiArIGgyIHsKICBtYXJnaW46IDAgMCAuNXJlbTsKfQoKaDMgKyBoMyB7CiAgbWFyZ2luOiAwIDAgLjVyZW07Cn0KCmgyLCBoMywgaDQsIGg1IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgcGFkZGluZy1yaWdodDogNDBweDsKfQoKLnNyY2xpbmsgewogIGZsb2F0OiByaWdodDsKICBmb250LXNpemU6IHNtYWxsZXI7Cn0KCmgxIHNwYW4sIGgyIHNwYW4sIGgzIHNwYW4sIGg0IHNwYW4gewogIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICBkaXNwbGF5OiBibG9jazsKICB0b3A6IDA7CiAgcmlnaHQ6IDA7Cn0KCmgxIHNwYW46aG92ZXIsIGgyIHNwYW46aG92ZXIsIGgzIHNwYW46aG92ZXIsIGg0IHNwYW46aG92ZXIgewogIG9wYWNpdHk6IDE7Cn0KCmgxIHNwYW4gYSwgaDIgc3BhbiBhLCBoMyBzcGFuIGEsIGg0IHNwYW4gYSB7CiAgY29sb3I6ICMwMDA7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGZvbnQtd2VpZ2h0OiBib2xkOwp9CgpwcmUsIHR0LCBjb2RlIHsKICBsaW5lLWhlaWdodDogMS41cmVtOwogIG1hcmdpbjogMDsgcGFkZGluZzogMDsKfQoKLnByZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKcHJlIHsKICBwYWRkaW5nOiAxcmVtOwogIHZlcnRpY2FsLWFsaWduOiB0b3A7CiAgYmFja2dyb3VuZDogI2YyZjJmMjsKICBtYXJnaW46IDFyZW07CiAgb3ZlcmZsb3cteDogYXV0bzsKfQoKcHJlID4gY29kZSB7CiAgcGFkZGluZzogMDsKfQoKcHJlICsgaDMgewogIG1hcmdpbi10b3A6IDIuMjI1cmVtOwp9Cgpjb2RlLnByZSB7CiAgd2hpdGUtc3BhY2U6IHByZTsKfQoKI2ludHJvIHsKICBtYXJnaW4tdG9wOiAxLjI1cmVtOwogIG1hcmdpbi1sZWZ0OiAxcmVtOwp9CgojaW50cm8gYSB7CiAgY29sb3I6ICNkZGQ7CiAgZm9udC13ZWlnaHQ6IGJvbGQ7Cn0KCmhyIHsKICBiYWNrZ3JvdW5kOiBub25lOwogIGJvcmRlcjogbWVkaXVtIG5vbmU7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM3YTdhN2E7CiAgbWFyZ2luOiAwIDAgMXJlbSAwOwp9CgojdG9jIGgyIHsKICBtYXJnaW4tdG9wOiAwOwogIG1hcmdpbjogMS41cmVtIDA7Cn0KCiN0b2MgcCB7CiAgbWFyZ2luOiAwOwp9CgojdG9jIHVsIGEgewogIHRleHQtZGVjb3JhdGlvbjpub25lOwp9CgojdG9jIHVsIGxpIHsKICBtYXJnaW4tYm90dG9tOiAuNjY2cmVtOwogIGxpc3Qtc3R5bGU6IHNxdWFyZSBvdXRzaWRlOwp9CgojdG9jIGxpID4gdWwgewogIG1hcmdpbi10b3A6IC42NjZyZW07Cn0KCiN0b2MgLnN0YWJpbGl0eV8wOjphZnRlciB7CiAgYmFja2dyb3VuZC1jb2xvcjogI2Q1MDAyNzsKICBjb2xvcjogI2ZmZjsKICBjb250ZW50OiAiZGVwcmVjYXRlZCI7CiAgbWFyZ2luLWxlZnQ6IC4yNXJlbTsKICBwYWRkaW5nOiAxcHggM3B4OwogIGJvcmRlci1yYWRpdXM6IDNweDsKfQoKI2FwaWNvbnRlbnQgbGkgewogIG1hcmdpbi1ib3R0b206IC41cmVtOwp9CgojYXBpY29udGVudCBsaTpsYXN0LWNoaWxkIHsKICBtYXJnaW4tYm90dG9tOiAwOwp9Cgp0dCwgY29kZSB7CiAgY29sb3I6ICMwNDA0MDQ7CiAgYmFja2dyb3VuZC1jb2xvcjogI2YyZjJmMjsKICBib3JkZXItcmFkaXVzOiAycHg7CiAgcGFkZGluZzogMXB4IDNweDsKfQoKLmFwaV9zdGFiaWxpdHkgY29kZSB7CiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAuMSk7Cn0KCmEgY29kZSB7CiAgY29sb3I6IGluaGVyaXQ7CiAgYmFja2dyb3VuZDogaW5oZXJpdDsKICBwYWRkaW5nOiAwOwp9CgoudHlwZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKI2NvbHVtbjEuaW50ZXJpb3IgewogIG1hcmdpbi1sZWZ0OiAyMzRweDsKICBwYWRkaW5nOiAwIDJyZW07CiAgLXdlYmtpdC1wYWRkaW5nLXN0YXJ0OiAxLjVyZW07Cn0KCiNjb2x1bW4yLmludGVyaW9yIHsKICB3aWR0aDogMjM0cHg7CiAgYmFja2dyb3VuZDogIzMzMzsKICBwb3NpdGlvbjogZml4ZWQ7CiAgbGVmdDogMDsKICB0b3A6IDA7CiAgYm90dG9tOiAwOwogIG92ZXJmbG93LXg6IGhpZGRlbjsKICBvdmVyZmxvdy15OiBzY3JvbGw7Cn0KCiNjb2x1bW4yIHVsIHsKICBsaXN0LXN0eWxlOiBub25lOwogIG1hcmdpbjogLjlyZW0gMCAuNXJlbTsKICBiYWNrZ3JvdW5kOiAjMzMzOwp9CgojY29sdW1uMiA+IDpmaXJzdC1jaGlsZCB7CiAgbWFyZ2luOiAxLjI1cmVtOwogIGZvbnQtc2l6ZTogMS41cmVtOwp9CgojY29sdW1uMiA+IHVsOm50aC1jaGlsZCgyKSB7CiAgbWFyZ2luOiAxLjI1cmVtIDAgLjVyZW07Cn0KCiNjb2x1bW4yID4gdWw6bGFzdC1jaGlsZCB7CiAgbWFyZ2luOiAuOXJlbSAwIDEuMjVyZW07Cn0KCiNjb2x1bW4yIHVsIGxpIHsKICBwYWRkaW5nLWxlZnQ6IDEuMjVyZW07CiAgbWFyZ2luLWJvdHRvbTogLjVyZW07CiAgcGFkZGluZy1ib3R0b206IC41cmVtOwp9CgojY29sdW1uMiAubGluZSB7CiAgbWFyZ2luOiAwIC41cmVtOwogIGJhY2tncm91bmQtY29sb3I6ICM3MDcwNzA7Cn0KCiNjb2x1bW4yIHVsIGxpOmxhc3QtY2hpbGQgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEgewogIGNvbG9yOiAjY2NjOwogIGJvcmRlci1yYWRpdXM6IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEuYWN0aXZlLCAjY29sdW1uMiB1bCBsaSBhLmFjdGl2ZTpob3ZlciwKI2NvbHVtbjIgdWwgbGkgYS5hY3RpdmU6Zm9jdXMgewogIGNvbG9yOiAjNDM4NTNkOwogIGJvcmRlci1yYWRpdXM6IDA7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM0Mzg1M2Q7CiAgYmFja2dyb3VuZDogbm9uZTsKfQoKI2ludHJvIGE6aG92ZXIsICNpbnRybyBhOmZvY3VzLAojY29sdW1uMiB1bCBsaSBhOmhvdmVyLCAjY29sdW1uMiB1bCBsaSBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgpzcGFuID4gLm1hcmssIHNwYW4gPiAubWFyazp2aXNpdGVkIHsKICBjb2xvcjogIzcwNzA3MDsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgdG9wOiAwcHg7CiAgcmlnaHQ6IDBweDsKfQoKc3BhbiA+IC5tYXJrOmhvdmVyLCBzcGFuID4gLm1hcms6Zm9jdXMsIHNwYW4gPiAubWFyazphY3RpdmUgewogIGNvbG9yOiAjNDM4NTNkOwogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCnRoID4gKjpsYXN0LWNoaWxkLCB0ZCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKfQoKLmNoYW5nZWxvZyA+IHN1bW1hcnkgewogIG1hcmdpbjogLjVyZW0gMDsKICBwYWRkaW5nOiAuNXJlbSAwOwogIGN1cnNvcjogcG9pbnRlcjsKfQoKLyogc2ltcGxlciBjbGVhcmZpeCAqLwouY2xlYXJmaXg6YWZ0ZXIgewogIGNvbnRlbnQ6ICIuIjsKICBkaXNwbGF5OiBibG9jazsKICBoZWlnaHQ6IDA7CiAgY2xlYXI6IGJvdGg7CiAgdmlzaWJpbGl0eTogaGlkZGVuOwp9CgouZ2l0aHViX2ljb24gewogIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7CiAgbWFyZ2luOiAtMnB4IDNweCAwIDA7Cn0KCkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogMTAyNHB4KSB7CiAgI2NvbnRlbnQgewogICAgb3ZlcmZsb3c6IHZpc2libGU7CiAgfQogICNjb2x1bW4xLmludGVyaW9yIHsKICAgIG1hcmdpbi1sZWZ0OiAwOwogICAgcGFkZGluZy1sZWZ0OiAuNXJlbTsKICAgIHBhZGRpbmctcmlnaHQ6IC41cmVtOwogICAgd2lkdGg6IGF1dG87CiAgICBvdmVyZmxvdy15OiB2aXNpYmxlOwogIH0KICAjY29sdW1uMiB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KfQoKQG1lZGlhIHByaW50IHsKICBodG1sIHsKICAgIGhlaWdodDogYXV0bzsKICAgIGZvbnQtc2l6ZTogMC43NWVtOwogIH0KICAjY29sdW1uMi5pbnRlcmlvciB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KICAjY29sdW1uMS5pbnRlcmlvciB7CiAgICBtYXJnaW4tbGVmdDogMHB4OwogICAgcGFkZGluZzogMHB4OwogICAgb3ZlcmZsb3cteTogYXV0bzsKICB9CiAgLmFwaV9tZXRhZGF0YSwKICAjdG9jLAogIC5zcmNsaW5rLAogICNndG9jLAogIC5tYXJrIHsKICAgIGRpc3BsYXk6IG5vbmU7CiAgfQogIGgxIHsKICAgIGZvbnQtc2l6ZTogMnJlbTsKICB9CiAgaDIgewogICAgZm9udC1zaXplOiAxLjc1cmVtOwogIH0KICBoMyB7CiAgICBmb250LXNpemU6IDEuNXJlbTsKICB9CiAgaDQgewogICAgZm9udC1zaXplOiAxLjNyZW07CiAgfQogIGg1IHsKICAgIGZvbnQtc2l6ZTogMS4ycmVtOwogIH0KICBoNiB7CiAgICBmb250LXNpemU6IDEuMXJlbTsKICB9CiAgLmFwaV9zdGFiaWxpdHkgewogICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogIH0KICAuYXBpX3N0YWJpbGl0eSBhIHsKICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsKICB9CiAgYSB7CiAgICBjb2xvcjogaW5oZXJpdDsKICB9CiAgI2FwaWNvbnRlbnQgewogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICB9Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LnNoX3NvdXJjZUNvZGUgewogIGZvbnQtd2VpZ2h0OiBub3JtYWw7CiAgZm9udC1zdHlsZTogbm9ybWFsOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfc3ltYm9sLAouc2hfc291cmNlQ29kZSAuc2hfY2JyYWNrZXQgewogIGNvbG9yOiAjMzMzOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfa2V5d29yZCB7CiAgY29sb3I6ICMzMzg7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9zdHJpbmcsCi5zaF9zb3VyY2VDb2RlIC5zaF9yZWdleHAsCi5zaF9zb3VyY2VDb2RlIC5zaF9udW1iZXIsCi5zaF9zb3VyY2VDb2RlIC5zaF9zcGVjaWFsY2hhciB7CiAgY29sb3I6ICNFNTQzMDU7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9jb21tZW50IHsKICBjb2xvcjogIzY2NjsKICBmb250LXdlaWdodDogbGlnaHRlcjsKfQo=">
+  <link rel="canonical" href="https://nodejs.org/api/http.html">
+</head>
+<body class="alt apidoc" id="api-section-http">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="https://nodejs.org/" title="Go back to the home page">
+          Node.js
+        </a>
+      </div>
+      <ul>
+<li><a href="https://nodejs.org/api/documentation.html" class="nav-documentation">About these Docs</a></li>
+<li><a href="https://nodejs.org/api/synopsis.html" class="nav-synopsis">Usage &amp; Example</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://nodejs.org/api/assert.html" class="nav-assert">Assertion Testing</a></li>
+<li><a href="https://nodejs.org/api/async_hooks.html" class="nav-async_hooks">Async Hooks</a></li>
+<li><a href="https://nodejs.org/api/buffer.html" class="nav-buffer">Buffer</a></li>
+<li><a href="https://nodejs.org/api/addons.html" class="nav-addons">C++ Addons</a></li>
+<li><a href="https://nodejs.org/api/n-api.html" class="nav-n-api">C/C++ Addons - N-API</a></li>
+<li><a href="https://nodejs.org/api/child_process.html" class="nav-child_process">Child Processes</a></li>
+<li><a href="https://nodejs.org/api/cluster.html" class="nav-cluster">Cluster</a></li>
+<li><a href="https://nodejs.org/api/cli.html" class="nav-cli">Command Line Options</a></li>
+<li><a href="https://nodejs.org/api/console.html" class="nav-console">Console</a></li>
+<li><a href="https://nodejs.org/api/crypto.html" class="nav-crypto">Crypto</a></li>
+<li><a href="https://nodejs.org/api/debugger.html" class="nav-debugger">Debugger</a></li>
+<li><a href="https://nodejs.org/api/deprecations.html" class="nav-deprecations">Deprecated APIs</a></li>
+<li><a href="https://nodejs.org/api/dns.html" class="nav-dns">DNS</a></li>
+<li><a href="https://nodejs.org/api/domain.html" class="nav-domain">Domain</a></li>
+<li><a href="https://nodejs.org/api/esm.html" class="nav-esm">ECMAScript Modules</a></li>
+<li><a href="https://nodejs.org/api/errors.html" class="nav-errors">Errors</a></li>
+<li><a href="https://nodejs.org/api/events.html" class="nav-events">Events</a></li>
+<li><a href="https://nodejs.org/api/fs.html" class="nav-fs">File System</a></li>
+<li><a href="https://nodejs.org/api/globals.html" class="nav-globals">Globals</a></li>
+<li><a href="https://nodejs.org/api/http.html" class="nav-http active">HTTP</a></li>
+<li><a href="https://nodejs.org/api/http2.html" class="nav-http2">HTTP/2</a></li>
+<li><a href="https://nodejs.org/api/https.html" class="nav-https">HTTPS</a></li>
+<li><a href="https://nodejs.org/api/inspector.html" class="nav-inspector">Inspector</a></li>
+<li><a href="https://nodejs.org/api/intl.html" class="nav-intl">Internationalization</a></li>
+<li><a href="https://nodejs.org/api/modules.html" class="nav-modules">Modules</a></li>
+<li><a href="https://nodejs.org/api/net.html" class="nav-net">Net</a></li>
+<li><a href="https://nodejs.org/api/os.html" class="nav-os">OS</a></li>
+<li><a href="https://nodejs.org/api/path.html" class="nav-path">Path</a></li>
+<li><a href="https://nodejs.org/api/perf_hooks.html" class="nav-perf_hooks">Performance Hooks</a></li>
+<li><a href="https://nodejs.org/api/policy.html" class="nav-policy">Policies</a></li>
+<li><a href="https://nodejs.org/api/process.html" class="nav-process">Process</a></li>
+<li><a href="https://nodejs.org/api/punycode.html" class="nav-punycode">Punycode</a></li>
+<li><a href="https://nodejs.org/api/querystring.html" class="nav-querystring">Query Strings</a></li>
+<li><a href="https://nodejs.org/api/readline.html" class="nav-readline">Readline</a></li>
+<li><a href="https://nodejs.org/api/repl.html" class="nav-repl">REPL</a></li>
+<li><a href="https://nodejs.org/api/report.html" class="nav-report">Report</a></li>
+<li><a href="https://nodejs.org/api/stream.html" class="nav-stream">Stream</a></li>
+<li><a href="https://nodejs.org/api/string_decoder.html" class="nav-string_decoder">String Decoder</a></li>
+<li><a href="https://nodejs.org/api/timers.html" class="nav-timers">Timers</a></li>
+<li><a href="https://nodejs.org/api/tls.html" class="nav-tls">TLS/SSL</a></li>
+<li><a href="https://nodejs.org/api/tracing.html" class="nav-tracing">Trace Events</a></li>
+<li><a href="https://nodejs.org/api/tty.html" class="nav-tty">TTY</a></li>
+<li><a href="https://nodejs.org/api/dgram.html" class="nav-dgram">UDP/Datagram</a></li>
+<li><a href="https://nodejs.org/api/url.html" class="nav-url">URL</a></li>
+<li><a href="https://nodejs.org/api/util.html" class="nav-util">Utilities</a></li>
+<li><a href="https://nodejs.org/api/v8.html" class="nav-v8">V8</a></li>
+<li><a href="https://nodejs.org/api/vm.html" class="nav-vm">VM</a></li>
+<li><a href="https://nodejs.org/api/worker_threads.html" class="nav-worker_threads">Worker Threads</a></li>
+<li><a href="https://nodejs.org/api/zlib.html" class="nav-zlib">Zlib</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://github.com/nodejs/node" class="nav-https-github-com-nodejs-node">GitHub Repo &amp; Issue Tracker</a></li>
+</ul>
+    </div>
+
+    <div id="column1" data-id="http" class="interior">
+      <header>
+        <h1>Node.js v12.10.0 Documentation</h1>
+        <div id="gtoc">
+          <ul>
+            <li>
+              <a href="https://nodejs.org/api/index.html" name="toc">Index</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/all.html">View on single page</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/http.json">View as JSON</a>
+            </li>
+            
+    <li class="version-picker">
+      <a href="#">View another version <span>▼</span></a>
+      <ol class="version-picker"><li><a href="https://nodejs.org/docs/latest-v12.x/api/http.html">12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v11.x/api/http.html">11.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v10.x/api/http.html">10.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v9.x/api/http.html">9.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/http.html">8.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v7.x/api/http.html">7.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v6.x/api/http.html">6.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v5.x/api/http.html">5.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v4.x/api/http.html">4.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.12.x/api/http.html">0.12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.10.x/api/http.html">0.10.x</a></li></ol>
+    </li>
+  
+            <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/http.md"><span class="github_icon"><svg height="16" width="16" viewBox="0 0 16.1 16.1" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8z"></path></svg></span>Edit on GitHub</a></li>
+          </ul>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+<li>
+<p><span class="stability_2"><a href="#http_http">HTTP</a></span></p>
+<ul>
+<li>
+<p><a href="#http_class_http_agent">Class: http.Agent</a></p>
+<ul>
+<li><a href="#http_new_agent_options">new Agent([options])</a></li>
+<li><a href="#http_agent_createconnection_options_callback">agent.createConnection(options[, callback])</a></li>
+<li><a href="#http_agent_keepsocketalive_socket">agent.keepSocketAlive(socket)</a></li>
+<li><a href="#http_agent_reusesocket_socket_request">agent.reuseSocket(socket, request)</a></li>
+<li><a href="#http_agent_destroy">agent.destroy()</a></li>
+<li><a href="#http_agent_freesockets">agent.freeSockets</a></li>
+<li><a href="#http_agent_getname_options">agent.getName(options)</a></li>
+<li><a href="#http_agent_maxfreesockets">agent.maxFreeSockets</a></li>
+<li><a href="#http_agent_maxsockets">agent.maxSockets</a></li>
+<li><a href="#http_agent_requests">agent.requests</a></li>
+<li><a href="#http_agent_sockets">agent.sockets</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#http_class_http_clientrequest">Class: http.ClientRequest</a></p>
+<ul>
+<li><a href="#http_event_abort">Event: 'abort'</a></li>
+<li><a href="#http_event_connect">Event: 'connect'</a></li>
+<li><a href="#http_event_continue">Event: 'continue'</a></li>
+<li><a href="#http_event_information">Event: 'information'</a></li>
+<li><a href="#http_event_response">Event: 'response'</a></li>
+<li><a href="#http_event_socket">Event: 'socket'</a></li>
+<li><a href="#http_event_timeout">Event: 'timeout'</a></li>
+<li><a href="#http_event_upgrade">Event: 'upgrade'</a></li>
+<li><a href="#http_request_abort">request.abort()</a></li>
+<li><a href="#http_request_aborted">request.aborted</a></li>
+<li><a href="#http_request_connection">request.connection</a></li>
+<li><a href="#http_request_end_data_encoding_callback">request.end([data[, encoding]][, callback])</a></li>
+<li><a href="#http_request_finished">request.finished</a></li>
+<li><a href="#http_request_flushheaders">request.flushHeaders()</a></li>
+<li><a href="#http_request_getheader_name">request.getHeader(name)</a></li>
+<li><a href="#http_request_maxheaderscount">request.maxHeadersCount</a></li>
+<li><a href="#http_request_path">request.path</a></li>
+<li><a href="#http_request_removeheader_name">request.removeHeader(name)</a></li>
+<li><a href="#http_request_setheader_name_value">request.setHeader(name, value)</a></li>
+<li><a href="#http_request_setnodelay_nodelay">request.setNoDelay([noDelay])</a></li>
+<li><a href="#http_request_setsocketkeepalive_enable_initialdelay">request.setSocketKeepAlive([enable][, initialDelay])</a></li>
+<li><a href="#http_request_settimeout_timeout_callback">request.setTimeout(timeout[, callback])</a></li>
+<li><a href="#http_request_socket">request.socket</a></li>
+<li><a href="#http_request_writableended">request.writableEnded</a></li>
+<li><a href="#http_request_writablefinished">request.writableFinished</a></li>
+<li><a href="#http_request_write_chunk_encoding_callback">request.write(chunk[, encoding][, callback])</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#http_class_http_server">Class: http.Server</a></p>
+<ul>
+<li><a href="#http_event_checkcontinue">Event: 'checkContinue'</a></li>
+<li><a href="#http_event_checkexpectation">Event: 'checkExpectation'</a></li>
+<li><a href="#http_event_clienterror">Event: 'clientError'</a></li>
+<li><a href="#http_event_close">Event: 'close'</a></li>
+<li><a href="#http_event_connect_1">Event: 'connect'</a></li>
+<li><a href="#http_event_connection">Event: 'connection'</a></li>
+<li><a href="#http_event_request">Event: 'request'</a></li>
+<li><a href="#http_event_upgrade_1">Event: 'upgrade'</a></li>
+<li><a href="#http_server_close_callback">server.close([callback])</a></li>
+<li><a href="#http_server_headerstimeout">server.headersTimeout</a></li>
+<li><a href="#http_server_listen">server.listen()</a></li>
+<li><a href="#http_server_listening">server.listening</a></li>
+<li><a href="#http_server_maxheaderscount">server.maxHeadersCount</a></li>
+<li><a href="#http_server_settimeout_msecs_callback">server.setTimeout([msecs][, callback])</a></li>
+<li><a href="#http_server_timeout">server.timeout</a></li>
+<li><a href="#http_server_keepalivetimeout">server.keepAliveTimeout</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#http_class_http_serverresponse">Class: http.ServerResponse</a></p>
+<ul>
+<li><a href="#http_event_close_1">Event: 'close'</a></li>
+<li><a href="#http_event_finish">Event: 'finish'</a></li>
+<li><a href="#http_response_addtrailers_headers">response.addTrailers(headers)</a></li>
+<li><a href="#http_response_connection">response.connection</a></li>
+<li><a href="#http_response_end_data_encoding_callback">response.end([data][, encoding][, callback])</a></li>
+<li><a href="#http_response_finished">response.finished</a></li>
+<li><a href="#http_response_flushheaders">response.flushHeaders()</a></li>
+<li><a href="#http_response_getheader_name">response.getHeader(name)</a></li>
+<li><a href="#http_response_getheadernames">response.getHeaderNames()</a></li>
+<li><a href="#http_response_getheaders">response.getHeaders()</a></li>
+<li><a href="#http_response_hasheader_name">response.hasHeader(name)</a></li>
+<li><a href="#http_response_headerssent">response.headersSent</a></li>
+<li><a href="#http_response_removeheader_name">response.removeHeader(name)</a></li>
+<li><a href="#http_response_senddate">response.sendDate</a></li>
+<li><a href="#http_response_setheader_name_value">response.setHeader(name, value)</a></li>
+<li><a href="#http_response_settimeout_msecs_callback">response.setTimeout(msecs[, callback])</a></li>
+<li><a href="#http_response_socket">response.socket</a></li>
+<li><a href="#http_response_statuscode">response.statusCode</a></li>
+<li><a href="#http_response_statusmessage">response.statusMessage</a></li>
+<li><a href="#http_response_writableended">response.writableEnded</a></li>
+<li><a href="#http_response_writablefinished">response.writableFinished</a></li>
+<li><a href="#http_response_write_chunk_encoding_callback">response.write(chunk[, encoding][, callback])</a></li>
+<li><a href="#http_response_writecontinue">response.writeContinue()</a></li>
+<li><a href="#http_response_writehead_statuscode_statusmessage_headers">response.writeHead(statusCode[, statusMessage][, headers])</a></li>
+<li><a href="#http_response_writeprocessing">response.writeProcessing()</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#http_class_http_incomingmessage">Class: http.IncomingMessage</a></p>
+<ul>
+<li><a href="#http_event_aborted">Event: 'aborted'</a></li>
+<li><a href="#http_event_close_2">Event: 'close'</a></li>
+<li><a href="#http_message_aborted">message.aborted</a></li>
+<li><a href="#http_message_complete">message.complete</a></li>
+<li><a href="#http_message_destroy_error">message.destroy([error])</a></li>
+<li><a href="#http_message_headers">message.headers</a></li>
+<li><a href="#http_message_httpversion">message.httpVersion</a></li>
+<li><a href="#http_message_method">message.method</a></li>
+<li><a href="#http_message_rawheaders">message.rawHeaders</a></li>
+<li><a href="#http_message_rawtrailers">message.rawTrailers</a></li>
+<li><a href="#http_message_settimeout_msecs_callback">message.setTimeout(msecs, callback)</a></li>
+<li><a href="#http_message_socket">message.socket</a></li>
+<li><a href="#http_message_statuscode">message.statusCode</a></li>
+<li><a href="#http_message_statusmessage">message.statusMessage</a></li>
+<li><a href="#http_message_trailers">message.trailers</a></li>
+<li><a href="#http_message_url">message.url</a></li>
+</ul>
+</li>
+<li><a href="#http_http_methods">http.METHODS</a></li>
+<li><a href="#http_http_status_codes">http.STATUS_CODES</a></li>
+<li><a href="#http_http_createserver_options_requestlistener">http.createServer([options][, requestListener])</a></li>
+<li><a href="#http_http_get_options_callback">http.get(options[, callback])</a></li>
+<li><a href="#http_http_get_url_options_callback">http.get(url[, options][, callback])</a></li>
+<li><a href="#http_http_globalagent">http.globalAgent</a></li>
+<li><a href="#http_http_maxheadersize">http.maxHeaderSize</a></li>
+<li><a href="#http_http_request_options_callback">http.request(options[, callback])</a></li>
+<li><a href="#http_http_request_url_options_callback">http.request(url[, options][, callback])</a></li>
+</ul>
+</li>
+</ul>
+      </div>
+
+      <div id="apicontent">
+        <h1>HTTP<span><a class="mark" href="#http_http" id="http_http">#</a></span></h1>
+
+<p></p><div class="api_stability api_stability_2"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 2</a> - Stable</div><p></p>
+<p>To use the HTTP server and client one must <code>require('http')</code>.</p>
+<p>The HTTP interfaces in Node.js are designed to support many features
+of the protocol which have been traditionally difficult to use.
+In particular, large, possibly chunk-encoded, messages. The interface is
+careful to never buffer entire requests or responses — the
+user is able to stream data.</p>
+<p>HTTP message headers are represented by an object like this:</p>
+<!-- eslint-skip -->
+<pre><code class="language-js">{ 'content-length': '123',
+  'content-type': 'text/plain',
+  'connection': 'keep-alive',
+  'host': 'mysite.com',
+  'accept': '*/*' }
+</code></pre>
+<p>Keys are lowercased. Values are not modified.</p>
+<p>In order to support the full spectrum of possible HTTP applications, Node.js's
+HTTP API is very low-level. It deals with stream handling and message
+parsing only. It parses a message into headers and body but it does not
+parse the actual headers or the body.</p>
+<p>See <a href="#http_message_headers"><code>message.headers</code></a> for details on how duplicate headers are handled.</p>
+<p>The raw headers as they were received are retained in the <code>rawHeaders</code>
+property, which is an array of <code>[key, value, key2, value2, ...]</code>. For
+example, the previous message header object might have a <code>rawHeaders</code>
+list like the following:</p>
+<!-- eslint-disable semi -->
+<pre><code class="language-js">[ 'ConTent-Length', '123456',
+  'content-LENGTH', '123',
+  'content-type', 'text/plain',
+  'CONNECTION', 'keep-alive',
+  'Host', 'mysite.com',
+  'accepT', '*/*' ]
+</code></pre>
+<h2>Class: http.Agent<span><a class="mark" href="#http_class_http_agent" id="http_class_http_agent">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.3.4</span>
+</div>
+<p>An <code>Agent</code> is responsible for managing connection persistence
+and reuse for HTTP clients. It maintains a queue of pending requests
+for a given host and port, reusing a single socket connection for each
+until the queue is empty, at which time the socket is either destroyed
+or put into a pool where it is kept to be used again for requests to the
+same host and port. Whether it is destroyed or pooled depends on the
+<code>keepAlive</code> <a href="#http_new_agent_options">option</a>.</p>
+<p>Pooled connections have TCP Keep-Alive enabled for them, but servers may
+still close idle connections, in which case they will be removed from the
+pool and a new connection will be made when a new HTTP request is made for
+that host and port. Servers may also refuse to allow multiple requests
+over the same connection, in which case the connection will have to be
+remade for every request and cannot be pooled. The <code>Agent</code> will still make
+the requests to that server, but each one will occur over a new connection.</p>
+<p>When a connection is closed by the client or the server, it is removed
+from the pool. Any unused sockets in the pool will be unrefed so as not
+to keep the Node.js process running when there are no outstanding requests.
+(see <a href="https://nodejs.org/api/net.html#net_socket_unref"><code>socket.unref()</code></a>).</p>
+<p>It is good practice, to <a href="#http_agent_destroy"><code>destroy()</code></a> an <code>Agent</code> instance when it is no
+longer in use, because unused sockets consume OS resources.</p>
+<p>Sockets are removed from an agent when the socket emits either
+a <code>'close'</code> event or an <code>'agentRemove'</code> event. When intending to keep one
+HTTP request open for a long time without keeping it in the agent, something
+like the following may be done:</p>
+<pre><code class="language-js">http.get(options, (res) =&gt; {
+  // Do stuff
+}).on('socket', (socket) =&gt; {
+  socket.emit('agentRemove');
+});
+</code></pre>
+<p>An agent may also be used for an individual request. By providing
+<code>{agent: false}</code> as an option to the <code>http.get()</code> or <code>http.request()</code>
+functions, a one-time use <code>Agent</code> with default options will be used
+for the client connection.</p>
+<p><code>agent:false</code>:</p>
+<pre><code class="language-js">http.get({
+  hostname: 'localhost',
+  port: 80,
+  path: '/',
+  agent: false  // Create a new agent just for this one request
+}, (res) =&gt; {
+  // Do stuff with response
+});
+</code></pre>
+<h3>new Agent([options])<span><a class="mark" href="#http_new_agent_options" id="http_new_agent_options">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.4</span>
+</div>
+<ul>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> Set of configurable options to set on the agent.
+Can have the following fields:</p>
+<ul>
+<li><code>keepAlive</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Keep sockets around even when there are no
+outstanding requests, so they can be used for future requests without
+having to reestablish a TCP connection. Not to be confused with the
+<code>keep-alive</code> value of the <code>Connection</code> header. The <code>Connection: keep-alive</code>
+header is always sent when using an agent except when the <code>Connection</code>
+header is explicitly specified or when the <code>keepAlive</code> and <code>maxSockets</code>
+options are respectively set to <code>false</code> and <code>Infinity</code>, in which case
+<code>Connection: close</code> will be used. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>keepAliveMsecs</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> When using the <code>keepAlive</code> option, specifies
+the <a href="https://nodejs.org/api/net.html#net_socket_setkeepalive_enable_initialdelay">initial delay</a>
+for TCP Keep-Alive packets. Ignored when the
+<code>keepAlive</code> option is <code>false</code> or <code>undefined</code>. <strong>Default:</strong> <code>1000</code>.</li>
+<li><code>maxSockets</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Maximum number of sockets to allow per
+host. Each request will use a new socket until the maximum is reached.
+<strong>Default:</strong> <code>Infinity</code>.</li>
+<li><code>maxFreeSockets</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Maximum number of sockets to leave open
+in a free state. Only relevant if <code>keepAlive</code> is set to <code>true</code>.
+<strong>Default:</strong> <code>256</code>.</li>
+<li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Socket timeout in milliseconds.
+This will set the timeout when the socket is created.</li>
+</ul>
+</li>
+</ul>
+<p><code>options</code> in <a href="https://nodejs.org/api/net.html#net_socket_connect_options_connectlistener"><code>socket.connect()</code></a> are also supported.</p>
+<p>The default <a href="#http_http_globalagent"><code>http.globalAgent</code></a> that is used by <a href="#http_http_request_options_callback"><code>http.request()</code></a> has all
+of these values set to their respective defaults.</p>
+<p>To configure any of them, a custom <a href="#http_class_http_agent"><code>http.Agent</code></a> instance must be created.</p>
+<pre><code class="language-js">const http = require('http');
+const keepAliveAgent = new http.Agent({ keepAlive: true });
+options.agent = keepAliveAgent;
+http.request(options, onResponseCallback);
+</code></pre>
+<h3>agent.createConnection(options[, callback])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/https.js#L95">[src]</a><span><a class="mark" href="#http_agent_createconnection_options_callback" id="http_agent_createconnection_options_callback">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> Options containing connection details. Check
+<a href="https://nodejs.org/api/net.html#net_net_createconnection_options_connectlistener"><code>net.createConnection()</code></a> for the format of the options</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> Callback function that receives the created socket</li>
+<li>Returns: <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>Produces a socket/stream to be used for HTTP requests.</p>
+<p>By default, this function is the same as <a href="https://nodejs.org/api/net.html#net_net_createconnection_options_connectlistener"><code>net.createConnection()</code></a>. However,
+custom agents may override this method in case greater flexibility is desired.</p>
+<p>A socket/stream can be supplied in one of two ways: by returning the
+socket/stream from this function, or by passing the socket/stream to <code>callback</code>.</p>
+<p><code>callback</code> has a signature of <code>(err, stream)</code>.</p>
+<h3>agent.keepSocketAlive(socket)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/_http_agent.js#L326">[src]</a><span><a class="mark" href="#http_agent_keepsocketalive_socket" id="http_agent_keepsocketalive_socket">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.1.0</span>
+</div>
+<ul>
+<li><code>socket</code> <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>Called when <code>socket</code> is detached from a request and could be persisted by the
+<code>Agent</code>. Default behavior is to:</p>
+<pre><code class="language-js">socket.setKeepAlive(true, this.keepAliveMsecs);
+socket.unref();
+return true;
+</code></pre>
+<p>This method can be overridden by a particular <code>Agent</code> subclass. If this
+method returns a falsy value, the socket will be destroyed instead of persisting
+it for use with the next request.</p>
+<h3>agent.reuseSocket(socket, request)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/_http_agent.js#L333">[src]</a><span><a class="mark" href="#http_agent_reusesocket_socket_request" id="http_agent_reusesocket_socket_request">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.1.0</span>
+</div>
+<ul>
+<li><code>socket</code> <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+<li><code>request</code> <a href="https://nodejs.org/api/http.html#http_class_http_clientrequest" class="type">&lt;http.ClientRequest&gt;</a></li>
+</ul>
+<p>Called when <code>socket</code> is attached to <code>request</code> after being persisted because of
+the keep-alive options. Default behavior is to:</p>
+<pre><code class="language-js">socket.ref();
+</code></pre>
+<p>This method can be overridden by a particular <code>Agent</code> subclass.</p>
+<h3>agent.destroy()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/_http_agent.js#L338">[src]</a><span><a class="mark" href="#http_agent_destroy" id="http_agent_destroy">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<p>Destroy any sockets that are currently in use by the agent.</p>
+<p>It is usually not necessary to do this. However, if using an
+agent with <code>keepAlive</code> enabled, then it is best to explicitly shut down
+the agent when it will no longer be used. Otherwise,
+sockets may hang open for quite a long time before the server
+terminates them.</p>
+<h3>agent.freeSockets<span><a class="mark" href="#http_agent_freesockets" id="http_agent_freesockets">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>An object which contains arrays of sockets currently awaiting use by
+the agent when <code>keepAlive</code> is enabled. Do not modify.</p>
+<h3>agent.getName(options)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/https.js#L164">[src]</a><span><a class="mark" href="#http_agent_getname_options" id="http_agent_getname_options">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.4</span>
+</div>
+<ul>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> A set of options providing information for name generation</p>
+<ul>
+<li><code>host</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A domain name or IP address of the server to issue the
+request to</li>
+<li><code>port</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Port of remote server</li>
+<li><code>localAddress</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Local interface to bind for network connections
+when issuing the request</li>
+<li><code>family</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> Must be 4 or 6 if this doesn't equal <code>undefined</code>.</li>
+</ul>
+</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Get a unique name for a set of request options, to determine whether a
+connection can be reused. For an HTTP agent, this returns
+<code>host:port:localAddress</code> or <code>host:port:localAddress:family</code>. For an HTTPS agent,
+the name includes the CA, cert, ciphers, and other HTTPS/TLS-specific options
+that determine socket reusability.</p>
+<h3>agent.maxFreeSockets<span><a class="mark" href="#http_agent_maxfreesockets" id="http_agent_maxfreesockets">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.7</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p>By default set to 256. For agents with <code>keepAlive</code> enabled, this
+sets the maximum number of sockets that will be left open in the free
+state.</p>
+<h3>agent.maxSockets<span><a class="mark" href="#http_agent_maxsockets" id="http_agent_maxsockets">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.6</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p>By default set to <code>Infinity</code>. Determines how many concurrent sockets the agent
+can have open per origin. Origin is the returned value of <a href="#http_agent_getname_options"><code>agent.getName()</code></a>.</p>
+<h3>agent.requests<span><a class="mark" href="#http_agent_requests" id="http_agent_requests">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.5.9</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>An object which contains queues of requests that have not yet been assigned to
+sockets. Do not modify.</p>
+<h3>agent.sockets<span><a class="mark" href="#http_agent_sockets" id="http_agent_sockets">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.6</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>An object which contains arrays of sockets currently in use by the
+agent. Do not modify.</p>
+<h2>Class: http.ClientRequest<span><a class="mark" href="#http_class_http_clientrequest" id="http_class_http_clientrequest">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.17</span>
+</div>
+<ul>
+<li>Extends: <a href="https://nodejs.org/api/stream.html#stream_stream" class="type">&lt;Stream&gt;</a></li>
+</ul>
+<p>This object is created internally and returned from <a href="#http_http_request_options_callback"><code>http.request()</code></a>. It
+represents an <em>in-progress</em> request whose header has already been queued. The
+header is still mutable using the <a href="#http_request_setheader_name_value"><code>setHeader(name, value)</code></a>,
+<a href="#http_request_getheader_name"><code>getHeader(name)</code></a>, <a href="#http_request_removeheader_name"><code>removeHeader(name)</code></a> API. The actual header will
+be sent along with the first data chunk or when calling <a href="#http_request_end_data_encoding_callback"><code>request.end()</code></a>.</p>
+<p>To get the response, add a listener for <a href="#http_event_response"><code>'response'</code></a> to the request object.
+<a href="#http_event_response"><code>'response'</code></a> will be emitted from the request object when the response
+headers have been received. The <a href="#http_event_response"><code>'response'</code></a> event is executed with one
+argument which is an instance of <a href="#http_class_http_incomingmessage"><code>http.IncomingMessage</code></a>.</p>
+<p>During the <a href="#http_event_response"><code>'response'</code></a> event, one can add listeners to the
+response object; particularly to listen for the <code>'data'</code> event.</p>
+<p>If no <a href="#http_event_response"><code>'response'</code></a> handler is added, then the response will be
+entirely discarded. However, if a <a href="#http_event_response"><code>'response'</code></a> event handler is added,
+then the data from the response object <strong>must</strong> be consumed, either by
+calling <code>response.read()</code> whenever there is a <code>'readable'</code> event, or
+by adding a <code>'data'</code> handler, or by calling the <code>.resume()</code> method.
+Until the data is consumed, the <code>'end'</code> event will not fire. Also, until
+the data is read it will consume memory that can eventually lead to a
+'process out of memory' error.</p>
+<p>Unlike the <code>request</code> object, if the response closes prematurely, the
+<code>response</code> object does not emit an <code>'error'</code> event but instead emits the
+<code>'aborted'</code> event.</p>
+<p>Node.js does not check whether Content-Length and the length of the
+body which has been transmitted are equal or not.</p>
+<h3>Event: 'abort'<span><a class="mark" href="#http_event_abort" id="http_event_abort">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v1.4.1</span>
+</div>
+<p>Emitted when the request has been aborted by the client. This event is only
+emitted on the first call to <code>abort()</code>.</p>
+<h3>Event: 'connect'<span><a class="mark" href="#http_event_connect" id="http_event_connect">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.0</span>
+</div>
+<ul>
+<li><code>response</code> <a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a></li>
+<li><code>socket</code> <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+<li><code>head</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>Emitted each time a server responds to a request with a <code>CONNECT</code> method. If
+this event is not being listened for, clients receiving a <code>CONNECT</code> method will
+have their connections closed.</p>
+<p>A client and server pair demonstrating how to listen for the <code>'connect'</code> event:</p>
+<pre><code class="language-js">const http = require('http');
+const net = require('net');
+const url = require('url');
+
+// Create an HTTP tunneling proxy
+const proxy = http.createServer((req, res) =&gt; {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('okay');
+});
+proxy.on('connect', (req, cltSocket, head) =&gt; {
+  // Connect to an origin server
+  const srvUrl = url.parse(`http://${req.url}`);
+  const srvSocket = net.connect(srvUrl.port, srvUrl.hostname, () =&gt; {
+    cltSocket.write('HTTP/1.1 200 Connection Established\r\n' +
+                    'Proxy-agent: Node.js-Proxy\r\n' +
+                    '\r\n');
+    srvSocket.write(head);
+    srvSocket.pipe(cltSocket);
+    cltSocket.pipe(srvSocket);
+  });
+});
+
+// Now that proxy is running
+proxy.listen(1337, '127.0.0.1', () =&gt; {
+
+  // Make a request to a tunneling proxy
+  const options = {
+    port: 1337,
+    host: '127.0.0.1',
+    method: 'CONNECT',
+    path: 'www.google.com:80'
+  };
+
+  const req = http.request(options);
+  req.end();
+
+  req.on('connect', (res, socket, head) =&gt; {
+    console.log('got connected!');
+
+    // Make a request over an HTTP tunnel
+    socket.write('GET / HTTP/1.1\r\n' +
+                 'Host: www.google.com:80\r\n' +
+                 'Connection: close\r\n' +
+                 '\r\n');
+    socket.on('data', (chunk) =&gt; {
+      console.log(chunk.toString());
+    });
+    socket.on('end', () =&gt; {
+      proxy.close();
+    });
+  });
+});
+</code></pre>
+<h3>Event: 'continue'<span><a class="mark" href="#http_event_continue" id="http_event_continue">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.2</span>
+</div>
+<p>Emitted when the server sends a '100 Continue' HTTP response, usually because
+the request contained 'Expect: 100-continue'. This is an instruction that
+the client should send the request body.</p>
+<h3>Event: 'information'<span><a class="mark" href="#http_event_information" id="http_event_information">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li>
+<p><code>info</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>httpVersion</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li><code>httpVersionMajor</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+<li><code>httpVersionMinor</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+<li><code>statusCode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+<li><code>statusMessage</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li><code>headers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+<li><code>rawHeaders</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>Emitted when the server sends a 1xx intermediate response (excluding 101
+Upgrade). The listeners of this event will receive an object containing the
+HTTP version, status code, status message, key-value headers object,
+and array with the raw header names followed by their respective values.</p>
+<pre><code class="language-js">const http = require('http');
+
+const options = {
+  host: '127.0.0.1',
+  port: 8080,
+  path: '/length_request'
+};
+
+// Make a request
+const req = http.request(options);
+req.end();
+
+req.on('information', (info) =&gt; {
+  console.log(`Got information prior to main response: ${info.statusCode}`);
+});
+</code></pre>
+<p>101 Upgrade statuses do not fire this event due to their break from the
+traditional HTTP request/response chain, such as web sockets, in-place TLS
+upgrades, or HTTP 2.0. To be notified of 101 Upgrade notices, listen for the
+<a href="#http_event_upgrade"><code>'upgrade'</code></a> event instead.</p>
+<h3>Event: 'response'<span><a class="mark" href="#http_event_response" id="http_event_response">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.0</span>
+</div>
+<ul>
+<li><code>response</code> <a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a></li>
+</ul>
+<p>Emitted when a response is received to this request. This event is emitted only
+once.</p>
+<h3>Event: 'socket'<span><a class="mark" href="#http_event_socket" id="http_event_socket">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.5.3</span>
+</div>
+<ul>
+<li><code>socket</code> <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>Emitted after a socket is assigned to this request.</p>
+<h3>Event: 'timeout'<span><a class="mark" href="#http_event_timeout" id="http_event_timeout">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.8</span>
+</div>
+<p>Emitted when the underlying socket times out from inactivity. This only notifies
+that the socket has been idle. The request must be aborted manually.</p>
+<p>See also: <a href="#http_request_settimeout_timeout_callback"><code>request.setTimeout()</code></a>.</p>
+<h3>Event: 'upgrade'<span><a class="mark" href="#http_event_upgrade" id="http_event_upgrade">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.94</span>
+</div>
+<ul>
+<li><code>response</code> <a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a></li>
+<li><code>socket</code> <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+<li><code>head</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>Emitted each time a server responds to a request with an upgrade. If this
+event is not being listened for and the response status code is 101 Switching
+Protocols, clients receiving an upgrade header will have their connections
+closed.</p>
+<p>A client server pair demonstrating how to listen for the <code>'upgrade'</code> event.</p>
+<pre><code class="language-js">const http = require('http');
+
+// Create an HTTP server
+const srv = http.createServer((req, res) =&gt; {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('okay');
+});
+srv.on('upgrade', (req, socket, head) =&gt; {
+  socket.write('HTTP/1.1 101 Web Socket Protocol Handshake\r\n' +
+               'Upgrade: WebSocket\r\n' +
+               'Connection: Upgrade\r\n' +
+               '\r\n');
+
+  socket.pipe(socket); // echo back
+});
+
+// Now that server is running
+srv.listen(1337, '127.0.0.1', () =&gt; {
+
+  // make a request
+  const options = {
+    port: 1337,
+    host: '127.0.0.1',
+    headers: {
+      'Connection': 'Upgrade',
+      'Upgrade': 'websocket'
+    }
+  };
+
+  const req = http.request(options);
+  req.end();
+
+  req.on('upgrade', (res, socket, upgradeHead) =&gt; {
+    console.log('got upgraded!');
+    socket.end();
+    process.exit(0);
+  });
+});
+</code></pre>
+<h3>request.abort()<span><a class="mark" href="#http_request_abort" id="http_request_abort">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.8</span>
+</div>
+<p>Marks the request as aborting. Calling this will cause remaining data
+in the response to be dropped and the socket to be destroyed.</p>
+<h3>request.aborted<span><a class="mark" href="#http_request_aborted" id="http_request_aborted">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>The <code>aborted</code> property is no longer a timestamp number.</p></td></tr>
+<tr><td>v0.11.14</td>
+<td><p><span>Added in: v0.11.14</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>The <code>request.aborted</code> property will be <code>true</code> if the request has
+been aborted.</p>
+<h3>request.connection<span><a class="mark" href="#http_request_connection" id="http_request_connection">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span>
+</div>
+<ul>
+<li><a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>See <a href="#http_request_socket"><code>request.socket</code></a>.</p>
+<h3>request.end([data[, encoding]][, callback])<span><a class="mark" href="#http_request_end_data_encoding_callback" id="http_request_end_data_encoding_callback">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>This method now returns a reference to <code>ClientRequest</code>.</p></td></tr>
+<tr><td>v0.1.90</td>
+<td><p><span>Added in: v0.1.90</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this" class="type">&lt;this&gt;</a></li>
+</ul>
+<p>Finishes sending the request. If any parts of the body are
+unsent, it will flush them to the stream. If the request is
+chunked, this will send the terminating <code>'0\r\n\r\n'</code>.</p>
+<p>If <code>data</code> is specified, it is equivalent to calling
+<a href="#http_request_write_chunk_encoding_callback"><code>request.write(data, encoding)</code></a> followed by <code>request.end(callback)</code>.</p>
+<p>If <code>callback</code> is specified, it will be called when the request stream
+is finished.</p>
+<h3>request.finished<span><a class="mark" href="#http_request_finished" id="http_request_finished">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.0.1</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>The <code>request.finished</code> property will be <code>true</code> if <a href="#http_request_end_data_encoding_callback"><code>request.end()</code></a>
+has been called. <code>request.end()</code> will automatically be called if the
+request was initiated via <a href="#http_http_get_options_callback"><code>http.get()</code></a>.</p>
+<h3>request.flushHeaders()<span><a class="mark" href="#http_request_flushheaders" id="http_request_flushheaders">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v1.6.0</span>
+</div>
+<p>Flushes the request headers.</p>
+<p>For efficiency reasons, Node.js normally buffers the request headers until
+<code>request.end()</code> is called or the first chunk of request data is written. It
+then tries to pack the request headers and data into a single TCP packet.</p>
+<p>That's usually desired (it saves a TCP round-trip), but not when the first
+data is not sent until possibly much later. <code>request.flushHeaders()</code> bypasses
+the optimization and kickstarts the request.</p>
+<h3>request.getHeader(name)<span><a class="mark" href="#http_request_getheader_name" id="http_request_getheader_name">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v1.6.0</span>
+</div>
+<ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+</ul>
+<p>Reads out a header on the request. The name is case-insensitive.
+The type of the return value depends on the arguments provided to
+<a href="#http_request_setheader_name_value"><code>request.setHeader()</code></a>.</p>
+<pre><code class="language-js">request.setHeader('content-type', 'text/html');
+request.setHeader('Content-Length', Buffer.byteLength(body));
+request.setHeader('Cookie', ['type=ninja', 'language=javascript']);
+const contentType = request.getHeader('Content-Type');
+// 'contentType' is 'text/html'
+const contentLength = request.getHeader('Content-Length');
+// 'contentLength' is of type number
+const cookie = request.getHeader('Cookie');
+// 'cookie' is of type string[]
+</code></pre>
+<h3>request.maxHeadersCount<span><a class="mark" href="#http_request_maxheaderscount" id="http_request_maxheaderscount">#</a></span></h3>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> <strong>Default:</strong> <code>2000</code></li>
+</ul>
+<p>Limits maximum response headers count. If set to 0, no limit will be applied.</p>
+<h3>request.path<span><a class="mark" href="#http_request_path" id="http_request_path">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.4.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The request path.</li>
+</ul>
+<h3>request.removeHeader(name)<span><a class="mark" href="#http_request_removeheader_name" id="http_request_removeheader_name">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v1.6.0</span>
+</div>
+<ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Removes a header that's already defined into headers object.</p>
+<pre><code class="language-js">request.removeHeader('Content-Type');
+</code></pre>
+<h3>request.setHeader(name, value)<span><a class="mark" href="#http_request_setheader_name_value" id="http_request_setheader_name_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v1.6.0</span>
+</div>
+<ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+</ul>
+<p>Sets a single header value for headers object. If this header already exists in
+the to-be-sent headers, its value will be replaced. Use an array of strings
+here to send multiple headers with the same name. Non-string values will be
+stored without modification. Therefore, <a href="#http_request_getheader_name"><code>request.getHeader()</code></a> may return
+non-string values. However, the non-string values will be converted to strings
+for network transmission.</p>
+<pre><code class="language-js">request.setHeader('Content-Type', 'application/json');
+</code></pre>
+<p>or</p>
+<pre><code class="language-js">request.setHeader('Cookie', ['type=ninja', 'language=javascript']);
+</code></pre>
+<h3>request.setNoDelay([noDelay])<span><a class="mark" href="#http_request_setnodelay_nodelay" id="http_request_setnodelay_nodelay">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.5.9</span>
+</div>
+<ul>
+<li><code>noDelay</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Once a socket is assigned to this request and is connected
+<a href="https://nodejs.org/api/net.html#net_socket_setnodelay_nodelay"><code>socket.setNoDelay()</code></a> will be called.</p>
+<h3>request.setSocketKeepAlive([enable][, initialdelay])<span><a class="mark" href="#http_request_setsocketkeepalive_enable_initialdelay" id="http_request_setsocketkeepalive_enable_initialdelay">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.5.9</span>
+</div>
+<ul>
+<li><code>enable</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+<li><code>initialDelay</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p>Once a socket is assigned to this request and is connected
+<a href="https://nodejs.org/api/net.html#net_socket_setkeepalive_enable_initialdelay"><code>socket.setKeepAlive()</code></a> will be called.</p>
+<h3>request.setTimeout(timeout[, callback])<span><a class="mark" href="#http_request_settimeout_timeout_callback" id="http_request_settimeout_timeout_callback">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>Consistently set socket timeout only when the socket connects.</p></td></tr>
+<tr><td>v0.5.9</td>
+<td><p><span>Added in: v0.5.9</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Milliseconds before a request times out.</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> Optional function to be called when a timeout occurs.
+Same as binding to the <code>'timeout'</code> event.</li>
+<li>Returns: <a href="https://nodejs.org/api/http.html#http_class_http_clientrequest" class="type">&lt;http.ClientRequest&gt;</a></li>
+</ul>
+<p>Once a socket is assigned to this request and is connected
+<a href="https://nodejs.org/api/net.html#net_socket_settimeout_timeout_callback"><code>socket.setTimeout()</code></a> will be called.</p>
+<h3>request.socket<span><a class="mark" href="#http_request_socket" id="http_request_socket">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span>
+</div>
+<ul>
+<li><a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>Reference to the underlying socket. Usually users will not want to access
+this property. In particular, the socket will not emit <code>'readable'</code> events
+because of how the protocol parser attaches to the socket. The <code>socket</code>
+may also be accessed via <code>request.connection</code>.</p>
+<pre><code class="language-js">const http = require('http');
+const options = {
+  host: 'www.google.com',
+};
+const req = http.get(options);
+req.end();
+req.once('response', (res) =&gt; {
+  const ip = req.socket.localAddress;
+  const port = req.socket.localPort;
+  console.log(`Your IP address is ${ip} and your source port is ${port}.`);
+  // Consume response object
+});
+</code></pre>
+<h3>request.writableEnded<span><a class="mark" href="#http_request_writableended" id="http_request_writableended">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.9.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Is <code>true</code> after <a href="#http_request_end_data_encoding_callback"><code>request.end()</code></a> has been called. This property
+does not indicate whether the data has been flushed, for this use
+<a href="#http_request_writablefinished"><code>request.writableFinished</code></a> instead.</p>
+<h3>request.writableFinished<span><a class="mark" href="#http_request_writablefinished" id="http_request_writablefinished">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.7.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Is <code>true</code> if all data has been flushed to the underlying system, immediately
+before the <a href="#http_event_finish"><code>'finish'</code></a> event is emitted.</p>
+<h3>request.write(chunk[, encoding][, callback])<span><a class="mark" href="#http_request_write_chunk_encoding_callback" id="http_request_write_chunk_encoding_callback">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.29</span>
+</div>
+<ul>
+<li><code>chunk</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Sends a chunk of the body. By calling this method
+many times, a request body can be sent to a
+server — in that case it is suggested to use the
+<code>['Transfer-Encoding', 'chunked']</code> header line when
+creating the request.</p>
+<p>The <code>encoding</code> argument is optional and only applies when <code>chunk</code> is a string.
+Defaults to <code>'utf8'</code>.</p>
+<p>The <code>callback</code> argument is optional and will be called when this chunk of data
+is flushed, but only if the chunk is non-empty.</p>
+<p>Returns <code>true</code> if the entire data was flushed successfully to the kernel
+buffer. Returns <code>false</code> if all or part of the data was queued in user memory.
+<code>'drain'</code> will be emitted when the buffer is free again.</p>
+<p>When <code>write</code> function is called with empty string or buffer, it does
+nothing and waits for more input.</p>
+<h2>Class: http.Server<span><a class="mark" href="#http_class_http_server" id="http_class_http_server">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.17</span>
+</div>
+<ul>
+<li>Extends: <a href="https://nodejs.org/api/net.html#net_class_net_server" class="type">&lt;net.Server&gt;</a></li>
+</ul>
+<h3>Event: 'checkContinue'<span><a class="mark" href="#http_event_checkcontinue" id="http_event_checkcontinue">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span>
+</div>
+<ul>
+<li><code>request</code> <a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a></li>
+<li><code>response</code> <a href="https://nodejs.org/api/http.html#http_class_http_serverresponse" class="type">&lt;http.ServerResponse&gt;</a></li>
+</ul>
+<p>Emitted each time a request with an HTTP <code>Expect: 100-continue</code> is received.
+If this event is not listened for, the server will automatically respond
+with a <code>100 Continue</code> as appropriate.</p>
+<p>Handling this event involves calling <a href="#http_response_writecontinue"><code>response.writeContinue()</code></a> if the
+client should continue to send the request body, or generating an appropriate
+HTTP response (e.g. 400 Bad Request) if the client should not continue to send
+the request body.</p>
+<p>When this event is emitted and handled, the <a href="#http_event_request"><code>'request'</code></a> event will
+not be emitted.</p>
+<h3>Event: 'checkExpectation'<span><a class="mark" href="#http_event_checkexpectation" id="http_event_checkexpectation">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v5.5.0</span>
+</div>
+<ul>
+<li><code>request</code> <a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a></li>
+<li><code>response</code> <a href="https://nodejs.org/api/http.html#http_class_http_serverresponse" class="type">&lt;http.ServerResponse&gt;</a></li>
+</ul>
+<p>Emitted each time a request with an HTTP <code>Expect</code> header is received, where the
+value is not <code>100-continue</code>. If this event is not listened for, the server will
+automatically respond with a <code>417 Expectation Failed</code> as appropriate.</p>
+<p>When this event is emitted and handled, the <a href="#http_event_request"><code>'request'</code></a> event will
+not be emitted.</p>
+<h3>Event: 'clientError'<span><a class="mark" href="#http_event_clienterror" id="http_event_clienterror">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>The default behavior will return a 431 Request Header Fields Too Large if a HPE_HEADER_OVERFLOW error occurs.</p></td></tr>
+<tr><td>v9.4.0</td>
+<td><p>The <code>rawPacket</code> is the current buffer that just parsed. Adding this buffer to the error object of <code>'clientError'</code> event is to make it possible that developers can log the broken packet.</p></td></tr>
+<tr><td>v6.0.0</td>
+<td><p>The default action of calling <code>.destroy()</code> on the <code>socket</code> will no longer take place if there are listeners attached for <code>'clientError'</code>.</p></td></tr>
+<tr><td>v0.1.94</td>
+<td><p><span>Added in: v0.1.94</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>exception</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>socket</code> <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>If a client connection emits an <code>'error'</code> event, it will be forwarded here.
+Listener of this event is responsible for closing/destroying the underlying
+socket. For example, one may wish to more gracefully close the socket with a
+custom HTTP response instead of abruptly severing the connection.</p>
+<p>Default behavior is to try close the socket with a HTTP '400 Bad Request',
+or a HTTP '431 Request Header Fields Too Large' in the case of a
+<a href="https://nodejs.org/api/errors.html#errors_hpe_header_overflow"><code>HPE_HEADER_OVERFLOW</code></a> error. If the socket is not writable it is
+immediately destroyed.</p>
+<p><code>socket</code> is the <a href="https://nodejs.org/api/net.html#net_class_net_socket"><code>net.Socket</code></a> object that the error originated from.</p>
+<pre><code class="language-js">const http = require('http');
+
+const server = http.createServer((req, res) =&gt; {
+  res.end();
+});
+server.on('clientError', (err, socket) =&gt; {
+  socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
+});
+server.listen(8000);
+</code></pre>
+<p>When the <code>'clientError'</code> event occurs, there is no <code>request</code> or <code>response</code>
+object, so any HTTP response sent, including response headers and payload,
+<em>must</em> be written directly to the <code>socket</code> object. Care must be taken to
+ensure the response is a properly formatted HTTP response message.</p>
+<p><code>err</code> is an instance of <code>Error</code> with two extra columns:</p>
+<ul>
+<li><code>bytesParsed</code>: the bytes count of request packet that Node.js may have parsed
+correctly;</li>
+<li><code>rawPacket</code>: the raw packet of current request.</li>
+</ul>
+<h3>Event: 'close'<span><a class="mark" href="#http_event_close" id="http_event_close">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.4</span>
+</div>
+<p>Emitted when the server closes.</p>
+<h3>Event: 'connect'<span><a class="mark" href="#http_event_connect_1" id="http_event_connect_1">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.0</span>
+</div>
+<ul>
+<li><code>request</code> <a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a> Arguments for the HTTP request, as it is in
+the <a href="#http_event_request"><code>'request'</code></a> event</li>
+<li><code>socket</code> <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a> Network socket between the server and client</li>
+<li><code>head</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> The first packet of the tunneling stream (may be empty)</li>
+</ul>
+<p>Emitted each time a client requests an HTTP <code>CONNECT</code> method. If this event is
+not listened for, then clients requesting a <code>CONNECT</code> method will have their
+connections closed.</p>
+<p>After this event is emitted, the request's socket will not have a <code>'data'</code>
+event listener, meaning it will need to be bound in order to handle data
+sent to the server on that socket.</p>
+<h3>Event: 'connection'<span><a class="mark" href="#http_event_connection" id="http_event_connection">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.0</span>
+</div>
+<ul>
+<li><code>socket</code> <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>This event is emitted when a new TCP stream is established. <code>socket</code> is
+typically an object of type <a href="https://nodejs.org/api/net.html#net_class_net_socket"><code>net.Socket</code></a>. Usually users will not want to
+access this event. In particular, the socket will not emit <code>'readable'</code> events
+because of how the protocol parser attaches to the socket. The <code>socket</code> can
+also be accessed at <code>request.connection</code>.</p>
+<p>This event can also be explicitly emitted by users to inject connections
+into the HTTP server. In that case, any <a href="https://nodejs.org/api/stream.html#stream_class_stream_duplex"><code>Duplex</code></a> stream can be passed.</p>
+<p>If <code>socket.setTimeout()</code> is called here, the timeout will be replaced with
+<code>server.keepAliveTimeout</code> when the socket has served a request (if
+<code>server.keepAliveTimeout</code> is non-zero).</p>
+<h3>Event: 'request'<span><a class="mark" href="#http_event_request" id="http_event_request">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.0</span>
+</div>
+<ul>
+<li><code>request</code> <a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a></li>
+<li><code>response</code> <a href="https://nodejs.org/api/http.html#http_class_http_serverresponse" class="type">&lt;http.ServerResponse&gt;</a></li>
+</ul>
+<p>Emitted each time there is a request. There may be multiple requests
+per connection (in the case of HTTP Keep-Alive connections).</p>
+<h3>Event: 'upgrade'<span><a class="mark" href="#http_event_upgrade_1" id="http_event_upgrade_1">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Not listening to this event no longer causes the socket to be destroyed if a client sends an Upgrade header.</p></td></tr>
+<tr><td>v0.1.94</td>
+<td><p><span>Added in: v0.1.94</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>request</code> <a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a> Arguments for the HTTP request, as it is in
+the <a href="#http_event_request"><code>'request'</code></a> event</li>
+<li><code>socket</code> <a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a> Network socket between the server and client</li>
+<li><code>head</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> The first packet of the upgraded stream (may be empty)</li>
+</ul>
+<p>Emitted each time a client requests an HTTP upgrade. Listening to this event
+is optional and clients cannot insist on a protocol change.</p>
+<p>After this event is emitted, the request's socket will not have a <code>'data'</code>
+event listener, meaning it will need to be bound in order to handle data
+sent to the server on that socket.</p>
+<h3>server.close([callback])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/net.js#L1585">[src]</a><span><a class="mark" href="#http_server_close_callback" id="http_server_close_callback">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.90</span>
+</div>
+<ul>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>Stops the server from accepting new connections. See <a href="https://nodejs.org/api/net.html#net_server_close_callback"><code>net.Server.close()</code></a>.</p>
+<h3>server.headersTimeout<span><a class="mark" href="#http_server_headerstimeout" id="http_server_headerstimeout">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v11.3.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> <strong>Default:</strong> <code>40000</code></li>
+</ul>
+<p>Limit the amount of time the parser will wait to receive the complete HTTP
+headers.</p>
+<p>In case of inactivity, the rules defined in <a href="#http_server_timeout"><code>server.timeout</code></a> apply. However,
+that inactivity based timeout would still allow the connection to be kept open
+if the headers are being sent very slowly (by default, up to a byte per 2
+minutes). In order to prevent this, whenever header data arrives an additional
+check is made that more than <code>server.headersTimeout</code> milliseconds has not
+passed since the connection was established. If the check fails, a <code>'timeout'</code>
+event is emitted on the server object, and (by default) the socket is destroyed.
+See <a href="#http_server_timeout"><code>server.timeout</code></a> for more information on how timeout behavior can be
+customized.</p>
+<h3>server.listen()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/net.js#L1378">[src]</a><span><a class="mark" href="#http_server_listen" id="http_server_listen">#</a></span></h3>
+<p>Starts the HTTP server listening for connections.
+This method is identical to <a href="https://nodejs.org/api/net.html#net_server_listen"><code>server.listen()</code></a> from <a href="https://nodejs.org/api/net.html#net_class_net_server"><code>net.Server</code></a>.</p>
+<h3>server.listening<span><a class="mark" href="#http_server_listening" id="http_server_listening">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v5.7.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Indicates whether or not the server is listening for connections.</li>
+</ul>
+<h3>server.maxHeadersCount<span><a class="mark" href="#http_server_maxheaderscount" id="http_server_maxheaderscount">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> <strong>Default:</strong> <code>2000</code></li>
+</ul>
+<p>Limits maximum incoming headers count. If set to 0, no limit will be applied.</p>
+<h3>server.setTimeout([msecs][, callback])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/_http_server.js#L348">[src]</a><span><a class="mark" href="#http_server_settimeout_msecs_callback" id="http_server_settimeout_msecs_callback">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.9.12</span>
+</div>
+<ul>
+<li><code>msecs</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> <strong>Default:</strong> <code>120000</code> (2 minutes)</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://nodejs.org/api/http.html#http_class_http_server" class="type">&lt;http.Server&gt;</a></li>
+</ul>
+<p>Sets the timeout value for sockets, and emits a <code>'timeout'</code> event on
+the Server object, passing the socket as an argument, if a timeout
+occurs.</p>
+<p>If there is a <code>'timeout'</code> event listener on the Server object, then it
+will be called with the timed-out socket as an argument.</p>
+<p>By default, the Server's timeout value is 2 minutes, and sockets are
+destroyed automatically if they time out. However, if a callback is assigned
+to the Server's <code>'timeout'</code> event, timeouts must be handled explicitly.</p>
+<p>To change the default timeout use the <a href="https://nodejs.org/api/cli.html#cli_http_server_default_timeout_milliseconds"><code>--http-server-default-timeout</code></a>
+flag.</p>
+<h3>server.timeout<span><a class="mark" href="#http_server_timeout" id="http_server_timeout">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.9.12</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Timeout in milliseconds. <strong>Default:</strong> <code>120000</code> (2 minutes).</li>
+</ul>
+<p>The number of milliseconds of inactivity before a socket is presumed
+to have timed out.</p>
+<p>A value of <code>0</code> will disable the timeout behavior on incoming connections.</p>
+<p>The socket timeout logic is set up on connection, so changing this
+value only affects new connections to the server, not any existing connections.</p>
+<p>To change the default timeout use the <a href="https://nodejs.org/api/cli.html#cli_http_server_default_timeout_milliseconds"><code>--http-server-default-timeout</code></a>
+flag.</p>
+<h3>server.keepAliveTimeout<span><a class="mark" href="#http_server_keepalivetimeout" id="http_server_keepalivetimeout">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.0.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Timeout in milliseconds. <strong>Default:</strong> <code>5000</code> (5 seconds).</li>
+</ul>
+<p>The number of milliseconds of inactivity a server needs to wait for additional
+incoming data, after it has finished writing the last response, before a socket
+will be destroyed. If the server receives new data before the keep-alive
+timeout has fired, it will reset the regular inactivity timeout, i.e.,
+<a href="#http_server_timeout"><code>server.timeout</code></a>.</p>
+<p>A value of <code>0</code> will disable the keep-alive timeout behavior on incoming
+connections.
+A value of <code>0</code> makes the http server behave similarly to Node.js versions prior
+to 8.0.0, which did not have a keep-alive timeout.</p>
+<p>The socket timeout logic is set up on connection, so changing this value only
+affects new connections to the server, not any existing connections.</p>
+<h2>Class: http.ServerResponse<span><a class="mark" href="#http_class_http_serverresponse" id="http_class_http_serverresponse">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.17</span>
+</div>
+<ul>
+<li>Extends: <a href="https://nodejs.org/api/stream.html#stream_stream" class="type">&lt;Stream&gt;</a></li>
+</ul>
+<p>This object is created internally by an HTTP server — not by the user. It is
+passed as the second parameter to the <a href="#http_event_request"><code>'request'</code></a> event.</p>
+<h3>Event: 'close'<span><a class="mark" href="#http_event_close_1" id="http_event_close_1">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.6.7</span>
+</div>
+<p>Indicates that the underlying connection was terminated.</p>
+<h3>Event: 'finish'<span><a class="mark" href="#http_event_finish" id="http_event_finish">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.6</span>
+</div>
+<p>Emitted when the response has been sent. More specifically, this event is
+emitted when the last segment of the response headers and body have been
+handed off to the operating system for transmission over the network. It
+does not imply that the client has received anything yet.</p>
+<h3>response.addTrailers(headers)<span><a class="mark" href="#http_response_addtrailers_headers" id="http_response_addtrailers_headers">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span>
+</div>
+<ul>
+<li><code>headers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>This method adds HTTP trailing headers (a header but at the end of the
+message) to the response.</p>
+<p>Trailers will <strong>only</strong> be emitted if chunked encoding is used for the
+response; if it is not (e.g. if the request was HTTP/1.0), they will
+be silently discarded.</p>
+<p>HTTP requires the <code>Trailer</code> header to be sent in order to
+emit trailers, with a list of the header fields in its value. E.g.,</p>
+<pre><code class="language-js">response.writeHead(200, { 'Content-Type': 'text/plain',
+                          'Trailer': 'Content-MD5' });
+response.write(fileData);
+response.addTrailers({ 'Content-MD5': '7895bf4b8828b55ceaf47747b4bca667' });
+response.end();
+</code></pre>
+<p>Attempting to set a header field name or value that contains invalid characters
+will result in a <a href="https://nodejs.org/api/errors.html#errors_class_typeerror"><code>TypeError</code></a> being thrown.</p>
+<h3>response.connection<span><a class="mark" href="#http_response_connection" id="http_response_connection">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span>
+</div>
+<ul>
+<li><a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>See <a href="#http_response_socket"><code>response.socket</code></a>.</p>
+<h3>response.end([data][, encoding][, callback])<span><a class="mark" href="#http_response_end_data_encoding_callback" id="http_response_end_data_encoding_callback">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>This method now returns a reference to <code>ServerResponse</code>.</p></td></tr>
+<tr><td>v0.1.90</td>
+<td><p><span>Added in: v0.1.90</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this" class="type">&lt;this&gt;</a></li>
+</ul>
+<p>This method signals to the server that all of the response headers and body
+have been sent; that server should consider this message complete.
+The method, <code>response.end()</code>, MUST be called on each response.</p>
+<p>If <code>data</code> is specified, it is similar in effect to calling
+<a href="#http_response_write_chunk_encoding_callback"><code>response.write(data, encoding)</code></a> followed by <code>response.end(callback)</code>.</p>
+<p>If <code>callback</code> is specified, it will be called when the response stream
+is finished.</p>
+<h3>response.finished<span><a class="mark" href="#http_response_finished" id="http_response_finished">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.0.2</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>The <code>response.finished</code> property will be <code>true</code> if <a href="#http_response_end_data_encoding_callback"><code>response.end()</code></a>
+has been called.</p>
+<h3>response.flushHeaders()<span><a class="mark" href="#http_response_flushheaders" id="http_response_flushheaders">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v1.6.0</span>
+</div>
+<p>Flushes the response headers. See also: <a href="#http_request_flushheaders"><code>request.flushHeaders()</code></a>.</p>
+<h3>response.getHeader(name)<span><a class="mark" href="#http_response_getheader_name" id="http_response_getheader_name">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.4.0</span>
+</div>
+<ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+</ul>
+<p>Reads out a header that's already been queued but not sent to the client.
+The name is case-insensitive. The type of the return value depends
+on the arguments provided to <a href="#http_response_setheader_name_value"><code>response.setHeader()</code></a>.</p>
+<pre><code class="language-js">response.setHeader('Content-Type', 'text/html');
+response.setHeader('Content-Length', Buffer.byteLength(body));
+response.setHeader('Set-Cookie', ['type=ninja', 'language=javascript']);
+const contentType = response.getHeader('content-type');
+// contentType is 'text/html'
+const contentLength = response.getHeader('Content-Length');
+// contentLength is of type number
+const setCookie = response.getHeader('set-cookie');
+// setCookie is of type string[]
+</code></pre>
+<h3>response.getHeaderNames()<span><a class="mark" href="#http_response_getheadernames" id="http_response_getheadernames">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.7.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+<p>Returns an array containing the unique names of the current outgoing headers.
+All header names are lowercase.</p>
+<pre><code class="language-js">response.setHeader('Foo', 'bar');
+response.setHeader('Set-Cookie', ['foo=bar', 'bar=baz']);
+
+const headerNames = response.getHeaderNames();
+// headerNames === ['foo', 'set-cookie']
+</code></pre>
+<h3>response.getHeaders()<span><a class="mark" href="#http_response_getheaders" id="http_response_getheaders">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.7.0</span>
+</div>
+<ul>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>Returns a shallow copy of the current outgoing headers. Since a shallow copy
+is used, array values may be mutated without additional calls to various
+header-related http module methods. The keys of the returned object are the
+header names and the values are the respective header values. All header names
+are lowercase.</p>
+<p>The object returned by the <code>response.getHeaders()</code> method <em>does not</em>
+prototypically inherit from the JavaScript <code>Object</code>. This means that typical
+<code>Object</code> methods such as <code>obj.toString()</code>, <code>obj.hasOwnProperty()</code>, and others
+are not defined and <em>will not work</em>.</p>
+<pre><code class="language-js">response.setHeader('Foo', 'bar');
+response.setHeader('Set-Cookie', ['foo=bar', 'bar=baz']);
+
+const headers = response.getHeaders();
+// headers === { foo: 'bar', 'set-cookie': ['foo=bar', 'bar=baz'] }
+</code></pre>
+<h3>response.hasHeader(name)<span><a class="mark" href="#http_response_hasheader_name" id="http_response_hasheader_name">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.7.0</span>
+</div>
+<ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the header identified by <code>name</code> is currently set in the
+outgoing headers. The header name matching is case-insensitive.</p>
+<pre><code class="language-js">const hasContentType = response.hasHeader('content-type');
+</code></pre>
+<h3>response.headersSent<span><a class="mark" href="#http_response_headerssent" id="http_response_headerssent">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.9.3</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Boolean (read-only). True if headers were sent, false otherwise.</p>
+<h3>response.removeHeader(name)<span><a class="mark" href="#http_response_removeheader_name" id="http_response_removeheader_name">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.4.0</span>
+</div>
+<ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Removes a header that's queued for implicit sending.</p>
+<pre><code class="language-js">response.removeHeader('Content-Encoding');
+</code></pre>
+<h3>response.sendDate<span><a class="mark" href="#http_response_senddate" id="http_response_senddate">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.5</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>When true, the Date header will be automatically generated and sent in
+the response if it is not already present in the headers. Defaults to true.</p>
+<p>This should only be disabled for testing; HTTP requires the Date header
+in responses.</p>
+<h3>response.setHeader(name, value)<span><a class="mark" href="#http_response_setheader_name_value" id="http_response_setheader_name_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.4.0</span>
+</div>
+<ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+</ul>
+<p>Sets a single header value for implicit headers. If this header already exists
+in the to-be-sent headers, its value will be replaced. Use an array of strings
+here to send multiple headers with the same name. Non-string values will be
+stored without modification. Therefore, <a href="#http_response_getheader_name"><code>response.getHeader()</code></a> may return
+non-string values. However, the non-string values will be converted to strings
+for network transmission.</p>
+<pre><code class="language-js">response.setHeader('Content-Type', 'text/html');
+</code></pre>
+<p>or</p>
+<pre><code class="language-js">response.setHeader('Set-Cookie', ['type=ninja', 'language=javascript']);
+</code></pre>
+<p>Attempting to set a header field name or value that contains invalid characters
+will result in a <a href="https://nodejs.org/api/errors.html#errors_class_typeerror"><code>TypeError</code></a> being thrown.</p>
+<p>When headers have been set with <a href="#http_response_setheader_name_value"><code>response.setHeader()</code></a>, they will be merged
+with any headers passed to <a href="#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a>, with the headers passed
+to <a href="#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a> given precedence.</p>
+<pre><code class="language-js">// Returns content-type = text/plain
+const server = http.createServer((req, res) =&gt; {
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('X-Foo', 'bar');
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('ok');
+});
+</code></pre>
+<p>If <a href="#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a> method is called and this method has not been
+called, it will directly write the supplied header values onto the network
+channel without caching internally, and the <a href="#http_response_getheader_name"><code>response.getHeader()</code></a> on the
+header will not yield the expected result. If progressive population of headers
+is desired with potential future retrieval and modification, use
+<a href="#http_response_setheader_name_value"><code>response.setHeader()</code></a> instead of <a href="#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a>.</p>
+<h3>response.setTimeout(msecs[, callback])<span><a class="mark" href="#http_response_settimeout_msecs_callback" id="http_response_settimeout_msecs_callback">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.9.12</span>
+</div>
+<ul>
+<li><code>msecs</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://nodejs.org/api/http.html#http_class_http_serverresponse" class="type">&lt;http.ServerResponse&gt;</a></li>
+</ul>
+<p>Sets the Socket's timeout value to <code>msecs</code>. If a callback is
+provided, then it is added as a listener on the <code>'timeout'</code> event on
+the response object.</p>
+<p>If no <code>'timeout'</code> listener is added to the request, the response, or
+the server, then sockets are destroyed when they time out. If a handler is
+assigned to the request, the response, or the server's <code>'timeout'</code> events,
+timed out sockets must be handled explicitly.</p>
+<h3>response.socket<span><a class="mark" href="#http_response_socket" id="http_response_socket">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span>
+</div>
+<ul>
+<li><a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>Reference to the underlying socket. Usually users will not want to access
+this property. In particular, the socket will not emit <code>'readable'</code> events
+because of how the protocol parser attaches to the socket. After
+<code>response.end()</code>, the property is nulled. The <code>socket</code> may also be accessed
+via <code>response.connection</code>.</p>
+<pre><code class="language-js">const http = require('http');
+const server = http.createServer((req, res) =&gt; {
+  const ip = res.socket.remoteAddress;
+  const port = res.socket.remotePort;
+  res.end(`Your IP address is ${ip} and your source port is ${port}.`);
+}).listen(3000);
+</code></pre>
+<h3>response.statusCode<span><a class="mark" href="#http_response_statuscode" id="http_response_statuscode">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.4.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> <strong>Default:</strong> <code>200</code></li>
+</ul>
+<p>When using implicit headers (not calling <a href="#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a> explicitly),
+this property controls the status code that will be sent to the client when
+the headers get flushed.</p>
+<pre><code class="language-js">response.statusCode = 404;
+</code></pre>
+<p>After response header was sent to the client, this property indicates the
+status code which was sent out.</p>
+<h3>response.statusMessage<span><a class="mark" href="#http_response_statusmessage" id="http_response_statusmessage">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.8</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>When using implicit headers (not calling <a href="#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a> explicitly),
+this property controls the status message that will be sent to the client when
+the headers get flushed. If this is left as <code>undefined</code> then the standard
+message for the status code will be used.</p>
+<pre><code class="language-js">response.statusMessage = 'Not found';
+</code></pre>
+<p>After response header was sent to the client, this property indicates the
+status message which was sent out.</p>
+<h3>response.writableEnded<span><a class="mark" href="#http_response_writableended" id="http_response_writableended">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.9.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Is <code>true</code> after <a href="#http_response_end_data_encoding_callback"><code>response.end()</code></a> has been called. This property
+does not indicate whether the data has been flushed, for this use
+<a href="#http_response_writablefinished"><code>response.writableFinished</code></a> instead.</p>
+<h3>response.writableFinished<span><a class="mark" href="#http_response_writablefinished" id="http_response_writablefinished">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v12.7.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Is <code>true</code> if all data has been flushed to the underlying system, immediately
+before the <a href="#http_event_finish"><code>'finish'</code></a> event is emitted.</p>
+<h3>response.write(chunk[, encoding][, callback])<span><a class="mark" href="#http_response_write_chunk_encoding_callback" id="http_response_write_chunk_encoding_callback">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.29</span>
+</div>
+<ul>
+<li><code>chunk</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> <strong>Default:</strong> <code>'utf8'</code></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>If this method is called and <a href="#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a> has not been called,
+it will switch to implicit header mode and flush the implicit headers.</p>
+<p>This sends a chunk of the response body. This method may
+be called multiple times to provide successive parts of the body.</p>
+<p>In the <code>http</code> module, the response body is omitted when the
+request is a HEAD request. Similarly, the <code>204</code> and <code>304</code> responses
+<em>must not</em> include a message body.</p>
+<p><code>chunk</code> can be a string or a buffer. If <code>chunk</code> is a string,
+the second parameter specifies how to encode it into a byte stream.
+<code>callback</code> will be called when this chunk of data is flushed.</p>
+<p>This is the raw HTTP body and has nothing to do with higher-level multi-part
+body encodings that may be used.</p>
+<p>The first time <a href="#http_response_write_chunk_encoding_callback"><code>response.write()</code></a> is called, it will send the buffered
+header information and the first chunk of the body to the client. The second
+time <a href="#http_response_write_chunk_encoding_callback"><code>response.write()</code></a> is called, Node.js assumes data will be streamed,
+and sends the new data separately. That is, the response is buffered up to the
+first chunk of the body.</p>
+<p>Returns <code>true</code> if the entire data was flushed successfully to the kernel
+buffer. Returns <code>false</code> if all or part of the data was queued in user memory.
+<code>'drain'</code> will be emitted when the buffer is free again.</p>
+<h3>response.writeContinue()<span><a class="mark" href="#http_response_writecontinue" id="http_response_writecontinue">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span>
+</div>
+<p>Sends a HTTP/1.1 100 Continue message to the client, indicating that
+the request body should be sent. See the <a href="#http_event_checkcontinue"><code>'checkContinue'</code></a> event on
+<code>Server</code>.</p>
+<h3>response.writeHead(statusCode[, statusMessage][, headers])<span><a class="mark" href="#http_response_writehead_statuscode_statusmessage_headers" id="http_response_writehead_statuscode_statusmessage_headers">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.10.0</td>
+<td><p>Return <code>this</code> from <code>writeHead()</code> to allow chaining with <code>end()</code>.</p></td></tr>
+<tr><td>v5.11.0, v4.4.5</td>
+<td><p>A <code>RangeError</code> is thrown if <code>statusCode</code> is not a number in the range <code>[100, 999]</code>.</p></td></tr>
+<tr><td>v0.1.30</td>
+<td><p><span>Added in: v0.1.30</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>statusCode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+<li><code>statusMessage</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li><code>headers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+<li>Returns: <a href="https://nodejs.org/api/http.html#http_class_http_serverresponse" class="type">&lt;http.ServerResponse&gt;</a></li>
+</ul>
+<p>Sends a response header to the request. The status code is a 3-digit HTTP
+status code, like <code>404</code>. The last argument, <code>headers</code>, are the response headers.
+Optionally one can give a human-readable <code>statusMessage</code> as the second
+argument.</p>
+<p>Returns a reference to the <code>ServerResponse</code>, so that calls can be chained.</p>
+<pre><code class="language-js">const body = 'hello world';
+response
+  .writeHead(200, {
+    'Content-Length': Buffer.byteLength(body),
+    'Content-Type': 'text/plain'
+  })
+  .end(body);
+</code></pre>
+<p>This method must only be called once on a message and it must
+be called before <a href="#http_response_end_data_encoding_callback"><code>response.end()</code></a> is called.</p>
+<p>If <a href="#http_response_write_chunk_encoding_callback"><code>response.write()</code></a> or <a href="#http_response_end_data_encoding_callback"><code>response.end()</code></a> are called before calling
+this, the implicit/mutable headers will be calculated and call this function.</p>
+<p>When headers have been set with <a href="#http_response_setheader_name_value"><code>response.setHeader()</code></a>, they will be merged
+with any headers passed to <a href="#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a>, with the headers passed
+to <a href="#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a> given precedence.</p>
+<p>If this method is called and <a href="#http_response_setheader_name_value"><code>response.setHeader()</code></a> has not been called,
+it will directly write the supplied header values onto the network channel
+without caching internally, and the <a href="#http_response_getheader_name"><code>response.getHeader()</code></a> on the header
+will not yield the expected result. If progressive population of headers is
+desired with potential future retrieval and modification, use
+<a href="#http_response_setheader_name_value"><code>response.setHeader()</code></a> instead.</p>
+<pre><code class="language-js">// Returns content-type = text/plain
+const server = http.createServer((req, res) =&gt; {
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('X-Foo', 'bar');
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('ok');
+});
+</code></pre>
+<p><code>Content-Length</code> is given in bytes not characters. The above example
+works because the string <code>'hello world'</code> contains only single byte characters.
+If the body contains higher coded characters then <code>Buffer.byteLength()</code>
+should be used to determine the number of bytes in a given encoding.
+And Node.js does not check whether <code>Content-Length</code> and the length of the body
+which has been transmitted are equal or not.</p>
+<p>Attempting to set a header field name or value that contains invalid characters
+will result in a <a href="https://nodejs.org/api/errors.html#errors_class_typeerror"><code>TypeError</code></a> being thrown.</p>
+<h3>response.writeProcessing()<span><a class="mark" href="#http_response_writeprocessing" id="http_response_writeprocessing">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<p>Sends a HTTP/1.1 102 Processing message to the client, indicating that
+the request body should be sent.</p>
+<h2>Class: http.IncomingMessage<span><a class="mark" href="#http_class_http_incomingmessage" id="http_class_http_incomingmessage">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.17</span>
+</div>
+<ul>
+<li>Extends: <a href="https://nodejs.org/api/stream.html#stream_class_stream_readable" class="type">&lt;stream.Readable&gt;</a></li>
+</ul>
+<p>An <code>IncomingMessage</code> object is created by <a href="#http_class_http_server"><code>http.Server</code></a> or
+<a href="#http_class_http_clientrequest"><code>http.ClientRequest</code></a> and passed as the first argument to the <a href="#http_event_request"><code>'request'</code></a>
+and <a href="#http_event_response"><code>'response'</code></a> event respectively. It may be used to access response
+status, headers and data.</p>
+<h3>Event: 'aborted'<span><a class="mark" href="#http_event_aborted" id="http_event_aborted">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.8</span>
+</div>
+<p>Emitted when the request has been aborted.</p>
+<h3>Event: 'close'<span><a class="mark" href="#http_event_close_2" id="http_event_close_2">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.4.2</span>
+</div>
+<p>Indicates that the underlying connection was closed.</p>
+<h3>message.aborted<span><a class="mark" href="#http_message_aborted" id="http_message_aborted">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.1.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>The <code>message.aborted</code> property will be <code>true</code> if the request has
+been aborted.</p>
+<h3>message.complete<span><a class="mark" href="#http_message_complete" id="http_message_complete">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>The <code>message.complete</code> property will be <code>true</code> if a complete HTTP message has
+been received and successfully parsed.</p>
+<p>This property is particularly useful as a means of determining if a client or
+server fully transmitted a message before a connection was terminated:</p>
+<pre><code class="language-js">const req = http.request({
+  host: '127.0.0.1',
+  port: 8080,
+  method: 'POST'
+}, (res) =&gt; {
+  res.resume();
+  res.on('end', () =&gt; {
+    if (!res.complete)
+      console.error(
+        'The connection was terminated while the message was still being sent');
+  });
+});
+</code></pre>
+<h3>message.destroy([error])<span><a class="mark" href="#http_message_destroy_error" id="http_message_destroy_error">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span>
+</div>
+<ul>
+<li><code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+</ul>
+<p>Calls <code>destroy()</code> on the socket that received the <code>IncomingMessage</code>. If <code>error</code>
+is provided, an <code>'error'</code> event is emitted and <code>error</code> is passed as an argument
+to any listeners on the event.</p>
+<h3>message.headers<span><a class="mark" href="#http_message_headers" id="http_message_headers">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.5</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>The request/response headers object.</p>
+<p>Key-value pairs of header names and values. Header names are lower-cased.</p>
+<pre><code class="language-js">// Prints something like:
+//
+// { 'user-agent': 'curl/7.22.0',
+//   host: '127.0.0.1:8000',
+//   accept: '*/*' }
+console.log(request.headers);
+</code></pre>
+<p>Duplicates in raw headers are handled in the following ways, depending on the
+header name:</p>
+<ul>
+<li>Duplicates of <code>age</code>, <code>authorization</code>, <code>content-length</code>, <code>content-type</code>,
+<code>etag</code>, <code>expires</code>, <code>from</code>, <code>host</code>, <code>if-modified-since</code>, <code>if-unmodified-since</code>,
+<code>last-modified</code>, <code>location</code>, <code>max-forwards</code>, <code>proxy-authorization</code>, <code>referer</code>,
+<code>retry-after</code>, or <code>user-agent</code> are discarded.</li>
+<li><code>set-cookie</code> is always an array. Duplicates are added to the array.</li>
+<li>For duplicate <code>cookie</code> headers, the values are joined together with '; '.</li>
+<li>For all other headers, the values are joined together with ', '.</li>
+</ul>
+<h3>message.httpVersion<span><a class="mark" href="#http_message_httpversion" id="http_message_httpversion">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.1</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>In case of server request, the HTTP version sent by the client. In the case of
+client response, the HTTP version of the connected-to server.
+Probably either <code>'1.1'</code> or <code>'1.0'</code>.</p>
+<p>Also <code>message.httpVersionMajor</code> is the first integer and
+<code>message.httpVersionMinor</code> is the second.</p>
+<h3>message.method<span><a class="mark" href="#http_message_method" id="http_message_method">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.1</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p><strong>Only valid for request obtained from <a href="#http_class_http_server"><code>http.Server</code></a>.</strong></p>
+<p>The request method as a string. Read only. Examples: <code>'GET'</code>, <code>'DELETE'</code>.</p>
+<h3>message.rawHeaders<span><a class="mark" href="#http_message_rawheaders" id="http_message_rawheaders">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.6</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+<p>The raw request/response headers list exactly as they were received.</p>
+<p>The keys and values are in the same list. It is <em>not</em> a
+list of tuples. So, the even-numbered offsets are key values, and the
+odd-numbered offsets are the associated values.</p>
+<p>Header names are not lowercased, and duplicates are not merged.</p>
+<pre><code class="language-js">// Prints something like:
+//
+// [ 'user-agent',
+//   'this is invalid because there can be only one',
+//   'User-Agent',
+//   'curl/7.22.0',
+//   'Host',
+//   '127.0.0.1:8000',
+//   'ACCEPT',
+//   '*/*' ]
+console.log(request.rawHeaders);
+</code></pre>
+<h3>message.rawTrailers<span><a class="mark" href="#http_message_rawtrailers" id="http_message_rawtrailers">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.6</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+<p>The raw request/response trailer keys and values exactly as they were
+received. Only populated at the <code>'end'</code> event.</p>
+<h3>message.setTimeout(msecs, callback)<span><a class="mark" href="#http_message_settimeout_msecs_callback" id="http_message_settimeout_msecs_callback">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.5.9</span>
+</div>
+<ul>
+<li><code>msecs</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a></li>
+</ul>
+<p>Calls <code>message.connection.setTimeout(msecs, callback)</code>.</p>
+<h3>message.socket<span><a class="mark" href="#http_message_socket" id="http_message_socket">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span>
+</div>
+<ul>
+<li><a href="https://nodejs.org/api/net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>The <a href="https://nodejs.org/api/net.html#net_class_net_socket"><code>net.Socket</code></a> object associated with the connection.</p>
+<p>With HTTPS support, use <a href="https://nodejs.org/api/tls.html#tls_tlssocket_getpeercertificate_detailed"><code>request.socket.getPeerCertificate()</code></a> to obtain the
+client's authentication details.</p>
+<h3>message.statusCode<span><a class="mark" href="#http_message_statuscode" id="http_message_statuscode">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.1</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p><strong>Only valid for response obtained from <a href="#http_class_http_clientrequest"><code>http.ClientRequest</code></a>.</strong></p>
+<p>The 3-digit HTTP response status code. E.G. <code>404</code>.</p>
+<h3>message.statusMessage<span><a class="mark" href="#http_message_statusmessage" id="http_message_statusmessage">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.10</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p><strong>Only valid for response obtained from <a href="#http_class_http_clientrequest"><code>http.ClientRequest</code></a>.</strong></p>
+<p>The HTTP response status message (reason phrase). E.G. <code>OK</code> or <code>Internal Server Error</code>.</p>
+<h3>message.trailers<span><a class="mark" href="#http_message_trailers" id="http_message_trailers">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>The request/response trailers object. Only populated at the <code>'end'</code> event.</p>
+<h3>message.url<span><a class="mark" href="#http_message_url" id="http_message_url">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.90</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p><strong>Only valid for request obtained from <a href="#http_class_http_server"><code>http.Server</code></a>.</strong></p>
+<p>Request URL string. This contains only the URL that is
+present in the actual HTTP request. If the request is:</p>
+<pre><code class="language-txt">GET /status?name=ryan HTTP/1.1\r\n
+Accept: text/plain\r\n
+\r\n
+</code></pre>
+<p>Then <code>request.url</code> will be:</p>
+<!-- eslint-disable semi -->
+<pre><code class="language-js">'/status?name=ryan'
+</code></pre>
+<p>To parse the url into its parts <code>require('url').parse(request.url)</code>
+can be used:</p>
+<pre><code class="language-txt">$ node
+&gt; require('url').parse('/status?name=ryan')
+Url {
+  protocol: null,
+  slashes: null,
+  auth: null,
+  host: null,
+  port: null,
+  hostname: null,
+  hash: null,
+  search: '?name=ryan',
+  query: 'name=ryan',
+  pathname: '/status',
+  path: '/status?name=ryan',
+  href: '/status?name=ryan' }
+</code></pre>
+<p>To extract the parameters from the query string, the
+<code>require('querystring').parse</code> function can be used, or
+<code>true</code> can be passed as the second argument to <code>require('url').parse</code>:</p>
+<pre><code class="language-txt">$ node
+&gt; require('url').parse('/status?name=ryan', true)
+Url {
+  protocol: null,
+  slashes: null,
+  auth: null,
+  host: null,
+  port: null,
+  hostname: null,
+  hash: null,
+  search: '?name=ryan',
+  query: { name: 'ryan' },
+  pathname: '/status',
+  path: '/status?name=ryan',
+  href: '/status?name=ryan' }
+</code></pre>
+<h2>http.METHODS<span><a class="mark" href="#http_http_methods" id="http_http_methods">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.11.8</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a></li>
+</ul>
+<p>A list of the HTTP methods that are supported by the parser.</p>
+<h2>http.STATUS_CODES<span><a class="mark" href="#http_http_status_codes" id="http_http_status_codes">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.1.22</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>A collection of all the standard HTTP response status codes, and the
+short description of each. For example, <code>http.STATUS_CODES[404] === 'Not Found'</code>.</p>
+<h2>http.createServer([options][, requestlistener])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/http.js#L39">[src]</a><span><a class="mark" href="#http_http_createserver_options_requestlistener" id="http_http_createserver_options_requestlistener">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.6.0, v8.12.0</td>
+<td><p>The <code>options</code> argument is supported now.</p></td></tr>
+<tr><td>v0.1.13</td>
+<td><p><span>Added in: v0.1.13</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>IncomingMessage</code> <a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a> Specifies the <code>IncomingMessage</code>
+class to be used. Useful for extending the original <code>IncomingMessage</code>.
+<strong>Default:</strong> <code>IncomingMessage</code>.</li>
+<li><code>ServerResponse</code> <a href="https://nodejs.org/api/http.html#http_class_http_serverresponse" class="type">&lt;http.ServerResponse&gt;</a> Specifies the <code>ServerResponse</code> class
+to be used. Useful for extending the original <code>ServerResponse</code>. <strong>Default:</strong>
+<code>ServerResponse</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>requestListener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></p>
+</li>
+<li>
+<p>Returns: <a href="https://nodejs.org/api/http.html#http_class_http_server" class="type">&lt;http.Server&gt;</a></p>
+</li>
+</ul>
+<p>Returns a new instance of <a href="#http_class_http_server"><code>http.Server</code></a>.</p>
+<p>The <code>requestListener</code> is a function which is automatically
+added to the <a href="#http_event_request"><code>'request'</code></a> event.</p>
+<h2>http.get(options[, callback])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/http.js#L47">[src]</a><span><a class="mark" href="#http_http_get_options_callback" id="http_http_get_options_callback">#</a></span></h2>
+<h2>http.get(url[, options][, callback])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/http.js#L47">[src]</a><span><a class="mark" href="#http_http_get_url_options_callback" id="http_http_get_url_options_callback">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.9.0</td>
+<td><p>The <code>url</code> parameter can now be passed along with a separate <code>options</code> object.</p></td></tr>
+<tr><td>v7.5.0</td>
+<td><p>The <code>options</code> parameter can be a WHATWG <code>URL</code> object.</p></td></tr>
+<tr><td>v0.3.6</td>
+<td><p><span>Added in: v0.3.6</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>url</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/url.html#url_the_whatwg_url_api" class="type">&lt;URL&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> Accepts the same <code>options</code> as
+<a href="#http_http_request_options_callback"><code>http.request()</code></a>, with the <code>method</code> always set to <code>GET</code>.
+Properties that are inherited from the prototype are ignored.</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://nodejs.org/api/http.html#http_class_http_clientrequest" class="type">&lt;http.ClientRequest&gt;</a></li>
+</ul>
+<p>Since most requests are GET requests without bodies, Node.js provides this
+convenience method. The only difference between this method and
+<a href="#http_http_request_options_callback"><code>http.request()</code></a> is that it sets the method to GET and calls <code>req.end()</code>
+automatically. The callback must take care to consume the response
+data for reasons stated in <a href="#http_class_http_clientrequest"><code>http.ClientRequest</code></a> section.</p>
+<p>The <code>callback</code> is invoked with a single argument that is an instance of
+<a href="#http_class_http_incomingmessage"><code>http.IncomingMessage</code></a>.</p>
+<p>JSON fetching example:</p>
+<pre><code class="language-js">http.get('http://nodejs.org/dist/index.json', (res) =&gt; {
+  const { statusCode } = res;
+  const contentType = res.headers['content-type'];
+
+  let error;
+  if (statusCode !== 200) {
+    error = new Error('Request Failed.\n' +
+                      `Status Code: ${statusCode}`);
+  } else if (!/^application\/json/.test(contentType)) {
+    error = new Error('Invalid content-type.\n' +
+                      `Expected application/json but received ${contentType}`);
+  }
+  if (error) {
+    console.error(error.message);
+    // Consume response data to free up memory
+    res.resume();
+    return;
+  }
+
+  res.setEncoding('utf8');
+  let rawData = '';
+  res.on('data', (chunk) =&gt; { rawData += chunk; });
+  res.on('end', () =&gt; {
+    try {
+      const parsedData = JSON.parse(rawData);
+      console.log(parsedData);
+    } catch (e) {
+      console.error(e.message);
+    }
+  });
+}).on('error', (e) =&gt; {
+  console.error(`Got error: ${e.message}`);
+});
+</code></pre>
+<h2>http.globalAgent<span><a class="mark" href="#http_http_globalagent" id="http_http_globalagent">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.5.9</span>
+</div>
+<ul>
+<li><a href="https://nodejs.org/api/http.html#http_class_http_agent" class="type">&lt;http.Agent&gt;</a></li>
+</ul>
+<p>Global instance of <code>Agent</code> which is used as the default for all HTTP client
+requests.</p>
+<h2>http.maxHeaderSize<span><a class="mark" href="#http_http_maxheadersize" id="http_http_maxheadersize">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v11.6.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p>Read-only property specifying the maximum allowed size of HTTP headers in bytes.
+Defaults to 8KB. Configurable using the <a href="https://nodejs.org/api/cli.html#cli_max_http_header_size_size"><code>--max-http-header-size</code></a> CLI option.</p>
+<h2>http.request(options[, callback])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/http.js#L43">[src]</a><span><a class="mark" href="#http_http_request_options_callback" id="http_http_request_options_callback">#</a></span></h2>
+<h2>http.request(url[, options][, callback])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/http.js#L43">[src]</a><span><a class="mark" href="#http_http_request_url_options_callback" id="http_http_request_url_options_callback">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.9.0</td>
+<td><p>The <code>url</code> parameter can now be passed along with a separate <code>options</code> object.</p></td></tr>
+<tr><td>v7.5.0</td>
+<td><p>The <code>options</code> parameter can be a WHATWG <code>URL</code> object.</p></td></tr>
+<tr><td>v0.3.6</td>
+<td><p><span>Added in: v0.3.6</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>url</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/url.html#url_the_whatwg_url_api" class="type">&lt;URL&gt;</a></li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li>
+<p><code>agent</code> <a href="https://nodejs.org/api/http.html#http_class_http_agent" class="type">&lt;http.Agent&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Controls <a href="#http_class_http_agent"><code>Agent</code></a> behavior. Possible
+values:</p>
+<ul>
+<li><code>undefined</code> (default): use <a href="#http_http_globalagent"><code>http.globalAgent</code></a> for this host and port.</li>
+<li><code>Agent</code> object: explicitly use the passed in <code>Agent</code>.</li>
+<li><code>false</code>: causes a new <code>Agent</code> with default values to be used.</li>
+</ul>
+</li>
+<li><code>auth</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Basic authentication i.e. <code>'user:password'</code> to compute an
+Authorization header.</li>
+<li><code>createConnection</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> A function that produces a socket/stream to
+use for the request when the <code>agent</code> option is not used. This can be used to
+avoid creating a custom <code>Agent</code> class just to override the default
+<code>createConnection</code> function. See <a href="#http_agent_createconnection_options_callback"><code>agent.createConnection()</code></a> for more
+details. Any <a href="https://nodejs.org/api/stream.html#stream_class_stream_duplex"><code>Duplex</code></a> stream is a valid return value.</li>
+<li><code>defaultPort</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Default port for the protocol. <strong>Default:</strong>
+<code>agent.defaultPort</code> if an <code>Agent</code> is used, else <code>undefined</code>.</li>
+<li><code>family</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> IP address family to use when resolving <code>host</code> or
+<code>hostname</code>. Valid values are <code>4</code> or <code>6</code>. When unspecified, both IP v4 and
+v6 will be used.</li>
+<li><code>headers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> An object containing request headers.</li>
+<li><code>host</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A domain name or IP address of the server to issue the
+request to. <strong>Default:</strong> <code>'localhost'</code>.</li>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Alias for <code>host</code>. To support <a href="https://nodejs.org/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost"><code>url.parse()</code></a>,
+<code>hostname</code> will be used if both <code>host</code> and <code>hostname</code> are specified.</li>
+<li><code>localAddress</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Local interface to bind for network connections.</li>
+<li><code>method</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A string specifying the HTTP request method. <strong>Default:</strong>
+<code>'GET'</code>.</li>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Request path. Should include query string if any.
+E.G. <code>'/index.html?page=12'</code>. An exception is thrown when the request path
+contains illegal characters. Currently, only spaces are rejected but that
+may change in the future. <strong>Default:</strong> <code>'/'</code>.</li>
+<li><code>port</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Port of remote server. <strong>Default:</strong> <code>defaultPort</code> if set,
+else <code>80</code>.</li>
+<li><code>protocol</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Protocol to use. <strong>Default:</strong> <code>'http:'</code>.</li>
+<li><code>setHost</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a>: Specifies whether or not to automatically add the
+<code>Host</code> header. Defaults to <code>true</code>.</li>
+<li><code>socketPath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Unix Domain Socket (cannot be used if one of <code>host</code>
+or <code>port</code> is specified, those specify a TCP Socket).</li>
+<li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a>: A number specifying the socket timeout in milliseconds.
+This will set the timeout before the socket is connected.</li>
+</ul>
+</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://nodejs.org/api/http.html#http_class_http_clientrequest" class="type">&lt;http.ClientRequest&gt;</a></li>
+</ul>
+<p>Node.js maintains several connections per server to make HTTP requests.
+This function allows one to transparently issue requests.</p>
+<p><code>url</code> can be a string or a <a href="https://nodejs.org/api/url.html#url_the_whatwg_url_api"><code>URL</code></a> object. If <code>url</code> is a
+string, it is automatically parsed with <a href="https://nodejs.org/api/url.html#url_constructor_new_url_input_base"><code>new URL()</code></a>. If it is a <a href="https://nodejs.org/api/url.html#url_the_whatwg_url_api"><code>URL</code></a>
+object, it will be automatically converted to an ordinary <code>options</code> object.</p>
+<p>If both <code>url</code> and <code>options</code> are specified, the objects are merged, with the
+<code>options</code> properties taking precedence.</p>
+<p>The optional <code>callback</code> parameter will be added as a one-time listener for
+the <a href="#http_event_response"><code>'response'</code></a> event.</p>
+<p><code>http.request()</code> returns an instance of the <a href="#http_class_http_clientrequest"><code>http.ClientRequest</code></a>
+class. The <code>ClientRequest</code> instance is a writable stream. If one needs to
+upload a file with a POST request, then write to the <code>ClientRequest</code> object.</p>
+<pre><code class="language-js">const postData = querystring.stringify({
+  'msg': 'Hello World!'
+});
+
+const options = {
+  hostname: 'www.google.com',
+  port: 80,
+  path: '/upload',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Length': Buffer.byteLength(postData)
+  }
+};
+
+const req = http.request(options, (res) =&gt; {
+  console.log(`STATUS: ${res.statusCode}`);
+  console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+  res.setEncoding('utf8');
+  res.on('data', (chunk) =&gt; {
+    console.log(`BODY: ${chunk}`);
+  });
+  res.on('end', () =&gt; {
+    console.log('No more data in response.');
+  });
+});
+
+req.on('error', (e) =&gt; {
+  console.error(`problem with request: ${e.message}`);
+});
+
+// Write data to request body
+req.write(postData);
+req.end();
+</code></pre>
+<p>In the example <code>req.end()</code> was called. With <code>http.request()</code> one
+must always call <code>req.end()</code> to signify the end of the request -
+even if there is no data being written to the request body.</p>
+<p>If any error is encountered during the request (be that with DNS resolution,
+TCP level errors, or actual HTTP parse errors) an <code>'error'</code> event is emitted
+on the returned request object. As with all <code>'error'</code> events, if no listeners
+are registered the error will be thrown.</p>
+<p>There are a few special headers that should be noted.</p>
+<ul>
+<li>
+<p>Sending a 'Connection: keep-alive' will notify Node.js that the connection to
+the server should be persisted until the next request.</p>
+</li>
+<li>
+<p>Sending a 'Content-Length' header will disable the default chunked encoding.</p>
+</li>
+<li>
+<p>Sending an 'Expect' header will immediately send the request headers.
+Usually, when sending 'Expect: 100-continue', both a timeout and a listener
+for the <code>'continue'</code> event should be set. See RFC 2616 Section 8.2.3 for more
+information.</p>
+</li>
+<li>
+<p>Sending an Authorization header will override using the <code>auth</code> option
+to compute basic authentication.</p>
+</li>
+</ul>
+<p>Example using a <a href="https://nodejs.org/api/url.html#url_the_whatwg_url_api"><code>URL</code></a> as <code>options</code>:</p>
+<pre><code class="language-js">const options = new URL('http://abc:<a href="https://nodejs.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ae2e3e0daffe2fbf7eaf6ffb4f9f5f7">[email&nbsp;protected]</a>');
+
+const req = http.request(options, (res) =&gt; {
+  // ...
+});
+</code></pre>
+<p>In a successful request, the following events will be emitted in the following
+order:</p>
+<ul>
+<li><code>'socket'</code></li>
+<li>
+<p><code>'response'</code></p>
+<ul>
+<li><code>'data'</code> any number of times, on the <code>res</code> object
+(<code>'data'</code> will not be emitted at all if the response body is empty, for
+instance, in most redirects)</li>
+<li><code>'end'</code> on the <code>res</code> object</li>
+</ul>
+</li>
+<li><code>'close'</code></li>
+</ul>
+<p>In the case of a connection error, the following events will be emitted:</p>
+<ul>
+<li><code>'socket'</code></li>
+<li><code>'error'</code></li>
+<li><code>'close'</code></li>
+</ul>
+<p>If <code>req.abort()</code> is called before the connection succeeds, the following events
+will be emitted in the following order:</p>
+<ul>
+<li><code>'socket'</code></li>
+<li>(<code>req.abort()</code> called here)</li>
+<li><code>'abort'</code></li>
+<li><code>'error'</code> with an error with message <code>'Error: socket hang up'</code> and code
+<code>'ECONNRESET'</code></li>
+<li><code>'close'</code></li>
+</ul>
+<p>If <code>req.abort()</code> is called after the response is received, the following events
+will be emitted in the following order:</p>
+<ul>
+<li><code>'socket'</code></li>
+<li>
+<p><code>'response'</code></p>
+<ul>
+<li><code>'data'</code> any number of times, on the <code>res</code> object</li>
+</ul>
+</li>
+<li>(<code>req.abort()</code> called here)</li>
+<li><code>'abort'</code></li>
+<li><code>'aborted'</code> on the <code>res</code> object</li>
+<li><code>'close'</code></li>
+<li><code>'end'</code> on the <code>res</code> object</li>
+<li><code>'close'</code> on the <code>res</code> object</li>
+</ul>
+<p>Setting the <code>timeout</code> option or using the <code>setTimeout()</code> function will
+not abort the request or do anything besides add a <code>'timeout'</code> event.</p>
+      </div>
+    </div>
+  </div>
+  <script data-cfasync="false" src="data:application/javascript;base64,IWZ1bmN0aW9uKCl7InVzZSBzdHJpY3QiO2Z1bmN0aW9uIGUoZSl7dHJ5e2lmKCJ1bmRlZmluZWQiPT10eXBlb2YgY29uc29sZSlyZXR1cm47ImVycm9yImluIGNvbnNvbGU/Y29uc29sZS5lcnJvcihlKTpjb25zb2xlLmxvZyhlKX1jYXRjaChlKXt9fWZ1bmN0aW9uIHQoZSl7cmV0dXJuIGQuaW5uZXJIVE1MPSc8YSBocmVmPSInK2UucmVwbGFjZSgvIi9nLCImcXVvdDsiKSsnIj48L2E+JyxkLmNoaWxkTm9kZXNbMF0uZ2V0QXR0cmlidXRlKCJocmVmIil8fCIifWZ1bmN0aW9uIHIoZSx0KXt2YXIgcj1lLnN1YnN0cih0LDIpO3JldHVybiBwYXJzZUludChyLDE2KX1mdW5jdGlvbiBuKG4sYyl7Zm9yKHZhciBvPSIiLGE9cihuLGMpLGk9YysyO2k8bi5sZW5ndGg7aSs9Mil7dmFyIGw9cihuLGkpXmE7bys9U3RyaW5nLmZyb21DaGFyQ29kZShsKX10cnl7bz1kZWNvZGVVUklDb21wb25lbnQoZXNjYXBlKG8pKX1jYXRjaCh1KXtlKHUpfXJldHVybiB0KG8pfWZ1bmN0aW9uIGModCl7Zm9yKHZhciByPXQucXVlcnlTZWxlY3RvckFsbCgiYSIpLGM9MDtjPHIubGVuZ3RoO2MrKyl0cnl7dmFyIG89cltjXSxhPW8uaHJlZi5pbmRleE9mKGwpO2E+LTEmJihvLmhyZWY9Im1haWx0bzoiK24oby5ocmVmLGErbC5sZW5ndGgpKX1jYXRjaChpKXtlKGkpfX1mdW5jdGlvbiBvKHQpe2Zvcih2YXIgcj10LnF1ZXJ5U2VsZWN0b3JBbGwodSksYz0wO2M8ci5sZW5ndGg7YysrKXRyeXt2YXIgbz1yW2NdLGE9by5wYXJlbnROb2RlLGk9by5nZXRBdHRyaWJ1dGUoZik7aWYoaSl7dmFyIGw9bihpLDApLGQ9ZG9jdW1lbnQuY3JlYXRlVGV4dE5vZGUobCk7YS5yZXBsYWNlQ2hpbGQoZCxvKX19Y2F0Y2goaCl7ZShoKX19ZnVuY3Rpb24gYSh0KXtmb3IodmFyIHI9dC5xdWVyeVNlbGVjdG9yQWxsKCJ0ZW1wbGF0ZSIpLG49MDtuPHIubGVuZ3RoO24rKyl0cnl7aShyW25dLmNvbnRlbnQpfWNhdGNoKGMpe2UoYyl9fWZ1bmN0aW9uIGkodCl7dHJ5e2ModCksbyh0KSxhKHQpfWNhdGNoKHIpe2Uocil9fXZhciBsPSIvY2RuLWNnaS9sL2VtYWlsLXByb3RlY3Rpb24jIix1PSIuX19jZl9lbWFpbF9fIixmPSJkYXRhLWNmZW1haWwiLGQ9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7aShkb2N1bWVudCksZnVuY3Rpb24oKXt2YXIgZT1kb2N1bWVudC5jdXJyZW50U2NyaXB0fHxkb2N1bWVudC5zY3JpcHRzW2RvY3VtZW50LnNjcmlwdHMubGVuZ3RoLTFdO2UucGFyZW50Tm9kZS5yZW1vdmVDaGlsZChlKX0oKX0oKTsK"></script><script src="data:application/javascript;base64,LyoKU0hKUyAtIFN5bnRheCBIaWdobGlnaHRpbmcgaW4gSmF2YVNjcmlwdApDb3B5cmlnaHQgKEMpIDIwMDcsIDIwMDggZ25vbWJhdEB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQKTGljZW5zZTogaHR0cDovL3NoanMuc291cmNlZm9yZ2UubmV0L2RvYy9ncGx2My5odG1sCiovCgppZiAoISB0aGlzLnNoX2xhbmd1YWdlcykgewogIHRoaXMuc2hfbGFuZ3VhZ2VzID0ge307Cn0KdmFyIHNoX3JlcXVlc3RzID0ge307CgpmdW5jdGlvbiBzaF9pc0VtYWlsQWRkcmVzcyh1cmwpIHsKICBpZiAoL15tYWlsdG86Ly50ZXN0KHVybCkpIHsKICAgIHJldHVybiBmYWxzZTsKICB9CiAgcmV0dXJuIHVybC5pbmRleE9mKCdAJykgIT09IC0xOwp9CgpmdW5jdGlvbiBzaF9zZXRIcmVmKHRhZ3MsIG51bVRhZ3MsIGlucHV0U3RyaW5nKSB7CiAgdmFyIHVybCA9IGlucHV0U3RyaW5nLnN1YnN0cmluZyh0YWdzW251bVRhZ3MgLSAyXS5wb3MsIHRhZ3NbbnVtVGFncyAtIDFdLnBvcyk7CiAgaWYgKHVybC5sZW5ndGggPj0gMiAmJiB1cmwuY2hhckF0KDApID09PSAnPCcgJiYgdXJsLmNoYXJBdCh1cmwubGVuZ3RoIC0gMSkgPT09ICc+JykgewogICAgdXJsID0gdXJsLnN1YnN0cigxLCB1cmwubGVuZ3RoIC0gMik7CiAgfQogIGlmIChzaF9pc0VtYWlsQWRkcmVzcyh1cmwpKSB7CiAgICB1cmwgPSAnbWFpbHRvOicgKyB1cmw7CiAgfQogIHRhZ3NbbnVtVGFncyAtIDJdLm5vZGUuaHJlZiA9IHVybDsKfQoKLyoKS29ucXVlcm9yIGhhcyBhIGJ1ZyB3aGVyZSB0aGUgcmVndWxhciBleHByZXNzaW9uIC8kL2cgd2lsbCBub3QgbWF0Y2ggYXQgdGhlIGVuZApvZiBhIGxpbmUgbW9yZSB0aGFuIG9uY2U6CgogIHZhciByZWdleCA9IC8kL2c7CiAgdmFyIG1hdGNoOwoKICB2YXIgbGluZSA9ICcxMjM0NTY3ODkwJzsKICByZWdleC5sYXN0SW5kZXggPSAxMDsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZSk7CgogIHZhciBsaW5lMiA9ICdhYmNkZSc7CiAgcmVnZXgubGFzdEluZGV4ID0gNTsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZTIpOyAgLy8gZmFpbHMKKi8KZnVuY3Rpb24gc2hfa29ucXVlcm9yRXhlYyhzKSB7CiAgdmFyIHJlc3VsdCA9IFsnJ107CiAgcmVzdWx0LmluZGV4ID0gcy5sZW5ndGg7CiAgcmVzdWx0LmlucHV0ID0gczsKICByZXR1cm4gcmVzdWx0Owp9CgovKioKSGlnaGxpZ2h0cyBhbGwgZWxlbWVudHMgY29udGFpbmluZyBzb3VyY2UgY29kZSBpbiBhIHRleHQgc3RyaW5nLiAgVGhlIHJldHVybgp2YWx1ZSBpcyBhbiBhcnJheSBvZiBvYmplY3RzLCBlYWNoIHJlcHJlc2VudGluZyBhbiBIVE1MIHN0YXJ0IG9yIGVuZCB0YWcuICBFYWNoCm9iamVjdCBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBwb3MsIHdoaWNoIGlzIGFuIGludGVnZXIgcmVwcmVzZW50aW5nIHRoZSB0ZXh0Cm9mZnNldCBvZiB0aGUgdGFnLiBFdmVyeSBzdGFydCB0YWcgYWxzbyBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBub2RlLCB3aGljaCBpcyB0aGUKRE9NIGVsZW1lbnQgc3RhcnRlZCBieSB0aGUgdGFnLiBFbmQgdGFncyBkbyBub3QgaGF2ZSB0aGlzIHByb3BlcnR5LgpAcGFyYW0gIGlucHV0U3RyaW5nICBhIHRleHQgc3RyaW5nCkBwYXJhbSAgbGFuZ3VhZ2UgIGEgbGFuZ3VhZ2UgZGVmaW5pdGlvbiBvYmplY3QKQHJldHVybiAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKKi8KZnVuY3Rpb24gc2hfaGlnaGxpZ2h0U3RyaW5nKGlucHV0U3RyaW5nLCBsYW5ndWFnZSkgewogIGlmICgvS29ucXVlcm9yLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICBpZiAoISBsYW5ndWFnZS5rb25xdWVyZWQpIHsKICAgICAgZm9yICh2YXIgcyA9IDA7IHMgPCBsYW5ndWFnZS5sZW5ndGg7IHMrKykgewogICAgICAgIGZvciAodmFyIHAgPSAwOyBwIDwgbGFuZ3VhZ2Vbc10ubGVuZ3RoOyBwKyspIHsKICAgICAgICAgIHZhciByID0gbGFuZ3VhZ2Vbc11bcF1bMF07CiAgICAgICAgICBpZiAoci5zb3VyY2UgPT09ICckJykgewogICAgICAgICAgICByLmV4ZWMgPSBzaF9rb25xdWVyb3JFeGVjOwogICAgICAgICAgfQogICAgICAgIH0KICAgICAgfQogICAgICBsYW5ndWFnZS5rb25xdWVyZWQgPSB0cnVlOwogICAgfQogIH0KCiAgdmFyIGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgdmFyIHNwYW4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJyk7CgogIC8vIHRoZSByZXN1bHQKICB2YXIgdGFncyA9IFtdOwogIHZhciBudW1UYWdzID0gMDsKCiAgLy8gZWFjaCBlbGVtZW50IGlzIGEgcGF0dGVybiBvYmplY3QgZnJvbSBsYW5ndWFnZQogIHZhciBwYXR0ZXJuU3RhY2sgPSBbXTsKCiAgLy8gdGhlIGN1cnJlbnQgcG9zaXRpb24gd2l0aGluIGlucHV0U3RyaW5nCiAgdmFyIHBvcyA9IDA7CgogIC8vIHRoZSBuYW1lIG9mIHRoZSBjdXJyZW50IHN0eWxlLCBvciBudWxsIGlmIHRoZXJlIGlzIG5vIGN1cnJlbnQgc3R5bGUKICB2YXIgY3VycmVudFN0eWxlID0gbnVsbDsKCiAgdmFyIG91dHB1dCA9IGZ1bmN0aW9uKHMsIHN0eWxlKSB7CiAgICB2YXIgbGVuZ3RoID0gcy5sZW5ndGg7CiAgICAvLyB0aGlzIGlzIG1vcmUgdGhhbiBqdXN0IGFuIG9wdGltaXphdGlvbiAtIHdlIGRvbid0IHdhbnQgdG8gb3V0cHV0IGVtcHR5IDxzcGFuPjwvc3Bhbj4gZWxlbWVudHMKICAgIGlmIChsZW5ndGggPT09IDApIHsKICAgICAgcmV0dXJuOwogICAgfQogICAgaWYgKCEgc3R5bGUpIHsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoICE9PSAwKSB7CiAgICAgICAgdmFyIHBhdHRlcm4gPSBwYXR0ZXJuU3RhY2tbc3RhY2tMZW5ndGggLSAxXTsKICAgICAgICAvLyBjaGVjayB3aGV0aGVyIHRoaXMgaXMgYSBzdGF0ZSBvciBhbiBlbnZpcm9ubWVudAogICAgICAgIGlmICghIHBhdHRlcm5bM10pIHsKICAgICAgICAgIC8vIGl0J3Mgbm90IGEgc3RhdGUgLSBpdCdzIGFuIGVudmlyb25tZW50OyB1c2UgdGhlIHN0eWxlIGZvciB0aGlzIGVudmlyb25tZW50CiAgICAgICAgICBzdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgfQogICAgICB9CiAgICB9CiAgICBpZiAoY3VycmVudFN0eWxlICE9PSBzdHlsZSkgewogICAgICBpZiAoY3VycmVudFN0eWxlKSB7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge3BvczogcG9zfTsKICAgICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgICAgc2hfc2V0SHJlZih0YWdzLCBudW1UYWdzLCBpbnB1dFN0cmluZyk7CiAgICAgICAgfQogICAgICB9CiAgICAgIGlmIChzdHlsZSkgewogICAgICAgIHZhciBjbG9uZTsKICAgICAgICBpZiAoc3R5bGUgPT09ICdzaF91cmwnKSB7CiAgICAgICAgICBjbG9uZSA9IGEuY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICBjbG9uZSA9IHNwYW4uY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgY2xvbmUuY2xhc3NOYW1lID0gc3R5bGU7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge25vZGU6IGNsb25lLCBwb3M6IHBvc307CiAgICAgIH0KICAgIH0KICAgIHBvcyArPSBsZW5ndGg7CiAgICBjdXJyZW50U3R5bGUgPSBzdHlsZTsKICB9OwoKICB2YXIgZW5kT2ZMaW5lUGF0dGVybiA9IC9cclxufFxyfFxuL2c7CiAgZW5kT2ZMaW5lUGF0dGVybi5sYXN0SW5kZXggPSAwOwogIHZhciBpbnB1dFN0cmluZ0xlbmd0aCA9IGlucHV0U3RyaW5nLmxlbmd0aDsKICB3aGlsZSAocG9zIDwgaW5wdXRTdHJpbmdMZW5ndGgpIHsKICAgIHZhciBzdGFydCA9IHBvczsKICAgIHZhciBlbmQ7CiAgICB2YXIgc3RhcnRPZk5leHRMaW5lOwogICAgdmFyIGVuZE9mTGluZU1hdGNoID0gZW5kT2ZMaW5lUGF0dGVybi5leGVjKGlucHV0U3RyaW5nKTsKICAgIGlmIChlbmRPZkxpbmVNYXRjaCA9PT0gbnVsbCkgewogICAgICBlbmQgPSBpbnB1dFN0cmluZ0xlbmd0aDsKICAgICAgc3RhcnRPZk5leHRMaW5lID0gaW5wdXRTdHJpbmdMZW5ndGg7CiAgICB9CiAgICBlbHNlIHsKICAgICAgZW5kID0gZW5kT2ZMaW5lTWF0Y2guaW5kZXg7CiAgICAgIHN0YXJ0T2ZOZXh0TGluZSA9IGVuZE9mTGluZVBhdHRlcm4ubGFzdEluZGV4OwogICAgfQoKICAgIHZhciBsaW5lID0gaW5wdXRTdHJpbmcuc3Vic3RyaW5nKHN0YXJ0LCBlbmQpOwoKICAgIHZhciBtYXRjaENhY2hlID0gW107CiAgICBmb3IgKDs7KSB7CiAgICAgIHZhciBwb3NXaXRoaW5MaW5lID0gcG9zIC0gc3RhcnQ7CgogICAgICB2YXIgc3RhdGVJbmRleDsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoID09PSAwKSB7CiAgICAgICAgc3RhdGVJbmRleCA9IDA7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gZ2V0IHRoZSBuZXh0IHN0YXRlCiAgICAgICAgc3RhdGVJbmRleCA9IHBhdHRlcm5TdGFja1tzdGFja0xlbmd0aCAtIDFdWzJdOwogICAgICB9CgogICAgICB2YXIgc3RhdGUgPSBsYW5ndWFnZVtzdGF0ZUluZGV4XTsKICAgICAgdmFyIG51bVBhdHRlcm5zID0gc3RhdGUubGVuZ3RoOwogICAgICB2YXIgbWMgPSBtYXRjaENhY2hlW3N0YXRlSW5kZXhdOwogICAgICBpZiAoISBtYykgewogICAgICAgIG1jID0gbWF0Y2hDYWNoZVtzdGF0ZUluZGV4XSA9IFtdOwogICAgICB9CiAgICAgIHZhciBiZXN0TWF0Y2ggPSBudWxsOwogICAgICB2YXIgYmVzdFBhdHRlcm5JbmRleCA9IC0xOwogICAgICBmb3IgKHZhciBpID0gMDsgaSA8IG51bVBhdHRlcm5zOyBpKyspIHsKICAgICAgICB2YXIgbWF0Y2g7CiAgICAgICAgaWYgKGkgPCBtYy5sZW5ndGggJiYgKG1jW2ldID09PSBudWxsIHx8IHBvc1dpdGhpbkxpbmUgPD0gbWNbaV0uaW5kZXgpKSB7CiAgICAgICAgICBtYXRjaCA9IG1jW2ldOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHZhciByZWdleCA9IHN0YXRlW2ldWzBdOwogICAgICAgICAgcmVnZXgubGFzdEluZGV4ID0gcG9zV2l0aGluTGluZTsKICAgICAgICAgIG1hdGNoID0gcmVnZXguZXhlYyhsaW5lKTsKICAgICAgICAgIG1jW2ldID0gbWF0Y2g7CiAgICAgICAgfQogICAgICAgIGlmIChtYXRjaCAhPT0gbnVsbCAmJiAoYmVzdE1hdGNoID09PSBudWxsIHx8IG1hdGNoLmluZGV4IDwgYmVzdE1hdGNoLmluZGV4KSkgewogICAgICAgICAgYmVzdE1hdGNoID0gbWF0Y2g7CiAgICAgICAgICBiZXN0UGF0dGVybkluZGV4ID0gaTsKICAgICAgICAgIGlmIChtYXRjaC5pbmRleCA9PT0gcG9zV2l0aGluTGluZSkgewogICAgICAgICAgICBicmVhazsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KCiAgICAgIGlmIChiZXN0TWF0Y2ggPT09IG51bGwpIHsKICAgICAgICBvdXRwdXQobGluZS5zdWJzdHJpbmcocG9zV2l0aGluTGluZSksIG51bGwpOwogICAgICAgIGJyZWFrOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGdvdCBhIG1hdGNoCiAgICAgICAgaWYgKGJlc3RNYXRjaC5pbmRleCA+IHBvc1dpdGhpbkxpbmUpIHsKICAgICAgICAgIG91dHB1dChsaW5lLnN1YnN0cmluZyhwb3NXaXRoaW5MaW5lLCBiZXN0TWF0Y2guaW5kZXgpLCBudWxsKTsKICAgICAgICB9CgogICAgICAgIHZhciBwYXR0ZXJuID0gc3RhdGVbYmVzdFBhdHRlcm5JbmRleF07CgogICAgICAgIHZhciBuZXdTdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgdmFyIG1hdGNoZWRTdHJpbmc7CiAgICAgICAgaWYgKG5ld1N0eWxlIGluc3RhbmNlb2YgQXJyYXkpIHsKICAgICAgICAgIGZvciAodmFyIHN1YmV4cHJlc3Npb24gPSAwOyBzdWJleHByZXNzaW9uIDwgbmV3U3R5bGUubGVuZ3RoOyBzdWJleHByZXNzaW9uKyspIHsKICAgICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFtzdWJleHByZXNzaW9uICsgMV07CiAgICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZVtzdWJleHByZXNzaW9uXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFswXTsKICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZSk7CiAgICAgICAgfQoKICAgICAgICBzd2l0Y2ggKHBhdHRlcm5bMl0pIHsKICAgICAgICBjYXNlIC0xOgogICAgICAgICAgLy8gZG8gbm90aGluZwogICAgICAgICAgYnJlYWs7CiAgICAgICAgY2FzZSAtMjoKICAgICAgICAgIC8vIGV4aXQKICAgICAgICAgIHBhdHRlcm5TdGFjay5wb3AoKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGNhc2UgLTM6CiAgICAgICAgICAvLyBleGl0YWxsCiAgICAgICAgICBwYXR0ZXJuU3RhY2subGVuZ3RoID0gMDsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGRlZmF1bHQ6CiAgICAgICAgICAvLyB0aGlzIHdhcyB0aGUgc3RhcnQgb2YgYSBkZWxpbWl0ZWQgcGF0dGVybiBvciBhIHN0YXRlL2Vudmlyb25tZW50CiAgICAgICAgICBwYXR0ZXJuU3RhY2sucHVzaChwYXR0ZXJuKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIH0KICAgICAgfQogICAgfQoKICAgIC8vIGVuZCBvZiB0aGUgbGluZQogICAgaWYgKGN1cnJlbnRTdHlsZSkgewogICAgICB0YWdzW251bVRhZ3MrK10gPSB7cG9zOiBwb3N9OwogICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgIHNoX3NldEhyZWYodGFncywgbnVtVGFncywgaW5wdXRTdHJpbmcpOwogICAgICB9CiAgICAgIGN1cnJlbnRTdHlsZSA9IG51bGw7CiAgICB9CiAgICBwb3MgPSBzdGFydE9mTmV4dExpbmU7CiAgfQoKICByZXR1cm4gdGFnczsKfQoKLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KLy8gRE9NLWRlcGVuZGVudCBmdW5jdGlvbnMKCmZ1bmN0aW9uIHNoX2dldENsYXNzZXMoZWxlbWVudCkgewogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgaHRtbENsYXNzID0gZWxlbWVudC5jbGFzc05hbWU7CiAgaWYgKGh0bWxDbGFzcyAmJiBodG1sQ2xhc3MubGVuZ3RoID4gMCkgewogICAgdmFyIGh0bWxDbGFzc2VzID0gaHRtbENsYXNzLnNwbGl0KCcgJyk7CiAgICBmb3IgKHZhciBpID0gMDsgaSA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaSsrKSB7CiAgICAgIGlmIChodG1sQ2xhc3Nlc1tpXS5sZW5ndGggPiAwKSB7CiAgICAgICAgcmVzdWx0LnB1c2goaHRtbENsYXNzZXNbaV0pOwogICAgICB9CiAgICB9CiAgfQogIHJldHVybiByZXN1bHQ7Cn0KCmZ1bmN0aW9uIHNoX2FkZENsYXNzKGVsZW1lbnQsIG5hbWUpIHsKICB2YXIgaHRtbENsYXNzZXMgPSBzaF9nZXRDbGFzc2VzKGVsZW1lbnQpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgaHRtbENsYXNzZXMubGVuZ3RoOyBpKyspIHsKICAgIGlmIChuYW1lLnRvTG93ZXJDYXNlKCkgPT09IGh0bWxDbGFzc2VzW2ldLnRvTG93ZXJDYXNlKCkpIHsKICAgICAgcmV0dXJuOwogICAgfQogIH0KICBodG1sQ2xhc3Nlcy5wdXNoKG5hbWUpOwogIGVsZW1lbnQuY2xhc3NOYW1lID0gaHRtbENsYXNzZXMuam9pbignICcpOwp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSBhbiBIVE1MIERPTSBOb2RlTGlzdC4KQHBhcmFtICBub2RlTGlzdCAgYSBET00gTm9kZUxpc3QKQHBhcmFtICByZXN1bHQgIGFuIG9iamVjdCB3aXRoIHRleHQsIHRhZ3MgYW5kIHBvcyBwcm9wZXJ0aWVzCiovCmZ1bmN0aW9uIHNoX2V4dHJhY3RUYWdzRnJvbU5vZGVMaXN0KG5vZGVMaXN0LCByZXN1bHQpIHsKICB2YXIgbGVuZ3RoID0gbm9kZUxpc3QubGVuZ3RoOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbGVuZ3RoOyBpKyspIHsKICAgIHZhciBub2RlID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHN3aXRjaCAobm9kZS5ub2RlVHlwZSkgewogICAgY2FzZSAxOgogICAgICBpZiAobm9kZS5ub2RlTmFtZS50b0xvd2VyQ2FzZSgpID09PSAnYnInKSB7CiAgICAgICAgdmFyIHRlcm1pbmF0b3I7CiAgICAgICAgaWYgKC9NU0lFLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xyJzsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xuJzsKICAgICAgICB9CiAgICAgICAgcmVzdWx0LnRleHQucHVzaCh0ZXJtaW5hdG9yKTsKICAgICAgICByZXN1bHQucG9zKys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7bm9kZTogbm9kZS5jbG9uZU5vZGUoZmFsc2UpLCBwb3M6IHJlc3VsdC5wb3N9KTsKICAgICAgICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChub2RlLmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7cG9zOiByZXN1bHQucG9zfSk7CiAgICAgIH0KICAgICAgYnJlYWs7CiAgICBjYXNlIDM6CiAgICBjYXNlIDQ6CiAgICAgIHJlc3VsdC50ZXh0LnB1c2gobm9kZS5kYXRhKTsKICAgICAgcmVzdWx0LnBvcyArPSBub2RlLmxlbmd0aDsKICAgICAgYnJlYWs7CiAgICB9CiAgfQp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSB0aGUgdGV4dCBvZiBhbiBIVE1MIGVsZW1lbnQuIFRoZSBleHRyYWN0ZWQgdGFncyB3aWxsIGJlCnJldHVybmVkIGFzIGFuIGFycmF5IG9mIHRhZyBvYmplY3RzLiBTZWUgc2hfaGlnaGxpZ2h0U3RyaW5nIGZvciB0aGUgZm9ybWF0IG9mCnRoZSB0YWcgb2JqZWN0cy4KQHBhcmFtICBlbGVtZW50ICBhIERPTSBlbGVtZW50CkBwYXJhbSAgdGFncyAgYW4gZW1wdHkgYXJyYXk7IHRoZSBleHRyYWN0ZWQgdGFnIG9iamVjdHMgd2lsbCBiZSByZXR1cm5lZCBpbiBpdApAcmV0dXJuICB0aGUgdGV4dCBvZiB0aGUgZWxlbWVudApAc2VlICBzaF9oaWdobGlnaHRTdHJpbmcKKi8KZnVuY3Rpb24gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgdGFncykgewogIHZhciByZXN1bHQgPSB7fTsKICByZXN1bHQudGV4dCA9IFtdOwogIHJlc3VsdC50YWdzID0gdGFnczsKICByZXN1bHQucG9zID0gMDsKICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChlbGVtZW50LmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgcmV0dXJuIHJlc3VsdC50ZXh0LmpvaW4oJycpOwp9CgovKioKTWVyZ2VzIHRoZSBvcmlnaW5hbCB0YWdzIGZyb20gYW4gZWxlbWVudCB3aXRoIHRoZSB0YWdzIHByb2R1Y2VkIGJ5IGhpZ2hsaWdodGluZy4KQHBhcmFtICBvcmlnaW5hbFRhZ3MgIGFuIGFycmF5IGNvbnRhaW5pbmcgdGhlIG9yaWdpbmFsIHRhZ3MKQHBhcmFtICBoaWdobGlnaHRUYWdzICBhbiBhcnJheSBjb250YWluaW5nIHRoZSBoaWdobGlnaHRpbmcgdGFncyAtIHRoZXNlIG11c3Qgbm90IG92ZXJsYXAKQHJlc3VsdCAgYW4gYXJyYXkgY29udGFpbmluZyB0aGUgbWVyZ2VkIHRhZ3MKKi8KZnVuY3Rpb24gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncykgewogIHZhciBudW1PcmlnaW5hbFRhZ3MgPSBvcmlnaW5hbFRhZ3MubGVuZ3RoOwogIGlmIChudW1PcmlnaW5hbFRhZ3MgPT09IDApIHsKICAgIHJldHVybiBoaWdobGlnaHRUYWdzOwogIH0KCiAgdmFyIG51bUhpZ2hsaWdodFRhZ3MgPSBoaWdobGlnaHRUYWdzLmxlbmd0aDsKICBpZiAobnVtSGlnaGxpZ2h0VGFncyA9PT0gMCkgewogICAgcmV0dXJuIG9yaWdpbmFsVGFnczsKICB9CgogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgb3JpZ2luYWxJbmRleCA9IDA7CiAgdmFyIGhpZ2hsaWdodEluZGV4ID0gMDsKCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MgJiYgaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICB2YXIgb3JpZ2luYWxUYWcgPSBvcmlnaW5hbFRhZ3Nbb3JpZ2luYWxJbmRleF07CiAgICB2YXIgaGlnaGxpZ2h0VGFnID0gaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF07CgogICAgaWYgKG9yaWdpbmFsVGFnLnBvcyA8PSBoaWdobGlnaHRUYWcucG9zKSB7CiAgICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnKTsKICAgICAgb3JpZ2luYWxJbmRleCsrOwogICAgfQogICAgZWxzZSB7CiAgICAgIHJlc3VsdC5wdXNoKGhpZ2hsaWdodFRhZyk7CiAgICAgIGlmIChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4ICsgMV0ucG9zIDw9IG9yaWdpbmFsVGFnLnBvcykgewogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgICAgcmVzdWx0LnB1c2goaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF0pOwogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gbmV3IGVuZCB0YWcKICAgICAgICByZXN1bHQucHVzaCh7cG9zOiBvcmlnaW5hbFRhZy5wb3N9KTsKCiAgICAgICAgLy8gbmV3IHN0YXJ0IHRhZwogICAgICAgIGhpZ2hsaWdodFRhZ3NbaGlnaGxpZ2h0SW5kZXhdID0ge25vZGU6IGhpZ2hsaWdodFRhZy5ub2RlLmNsb25lTm9kZShmYWxzZSksIHBvczogb3JpZ2luYWxUYWcucG9zfTsKICAgICAgfQogICAgfQogIH0KCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MpIHsKICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnc1tvcmlnaW5hbEluZGV4XSk7CiAgICBvcmlnaW5hbEluZGV4Kys7CiAgfQoKICB3aGlsZSAoaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICByZXN1bHQucHVzaChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4XSk7CiAgICBoaWdobGlnaHRJbmRleCsrOwogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkluc2VydHMgdGFncyBpbnRvIHRleHQuCkBwYXJhbSAgdGFncyAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKQHBhcmFtICB0ZXh0ICBhIHN0cmluZyByZXByZXNlbnRpbmcgdGhlIHRleHQKQHJldHVybiAgYSBET00gRG9jdW1lbnRGcmFnbWVudCByZXByZXNlbnRpbmcgdGhlIHJlc3VsdGluZyBIVE1MCiovCmZ1bmN0aW9uIHNoX2luc2VydFRhZ3ModGFncywgdGV4dCkgewogIHZhciBkb2MgPSBkb2N1bWVudDsKCiAgdmFyIHJlc3VsdCA9IGRvY3VtZW50LmNyZWF0ZURvY3VtZW50RnJhZ21lbnQoKTsKICB2YXIgdGFnSW5kZXggPSAwOwogIHZhciBudW1UYWdzID0gdGFncy5sZW5ndGg7CiAgdmFyIHRleHRQb3MgPSAwOwogIHZhciB0ZXh0TGVuZ3RoID0gdGV4dC5sZW5ndGg7CiAgdmFyIGN1cnJlbnROb2RlID0gcmVzdWx0OwoKICAvLyBvdXRwdXQgb25lIHRhZyBvciB0ZXh0IG5vZGUgZXZlcnkgaXRlcmF0aW9uCiAgd2hpbGUgKHRleHRQb3MgPCB0ZXh0TGVuZ3RoIHx8IHRhZ0luZGV4IDwgbnVtVGFncykgewogICAgdmFyIHRhZzsKICAgIHZhciB0YWdQb3M7CiAgICBpZiAodGFnSW5kZXggPCBudW1UYWdzKSB7CiAgICAgIHRhZyA9IHRhZ3NbdGFnSW5kZXhdOwogICAgICB0YWdQb3MgPSB0YWcucG9zOwogICAgfQogICAgZWxzZSB7CiAgICAgIHRhZ1BvcyA9IHRleHRMZW5ndGg7CiAgICB9CgogICAgaWYgKHRhZ1BvcyA8PSB0ZXh0UG9zKSB7CiAgICAgIC8vIG91dHB1dCB0aGUgdGFnCiAgICAgIGlmICh0YWcubm9kZSkgewogICAgICAgIC8vIHN0YXJ0IHRhZwogICAgICAgIHZhciBuZXdOb2RlID0gdGFnLm5vZGU7CiAgICAgICAgY3VycmVudE5vZGUuYXBwZW5kQ2hpbGQobmV3Tm9kZSk7CiAgICAgICAgY3VycmVudE5vZGUgPSBuZXdOb2RlOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGVuZCB0YWcKICAgICAgICBjdXJyZW50Tm9kZSA9IGN1cnJlbnROb2RlLnBhcmVudE5vZGU7CiAgICAgIH0KICAgICAgdGFnSW5kZXgrKzsKICAgIH0KICAgIGVsc2UgewogICAgICAvLyBvdXRwdXQgdGV4dAogICAgICBjdXJyZW50Tm9kZS5hcHBlbmRDaGlsZChkb2MuY3JlYXRlVGV4dE5vZGUodGV4dC5zdWJzdHJpbmcodGV4dFBvcywgdGFnUG9zKSkpOwogICAgICB0ZXh0UG9zID0gdGFnUG9zOwogICAgfQogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkhpZ2hsaWdodHMgYW4gZWxlbWVudCBjb250YWluaW5nIHNvdXJjZSBjb2RlLiAgVXBvbiBjb21wbGV0aW9uIG9mIHRoaXMgZnVuY3Rpb24sCnRoZSBlbGVtZW50IHdpbGwgaGF2ZSBiZWVuIHBsYWNlZCBpbiB0aGUgInNoX3NvdXJjZUNvZGUiIGNsYXNzLgpAcGFyYW0gIGVsZW1lbnQgIGEgRE9NIDxwcmU+IGVsZW1lbnQgY29udGFpbmluZyB0aGUgc291cmNlIGNvZGUgdG8gYmUgaGlnaGxpZ2h0ZWQKQHBhcmFtICBsYW5ndWFnZSAgYSBsYW5ndWFnZSBkZWZpbml0aW9uIG9iamVjdAoqLwpmdW5jdGlvbiBzaF9oaWdobGlnaHRFbGVtZW50KGVsZW1lbnQsIGxhbmd1YWdlKSB7CiAgc2hfYWRkQ2xhc3MoZWxlbWVudCwgJ3NoX3NvdXJjZUNvZGUnKTsKICB2YXIgb3JpZ2luYWxUYWdzID0gW107CiAgdmFyIGlucHV0U3RyaW5nID0gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgb3JpZ2luYWxUYWdzKTsKICB2YXIgaGlnaGxpZ2h0VGFncyA9IHNoX2hpZ2hsaWdodFN0cmluZyhpbnB1dFN0cmluZywgbGFuZ3VhZ2UpOwogIHZhciB0YWdzID0gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncyk7CiAgdmFyIGRvY3VtZW50RnJhZ21lbnQgPSBzaF9pbnNlcnRUYWdzKHRhZ3MsIGlucHV0U3RyaW5nKTsKICB3aGlsZSAoZWxlbWVudC5oYXNDaGlsZE5vZGVzKCkpIHsKICAgIGVsZW1lbnQucmVtb3ZlQ2hpbGQoZWxlbWVudC5maXJzdENoaWxkKTsKICB9CiAgZWxlbWVudC5hcHBlbmRDaGlsZChkb2N1bWVudEZyYWdtZW50KTsKfQoKZnVuY3Rpb24gc2hfZ2V0WE1MSHR0cFJlcXVlc3QoKSB7CiAgaWYgKHdpbmRvdy5BY3RpdmVYT2JqZWN0KSB7CiAgICByZXR1cm4gbmV3IEFjdGl2ZVhPYmplY3QoJ01zeG1sMi5YTUxIVFRQJyk7CiAgfQogIGVsc2UgaWYgKHdpbmRvdy5YTUxIdHRwUmVxdWVzdCkgewogICAgcmV0dXJuIG5ldyBYTUxIdHRwUmVxdWVzdCgpOwogIH0KICB0aHJvdyAnTm8gWE1MSHR0cFJlcXVlc3QgaW1wbGVtZW50YXRpb24gYXZhaWxhYmxlJzsKfQoKZnVuY3Rpb24gc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpIHsKICBpZiAobGFuZ3VhZ2UgaW4gc2hfcmVxdWVzdHMpIHsKICAgIHNoX3JlcXVlc3RzW2xhbmd1YWdlXS5wdXNoKGVsZW1lbnQpOwogICAgcmV0dXJuOwogIH0KICBzaF9yZXF1ZXN0c1tsYW5ndWFnZV0gPSBbZWxlbWVudF07CiAgdmFyIHJlcXVlc3QgPSBzaF9nZXRYTUxIdHRwUmVxdWVzdCgpOwogIHZhciB1cmwgPSBwcmVmaXggKyAnc2hfJyArIGxhbmd1YWdlICsgc3VmZml4OwogIHJlcXVlc3Qub3BlbignR0VUJywgdXJsLCB0cnVlKTsKICByZXF1ZXN0Lm9ucmVhZHlzdGF0ZWNoYW5nZSA9IGZ1bmN0aW9uICgpIHsKICAgIGlmIChyZXF1ZXN0LnJlYWR5U3RhdGUgPT09IDQpIHsKICAgICAgdHJ5IHsKICAgICAgICBpZiAoISByZXF1ZXN0LnN0YXR1cyB8fCByZXF1ZXN0LnN0YXR1cyA9PT0gMjAwKSB7CiAgICAgICAgICBldmFsKHJlcXVlc3QucmVzcG9uc2VUZXh0KTsKICAgICAgICAgIHZhciBlbGVtZW50cyA9IHNoX3JlcXVlc3RzW2xhbmd1YWdlXTsKICAgICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgZWxlbWVudHMubGVuZ3RoOyBpKyspIHsKICAgICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50c1tpXSwgc2hfbGFuZ3VhZ2VzW2xhbmd1YWdlXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgdGhyb3cgJ0hUVFAgZXJyb3I6IHN0YXR1cyAnICsgcmVxdWVzdC5zdGF0dXM7CiAgICAgICAgfQogICAgICB9CiAgICAgIGZpbmFsbHkgewogICAgICAgIHJlcXVlc3QgPSBudWxsOwogICAgICB9CiAgICB9CiAgfTsKICByZXF1ZXN0LnNlbmQobnVsbCk7Cn0KCi8qKgpIaWdobGlnaHRzIGFsbCBlbGVtZW50cyBjb250YWluaW5nIHNvdXJjZSBjb2RlIG9uIHRoZSBjdXJyZW50IHBhZ2UuIEVsZW1lbnRzCmNvbnRhaW5pbmcgc291cmNlIGNvZGUgbXVzdCBiZSAicHJlIiBlbGVtZW50cyB3aXRoIGEgImNsYXNzIiBhdHRyaWJ1dGUgb2YKInNoX0xBTkdVQUdFIiwgd2hlcmUgTEFOR1VBR0UgaXMgYSB2YWxpZCBsYW5ndWFnZSBpZGVudGlmaWVyOyBlLmcuLCAic2hfamF2YSIKaWRlbnRpZmllcyB0aGUgZWxlbWVudCBhcyBjb250YWluaW5nICJqYXZhIiBsYW5ndWFnZSBzb3VyY2UgY29kZS4KKi8KZnVuY3Rpb24gaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCB0YWcpIHsKICB2YXIgbm9kZUxpc3QgPSBkb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSh0YWcpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbm9kZUxpc3QubGVuZ3RoOyBpKyspIHsKICAgIHZhciBlbGVtZW50ID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHZhciBodG1sQ2xhc3NlcyA9IHNoX2dldENsYXNzZXMoZWxlbWVudCk7CiAgICB2YXIgaGlnaGxpZ2h0ZWQgPSBmYWxzZTsKICAgIHZhciBkb250aGlnaGxpZ2h0ID0gZmFsc2U7CiAgICBmb3IgKHZhciBqID0gMDsgaiA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaisrKSB7CiAgICAgIHZhciBodG1sQ2xhc3MgPSBodG1sQ2xhc3Nlc1tqXS50b0xvd2VyQ2FzZSgpOwogICAgICBpZiAoaHRtbENsYXNzID09PSAnc2hfbm9uZScpIHsKICAgICAgICBkb250aGlnaGxpZ2h0ID0gdHJ1ZQogICAgICAgIGNvbnRpbnVlOwogICAgICB9CiAgICAgIGlmIChodG1sQ2xhc3Muc3Vic3RyKDAsIDMpID09PSAnc2hfJykgewogICAgICAgIHZhciBsYW5ndWFnZSA9IGh0bWxDbGFzcy5zdWJzdHJpbmcoMyk7CiAgICAgICAgaWYgKGxhbmd1YWdlIGluIHNoX2xhbmd1YWdlcykgewogICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50LCBzaF9sYW5ndWFnZXNbbGFuZ3VhZ2VdKTsKICAgICAgICAgIGhpZ2hsaWdodGVkID0gdHJ1ZTsKICAgICAgICB9CiAgICAgICAgZWxzZSBpZiAodHlwZW9mKHByZWZpeCkgPT09ICdzdHJpbmcnICYmIHR5cGVvZihzdWZmaXgpID09PSAnc3RyaW5nJykgewogICAgICAgICAgc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHRocm93ICdGb3VuZCA8JyArIHRhZyArICc+IGVsZW1lbnQgd2l0aCBjbGFzcz0iJyArIGh0bWxDbGFzcyArICciLCBidXQgbm8gc3VjaCBsYW5ndWFnZSBleGlzdHMnOwogICAgICAgIH0KICAgICAgICBicmVhazsKICAgICAgfQogICAgfQogICAgaWYgKGhpZ2hsaWdodGVkID09PSBmYWxzZSAmJiBkb250aGlnaGxpZ2h0ID09IGZhbHNlKSB7CiAgICAgIHNoX2hpZ2hsaWdodEVsZW1lbnQoZWxlbWVudCwgc2hfbGFuZ3VhZ2VzWyJqYXZhc2NyaXB0Il0pOwogICAgfQogIH0KfQoKCgpmdW5jdGlvbiBzaF9oaWdobGlnaHREb2N1bWVudChwcmVmaXgsIHN1ZmZpeCkgewogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3R0Jyk7CiAgaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCAnY29kZScpOwogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3ByZScpOwp9Cg=="></script>
+  <script src="data:application/javascript;base64,aWYoIXRoaXMuc2hfbGFuZ3VhZ2VzKXt0aGlzLnNoX2xhbmd1YWdlcz17fX1zaF9sYW5ndWFnZXMuamF2YXNjcmlwdD1bW1svXC9cL1wvL2csInNoX2NvbW1lbnQiLDFdLFsvXC9cLy9nLCJzaF9jb21tZW50Iiw3XSxbL1wvXCpcKi9nLCJzaF9jb21tZW50Iiw4XSxbL1wvXCovZywic2hfY29tbWVudCIsOV0sWy9cYig/OmFic3RyYWN0fGJyZWFrfGNhc2V8Y2F0Y2h8Y2xhc3N8Y29uc3R8Y29udGludWV8ZGVidWdnZXJ8ZGVmYXVsdHxkZWxldGV8ZG98ZWxzZXxlbnVtfGV4cG9ydHxleHRlbmRzfGZhbHNlfGZpbmFsfGZpbmFsbHl8Zm9yfGZ1bmN0aW9ufGdvdG98aWZ8aW1wbGVtZW50c3xpbnxpbnN0YW5jZW9mfGludGVyZmFjZXxuYXRpdmV8bmV3fG51bGx8cHJpdmF0ZXxwcm90ZWN0ZWR8cHJvdG90eXBlfHB1YmxpY3xyZXR1cm58c3RhdGljfHN1cGVyfHN3aXRjaHxzeW5jaHJvbml6ZWR8dGhyb3d8dGhyb3dzfHRoaXN8dHJhbnNpZW50fHRydWV8dHJ5fHR5cGVvZnx2YXJ8dm9sYXRpbGV8d2hpbGV8d2l0aClcYi9nLCJzaF9rZXl3b3JkIiwtMV0sWy8oXCtcK3wtLXxcKXxcXSkoXHMqKShcLz0/KD8hWypcL10pKS9nLFsic2hfc3ltYm9sIiwic2hfbm9ybWFsIiwic2hfc3ltYm9sIl0sLTFdLFsvKDB4W0EtRmEtZjAtOV0rfCg/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykoXHMqKShcLyg/IVsqXC9dKSkvZyxbInNoX251bWJlciIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyhbQS1aYS16JF9dW0EtWmEtejAtOSRfXSpccyopKFwvPT8oPyFbKlwvXSkpL2csWyJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy9cLyg/OlxcLnxbXipcXFwvXSkoPzpcXC58W15cXFwvXSkqXC9bZ2ltXSovZywic2hfcmVnZXhwIiwtMV0sWy9cYlsrLV0/KD86KD86MHhbQS1GYS1mMC05XSspfCg/Oig/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykpdT8oPzooPzppbnQoPzo4fDE2fDMyfDY0KSl8TCk/XGIvZywic2hfbnVtYmVyIiwtMV0sWy8iL2csInNoX3N0cmluZyIsMTBdLFsvJy9nLCJzaF9zdHJpbmciLDExXSxbL358IXwlfFxefFwqfFwofFwpfC18XCt8PXxcW3xcXXxcXHw6fDt8LHxcLnxcL3xcP3wmfDx8PnxcfC9nLCJzaF9zeW1ib2wiLC0xXSxbL1x7fFx9L2csInNoX2NicmFja2V0IiwtMV0sWy9cYig/Ok1hdGh8SW5maW5pdHl8TmFOfHVuZGVmaW5lZHxhcmd1bWVudHMpXGIvZywic2hfcHJlZGVmX3ZhciIsLTFdLFsvXGIoPzpBcnJheXxCb29sZWFufERhdGV8RXJyb3J8RXZhbEVycm9yfEZ1bmN0aW9ufE51bWJlcnxPYmplY3R8UmFuZ2VFcnJvcnxSZWZlcmVuY2VFcnJvcnxSZWdFeHB8U3RyaW5nfFN5bnRheEVycm9yfFR5cGVFcnJvcnxVUklFcnJvcnxkZWNvZGVVUkl8ZGVjb2RlVVJJQ29tcG9uZW50fGVuY29kZVVSSXxlbmNvZGVVUklDb21wb25lbnR8ZXZhbHxpc0Zpbml0ZXxpc05hTnxwYXJzZUZsb2F0fHBhcnNlSW50KVxiL2csInNoX3ByZWRlZl9mdW5jIiwtMV0sWy8oPzpbQS1aYS16XXxfKVtBLVphLXowLTlfXSooPz1bIFx0XSpcKCkvZywic2hfZnVuY3Rpb24iLC0xXV0sW1svJC9nLG51bGwsLTJdLFsvKD86PD8pW0EtWmEtejAtOV9cLlwvXC1ffl0rQFtBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KXwoPzo8PylbQS1aYS16MC05X10rOlwvXC9bQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+PykvZywic2hfdXJsIiwtMV0sWy88XD94bWwvZywic2hfcHJlcHJvYyIsMiwxXSxbLzwhRE9DVFlQRS9nLCJzaF9wcmVwcm9jIiw0LDFdLFsvPCEtLS9nLCJzaF9jb21tZW50Iiw1XSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKSg/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKS9nLCJzaF9rZXl3b3JkIiw2LDFdLFsvJig/OltBLVphLXowLTldKyk7L2csInNoX3ByZXByb2MiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSooPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMV0sWy88KD86XC8pP1tBLVphLXpdW0EtWmEtejAtOV0qL2csInNoX2tleXdvcmQiLDYsMV0sWy9AW0EtWmEtel0rL2csInNoX3R5cGUiLC0xXSxbLyg/OlRPRE98RklYTUV8QlVHKSg/Ols6XT8pL2csInNoX3RvZG8iLC0xXV0sW1svXD8+L2csInNoX3ByZXByb2MiLC0yXSxbLyhbXj0iIFx0Pl0rKShbIFx0XSopKD0/KS9nLFsic2hfdHlwZSIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyIvZywic2hfc3RyaW5nIiwzXV0sW1svXFwoPzpcXHwiKS9nLG51bGwsLTFdLFsvIi9nLCJzaF9zdHJpbmciLC0yXV0sW1svPi9nLCJzaF9wcmVwcm9jIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLy0tPi9nLCJzaF9jb21tZW50IiwtMl0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdXSxbWy8oPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLyQvZyxudWxsLC0yXV0sW1svXCpcLy9nLCJzaF9jb21tZW50IiwtMl0sWy8oPzo8PylbQS1aYS16MC05X1wuXC9cLV9+XStAW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pfCg/Ojw/KVtBLVphLXowLTlfXSs6XC9cL1tBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KS9nLCJzaF91cmwiLC0xXSxbLzxcP3htbC9nLCJzaF9wcmVwcm9jIiwyLDFdLFsvPCFET0NUWVBFL2csInNoX3ByZXByb2MiLDQsMV0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopKD86XC8pPz4vZywic2hfa2V5d29yZCIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopL2csInNoX2tleXdvcmQiLDYsMV0sWy8mKD86W0EtWmEtejAtOV0rKTsvZywic2hfcHJlcHJvYyIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XVtBLVphLXowLTldKig/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSovZywic2hfa2V5d29yZCIsNiwxXSxbL0BbQS1aYS16XSsvZywic2hfdHlwZSIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy9cKlwvL2csInNoX2NvbW1lbnQiLC0yXSxbLyg/Ojw/KVtBLVphLXowLTlfXC5cL1wtX35dK0BbQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+Pyl8KD86PD8pW0EtWmEtejAtOV9dKzpcL1wvW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pL2csInNoX3VybCIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy8iL2csInNoX3N0cmluZyIsLTJdLFsvXFwuL2csInNoX3NwZWNpYWxjaGFyIiwtMV1dLFtbLycvZywic2hfc3RyaW5nIiwtMl0sWy9cXC4vZywic2hfc3BlY2lhbGNoYXIiLC0xXV1dOw=="></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+
+</body></html>

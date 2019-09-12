@@ -1,0 +1,2202 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Util | Node.js v12.10.0 Documentation</title>
+  <link rel="stylesheet" href="data:text/css;base64,LyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogaXRhbGljOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBJdGFsaWMnKSwgbG9jYWwoJ0xhdG8tSXRhbGljJyksIHVybChodHRwczovL2ZvbnRzLmdzdGF0aWMuY29tL3MvbGF0by92MTYvUzZ1OHc0Qk1VVFBIanhzQVVpLXFOaVhnN2VVMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBpdGFsaWM7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEl0YWxpYycpLCBsb2NhbCgnTGF0by1JdGFsaWMnKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnU4dzRCTVVUUEhqeHNBWEMtcU5pWGc3US53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0KLyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogbm9ybWFsOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBSZWd1bGFyJyksIGxvY2FsKCdMYXRvLVJlZ3VsYXInKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnV5dzRCTVVUUEhqeEF3WGlXdEZDZlE3QS53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIFJlZ3VsYXInKSwgbG9jYWwoJ0xhdG8tUmVndWxhcicpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dXl3NEJNVVRQSGp4NHdYaVd0RkNjLndvZmYyKSBmb3JtYXQoJ3dvZmYyJyk7CiAgdW5pY29kZS1yYW5nZTogVSswMDAwLTAwRkYsIFUrMDEzMSwgVSswMTUyLTAxNTMsIFUrMDJCQi0wMkJDLCBVKzAyQzYsIFUrMDJEQSwgVSswMkRDLCBVKzIwMDAtMjA2RiwgVSsyMDc0LCBVKzIwQUMsIFUrMjEyMiwgVSsyMTkxLCBVKzIxOTMsIFUrMjIxMiwgVSsyMjE1LCBVK0ZFRkYsIFUrRkZGRDsKfQovKiBsYXRpbi1leHQgKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2FQR1EzcTVkME43dy53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2lQR1EzcTVkMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LyotLS0tLS0tLS0tLS0tLS0tLS0tLS0gTGF5b3V0IGFuZCBUeXBvZ3JhcGh5IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwpodG1sIHsKICBmb250LXNpemU6IDFyZW07CiAgb3ZlcmZsb3ctd3JhcDogYnJlYWstd29yZDsKICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDsKICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlOwogIC13ZWJraXQtZm9udC12YXJpYW50LWxpZ2F0dXJlczogbm9uZTsKICAgICAgICAgIGZvbnQtdmFyaWFudC1saWdhdHVyZXM6IG5vbmU7Cn0KCiogewogIGJveC1zaXppbmc6IGJvcmRlci1ib3g7Cn0KCmJvZHkgewogIGZvbnQtZmFtaWx5OiAiTGF0byIsICJMdWNpZGEgR3JhbmRlIiwgIkx1Y2lkYSBTYW5zIFVuaWNvZGUiLCAiTHVjaWRhIFNhbnMiLCBWZXJkYW5hLCBUYWhvbWEsIHNhbnMtc2VyaWY7CiAgbWFyZ2luOiAwOwogIHBhZGRpbmc6IDA7CiAgY29sb3I6ICMzMzM7CiAgYmFja2dyb3VuZDogI2ZmZjsKfQoKaDEgeyBmb250LXNpemU6IDIuNXJlbSB9CmgyIHsgZm9udC1zaXplOiAycmVtIH0KaDMgeyBmb250LXNpemU6IDEuNzVyZW0gfQpoNCB7IGZvbnQtc2l6ZTogMS41cmVtIH0KaDUgeyBmb250LXNpemU6IDEuMjVyZW0gfQpoNiB7IGZvbnQtc2l6ZTogMXJlbSB9CgpoMSwgaDIsIGgzLCBoNCwgaDUsIGg2IHsKICBtYXJnaW46IDEuNXJlbSAwIDFyZW07CiAgdGV4dC1yZW5kZXJpbmc6IG9wdGltaXplTGVnaWJpbGl0eTsKICBmb250LXdlaWdodDogNzAwOwogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKcHJlLCB0dCwgY29kZSwgLnByZSwgc3Bhbi50eXBlLCBhLnR5cGUgewogIGZvbnQtZmFtaWx5OiBTRk1vbm8tUmVndWxhciwgTWVubG8sIENvbnNvbGFzLCAiTGliZXJhdGlvbiBNb25vIiwgIkNvdXJpZXIgTmV3IiwgbW9ub3NwYWNlOwogIGZvbnQtc2l6ZTogLjllbTsKfQoKI2NvbnRlbnQgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKYSwgYTpsaW5rLCBhOmFjdGl2ZSB7CiAgY29sb3I6ICM0Mzg1M2Q7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGJvcmRlci1yYWRpdXM6IDJweDsKICBwYWRkaW5nOiAxcHggM3B4Owp9CgphOmhvdmVyLCBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDM4NTNkOwogIG91dGxpbmU6IG5vbmU7Cn0KCnN0cm9uZyB7CiAgZm9udC13ZWlnaHQ6IDcwMDsKfQoKY29kZSBhOmhvdmVyIHsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgplbSBjb2RlIHsKICBmb250LXN0eWxlOiBub3JtYWw7Cn0KCiNjaGFuZ2Vsb2cgI2d0b2MgewogIGRpc3BsYXk6IG5vbmU7Cn0KCiNndG9jIHsKICBtYXJnaW4tdG9wOiAuNXJlbTsKICBtYXJnaW4tYm90dG9tOiAxcmVtOwp9CgojZ3RvYyB1bCB7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBtYXJnaW4tbGVmdDogMDsKICBsaW5lLWhlaWdodDogMS41cmVtOwp9CgojZ3RvYyA+IHVsID4gbGkgewogIGRpc3BsYXk6IGlubGluZTsKICBib3JkZXItcmlnaHQ6IDFweCAjMDAwIHNvbGlkOwogIG1hcmdpbi1yaWdodDogMC40cmVtOwogIHBhZGRpbmctcmlnaHQ6IDAuNHJlbTsKfQoKI2d0b2MgPiB1bCA+IGxpOmxhc3QtY2hpbGQgewogIGJvcmRlci1yaWdodDogbm9uZTsKICBtYXJnaW4tcmlnaHQ6IDA7CiAgcGFkZGluZy1yaWdodDogMDsKfQoKbGkudmVyc2lvbi1waWNrZXIgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBhIHsKICBib3JkZXItcmFkaXVzOiAycHggMnB4IDAgMDsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBvbCB7CiAgZGlzcGxheTogYmxvY2s7CiAgei1pbmRleDogMTsKfQoKbGkudmVyc2lvbi1waWNrZXIgYSBzcGFuIHsKICBmb250LXNpemU6IC43cmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciB7CiAgYmFja2dyb3VuZDogI2ZmZjsKICBib3JkZXI6IDFweCAjNDM4NTNkIHNvbGlkOwogIGJvcmRlci1yYWRpdXM6IDAgMCAycHggMnB4OwogIGRpc3BsYXk6IG5vbmU7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgcmlnaHQ6IDA7CiAgdG9wOiAxLjI1cmVtOwogIHdpZHRoOiAxMDAlOwp9CgojZ3RvYyBvbC52ZXJzaW9uLXBpY2tlciBsaSB7CiAgZGlzcGxheTogYmxvY2s7CiAgYm9yZGVyLXJpZ2h0OiAwOwogIG1hcmdpbi1yaWdodDogMDsKfQoKb2wudmVyc2lvbi1waWNrZXIgbGkgYSB7CiAgYm9yZGVyLXJhZGl1czogMDsKICBkaXNwbGF5OiBibG9jazsKICBtYXJnaW46IDA7CiAgcGFkZGluZzogLjFyZW07CiAgcGFkZGluZy1sZWZ0OiAxcmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciBsaTpsYXN0LWNoaWxkIGEgewogIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAxcHg7CiAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMXB4Owp9CgoubGluZSB7CiAgd2lkdGg6IGNhbGMoMTAwJSAtIDFyZW0pOwogIGRpc3BsYXk6IGJsb2NrOwogIHBhZGRpbmctYm90dG9tOiAxcHg7Cn0KCi5hcGlfc3RhYmlsaXR5IHsKICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDsKICBtYXJnaW46IDAgMCAxcmVtIDA7CiAgZm9udC1mYW1pbHk6ICJMYXRvIiwgIkx1Y2lkYSBHcmFuZGUiLCAiTHVjaWRhIFNhbnMgVW5pY29kZSIsICJMdWNpZGEgU2FucyIsIFZlcmRhbmEsIFRhaG9tYSwgc2Fucy1zZXJpZjsKICBwYWRkaW5nOiAxcmVtOwogIGxpbmUtaGVpZ2h0OiAxLjU7Cn0KCi5hcGlfc3RhYmlsaXR5ICogewogIGNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50Owp9CgouYXBpX3N0YWJpbGl0eSBhIHsKICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsKfQoKLmFwaV9zdGFiaWxpdHkgYTpob3ZlciwgLmFwaV9zdGFiaWxpdHkgYTphY3RpdmUsIC5hcGlfc3RhYmlsaXR5IGE6Zm9jdXMgewogIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjQpOwp9CgouYXBpX3N0YWJpbGl0eSBhIGNvZGUgewogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCi5hcGlfc3RhYmlsaXR5XzAgewogIGJhY2tncm91bmQtY29sb3I6ICNENjAwMjc7Cn0KCi5hcGlfc3RhYmlsaXR5XzEgewogIGJhY2tncm91bmQtY29sb3I6ICNFQzUzMTU7Cn0KCi5hcGlfc3RhYmlsaXR5XzIgewogIGJhY2tncm91bmQtY29sb3I6ICM0RUJBMEY7Cn0KCi5hcGlfbWV0YWRhdGEgewogIGZvbnQtc2l6ZTogLjg1cmVtOwogIG1hcmdpbi1ib3R0b206IDFyZW07Cn0KCi5hcGlfbWV0YWRhdGEgc3BhbiB7CiAgbWFyZ2luLXJpZ2h0OiAxcmVtOwp9CgouYXBpX21ldGFkYXRhIHNwYW46bGFzdC1jaGlsZCB7CiAgbWFyZ2luLXJpZ2h0OiAwcHg7Cn0KCnVsLnBsYWluIHsKICBsaXN0LXN0eWxlOiBub25lOwp9CgphYmJyIHsKICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkICM0NTQ1NDU7Cn0KCnAgewogIHRleHQtcmVuZGVyaW5nOiBvcHRpbWl6ZUxlZ2liaWxpdHk7CiAgbWFyZ2luOiAwIDAgMS4xMjVyZW0gMDsKICBsaW5lLWhlaWdodDogMS41Owp9CgojYXBpY29udGVudCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKICBwYWRkaW5nLWJvdHRvbTogMnJlbTsKfQoKdGFibGUgewogIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7CiAgbWFyZ2luOiAwIDAgMS41cmVtIDA7Cn0KCnRoLCB0ZCB7CiAgYm9yZGVyOiAxcHggc29saWQgI2FhYTsKICBwYWRkaW5nOiAuNzVyZW0gMXJlbSAuNzVyZW0gMXJlbTsKICB2ZXJ0aWNhbC1hbGlnbjogdG9wOwp9Cgp0aCB7CiAgdGV4dC1hbGlnbjpsZWZ0Owp9CgpvbCwgdWwsIGRsIHsKICBtYXJnaW46IDAgMCAuNnJlbSAwOwogIHBhZGRpbmc6IDA7Cn0KCm9sIHVsLCBvbCBvbCwgb2wgZGwsIHVsIHVsLCB1bCBvbCwgdWwgZGwsIGRsIHVsLCBkbCBvbCwgZGwgZGwgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCnVsLCBvbCB7CiAgbWFyZ2luLWxlZnQ6IDJyZW07Cn0KCmRsIGR0IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgbWFyZ2luOiAxLjVyZW0gMCAwOwp9CgpkbCBkZCB7CiAgcG9zaXRpb246IHJlbGF0aXZlOwogIG1hcmdpbjogMCAxcmVtIDA7Cn0KCmRkICsgZHQucHJlIHsKICBtYXJnaW4tdG9wOiAxLjZyZW07Cn0KCiNhcGljb250ZW50IHsKICBwYWRkaW5nLXRvcDogMXJlbTsKfQoKI2FwaWNvbnRlbnQgLmxpbmUgewogIHdpZHRoOiBjYWxjKDUwJSAtIDFyZW0pOwogIG1hcmdpbjogMXJlbSAxcmVtIC45NXJlbTsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2NjOwp9CgpoMiArIGgyIHsKICBtYXJnaW46IDAgMCAuNXJlbTsKfQoKaDMgKyBoMyB7CiAgbWFyZ2luOiAwIDAgLjVyZW07Cn0KCmgyLCBoMywgaDQsIGg1IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgcGFkZGluZy1yaWdodDogNDBweDsKfQoKLnNyY2xpbmsgewogIGZsb2F0OiByaWdodDsKICBmb250LXNpemU6IHNtYWxsZXI7Cn0KCmgxIHNwYW4sIGgyIHNwYW4sIGgzIHNwYW4sIGg0IHNwYW4gewogIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICBkaXNwbGF5OiBibG9jazsKICB0b3A6IDA7CiAgcmlnaHQ6IDA7Cn0KCmgxIHNwYW46aG92ZXIsIGgyIHNwYW46aG92ZXIsIGgzIHNwYW46aG92ZXIsIGg0IHNwYW46aG92ZXIgewogIG9wYWNpdHk6IDE7Cn0KCmgxIHNwYW4gYSwgaDIgc3BhbiBhLCBoMyBzcGFuIGEsIGg0IHNwYW4gYSB7CiAgY29sb3I6ICMwMDA7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGZvbnQtd2VpZ2h0OiBib2xkOwp9CgpwcmUsIHR0LCBjb2RlIHsKICBsaW5lLWhlaWdodDogMS41cmVtOwogIG1hcmdpbjogMDsgcGFkZGluZzogMDsKfQoKLnByZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKcHJlIHsKICBwYWRkaW5nOiAxcmVtOwogIHZlcnRpY2FsLWFsaWduOiB0b3A7CiAgYmFja2dyb3VuZDogI2YyZjJmMjsKICBtYXJnaW46IDFyZW07CiAgb3ZlcmZsb3cteDogYXV0bzsKfQoKcHJlID4gY29kZSB7CiAgcGFkZGluZzogMDsKfQoKcHJlICsgaDMgewogIG1hcmdpbi10b3A6IDIuMjI1cmVtOwp9Cgpjb2RlLnByZSB7CiAgd2hpdGUtc3BhY2U6IHByZTsKfQoKI2ludHJvIHsKICBtYXJnaW4tdG9wOiAxLjI1cmVtOwogIG1hcmdpbi1sZWZ0OiAxcmVtOwp9CgojaW50cm8gYSB7CiAgY29sb3I6ICNkZGQ7CiAgZm9udC13ZWlnaHQ6IGJvbGQ7Cn0KCmhyIHsKICBiYWNrZ3JvdW5kOiBub25lOwogIGJvcmRlcjogbWVkaXVtIG5vbmU7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM3YTdhN2E7CiAgbWFyZ2luOiAwIDAgMXJlbSAwOwp9CgojdG9jIGgyIHsKICBtYXJnaW4tdG9wOiAwOwogIG1hcmdpbjogMS41cmVtIDA7Cn0KCiN0b2MgcCB7CiAgbWFyZ2luOiAwOwp9CgojdG9jIHVsIGEgewogIHRleHQtZGVjb3JhdGlvbjpub25lOwp9CgojdG9jIHVsIGxpIHsKICBtYXJnaW4tYm90dG9tOiAuNjY2cmVtOwogIGxpc3Qtc3R5bGU6IHNxdWFyZSBvdXRzaWRlOwp9CgojdG9jIGxpID4gdWwgewogIG1hcmdpbi10b3A6IC42NjZyZW07Cn0KCiN0b2MgLnN0YWJpbGl0eV8wOjphZnRlciB7CiAgYmFja2dyb3VuZC1jb2xvcjogI2Q1MDAyNzsKICBjb2xvcjogI2ZmZjsKICBjb250ZW50OiAiZGVwcmVjYXRlZCI7CiAgbWFyZ2luLWxlZnQ6IC4yNXJlbTsKICBwYWRkaW5nOiAxcHggM3B4OwogIGJvcmRlci1yYWRpdXM6IDNweDsKfQoKI2FwaWNvbnRlbnQgbGkgewogIG1hcmdpbi1ib3R0b206IC41cmVtOwp9CgojYXBpY29udGVudCBsaTpsYXN0LWNoaWxkIHsKICBtYXJnaW4tYm90dG9tOiAwOwp9Cgp0dCwgY29kZSB7CiAgY29sb3I6ICMwNDA0MDQ7CiAgYmFja2dyb3VuZC1jb2xvcjogI2YyZjJmMjsKICBib3JkZXItcmFkaXVzOiAycHg7CiAgcGFkZGluZzogMXB4IDNweDsKfQoKLmFwaV9zdGFiaWxpdHkgY29kZSB7CiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAuMSk7Cn0KCmEgY29kZSB7CiAgY29sb3I6IGluaGVyaXQ7CiAgYmFja2dyb3VuZDogaW5oZXJpdDsKICBwYWRkaW5nOiAwOwp9CgoudHlwZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKI2NvbHVtbjEuaW50ZXJpb3IgewogIG1hcmdpbi1sZWZ0OiAyMzRweDsKICBwYWRkaW5nOiAwIDJyZW07CiAgLXdlYmtpdC1wYWRkaW5nLXN0YXJ0OiAxLjVyZW07Cn0KCiNjb2x1bW4yLmludGVyaW9yIHsKICB3aWR0aDogMjM0cHg7CiAgYmFja2dyb3VuZDogIzMzMzsKICBwb3NpdGlvbjogZml4ZWQ7CiAgbGVmdDogMDsKICB0b3A6IDA7CiAgYm90dG9tOiAwOwogIG92ZXJmbG93LXg6IGhpZGRlbjsKICBvdmVyZmxvdy15OiBzY3JvbGw7Cn0KCiNjb2x1bW4yIHVsIHsKICBsaXN0LXN0eWxlOiBub25lOwogIG1hcmdpbjogLjlyZW0gMCAuNXJlbTsKICBiYWNrZ3JvdW5kOiAjMzMzOwp9CgojY29sdW1uMiA+IDpmaXJzdC1jaGlsZCB7CiAgbWFyZ2luOiAxLjI1cmVtOwogIGZvbnQtc2l6ZTogMS41cmVtOwp9CgojY29sdW1uMiA+IHVsOm50aC1jaGlsZCgyKSB7CiAgbWFyZ2luOiAxLjI1cmVtIDAgLjVyZW07Cn0KCiNjb2x1bW4yID4gdWw6bGFzdC1jaGlsZCB7CiAgbWFyZ2luOiAuOXJlbSAwIDEuMjVyZW07Cn0KCiNjb2x1bW4yIHVsIGxpIHsKICBwYWRkaW5nLWxlZnQ6IDEuMjVyZW07CiAgbWFyZ2luLWJvdHRvbTogLjVyZW07CiAgcGFkZGluZy1ib3R0b206IC41cmVtOwp9CgojY29sdW1uMiAubGluZSB7CiAgbWFyZ2luOiAwIC41cmVtOwogIGJhY2tncm91bmQtY29sb3I6ICM3MDcwNzA7Cn0KCiNjb2x1bW4yIHVsIGxpOmxhc3QtY2hpbGQgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEgewogIGNvbG9yOiAjY2NjOwogIGJvcmRlci1yYWRpdXM6IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEuYWN0aXZlLCAjY29sdW1uMiB1bCBsaSBhLmFjdGl2ZTpob3ZlciwKI2NvbHVtbjIgdWwgbGkgYS5hY3RpdmU6Zm9jdXMgewogIGNvbG9yOiAjNDM4NTNkOwogIGJvcmRlci1yYWRpdXM6IDA7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM0Mzg1M2Q7CiAgYmFja2dyb3VuZDogbm9uZTsKfQoKI2ludHJvIGE6aG92ZXIsICNpbnRybyBhOmZvY3VzLAojY29sdW1uMiB1bCBsaSBhOmhvdmVyLCAjY29sdW1uMiB1bCBsaSBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgpzcGFuID4gLm1hcmssIHNwYW4gPiAubWFyazp2aXNpdGVkIHsKICBjb2xvcjogIzcwNzA3MDsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgdG9wOiAwcHg7CiAgcmlnaHQ6IDBweDsKfQoKc3BhbiA+IC5tYXJrOmhvdmVyLCBzcGFuID4gLm1hcms6Zm9jdXMsIHNwYW4gPiAubWFyazphY3RpdmUgewogIGNvbG9yOiAjNDM4NTNkOwogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCnRoID4gKjpsYXN0LWNoaWxkLCB0ZCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKfQoKLmNoYW5nZWxvZyA+IHN1bW1hcnkgewogIG1hcmdpbjogLjVyZW0gMDsKICBwYWRkaW5nOiAuNXJlbSAwOwogIGN1cnNvcjogcG9pbnRlcjsKfQoKLyogc2ltcGxlciBjbGVhcmZpeCAqLwouY2xlYXJmaXg6YWZ0ZXIgewogIGNvbnRlbnQ6ICIuIjsKICBkaXNwbGF5OiBibG9jazsKICBoZWlnaHQ6IDA7CiAgY2xlYXI6IGJvdGg7CiAgdmlzaWJpbGl0eTogaGlkZGVuOwp9CgouZ2l0aHViX2ljb24gewogIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7CiAgbWFyZ2luOiAtMnB4IDNweCAwIDA7Cn0KCkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogMTAyNHB4KSB7CiAgI2NvbnRlbnQgewogICAgb3ZlcmZsb3c6IHZpc2libGU7CiAgfQogICNjb2x1bW4xLmludGVyaW9yIHsKICAgIG1hcmdpbi1sZWZ0OiAwOwogICAgcGFkZGluZy1sZWZ0OiAuNXJlbTsKICAgIHBhZGRpbmctcmlnaHQ6IC41cmVtOwogICAgd2lkdGg6IGF1dG87CiAgICBvdmVyZmxvdy15OiB2aXNpYmxlOwogIH0KICAjY29sdW1uMiB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KfQoKQG1lZGlhIHByaW50IHsKICBodG1sIHsKICAgIGhlaWdodDogYXV0bzsKICAgIGZvbnQtc2l6ZTogMC43NWVtOwogIH0KICAjY29sdW1uMi5pbnRlcmlvciB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KICAjY29sdW1uMS5pbnRlcmlvciB7CiAgICBtYXJnaW4tbGVmdDogMHB4OwogICAgcGFkZGluZzogMHB4OwogICAgb3ZlcmZsb3cteTogYXV0bzsKICB9CiAgLmFwaV9tZXRhZGF0YSwKICAjdG9jLAogIC5zcmNsaW5rLAogICNndG9jLAogIC5tYXJrIHsKICAgIGRpc3BsYXk6IG5vbmU7CiAgfQogIGgxIHsKICAgIGZvbnQtc2l6ZTogMnJlbTsKICB9CiAgaDIgewogICAgZm9udC1zaXplOiAxLjc1cmVtOwogIH0KICBoMyB7CiAgICBmb250LXNpemU6IDEuNXJlbTsKICB9CiAgaDQgewogICAgZm9udC1zaXplOiAxLjNyZW07CiAgfQogIGg1IHsKICAgIGZvbnQtc2l6ZTogMS4ycmVtOwogIH0KICBoNiB7CiAgICBmb250LXNpemU6IDEuMXJlbTsKICB9CiAgLmFwaV9zdGFiaWxpdHkgewogICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogIH0KICAuYXBpX3N0YWJpbGl0eSBhIHsKICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsKICB9CiAgYSB7CiAgICBjb2xvcjogaW5oZXJpdDsKICB9CiAgI2FwaWNvbnRlbnQgewogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICB9Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LnNoX3NvdXJjZUNvZGUgewogIGZvbnQtd2VpZ2h0OiBub3JtYWw7CiAgZm9udC1zdHlsZTogbm9ybWFsOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfc3ltYm9sLAouc2hfc291cmNlQ29kZSAuc2hfY2JyYWNrZXQgewogIGNvbG9yOiAjMzMzOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfa2V5d29yZCB7CiAgY29sb3I6ICMzMzg7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9zdHJpbmcsCi5zaF9zb3VyY2VDb2RlIC5zaF9yZWdleHAsCi5zaF9zb3VyY2VDb2RlIC5zaF9udW1iZXIsCi5zaF9zb3VyY2VDb2RlIC5zaF9zcGVjaWFsY2hhciB7CiAgY29sb3I6ICNFNTQzMDU7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9jb21tZW50IHsKICBjb2xvcjogIzY2NjsKICBmb250LXdlaWdodDogbGlnaHRlcjsKfQo=">
+  <link rel="canonical" href="https://nodejs.org/api/util.html">
+</head>
+<body class="alt apidoc" id="api-section-util">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="https://nodejs.org/" title="Go back to the home page">
+          Node.js
+        </a>
+      </div>
+      <ul>
+<li><a href="https://nodejs.org/api/documentation.html" class="nav-documentation">About these Docs</a></li>
+<li><a href="https://nodejs.org/api/synopsis.html" class="nav-synopsis">Usage &amp; Example</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://nodejs.org/api/assert.html" class="nav-assert">Assertion Testing</a></li>
+<li><a href="https://nodejs.org/api/async_hooks.html" class="nav-async_hooks">Async Hooks</a></li>
+<li><a href="https://nodejs.org/api/buffer.html" class="nav-buffer">Buffer</a></li>
+<li><a href="https://nodejs.org/api/addons.html" class="nav-addons">C++ Addons</a></li>
+<li><a href="https://nodejs.org/api/n-api.html" class="nav-n-api">C/C++ Addons - N-API</a></li>
+<li><a href="https://nodejs.org/api/child_process.html" class="nav-child_process">Child Processes</a></li>
+<li><a href="https://nodejs.org/api/cluster.html" class="nav-cluster">Cluster</a></li>
+<li><a href="https://nodejs.org/api/cli.html" class="nav-cli">Command Line Options</a></li>
+<li><a href="https://nodejs.org/api/console.html" class="nav-console">Console</a></li>
+<li><a href="https://nodejs.org/api/crypto.html" class="nav-crypto">Crypto</a></li>
+<li><a href="https://nodejs.org/api/debugger.html" class="nav-debugger">Debugger</a></li>
+<li><a href="https://nodejs.org/api/deprecations.html" class="nav-deprecations">Deprecated APIs</a></li>
+<li><a href="https://nodejs.org/api/dns.html" class="nav-dns">DNS</a></li>
+<li><a href="https://nodejs.org/api/domain.html" class="nav-domain">Domain</a></li>
+<li><a href="https://nodejs.org/api/esm.html" class="nav-esm">ECMAScript Modules</a></li>
+<li><a href="https://nodejs.org/api/errors.html" class="nav-errors">Errors</a></li>
+<li><a href="https://nodejs.org/api/events.html" class="nav-events">Events</a></li>
+<li><a href="https://nodejs.org/api/fs.html" class="nav-fs">File System</a></li>
+<li><a href="https://nodejs.org/api/globals.html" class="nav-globals">Globals</a></li>
+<li><a href="https://nodejs.org/api/http.html" class="nav-http">HTTP</a></li>
+<li><a href="https://nodejs.org/api/http2.html" class="nav-http2">HTTP/2</a></li>
+<li><a href="https://nodejs.org/api/https.html" class="nav-https">HTTPS</a></li>
+<li><a href="https://nodejs.org/api/inspector.html" class="nav-inspector">Inspector</a></li>
+<li><a href="https://nodejs.org/api/intl.html" class="nav-intl">Internationalization</a></li>
+<li><a href="https://nodejs.org/api/modules.html" class="nav-modules">Modules</a></li>
+<li><a href="https://nodejs.org/api/net.html" class="nav-net">Net</a></li>
+<li><a href="https://nodejs.org/api/os.html" class="nav-os">OS</a></li>
+<li><a href="https://nodejs.org/api/path.html" class="nav-path">Path</a></li>
+<li><a href="https://nodejs.org/api/perf_hooks.html" class="nav-perf_hooks">Performance Hooks</a></li>
+<li><a href="https://nodejs.org/api/policy.html" class="nav-policy">Policies</a></li>
+<li><a href="https://nodejs.org/api/process.html" class="nav-process">Process</a></li>
+<li><a href="https://nodejs.org/api/punycode.html" class="nav-punycode">Punycode</a></li>
+<li><a href="https://nodejs.org/api/querystring.html" class="nav-querystring">Query Strings</a></li>
+<li><a href="https://nodejs.org/api/readline.html" class="nav-readline">Readline</a></li>
+<li><a href="https://nodejs.org/api/repl.html" class="nav-repl">REPL</a></li>
+<li><a href="https://nodejs.org/api/report.html" class="nav-report">Report</a></li>
+<li><a href="https://nodejs.org/api/stream.html" class="nav-stream">Stream</a></li>
+<li><a href="https://nodejs.org/api/string_decoder.html" class="nav-string_decoder">String Decoder</a></li>
+<li><a href="https://nodejs.org/api/timers.html" class="nav-timers">Timers</a></li>
+<li><a href="https://nodejs.org/api/tls.html" class="nav-tls">TLS/SSL</a></li>
+<li><a href="https://nodejs.org/api/tracing.html" class="nav-tracing">Trace Events</a></li>
+<li><a href="https://nodejs.org/api/tty.html" class="nav-tty">TTY</a></li>
+<li><a href="https://nodejs.org/api/dgram.html" class="nav-dgram">UDP/Datagram</a></li>
+<li><a href="https://nodejs.org/api/url.html" class="nav-url">URL</a></li>
+<li><a href="https://nodejs.org/api/util.html" class="nav-util active">Utilities</a></li>
+<li><a href="https://nodejs.org/api/v8.html" class="nav-v8">V8</a></li>
+<li><a href="https://nodejs.org/api/vm.html" class="nav-vm">VM</a></li>
+<li><a href="https://nodejs.org/api/worker_threads.html" class="nav-worker_threads">Worker Threads</a></li>
+<li><a href="https://nodejs.org/api/zlib.html" class="nav-zlib">Zlib</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://github.com/nodejs/node" class="nav-https-github-com-nodejs-node">GitHub Repo &amp; Issue Tracker</a></li>
+</ul>
+    </div>
+
+    <div id="column1" data-id="util" class="interior">
+      <header>
+        <h1>Node.js v12.10.0 Documentation</h1>
+        <div id="gtoc">
+          <ul>
+            <li>
+              <a href="https://nodejs.org/api/index.html" name="toc">Index</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/all.html">View on single page</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/util.json">View as JSON</a>
+            </li>
+            
+    <li class="version-picker">
+      <a href="#">View another version <span>▼</span></a>
+      <ol class="version-picker"><li><a href="https://nodejs.org/docs/latest-v12.x/api/util.html">12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v11.x/api/util.html">11.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v10.x/api/util.html">10.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v9.x/api/util.html">9.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/util.html">8.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v7.x/api/util.html">7.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v6.x/api/util.html">6.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v5.x/api/util.html">5.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v4.x/api/util.html">4.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.12.x/api/util.html">0.12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.10.x/api/util.html">0.10.x</a></li></ol>
+    </li>
+  
+            <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/util.md"><span class="github_icon"><svg height="16" width="16" viewBox="0 0 16.1 16.1" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8z"></path></svg></span>Edit on GitHub</a></li>
+          </ul>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+<li>
+<p><span class="stability_2"><a href="#util_util">Util</a></span></p>
+<ul>
+<li><a href="#util_util_callbackify_original">util.callbackify(original)</a></li>
+<li><a href="#util_util_debuglog_section">util.debuglog(section)</a></li>
+<li><a href="#util_util_deprecate_fn_msg_code">util.deprecate(fn, msg[, code])</a></li>
+<li><a href="#util_util_format_format_args">util.format(format[, ...args])</a></li>
+<li><a href="#util_util_formatwithoptions_inspectoptions_format_args">util.formatWithOptions(inspectOptions, format[, ...args])</a></li>
+<li><a href="#util_util_getsystemerrorname_err">util.getSystemErrorName(err)</a></li>
+<li><a href="#util_util_inherits_constructor_superconstructor">util.inherits(constructor, superConstructor)</a></li>
+<li><a href="#util_util_inspect_object_options">util.inspect(object[, options])</a></li>
+<li>
+<p><a href="#util_util_inspect_object_showhidden_depth_colors">util.inspect(object[, showHidden[, depth[, colors]]])</a></p>
+<ul>
+<li><a href="#util_customizing_util_inspect_colors">Customizing <code>util.inspect</code> colors</a></li>
+<li><a href="#util_custom_inspection_functions_on_objects">Custom inspection functions on Objects</a></li>
+<li><a href="#util_util_inspect_custom">util.inspect.custom</a></li>
+<li><a href="#util_util_inspect_defaultoptions">util.inspect.defaultOptions</a></li>
+</ul>
+</li>
+<li><a href="#util_util_isdeepstrictequal_val1_val2">util.isDeepStrictEqual(val1, val2)</a></li>
+<li>
+<p><a href="#util_util_promisify_original">util.promisify(original)</a></p>
+<ul>
+<li><a href="#util_custom_promisified_functions">Custom promisified functions</a></li>
+<li><a href="#util_util_promisify_custom">util.promisify.custom</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#util_class_util_textdecoder">Class: util.TextDecoder</a></p>
+<ul>
+<li>
+<p><a href="#util_whatwg_supported_encodings">WHATWG Supported Encodings</a></p>
+<ul>
+<li><a href="#util_encodings_supported_without_icu">Encodings Supported Without ICU</a></li>
+<li><a href="#util_encodings_supported_by_default_with_icu">Encodings Supported by Default (With ICU)</a></li>
+<li><a href="#util_encodings_requiring_full_icu_data">Encodings Requiring Full ICU Data</a></li>
+</ul>
+</li>
+<li><a href="#util_new_textdecoder_encoding_options">new TextDecoder([encoding[, options]])</a></li>
+<li><a href="#util_textdecoder_decode_input_options">textDecoder.decode([input[, options]])</a></li>
+<li><a href="#util_textdecoder_encoding">textDecoder.encoding</a></li>
+<li><a href="#util_textdecoder_fatal">textDecoder.fatal</a></li>
+<li><a href="#util_textdecoder_ignorebom">textDecoder.ignoreBOM</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#util_class_util_textencoder">Class: util.TextEncoder</a></p>
+<ul>
+<li><a href="#util_textencoder_encode_input">textEncoder.encode([input])</a></li>
+<li><a href="#util_textencoder_encoding">textEncoder.encoding</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#util_util_types">util.types</a></p>
+<ul>
+<li><a href="#util_util_types_isanyarraybuffer_value">util.types.isAnyArrayBuffer(value)</a></li>
+<li><a href="#util_util_types_isargumentsobject_value">util.types.isArgumentsObject(value)</a></li>
+<li><a href="#util_util_types_isarraybuffer_value">util.types.isArrayBuffer(value)</a></li>
+<li><a href="#util_util_types_isasyncfunction_value">util.types.isAsyncFunction(value)</a></li>
+<li><a href="#util_util_types_isbigint64array_value">util.types.isBigInt64Array(value)</a></li>
+<li><a href="#util_util_types_isbiguint64array_value">util.types.isBigUint64Array(value)</a></li>
+<li><a href="#util_util_types_isbooleanobject_value">util.types.isBooleanObject(value)</a></li>
+<li><a href="#util_util_types_isboxedprimitive_value">util.types.isBoxedPrimitive(value)</a></li>
+<li><a href="#util_util_types_isdataview_value">util.types.isDataView(value)</a></li>
+<li><a href="#util_util_types_isdate_value">util.types.isDate(value)</a></li>
+<li><a href="#util_util_types_isexternal_value">util.types.isExternal(value)</a></li>
+<li><a href="#util_util_types_isfloat32array_value">util.types.isFloat32Array(value)</a></li>
+<li><a href="#util_util_types_isfloat64array_value">util.types.isFloat64Array(value)</a></li>
+<li><a href="#util_util_types_isgeneratorfunction_value">util.types.isGeneratorFunction(value)</a></li>
+<li><a href="#util_util_types_isgeneratorobject_value">util.types.isGeneratorObject(value)</a></li>
+<li><a href="#util_util_types_isint8array_value">util.types.isInt8Array(value)</a></li>
+<li><a href="#util_util_types_isint16array_value">util.types.isInt16Array(value)</a></li>
+<li><a href="#util_util_types_isint32array_value">util.types.isInt32Array(value)</a></li>
+<li><a href="#util_util_types_ismap_value">util.types.isMap(value)</a></li>
+<li><a href="#util_util_types_ismapiterator_value">util.types.isMapIterator(value)</a></li>
+<li><a href="#util_util_types_ismodulenamespaceobject_value">util.types.isModuleNamespaceObject(value)</a></li>
+<li><a href="#util_util_types_isnativeerror_value">util.types.isNativeError(value)</a></li>
+<li><a href="#util_util_types_isnumberobject_value">util.types.isNumberObject(value)</a></li>
+<li><a href="#util_util_types_ispromise_value">util.types.isPromise(value)</a></li>
+<li><a href="#util_util_types_isproxy_value">util.types.isProxy(value)</a></li>
+<li><a href="#util_util_types_isregexp_value">util.types.isRegExp(value)</a></li>
+<li><a href="#util_util_types_isset_value">util.types.isSet(value)</a></li>
+<li><a href="#util_util_types_issetiterator_value">util.types.isSetIterator(value)</a></li>
+<li><a href="#util_util_types_issharedarraybuffer_value">util.types.isSharedArrayBuffer(value)</a></li>
+<li><a href="#util_util_types_isstringobject_value">util.types.isStringObject(value)</a></li>
+<li><a href="#util_util_types_issymbolobject_value">util.types.isSymbolObject(value)</a></li>
+<li><a href="#util_util_types_istypedarray_value">util.types.isTypedArray(value)</a></li>
+<li><a href="#util_util_types_isuint8array_value">util.types.isUint8Array(value)</a></li>
+<li><a href="#util_util_types_isuint8clampedarray_value">util.types.isUint8ClampedArray(value)</a></li>
+<li><a href="#util_util_types_isuint16array_value">util.types.isUint16Array(value)</a></li>
+<li><a href="#util_util_types_isuint32array_value">util.types.isUint32Array(value)</a></li>
+<li><a href="#util_util_types_isweakmap_value">util.types.isWeakMap(value)</a></li>
+<li><a href="#util_util_types_isweakset_value">util.types.isWeakSet(value)</a></li>
+<li><a href="#util_util_types_iswebassemblycompiledmodule_value">util.types.isWebAssemblyCompiledModule(value)</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#util_deprecated_apis">Deprecated APIs</a></p>
+<ul>
+<li><span class="stability_0"><a href="#util_util_extend_target_source">util._extend(target, source)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isarray_object">util.isArray(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isboolean_object">util.isBoolean(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isbuffer_object">util.isBuffer(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isdate_object">util.isDate(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_iserror_object">util.isError(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isfunction_object">util.isFunction(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isnull_object">util.isNull(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isnullorundefined_object">util.isNullOrUndefined(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isnumber_object">util.isNumber(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isobject_object">util.isObject(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isprimitive_object">util.isPrimitive(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isregexp_object">util.isRegExp(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isstring_object">util.isString(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_issymbol_object">util.isSymbol(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_isundefined_object">util.isUndefined(object)</a></span></li>
+<li><span class="stability_0"><a href="#util_util_log_string">util.log(string)</a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+      </div>
+
+      <div id="apicontent">
+        <h1>Util<span><a class="mark" href="#util_util" id="util_util">#</a></span></h1>
+
+<p></p><div class="api_stability api_stability_2"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 2</a> - Stable</div><p></p>
+<p>The <code>util</code> module is primarily designed to support the needs of Node.js' own
+internal APIs. However, many of the utilities are useful for application and
+module developers as well. It can be accessed using:</p>
+<pre><code class="language-js">const util = require('util');
+</code></pre>
+<h2>util.callbackify(original)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L183">[src]</a><span><a class="mark" href="#util_util_callbackify_original" id="util_util_callbackify_original">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v8.2.0</span>
+</div>
+<ul>
+<li><code>original</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> An <code>async</code> function</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> a callback style function</li>
+</ul>
+<p>Takes an <code>async</code> function (or a function that returns a <code>Promise</code>) and returns a
+function following the error-first callback style, i.e. taking
+an <code>(err, value) =&gt; ...</code> callback as the last argument. In the callback, the
+first argument will be the rejection reason (or <code>null</code> if the <code>Promise</code>
+resolved), and the second argument will be the resolved value.</p>
+<pre><code class="language-js">const util = require('util');
+
+async function fn() {
+  return 'hello world';
+}
+const callbackFunction = util.callbackify(fn);
+
+callbackFunction((err, ret) =&gt; {
+  if (err) throw err;
+  console.log(ret);
+});
+</code></pre>
+<p>Will print:</p>
+<pre><code class="language-txt">hello world
+</code></pre>
+<p>The callback is executed asynchronously, and will have a limited stack trace.
+If the callback throws, the process will emit an <a href="https://nodejs.org/api/process.html#process_event_uncaughtexception"><code>'uncaughtException'</code></a>
+event, and if not handled will exit.</p>
+<p>Since <code>null</code> has a special meaning as the first argument to a callback, if a
+wrapped function rejects a <code>Promise</code> with a falsy value as a reason, the value
+is wrapped in an <code>Error</code> with the original value stored in a field named
+<code>reason</code>.</p>
+<pre><code class="language-js">function fn() {
+  return Promise.reject(null);
+}
+const callbackFunction = util.callbackify(fn);
+
+callbackFunction((err, ret) =&gt; {
+  // When the Promise was rejected with `null` it is wrapped with an Error and
+  // the original value is stored in `reason`.
+  err &amp;&amp; err.hasOwnProperty('reason') &amp;&amp; err.reason === null;  // true
+});
+</code></pre>
+<h2>util.debuglog(section)<span><a class="mark" href="#util_util_debuglog_section" id="util_util_debuglog_section">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v0.11.3</span>
+</div>
+<ul>
+<li><code>section</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A string identifying the portion of the application for
+which the <code>debuglog</code> function is being created.</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> The logging function</li>
+</ul>
+<p>The <code>util.debuglog()</code> method is used to create a function that conditionally
+writes debug messages to <code>stderr</code> based on the existence of the <code>NODE_DEBUG</code>
+environment variable. If the <code>section</code> name appears within the value of that
+environment variable, then the returned function operates similar to
+<a href="https://nodejs.org/api/console.html#console_console_error_data_args"><code>console.error()</code></a>. If not, then the returned function is a no-op.</p>
+<pre><code class="language-js">const util = require('util');
+const debuglog = util.debuglog('foo');
+
+debuglog('hello from foo [%d]', 123);
+</code></pre>
+<p>If this program is run with <code>NODE_DEBUG=foo</code> in the environment, then
+it will output something like:</p>
+<pre><code class="language-txt">FOO 3245: hello from foo [123]
+</code></pre>
+<p>where <code>3245</code> is the process id. If it is not run with that
+environment variable set, then it will not print anything.</p>
+<p>The <code>section</code> supports wildcard also:</p>
+<pre><code class="language-js">const util = require('util');
+const debuglog = util.debuglog('foo-bar');
+
+debuglog('hi there, it\'s foo-bar [%d]', 2333);
+</code></pre>
+<p>if it is run with <code>NODE_DEBUG=foo*</code> in the environment, then it will output
+something like:</p>
+<pre><code class="language-txt">FOO-BAR 3257: hi there, it's foo-bar [2333]
+</code></pre>
+<p>Multiple comma-separated <code>section</code> names may be specified in the <code>NODE_DEBUG</code>
+environment variable: <code>NODE_DEBUG=fs,net,tls</code>.</p>
+<h2>util.deprecate(fn, msg[, code])<span><a class="mark" href="#util_util_deprecate_fn_msg_code" id="util_util_deprecate_fn_msg_code">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Deprecation warnings are only emitted once for each code.</p></td></tr>
+<tr><td>v0.8.0</td>
+<td><p><span>Added in: v0.8.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>fn</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> The function that is being deprecated.</li>
+<li><code>msg</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A warning message to display when the deprecated function is
+invoked.</li>
+<li><code>code</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A deprecation code. See the <a href="https://nodejs.org/api/deprecations.html#deprecations_list_of_deprecated_apis">list of deprecated APIs</a> for a
+list of codes.</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> The deprecated function wrapped to emit a warning.</li>
+</ul>
+<p>The <code>util.deprecate()</code> method wraps <code>fn</code> (which may be a function or class) in
+such a way that it is marked as deprecated.</p>
+<pre><code class="language-js">const util = require('util');
+
+exports.obsoleteFunction = util.deprecate(() =&gt; {
+  // Do something here.
+}, 'obsoleteFunction() is deprecated. Use newShinyFunction() instead.');
+</code></pre>
+<p>When called, <code>util.deprecate()</code> will return a function that will emit a
+<code>DeprecationWarning</code> using the <a href="https://nodejs.org/api/process.html#process_event_warning"><code>'warning'</code></a> event. The warning will
+be emitted and printed to <code>stderr</code> the first time the returned function is
+called. After the warning is emitted, the wrapped function is called without
+emitting a warning.</p>
+<p>If the same optional <code>code</code> is supplied in multiple calls to <code>util.deprecate()</code>,
+the warning will be emitted only once for that <code>code</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+const fn1 = util.deprecate(someFunction, someMessage, 'DEP0001');
+const fn2 = util.deprecate(someOtherFunction, someOtherMessage, 'DEP0001');
+fn1(); // Emits a deprecation warning with code DEP0001
+fn2(); // Does not emit a deprecation warning because it has the same code
+</code></pre>
+<p>If either the <code>--no-deprecation</code> or <code>--no-warnings</code> command line flags are
+used, or if the <code>process.noDeprecation</code> property is set to <code>true</code> <em>prior</em> to
+the first deprecation warning, the <code>util.deprecate()</code> method does nothing.</p>
+<p>If the <code>--trace-deprecation</code> or <code>--trace-warnings</code> command line flags are set,
+or the <code>process.traceDeprecation</code> property is set to <code>true</code>, a warning and a
+stack trace are printed to <code>stderr</code> the first time the deprecated function is
+called.</p>
+<p>If the <code>--throw-deprecation</code> command line flag is set, or the
+<code>process.throwDeprecation</code> property is set to <code>true</code>, then an exception will be
+thrown when the deprecated function is called.</p>
+<p>The <code>--throw-deprecation</code> command line flag and <code>process.throwDeprecation</code>
+property take precedence over <code>--trace-deprecation</code> and
+<code>process.traceDeprecation</code>.</p>
+<h2>util.format(format[, ...args])<span><a class="mark" href="#util_util_format_format_args" id="util_util_format_format_args">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>The <code>format</code> argument is now only taken as such if it actually contains format specifiers.</p></td></tr>
+<tr><td>v12.0.0</td>
+<td><p>If the <code>format</code> argument is not a format string, the output string's formatting is no longer dependent on the type of the first argument. This change removes previously present quotes from strings that were being output when the first argument was not a string.</p></td></tr>
+<tr><td>v11.4.0</td>
+<td><p>The <code>%d</code>, <code>%f</code> and <code>%i</code> specifiers now support Symbols properly.</p></td></tr>
+<tr><td>v11.4.0</td>
+<td><p>The <code>%o</code> specifier's <code>depth</code> has default depth of 4 again.</p></td></tr>
+<tr><td>v11.0.0</td>
+<td><p>The <code>%o</code> specifier's <code>depth</code> option will now fall back to the default depth.</p></td></tr>
+<tr><td>v10.12.0</td>
+<td><p>The <code>%d</code> and <code>%i</code> specifiers now support BigInt.</p></td></tr>
+<tr><td>v8.4.0</td>
+<td><p>The <code>%o</code> and <code>%O</code> specifiers are supported now.</p></td></tr>
+<tr><td>v0.5.3</td>
+<td><p><span>Added in: v0.5.3</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>format</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A <code>printf</code>-like format string.</li>
+</ul>
+<p>The <code>util.format()</code> method returns a formatted string using the first argument
+as a <code>printf</code>-like format string which can contain zero or more format
+specifiers. Each specifier is replaced with the converted value from the
+corresponding argument. Supported specifiers are:</p>
+<ul>
+<li><code>%s</code> - <code>String</code> will be used to convert all values except <code>BigInt</code>, <code>Object</code>
+and <code>-0</code>. <code>BigInt</code> values will be represented with an <code>n</code> and Objects that
+have no user defined <code>toString</code> function are inspected using <code>util.inspect()</code>
+with options <code>{ depth: 0, colors: false, compact: 3 }</code>.</li>
+<li><code>%d</code> - <code>Number</code> will be used to convert all values except <code>BigInt</code> and
+<code>Symbol</code>.</li>
+<li><code>%i</code> - <code>parseInt(value, 10)</code> is used for all values except <code>BigInt</code> and
+<code>Symbol</code>.</li>
+<li><code>%f</code> - <code>parseFloat(value)</code> is used for all values expect <code>Symbol</code>.</li>
+<li><code>%j</code> - JSON. Replaced with the string <code>'[Circular]'</code> if the argument contains
+circular references.</li>
+<li><code>%o</code> - <code>Object</code>. A string representation of an object with generic JavaScript
+object formatting. Similar to <code>util.inspect()</code> with options
+<code>{ showHidden: true, showProxy: true }</code>. This will show the full object
+including non-enumerable properties and proxies.</li>
+<li><code>%O</code> - <code>Object</code>. A string representation of an object with generic JavaScript
+object formatting. Similar to <code>util.inspect()</code> without options. This will show
+the full object not including non-enumerable properties and proxies.</li>
+<li><code>%%</code> - single percent sign (<code>'%'</code>). This does not consume an argument.</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The formatted string</li>
+</ul>
+<p>If a specifier does not have a corresponding argument, it is not replaced:</p>
+<pre><code class="language-js">util.format('%s:%s', 'foo');
+// Returns: 'foo:%s'
+</code></pre>
+<p>Values that are not part of the format string are formatted using
+<code>util.inspect()</code> if their type is not <code>string</code>.</p>
+<p>If there are more arguments passed to the <code>util.format()</code> method than the
+number of specifiers, the extra arguments are concatenated to the returned
+string, separated by spaces:</p>
+<pre><code class="language-js">util.format('%s:%s', 'foo', 'bar', 'baz');
+// Returns: 'foo:bar baz'
+</code></pre>
+<p>If the first argument does not contain a valid format specifier, <code>util.format()</code>
+returns a string that is the concatenation of all arguments separated by spaces:</p>
+<pre><code class="language-js">util.format(1, 2, 3);
+// Returns: '1 2 3'
+</code></pre>
+<p>If only one argument is passed to <code>util.format()</code>, it is returned as it is
+without any formatting:</p>
+<pre><code class="language-js">util.format('%% %s');
+// Returns: '%% %s'
+</code></pre>
+<p><code>util.format()</code> is a synchronous method that is intended as a debugging tool.
+Some input values can have a significant performance overhead that can block the
+event loop. Use this function with care and never in a hot code path.</p>
+<h2>util.formatWithOptions(inspectOptions, format[, ...args])<span><a class="mark" href="#util_util_formatwithoptions_inspectoptions_format_args" id="util_util_formatwithoptions_inspectoptions_format_args">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>inspectOptions</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+<li><code>format</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>This function is identical to <a href="#util_util_format_format_args"><code>util.format()</code></a>, except in that it takes
+an <code>inspectOptions</code> argument which specifies options that are passed along to
+<a href="#util_util_inspect_object_options"><code>util.inspect()</code></a>.</p>
+<pre><code class="language-js">util.formatWithOptions({ colors: true }, 'See object %O', { foo: 42 });
+// Returns 'See object { foo: 42 }', where `42` is colored as a number
+// when printed to a terminal.
+</code></pre>
+<h2>util.getSystemErrorName(err)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L217">[src]</a><span><a class="mark" href="#util_util_getsystemerrorname_err" id="util_util_getsystemerrorname_err">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v9.7.0</span>
+</div>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Returns the string name for a numeric error code that comes from a Node.js API.
+The mapping between error codes and error names is platform-dependent.
+See <a href="https://nodejs.org/api/errors.html#errors_common_system_errors">Common System Errors</a> for the names of common errors.</p>
+<pre><code class="language-js">fs.access('file/that/does/not/exist', (err) =&gt; {
+  const name = util.getSystemErrorName(err.errno);
+  console.error(name);  // ENOENT
+});
+</code></pre>
+<h2>util.inherits(constructor, superConstructor)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L140">[src]</a><span><a class="mark" href="#util_util_inherits_constructor_superconstructor" id="util_util_inherits_constructor_superconstructor">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v5.0.0</td>
+<td><p>The <code>constructor</code> parameter can refer to an ES6 class now.</p></td></tr>
+<tr><td>v0.3.0</td>
+<td><p><span>Added in: v0.3.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>constructor</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li><code>superConstructor</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>Usage of <code>util.inherits()</code> is discouraged. Please use the ES6 <code>class</code> and
+<code>extends</code> keywords to get language level inheritance support. Also note
+that the two styles are <a href="https://github.com/nodejs/node/issues/4179">semantically incompatible</a>.</p>
+<p>Inherit the prototype methods from one <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor">constructor</a> into another. The
+prototype of <code>constructor</code> will be set to a new object created from
+<code>superConstructor</code>.</p>
+<p>This mainly adds some input validation on top of
+<code>Object.setPrototypeOf(constructor.prototype, superConstructor.prototype)</code>.
+As an additional convenience, <code>superConstructor</code> will be accessible
+through the <code>constructor.super_</code> property.</p>
+<pre><code class="language-js">const util = require('util');
+const EventEmitter = require('events');
+
+function MyStream() {
+  EventEmitter.call(this);
+}
+
+util.inherits(MyStream, EventEmitter);
+
+MyStream.prototype.write = function(data) {
+  this.emit('data', data);
+};
+
+const stream = new MyStream();
+
+console.log(stream instanceof EventEmitter); // true
+console.log(MyStream.super_ === EventEmitter); // true
+
+stream.on('data', (data) =&gt; {
+  console.log(`Received data: "${data}"`);
+});
+stream.write('It works!'); // Received data: "It works!"
+</code></pre>
+<p>ES6 example using <code>class</code> and <code>extends</code>:</p>
+<pre><code class="language-js">const EventEmitter = require('events');
+
+class MyStream extends EventEmitter {
+  write(data) {
+    this.emit('data', data);
+  }
+}
+
+const stream = new MyStream();
+
+stream.on('data', (data) =&gt; {
+  console.log(`Received data: "${data}"`);
+});
+stream.write('With ES6');
+</code></pre>
+<h2>util.inspect(object[, options])<span><a class="mark" href="#util_util_inspect_object_options" id="util_util_inspect_object_options">#</a></span></h2>
+<h2>util.inspect(object[, showHidden[, depth[, colors]]])<span><a class="mark" href="#util_util_inspect_object_showhidden_depth_colors" id="util_util_inspect_object_showhidden_depth_colors">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>The <code>compact</code> options default is changed to <code>3</code> and the <code>breakLength</code> options default is changed to <code>80</code>.</p></td></tr>
+<tr><td>v12.0.0</td>
+<td><p>Internal properties no longer appear in the context argument of a custom inspection function.</p></td></tr>
+<tr><td>v11.11.0</td>
+<td><p>The <code>compact</code> option accepts numbers for a new output mode.</p></td></tr>
+<tr><td>v11.7.0</td>
+<td><p>ArrayBuffers now also show their binary contents.</p></td></tr>
+<tr><td>v11.5.0</td>
+<td><p>The <code>getters</code> option is supported now.</p></td></tr>
+<tr><td>v11.4.0</td>
+<td><p>The <code>depth</code> default changed back to <code>2</code>.</p></td></tr>
+<tr><td>v11.0.0</td>
+<td><p>The <code>depth</code> default changed to <code>20</code>.</p></td></tr>
+<tr><td>v11.0.0</td>
+<td><p>The inspection output is now limited to about 128 MB. Data above that size will not be fully inspected.</p></td></tr>
+<tr><td>v10.12.0</td>
+<td><p>The <code>sorted</code> option is supported now.</p></td></tr>
+<tr><td>v10.6.0</td>
+<td><p>Inspecting linked lists and similar objects is now possible up to the maximum call stack size.</p></td></tr>
+<tr><td>v10.0.0</td>
+<td><p>The <code>WeakMap</code> and <code>WeakSet</code> entries can now be inspected as well.</p></td></tr>
+<tr><td>v9.9.0</td>
+<td><p>The <code>compact</code> option is supported now.</p></td></tr>
+<tr><td>v6.6.0</td>
+<td><p>Custom inspection functions can now return <code>this</code>.</p></td></tr>
+<tr><td>v6.3.0</td>
+<td><p>The <code>breakLength</code> option is supported now.</p></td></tr>
+<tr><td>v6.1.0</td>
+<td><p>The <code>maxArrayLength</code> option is supported now; in particular, long arrays are truncated by default.</p></td></tr>
+<tr><td>v6.1.0</td>
+<td><p>The <code>showProxy</code> option is supported now.</p></td></tr>
+<tr><td>v0.3.0</td>
+<td><p><span>Added in: v0.3.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a> Any JavaScript primitive or <code>Object</code>.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>showHidden</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If <code>true</code>, <code>object</code>'s non-enumerable symbols and
+properties are included in the formatted result. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap"><code>WeakMap</code></a> and
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet"><code>WeakSet</code></a> entries are also included. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>depth</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Specifies the number of times to recurse while formatting
+<code>object</code>. This is useful for inspecting large objects. To recurse up to
+the maximum call stack size pass <code>Infinity</code> or <code>null</code>.
+<strong>Default:</strong> <code>2</code>.</li>
+<li><code>colors</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If <code>true</code>, the output is styled with ANSI color
+codes. Colors are customizable. See <a href="#util_customizing_util_inspect_colors">Customizing <code>util.inspect</code> colors</a>.
+<strong>Default:</strong> <code>false</code>.</li>
+<li><code>customInspect</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If <code>false</code>,
+<code>[util.inspect.custom](depth, opts)</code> functions are not invoked.
+<strong>Default:</strong> <code>true</code>.</li>
+<li><code>showProxy</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If <code>true</code>, <code>Proxy</code> inspection includes
+the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy#Terminology"><code>target</code> and <code>handler</code></a> objects. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>maxArrayLength</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> Specifies the maximum number of <code>Array</code>,
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray"><code>TypedArray</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap"><code>WeakMap</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet"><code>WeakSet</code></a> elements to include when
+formatting. Set to <code>null</code> or <code>Infinity</code> to show all elements. Set to <code>0</code> or
+negative to show no elements. <strong>Default:</strong> <code>100</code>.</li>
+<li><code>breakLength</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> The length at which input values are split across
+multiple lines. Set to <code>Infinity</code> to format the input as a single line
+(in combination with <code>compact</code> set to <code>true</code> or any number &gt;= <code>1</code>).
+<strong>Default:</strong> <code>80</code>.</li>
+<li><code>compact</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> Setting this to <code>false</code> causes each object key
+to be displayed on a new line. It will also add new lines to text that is
+longer than <code>breakLength</code>. If set to a number, the most <code>n</code> inner elements
+are united on a single line as long as all properties fit into
+<code>breakLength</code>. Short array elements are also grouped together. No
+text will be reduced below 16 characters, no matter the <code>breakLength</code> size.
+For more information, see the example below. <strong>Default:</strong> <code>3</code>.</li>
+<li><code>sorted</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> If set to <code>true</code> or a function, all properties
+of an object, and <code>Set</code> and <code>Map</code> entries are sorted in the resulting
+string. If set to <code>true</code> the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">default sort</a> is used. If set to a function,
+it is used as a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#Parameters">compare function</a>.</li>
+<li><code>getters</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> If set to <code>true</code>, getters are inspected. If set
+to <code>'get'</code>, only getters without a corresponding setter are inspected. If
+set to <code>'set'</code>, only getters with a corresponding setter are inspected.
+This might cause side effects depending on the getter function.
+<strong>Default:</strong> <code>false</code>.</li>
+</ul>
+</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The representation of <code>object</code>.</li>
+</ul>
+<p>The <code>util.inspect()</code> method returns a string representation of <code>object</code> that is
+intended for debugging. The output of <code>util.inspect</code> may change at any time
+and should not be depended upon programmatically. Additional <code>options</code> may be
+passed that alter the result.
+<code>util.inspect()</code> will use the constructor's name and/or <code>@@toStringTag</code> to make
+an identifiable tag for an inspected value.</p>
+<pre><code class="language-js">class Foo {
+  get [Symbol.toStringTag]() {
+    return 'bar';
+  }
+}
+
+class Bar {}
+
+const baz = Object.create(null, { [Symbol.toStringTag]: { value: 'foo' } });
+
+util.inspect(new Foo()); // 'Foo [bar] {}'
+util.inspect(new Bar()); // 'Bar {}'
+util.inspect(baz);       // '[foo] {}'
+</code></pre>
+<p>The following example inspects all properties of the <code>util</code> object:</p>
+<pre><code class="language-js">const util = require('util');
+
+console.log(util.inspect(util, { showHidden: true, depth: null }));
+</code></pre>
+<p>The following example highlights the effect of the <code>compact</code> option:</p>
+<pre><code class="language-js">const util = require('util');
+
+const o = {
+  a: [1, 2, [[
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ' +
+      'eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    'test',
+    'foo']], 4],
+  b: new Map([['za', 1], ['zb', 'test']])
+};
+console.log(util.inspect(o, { compact: true, depth: 5, breakLength: 80 }));
+
+// This will print
+
+// { a:
+//   [ 1,
+//     2,
+//     [ [ 'Lorem ipsum dolor sit amet, consectetur [...]', // A long line
+//           'test',
+//           'foo' ] ],
+//     4 ],
+//   b: Map { 'za' =&gt; 1, 'zb' =&gt; 'test' } }
+
+// Setting `compact` to false changes the output to be more reader friendly.
+console.log(util.inspect(o, { compact: false, depth: 5, breakLength: 80 }));
+
+// {
+//   a: [
+//     1,
+//     2,
+//     [
+//       [
+//         'Lorem ipsum dolor sit amet, consectetur ' +
+//           'adipiscing elit, sed do eiusmod tempor ' +
+//           'incididunt ut labore et dolore magna ' +
+//           'aliqua.,
+//         'test',
+//         'foo'
+//       ]
+//     ],
+//     4
+//   ],
+//   b: Map {
+//     'za' =&gt; 1,
+//     'zb' =&gt; 'test'
+//   }
+// }
+
+// Setting `breakLength` to e.g. 150 will print the "Lorem ipsum" text in a
+// single line.
+// Reducing the `breakLength` will split the "Lorem ipsum" text in smaller
+// chunks.
+</code></pre>
+<p>The <code>showHidden</code> option allows <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap"><code>WeakMap</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet"><code>WeakSet</code></a> entries to be
+inspected. If there are more entries than <code>maxArrayLength</code>, there is no
+guarantee which entries are displayed. That means retrieving the same
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet"><code>WeakSet</code></a> entries twice may result in different output. Furthermore, entries
+with no remaining strong references may be garbage collected at any time.</p>
+<pre><code class="language-js">const { inspect } = require('util');
+
+const obj = { a: 1 };
+const obj2 = { b: 2 };
+const weakSet = new WeakSet([obj, obj2]);
+
+console.log(inspect(weakSet, { showHidden: true }));
+// WeakSet { { a: 1 }, { b: 2 } }
+</code></pre>
+<p>The <code>sorted</code> option ensures that an object's property insertion order does not
+impact the result of <code>util.inspect()</code>.</p>
+<pre><code class="language-js">const { inspect } = require('util');
+const assert = require('assert');
+
+const o1 = {
+  b: [2, 3, 1],
+  a: '`a` comes before `b`',
+  c: new Set([2, 3, 1])
+};
+console.log(inspect(o1, { sorted: true }));
+// { a: '`a` comes before `b`', b: [ 2, 3, 1 ], c: Set { 1, 2, 3 } }
+console.log(inspect(o1, { sorted: (a, b) =&gt; b.localeCompare(a) }));
+// { c: Set { 3, 2, 1 }, b: [ 2, 3, 1 ], a: '`a` comes before `b`' }
+
+const o2 = {
+  c: new Set([2, 1, 3]),
+  a: '`a` comes before `b`',
+  b: [2, 3, 1]
+};
+assert.strict.equal(
+  inspect(o1, { sorted: true }),
+  inspect(o2, { sorted: true })
+);
+</code></pre>
+<p><code>util.inspect()</code> is a synchronous method intended for debugging. Its maximum
+output length is approximately 128 MB. Inputs that result in longer output will
+be truncated.</p>
+<h3>Customizing <code>util.inspect</code> colors<span><a class="mark" href="#util_customizing_util_inspect_colors" id="util_customizing_util_inspect_colors">#</a></span></h3>
+
+<p>Color output (if enabled) of <code>util.inspect</code> is customizable globally
+via the <code>util.inspect.styles</code> and <code>util.inspect.colors</code> properties.</p>
+<p><code>util.inspect.styles</code> is a map associating a style name to a color from
+<code>util.inspect.colors</code>.</p>
+<p>The default styles and associated colors are:</p>
+<ul>
+<li><code>bigint</code> - <code>yellow</code></li>
+<li><code>boolean</code> - <code>yellow</code></li>
+<li><code>date</code> - <code>magenta</code></li>
+<li><code>module</code> - <code>underline</code></li>
+<li><code>name</code> - (no styling)</li>
+<li><code>null</code> - <code>bold</code></li>
+<li><code>number</code> - <code>yellow</code></li>
+<li><code>regexp</code> - <code>red</code></li>
+<li><code>special</code> - <code>cyan</code> (e.g., <code>Proxies</code>)</li>
+<li><code>string</code> - <code>green</code></li>
+<li><code>symbol</code> - <code>green</code></li>
+<li><code>undefined</code> - <code>grey</code></li>
+</ul>
+<p>The predefined color codes are: <code>white</code>, <code>grey</code>, <code>black</code>, <code>blue</code>, <code>cyan</code>,
+<code>green</code>, <code>magenta</code>, <code>red</code> and <code>yellow</code>. There are also <code>bold</code>, <code>italic</code>,
+<code>underline</code> and <code>inverse</code> codes.</p>
+<p>Color styling uses ANSI control codes that may not be supported on all
+terminals. To verify color support use <a href="https://nodejs.org/api/tty.html#tty_writestream_hascolors_count_env"><code>tty.hasColors()</code></a>.</p>
+<h3>Custom inspection functions on Objects<span><a class="mark" href="#util_custom_inspection_functions_on_objects" id="util_custom_inspection_functions_on_objects">#</a></span></h3>
+
+<p>Objects may also define their own
+<a href="#util_util_inspect_custom"><code>[util.inspect.custom](depth, opts)</code></a> function,
+which <code>util.inspect()</code> will invoke and use the result of when inspecting
+the object:</p>
+<pre><code class="language-js">const util = require('util');
+
+class Box {
+  constructor(value) {
+    this.value = value;
+  }
+
+  [util.inspect.custom](depth, options) {
+    if (depth &lt; 0) {
+      return options.stylize('[Box]', 'special');
+    }
+
+    const newOptions = Object.assign({}, options, {
+      depth: options.depth === null ? null : options.depth - 1
+    });
+
+    // Five space padding because that's the size of "Box&lt; ".
+    const padding = ' '.repeat(5);
+    const inner = util.inspect(this.value, newOptions)
+                      .replace(/\n/g, `\n${padding}`);
+    return `${options.stylize('Box', 'special')}&lt; ${inner} &gt;`;
+  }
+}
+
+const box = new Box(true);
+
+util.inspect(box);
+// Returns: "Box&lt; true &gt;"
+</code></pre>
+<p>Custom <code>[util.inspect.custom](depth, opts)</code> functions typically return a string
+but may return a value of any type that will be formatted accordingly by
+<code>util.inspect()</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+const obj = { foo: 'this will not show up in the inspect() output' };
+obj[util.inspect.custom] = (depth) =&gt; {
+  return { bar: 'baz' };
+};
+
+util.inspect(obj);
+// Returns: "{ bar: 'baz' }"
+</code></pre>
+<h3>util.inspect.custom<span><a class="mark" href="#util_util_inspect_custom" id="util_util_inspect_custom">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.12.0</td>
+<td><p>This is now defined as a shared symbol.</p></td></tr>
+<tr><td>v6.6.0</td>
+<td><p><span>Added in: v6.6.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Symbol_type" class="type">&lt;symbol&gt;</a> that can be used to declare custom inspect functions.</li>
+</ul>
+<p>In addition to being accessible through <code>util.inspect.custom</code>, this
+symbol is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/for">registered globally</a> and can be
+accessed in any environment as <code>Symbol.for('nodejs.util.inspect.custom')</code>.</p>
+<pre><code class="language-js">const inspect = Symbol.for('nodejs.util.inspect.custom');
+
+class Password {
+  constructor(value) {
+    this.value = value;
+  }
+
+  toString() {
+    return 'xxxxxxxx';
+  }
+
+  [inspect]() {
+    return `Password &lt;${this.toString()}&gt;`;
+  }
+}
+
+const password = new Password('r0sebud');
+console.log(password);
+// Prints Password &lt;xxxxxxxx&gt;
+</code></pre>
+<p>See <a href="#util_custom_inspection_functions_on_objects">Custom inspection functions on Objects</a> for more details.</p>
+<h3>util.inspect.defaultOptions<span><a class="mark" href="#util_util_inspect_defaultoptions" id="util_util_inspect_defaultoptions">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v6.4.0</span>
+</div>
+<p>The <code>defaultOptions</code> value allows customization of the default options used by
+<code>util.inspect</code>. This is useful for functions like <code>console.log</code> or
+<code>util.format</code> which implicitly call into <code>util.inspect</code>. It shall be set to an
+object containing one or more valid <a href="#util_util_inspect_object_options"><code>util.inspect()</code></a> options. Setting
+option properties directly is also supported.</p>
+<pre><code class="language-js">const util = require('util');
+const arr = Array(101).fill(0);
+
+console.log(arr); // Logs the truncated array
+util.inspect.defaultOptions.maxArrayLength = null;
+console.log(arr); // logs the full array
+</code></pre>
+<h2>util.isDeepStrictEqual(val1, val2)<span><a class="mark" href="#util_util_isdeepstrictequal_val1_val2" id="util_util_isdeepstrictequal_val1_val2">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v9.0.0</span>
+</div>
+<ul>
+<li><code>val1</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li><code>val2</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if there is deep strict equality between <code>val1</code> and <code>val2</code>.
+Otherwise, returns <code>false</code>.</p>
+<p>See <a href="https://nodejs.org/api/assert.html#assert_assert_deepstrictequal_actual_expected_message"><code>assert.deepStrictEqual()</code></a> for more information about deep strict
+equality.</p>
+<h2>util.promisify(original)<span><a class="mark" href="#util_util_promisify_original" id="util_util_promisify_original">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v8.0.0</span>
+</div>
+<ul>
+<li><code>original</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>Takes a function following the common error-first callback style, i.e. taking
+an <code>(err, value) =&gt; ...</code> callback as the last argument, and returns a version
+that returns promises.</p>
+<pre><code class="language-js">const util = require('util');
+const fs = require('fs');
+
+const stat = util.promisify(fs.stat);
+stat('.').then((stats) =&gt; {
+  // Do something with `stats`
+}).catch((error) =&gt; {
+  // Handle the error.
+});
+</code></pre>
+<p>Or, equivalently using <code>async function</code>s:</p>
+<pre><code class="language-js">const util = require('util');
+const fs = require('fs');
+
+const stat = util.promisify(fs.stat);
+
+async function callStat() {
+  const stats = await stat('.');
+  console.log(`This directory is owned by ${stats.uid}`);
+}
+</code></pre>
+<p>If there is an <code>original[util.promisify.custom]</code> property present, <code>promisify</code>
+will return its value, see <a href="#util_custom_promisified_functions">Custom promisified functions</a>.</p>
+<p><code>promisify()</code> assumes that <code>original</code> is a function taking a callback as its
+final argument in all cases. If <code>original</code> is not a function, <code>promisify()</code>
+will throw an error. If <code>original</code> is a function but its last argument is not
+an error-first callback, it will still be passed an error-first
+callback as its last argument.</p>
+<h3>Custom promisified functions<span><a class="mark" href="#util_custom_promisified_functions" id="util_custom_promisified_functions">#</a></span></h3>
+<p>Using the <code>util.promisify.custom</code> symbol one can override the return value of
+<a href="#util_util_promisify_original"><code>util.promisify()</code></a>:</p>
+<pre><code class="language-js">const util = require('util');
+
+function doSomething(foo, callback) {
+  // ...
+}
+
+doSomething[util.promisify.custom] = (foo) =&gt; {
+  return getPromiseSomehow();
+};
+
+const promisified = util.promisify(doSomething);
+console.log(promisified === doSomething[util.promisify.custom]);
+// prints 'true'
+</code></pre>
+<p>This can be useful for cases where the original function does not follow the
+standard format of taking an error-first callback as the last argument.</p>
+<p>For example, with a function that takes in
+<code>(foo, onSuccessCallback, onErrorCallback)</code>:</p>
+<pre><code class="language-js">doSomething[util.promisify.custom] = (foo) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    doSomething(foo, resolve, reject);
+  });
+};
+</code></pre>
+<p>If <code>promisify.custom</code> is defined but is not a function, <code>promisify()</code> will
+throw an error.</p>
+<h3>util.promisify.custom<span><a class="mark" href="#util_util_promisify_custom" id="util_util_promisify_custom">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v8.0.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Symbol_type" class="type">&lt;symbol&gt;</a> that can be used to declare custom promisified variants of functions,
+see <a href="#util_custom_promisified_functions">Custom promisified functions</a>.</li>
+</ul>
+<h2>Class: util.TextDecoder<span><a class="mark" href="#util_class_util_textdecoder" id="util_class_util_textdecoder">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v8.3.0</span>
+</div>
+<p>An implementation of the <a href="https://encoding.spec.whatwg.org/">WHATWG Encoding Standard</a> <code>TextDecoder</code> API.</p>
+<pre><code class="language-js">const decoder = new TextDecoder('shift_jis');
+let string = '';
+let buffer;
+while (buffer = getNextChunkSomehow()) {
+  string += decoder.decode(buffer, { stream: true });
+}
+string += decoder.decode(); // end-of-stream
+</code></pre>
+<h3>WHATWG Supported Encodings<span><a class="mark" href="#util_whatwg_supported_encodings" id="util_whatwg_supported_encodings">#</a></span></h3>
+<p>Per the <a href="https://encoding.spec.whatwg.org/">WHATWG Encoding Standard</a>, the encodings supported by the
+<code>TextDecoder</code> API are outlined in the tables below. For each encoding,
+one or more aliases may be used.</p>
+<p>Different Node.js build configurations support different sets of encodings.
+While a very basic set of encodings is supported even on Node.js builds without
+ICU enabled, support for some encodings is provided only when Node.js is built
+with ICU and using the full ICU data (see <a href="https://nodejs.org/api/intl.html">Internationalization</a>).</p>
+<h4>Encodings Supported Without ICU<span><a class="mark" href="#util_encodings_supported_without_icu" id="util_encodings_supported_without_icu">#</a></span></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Encoding</th><th>Aliases</th></tr></thead><tbody><tr><td><code>'utf-8'</code></td><td><code>'unicode-1-1-utf-8'</code>, <code>'utf8'</code></td></tr><tr><td><code>'utf-16le'</code></td><td><code>'utf-16'</code></td></tr></tbody></table>
+<h4>Encodings Supported by Default (With ICU)<span><a class="mark" href="#util_encodings_supported_by_default_with_icu" id="util_encodings_supported_by_default_with_icu">#</a></span></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Encoding</th><th>Aliases</th></tr></thead><tbody><tr><td><code>'utf-8'</code></td><td><code>'unicode-1-1-utf-8'</code>, <code>'utf8'</code></td></tr><tr><td><code>'utf-16le'</code></td><td><code>'utf-16'</code></td></tr><tr><td><code>'utf-16be'</code></td><td></td></tr></tbody></table>
+<h4>Encodings Requiring Full ICU Data<span><a class="mark" href="#util_encodings_requiring_full_icu_data" id="util_encodings_requiring_full_icu_data">#</a></span></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Encoding</th><th>Aliases</th></tr></thead><tbody><tr><td><code>'ibm866'</code></td><td><code>'866'</code>, <code>'cp866'</code>, <code>'csibm866'</code></td></tr><tr><td><code>'iso-8859-2'</code></td><td><code>'csisolatin2'</code>, <code>'iso-ir-101'</code>, <code>'iso8859-2'</code>, <code>'iso88592'</code>, <code>'iso_8859-2'</code>, <code>'iso_8859-2:1987'</code>, <code>'l2'</code>, <code>'latin2'</code></td></tr><tr><td><code>'iso-8859-3'</code></td><td><code>'csisolatin3'</code>, <code>'iso-ir-109'</code>, <code>'iso8859-3'</code>, <code>'iso88593'</code>, <code>'iso_8859-3'</code>, <code>'iso_8859-3:1988'</code>, <code>'l3'</code>, <code>'latin3'</code></td></tr><tr><td><code>'iso-8859-4'</code></td><td><code>'csisolatin4'</code>, <code>'iso-ir-110'</code>, <code>'iso8859-4'</code>, <code>'iso88594'</code>, <code>'iso_8859-4'</code>, <code>'iso_8859-4:1988'</code>, <code>'l4'</code>, <code>'latin4'</code></td></tr><tr><td><code>'iso-8859-5'</code></td><td><code>'csisolatincyrillic'</code>, <code>'cyrillic'</code>, <code>'iso-ir-144'</code>, <code>'iso8859-5'</code>, <code>'iso88595'</code>, <code>'iso_8859-5'</code>, <code>'iso_8859-5:1988'</code></td></tr><tr><td><code>'iso-8859-6'</code></td><td><code>'arabic'</code>, <code>'asmo-708'</code>, <code>'csiso88596e'</code>, <code>'csiso88596i'</code>, <code>'csisolatinarabic'</code>, <code>'ecma-114'</code>, <code>'iso-8859-6-e'</code>, <code>'iso-8859-6-i'</code>, <code>'iso-ir-127'</code>, <code>'iso8859-6'</code>, <code>'iso88596'</code>, <code>'iso_8859-6'</code>, <code>'iso_8859-6:1987'</code></td></tr><tr><td><code>'iso-8859-7'</code></td><td><code>'csisolatingreek'</code>, <code>'ecma-118'</code>, <code>'elot_928'</code>, <code>'greek'</code>, <code>'greek8'</code>, <code>'iso-ir-126'</code>, <code>'iso8859-7'</code>, <code>'iso88597'</code>, <code>'iso_8859-7'</code>, <code>'iso_8859-7:1987'</code>, <code>'sun_eu_greek'</code></td></tr><tr><td><code>'iso-8859-8'</code></td><td><code>'csiso88598e'</code>, <code>'csisolatinhebrew'</code>, <code>'hebrew'</code>, <code>'iso-8859-8-e'</code>, <code>'iso-ir-138'</code>, <code>'iso8859-8'</code>, <code>'iso88598'</code>, <code>'iso_8859-8'</code>, <code>'iso_8859-8:1988'</code>, <code>'visual'</code></td></tr><tr><td><code>'iso-8859-8-i'</code></td><td><code>'csiso88598i'</code>, <code>'logical'</code></td></tr><tr><td><code>'iso-8859-10'</code></td><td><code>'csisolatin6'</code>, <code>'iso-ir-157'</code>, <code>'iso8859-10'</code>, <code>'iso885910'</code>, <code>'l6'</code>, <code>'latin6'</code></td></tr><tr><td><code>'iso-8859-13'</code></td><td><code>'iso8859-13'</code>, <code>'iso885913'</code></td></tr><tr><td><code>'iso-8859-14'</code></td><td><code>'iso8859-14'</code>, <code>'iso885914'</code></td></tr><tr><td><code>'iso-8859-15'</code></td><td><code>'csisolatin9'</code>, <code>'iso8859-15'</code>, <code>'iso885915'</code>, <code>'iso_8859-15'</code>, <code>'l9'</code></td></tr><tr><td><code>'koi8-r'</code></td><td><code>'cskoi8r'</code>, <code>'koi'</code>, <code>'koi8'</code>, <code>'koi8_r'</code></td></tr><tr><td><code>'koi8-u'</code></td><td><code>'koi8-ru'</code></td></tr><tr><td><code>'macintosh'</code></td><td><code>'csmacintosh'</code>, <code>'mac'</code>, <code>'x-mac-roman'</code></td></tr><tr><td><code>'windows-874'</code></td><td><code>'dos-874'</code>, <code>'iso-8859-11'</code>, <code>'iso8859-11'</code>, <code>'iso885911'</code>, <code>'tis-620'</code></td></tr><tr><td><code>'windows-1250'</code></td><td><code>'cp1250'</code>, <code>'x-cp1250'</code></td></tr><tr><td><code>'windows-1251'</code></td><td><code>'cp1251'</code>, <code>'x-cp1251'</code></td></tr><tr><td><code>'windows-1252'</code></td><td><code>'ansi_x3.4-1968'</code>, <code>'ascii'</code>, <code>'cp1252'</code>, <code>'cp819'</code>, <code>'csisolatin1'</code>, <code>'ibm819'</code>, <code>'iso-8859-1'</code>, <code>'iso-ir-100'</code>, <code>'iso8859-1'</code>, <code>'iso88591'</code>, <code>'iso_8859-1'</code>, <code>'iso_8859-1:1987'</code>, <code>'l1'</code>, <code>'latin1'</code>, <code>'us-ascii'</code>, <code>'x-cp1252'</code></td></tr><tr><td><code>'windows-1253'</code></td><td><code>'cp1253'</code>, <code>'x-cp1253'</code></td></tr><tr><td><code>'windows-1254'</code></td><td><code>'cp1254'</code>, <code>'csisolatin5'</code>, <code>'iso-8859-9'</code>, <code>'iso-ir-148'</code>, <code>'iso8859-9'</code>, <code>'iso88599'</code>, <code>'iso_8859-9'</code>, <code>'iso_8859-9:1989'</code>, <code>'l5'</code>, <code>'latin5'</code>, <code>'x-cp1254'</code></td></tr><tr><td><code>'windows-1255'</code></td><td><code>'cp1255'</code>, <code>'x-cp1255'</code></td></tr><tr><td><code>'windows-1256'</code></td><td><code>'cp1256'</code>, <code>'x-cp1256'</code></td></tr><tr><td><code>'windows-1257'</code></td><td><code>'cp1257'</code>, <code>'x-cp1257'</code></td></tr><tr><td><code>'windows-1258'</code></td><td><code>'cp1258'</code>, <code>'x-cp1258'</code></td></tr><tr><td><code>'x-mac-cyrillic'</code></td><td><code>'x-mac-ukrainian'</code></td></tr><tr><td><code>'gbk'</code></td><td><code>'chinese'</code>, <code>'csgb2312'</code>, <code>'csiso58gb231280'</code>, <code>'gb2312'</code>, <code>'gb_2312'</code>, <code>'gb_2312-80'</code>, <code>'iso-ir-58'</code>, <code>'x-gbk'</code></td></tr><tr><td><code>'gb18030'</code></td><td></td></tr><tr><td><code>'big5'</code></td><td><code>'big5-hkscs'</code>, <code>'cn-big5'</code>, <code>'csbig5'</code>, <code>'x-x-big5'</code></td></tr><tr><td><code>'euc-jp'</code></td><td><code>'cseucpkdfmtjapanese'</code>, <code>'x-euc-jp'</code></td></tr><tr><td><code>'iso-2022-jp'</code></td><td><code>'csiso2022jp'</code></td></tr><tr><td><code>'shift_jis'</code></td><td><code>'csshiftjis'</code>, <code>'ms932'</code>, <code>'ms_kanji'</code>, <code>'shift-jis'</code>, <code>'sjis'</code>, <code>'windows-31j'</code>, <code>'x-sjis'</code></td></tr><tr><td><code>'euc-kr'</code></td><td><code>'cseuckr'</code>, <code>'csksc56011987'</code>, <code>'iso-ir-149'</code>, <code>'korean'</code>, <code>'ks_c_5601-1987'</code>, <code>'ks_c_5601-1989'</code>, <code>'ksc5601'</code>, <code>'ksc_5601'</code>, <code>'windows-949'</code></td></tr></tbody></table>
+<p>The <code>'iso-8859-16'</code> encoding listed in the <a href="https://encoding.spec.whatwg.org/">WHATWG Encoding Standard</a>
+is not supported.</p>
+<h3>new TextDecoder([encoding[, options]])<span><a class="mark" href="#util_new_textdecoder_encoding_options" id="util_new_textdecoder_encoding_options">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>The class is now available on the global object.</p></td></tr>
+<tr><td>v8.3.0</td>
+<td><p><span>Added in: v8.3.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Identifies the <code>encoding</code> that this <code>TextDecoder</code> instance
+supports. <strong>Default:</strong> <code>'utf-8'</code>.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>fatal</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> <code>true</code> if decoding failures are fatal. This option is only
+supported when ICU is enabled (see <a href="https://nodejs.org/api/intl.html">Internationalization</a>). <strong>Default:</strong>
+<code>false</code>.</li>
+<li><code>ignoreBOM</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> When <code>true</code>, the <code>TextDecoder</code> will include the byte
+order mark in the decoded result. When <code>false</code>, the byte order mark will
+be removed from the output. This option is only used when <code>encoding</code> is
+<code>'utf-8'</code>, <code>'utf-16be'</code> or <code>'utf-16le'</code>. <strong>Default:</strong> <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Creates an new <code>TextDecoder</code> instance. The <code>encoding</code> may specify one of the
+supported encodings or an alias.</p>
+<p>The <code>TextDecoder</code> class is also available on the global object.</p>
+<h3>textDecoder.decode([input[, options]])<span><a class="mark" href="#util_textdecoder_decode_input_options" id="util_textdecoder_decode_input_options">#</a></span></h3>
+<ul>
+<li><code>input</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" class="type">&lt;ArrayBuffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView" class="type">&lt;DataView&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" class="type">&lt;TypedArray&gt;</a> An <code>ArrayBuffer</code>, <code>DataView</code> or
+<code>TypedArray</code> instance containing the encoded data.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>stream</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> <code>true</code> if additional chunks of data are expected.
+<strong>Default:</strong> <code>false</code>.</li>
+</ul>
+</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>Decodes the <code>input</code> and returns a string. If <code>options.stream</code> is <code>true</code>, any
+incomplete byte sequences occurring at the end of the <code>input</code> are buffered
+internally and emitted after the next call to <code>textDecoder.decode()</code>.</p>
+<p>If <code>textDecoder.fatal</code> is <code>true</code>, decoding errors that occur will result in a
+<code>TypeError</code> being thrown.</p>
+<h3>textDecoder.encoding<span><a class="mark" href="#util_textdecoder_encoding" id="util_textdecoder_encoding">#</a></span></h3>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The encoding supported by the <code>TextDecoder</code> instance.</p>
+<h3>textDecoder.fatal<span><a class="mark" href="#util_textdecoder_fatal" id="util_textdecoder_fatal">#</a></span></h3>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>The value will be <code>true</code> if decoding errors result in a <code>TypeError</code> being
+thrown.</p>
+<h3>textDecoder.ignoreBOM<span><a class="mark" href="#util_textdecoder_ignorebom" id="util_textdecoder_ignorebom">#</a></span></h3>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>The value will be <code>true</code> if the decoding result will include the byte order
+mark.</p>
+<h2>Class: util.TextEncoder<span><a class="mark" href="#util_class_util_textencoder" id="util_class_util_textencoder">#</a></span></h2>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>The class is now available on the global object.</p></td></tr>
+<tr><td>v8.3.0</td>
+<td><p><span>Added in: v8.3.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>An implementation of the <a href="https://encoding.spec.whatwg.org/">WHATWG Encoding Standard</a> <code>TextEncoder</code> API. All
+instances of <code>TextEncoder</code> only support UTF-8 encoding.</p>
+<pre><code class="language-js">const encoder = new TextEncoder();
+const uint8array = encoder.encode('this is some data');
+</code></pre>
+<p>The <code>TextEncoder</code> class is also available on the global object.</p>
+<h3>textEncoder.encode([input])<span><a class="mark" href="#util_textencoder_encode_input" id="util_textencoder_encode_input">#</a></span></h3>
+<ul>
+<li><code>input</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The text to encode. <strong>Default:</strong> an empty string.</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array" class="type">&lt;Uint8Array&gt;</a></li>
+</ul>
+<p>UTF-8 encodes the <code>input</code> string and returns a <code>Uint8Array</code> containing the
+encoded bytes.</p>
+<h3>textEncoder.encoding<span><a class="mark" href="#util_textencoder_encoding" id="util_textencoder_encoding">#</a></span></h3>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The encoding supported by the <code>TextEncoder</code> instance. Always set to <code>'utf-8'</code>.</p>
+<h2>util.types<span><a class="mark" href="#util_util_types" id="util_util_types">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<p><code>util.types</code> provides a number of type checks for different kinds of built-in
+objects. Unlike <code>instanceof</code> or <code>Object.prototype.toString.call(value)</code>,
+these checks do not inspect properties of the object that are accessible from
+JavaScript (like their prototype), and usually have the overhead of
+calling into C++.</p>
+<p>The result generally does not make any guarantees about what kinds of
+properties or behavior a value exposes in JavaScript. They are primarily
+useful for addon developers who prefer to do type checking in JavaScript.</p>
+<h3>util.types.isAnyArrayBuffer(value)<span><a class="mark" href="#util_util_types_isanyarraybuffer_value" id="util_util_types_isanyarraybuffer_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer"><code>ArrayBuffer</code></a> or
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer"><code>SharedArrayBuffer</code></a> instance.</p>
+<p>See also <a href="#util_util_types_isarraybuffer_value"><code>util.types.isArrayBuffer()</code></a> and
+<a href="#util_util_types_issharedarraybuffer_value"><code>util.types.isSharedArrayBuffer()</code></a>.</p>
+<pre><code class="language-js">util.types.isAnyArrayBuffer(new ArrayBuffer());  // Returns true
+util.types.isAnyArrayBuffer(new SharedArrayBuffer());  // Returns true
+</code></pre>
+<h3>util.types.isArgumentsObject(value)<span><a class="mark" href="#util_util_types_isargumentsobject_value" id="util_util_types_isargumentsobject_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is an <code>arguments</code> object.</p>
+<!-- eslint-disable prefer-rest-params -->
+<pre><code class="language-js">function foo() {
+  util.types.isArgumentsObject(arguments);  // Returns true
+}
+</code></pre>
+<h3>util.types.isArrayBuffer(value)<span><a class="mark" href="#util_util_types_isarraybuffer_value" id="util_util_types_isarraybuffer_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer"><code>ArrayBuffer</code></a> instance.
+This does <em>not</em> include <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer"><code>SharedArrayBuffer</code></a> instances. Usually, it is
+desirable to test for both; See <a href="#util_util_types_isanyarraybuffer_value"><code>util.types.isAnyArrayBuffer()</code></a> for that.</p>
+<pre><code class="language-js">util.types.isArrayBuffer(new ArrayBuffer());  // Returns true
+util.types.isArrayBuffer(new SharedArrayBuffer());  // Returns false
+</code></pre>
+<h3>util.types.isAsyncFunction(value)<span><a class="mark" href="#util_util_types_isasyncfunction_value" id="util_util_types_isasyncfunction_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">async function</a>.
+This only reports back what the JavaScript engine is seeing;
+in particular, the return value may not match the original source code if
+a transpilation tool was used.</p>
+<pre><code class="language-js">util.types.isAsyncFunction(function foo() {});  // Returns false
+util.types.isAsyncFunction(async function foo() {});  // Returns true
+</code></pre>
+<h3>util.types.isBigInt64Array(value)<span><a class="mark" href="#util_util_types_isbigint64array_value" id="util_util_types_isbigint64array_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a <code>BigInt64Array</code> instance.</p>
+<pre><code class="language-js">util.types.isBigInt64Array(new BigInt64Array());   // Returns true
+util.types.isBigInt64Array(new BigUint64Array());  // Returns false
+</code></pre>
+<h3>util.types.isBigUint64Array(value)<span><a class="mark" href="#util_util_types_isbiguint64array_value" id="util_util_types_isbiguint64array_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a <code>BigUint64Array</code> instance.</p>
+<pre><code class="language-js">util.types.isBigUint64Array(new BigInt64Array());   // Returns false
+util.types.isBigUint64Array(new BigUint64Array());  // Returns true
+</code></pre>
+<h3>util.types.isBooleanObject(value)<span><a class="mark" href="#util_util_types_isbooleanobject_value" id="util_util_types_isbooleanobject_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a boolean object, e.g. created
+by <code>new Boolean()</code>.</p>
+<pre><code class="language-js">util.types.isBooleanObject(false);  // Returns false
+util.types.isBooleanObject(true);   // Returns false
+util.types.isBooleanObject(new Boolean(false)); // Returns true
+util.types.isBooleanObject(new Boolean(true));  // Returns true
+util.types.isBooleanObject(Boolean(false)); // Returns false
+util.types.isBooleanObject(Boolean(true));  // Returns false
+</code></pre>
+<h3>util.types.isBoxedPrimitive(value)<span><a class="mark" href="#util_util_types_isboxedprimitive_value" id="util_util_types_isboxedprimitive_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.11.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is any boxed primitive object, e.g. created
+by <code>new Boolean()</code>, <code>new String()</code> or <code>Object(Symbol())</code>.</p>
+<p>For example:</p>
+<pre><code class="language-js">util.types.isBoxedPrimitive(false); // Returns false
+util.types.isBoxedPrimitive(new Boolean(false)); // Returns true
+util.types.isBoxedPrimitive(Symbol('foo')); // Returns false
+util.types.isBoxedPrimitive(Object(Symbol('foo'))); // Returns true
+util.types.isBoxedPrimitive(Object(BigInt(5))); // Returns true
+</code></pre>
+<h3>util.types.isDataView(value)<span><a class="mark" href="#util_util_types_isdataview_value" id="util_util_types_isdataview_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView"><code>DataView</code></a> instance.</p>
+<pre><code class="language-js">const ab = new ArrayBuffer(20);
+util.types.isDataView(new DataView(ab));  // Returns true
+util.types.isDataView(new Float64Array());  // Returns false
+</code></pre>
+<p>See also <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/isView"><code>ArrayBuffer.isView()</code></a>.</p>
+<h3>util.types.isDate(value)<span><a class="mark" href="#util_util_types_isdate_value" id="util_util_types_isdate_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> instance.</p>
+<pre><code class="language-js">util.types.isDate(new Date());  // Returns true
+</code></pre>
+<h3>util.types.isExternal(value)<span><a class="mark" href="#util_util_types_isexternal_value" id="util_util_types_isexternal_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a native <code>External</code> value.</p>
+<h3>util.types.isFloat32Array(value)<span><a class="mark" href="#util_util_types_isfloat32array_value" id="util_util_types_isfloat32array_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array"><code>Float32Array</code></a> instance.</p>
+<pre><code class="language-js">util.types.isFloat32Array(new ArrayBuffer());  // Returns false
+util.types.isFloat32Array(new Float32Array());  // Returns true
+util.types.isFloat32Array(new Float64Array());  // Returns false
+</code></pre>
+<h3>util.types.isFloat64Array(value)<span><a class="mark" href="#util_util_types_isfloat64array_value" id="util_util_types_isfloat64array_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array"><code>Float64Array</code></a> instance.</p>
+<pre><code class="language-js">util.types.isFloat64Array(new ArrayBuffer());  // Returns false
+util.types.isFloat64Array(new Uint8Array());  // Returns false
+util.types.isFloat64Array(new Float64Array());  // Returns true
+</code></pre>
+<h3>util.types.isGeneratorFunction(value)<span><a class="mark" href="#util_util_types_isgeneratorfunction_value" id="util_util_types_isgeneratorfunction_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a generator function.
+This only reports back what the JavaScript engine is seeing;
+in particular, the return value may not match the original source code if
+a transpilation tool was used.</p>
+<pre><code class="language-js">util.types.isGeneratorFunction(function foo() {});  // Returns false
+util.types.isGeneratorFunction(function* foo() {});  // Returns true
+</code></pre>
+<h3>util.types.isGeneratorObject(value)<span><a class="mark" href="#util_util_types_isgeneratorobject_value" id="util_util_types_isgeneratorobject_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a generator object as returned from a
+built-in generator function.
+This only reports back what the JavaScript engine is seeing;
+in particular, the return value may not match the original source code if
+a transpilation tool was used.</p>
+<pre><code class="language-js">function* foo() {}
+const generator = foo();
+util.types.isGeneratorObject(generator);  // Returns true
+</code></pre>
+<h3>util.types.isInt8Array(value)<span><a class="mark" href="#util_util_types_isint8array_value" id="util_util_types_isint8array_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array"><code>Int8Array</code></a> instance.</p>
+<pre><code class="language-js">util.types.isInt8Array(new ArrayBuffer());  // Returns false
+util.types.isInt8Array(new Int8Array());  // Returns true
+util.types.isInt8Array(new Float64Array());  // Returns false
+</code></pre>
+<h3>util.types.isInt16Array(value)<span><a class="mark" href="#util_util_types_isint16array_value" id="util_util_types_isint16array_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array"><code>Int16Array</code></a> instance.</p>
+<pre><code class="language-js">util.types.isInt16Array(new ArrayBuffer());  // Returns false
+util.types.isInt16Array(new Int16Array());  // Returns true
+util.types.isInt16Array(new Float64Array());  // Returns false
+</code></pre>
+<h3>util.types.isInt32Array(value)<span><a class="mark" href="#util_util_types_isint32array_value" id="util_util_types_isint32array_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array"><code>Int32Array</code></a> instance.</p>
+<pre><code class="language-js">util.types.isInt32Array(new ArrayBuffer());  // Returns false
+util.types.isInt32Array(new Int32Array());  // Returns true
+util.types.isInt32Array(new Float64Array());  // Returns false
+</code></pre>
+<h3>util.types.isMap(value)<span><a class="mark" href="#util_util_types_ismap_value" id="util_util_types_ismap_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"><code>Map</code></a> instance.</p>
+<pre><code class="language-js">util.types.isMap(new Map());  // Returns true
+</code></pre>
+<h3>util.types.isMapIterator(value)<span><a class="mark" href="#util_util_types_ismapiterator_value" id="util_util_types_ismapiterator_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is an iterator returned for a built-in
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"><code>Map</code></a> instance.</p>
+<pre><code class="language-js">const map = new Map();
+util.types.isMapIterator(map.keys());  // Returns true
+util.types.isMapIterator(map.values());  // Returns true
+util.types.isMapIterator(map.entries());  // Returns true
+util.types.isMapIterator(map[Symbol.iterator]());  // Returns true
+</code></pre>
+<h3>util.types.isModuleNamespaceObject(value)<span><a class="mark" href="#util_util_types_ismodulenamespaceobject_value" id="util_util_types_ismodulenamespaceobject_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is an instance of a <a href="https://tc39.github.io/ecma262/#sec-module-namespace-exotic-objects">Module Namespace Object</a>.</p>
+<!-- eslint-skip -->
+<pre><code class="language-js">import * as ns from './a.js';
+
+util.types.isModuleNamespaceObject(ns);  // Returns true
+</code></pre>
+<h3>util.types.isNativeError(value)<span><a class="mark" href="#util_util_types_isnativeerror_value" id="util_util_types_isnativeerror_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is an instance of a built-in <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> type.</p>
+<pre><code class="language-js">util.types.isNativeError(new Error());  // Returns true
+util.types.isNativeError(new TypeError());  // Returns true
+util.types.isNativeError(new RangeError());  // Returns true
+</code></pre>
+<h3>util.types.isNumberObject(value)<span><a class="mark" href="#util_util_types_isnumberobject_value" id="util_util_types_isnumberobject_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a number object, e.g. created
+by <code>new Number()</code>.</p>
+<pre><code class="language-js">util.types.isNumberObject(0);  // Returns false
+util.types.isNumberObject(new Number(0));   // Returns true
+</code></pre>
+<h3>util.types.isPromise(value)<span><a class="mark" href="#util_util_types_ispromise_value" id="util_util_types_ispromise_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"><code>Promise</code></a>.</p>
+<pre><code class="language-js">util.types.isPromise(Promise.resolve(42));  // Returns true
+</code></pre>
+<h3>util.types.isProxy(value)<span><a class="mark" href="#util_util_types_isproxy_value" id="util_util_types_isproxy_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy"><code>Proxy</code></a> instance.</p>
+<pre><code class="language-js">const target = {};
+const proxy = new Proxy(target, {});
+util.types.isProxy(target);  // Returns false
+util.types.isProxy(proxy);  // Returns true
+</code></pre>
+<h3>util.types.isRegExp(value)<span><a class="mark" href="#util_util_types_isregexp_value" id="util_util_types_isregexp_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a regular expression object.</p>
+<pre><code class="language-js">util.types.isRegExp(/abc/);  // Returns true
+util.types.isRegExp(new RegExp('abc'));  // Returns true
+</code></pre>
+<h3>util.types.isSet(value)<span><a class="mark" href="#util_util_types_isset_value" id="util_util_types_isset_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set"><code>Set</code></a> instance.</p>
+<pre><code class="language-js">util.types.isSet(new Set());  // Returns true
+</code></pre>
+<h3>util.types.isSetIterator(value)<span><a class="mark" href="#util_util_types_issetiterator_value" id="util_util_types_issetiterator_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is an iterator returned for a built-in
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set"><code>Set</code></a> instance.</p>
+<pre><code class="language-js">const set = new Set();
+util.types.isSetIterator(set.keys());  // Returns true
+util.types.isSetIterator(set.values());  // Returns true
+util.types.isSetIterator(set.entries());  // Returns true
+util.types.isSetIterator(set[Symbol.iterator]());  // Returns true
+</code></pre>
+<h3>util.types.isSharedArrayBuffer(value)<span><a class="mark" href="#util_util_types_issharedarraybuffer_value" id="util_util_types_issharedarraybuffer_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer"><code>SharedArrayBuffer</code></a> instance.
+This does <em>not</em> include <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer"><code>ArrayBuffer</code></a> instances. Usually, it is
+desirable to test for both; See <a href="#util_util_types_isanyarraybuffer_value"><code>util.types.isAnyArrayBuffer()</code></a> for that.</p>
+<pre><code class="language-js">util.types.isSharedArrayBuffer(new ArrayBuffer());  // Returns false
+util.types.isSharedArrayBuffer(new SharedArrayBuffer());  // Returns true
+</code></pre>
+<h3>util.types.isStringObject(value)<span><a class="mark" href="#util_util_types_isstringobject_value" id="util_util_types_isstringobject_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a string object, e.g. created
+by <code>new String()</code>.</p>
+<pre><code class="language-js">util.types.isStringObject('foo');  // Returns false
+util.types.isStringObject(new String('foo'));   // Returns true
+</code></pre>
+<h3>util.types.isSymbolObject(value)<span><a class="mark" href="#util_util_types_issymbolobject_value" id="util_util_types_issymbolobject_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a symbol object, created
+by calling <code>Object()</code> on a <code>Symbol</code> primitive.</p>
+<pre><code class="language-js">const symbol = Symbol('foo');
+util.types.isSymbolObject(symbol);  // Returns false
+util.types.isSymbolObject(Object(symbol));   // Returns true
+</code></pre>
+<h3>util.types.isTypedArray(value)<span><a class="mark" href="#util_util_types_istypedarray_value" id="util_util_types_istypedarray_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray"><code>TypedArray</code></a> instance.</p>
+<pre><code class="language-js">util.types.isTypedArray(new ArrayBuffer());  // Returns false
+util.types.isTypedArray(new Uint8Array());  // Returns true
+util.types.isTypedArray(new Float64Array());  // Returns true
+</code></pre>
+<p>See also <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/isView"><code>ArrayBuffer.isView()</code></a>.</p>
+<h3>util.types.isUint8Array(value)<span><a class="mark" href="#util_util_types_isuint8array_value" id="util_util_types_isuint8array_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array"><code>Uint8Array</code></a> instance.</p>
+<pre><code class="language-js">util.types.isUint8Array(new ArrayBuffer());  // Returns false
+util.types.isUint8Array(new Uint8Array());  // Returns true
+util.types.isUint8Array(new Float64Array());  // Returns false
+</code></pre>
+<h3>util.types.isUint8ClampedArray(value)<span><a class="mark" href="#util_util_types_isuint8clampedarray_value" id="util_util_types_isuint8clampedarray_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray"><code>Uint8ClampedArray</code></a> instance.</p>
+<pre><code class="language-js">util.types.isUint8ClampedArray(new ArrayBuffer());  // Returns false
+util.types.isUint8ClampedArray(new Uint8ClampedArray());  // Returns true
+util.types.isUint8ClampedArray(new Float64Array());  // Returns false
+</code></pre>
+<h3>util.types.isUint16Array(value)<span><a class="mark" href="#util_util_types_isuint16array_value" id="util_util_types_isuint16array_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array"><code>Uint16Array</code></a> instance.</p>
+<pre><code class="language-js">util.types.isUint16Array(new ArrayBuffer());  // Returns false
+util.types.isUint16Array(new Uint16Array());  // Returns true
+util.types.isUint16Array(new Float64Array());  // Returns false
+</code></pre>
+<h3>util.types.isUint32Array(value)<span><a class="mark" href="#util_util_types_isuint32array_value" id="util_util_types_isuint32array_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array"><code>Uint32Array</code></a> instance.</p>
+<pre><code class="language-js">util.types.isUint32Array(new ArrayBuffer());  // Returns false
+util.types.isUint32Array(new Uint32Array());  // Returns true
+util.types.isUint32Array(new Float64Array());  // Returns false
+</code></pre>
+<h3>util.types.isWeakMap(value)<span><a class="mark" href="#util_util_types_isweakmap_value" id="util_util_types_isweakmap_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap"><code>WeakMap</code></a> instance.</p>
+<pre><code class="language-js">util.types.isWeakMap(new WeakMap());  // Returns true
+</code></pre>
+<h3>util.types.isWeakSet(value)<span><a class="mark" href="#util_util_types_isweakset_value" id="util_util_types_isweakset_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet"><code>WeakSet</code></a> instance.</p>
+<pre><code class="language-js">util.types.isWeakSet(new WeakSet());  // Returns true
+</code></pre>
+<h3>util.types.isWebAssemblyCompiledModule(value)<span><a class="mark" href="#util_util_types_iswebassemblycompiledmodule_value" id="util_util_types_iswebassemblycompiledmodule_value">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v10.0.0</span>
+</div>
+<ul>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the value is a built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/Module"><code>WebAssembly.Module</code></a> instance.</p>
+<pre><code class="language-js">const module = new WebAssembly.Module(wasmBuffer);
+util.types.isWebAssemblyCompiledModule(module);  // Returns true
+</code></pre>
+<h2>Deprecated APIs<span><a class="mark" href="#util_deprecated_apis" id="util_deprecated_apis">#</a></span></h2>
+<p>The following APIs are deprecated and should no longer be used. Existing
+applications and modules should be updated to find alternative approaches.</p>
+<h3>util._extend(target, source)<span><a class="mark" href="#util_util_extend_target_source" id="util_util_extend_target_source">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.5</span><span>Deprecated since: v6.0.0</span>
+</div>
+<ul>
+<li><code>target</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+<li><code>source</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign"><code>Object.assign()</code></a> instead.</div><p></p>
+<p>The <code>util._extend()</code> method was never intended to be used outside of internal
+Node.js modules. The community found and used it anyway.</p>
+<p>It is deprecated and should not be used in new code. JavaScript comes with very
+similar built-in functionality through <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign"><code>Object.assign()</code></a>.</p>
+<h3>util.isArray(object)<span><a class="mark" href="#util_util_isarray_object" id="util_util_isarray_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.6.0</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray"><code>Array.isArray()</code></a> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Alias for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray"><code>Array.isArray()</code></a>.</p>
+<p>Returns <code>true</code> if the given <code>object</code> is an <code>Array</code>. Otherwise, returns <code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isArray([]);
+// Returns: true
+util.isArray(new Array());
+// Returns: true
+util.isArray({});
+// Returns: false
+</code></pre>
+<h3>util.isBoolean(object)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L55">[src]</a><span><a class="mark" href="#util_util_isboolean_object" id="util_util_isboolean_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.5</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <code>typeof value === 'boolean'</code> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is a <code>Boolean</code>. Otherwise, returns <code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isBoolean(1);
+// Returns: false
+util.isBoolean(0);
+// Returns: false
+util.isBoolean(false);
+// Returns: true
+</code></pre>
+<h3>util.isBuffer(object)<span><a class="mark" href="#util_util_isbuffer_object" id="util_util_isbuffer_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.5</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <a href="https://nodejs.org/api/buffer.html#buffer_class_method_buffer_isbuffer_obj"><code>Buffer.isBuffer()</code></a> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is a <code>Buffer</code>. Otherwise, returns <code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isBuffer({ length: 0 });
+// Returns: false
+util.isBuffer([]);
+// Returns: false
+util.isBuffer(Buffer.from('hello world'));
+// Returns: true
+</code></pre>
+<h3>util.isDate(object)<span><a class="mark" href="#util_util_isdate_object" id="util_util_isdate_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.6.0</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <a href="#util_util_types_isdate_value"><code>util.types.isDate()</code></a> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is a <code>Date</code>. Otherwise, returns <code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isDate(new Date());
+// Returns: true
+util.isDate(Date());
+// false (without 'new' returns a String)
+util.isDate({});
+// Returns: false
+</code></pre>
+<h3>util.isError(object)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L87">[src]</a><span><a class="mark" href="#util_util_iserror_object" id="util_util_iserror_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.6.0</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <a href="#util_util_types_isnativeerror_value"><code>util.types.isNativeError()</code></a> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is an <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a>. Otherwise, returns
+<code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isError(new Error());
+// Returns: true
+util.isError(new TypeError());
+// Returns: true
+util.isError({ name: 'Error', message: 'an error occurred' });
+// Returns: false
+</code></pre>
+<p>This method relies on <code>Object.prototype.toString()</code> behavior. It is
+possible to obtain an incorrect result when the <code>object</code> argument manipulates
+<code>@@toStringTag</code>.</p>
+<pre><code class="language-js">const util = require('util');
+const obj = { name: 'Error', message: 'an error occurred' };
+
+util.isError(obj);
+// Returns: false
+obj[Symbol.toStringTag] = 'Error';
+util.isError(obj);
+// Returns: true
+</code></pre>
+<h3>util.isFunction(object)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L91">[src]</a><span><a class="mark" href="#util_util_isfunction_object" id="util_util_isfunction_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.5</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <code>typeof value === 'function'</code> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is a <code>Function</code>. Otherwise, returns
+<code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+function Foo() {}
+const Bar = () =&gt; {};
+
+util.isFunction({});
+// Returns: false
+util.isFunction(Foo);
+// Returns: true
+util.isFunction(Bar);
+// Returns: true
+</code></pre>
+<h3>util.isNull(object)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L59">[src]</a><span><a class="mark" href="#util_util_isnull_object" id="util_util_isnull_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.5</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <code>value === null</code> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is strictly <code>null</code>. Otherwise, returns
+<code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isNull(0);
+// Returns: false
+util.isNull(undefined);
+// Returns: false
+util.isNull(null);
+// Returns: true
+</code></pre>
+<h3>util.isNullOrUndefined(object)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L63">[src]</a><span><a class="mark" href="#util_util_isnullorundefined_object" id="util_util_isnullorundefined_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.5</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use
+<code>value === undefined || value === null</code> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is <code>null</code> or <code>undefined</code>. Otherwise,
+returns <code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isNullOrUndefined(0);
+// Returns: false
+util.isNullOrUndefined(undefined);
+// Returns: true
+util.isNullOrUndefined(null);
+// Returns: true
+</code></pre>
+<h3>util.isNumber(object)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L67">[src]</a><span><a class="mark" href="#util_util_isnumber_object" id="util_util_isnumber_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.5</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <code>typeof value === 'number'</code> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is a <code>Number</code>. Otherwise, returns <code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isNumber(false);
+// Returns: false
+util.isNumber(Infinity);
+// Returns: true
+util.isNumber(0);
+// Returns: true
+util.isNumber(NaN);
+// Returns: true
+</code></pre>
+<h3>util.isObject(object)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L83">[src]</a><span><a class="mark" href="#util_util_isobject_object" id="util_util_isobject_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.5</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated:
+Use <code>value !== null &amp;&amp; typeof value === 'object'</code> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is strictly an <code>Object</code> <strong>and</strong> not a
+<code>Function</code> (even though functions are objects in JavaScript).
+Otherwise, returns <code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isObject(5);
+// Returns: false
+util.isObject(null);
+// Returns: false
+util.isObject({});
+// Returns: true
+util.isObject(() =&gt; {});
+// Returns: false
+</code></pre>
+<h3>util.isPrimitive(object)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L95">[src]</a><span><a class="mark" href="#util_util_isprimitive_object" id="util_util_isprimitive_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.5</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use
+<code>(typeof value !== 'object' &amp;&amp; typeof value !== 'function') || value === null</code>
+instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is a primitive type. Otherwise, returns
+<code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isPrimitive(5);
+// Returns: true
+util.isPrimitive('foo');
+// Returns: true
+util.isPrimitive(false);
+// Returns: true
+util.isPrimitive(null);
+// Returns: true
+util.isPrimitive(undefined);
+// Returns: true
+util.isPrimitive({});
+// Returns: false
+util.isPrimitive(() =&gt; {});
+// Returns: false
+util.isPrimitive(/^$/);
+// Returns: false
+util.isPrimitive(new Date());
+// Returns: false
+</code></pre>
+<h3>util.isRegExp(object)<span><a class="mark" href="#util_util_isregexp_object" id="util_util_isregexp_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.6.0</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is a <code>RegExp</code>. Otherwise, returns <code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isRegExp(/some regexp/);
+// Returns: true
+util.isRegExp(new RegExp('another regexp'));
+// Returns: true
+util.isRegExp({});
+// Returns: false
+</code></pre>
+<h3>util.isString(object)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L71">[src]</a><span><a class="mark" href="#util_util_isstring_object" id="util_util_isstring_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.5</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <code>typeof value === 'string'</code> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is a <code>string</code>. Otherwise, returns <code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isString('');
+// Returns: true
+util.isString('foo');
+// Returns: true
+util.isString(String('foo'));
+// Returns: true
+util.isString(5);
+// Returns: false
+</code></pre>
+<h3>util.isSymbol(object)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L75">[src]</a><span><a class="mark" href="#util_util_issymbol_object" id="util_util_issymbol_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.5</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <code>typeof value === 'symbol'</code> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is a <code>Symbol</code>. Otherwise, returns <code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.isSymbol(5);
+// Returns: false
+util.isSymbol('foo');
+// Returns: false
+util.isSymbol(Symbol('foo'));
+// Returns: true
+</code></pre>
+<h3>util.isUndefined(object)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L79">[src]</a><span><a class="mark" href="#util_util_isundefined_object" id="util_util_isundefined_object">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.11.5</span><span>Deprecated since: v4.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use <code>value === undefined</code> instead.</div><p></p>
+<ul>
+<li><code>object</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>Returns <code>true</code> if the given <code>object</code> is <code>undefined</code>. Otherwise, returns <code>false</code>.</p>
+<pre><code class="language-js">const util = require('util');
+
+const foo = undefined;
+util.isUndefined(5);
+// Returns: false
+util.isUndefined(foo);
+// Returns: true
+util.isUndefined(null);
+// Returns: false
+</code></pre>
+<h3>util.log(string)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L118">[src]</a><span><a class="mark" href="#util_util_log_string" id="util_util_log_string">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.3.0</span><span>Deprecated since: v6.0.0</span>
+</div>
+<p></p><div class="api_stability api_stability_0"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 0</a> - Deprecated: Use a third party module instead.</div><p></p>
+<ul>
+<li><code>string</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The <code>util.log()</code> method prints the given <code>string</code> to <code>stdout</code> with an included
+timestamp.</p>
+<pre><code class="language-js">const util = require('util');
+
+util.log('Timestamped message.');
+</code></pre>
+      </div>
+    </div>
+  </div>
+  <script src="data:application/javascript;base64,LyoKU0hKUyAtIFN5bnRheCBIaWdobGlnaHRpbmcgaW4gSmF2YVNjcmlwdApDb3B5cmlnaHQgKEMpIDIwMDcsIDIwMDggZ25vbWJhdEB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQKTGljZW5zZTogaHR0cDovL3NoanMuc291cmNlZm9yZ2UubmV0L2RvYy9ncGx2My5odG1sCiovCgppZiAoISB0aGlzLnNoX2xhbmd1YWdlcykgewogIHRoaXMuc2hfbGFuZ3VhZ2VzID0ge307Cn0KdmFyIHNoX3JlcXVlc3RzID0ge307CgpmdW5jdGlvbiBzaF9pc0VtYWlsQWRkcmVzcyh1cmwpIHsKICBpZiAoL15tYWlsdG86Ly50ZXN0KHVybCkpIHsKICAgIHJldHVybiBmYWxzZTsKICB9CiAgcmV0dXJuIHVybC5pbmRleE9mKCdAJykgIT09IC0xOwp9CgpmdW5jdGlvbiBzaF9zZXRIcmVmKHRhZ3MsIG51bVRhZ3MsIGlucHV0U3RyaW5nKSB7CiAgdmFyIHVybCA9IGlucHV0U3RyaW5nLnN1YnN0cmluZyh0YWdzW251bVRhZ3MgLSAyXS5wb3MsIHRhZ3NbbnVtVGFncyAtIDFdLnBvcyk7CiAgaWYgKHVybC5sZW5ndGggPj0gMiAmJiB1cmwuY2hhckF0KDApID09PSAnPCcgJiYgdXJsLmNoYXJBdCh1cmwubGVuZ3RoIC0gMSkgPT09ICc+JykgewogICAgdXJsID0gdXJsLnN1YnN0cigxLCB1cmwubGVuZ3RoIC0gMik7CiAgfQogIGlmIChzaF9pc0VtYWlsQWRkcmVzcyh1cmwpKSB7CiAgICB1cmwgPSAnbWFpbHRvOicgKyB1cmw7CiAgfQogIHRhZ3NbbnVtVGFncyAtIDJdLm5vZGUuaHJlZiA9IHVybDsKfQoKLyoKS29ucXVlcm9yIGhhcyBhIGJ1ZyB3aGVyZSB0aGUgcmVndWxhciBleHByZXNzaW9uIC8kL2cgd2lsbCBub3QgbWF0Y2ggYXQgdGhlIGVuZApvZiBhIGxpbmUgbW9yZSB0aGFuIG9uY2U6CgogIHZhciByZWdleCA9IC8kL2c7CiAgdmFyIG1hdGNoOwoKICB2YXIgbGluZSA9ICcxMjM0NTY3ODkwJzsKICByZWdleC5sYXN0SW5kZXggPSAxMDsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZSk7CgogIHZhciBsaW5lMiA9ICdhYmNkZSc7CiAgcmVnZXgubGFzdEluZGV4ID0gNTsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZTIpOyAgLy8gZmFpbHMKKi8KZnVuY3Rpb24gc2hfa29ucXVlcm9yRXhlYyhzKSB7CiAgdmFyIHJlc3VsdCA9IFsnJ107CiAgcmVzdWx0LmluZGV4ID0gcy5sZW5ndGg7CiAgcmVzdWx0LmlucHV0ID0gczsKICByZXR1cm4gcmVzdWx0Owp9CgovKioKSGlnaGxpZ2h0cyBhbGwgZWxlbWVudHMgY29udGFpbmluZyBzb3VyY2UgY29kZSBpbiBhIHRleHQgc3RyaW5nLiAgVGhlIHJldHVybgp2YWx1ZSBpcyBhbiBhcnJheSBvZiBvYmplY3RzLCBlYWNoIHJlcHJlc2VudGluZyBhbiBIVE1MIHN0YXJ0IG9yIGVuZCB0YWcuICBFYWNoCm9iamVjdCBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBwb3MsIHdoaWNoIGlzIGFuIGludGVnZXIgcmVwcmVzZW50aW5nIHRoZSB0ZXh0Cm9mZnNldCBvZiB0aGUgdGFnLiBFdmVyeSBzdGFydCB0YWcgYWxzbyBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBub2RlLCB3aGljaCBpcyB0aGUKRE9NIGVsZW1lbnQgc3RhcnRlZCBieSB0aGUgdGFnLiBFbmQgdGFncyBkbyBub3QgaGF2ZSB0aGlzIHByb3BlcnR5LgpAcGFyYW0gIGlucHV0U3RyaW5nICBhIHRleHQgc3RyaW5nCkBwYXJhbSAgbGFuZ3VhZ2UgIGEgbGFuZ3VhZ2UgZGVmaW5pdGlvbiBvYmplY3QKQHJldHVybiAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKKi8KZnVuY3Rpb24gc2hfaGlnaGxpZ2h0U3RyaW5nKGlucHV0U3RyaW5nLCBsYW5ndWFnZSkgewogIGlmICgvS29ucXVlcm9yLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICBpZiAoISBsYW5ndWFnZS5rb25xdWVyZWQpIHsKICAgICAgZm9yICh2YXIgcyA9IDA7IHMgPCBsYW5ndWFnZS5sZW5ndGg7IHMrKykgewogICAgICAgIGZvciAodmFyIHAgPSAwOyBwIDwgbGFuZ3VhZ2Vbc10ubGVuZ3RoOyBwKyspIHsKICAgICAgICAgIHZhciByID0gbGFuZ3VhZ2Vbc11bcF1bMF07CiAgICAgICAgICBpZiAoci5zb3VyY2UgPT09ICckJykgewogICAgICAgICAgICByLmV4ZWMgPSBzaF9rb25xdWVyb3JFeGVjOwogICAgICAgICAgfQogICAgICAgIH0KICAgICAgfQogICAgICBsYW5ndWFnZS5rb25xdWVyZWQgPSB0cnVlOwogICAgfQogIH0KCiAgdmFyIGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgdmFyIHNwYW4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJyk7CgogIC8vIHRoZSByZXN1bHQKICB2YXIgdGFncyA9IFtdOwogIHZhciBudW1UYWdzID0gMDsKCiAgLy8gZWFjaCBlbGVtZW50IGlzIGEgcGF0dGVybiBvYmplY3QgZnJvbSBsYW5ndWFnZQogIHZhciBwYXR0ZXJuU3RhY2sgPSBbXTsKCiAgLy8gdGhlIGN1cnJlbnQgcG9zaXRpb24gd2l0aGluIGlucHV0U3RyaW5nCiAgdmFyIHBvcyA9IDA7CgogIC8vIHRoZSBuYW1lIG9mIHRoZSBjdXJyZW50IHN0eWxlLCBvciBudWxsIGlmIHRoZXJlIGlzIG5vIGN1cnJlbnQgc3R5bGUKICB2YXIgY3VycmVudFN0eWxlID0gbnVsbDsKCiAgdmFyIG91dHB1dCA9IGZ1bmN0aW9uKHMsIHN0eWxlKSB7CiAgICB2YXIgbGVuZ3RoID0gcy5sZW5ndGg7CiAgICAvLyB0aGlzIGlzIG1vcmUgdGhhbiBqdXN0IGFuIG9wdGltaXphdGlvbiAtIHdlIGRvbid0IHdhbnQgdG8gb3V0cHV0IGVtcHR5IDxzcGFuPjwvc3Bhbj4gZWxlbWVudHMKICAgIGlmIChsZW5ndGggPT09IDApIHsKICAgICAgcmV0dXJuOwogICAgfQogICAgaWYgKCEgc3R5bGUpIHsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoICE9PSAwKSB7CiAgICAgICAgdmFyIHBhdHRlcm4gPSBwYXR0ZXJuU3RhY2tbc3RhY2tMZW5ndGggLSAxXTsKICAgICAgICAvLyBjaGVjayB3aGV0aGVyIHRoaXMgaXMgYSBzdGF0ZSBvciBhbiBlbnZpcm9ubWVudAogICAgICAgIGlmICghIHBhdHRlcm5bM10pIHsKICAgICAgICAgIC8vIGl0J3Mgbm90IGEgc3RhdGUgLSBpdCdzIGFuIGVudmlyb25tZW50OyB1c2UgdGhlIHN0eWxlIGZvciB0aGlzIGVudmlyb25tZW50CiAgICAgICAgICBzdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgfQogICAgICB9CiAgICB9CiAgICBpZiAoY3VycmVudFN0eWxlICE9PSBzdHlsZSkgewogICAgICBpZiAoY3VycmVudFN0eWxlKSB7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge3BvczogcG9zfTsKICAgICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgICAgc2hfc2V0SHJlZih0YWdzLCBudW1UYWdzLCBpbnB1dFN0cmluZyk7CiAgICAgICAgfQogICAgICB9CiAgICAgIGlmIChzdHlsZSkgewogICAgICAgIHZhciBjbG9uZTsKICAgICAgICBpZiAoc3R5bGUgPT09ICdzaF91cmwnKSB7CiAgICAgICAgICBjbG9uZSA9IGEuY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICBjbG9uZSA9IHNwYW4uY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgY2xvbmUuY2xhc3NOYW1lID0gc3R5bGU7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge25vZGU6IGNsb25lLCBwb3M6IHBvc307CiAgICAgIH0KICAgIH0KICAgIHBvcyArPSBsZW5ndGg7CiAgICBjdXJyZW50U3R5bGUgPSBzdHlsZTsKICB9OwoKICB2YXIgZW5kT2ZMaW5lUGF0dGVybiA9IC9cclxufFxyfFxuL2c7CiAgZW5kT2ZMaW5lUGF0dGVybi5sYXN0SW5kZXggPSAwOwogIHZhciBpbnB1dFN0cmluZ0xlbmd0aCA9IGlucHV0U3RyaW5nLmxlbmd0aDsKICB3aGlsZSAocG9zIDwgaW5wdXRTdHJpbmdMZW5ndGgpIHsKICAgIHZhciBzdGFydCA9IHBvczsKICAgIHZhciBlbmQ7CiAgICB2YXIgc3RhcnRPZk5leHRMaW5lOwogICAgdmFyIGVuZE9mTGluZU1hdGNoID0gZW5kT2ZMaW5lUGF0dGVybi5leGVjKGlucHV0U3RyaW5nKTsKICAgIGlmIChlbmRPZkxpbmVNYXRjaCA9PT0gbnVsbCkgewogICAgICBlbmQgPSBpbnB1dFN0cmluZ0xlbmd0aDsKICAgICAgc3RhcnRPZk5leHRMaW5lID0gaW5wdXRTdHJpbmdMZW5ndGg7CiAgICB9CiAgICBlbHNlIHsKICAgICAgZW5kID0gZW5kT2ZMaW5lTWF0Y2guaW5kZXg7CiAgICAgIHN0YXJ0T2ZOZXh0TGluZSA9IGVuZE9mTGluZVBhdHRlcm4ubGFzdEluZGV4OwogICAgfQoKICAgIHZhciBsaW5lID0gaW5wdXRTdHJpbmcuc3Vic3RyaW5nKHN0YXJ0LCBlbmQpOwoKICAgIHZhciBtYXRjaENhY2hlID0gW107CiAgICBmb3IgKDs7KSB7CiAgICAgIHZhciBwb3NXaXRoaW5MaW5lID0gcG9zIC0gc3RhcnQ7CgogICAgICB2YXIgc3RhdGVJbmRleDsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoID09PSAwKSB7CiAgICAgICAgc3RhdGVJbmRleCA9IDA7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gZ2V0IHRoZSBuZXh0IHN0YXRlCiAgICAgICAgc3RhdGVJbmRleCA9IHBhdHRlcm5TdGFja1tzdGFja0xlbmd0aCAtIDFdWzJdOwogICAgICB9CgogICAgICB2YXIgc3RhdGUgPSBsYW5ndWFnZVtzdGF0ZUluZGV4XTsKICAgICAgdmFyIG51bVBhdHRlcm5zID0gc3RhdGUubGVuZ3RoOwogICAgICB2YXIgbWMgPSBtYXRjaENhY2hlW3N0YXRlSW5kZXhdOwogICAgICBpZiAoISBtYykgewogICAgICAgIG1jID0gbWF0Y2hDYWNoZVtzdGF0ZUluZGV4XSA9IFtdOwogICAgICB9CiAgICAgIHZhciBiZXN0TWF0Y2ggPSBudWxsOwogICAgICB2YXIgYmVzdFBhdHRlcm5JbmRleCA9IC0xOwogICAgICBmb3IgKHZhciBpID0gMDsgaSA8IG51bVBhdHRlcm5zOyBpKyspIHsKICAgICAgICB2YXIgbWF0Y2g7CiAgICAgICAgaWYgKGkgPCBtYy5sZW5ndGggJiYgKG1jW2ldID09PSBudWxsIHx8IHBvc1dpdGhpbkxpbmUgPD0gbWNbaV0uaW5kZXgpKSB7CiAgICAgICAgICBtYXRjaCA9IG1jW2ldOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHZhciByZWdleCA9IHN0YXRlW2ldWzBdOwogICAgICAgICAgcmVnZXgubGFzdEluZGV4ID0gcG9zV2l0aGluTGluZTsKICAgICAgICAgIG1hdGNoID0gcmVnZXguZXhlYyhsaW5lKTsKICAgICAgICAgIG1jW2ldID0gbWF0Y2g7CiAgICAgICAgfQogICAgICAgIGlmIChtYXRjaCAhPT0gbnVsbCAmJiAoYmVzdE1hdGNoID09PSBudWxsIHx8IG1hdGNoLmluZGV4IDwgYmVzdE1hdGNoLmluZGV4KSkgewogICAgICAgICAgYmVzdE1hdGNoID0gbWF0Y2g7CiAgICAgICAgICBiZXN0UGF0dGVybkluZGV4ID0gaTsKICAgICAgICAgIGlmIChtYXRjaC5pbmRleCA9PT0gcG9zV2l0aGluTGluZSkgewogICAgICAgICAgICBicmVhazsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KCiAgICAgIGlmIChiZXN0TWF0Y2ggPT09IG51bGwpIHsKICAgICAgICBvdXRwdXQobGluZS5zdWJzdHJpbmcocG9zV2l0aGluTGluZSksIG51bGwpOwogICAgICAgIGJyZWFrOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGdvdCBhIG1hdGNoCiAgICAgICAgaWYgKGJlc3RNYXRjaC5pbmRleCA+IHBvc1dpdGhpbkxpbmUpIHsKICAgICAgICAgIG91dHB1dChsaW5lLnN1YnN0cmluZyhwb3NXaXRoaW5MaW5lLCBiZXN0TWF0Y2guaW5kZXgpLCBudWxsKTsKICAgICAgICB9CgogICAgICAgIHZhciBwYXR0ZXJuID0gc3RhdGVbYmVzdFBhdHRlcm5JbmRleF07CgogICAgICAgIHZhciBuZXdTdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgdmFyIG1hdGNoZWRTdHJpbmc7CiAgICAgICAgaWYgKG5ld1N0eWxlIGluc3RhbmNlb2YgQXJyYXkpIHsKICAgICAgICAgIGZvciAodmFyIHN1YmV4cHJlc3Npb24gPSAwOyBzdWJleHByZXNzaW9uIDwgbmV3U3R5bGUubGVuZ3RoOyBzdWJleHByZXNzaW9uKyspIHsKICAgICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFtzdWJleHByZXNzaW9uICsgMV07CiAgICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZVtzdWJleHByZXNzaW9uXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFswXTsKICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZSk7CiAgICAgICAgfQoKICAgICAgICBzd2l0Y2ggKHBhdHRlcm5bMl0pIHsKICAgICAgICBjYXNlIC0xOgogICAgICAgICAgLy8gZG8gbm90aGluZwogICAgICAgICAgYnJlYWs7CiAgICAgICAgY2FzZSAtMjoKICAgICAgICAgIC8vIGV4aXQKICAgICAgICAgIHBhdHRlcm5TdGFjay5wb3AoKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGNhc2UgLTM6CiAgICAgICAgICAvLyBleGl0YWxsCiAgICAgICAgICBwYXR0ZXJuU3RhY2subGVuZ3RoID0gMDsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGRlZmF1bHQ6CiAgICAgICAgICAvLyB0aGlzIHdhcyB0aGUgc3RhcnQgb2YgYSBkZWxpbWl0ZWQgcGF0dGVybiBvciBhIHN0YXRlL2Vudmlyb25tZW50CiAgICAgICAgICBwYXR0ZXJuU3RhY2sucHVzaChwYXR0ZXJuKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIH0KICAgICAgfQogICAgfQoKICAgIC8vIGVuZCBvZiB0aGUgbGluZQogICAgaWYgKGN1cnJlbnRTdHlsZSkgewogICAgICB0YWdzW251bVRhZ3MrK10gPSB7cG9zOiBwb3N9OwogICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgIHNoX3NldEhyZWYodGFncywgbnVtVGFncywgaW5wdXRTdHJpbmcpOwogICAgICB9CiAgICAgIGN1cnJlbnRTdHlsZSA9IG51bGw7CiAgICB9CiAgICBwb3MgPSBzdGFydE9mTmV4dExpbmU7CiAgfQoKICByZXR1cm4gdGFnczsKfQoKLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KLy8gRE9NLWRlcGVuZGVudCBmdW5jdGlvbnMKCmZ1bmN0aW9uIHNoX2dldENsYXNzZXMoZWxlbWVudCkgewogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgaHRtbENsYXNzID0gZWxlbWVudC5jbGFzc05hbWU7CiAgaWYgKGh0bWxDbGFzcyAmJiBodG1sQ2xhc3MubGVuZ3RoID4gMCkgewogICAgdmFyIGh0bWxDbGFzc2VzID0gaHRtbENsYXNzLnNwbGl0KCcgJyk7CiAgICBmb3IgKHZhciBpID0gMDsgaSA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaSsrKSB7CiAgICAgIGlmIChodG1sQ2xhc3Nlc1tpXS5sZW5ndGggPiAwKSB7CiAgICAgICAgcmVzdWx0LnB1c2goaHRtbENsYXNzZXNbaV0pOwogICAgICB9CiAgICB9CiAgfQogIHJldHVybiByZXN1bHQ7Cn0KCmZ1bmN0aW9uIHNoX2FkZENsYXNzKGVsZW1lbnQsIG5hbWUpIHsKICB2YXIgaHRtbENsYXNzZXMgPSBzaF9nZXRDbGFzc2VzKGVsZW1lbnQpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgaHRtbENsYXNzZXMubGVuZ3RoOyBpKyspIHsKICAgIGlmIChuYW1lLnRvTG93ZXJDYXNlKCkgPT09IGh0bWxDbGFzc2VzW2ldLnRvTG93ZXJDYXNlKCkpIHsKICAgICAgcmV0dXJuOwogICAgfQogIH0KICBodG1sQ2xhc3Nlcy5wdXNoKG5hbWUpOwogIGVsZW1lbnQuY2xhc3NOYW1lID0gaHRtbENsYXNzZXMuam9pbignICcpOwp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSBhbiBIVE1MIERPTSBOb2RlTGlzdC4KQHBhcmFtICBub2RlTGlzdCAgYSBET00gTm9kZUxpc3QKQHBhcmFtICByZXN1bHQgIGFuIG9iamVjdCB3aXRoIHRleHQsIHRhZ3MgYW5kIHBvcyBwcm9wZXJ0aWVzCiovCmZ1bmN0aW9uIHNoX2V4dHJhY3RUYWdzRnJvbU5vZGVMaXN0KG5vZGVMaXN0LCByZXN1bHQpIHsKICB2YXIgbGVuZ3RoID0gbm9kZUxpc3QubGVuZ3RoOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbGVuZ3RoOyBpKyspIHsKICAgIHZhciBub2RlID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHN3aXRjaCAobm9kZS5ub2RlVHlwZSkgewogICAgY2FzZSAxOgogICAgICBpZiAobm9kZS5ub2RlTmFtZS50b0xvd2VyQ2FzZSgpID09PSAnYnInKSB7CiAgICAgICAgdmFyIHRlcm1pbmF0b3I7CiAgICAgICAgaWYgKC9NU0lFLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xyJzsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xuJzsKICAgICAgICB9CiAgICAgICAgcmVzdWx0LnRleHQucHVzaCh0ZXJtaW5hdG9yKTsKICAgICAgICByZXN1bHQucG9zKys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7bm9kZTogbm9kZS5jbG9uZU5vZGUoZmFsc2UpLCBwb3M6IHJlc3VsdC5wb3N9KTsKICAgICAgICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChub2RlLmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7cG9zOiByZXN1bHQucG9zfSk7CiAgICAgIH0KICAgICAgYnJlYWs7CiAgICBjYXNlIDM6CiAgICBjYXNlIDQ6CiAgICAgIHJlc3VsdC50ZXh0LnB1c2gobm9kZS5kYXRhKTsKICAgICAgcmVzdWx0LnBvcyArPSBub2RlLmxlbmd0aDsKICAgICAgYnJlYWs7CiAgICB9CiAgfQp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSB0aGUgdGV4dCBvZiBhbiBIVE1MIGVsZW1lbnQuIFRoZSBleHRyYWN0ZWQgdGFncyB3aWxsIGJlCnJldHVybmVkIGFzIGFuIGFycmF5IG9mIHRhZyBvYmplY3RzLiBTZWUgc2hfaGlnaGxpZ2h0U3RyaW5nIGZvciB0aGUgZm9ybWF0IG9mCnRoZSB0YWcgb2JqZWN0cy4KQHBhcmFtICBlbGVtZW50ICBhIERPTSBlbGVtZW50CkBwYXJhbSAgdGFncyAgYW4gZW1wdHkgYXJyYXk7IHRoZSBleHRyYWN0ZWQgdGFnIG9iamVjdHMgd2lsbCBiZSByZXR1cm5lZCBpbiBpdApAcmV0dXJuICB0aGUgdGV4dCBvZiB0aGUgZWxlbWVudApAc2VlICBzaF9oaWdobGlnaHRTdHJpbmcKKi8KZnVuY3Rpb24gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgdGFncykgewogIHZhciByZXN1bHQgPSB7fTsKICByZXN1bHQudGV4dCA9IFtdOwogIHJlc3VsdC50YWdzID0gdGFnczsKICByZXN1bHQucG9zID0gMDsKICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChlbGVtZW50LmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgcmV0dXJuIHJlc3VsdC50ZXh0LmpvaW4oJycpOwp9CgovKioKTWVyZ2VzIHRoZSBvcmlnaW5hbCB0YWdzIGZyb20gYW4gZWxlbWVudCB3aXRoIHRoZSB0YWdzIHByb2R1Y2VkIGJ5IGhpZ2hsaWdodGluZy4KQHBhcmFtICBvcmlnaW5hbFRhZ3MgIGFuIGFycmF5IGNvbnRhaW5pbmcgdGhlIG9yaWdpbmFsIHRhZ3MKQHBhcmFtICBoaWdobGlnaHRUYWdzICBhbiBhcnJheSBjb250YWluaW5nIHRoZSBoaWdobGlnaHRpbmcgdGFncyAtIHRoZXNlIG11c3Qgbm90IG92ZXJsYXAKQHJlc3VsdCAgYW4gYXJyYXkgY29udGFpbmluZyB0aGUgbWVyZ2VkIHRhZ3MKKi8KZnVuY3Rpb24gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncykgewogIHZhciBudW1PcmlnaW5hbFRhZ3MgPSBvcmlnaW5hbFRhZ3MubGVuZ3RoOwogIGlmIChudW1PcmlnaW5hbFRhZ3MgPT09IDApIHsKICAgIHJldHVybiBoaWdobGlnaHRUYWdzOwogIH0KCiAgdmFyIG51bUhpZ2hsaWdodFRhZ3MgPSBoaWdobGlnaHRUYWdzLmxlbmd0aDsKICBpZiAobnVtSGlnaGxpZ2h0VGFncyA9PT0gMCkgewogICAgcmV0dXJuIG9yaWdpbmFsVGFnczsKICB9CgogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgb3JpZ2luYWxJbmRleCA9IDA7CiAgdmFyIGhpZ2hsaWdodEluZGV4ID0gMDsKCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MgJiYgaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICB2YXIgb3JpZ2luYWxUYWcgPSBvcmlnaW5hbFRhZ3Nbb3JpZ2luYWxJbmRleF07CiAgICB2YXIgaGlnaGxpZ2h0VGFnID0gaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF07CgogICAgaWYgKG9yaWdpbmFsVGFnLnBvcyA8PSBoaWdobGlnaHRUYWcucG9zKSB7CiAgICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnKTsKICAgICAgb3JpZ2luYWxJbmRleCsrOwogICAgfQogICAgZWxzZSB7CiAgICAgIHJlc3VsdC5wdXNoKGhpZ2hsaWdodFRhZyk7CiAgICAgIGlmIChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4ICsgMV0ucG9zIDw9IG9yaWdpbmFsVGFnLnBvcykgewogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgICAgcmVzdWx0LnB1c2goaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF0pOwogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gbmV3IGVuZCB0YWcKICAgICAgICByZXN1bHQucHVzaCh7cG9zOiBvcmlnaW5hbFRhZy5wb3N9KTsKCiAgICAgICAgLy8gbmV3IHN0YXJ0IHRhZwogICAgICAgIGhpZ2hsaWdodFRhZ3NbaGlnaGxpZ2h0SW5kZXhdID0ge25vZGU6IGhpZ2hsaWdodFRhZy5ub2RlLmNsb25lTm9kZShmYWxzZSksIHBvczogb3JpZ2luYWxUYWcucG9zfTsKICAgICAgfQogICAgfQogIH0KCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MpIHsKICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnc1tvcmlnaW5hbEluZGV4XSk7CiAgICBvcmlnaW5hbEluZGV4Kys7CiAgfQoKICB3aGlsZSAoaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICByZXN1bHQucHVzaChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4XSk7CiAgICBoaWdobGlnaHRJbmRleCsrOwogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkluc2VydHMgdGFncyBpbnRvIHRleHQuCkBwYXJhbSAgdGFncyAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKQHBhcmFtICB0ZXh0ICBhIHN0cmluZyByZXByZXNlbnRpbmcgdGhlIHRleHQKQHJldHVybiAgYSBET00gRG9jdW1lbnRGcmFnbWVudCByZXByZXNlbnRpbmcgdGhlIHJlc3VsdGluZyBIVE1MCiovCmZ1bmN0aW9uIHNoX2luc2VydFRhZ3ModGFncywgdGV4dCkgewogIHZhciBkb2MgPSBkb2N1bWVudDsKCiAgdmFyIHJlc3VsdCA9IGRvY3VtZW50LmNyZWF0ZURvY3VtZW50RnJhZ21lbnQoKTsKICB2YXIgdGFnSW5kZXggPSAwOwogIHZhciBudW1UYWdzID0gdGFncy5sZW5ndGg7CiAgdmFyIHRleHRQb3MgPSAwOwogIHZhciB0ZXh0TGVuZ3RoID0gdGV4dC5sZW5ndGg7CiAgdmFyIGN1cnJlbnROb2RlID0gcmVzdWx0OwoKICAvLyBvdXRwdXQgb25lIHRhZyBvciB0ZXh0IG5vZGUgZXZlcnkgaXRlcmF0aW9uCiAgd2hpbGUgKHRleHRQb3MgPCB0ZXh0TGVuZ3RoIHx8IHRhZ0luZGV4IDwgbnVtVGFncykgewogICAgdmFyIHRhZzsKICAgIHZhciB0YWdQb3M7CiAgICBpZiAodGFnSW5kZXggPCBudW1UYWdzKSB7CiAgICAgIHRhZyA9IHRhZ3NbdGFnSW5kZXhdOwogICAgICB0YWdQb3MgPSB0YWcucG9zOwogICAgfQogICAgZWxzZSB7CiAgICAgIHRhZ1BvcyA9IHRleHRMZW5ndGg7CiAgICB9CgogICAgaWYgKHRhZ1BvcyA8PSB0ZXh0UG9zKSB7CiAgICAgIC8vIG91dHB1dCB0aGUgdGFnCiAgICAgIGlmICh0YWcubm9kZSkgewogICAgICAgIC8vIHN0YXJ0IHRhZwogICAgICAgIHZhciBuZXdOb2RlID0gdGFnLm5vZGU7CiAgICAgICAgY3VycmVudE5vZGUuYXBwZW5kQ2hpbGQobmV3Tm9kZSk7CiAgICAgICAgY3VycmVudE5vZGUgPSBuZXdOb2RlOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGVuZCB0YWcKICAgICAgICBjdXJyZW50Tm9kZSA9IGN1cnJlbnROb2RlLnBhcmVudE5vZGU7CiAgICAgIH0KICAgICAgdGFnSW5kZXgrKzsKICAgIH0KICAgIGVsc2UgewogICAgICAvLyBvdXRwdXQgdGV4dAogICAgICBjdXJyZW50Tm9kZS5hcHBlbmRDaGlsZChkb2MuY3JlYXRlVGV4dE5vZGUodGV4dC5zdWJzdHJpbmcodGV4dFBvcywgdGFnUG9zKSkpOwogICAgICB0ZXh0UG9zID0gdGFnUG9zOwogICAgfQogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkhpZ2hsaWdodHMgYW4gZWxlbWVudCBjb250YWluaW5nIHNvdXJjZSBjb2RlLiAgVXBvbiBjb21wbGV0aW9uIG9mIHRoaXMgZnVuY3Rpb24sCnRoZSBlbGVtZW50IHdpbGwgaGF2ZSBiZWVuIHBsYWNlZCBpbiB0aGUgInNoX3NvdXJjZUNvZGUiIGNsYXNzLgpAcGFyYW0gIGVsZW1lbnQgIGEgRE9NIDxwcmU+IGVsZW1lbnQgY29udGFpbmluZyB0aGUgc291cmNlIGNvZGUgdG8gYmUgaGlnaGxpZ2h0ZWQKQHBhcmFtICBsYW5ndWFnZSAgYSBsYW5ndWFnZSBkZWZpbml0aW9uIG9iamVjdAoqLwpmdW5jdGlvbiBzaF9oaWdobGlnaHRFbGVtZW50KGVsZW1lbnQsIGxhbmd1YWdlKSB7CiAgc2hfYWRkQ2xhc3MoZWxlbWVudCwgJ3NoX3NvdXJjZUNvZGUnKTsKICB2YXIgb3JpZ2luYWxUYWdzID0gW107CiAgdmFyIGlucHV0U3RyaW5nID0gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgb3JpZ2luYWxUYWdzKTsKICB2YXIgaGlnaGxpZ2h0VGFncyA9IHNoX2hpZ2hsaWdodFN0cmluZyhpbnB1dFN0cmluZywgbGFuZ3VhZ2UpOwogIHZhciB0YWdzID0gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncyk7CiAgdmFyIGRvY3VtZW50RnJhZ21lbnQgPSBzaF9pbnNlcnRUYWdzKHRhZ3MsIGlucHV0U3RyaW5nKTsKICB3aGlsZSAoZWxlbWVudC5oYXNDaGlsZE5vZGVzKCkpIHsKICAgIGVsZW1lbnQucmVtb3ZlQ2hpbGQoZWxlbWVudC5maXJzdENoaWxkKTsKICB9CiAgZWxlbWVudC5hcHBlbmRDaGlsZChkb2N1bWVudEZyYWdtZW50KTsKfQoKZnVuY3Rpb24gc2hfZ2V0WE1MSHR0cFJlcXVlc3QoKSB7CiAgaWYgKHdpbmRvdy5BY3RpdmVYT2JqZWN0KSB7CiAgICByZXR1cm4gbmV3IEFjdGl2ZVhPYmplY3QoJ01zeG1sMi5YTUxIVFRQJyk7CiAgfQogIGVsc2UgaWYgKHdpbmRvdy5YTUxIdHRwUmVxdWVzdCkgewogICAgcmV0dXJuIG5ldyBYTUxIdHRwUmVxdWVzdCgpOwogIH0KICB0aHJvdyAnTm8gWE1MSHR0cFJlcXVlc3QgaW1wbGVtZW50YXRpb24gYXZhaWxhYmxlJzsKfQoKZnVuY3Rpb24gc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpIHsKICBpZiAobGFuZ3VhZ2UgaW4gc2hfcmVxdWVzdHMpIHsKICAgIHNoX3JlcXVlc3RzW2xhbmd1YWdlXS5wdXNoKGVsZW1lbnQpOwogICAgcmV0dXJuOwogIH0KICBzaF9yZXF1ZXN0c1tsYW5ndWFnZV0gPSBbZWxlbWVudF07CiAgdmFyIHJlcXVlc3QgPSBzaF9nZXRYTUxIdHRwUmVxdWVzdCgpOwogIHZhciB1cmwgPSBwcmVmaXggKyAnc2hfJyArIGxhbmd1YWdlICsgc3VmZml4OwogIHJlcXVlc3Qub3BlbignR0VUJywgdXJsLCB0cnVlKTsKICByZXF1ZXN0Lm9ucmVhZHlzdGF0ZWNoYW5nZSA9IGZ1bmN0aW9uICgpIHsKICAgIGlmIChyZXF1ZXN0LnJlYWR5U3RhdGUgPT09IDQpIHsKICAgICAgdHJ5IHsKICAgICAgICBpZiAoISByZXF1ZXN0LnN0YXR1cyB8fCByZXF1ZXN0LnN0YXR1cyA9PT0gMjAwKSB7CiAgICAgICAgICBldmFsKHJlcXVlc3QucmVzcG9uc2VUZXh0KTsKICAgICAgICAgIHZhciBlbGVtZW50cyA9IHNoX3JlcXVlc3RzW2xhbmd1YWdlXTsKICAgICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgZWxlbWVudHMubGVuZ3RoOyBpKyspIHsKICAgICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50c1tpXSwgc2hfbGFuZ3VhZ2VzW2xhbmd1YWdlXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgdGhyb3cgJ0hUVFAgZXJyb3I6IHN0YXR1cyAnICsgcmVxdWVzdC5zdGF0dXM7CiAgICAgICAgfQogICAgICB9CiAgICAgIGZpbmFsbHkgewogICAgICAgIHJlcXVlc3QgPSBudWxsOwogICAgICB9CiAgICB9CiAgfTsKICByZXF1ZXN0LnNlbmQobnVsbCk7Cn0KCi8qKgpIaWdobGlnaHRzIGFsbCBlbGVtZW50cyBjb250YWluaW5nIHNvdXJjZSBjb2RlIG9uIHRoZSBjdXJyZW50IHBhZ2UuIEVsZW1lbnRzCmNvbnRhaW5pbmcgc291cmNlIGNvZGUgbXVzdCBiZSAicHJlIiBlbGVtZW50cyB3aXRoIGEgImNsYXNzIiBhdHRyaWJ1dGUgb2YKInNoX0xBTkdVQUdFIiwgd2hlcmUgTEFOR1VBR0UgaXMgYSB2YWxpZCBsYW5ndWFnZSBpZGVudGlmaWVyOyBlLmcuLCAic2hfamF2YSIKaWRlbnRpZmllcyB0aGUgZWxlbWVudCBhcyBjb250YWluaW5nICJqYXZhIiBsYW5ndWFnZSBzb3VyY2UgY29kZS4KKi8KZnVuY3Rpb24gaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCB0YWcpIHsKICB2YXIgbm9kZUxpc3QgPSBkb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSh0YWcpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbm9kZUxpc3QubGVuZ3RoOyBpKyspIHsKICAgIHZhciBlbGVtZW50ID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHZhciBodG1sQ2xhc3NlcyA9IHNoX2dldENsYXNzZXMoZWxlbWVudCk7CiAgICB2YXIgaGlnaGxpZ2h0ZWQgPSBmYWxzZTsKICAgIHZhciBkb250aGlnaGxpZ2h0ID0gZmFsc2U7CiAgICBmb3IgKHZhciBqID0gMDsgaiA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaisrKSB7CiAgICAgIHZhciBodG1sQ2xhc3MgPSBodG1sQ2xhc3Nlc1tqXS50b0xvd2VyQ2FzZSgpOwogICAgICBpZiAoaHRtbENsYXNzID09PSAnc2hfbm9uZScpIHsKICAgICAgICBkb250aGlnaGxpZ2h0ID0gdHJ1ZQogICAgICAgIGNvbnRpbnVlOwogICAgICB9CiAgICAgIGlmIChodG1sQ2xhc3Muc3Vic3RyKDAsIDMpID09PSAnc2hfJykgewogICAgICAgIHZhciBsYW5ndWFnZSA9IGh0bWxDbGFzcy5zdWJzdHJpbmcoMyk7CiAgICAgICAgaWYgKGxhbmd1YWdlIGluIHNoX2xhbmd1YWdlcykgewogICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50LCBzaF9sYW5ndWFnZXNbbGFuZ3VhZ2VdKTsKICAgICAgICAgIGhpZ2hsaWdodGVkID0gdHJ1ZTsKICAgICAgICB9CiAgICAgICAgZWxzZSBpZiAodHlwZW9mKHByZWZpeCkgPT09ICdzdHJpbmcnICYmIHR5cGVvZihzdWZmaXgpID09PSAnc3RyaW5nJykgewogICAgICAgICAgc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHRocm93ICdGb3VuZCA8JyArIHRhZyArICc+IGVsZW1lbnQgd2l0aCBjbGFzcz0iJyArIGh0bWxDbGFzcyArICciLCBidXQgbm8gc3VjaCBsYW5ndWFnZSBleGlzdHMnOwogICAgICAgIH0KICAgICAgICBicmVhazsKICAgICAgfQogICAgfQogICAgaWYgKGhpZ2hsaWdodGVkID09PSBmYWxzZSAmJiBkb250aGlnaGxpZ2h0ID09IGZhbHNlKSB7CiAgICAgIHNoX2hpZ2hsaWdodEVsZW1lbnQoZWxlbWVudCwgc2hfbGFuZ3VhZ2VzWyJqYXZhc2NyaXB0Il0pOwogICAgfQogIH0KfQoKCgpmdW5jdGlvbiBzaF9oaWdobGlnaHREb2N1bWVudChwcmVmaXgsIHN1ZmZpeCkgewogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3R0Jyk7CiAgaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCAnY29kZScpOwogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3ByZScpOwp9Cg=="></script>
+  <script src="data:application/javascript;base64,aWYoIXRoaXMuc2hfbGFuZ3VhZ2VzKXt0aGlzLnNoX2xhbmd1YWdlcz17fX1zaF9sYW5ndWFnZXMuamF2YXNjcmlwdD1bW1svXC9cL1wvL2csInNoX2NvbW1lbnQiLDFdLFsvXC9cLy9nLCJzaF9jb21tZW50Iiw3XSxbL1wvXCpcKi9nLCJzaF9jb21tZW50Iiw4XSxbL1wvXCovZywic2hfY29tbWVudCIsOV0sWy9cYig/OmFic3RyYWN0fGJyZWFrfGNhc2V8Y2F0Y2h8Y2xhc3N8Y29uc3R8Y29udGludWV8ZGVidWdnZXJ8ZGVmYXVsdHxkZWxldGV8ZG98ZWxzZXxlbnVtfGV4cG9ydHxleHRlbmRzfGZhbHNlfGZpbmFsfGZpbmFsbHl8Zm9yfGZ1bmN0aW9ufGdvdG98aWZ8aW1wbGVtZW50c3xpbnxpbnN0YW5jZW9mfGludGVyZmFjZXxuYXRpdmV8bmV3fG51bGx8cHJpdmF0ZXxwcm90ZWN0ZWR8cHJvdG90eXBlfHB1YmxpY3xyZXR1cm58c3RhdGljfHN1cGVyfHN3aXRjaHxzeW5jaHJvbml6ZWR8dGhyb3d8dGhyb3dzfHRoaXN8dHJhbnNpZW50fHRydWV8dHJ5fHR5cGVvZnx2YXJ8dm9sYXRpbGV8d2hpbGV8d2l0aClcYi9nLCJzaF9rZXl3b3JkIiwtMV0sWy8oXCtcK3wtLXxcKXxcXSkoXHMqKShcLz0/KD8hWypcL10pKS9nLFsic2hfc3ltYm9sIiwic2hfbm9ybWFsIiwic2hfc3ltYm9sIl0sLTFdLFsvKDB4W0EtRmEtZjAtOV0rfCg/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykoXHMqKShcLyg/IVsqXC9dKSkvZyxbInNoX251bWJlciIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyhbQS1aYS16JF9dW0EtWmEtejAtOSRfXSpccyopKFwvPT8oPyFbKlwvXSkpL2csWyJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy9cLyg/OlxcLnxbXipcXFwvXSkoPzpcXC58W15cXFwvXSkqXC9bZ2ltXSovZywic2hfcmVnZXhwIiwtMV0sWy9cYlsrLV0/KD86KD86MHhbQS1GYS1mMC05XSspfCg/Oig/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykpdT8oPzooPzppbnQoPzo4fDE2fDMyfDY0KSl8TCk/XGIvZywic2hfbnVtYmVyIiwtMV0sWy8iL2csInNoX3N0cmluZyIsMTBdLFsvJy9nLCJzaF9zdHJpbmciLDExXSxbL358IXwlfFxefFwqfFwofFwpfC18XCt8PXxcW3xcXXxcXHw6fDt8LHxcLnxcL3xcP3wmfDx8PnxcfC9nLCJzaF9zeW1ib2wiLC0xXSxbL1x7fFx9L2csInNoX2NicmFja2V0IiwtMV0sWy9cYig/Ok1hdGh8SW5maW5pdHl8TmFOfHVuZGVmaW5lZHxhcmd1bWVudHMpXGIvZywic2hfcHJlZGVmX3ZhciIsLTFdLFsvXGIoPzpBcnJheXxCb29sZWFufERhdGV8RXJyb3J8RXZhbEVycm9yfEZ1bmN0aW9ufE51bWJlcnxPYmplY3R8UmFuZ2VFcnJvcnxSZWZlcmVuY2VFcnJvcnxSZWdFeHB8U3RyaW5nfFN5bnRheEVycm9yfFR5cGVFcnJvcnxVUklFcnJvcnxkZWNvZGVVUkl8ZGVjb2RlVVJJQ29tcG9uZW50fGVuY29kZVVSSXxlbmNvZGVVUklDb21wb25lbnR8ZXZhbHxpc0Zpbml0ZXxpc05hTnxwYXJzZUZsb2F0fHBhcnNlSW50KVxiL2csInNoX3ByZWRlZl9mdW5jIiwtMV0sWy8oPzpbQS1aYS16XXxfKVtBLVphLXowLTlfXSooPz1bIFx0XSpcKCkvZywic2hfZnVuY3Rpb24iLC0xXV0sW1svJC9nLG51bGwsLTJdLFsvKD86PD8pW0EtWmEtejAtOV9cLlwvXC1ffl0rQFtBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KXwoPzo8PylbQS1aYS16MC05X10rOlwvXC9bQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+PykvZywic2hfdXJsIiwtMV0sWy88XD94bWwvZywic2hfcHJlcHJvYyIsMiwxXSxbLzwhRE9DVFlQRS9nLCJzaF9wcmVwcm9jIiw0LDFdLFsvPCEtLS9nLCJzaF9jb21tZW50Iiw1XSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKSg/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKS9nLCJzaF9rZXl3b3JkIiw2LDFdLFsvJig/OltBLVphLXowLTldKyk7L2csInNoX3ByZXByb2MiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSooPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMV0sWy88KD86XC8pP1tBLVphLXpdW0EtWmEtejAtOV0qL2csInNoX2tleXdvcmQiLDYsMV0sWy9AW0EtWmEtel0rL2csInNoX3R5cGUiLC0xXSxbLyg/OlRPRE98RklYTUV8QlVHKSg/Ols6XT8pL2csInNoX3RvZG8iLC0xXV0sW1svXD8+L2csInNoX3ByZXByb2MiLC0yXSxbLyhbXj0iIFx0Pl0rKShbIFx0XSopKD0/KS9nLFsic2hfdHlwZSIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyIvZywic2hfc3RyaW5nIiwzXV0sW1svXFwoPzpcXHwiKS9nLG51bGwsLTFdLFsvIi9nLCJzaF9zdHJpbmciLC0yXV0sW1svPi9nLCJzaF9wcmVwcm9jIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLy0tPi9nLCJzaF9jb21tZW50IiwtMl0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdXSxbWy8oPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLyQvZyxudWxsLC0yXV0sW1svXCpcLy9nLCJzaF9jb21tZW50IiwtMl0sWy8oPzo8PylbQS1aYS16MC05X1wuXC9cLV9+XStAW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pfCg/Ojw/KVtBLVphLXowLTlfXSs6XC9cL1tBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KS9nLCJzaF91cmwiLC0xXSxbLzxcP3htbC9nLCJzaF9wcmVwcm9jIiwyLDFdLFsvPCFET0NUWVBFL2csInNoX3ByZXByb2MiLDQsMV0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopKD86XC8pPz4vZywic2hfa2V5d29yZCIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopL2csInNoX2tleXdvcmQiLDYsMV0sWy8mKD86W0EtWmEtejAtOV0rKTsvZywic2hfcHJlcHJvYyIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XVtBLVphLXowLTldKig/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSovZywic2hfa2V5d29yZCIsNiwxXSxbL0BbQS1aYS16XSsvZywic2hfdHlwZSIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy9cKlwvL2csInNoX2NvbW1lbnQiLC0yXSxbLyg/Ojw/KVtBLVphLXowLTlfXC5cL1wtX35dK0BbQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+Pyl8KD86PD8pW0EtWmEtejAtOV9dKzpcL1wvW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pL2csInNoX3VybCIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy8iL2csInNoX3N0cmluZyIsLTJdLFsvXFwuL2csInNoX3NwZWNpYWxjaGFyIiwtMV1dLFtbLycvZywic2hfc3RyaW5nIiwtMl0sWy9cXC4vZywic2hfc3BlY2lhbGNoYXIiLC0xXV1dOw=="></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+
+</body></html>

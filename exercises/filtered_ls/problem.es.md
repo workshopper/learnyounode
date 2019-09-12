@@ -16,9 +16,9 @@ function callback (error, lista) { /* ... */ }
 La `lista` es un arreglo de nombres de archivos de tipo String.
 
 La documentación del módulo `fs` puede verse en:
-  https://nodejs.org/api/fs.html
+  {rootdir:/docs-nodejs/fs.html}
 
 Además, el módulo `path` puede resultar útil, especialmente la función `extname`.
 
 La documentación del módulo `path` puede verse en:
-  https://nodejs.org/api/path.html
+  {rootdir:/docs-nodejs/path.html}

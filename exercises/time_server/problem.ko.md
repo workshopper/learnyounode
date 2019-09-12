@@ -43,7 +43,7 @@ server.listen(8000)
 
 `net` 모듈의 문서는 브라우저에 이 주소를 넣으면 볼 수 있습니다.
 
-  https://nodejs.org/api/net.html
+  {rootdir:/docs-nodejs/net.html}
 
 날짜를 만드려면, `new Date()` 객체에서 사용자 정의 형식을 만들 필요가 있습니다. 이 메소드가 유용할 것입니다.
 
