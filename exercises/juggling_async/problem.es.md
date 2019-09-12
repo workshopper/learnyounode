@@ -9,4 +9,4 @@ Como las llamadas a las URLs son asíncronas, es probable que no recibas las res
 
 Tendrás que encolar los resultados y mantener un contador de cuántas peticiones han sido recibidas de modo que al llegar al final puedas imprimir los resultados.
 
-En la vida real, hay varias librerías como [async](https://npmjs.com/async) y [after](https://npmjs.com/after) que facilitan la continuación de los callbacks. Para el alcance de este ejercicio no es necesario usar librerías externas.
+En la vida real, utilizar [JavaScript async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) facilitaria la continuación de los callbacks. Pero para el alcance de este ejercicio se debería realizar sin utilizarlo.
