@@ -6,6 +6,8 @@ For example, if you get 'txt' as the second argument then you will need to filte
 
 Keep in mind that the first arguments of your program are not the first values of the `process.argv` array, as the first two values are reserved for system info by Node.
 
+Keep in mind you need not to return a list but console.log() all elements of the filtered list.
+
 The list of files should be printed to the console, one file per line. You **must** use asynchronous I/O.
 
 ----------------------------------------------------------------------
