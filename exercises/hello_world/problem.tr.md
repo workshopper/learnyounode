@@ -5,7 +5,7 @@ Konsol(stdout)a "MERHABA DÜNYA" yazan bir program yazınız.
 ----------------------------------------------------------------------
 ## İPUÇLARI
 
-Node.js programı yazabilmek için, `.js` uzantılı bir dosya oluşturmalı ve için JavaScript yazmalısınız! Programınızı çalışmak için `node` komutunu kullanmalısnız. e.g.:
+Node.js programı yazabilmek için, `.js` uzantılı bir dosya oluşturmalı ve için JavaScript yazmalısınız! Programınızı çalışmak için `node` komutunu kullanmalısnız. Örneğin;
 
 ```sh
 $ node merhaba-dunya.js
