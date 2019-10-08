@@ -40,7 +40,7 @@ const mymodule = require('./benimmodulum.js')
 
 şeklinde kullanmalısınız. '.js' kısmı opsiyoneldir ve genellikle kullanılmaz.
 
-Şimdi, modül dosyanızda  `benimmodulum` değişkenine atanmış `module.exports` nesnesi var. Bir fonksiyon dışarı aktardığımız için `benimmodulum` çağrılabilir bir fonksiyon olur!
+Şimdi, modül dosyanızda `benimmodulum` değişkenine atanmış `module.exports` nesnesi var. Bir fonksiyon dışarı aktardığımız için `benimmodulum` çağrılabilir bir fonksiyon olur!
 
 Ayrıca aklınızda bulundurun ki; callback fonksiyonlarında hata kontrolleri ve erken geri dönmeler(early-returns) yapmak iyi bir alışkanlıktır:
 
