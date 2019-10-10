@@ -29,7 +29,7 @@ function listener (socket) { /* ... */ }
 
 `net.createServer()` fonksiyonu `sunucu`nuzun bir örneğini(instance) geri döndürür. `sunucu.listen(portNumarasi)` şeklinde kullanarak belirli bir portu dinlemeye başlarsınız.
 
-Tipik bir Node TCP sunucu şuna benzer:
+Tipik bir Node TCP sunucusu şuna benzer:
 
 ```js
 const net = require('net')
