@@ -18,7 +18,7 @@ module `net`, `http` fournit une méthode `http.createServer()`, mais celle-ci
 crée un serveur qui comprend le protocole HTTP.
 
 `http.createServer()` prend une fonction de rappel appelée une fois par
-connexion reçue par la serveur.  La fonction de rappel a la signature :
+connexion reçue par le serveur.  La fonction de rappel a la signature :
 
 ```js
 function callback (request, response) { /* ... */ }
