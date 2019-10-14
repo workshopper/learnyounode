@@ -1,0 +1,78 @@
+{
+  "title": "KAZANMAK İÇİN NODE.JS ÖĞRENİN!",
+  "common": {
+    "exercise": {
+      "pass": {
+        "sync": "Senkron metod kullanıldı: {{{method}}}",
+        "async": "Asenkron metod kullanıldı: {{{method}}}"
+      },
+      "fail": {
+        "sync": "Senkron metod kullanıldı: {{{method}}}",
+        "async": "Asenkron metod kullanıldı: {{{method}}}",
+        "unused": "`fs` modülündeki asenkron metod kullanıldı.",
+        "unexpected_error": "HTTP sunucusunda beklenmedik bir hata oluştu: {{{message}}}",
+        "connection": "{{{address}}} bağlanırken hata oluştu: {{{message}}}"
+      }
+    }
+  },
+  "exercise": {
+    "HELLO WORLD": "MERHABA DÜNYA",
+    "BABY STEPS": "BEBEK ADIMLARI",
+    "MY FIRST I/O!": "BENİM İLK G/Ç İŞLEMİM",
+    "MY FIRST ASYNC I/O!": "BENİM İLK ASENKRON G/Ç İŞLEMİM",
+    "FILTERED LS": "FİLTRELENMİŞ LS",
+    "MAKE IT MODULAR": "MODÜLER YAP",
+    "HTTP CLIENT": "HTTP İSTEMCİSİ",
+    "HTTP COLLECT": "HTTP TOPLA",
+    "JUGGLING ASYNC": "ASENKRON HOKKABAZI",
+    "TIME SERVER": "ZAMAN SUNUCUSU",
+    "HTTP FILE SERVER": "HTTP DOSYA SUNUCUSU",
+    "HTTP UPPERCASERER": "HTTP BÜYÜK HARFE DÖNÜŞTÜRÜCÜ",
+    "HTTP JSON API SERVER": "HTTP JSON API SUNUCUSU"
+  },
+  "exercises": {
+    "MAKE IT MODULAR": {
+      "fail": {
+        "missing_module": "Ekstra bir modül dosyası kullanmadınız, require() kullanarak bir modül import etmelisiniz",
+        "loadError": "Modül dosyası [{{path}}] yüklenirken hata oluştu: {{{message}}}",
+        "mod": {
+          "_base": "Ekstra modül dsoyanuz [{{path}}] {{{message}}}",
+          "no_export": "**bir tek fonksiyon** u dışarı aktarmıyor. `module.exports = function () {}` kalıbını kullanmalısınız.",
+          "arguments": "**üç** argümandan az argüman alan bir fonksiyon dışarı aktarıyor. dizin, filtre ve **callback** kabul eden bir fonksiyon kabul etmelisiniz.",
+          "missing_callback": "fs.readdir() fonksiyonu çağrılırken oluşan hata sonrasında callback argümanını çağırmadı",
+          "missing_error": "`fs.readdir()` fonksiyonundan oluşan hata geri gönderilmedi gibi görünüyor.\n  Aşağıdaki Node.js kalıbını kendi callback fonksiyonunuz içinde kullanınız:\n\tif (err)\n\t  return callback(err)",
+          "callback_arguments": "callback fonksiyonundan two argüman geri döndürmedi (`null` ve dosya isimlerinden oluşan bir dizi bekleniyor)",
+          "dont_use_dot": "'.'- ön ekli bir uzantı bekliyor gibi görünüyor, ikinci komut satırı argümanını '.' eklenmeden almalısınız",
+          "array_wrong_size": "callback fonksiyonun ikinci argümanını doğru sayıda elemana sahip diziyi geri döndürmedi ",
+          "dotExt": "belki de \".ext\" yerine \"ext\" ile eşleşmeliydi",
+          "array_comparison": "callback fonksiyonun ikinci argümanını doğru dosya listesi olarak geri döndürmedi",
+          "missing_array_argument": "callback fonksiyonun ikinci argümanını dizi nesnesi olarak geri döndürmedi",
+          "callback_error": "callback fonksiyonundan hata döndürdü:\n\t{{{error}}}",
+          "timeout": "callback argümanını çağırmadı",
+          "unexpected": "hata fırlattı:\n\t{{{error}}}"
+        }
+      },
+      "pass": {
+        "singleFunction": "Ekstra modül dosyası tek bir fonksiyon dışarı aktarıyor",
+        "arguments": "Ekstra modül dosyası {{{count}}} tane argüman alan bir fonksiyon dışarı aktarıyor",
+        "error": "Ekstra modül dosyası hataların üstesinden doğru şekilde geliyor",
+        "callback": "Ekstra modül dosyası callback argümanını doğru şekilde kullanıyor",
+        "callback_arguments": "Ekstra modül dosyası callback fonksiyonundan iki argüman geri döndürüyor",
+        "array_argument": "Ekstra modül dosyası callback fonksiyonunun ikinci argümanı olarak bir dizi geri döndürüyor",
+        "dont_use_dot": "Ekstra modül dosyası '.' ön ekinin üstesinden doğru şekilde geliyor",
+        "array_size": "Ekstra modül dosyası callback fonksiyonunun ikinci argümanı olarak doğru sayıda elemand geri döndürüyor",
+        "final": "Ekstra modül dosyası callback fonksiyonun ikinci argümanı olarak doğru dosya listesini geri döndürüyor"
+      }
+    },
+    "TIME SERVER": {
+      "fail": {
+        "connection": "localhost:{{port}}'a bağlanırken hata oluştu: {{{message}}}"
+      }
+    },
+    "HTTP FILE SERVER": {
+      "fail": {
+        "no_createReadStream": "fs.createReadStream() dışında bir fs metodu kullanıldı: {{{method}}}"
+      }
+    }
+  }
+}
