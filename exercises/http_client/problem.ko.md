@@ -6,7 +6,7 @@
 이 연습 문제에는 `http` 핵심 모듈이 필요할 것입니다.
 
 `http` 모듈의 문서는 브라우저에 이 주소를 넣으면 볼 수 있습니다.
-  {rootdir:/node_apidoc/http.html}
+  {rootdir:/docs-nodejs/http.html}
 
 `http.get()` 메소드는 간단한 GET 요청의 단축입니다. 간단한 답을 작성하기 위해 사용하세요. `http.get()`의 첫 번째 인자는 GET해야할 URL입니다. 두 번째 인자는 콜백입니다.
 
@@ -19,7 +19,7 @@ function callback (response) { /* ... */ }
 `response` 객체는 Node **스트림** 객체에 있습니다. Node 스트림을 이벤트를 발생하는 객체로 취급할 수 있습니다. 가장 흥미로운 세 가지 이벤트는 "data", "error", "end"입니다. 이벤트는 이런 식으로 감시할 수 있습니다.
 
 ```js
-response.on("data", function (data) { /* ... */ })
+response.on('data', function (data) { /* ... */ })
 ```
 
 "data" 이벤트는 데이터의 덩어리가 있고 처리할 수 있을 때 발생합니다. 덩어리의 크기는 뒤에 있는 데이터 소스에 따라 달라집니다.

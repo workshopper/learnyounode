@@ -41,8 +41,8 @@ module.exports = function (args) { /* ... */ }
 あるいは、関数名を使って定義してもいいです。
 
 ```js
-function hoge() {
-    /* ... */
+function hoge () {
+  /* ... */
 }
 
 module.exports = hoge
@@ -52,23 +52,22 @@ module.exports = hoge
 あなたの Module の名前が `mymodule.js` の場合、以下のように使ってください:
 
 ```js
-var hoge_module = require('./mymodule.js')
+const hogemodule = require('./mymodule.js')
 ```
 
 （メモ： `'.js'` の拡張子は必ずしも必要ではありません。他のコードでは、それをよく省略しています。）
-上記コードによって Module に書いてある `module.exports` の Object にアクセスできます。その Object は、 `hoge_module` 変数に格納されます。
+上記コードによって Module に書いてある `module.exports` の Object にアクセスできます。その Object は、 `hogemodule` 変数に格納されます。
 
-`mymodule.js` には1つの関数だけ定義されているので、 `hoge_module` 変数が実行可能な関数となります！
+`mymodule.js` には1つの関数だけ定義されているので、 `hogemodule` 変数が実行可能な関数となります！
 
-**例**： `hoge_module();`
+**例**： `hogemodule();`
 
 イディオムのエラーチェックと `return` を忘れないでください：
 
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // 早期 `return` が大事。
+    if (err) { return callback(err) } // 早期 `return` が大事。
 
     // ... エラーのない場合、そのまま `data`を使って楽しんでください。
 

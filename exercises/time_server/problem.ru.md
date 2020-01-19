@@ -27,8 +27,8 @@ function callback (socket) { /* ... */ }
 Типичный Node TCP сервер выглядит так:
 
 ```js
-var net = require('net')
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
   // socket handling logic
 })
 server.listen(8000)
@@ -41,14 +41,14 @@ server.listen(8000)
 Используйте `socket.write(data)`, для того чтобы вывести данные и `socket.end()`, для того чтобы закрыть соединение. Также метод `.end()` может принимать данные в качестве аргумента, поэтому Вы можете вывести данные следующим образом: `socket.end(data)`.
 
 Документацию для `net` модуля Вы сможете найти, набрав в браузере:
-  {rootdir:/node_apidoc/net.html}
+  {rootdir:/docs-nodejs/net.html}
 
 Для работы с датой воспользуйтесь `new Date()` объектом. Следующие методы могут быть полезны:
 
 ```js
 date.getFullYear()
-date.getMonth()     // starts at 0
-date.getDate()      // returns the day of month
+date.getMonth() // starts at 0
+date.getDate() // returns the day of month
 date.getHours()
 date.getMinutes()
 ```

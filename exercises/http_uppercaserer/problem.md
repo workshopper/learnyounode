@@ -1,3 +1,5 @@
+Create a file named `http-uppercaserer.js`.
+
 Write an HTTP **server** that receives only POST requests and converts incoming POST body characters to upper-case and returns it to the client.
 
 Your server should listen on the port provided by the first argument to your program.
@@ -12,7 +14,7 @@ There are a number of different packages in npm that you can use to *"transform"
 `through2-map` allows you to create a *transform stream* using only a single function that takes a chunk of data and returns a chunk of data. It's designed to work much like `Array#map()` but for streams:
 
 ```js
-var map = require('through2-map')
+const map = require('through2-map')
 inStream.pipe(map(function (chunk) {
   return chunk.toString().split('').reverse().join('')
 })).pipe(outStream)
@@ -33,3 +35,9 @@ If you don't have an Internet connection, simply make a `node_modules` directory
 Documentation for through2-map has been installed along with {appname} on your system and you can read them by pointing your browser here:
 
   {rootdir:/docs/through2-map.html}
+
+Check to see if your program is correct by running this command:
+
+```sh
+$ {appname} verify http-uppercaserer.js
+```

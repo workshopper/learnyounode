@@ -60,7 +60,7 @@ Pour définir un *export de fonction unique*, affectez cette fonction
 à l’objet `module.exports`, en écrasant sa valeur précédente :
 
 ```js
-module.exports = function filterDir(args) { /* ... */ }
+module.exports = function filterDir (args) { /* ... */ }
 ```
 
 Vous pouvez aussi déclarer la fonction d’abord et affecter sa
@@ -74,7 +74,7 @@ ici préfixés par './'.  Donc si votre module s’appelle `mymodule.js`,
 vous devriez faire :
 
 ```js
-var myModule = require('./mymodule');
+const myModule = require('./mymodule')
 ```
 
 Même s’il est possible de préciser aussi l’extension du fichier
@@ -95,7 +95,7 @@ de rappel supérieure dans ce cas :
 function bar (callback) {
   foo(function (err, data) {
     if (err) {
-      return callback(err); // propagation et court-circuit
+      return callback(err) // propagation et court-circuit
     }
 
     // … pas d’erreur, on continue à faire des trucs cool avec `data`

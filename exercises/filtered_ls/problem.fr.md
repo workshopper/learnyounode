@@ -29,7 +29,7 @@ les noms de fichiers.
 La documentation du module `fs` est disponible ici, vous n’avez qu’à l’ouvrir
 dans votre navigateur :
 
-  {rootdir:/node_apidoc/fs.html}
+  {rootdir:/docs-nodejs/fs.html}
 
 Vous pourrez aussi trouver le module noyau `path` bien pratique, en
 particulier sa méthode `extname`.
@@ -37,4 +37,4 @@ particulier sa méthode `extname`.
 La documentation du module `path` est disponible à l’adresse hors-ligne
 suivante :
 
-  {rootdir:/node_apidoc/path.html}
+  {rootdir:/docs-nodejs/path.html}

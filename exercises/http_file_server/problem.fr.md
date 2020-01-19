@@ -18,10 +18,10 @@ module `net`, `http` fournit une méthode `http.createServer()`, mais celle-ci
 crée un serveur qui comprend le protocole HTTP.
 
 `http.createServer()` prend une fonction de rappel appelée une fois par
-connexion reçue par la serveur.  La fonction de rappel a la signature :
+connexion reçue par le serveur.  La fonction de rappel a la signature :
 
 ```js
-function callback(request, response) { /* ... */ }
+function callback (request, response) { /* ... */ }
 ```
 
 Les deux arguments sont des objets représentant la requête HTTP et la
@@ -41,17 +41,17 @@ particulier.
 Un serveur HTTP Node ressemble classiquement à ceci :
 
 ```js
-var http = require('http');
-var server = http.createServer(function(req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // logique de traitement de la requête…
-});
-server.listen(8000);
+})
+server.listen(8000)
 ```
 
 La documentation du module `http` peut être consultée hors-ligne à l’adresse
 suivante :
 
-  {rootdir:/node_apidoc/http.html}
+  {rootdir:/docs-nodejs/http.html}
 
 Le module noyau `fs` fournit des APIs orientées flux pour les fichiers.  Vous
 aurez besoin d’utiliser la méthode `fs.createReadStream()` pour créer un flux

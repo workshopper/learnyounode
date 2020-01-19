@@ -6,7 +6,7 @@ Escribe un programa que reciba como argumento una URL y realice una petición HT
 Para este ejercicio necesitas el módulo `http` incluido en Node.
 
 La documentación del módulo `http` puede verse en:
-  {rootdir:/node_apidoc/http.html}
+  {rootdir:/docs-nodejs/http.html}
 
 El método `http.get()` es versión simplificada para peticiones GET y conviene que la uses para la solución. El primer parámetro de `http.get()` es la URL y el segundo es un callback.
 
@@ -19,7 +19,7 @@ function callback (response) { /* ... */ }
 Siendo `response` un objeto **Stream** de Node. En Node los Streams emiten eventos, a los cuales puedes suscribir callbacks. Para este ejercicio sólo nos interesan los eventos: "data", "error" y "end". Para escuchar un evento debes hacer:
 
 ```js
-response.on("data", function (data) { /* ... */ })
+response.on('data', function (data) { /* ... */ })
 ```
 
 El evento "data" se dispara cuando un `chunk`, conjunto de datos, está disponible para procesarse. El tamaño del `chunk` depende de la implementación.

@@ -29,15 +29,15 @@ El servidor deberá escuchar en un puerto cuyo número será el primer argumento
 
 El objeto `request` de HTTP tiene un atributo `url` que deberás usar para distinguir las *"routes"* de cada endpoint.
 
-Puedes parsear la URL y los parámetros usando el módulo `url` de Node, `url.parse(request.url, true)` parsea y devuelve un objeto con atributos pertinentes.
+Puedes parsear la URL y los parámetros usando el módulo `url` de Node, `new URL(request.url)` parsea y devuelve un objeto con atributos pertinentes.
 
 Puedes probarlo en la línea de comandos escribiendo:
 
 ```sh
-$ node -pe "require('url').parse('/test?q=1', true)"
+$ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 La documentación del módulo `url` puede verse en:
-  {rootdir:/node_apidoc/url.html}
+  {rootdir:/docs-nodejs/url.html}
 
 Para enviar la respuesta del servidor en formato JSON puedes usar el método `JSON.stringify()`.
 Asimismo convendría que en la misma le agregaras un encabezado 'Content-Type' adecuado, por ejemplo:

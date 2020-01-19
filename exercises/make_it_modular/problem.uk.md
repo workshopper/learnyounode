@@ -33,7 +33,7 @@ module.exports = function (args) { /* ... */ }
 Для використання Вашого модуля у програмі, скористайтесь `require()` точно так, як Ви робили це для отримання `fs` модуля `require('fs')`. З тією лише різницею, що для локальних модулів Вам слід додавати префікс './'. Наприклад, якщо файл носить назву mymodule.js, то:
 
 ```js
-var mymodule = require('./mymodule.js')
+const mymodule = require('./mymodule.js')
 ```
 
 Розширення '.js' тут не обов’язкове і Ви будете часто помічати, як його упускають.
@@ -45,8 +45,7 @@ var mymodule = require('./mymodule.js')
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // перериваємо сценарій, повертаємо помилку
+    if (err) { return callback(err) } // перериваємо сценарій, повертаємо помилку
 
     // ... тут помилок немає, продовжуємо роботу з `data`
 

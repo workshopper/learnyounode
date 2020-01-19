@@ -28,8 +28,8 @@ function callback (socket) { /* ... */ }
 En typisk Node TCP server vil se slik ut:
 
 ```js
-var net = require('net')
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
   // socket håndtering
 })
 server.listen(8000)
@@ -43,14 +43,14 @@ Benytt `socket.write(data)` for å skrive og `socket.end()` for å lukke sockete
 
 Dokumentasjonen til `net` finner du her:
 
-  {rootdir:/node_apidoc/net.html}
+  {rootdir:/docs-nodejs/net.html}
 
 Etter å ha opprettet et `new Date()` object, vil disse funksjonene være til hjelp får å få riktig format:
 
 ```js
 date.getFullYear()
-date.getMonth()     // starter på 0
-date.getDate()      // returnerer dagen i måneden
+date.getMonth() // starter på 0
+date.getDate() // returnerer dagen i måneden
 date.getHours()
 date.getMinutes()
 ```

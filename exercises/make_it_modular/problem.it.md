@@ -33,7 +33,7 @@ Oppure puoi dichiarare una funzione con un nome e assegnarne il nome a `module.e
 Per usare il tuo nuovo modulo nel tuo file di programma originale, usa la chiamata `require()` nella stessa maniera in cui chiami `require('fs')` per caricare il modulo `fs`. La sola differenza è che per moduli locali devi usare il prefisso './'. Quindi, se il tuo file è chiamato mymodule.js:
 
 ```js
-var mymodule = require('./mymodule.js')
+const mymodule = require('./mymodule.js')
 ```
 
 L'estensione '.js' è opzionale e la troverai spesso omessa.
@@ -45,8 +45,7 @@ Tieni anche a mente che è una forma idiomatica controllare la presenza di error
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // ritorno anticipato
+    if (err) { return callback(err) } // ritorno anticipato
 
     // ... nessun errore, continua a cose interessanti con `data`
 

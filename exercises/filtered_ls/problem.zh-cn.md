@@ -17,8 +17,8 @@ function callback (err, list) { /* ... */ }
 
 这里的 `list` 是一个数组，它所包含的元素是每个文件的文件名（字符串形式）。
 
-`fs` 的文档你可以用浏览器访问 {rootdir:/node_apidoc/fs.html} 来阅读。
+`fs` 的文档你可以用浏览器访问 {rootdir:/docs-nodejs/fs.html} 来阅读。
 
 你可能会发现 node 自带的 `path` 模块也很有用，特别是它那个 `extname` 方法。
 
-同样，你也可以通过浏览器访问 {rootdir:/node_apidoc/path.html} 来阅读 `path` 模块的文档。
+同样，你也可以通过浏览器访问 {rootdir:/docs-nodejs/path.html} 来阅读 `path` 模块的文档。

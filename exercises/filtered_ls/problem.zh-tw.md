@@ -16,9 +16,9 @@ function callback (err, list) { /* ... */ }
 而 `list` 是檔名字串（String）所組成的 Array。
 
 要閱讀 `fs` 模組的文件，可以在瀏覽器中打開這個頁面：
-  {rootdir:/node_apidoc/fs.html}
+  {rootdir:/docs-nodejs/fs.html}
 
 您可能也會發現 Node 的 `path` 模組很好用，尤其是模組裡的 `extname` 方法。
 
 要閱讀 `path` 模組的文件，可以在瀏覽器中打開這個頁面：
-  {rootdir:/node_apidoc/path.html}
+  {rootdir:/docs-nodejs/path.html}

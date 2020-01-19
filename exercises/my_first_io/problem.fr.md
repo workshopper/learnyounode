@@ -16,7 +16,7 @@ Tout ce qui touche au système de fichiers se trouve dans le module noyau `fs`
 module, il vous suffit d’un appel comme le suivant :
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 À présent vous avez le module `fs` entier mis à disposition dans votre
@@ -30,18 +30,18 @@ vous *renverra* un objet `Buffer` avec l’intégralité du contenu du fichier.
 La documentation du module `fs` est disponible ici, vous n’avez qu’à l’ouvrir
 dans votre navigateur :
 
-  {rootdir:/node_apidoc/fs.html}
+  {rootdir:/docs-nodejs/fs.html}
 
 Les objets `Buffer` sont l’approche retenue par Node pour représenter
 efficacement des tableaux de données, qu’il s’agisse de texte ASCII, de
 binaire ou d’autres formats.  Les objets `Buffer` peuvent être convertis
 en chaînes de caractères par un simple appel à leur méthode `toString()`,
-par exemple `var str = buf.toString()`.
+par exemple `const str = buf.toString()`.
 
 La documentation des `Buffer`s est disponible en ouvrant le fichier
 suivant dans votre navigateur :
 
-  {rootdir:/node_apidoc/buffer.html}
+  {rootdir:/docs-nodejs/buffer.html}
 
 Si vous cherchez un moyen simple de compter les sauts de lignes dans une
 chaîne de caractères, souvenez-vous qu’une `String` JavaScript peut être

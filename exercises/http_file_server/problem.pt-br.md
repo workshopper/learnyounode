@@ -24,14 +24,14 @@ Ambos `request` and `response` são também Node streams! O que significa que po
 Um típico Servidor HTTP Node parece com isto:
 
 ```js
-var http = require('http')
-var server = http.createServer(function (req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // request handling logic...
 })
 server.listen(8000)
 ```
 
 A documentação do modulo `http` pode ser encontrada redirecionando seu navegador para:
-  {rootdir:/node_apidoc/http.html}
+  {rootdir:/docs-nodejs/http.html}
 
 O núcleo do módulo `fs` também possui algumas APIs streaming para arquivos. Você precisa usar o método `fs.createReadStream()` para criar uma stream que representa o arquivo que você passa como argumento. O método retorna um objeto de stream que você pode usar `src.pipe(dst)` para fornecer os dados de `src` stream para o `dst` stream. Desta maneira, você pode conectar um filesystem stream com uma resposta HTTP stream.

@@ -33,7 +33,7 @@ module.exports = function (args) { /* ... */ }
 要在你原来的程序中使用你新的模块，请用 `require()` 载入你的模块，这和载入 `fs` 模块时候用 `require('fs')` 一样，唯一的区别在于你的本地模块需要加上 './' 这个相对路径前缀。所以，如果你的模块文件名字是 `mymodule.js`，那么你需要像这样写：
 
 ```js
-var mymodule = require('./mymodule.js')
+const mymodule = require('./mymodule.js')
 ```
 
 '.js' 这个文件扩展名通常是可以省略的。
@@ -45,8 +45,7 @@ var mymodule = require('./mymodule.js')
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // 尽早返回错误
+    if (err) { return callback(err) } // 尽早返回错误
 
     // ... 没有错误，处理 `data`
 

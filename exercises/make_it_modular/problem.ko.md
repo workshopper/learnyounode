@@ -33,7 +33,7 @@ module.exports = function (args) { /* ... */ }
 원래 프로그램에서 새로운 모듈을 사용하려면, `require('fs')`로 `fs`를 불러왔을 때랑 마찬가지로 `require()` 호출을 사용하면 됩니다. 차이점이라면 지역 모듈은 앞에 './'를 붙여야만 하는 것뿐입니다. 즉, 파일 이름이 mymodule.js라면 이렇게 하시면 됩니다.
 
 ```js
-var mymodule = require('./mymodule.js')
+const mymodule = require('./mymodule.js')
 ```
 
 '.js'는 생략 가능하고 생략하는 것을 자주 보게 될 것입니다.
@@ -45,8 +45,7 @@ var mymodule = require('./mymodule.js')
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // early return
+    if (err) { return callback(err) } // early return
 
     // ... no error, continue doing cool things with `data`
 

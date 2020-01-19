@@ -27,7 +27,7 @@ $ node program.js 1 2 3
 Dans ce cas, l’affichage obtenu serait un tableau similaire à celui-ci :
 
 ```js
-[ 'node', '/path/to/your/program.js', '1', '2', '3' ]
+['node', '/path/to/your/program.js', '1', '2', '3']
 ```
 
 Vous aurez besoin de réfléchir à une façon d’itérer à travers les arguments

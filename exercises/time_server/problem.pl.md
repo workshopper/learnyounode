@@ -31,8 +31,8 @@ Metoda `net.createServer()` zwraca instancję Twojego serwera. Aby rozpocząć n
 Typowy serwer TCP w Node.js wygląda tak:
 
 ```js
-var net = require('net')
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
   // logika obsługi gniazda
 })
 server.listen(8000)
@@ -45,14 +45,14 @@ Obiekt `socket` zawiera mnóstwo metadanych na temat połączenia, ale jest rów
 Wywołaj `socket.write(data)` aby zapisać dane do gniazda i `socket.end()` aby je zamknąć. Metoda `end()` przyjmuje również obiekt z danymi jako argument więc możesz uprościć całość do `socket.end(data)` - zapiszesz wtedy dane do gniazda i od razu je zamkniesz.
 
 Dokumentację modułu `net` możesz przeczytać tutaj:
-  {rootdir:/node_apidoc/net.html}
+  {rootdir:/docs-nodejs/net.html}
 
 Aby utworzyć datę, musisz przygotować odpowiedni format z obiektu `new Date()`. Metody, które Ci się przydadzą to:
 
 ```js
 date.getFullYear()
-date.getMonth()     // zaczyna się od 0
-date.getDate()      // zwraca dzień miesiąca
+date.getMonth() // zaczyna się od 0
+date.getDate() // zwraca dzień miesiąca
 date.getHours()
 date.getMinutes()
 ```

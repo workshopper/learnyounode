@@ -24,14 +24,14 @@ Cả 2 đối tượng `request` và `response` đều là dòng dữ liệu (No
 Một máy chủ HTTP với Node thường có dạng như sau:
 
 ```js
-var http = require('http')
-var server = http.createServer(function (req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // xử lý logic cho request...
 })
 server.listen(8000)
 ```
 
 Bạn có thể xem thêm tài liệu về mô-đun `http` tại đây:
-  {rootdir:/node_apidoc/http.html}
+  {rootdir:/docs-nodejs/http.html}
 
 Mô-đun lõi `fs` cũng cung cấp API để tạo dòng dữ liệu từ các file như phương thức `fs.createReadStream()`. Phương thức này trả về một đối tượng dòng dữ liệu và bạn có thể sử dụng `src.pipe(dst)` để đẩy (pipe) dữ liệu từ dòng `src` tới dòng `dst`. Với các này, bạn có thể nối kết được một dòng dữ liệu của file nào đó với dòng response HTTP.

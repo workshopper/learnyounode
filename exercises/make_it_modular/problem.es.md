@@ -30,7 +30,7 @@ También puedes usar una función con nombre y asignar el nombre a exports.
 Para llamar a esta función desde el programa debes usar `require` de la misma forma que para cargar el módulo de `fs` salvo que debes agregar el prefijo './' para indicar que es un archivo del directorio actual. Por ejemplo si tu módulo se llama 'mymodule.js' deberás usar:
 
 ```js
-var mymodule = require('./mymodule.js')
+const mymodule = require('./mymodule.js')
 ```
 
 El '.js' es opcional y en la mayoría de los casos se omite.
@@ -42,8 +42,7 @@ Ten en cuenta que es buena práctica en Node controlar errores y devolverlos bie
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // devolver el error
+    if (err) { return callback(err) } // devolver el error
 
     // ... no hay error, continuar con los cálculos.
 

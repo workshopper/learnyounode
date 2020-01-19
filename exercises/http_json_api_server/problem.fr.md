@@ -39,19 +39,19 @@ L’objet `request` fourni par le serveur HTTP a une propriété `url` dont vous
 aurez besoin pour *« router »* les requêtes vers le bon point d’accès.
 
 Vous pouvez analyser l’URL et la *query string* en utilisant le module noyau
-Node `url`.  Un appel `url.parse(request.url, true)` analysera le contenu de
+Node `url`.  Un appel `new URL(request.url)` analysera le contenu de
 `request.url` et vous fournira un objet avec toutes les propriétés utiles.
 
 Par exemple, sur votre invite de commande, tapez :
 
 ```sh
-$ node -pe "require('url').parse('/test?q=1', true)"
+$ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 La documentation pour le module `url` peut être consultée hors-ligne à
 l’adresse suivante :
 
-  {rootdir:/node_apidoc/url.html}
+  {rootdir:/docs-nodejs/url.html}
 
 Votre réponse doit être un texte au format JSON.  Jetez un œil à
 `JSON.stringify()` pour de plus amples informations.
@@ -60,7 +60,7 @@ Soyez également un-e bon-ne citoyen-ne du web et définissez le
 `Content-Type` correctement avant d’envoyer le corps de réponse :
 
 ```js
-res.writeHead(200, { 'Content-Type': 'application/json' });
+res.writeHead(200, { 'Content-Type': 'application/json' })
 ```
 
 L’objet `Date` en JavaScript peut afficher des dates au format ISO, par

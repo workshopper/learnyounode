@@ -39,8 +39,8 @@ function handler (eventData) { /* ... */ }
 一般的な Node の TCP サーバは次のように記述されています：
 
 ```js
-var net = require('net')
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
   // socket handling logic
 })
 server.listen(8000)
@@ -59,14 +59,14 @@ server.listen(8000)
 
 `net` モジュールのドキュメントは、このリンクをブラウザで見てください:
 
-  {rootdir:/node_apidoc/net.html}
+  {rootdir:/docs-nodejs/net.html}
 
 問題に書いてある通り `new Date()` の日付を整形する必要があります。`date` には色々な役に立つ関数があります：
 
 ```js
 date.getFullYear()
-date.getMonth()     // 0からスタートしています
-date.getDate()      // 月の日
+date.getMonth() // 0からスタートしています
+date.getDate() // 月の日
 date.getHours()
 date.getMinutes()
 ```

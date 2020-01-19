@@ -25,27 +25,26 @@
     "HTTP CLIENT": "HTTP klient",
     "HTTP COLLECT": "HTTP collect",
     "JUGGLING ASYNC": "Håndtere asynkronitet",
-    "TIME SERVER": "Tids server",
-    "HTTP FILE SERVER": "HTTP fil server",
+    "TIME SERVER": "Tidsserver",
+    "HTTP FILE SERVER": "HTTP filserver",
     "HTTP UPPERCASERER": "HTTP caps lock",
     "HTTP JSON API SERVER": "HTTP JSON API server"
   },
   "exercises": {
     "LAG MODULER": {
       "fail": {
-        "missing_module": "Did not use an additional module file, you must require() a module to help solve this exercise",
-        "missing_module": "Du brukte ikke en egen fil for modulen, du må require() en modul til å løse denne oppgaven",
-        "loadError": "Kunne ikke laste module fil [{{path}}]: {{{message}}}",
+        "missing_module": "Du brukte ikke en egen fil for modulen, du må require() en modul for å løse denne oppgaven",
+        "loadError": "Kunne ikke laste modul fil [{{path}}]: {{{message}}}",
         "mod": {
           "_base": "Din ekstra modul fil [{{path}}] {{{message}}}",
-          "no_export": "gjør ikke tilgjgenlig en funksjon {{{method}}}. Du må bruke `module.exports = function () {}`.",
+          "no_export": "gjør ikke tilgjengelig en funksjon {{{method}}}. Du må bruke `module.exports = function () {}`.",
           "singleFunction": "en funksjon",
           "arguments": "tilgjengeliggjør en funksjon som tar mindre enn {{{three}}} argumenter. Du må ta imot en katalog, et filter og en {{{callback}}}.",
           "arguments_three": "tre",
           "arguments_callback": "callback",
           "missing_callback": "kalte ikke callback argumentet etter en feil fra kallet fs.readdir()",
           "missing_error": "sender ikke tilbake en feil motattat fra kallet `fs.readdir()`.\n  Bruk dette idiomatiske Node.js mønsteret i din callback til `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
-          "callback_arguments": "returnerte ikke to argumenter på callback funksjonen (forventet `null` og en Array med filenavn)",
+          "callback_arguments": "returnerte ikke to argumenter på callback funksjonen (forventet `null` og en Array med filnavn)",
           "array_wrong_size": "returnerte ikke en an Array med riktig antall elementer som andre argument i callback funksjonen",
           "dotExt": "kan hende du bruker \"ext\" istedet for \".ext\"",
           "array_comparison": "returnerte ikke riktig liste av filer som andre argument i callback funksjonen",
@@ -66,14 +65,14 @@
         "final": "Modulen returnerte korrekt liste av filer som andre arugment i callback funksjonen"
       }
     },
-    "TIDS SERVER": {
+    "TIDSSERVER": {
       "fail": {
         "connection": "Feil ved tilkobling til localhost:{{port}}: {{{message}}}"
       }
     },
-    "HTTP FIL SERVER": {
+    "HTTP FILSERVER": {
       "fail": {
-        "no_createReadStream": "Brukte en anne fs metode enn fs.createReadStream(): {{{method}}}"
+        "no_createReadStream": "Brukte en annen fs metode enn fs.createReadStream(): {{{method}}}"
       }
     }
   }

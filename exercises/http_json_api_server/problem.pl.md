@@ -27,17 +27,17 @@ Twój serwer powinien nasłuchiwać na porcie o numerze przekazanym jako pierwsz
 
 Obiekt `request` serwera HTTP posiada właściwość `url`, która będzie Ci potrzebna aby *"trasować" (routing)* otrzymywane żądania do dwóch punktów końcowych.
 
-You can parse the URL and query string using the Node core 'url' module. `url.parse(request.url, true)` will parse content of request.url and provide you with an object with helpful properties.
-Możesz sparsować URL i ciąg znaków zapytania wykorzystując moduł podstawowy `url`. Wywołanie `url.parse(request.url, true)` dokona parsowania wartości właściwości `request.url` i zwróci obiekt z użytecznymi właściwościami.
+You can parse the URL and query string using the Node core 'url' module. `new URL(request.url)` will parse content of request.url and provide you with an object with helpful properties.
+Możesz sparsować URL i ciąg znaków zapytania wykorzystując moduł podstawowy `url`. Wywołanie `new URL(request.url)` dokona parsowania wartości właściwości `request.url` i zwróci obiekt z użytecznymi właściwościami.
 
 Dla przykładu, wywołaj następujący kod w wierszu poleceń:
 
 ```sh
-$ node -pe "require('url').parse('/test?q=1', true)"
+$ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 Dokumentację modułu `url` możesz przeczytać tutaj:
-  {rootdir:/node_apidoc/url.html}
+  {rootdir:/docs-nodejs/url.html}
 
 Your response should be in a JSON string format. Look at `JSON.stringify()` for more information.
 Twoja odpowiedź powinna być w formacie JSON. Poszukaj informacji na temat `JSON.stringify()` aby dowiedzieć się więcej.

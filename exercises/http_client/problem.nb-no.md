@@ -6,7 +6,7 @@ Skriv et program som utfører en HTTP GET forespørsel til en URL som gis til de
 For denne oppgaven må du bruke `http` modulen.
 
 Dokumentasjonen til `http` modulen kan du finne her:
-  {rootdir:/node_apidoc/http.html}
+  {rootdir:/docs-nodejs/http.html}
 
 `http.get()` er en hjelpemetode for å gjøre enkle GET forespørsler, bruk den i løsningen din. Det første argumentet til `http.get()` kan være URLen du ønske forespørre. Gi en callback funksjon som det andre argumentet.
 
@@ -19,7 +19,7 @@ function callback (response) { /* ... */ }
 Her er `response` objektet er et Node **Stream** objekt. Du kan behandle Node Streams som objekter som sender ut eventer. De tre eventene som er mest interessante er: "data", "error" og "end". Du lytter en event på denne måten:
 
 ```js
-response.on("data", function (data) { /* ... */ })
+response.on('data', function (data) { /* ... */ })
 ```
 
 Data eventen sendes ut når en bit av dataen er tilgjengelig og kan behandles. Datastørrelsen avhenger av den underliggende datakilden.

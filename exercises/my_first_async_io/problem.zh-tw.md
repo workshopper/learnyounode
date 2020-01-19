@@ -18,4 +18,4 @@ function callback (err, data) { /* ... */ }
 所以您就可以藉著檢查第一個參數是否為 True 以確認是不是有錯誤發生。如果沒有錯誤發生，您應該就會可以取得 Buffer 物件作為您的第二個參數。如果使用 `readFileSync()` 方法，您可以在第二參數中改填入「utf8」，然後把 callback 函式放在第三個參數，相對地，您會得到一個 `String` 而非 `Buffer`。
 
 要閱讀 `fs` 模組的文件，可以在瀏覽器中打開這個頁面：
-  {rootdir:/node_apidoc/fs.html}
+  {rootdir:/docs-nodejs/fs.html}

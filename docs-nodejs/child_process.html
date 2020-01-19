@@ -1,0 +1,1549 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Child Process | Node.js v12.10.0 Documentation</title>
+  <link rel="stylesheet" href="data:text/css;base64,LyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogaXRhbGljOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBJdGFsaWMnKSwgbG9jYWwoJ0xhdG8tSXRhbGljJyksIHVybChodHRwczovL2ZvbnRzLmdzdGF0aWMuY29tL3MvbGF0by92MTYvUzZ1OHc0Qk1VVFBIanhzQVVpLXFOaVhnN2VVMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBpdGFsaWM7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEl0YWxpYycpLCBsb2NhbCgnTGF0by1JdGFsaWMnKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnU4dzRCTVVUUEhqeHNBWEMtcU5pWGc3US53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0KLyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogbm9ybWFsOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBSZWd1bGFyJyksIGxvY2FsKCdMYXRvLVJlZ3VsYXInKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnV5dzRCTVVUUEhqeEF3WGlXdEZDZlE3QS53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIFJlZ3VsYXInKSwgbG9jYWwoJ0xhdG8tUmVndWxhcicpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dXl3NEJNVVRQSGp4NHdYaVd0RkNjLndvZmYyKSBmb3JtYXQoJ3dvZmYyJyk7CiAgdW5pY29kZS1yYW5nZTogVSswMDAwLTAwRkYsIFUrMDEzMSwgVSswMTUyLTAxNTMsIFUrMDJCQi0wMkJDLCBVKzAyQzYsIFUrMDJEQSwgVSswMkRDLCBVKzIwMDAtMjA2RiwgVSsyMDc0LCBVKzIwQUMsIFUrMjEyMiwgVSsyMTkxLCBVKzIxOTMsIFUrMjIxMiwgVSsyMjE1LCBVK0ZFRkYsIFUrRkZGRDsKfQovKiBsYXRpbi1leHQgKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2FQR1EzcTVkME43dy53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2lQR1EzcTVkMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LyotLS0tLS0tLS0tLS0tLS0tLS0tLS0gTGF5b3V0IGFuZCBUeXBvZ3JhcGh5IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwpodG1sIHsKICBmb250LXNpemU6IDFyZW07CiAgb3ZlcmZsb3ctd3JhcDogYnJlYWstd29yZDsKICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDsKICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlOwogIC13ZWJraXQtZm9udC12YXJpYW50LWxpZ2F0dXJlczogbm9uZTsKICAgICAgICAgIGZvbnQtdmFyaWFudC1saWdhdHVyZXM6IG5vbmU7Cn0KCiogewogIGJveC1zaXppbmc6IGJvcmRlci1ib3g7Cn0KCmJvZHkgewogIGZvbnQtZmFtaWx5OiAiTGF0byIsICJMdWNpZGEgR3JhbmRlIiwgIkx1Y2lkYSBTYW5zIFVuaWNvZGUiLCAiTHVjaWRhIFNhbnMiLCBWZXJkYW5hLCBUYWhvbWEsIHNhbnMtc2VyaWY7CiAgbWFyZ2luOiAwOwogIHBhZGRpbmc6IDA7CiAgY29sb3I6ICMzMzM7CiAgYmFja2dyb3VuZDogI2ZmZjsKfQoKaDEgeyBmb250LXNpemU6IDIuNXJlbSB9CmgyIHsgZm9udC1zaXplOiAycmVtIH0KaDMgeyBmb250LXNpemU6IDEuNzVyZW0gfQpoNCB7IGZvbnQtc2l6ZTogMS41cmVtIH0KaDUgeyBmb250LXNpemU6IDEuMjVyZW0gfQpoNiB7IGZvbnQtc2l6ZTogMXJlbSB9CgpoMSwgaDIsIGgzLCBoNCwgaDUsIGg2IHsKICBtYXJnaW46IDEuNXJlbSAwIDFyZW07CiAgdGV4dC1yZW5kZXJpbmc6IG9wdGltaXplTGVnaWJpbGl0eTsKICBmb250LXdlaWdodDogNzAwOwogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKcHJlLCB0dCwgY29kZSwgLnByZSwgc3Bhbi50eXBlLCBhLnR5cGUgewogIGZvbnQtZmFtaWx5OiBTRk1vbm8tUmVndWxhciwgTWVubG8sIENvbnNvbGFzLCAiTGliZXJhdGlvbiBNb25vIiwgIkNvdXJpZXIgTmV3IiwgbW9ub3NwYWNlOwogIGZvbnQtc2l6ZTogLjllbTsKfQoKI2NvbnRlbnQgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKYSwgYTpsaW5rLCBhOmFjdGl2ZSB7CiAgY29sb3I6ICM0Mzg1M2Q7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGJvcmRlci1yYWRpdXM6IDJweDsKICBwYWRkaW5nOiAxcHggM3B4Owp9CgphOmhvdmVyLCBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDM4NTNkOwogIG91dGxpbmU6IG5vbmU7Cn0KCnN0cm9uZyB7CiAgZm9udC13ZWlnaHQ6IDcwMDsKfQoKY29kZSBhOmhvdmVyIHsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgplbSBjb2RlIHsKICBmb250LXN0eWxlOiBub3JtYWw7Cn0KCiNjaGFuZ2Vsb2cgI2d0b2MgewogIGRpc3BsYXk6IG5vbmU7Cn0KCiNndG9jIHsKICBtYXJnaW4tdG9wOiAuNXJlbTsKICBtYXJnaW4tYm90dG9tOiAxcmVtOwp9CgojZ3RvYyB1bCB7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBtYXJnaW4tbGVmdDogMDsKICBsaW5lLWhlaWdodDogMS41cmVtOwp9CgojZ3RvYyA+IHVsID4gbGkgewogIGRpc3BsYXk6IGlubGluZTsKICBib3JkZXItcmlnaHQ6IDFweCAjMDAwIHNvbGlkOwogIG1hcmdpbi1yaWdodDogMC40cmVtOwogIHBhZGRpbmctcmlnaHQ6IDAuNHJlbTsKfQoKI2d0b2MgPiB1bCA+IGxpOmxhc3QtY2hpbGQgewogIGJvcmRlci1yaWdodDogbm9uZTsKICBtYXJnaW4tcmlnaHQ6IDA7CiAgcGFkZGluZy1yaWdodDogMDsKfQoKbGkudmVyc2lvbi1waWNrZXIgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBhIHsKICBib3JkZXItcmFkaXVzOiAycHggMnB4IDAgMDsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBvbCB7CiAgZGlzcGxheTogYmxvY2s7CiAgei1pbmRleDogMTsKfQoKbGkudmVyc2lvbi1waWNrZXIgYSBzcGFuIHsKICBmb250LXNpemU6IC43cmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciB7CiAgYmFja2dyb3VuZDogI2ZmZjsKICBib3JkZXI6IDFweCAjNDM4NTNkIHNvbGlkOwogIGJvcmRlci1yYWRpdXM6IDAgMCAycHggMnB4OwogIGRpc3BsYXk6IG5vbmU7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgcmlnaHQ6IDA7CiAgdG9wOiAxLjI1cmVtOwogIHdpZHRoOiAxMDAlOwp9CgojZ3RvYyBvbC52ZXJzaW9uLXBpY2tlciBsaSB7CiAgZGlzcGxheTogYmxvY2s7CiAgYm9yZGVyLXJpZ2h0OiAwOwogIG1hcmdpbi1yaWdodDogMDsKfQoKb2wudmVyc2lvbi1waWNrZXIgbGkgYSB7CiAgYm9yZGVyLXJhZGl1czogMDsKICBkaXNwbGF5OiBibG9jazsKICBtYXJnaW46IDA7CiAgcGFkZGluZzogLjFyZW07CiAgcGFkZGluZy1sZWZ0OiAxcmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciBsaTpsYXN0LWNoaWxkIGEgewogIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAxcHg7CiAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMXB4Owp9CgoubGluZSB7CiAgd2lkdGg6IGNhbGMoMTAwJSAtIDFyZW0pOwogIGRpc3BsYXk6IGJsb2NrOwogIHBhZGRpbmctYm90dG9tOiAxcHg7Cn0KCi5hcGlfc3RhYmlsaXR5IHsKICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDsKICBtYXJnaW46IDAgMCAxcmVtIDA7CiAgZm9udC1mYW1pbHk6ICJMYXRvIiwgIkx1Y2lkYSBHcmFuZGUiLCAiTHVjaWRhIFNhbnMgVW5pY29kZSIsICJMdWNpZGEgU2FucyIsIFZlcmRhbmEsIFRhaG9tYSwgc2Fucy1zZXJpZjsKICBwYWRkaW5nOiAxcmVtOwogIGxpbmUtaGVpZ2h0OiAxLjU7Cn0KCi5hcGlfc3RhYmlsaXR5ICogewogIGNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50Owp9CgouYXBpX3N0YWJpbGl0eSBhIHsKICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsKfQoKLmFwaV9zdGFiaWxpdHkgYTpob3ZlciwgLmFwaV9zdGFiaWxpdHkgYTphY3RpdmUsIC5hcGlfc3RhYmlsaXR5IGE6Zm9jdXMgewogIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjQpOwp9CgouYXBpX3N0YWJpbGl0eSBhIGNvZGUgewogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCi5hcGlfc3RhYmlsaXR5XzAgewogIGJhY2tncm91bmQtY29sb3I6ICNENjAwMjc7Cn0KCi5hcGlfc3RhYmlsaXR5XzEgewogIGJhY2tncm91bmQtY29sb3I6ICNFQzUzMTU7Cn0KCi5hcGlfc3RhYmlsaXR5XzIgewogIGJhY2tncm91bmQtY29sb3I6ICM0RUJBMEY7Cn0KCi5hcGlfbWV0YWRhdGEgewogIGZvbnQtc2l6ZTogLjg1cmVtOwogIG1hcmdpbi1ib3R0b206IDFyZW07Cn0KCi5hcGlfbWV0YWRhdGEgc3BhbiB7CiAgbWFyZ2luLXJpZ2h0OiAxcmVtOwp9CgouYXBpX21ldGFkYXRhIHNwYW46bGFzdC1jaGlsZCB7CiAgbWFyZ2luLXJpZ2h0OiAwcHg7Cn0KCnVsLnBsYWluIHsKICBsaXN0LXN0eWxlOiBub25lOwp9CgphYmJyIHsKICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkICM0NTQ1NDU7Cn0KCnAgewogIHRleHQtcmVuZGVyaW5nOiBvcHRpbWl6ZUxlZ2liaWxpdHk7CiAgbWFyZ2luOiAwIDAgMS4xMjVyZW0gMDsKICBsaW5lLWhlaWdodDogMS41Owp9CgojYXBpY29udGVudCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKICBwYWRkaW5nLWJvdHRvbTogMnJlbTsKfQoKdGFibGUgewogIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7CiAgbWFyZ2luOiAwIDAgMS41cmVtIDA7Cn0KCnRoLCB0ZCB7CiAgYm9yZGVyOiAxcHggc29saWQgI2FhYTsKICBwYWRkaW5nOiAuNzVyZW0gMXJlbSAuNzVyZW0gMXJlbTsKICB2ZXJ0aWNhbC1hbGlnbjogdG9wOwp9Cgp0aCB7CiAgdGV4dC1hbGlnbjpsZWZ0Owp9CgpvbCwgdWwsIGRsIHsKICBtYXJnaW46IDAgMCAuNnJlbSAwOwogIHBhZGRpbmc6IDA7Cn0KCm9sIHVsLCBvbCBvbCwgb2wgZGwsIHVsIHVsLCB1bCBvbCwgdWwgZGwsIGRsIHVsLCBkbCBvbCwgZGwgZGwgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCnVsLCBvbCB7CiAgbWFyZ2luLWxlZnQ6IDJyZW07Cn0KCmRsIGR0IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgbWFyZ2luOiAxLjVyZW0gMCAwOwp9CgpkbCBkZCB7CiAgcG9zaXRpb246IHJlbGF0aXZlOwogIG1hcmdpbjogMCAxcmVtIDA7Cn0KCmRkICsgZHQucHJlIHsKICBtYXJnaW4tdG9wOiAxLjZyZW07Cn0KCiNhcGljb250ZW50IHsKICBwYWRkaW5nLXRvcDogMXJlbTsKfQoKI2FwaWNvbnRlbnQgLmxpbmUgewogIHdpZHRoOiBjYWxjKDUwJSAtIDFyZW0pOwogIG1hcmdpbjogMXJlbSAxcmVtIC45NXJlbTsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2NjOwp9CgpoMiArIGgyIHsKICBtYXJnaW46IDAgMCAuNXJlbTsKfQoKaDMgKyBoMyB7CiAgbWFyZ2luOiAwIDAgLjVyZW07Cn0KCmgyLCBoMywgaDQsIGg1IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgcGFkZGluZy1yaWdodDogNDBweDsKfQoKLnNyY2xpbmsgewogIGZsb2F0OiByaWdodDsKICBmb250LXNpemU6IHNtYWxsZXI7Cn0KCmgxIHNwYW4sIGgyIHNwYW4sIGgzIHNwYW4sIGg0IHNwYW4gewogIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICBkaXNwbGF5OiBibG9jazsKICB0b3A6IDA7CiAgcmlnaHQ6IDA7Cn0KCmgxIHNwYW46aG92ZXIsIGgyIHNwYW46aG92ZXIsIGgzIHNwYW46aG92ZXIsIGg0IHNwYW46aG92ZXIgewogIG9wYWNpdHk6IDE7Cn0KCmgxIHNwYW4gYSwgaDIgc3BhbiBhLCBoMyBzcGFuIGEsIGg0IHNwYW4gYSB7CiAgY29sb3I6ICMwMDA7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGZvbnQtd2VpZ2h0OiBib2xkOwp9CgpwcmUsIHR0LCBjb2RlIHsKICBsaW5lLWhlaWdodDogMS41cmVtOwogIG1hcmdpbjogMDsgcGFkZGluZzogMDsKfQoKLnByZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKcHJlIHsKICBwYWRkaW5nOiAxcmVtOwogIHZlcnRpY2FsLWFsaWduOiB0b3A7CiAgYmFja2dyb3VuZDogI2YyZjJmMjsKICBtYXJnaW46IDFyZW07CiAgb3ZlcmZsb3cteDogYXV0bzsKfQoKcHJlID4gY29kZSB7CiAgcGFkZGluZzogMDsKfQoKcHJlICsgaDMgewogIG1hcmdpbi10b3A6IDIuMjI1cmVtOwp9Cgpjb2RlLnByZSB7CiAgd2hpdGUtc3BhY2U6IHByZTsKfQoKI2ludHJvIHsKICBtYXJnaW4tdG9wOiAxLjI1cmVtOwogIG1hcmdpbi1sZWZ0OiAxcmVtOwp9CgojaW50cm8gYSB7CiAgY29sb3I6ICNkZGQ7CiAgZm9udC13ZWlnaHQ6IGJvbGQ7Cn0KCmhyIHsKICBiYWNrZ3JvdW5kOiBub25lOwogIGJvcmRlcjogbWVkaXVtIG5vbmU7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM3YTdhN2E7CiAgbWFyZ2luOiAwIDAgMXJlbSAwOwp9CgojdG9jIGgyIHsKICBtYXJnaW4tdG9wOiAwOwogIG1hcmdpbjogMS41cmVtIDA7Cn0KCiN0b2MgcCB7CiAgbWFyZ2luOiAwOwp9CgojdG9jIHVsIGEgewogIHRleHQtZGVjb3JhdGlvbjpub25lOwp9CgojdG9jIHVsIGxpIHsKICBtYXJnaW4tYm90dG9tOiAuNjY2cmVtOwogIGxpc3Qtc3R5bGU6IHNxdWFyZSBvdXRzaWRlOwp9CgojdG9jIGxpID4gdWwgewogIG1hcmdpbi10b3A6IC42NjZyZW07Cn0KCiN0b2MgLnN0YWJpbGl0eV8wOjphZnRlciB7CiAgYmFja2dyb3VuZC1jb2xvcjogI2Q1MDAyNzsKICBjb2xvcjogI2ZmZjsKICBjb250ZW50OiAiZGVwcmVjYXRlZCI7CiAgbWFyZ2luLWxlZnQ6IC4yNXJlbTsKICBwYWRkaW5nOiAxcHggM3B4OwogIGJvcmRlci1yYWRpdXM6IDNweDsKfQoKI2FwaWNvbnRlbnQgbGkgewogIG1hcmdpbi1ib3R0b206IC41cmVtOwp9CgojYXBpY29udGVudCBsaTpsYXN0LWNoaWxkIHsKICBtYXJnaW4tYm90dG9tOiAwOwp9Cgp0dCwgY29kZSB7CiAgY29sb3I6ICMwNDA0MDQ7CiAgYmFja2dyb3VuZC1jb2xvcjogI2YyZjJmMjsKICBib3JkZXItcmFkaXVzOiAycHg7CiAgcGFkZGluZzogMXB4IDNweDsKfQoKLmFwaV9zdGFiaWxpdHkgY29kZSB7CiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAuMSk7Cn0KCmEgY29kZSB7CiAgY29sb3I6IGluaGVyaXQ7CiAgYmFja2dyb3VuZDogaW5oZXJpdDsKICBwYWRkaW5nOiAwOwp9CgoudHlwZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKI2NvbHVtbjEuaW50ZXJpb3IgewogIG1hcmdpbi1sZWZ0OiAyMzRweDsKICBwYWRkaW5nOiAwIDJyZW07CiAgLXdlYmtpdC1wYWRkaW5nLXN0YXJ0OiAxLjVyZW07Cn0KCiNjb2x1bW4yLmludGVyaW9yIHsKICB3aWR0aDogMjM0cHg7CiAgYmFja2dyb3VuZDogIzMzMzsKICBwb3NpdGlvbjogZml4ZWQ7CiAgbGVmdDogMDsKICB0b3A6IDA7CiAgYm90dG9tOiAwOwogIG92ZXJmbG93LXg6IGhpZGRlbjsKICBvdmVyZmxvdy15OiBzY3JvbGw7Cn0KCiNjb2x1bW4yIHVsIHsKICBsaXN0LXN0eWxlOiBub25lOwogIG1hcmdpbjogLjlyZW0gMCAuNXJlbTsKICBiYWNrZ3JvdW5kOiAjMzMzOwp9CgojY29sdW1uMiA+IDpmaXJzdC1jaGlsZCB7CiAgbWFyZ2luOiAxLjI1cmVtOwogIGZvbnQtc2l6ZTogMS41cmVtOwp9CgojY29sdW1uMiA+IHVsOm50aC1jaGlsZCgyKSB7CiAgbWFyZ2luOiAxLjI1cmVtIDAgLjVyZW07Cn0KCiNjb2x1bW4yID4gdWw6bGFzdC1jaGlsZCB7CiAgbWFyZ2luOiAuOXJlbSAwIDEuMjVyZW07Cn0KCiNjb2x1bW4yIHVsIGxpIHsKICBwYWRkaW5nLWxlZnQ6IDEuMjVyZW07CiAgbWFyZ2luLWJvdHRvbTogLjVyZW07CiAgcGFkZGluZy1ib3R0b206IC41cmVtOwp9CgojY29sdW1uMiAubGluZSB7CiAgbWFyZ2luOiAwIC41cmVtOwogIGJhY2tncm91bmQtY29sb3I6ICM3MDcwNzA7Cn0KCiNjb2x1bW4yIHVsIGxpOmxhc3QtY2hpbGQgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEgewogIGNvbG9yOiAjY2NjOwogIGJvcmRlci1yYWRpdXM6IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEuYWN0aXZlLCAjY29sdW1uMiB1bCBsaSBhLmFjdGl2ZTpob3ZlciwKI2NvbHVtbjIgdWwgbGkgYS5hY3RpdmU6Zm9jdXMgewogIGNvbG9yOiAjNDM4NTNkOwogIGJvcmRlci1yYWRpdXM6IDA7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM0Mzg1M2Q7CiAgYmFja2dyb3VuZDogbm9uZTsKfQoKI2ludHJvIGE6aG92ZXIsICNpbnRybyBhOmZvY3VzLAojY29sdW1uMiB1bCBsaSBhOmhvdmVyLCAjY29sdW1uMiB1bCBsaSBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgpzcGFuID4gLm1hcmssIHNwYW4gPiAubWFyazp2aXNpdGVkIHsKICBjb2xvcjogIzcwNzA3MDsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgdG9wOiAwcHg7CiAgcmlnaHQ6IDBweDsKfQoKc3BhbiA+IC5tYXJrOmhvdmVyLCBzcGFuID4gLm1hcms6Zm9jdXMsIHNwYW4gPiAubWFyazphY3RpdmUgewogIGNvbG9yOiAjNDM4NTNkOwogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCnRoID4gKjpsYXN0LWNoaWxkLCB0ZCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKfQoKLmNoYW5nZWxvZyA+IHN1bW1hcnkgewogIG1hcmdpbjogLjVyZW0gMDsKICBwYWRkaW5nOiAuNXJlbSAwOwogIGN1cnNvcjogcG9pbnRlcjsKfQoKLyogc2ltcGxlciBjbGVhcmZpeCAqLwouY2xlYXJmaXg6YWZ0ZXIgewogIGNvbnRlbnQ6ICIuIjsKICBkaXNwbGF5OiBibG9jazsKICBoZWlnaHQ6IDA7CiAgY2xlYXI6IGJvdGg7CiAgdmlzaWJpbGl0eTogaGlkZGVuOwp9CgouZ2l0aHViX2ljb24gewogIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7CiAgbWFyZ2luOiAtMnB4IDNweCAwIDA7Cn0KCkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogMTAyNHB4KSB7CiAgI2NvbnRlbnQgewogICAgb3ZlcmZsb3c6IHZpc2libGU7CiAgfQogICNjb2x1bW4xLmludGVyaW9yIHsKICAgIG1hcmdpbi1sZWZ0OiAwOwogICAgcGFkZGluZy1sZWZ0OiAuNXJlbTsKICAgIHBhZGRpbmctcmlnaHQ6IC41cmVtOwogICAgd2lkdGg6IGF1dG87CiAgICBvdmVyZmxvdy15OiB2aXNpYmxlOwogIH0KICAjY29sdW1uMiB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KfQoKQG1lZGlhIHByaW50IHsKICBodG1sIHsKICAgIGhlaWdodDogYXV0bzsKICAgIGZvbnQtc2l6ZTogMC43NWVtOwogIH0KICAjY29sdW1uMi5pbnRlcmlvciB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KICAjY29sdW1uMS5pbnRlcmlvciB7CiAgICBtYXJnaW4tbGVmdDogMHB4OwogICAgcGFkZGluZzogMHB4OwogICAgb3ZlcmZsb3cteTogYXV0bzsKICB9CiAgLmFwaV9tZXRhZGF0YSwKICAjdG9jLAogIC5zcmNsaW5rLAogICNndG9jLAogIC5tYXJrIHsKICAgIGRpc3BsYXk6IG5vbmU7CiAgfQogIGgxIHsKICAgIGZvbnQtc2l6ZTogMnJlbTsKICB9CiAgaDIgewogICAgZm9udC1zaXplOiAxLjc1cmVtOwogIH0KICBoMyB7CiAgICBmb250LXNpemU6IDEuNXJlbTsKICB9CiAgaDQgewogICAgZm9udC1zaXplOiAxLjNyZW07CiAgfQogIGg1IHsKICAgIGZvbnQtc2l6ZTogMS4ycmVtOwogIH0KICBoNiB7CiAgICBmb250LXNpemU6IDEuMXJlbTsKICB9CiAgLmFwaV9zdGFiaWxpdHkgewogICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogIH0KICAuYXBpX3N0YWJpbGl0eSBhIHsKICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsKICB9CiAgYSB7CiAgICBjb2xvcjogaW5oZXJpdDsKICB9CiAgI2FwaWNvbnRlbnQgewogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICB9Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LnNoX3NvdXJjZUNvZGUgewogIGZvbnQtd2VpZ2h0OiBub3JtYWw7CiAgZm9udC1zdHlsZTogbm9ybWFsOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfc3ltYm9sLAouc2hfc291cmNlQ29kZSAuc2hfY2JyYWNrZXQgewogIGNvbG9yOiAjMzMzOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfa2V5d29yZCB7CiAgY29sb3I6ICMzMzg7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9zdHJpbmcsCi5zaF9zb3VyY2VDb2RlIC5zaF9yZWdleHAsCi5zaF9zb3VyY2VDb2RlIC5zaF9udW1iZXIsCi5zaF9zb3VyY2VDb2RlIC5zaF9zcGVjaWFsY2hhciB7CiAgY29sb3I6ICNFNTQzMDU7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9jb21tZW50IHsKICBjb2xvcjogIzY2NjsKICBmb250LXdlaWdodDogbGlnaHRlcjsKfQo=">
+  <link rel="canonical" href="https://nodejs.org/api/child_process.html">
+</head>
+<body class="alt apidoc" id="api-section-child_process">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="https://nodejs.org/" title="Go back to the home page">
+          Node.js
+        </a>
+      </div>
+      <ul>
+<li><a href="https://nodejs.org/api/documentation.html" class="nav-documentation">About these Docs</a></li>
+<li><a href="https://nodejs.org/api/synopsis.html" class="nav-synopsis">Usage &amp; Example</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://nodejs.org/api/assert.html" class="nav-assert">Assertion Testing</a></li>
+<li><a href="https://nodejs.org/api/async_hooks.html" class="nav-async_hooks">Async Hooks</a></li>
+<li><a href="https://nodejs.org/api/buffer.html" class="nav-buffer">Buffer</a></li>
+<li><a href="https://nodejs.org/api/addons.html" class="nav-addons">C++ Addons</a></li>
+<li><a href="https://nodejs.org/api/n-api.html" class="nav-n-api">C/C++ Addons - N-API</a></li>
+<li><a href="https://nodejs.org/api/child_process.html" class="nav-child_process active">Child Processes</a></li>
+<li><a href="https://nodejs.org/api/cluster.html" class="nav-cluster">Cluster</a></li>
+<li><a href="https://nodejs.org/api/cli.html" class="nav-cli">Command Line Options</a></li>
+<li><a href="https://nodejs.org/api/console.html" class="nav-console">Console</a></li>
+<li><a href="https://nodejs.org/api/crypto.html" class="nav-crypto">Crypto</a></li>
+<li><a href="https://nodejs.org/api/debugger.html" class="nav-debugger">Debugger</a></li>
+<li><a href="https://nodejs.org/api/deprecations.html" class="nav-deprecations">Deprecated APIs</a></li>
+<li><a href="https://nodejs.org/api/dns.html" class="nav-dns">DNS</a></li>
+<li><a href="https://nodejs.org/api/domain.html" class="nav-domain">Domain</a></li>
+<li><a href="https://nodejs.org/api/esm.html" class="nav-esm">ECMAScript Modules</a></li>
+<li><a href="https://nodejs.org/api/errors.html" class="nav-errors">Errors</a></li>
+<li><a href="https://nodejs.org/api/events.html" class="nav-events">Events</a></li>
+<li><a href="https://nodejs.org/api/fs.html" class="nav-fs">File System</a></li>
+<li><a href="https://nodejs.org/api/globals.html" class="nav-globals">Globals</a></li>
+<li><a href="https://nodejs.org/api/http.html" class="nav-http">HTTP</a></li>
+<li><a href="https://nodejs.org/api/http2.html" class="nav-http2">HTTP/2</a></li>
+<li><a href="https://nodejs.org/api/https.html" class="nav-https">HTTPS</a></li>
+<li><a href="https://nodejs.org/api/inspector.html" class="nav-inspector">Inspector</a></li>
+<li><a href="https://nodejs.org/api/intl.html" class="nav-intl">Internationalization</a></li>
+<li><a href="https://nodejs.org/api/modules.html" class="nav-modules">Modules</a></li>
+<li><a href="https://nodejs.org/api/net.html" class="nav-net">Net</a></li>
+<li><a href="https://nodejs.org/api/os.html" class="nav-os">OS</a></li>
+<li><a href="https://nodejs.org/api/path.html" class="nav-path">Path</a></li>
+<li><a href="https://nodejs.org/api/perf_hooks.html" class="nav-perf_hooks">Performance Hooks</a></li>
+<li><a href="https://nodejs.org/api/policy.html" class="nav-policy">Policies</a></li>
+<li><a href="https://nodejs.org/api/process.html" class="nav-process">Process</a></li>
+<li><a href="https://nodejs.org/api/punycode.html" class="nav-punycode">Punycode</a></li>
+<li><a href="https://nodejs.org/api/querystring.html" class="nav-querystring">Query Strings</a></li>
+<li><a href="https://nodejs.org/api/readline.html" class="nav-readline">Readline</a></li>
+<li><a href="https://nodejs.org/api/repl.html" class="nav-repl">REPL</a></li>
+<li><a href="https://nodejs.org/api/report.html" class="nav-report">Report</a></li>
+<li><a href="https://nodejs.org/api/stream.html" class="nav-stream">Stream</a></li>
+<li><a href="https://nodejs.org/api/string_decoder.html" class="nav-string_decoder">String Decoder</a></li>
+<li><a href="https://nodejs.org/api/timers.html" class="nav-timers">Timers</a></li>
+<li><a href="https://nodejs.org/api/tls.html" class="nav-tls">TLS/SSL</a></li>
+<li><a href="https://nodejs.org/api/tracing.html" class="nav-tracing">Trace Events</a></li>
+<li><a href="https://nodejs.org/api/tty.html" class="nav-tty">TTY</a></li>
+<li><a href="https://nodejs.org/api/dgram.html" class="nav-dgram">UDP/Datagram</a></li>
+<li><a href="https://nodejs.org/api/url.html" class="nav-url">URL</a></li>
+<li><a href="https://nodejs.org/api/util.html" class="nav-util">Utilities</a></li>
+<li><a href="https://nodejs.org/api/v8.html" class="nav-v8">V8</a></li>
+<li><a href="https://nodejs.org/api/vm.html" class="nav-vm">VM</a></li>
+<li><a href="https://nodejs.org/api/worker_threads.html" class="nav-worker_threads">Worker Threads</a></li>
+<li><a href="https://nodejs.org/api/zlib.html" class="nav-zlib">Zlib</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://github.com/nodejs/node" class="nav-https-github-com-nodejs-node">GitHub Repo &amp; Issue Tracker</a></li>
+</ul>
+    </div>
+
+    <div id="column1" data-id="child_process" class="interior">
+      <header>
+        <h1>Node.js v12.10.0 Documentation</h1>
+        <div id="gtoc">
+          <ul>
+            <li>
+              <a href="https://nodejs.org/api/index.html" name="toc">Index</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/all.html">View on single page</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/child_process.json">View as JSON</a>
+            </li>
+            
+    <li class="version-picker">
+      <a href="#">View another version <span>▼</span></a>
+      <ol class="version-picker"><li><a href="https://nodejs.org/docs/latest-v12.x/api/child_process.html">12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v11.x/api/child_process.html">11.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v10.x/api/child_process.html">10.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v9.x/api/child_process.html">9.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/child_process.html">8.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v7.x/api/child_process.html">7.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v6.x/api/child_process.html">6.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v5.x/api/child_process.html">5.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v4.x/api/child_process.html">4.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.12.x/api/child_process.html">0.12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v0.10.x/api/child_process.html">0.10.x</a></li></ol>
+    </li>
+  
+            <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/child_process.md"><span class="github_icon"><svg height="16" width="16" viewBox="0 0 16.1 16.1" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8z"></path></svg></span>Edit on GitHub</a></li>
+          </ul>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+<li>
+<p><span class="stability_2"><a href="#child_process_child_process">Child Process</a></span></p>
+<ul>
+<li>
+<p><a href="#child_process_asynchronous_process_creation">Asynchronous Process Creation</a></p>
+<ul>
+<li><a href="#child_process_spawning_bat_and_cmd_files_on_windows">Spawning <code>.bat</code> and <code>.cmd</code> files on Windows</a></li>
+<li><a href="#child_process_child_process_exec_command_options_callback">child_process.exec(command[, options][, callback])</a></li>
+<li><a href="#child_process_child_process_execfile_file_args_options_callback">child_process.execFile(file[, args][, options][, callback])</a></li>
+<li><a href="#child_process_child_process_fork_modulepath_args_options">child_process.fork(modulePath[, args][, options])</a></li>
+<li>
+<p><a href="#child_process_child_process_spawn_command_args_options">child_process.spawn(command[, args][, options])</a></p>
+<ul>
+<li><a href="#child_process_options_detached">options.detached</a></li>
+<li><a href="#child_process_options_stdio">options.stdio</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#child_process_synchronous_process_creation">Synchronous Process Creation</a></p>
+<ul>
+<li><a href="#child_process_child_process_execfilesync_file_args_options">child_process.execFileSync(file[, args][, options])</a></li>
+<li><a href="#child_process_child_process_execsync_command_options">child_process.execSync(command[, options])</a></li>
+<li><a href="#child_process_child_process_spawnsync_command_args_options">child_process.spawnSync(command[, args][, options])</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#child_process_class_childprocess">Class: ChildProcess</a></p>
+<ul>
+<li><a href="#child_process_event_close">Event: 'close'</a></li>
+<li><a href="#child_process_event_disconnect">Event: 'disconnect'</a></li>
+<li><a href="#child_process_event_error">Event: 'error'</a></li>
+<li><a href="#child_process_event_exit">Event: 'exit'</a></li>
+<li><a href="#child_process_event_message">Event: 'message'</a></li>
+<li><a href="#child_process_subprocess_channel">subprocess.channel</a></li>
+<li><a href="#child_process_subprocess_connected">subprocess.connected</a></li>
+<li><a href="#child_process_subprocess_disconnect">subprocess.disconnect()</a></li>
+<li><a href="#child_process_subprocess_kill_signal">subprocess.kill([signal])</a></li>
+<li><a href="#child_process_subprocess_killed">subprocess.killed</a></li>
+<li><a href="#child_process_subprocess_pid">subprocess.pid</a></li>
+<li><a href="#child_process_subprocess_ref">subprocess.ref()</a></li>
+<li>
+<p><a href="#child_process_subprocess_send_message_sendhandle_options_callback">subprocess.send(message[, sendHandle[, options]][, callback])</a></p>
+<ul>
+<li><a href="#child_process_example_sending_a_server_object">Example: sending a server object</a></li>
+<li><a href="#child_process_example_sending_a_socket_object">Example: sending a socket object</a></li>
+</ul>
+</li>
+<li><a href="#child_process_subprocess_stderr">subprocess.stderr</a></li>
+<li><a href="#child_process_subprocess_stdin">subprocess.stdin</a></li>
+<li><a href="#child_process_subprocess_stdio">subprocess.stdio</a></li>
+<li><a href="#child_process_subprocess_stdout">subprocess.stdout</a></li>
+<li><a href="#child_process_subprocess_unref">subprocess.unref()</a></li>
+</ul>
+</li>
+<li><a href="#child_process_maxbuffer_and_unicode"><code>maxBuffer</code> and Unicode</a></li>
+<li><a href="#child_process_shell_requirements">Shell Requirements</a></li>
+<li><a href="#child_process_default_windows_shell">Default Windows Shell</a></li>
+</ul>
+</li>
+</ul>
+      </div>
+
+      <div id="apicontent">
+        <h1>Child Process<span><a class="mark" href="#child_process_child_process" id="child_process_child_process">#</a></span></h1>
+
+<p></p><div class="api_stability api_stability_2"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 2</a> - Stable</div><p></p>
+<p>The <code>child_process</code> module provides the ability to spawn child processes in
+a manner that is similar, but not identical, to <a href="http://man7.org/linux/man-pages/man3/popen.3.html"><code>popen(3)</code></a>. This capability
+is primarily provided by the <a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a> function:</p>
+<pre><code class="language-js">const { spawn } = require('child_process');
+const ls = spawn('ls', ['-lh', '/usr']);
+
+ls.stdout.on('data', (data) =&gt; {
+  console.log(`stdout: ${data}`);
+});
+
+ls.stderr.on('data', (data) =&gt; {
+  console.error(`stderr: ${data}`);
+});
+
+ls.on('close', (code) =&gt; {
+  console.log(`child process exited with code ${code}`);
+});
+</code></pre>
+<p>By default, pipes for <code>stdin</code>, <code>stdout</code>, and <code>stderr</code> are established between
+the parent Node.js process and the spawned child. These pipes have
+limited (and platform-specific) capacity. If the child process writes to
+stdout in excess of that limit without the output being captured, the child
+process will block waiting for the pipe buffer to accept more data. This is
+identical to the behavior of pipes in the shell. Use the <code>{ stdio: 'ignore' }</code>
+option if the output will not be consumed.</p>
+<p>The <a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a> method spawns the child process asynchronously,
+without blocking the Node.js event loop. The <a href="#child_process_child_process_spawnsync_command_args_options"><code>child_process.spawnSync()</code></a>
+function provides equivalent functionality in a synchronous manner that blocks
+the event loop until the spawned process either exits or is terminated.</p>
+<p>For convenience, the <code>child_process</code> module provides a handful of synchronous
+and asynchronous alternatives to <a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a> and
+<a href="#child_process_child_process_spawnsync_command_args_options"><code>child_process.spawnSync()</code></a>. Each of these alternatives are implemented on
+top of <a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a> or <a href="#child_process_child_process_spawnsync_command_args_options"><code>child_process.spawnSync()</code></a>.</p>
+<ul>
+<li><a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a>: spawns a shell and runs a command within that
+shell, passing the <code>stdout</code> and <code>stderr</code> to a callback function when
+complete.</li>
+<li><a href="#child_process_child_process_execfile_file_args_options_callback"><code>child_process.execFile()</code></a>: similar to <a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a> except
+that it spawns the command directly without first spawning a shell by
+default.</li>
+<li><a href="#child_process_child_process_fork_modulepath_args_options"><code>child_process.fork()</code></a>: spawns a new Node.js process and invokes a
+specified module with an IPC communication channel established that allows
+sending messages between parent and child.</li>
+<li><a href="#child_process_child_process_execsync_command_options"><code>child_process.execSync()</code></a>: a synchronous version of
+<a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a> that will block the Node.js event loop.</li>
+<li><a href="#child_process_child_process_execfilesync_file_args_options"><code>child_process.execFileSync()</code></a>: a synchronous version of
+<a href="#child_process_child_process_execfile_file_args_options_callback"><code>child_process.execFile()</code></a> that will block the Node.js event loop.</li>
+</ul>
+<p>For certain use cases, such as automating shell scripts, the
+<a href="#child_process_synchronous_process_creation">synchronous counterparts</a> may be more convenient. In many cases, however,
+the synchronous methods can have significant impact on performance due to
+stalling the event loop while spawned processes complete.</p>
+<h2>Asynchronous Process Creation<span><a class="mark" href="#child_process_asynchronous_process_creation" id="child_process_asynchronous_process_creation">#</a></span></h2>
+<p>The <a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a>, <a href="#child_process_child_process_fork_modulepath_args_options"><code>child_process.fork()</code></a>, <a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a>,
+and <a href="#child_process_child_process_execfile_file_args_options_callback"><code>child_process.execFile()</code></a> methods all follow the idiomatic asynchronous
+programming pattern typical of other Node.js APIs.</p>
+<p>Each of the methods returns a <a href="#child_process_child_process"><code>ChildProcess</code></a> instance. These objects
+implement the Node.js <a href="https://nodejs.org/api/events.html#events_class_eventemitter"><code>EventEmitter</code></a> API, allowing the parent process to
+register listener functions that are called when certain events occur during
+the life cycle of the child process.</p>
+<p>The <a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a> and <a href="#child_process_child_process_execfile_file_args_options_callback"><code>child_process.execFile()</code></a> methods
+additionally allow for an optional <code>callback</code> function to be specified that is
+invoked when the child process terminates.</p>
+<h3>Spawning <code>.bat</code> and <code>.cmd</code> files on Windows<span><a class="mark" href="#child_process_spawning_bat_and_cmd_files_on_windows" id="child_process_spawning_bat_and_cmd_files_on_windows">#</a></span></h3>
+<p>The importance of the distinction between <a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a> and
+<a href="#child_process_child_process_execfile_file_args_options_callback"><code>child_process.execFile()</code></a> can vary based on platform. On Unix-type
+operating systems (Unix, Linux, macOS) <a href="#child_process_child_process_execfile_file_args_options_callback"><code>child_process.execFile()</code></a> can be
+more efficient because it does not spawn a shell by default. On Windows,
+however, <code>.bat</code> and <code>.cmd</code> files are not executable on their own without a
+terminal, and therefore cannot be launched using <a href="#child_process_child_process_execfile_file_args_options_callback"><code>child_process.execFile()</code></a>.
+When running on Windows, <code>.bat</code> and <code>.cmd</code> files can be invoked using
+<a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a> with the <code>shell</code> option set, with
+<a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a>, or by spawning <code>cmd.exe</code> and passing the <code>.bat</code> or
+<code>.cmd</code> file as an argument (which is what the <code>shell</code> option and
+<a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a> do). In any case, if the script filename contains
+spaces it needs to be quoted.</p>
+<pre><code class="language-js">// On Windows Only...
+const { spawn } = require('child_process');
+const bat = spawn('cmd.exe', ['/c', 'my.bat']);
+
+bat.stdout.on('data', (data) =&gt; {
+  console.log(data.toString());
+});
+
+bat.stderr.on('data', (data) =&gt; {
+  console.error(data.toString());
+});
+
+bat.on('exit', (code) =&gt; {
+  console.log(`Child exited with code ${code}`);
+});
+</code></pre>
+<pre><code class="language-js">// OR...
+const { exec } = require('child_process');
+exec('my.bat', (err, stdout, stderr) =&gt; {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(stdout);
+});
+
+// Script with spaces in the filename:
+const bat = spawn('"my script.cmd"', ['a', 'b'], { shell: true });
+// or:
+exec('"my script.cmd" a b', (err, stdout, stderr) =&gt; {
+  // ...
+});
+</code></pre>
+<h3>child_process.exec(command[, options][, callback])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/child_process.js#L143">[src]</a><span><a class="mark" href="#child_process_child_process_exec_command_options_callback" id="child_process_child_process_exec_command_options_callback">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.8.0</td>
+<td><p>The <code>windowsHide</code> option is supported now.</p></td></tr>
+<tr><td>v0.1.90</td>
+<td><p><span>Added in: v0.1.90</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>command</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The command to run, with space-separated arguments.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>cwd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Current working directory of the child process.
+<strong>Default:</strong> <code>null</code>.</li>
+<li><code>env</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> Environment key-value pairs. <strong>Default:</strong> <code>process.env</code>.</li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> <strong>Default:</strong> <code>'utf8'</code></li>
+<li><code>shell</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Shell to execute the command with. See
+<a href="#child_process_shell_requirements">Shell Requirements</a> and <a href="#child_process_default_windows_shell">Default Windows Shell</a>. <strong>Default:</strong>
+<code>'/bin/sh'</code> on Unix, <code>process.env.ComSpec</code> on Windows.</li>
+<li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> <strong>Default:</strong> <code>0</code></li>
+<li><code>maxBuffer</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Largest amount of data in bytes allowed on stdout or
+stderr. If exceeded, the child process is terminated and any output is
+truncated. See caveat at <a href="#child_process_maxbuffer_and_unicode"><code>maxBuffer</code> and Unicode</a>.
+<strong>Default:</strong> <code>1024 * 1024</code>.</li>
+<li><code>killSignal</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> <strong>Default:</strong> <code>'SIGTERM'</code></li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the user identity of the process (see <a href="http://man7.org/linux/man-pages/man2/setuid.2.html"><code>setuid(2)</code></a>).</li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the group identity of the process (see <a href="http://man7.org/linux/man-pages/man2/setgid.2.html"><code>setgid(2)</code></a>).</li>
+<li><code>windowsHide</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Hide the subprocess console window that would
+normally be created on Windows systems. <strong>Default:</strong> <code>false</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> called with the output when process terminates.</p>
+<ul>
+<li><code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>stdout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>stderr</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+</li>
+<li>Returns: <a href="https://nodejs.org/api/child_process.html#child_process_class_childprocess" class="type">&lt;ChildProcess&gt;</a></li>
+</ul>
+<p>Spawns a shell then executes the <code>command</code> within that shell, buffering any
+generated output. The <code>command</code> string passed to the exec function is processed
+directly by the shell and special characters (vary based on
+<a href="https://en.wikipedia.org/wiki/List_of_command-line_interpreters">shell</a>)
+need to be dealt with accordingly:</p>
+<pre><code class="language-js">exec('"/path/to/test file/test.sh" arg1 arg2');
+// Double quotes are used so that the space in the path is not interpreted as
+// a delimiter of multiple arguments.
+
+exec('echo "The \\$HOME variable is $HOME"');
+// The $HOME variable is escaped in the first instance, but not in the second.
+</code></pre>
+<p><strong>Never pass unsanitized user input to this function. Any input containing shell
+metacharacters may be used to trigger arbitrary command execution.</strong></p>
+<p>If a <code>callback</code> function is provided, it is called with the arguments
+<code>(error, stdout, stderr)</code>. On success, <code>error</code> will be <code>null</code>. On error,
+<code>error</code> will be an instance of <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a>. The <code>error.code</code> property will be
+the exit code of the child process while <code>error.signal</code> will be set to the
+signal that terminated the process. Any exit code other than <code>0</code> is considered
+to be an error.</p>
+<p>The <code>stdout</code> and <code>stderr</code> arguments passed to the callback will contain the
+stdout and stderr output of the child process. By default, Node.js will decode
+the output as UTF-8 and pass strings to the callback. The <code>encoding</code> option
+can be used to specify the character encoding used to decode the stdout and
+stderr output. If <code>encoding</code> is <code>'buffer'</code>, or an unrecognized character
+encoding, <code>Buffer</code> objects will be passed to the callback instead.</p>
+<pre><code class="language-js">const { exec } = require('child_process');
+exec('cat *.js missing_file | wc -l', (error, stdout, stderr) =&gt; {
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.error(`stderr: ${stderr}`);
+});
+</code></pre>
+<p>If <code>timeout</code> is greater than <code>0</code>, the parent will send the signal
+identified by the <code>killSignal</code> property (the default is <code>'SIGTERM'</code>) if the
+child runs longer than <code>timeout</code> milliseconds.</p>
+<p>Unlike the <a href="http://man7.org/linux/man-pages/man3/exec.3.html"><code>exec(3)</code></a> POSIX system call, <code>child_process.exec()</code> does not replace
+the existing process and uses a shell to execute the command.</p>
+<p>If this method is invoked as its <a href="https://nodejs.org/api/util.html#util_util_promisify_original"><code>util.promisify()</code></a>ed version, it returns
+a <code>Promise</code> for an <code>Object</code> with <code>stdout</code> and <code>stderr</code> properties. The returned
+<code>ChildProcess</code> instance is attached to the <code>Promise</code> as a <code>child</code> property. In
+case of an error (including any error resulting in an exit code other than 0), a
+rejected promise is returned, with the same <code>error</code> object given in the
+callback, but with two additional properties <code>stdout</code> and <code>stderr</code>.</p>
+<pre><code class="language-js">const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
+async function lsExample() {
+  const { stdout, stderr } = await exec('ls');
+  console.log('stdout:', stdout);
+  console.error('stderr:', stderr);
+}
+lsExample();
+</code></pre>
+<h3>child_process.execFile(file[, args][, options][, callback])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/child_process.js#L178">[src]</a><span><a class="mark" href="#child_process_child_process_execfile_file_args_options_callback" id="child_process_child_process_execfile_file_args_options_callback">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.8.0</td>
+<td><p>The <code>windowsHide</code> option is supported now.</p></td></tr>
+<tr><td>v0.1.91</td>
+<td><p><span>Added in: v0.1.91</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>file</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The name or path of the executable file to run.</li>
+<li><code>args</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> List of string arguments.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>cwd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Current working directory of the child process.</li>
+<li><code>env</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> Environment key-value pairs. <strong>Default:</strong> <code>process.env</code>.</li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> <strong>Default:</strong> <code>'utf8'</code></li>
+<li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> <strong>Default:</strong> <code>0</code></li>
+<li><code>maxBuffer</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Largest amount of data in bytes allowed on stdout or
+stderr. If exceeded, the child process is terminated and any output is
+truncated. See caveat at <a href="#child_process_maxbuffer_and_unicode"><code>maxBuffer</code> and Unicode</a>.
+<strong>Default:</strong> <code>1024 * 1024</code>.</li>
+<li><code>killSignal</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> <strong>Default:</strong> <code>'SIGTERM'</code></li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the user identity of the process (see <a href="http://man7.org/linux/man-pages/man2/setuid.2.html"><code>setuid(2)</code></a>).</li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the group identity of the process (see <a href="http://man7.org/linux/man-pages/man2/setgid.2.html"><code>setgid(2)</code></a>).</li>
+<li><code>windowsHide</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Hide the subprocess console window that would
+normally be created on Windows systems. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>windowsVerbatimArguments</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> No quoting or escaping of arguments is
+done on Windows. Ignored on Unix. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>shell</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> If <code>true</code>, runs <code>command</code> inside of a shell. Uses
+<code>'/bin/sh'</code> on Unix, and <code>process.env.ComSpec</code> on Windows. A different
+shell can be specified as a string. See <a href="#child_process_shell_requirements">Shell Requirements</a> and
+<a href="#child_process_default_windows_shell">Default Windows Shell</a>. <strong>Default:</strong> <code>false</code> (no shell).</li>
+</ul>
+</li>
+<li>
+<p><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> Called with the output when process terminates.</p>
+<ul>
+<li><code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>stdout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>stderr</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+</li>
+<li>Returns: <a href="https://nodejs.org/api/child_process.html#child_process_class_childprocess" class="type">&lt;ChildProcess&gt;</a></li>
+</ul>
+<p>The <code>child_process.execFile()</code> function is similar to <a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a>
+except that it does not spawn a shell by default. Rather, the specified
+executable <code>file</code> is spawned directly as a new process making it slightly more
+efficient than <a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a>.</p>
+<p>The same options as <a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a> are supported. Since a shell is
+not spawned, behaviors such as I/O redirection and file globbing are not
+supported.</p>
+<pre><code class="language-js">const { execFile } = require('child_process');
+const child = execFile('node', ['--version'], (error, stdout, stderr) =&gt; {
+  if (error) {
+    throw error;
+  }
+  console.log(stdout);
+});
+</code></pre>
+<p>The <code>stdout</code> and <code>stderr</code> arguments passed to the callback will contain the
+stdout and stderr output of the child process. By default, Node.js will decode
+the output as UTF-8 and pass strings to the callback. The <code>encoding</code> option
+can be used to specify the character encoding used to decode the stdout and
+stderr output. If <code>encoding</code> is <code>'buffer'</code>, or an unrecognized character
+encoding, <code>Buffer</code> objects will be passed to the callback instead.</p>
+<p>If this method is invoked as its <a href="https://nodejs.org/api/util.html#util_util_promisify_original"><code>util.promisify()</code></a>ed version, it returns
+a <code>Promise</code> for an <code>Object</code> with <code>stdout</code> and <code>stderr</code> properties. The returned
+<code>ChildProcess</code> instance is attached to the <code>Promise</code> as a <code>child</code> property. In
+case of an error (including any error resulting in an exit code other than 0), a
+rejected promise is returned, with the same <code>error</code> object given in the
+callback, but with two additional properties <code>stdout</code> and <code>stderr</code>.</p>
+<pre><code class="language-js">const util = require('util');
+const execFile = util.promisify(require('child_process').execFile);
+async function getVersion() {
+  const { stdout } = await execFile('node', ['--version']);
+  console.log(stdout);
+}
+getVersion();
+</code></pre>
+<p><strong>If the <code>shell</code> option is enabled, do not pass unsanitized user input to this
+function. Any input containing shell metacharacters may be used to trigger
+arbitrary command execution.</strong></p>
+<h3>child_process.fork(modulePath[, args][, options])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/child_process.js#L54">[src]</a><span><a class="mark" href="#child_process_child_process_fork_modulepath_args_options" id="child_process_child_process_fork_modulepath_args_options">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.0.0</td>
+<td><p>The <code>stdio</code> option can now be a string.</p></td></tr>
+<tr><td>v6.4.0</td>
+<td><p>The <code>stdio</code> option is supported now.</p></td></tr>
+<tr><td>v0.5.0</td>
+<td><p><span>Added in: v0.5.0</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>modulePath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The module to run in the child.</li>
+<li><code>args</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> List of string arguments.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>cwd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Current working directory of the child process.</li>
+<li><code>detached</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Prepare child to run independently of its parent
+process. Specific behavior depends on the platform, see
+<a href="#child_process_options_detached"><code>options.detached</code></a>).</li>
+<li><code>env</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> Environment key-value pairs.  <strong>Default:</strong> <code>process.env</code>.</li>
+<li><code>execPath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Executable used to create the child process.</li>
+<li><code>execArgv</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> List of string arguments passed to the executable.
+<strong>Default:</strong> <code>process.execArgv</code>.</li>
+<li><code>silent</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If <code>true</code>, stdin, stdout, and stderr of the child will be
+piped to the parent, otherwise they will be inherited from the parent, see
+the <code>'pipe'</code> and <code>'inherit'</code> options for <a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a>'s
+<a href="#child_process_options_stdio"><code>stdio</code></a> for more details. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>stdio</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> See <a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a>'s <a href="#child_process_options_stdio"><code>stdio</code></a>.
+When this option is provided, it overrides <code>silent</code>. If the array variant
+is used, it must contain exactly one item with value <code>'ipc'</code> or an error
+will be thrown. For instance <code>[0, 1, 2, 'ipc']</code>.</li>
+<li><code>windowsVerbatimArguments</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> No quoting or escaping of arguments is
+done on Windows. Ignored on Unix. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the user identity of the process (see <a href="http://man7.org/linux/man-pages/man2/setuid.2.html"><code>setuid(2)</code></a>).</li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the group identity of the process (see <a href="http://man7.org/linux/man-pages/man2/setgid.2.html"><code>setgid(2)</code></a>).</li>
+</ul>
+</li>
+<li>Returns: <a href="https://nodejs.org/api/child_process.html#child_process_class_childprocess" class="type">&lt;ChildProcess&gt;</a></li>
+</ul>
+<p>The <code>child_process.fork()</code> method is a special case of
+<a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a> used specifically to spawn new Node.js processes.
+Like <a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a>, a <a href="#child_process_child_process"><code>ChildProcess</code></a> object is returned. The
+returned <a href="#child_process_child_process"><code>ChildProcess</code></a> will have an additional communication channel
+built-in that allows messages to be passed back and forth between the parent and
+child. See <a href="#child_process_subprocess_send_message_sendhandle_options_callback"><code>subprocess.send()</code></a> for details.</p>
+<p>It is important to keep in mind that spawned Node.js child processes are
+independent of the parent with exception of the IPC communication channel
+that is established between the two. Each process has its own memory, with
+their own V8 instances. Because of the additional resource allocations
+required, spawning a large number of child Node.js processes is not
+recommended.</p>
+<p>By default, <code>child_process.fork()</code> will spawn new Node.js instances using the
+<a href="https://nodejs.org/api/process.html#process_process_execpath"><code>process.execPath</code></a> of the parent process. The <code>execPath</code> property in the
+<code>options</code> object allows for an alternative execution path to be used.</p>
+<p>Node.js processes launched with a custom <code>execPath</code> will communicate with the
+parent process using the file descriptor (fd) identified using the
+environment variable <code>NODE_CHANNEL_FD</code> on the child process.</p>
+<p>Unlike the <a href="http://man7.org/linux/man-pages/man2/fork.2.html"><code>fork(2)</code></a> POSIX system call, <code>child_process.fork()</code> does not clone the
+current process.</p>
+<p>The <code>shell</code> option available in <a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a> is not supported by
+<code>child_process.fork()</code> and will be ignored if set.</p>
+<h3>child_process.spawn(command[, args][, options])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/child_process.js#L533">[src]</a><span><a class="mark" href="#child_process_child_process_spawn_command_args_options" id="child_process_child_process_spawn_command_args_options">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.8.0</td>
+<td><p>The <code>windowsHide</code> option is supported now.</p></td></tr>
+<tr><td>v6.4.0</td>
+<td><p>The <code>argv0</code> option is supported now.</p></td></tr>
+<tr><td>v5.7.0</td>
+<td><p>The <code>shell</code> option is supported now.</p></td></tr>
+<tr><td>v0.1.90</td>
+<td><p><span>Added in: v0.1.90</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>command</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The command to run.</li>
+<li><code>args</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> List of string arguments.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>cwd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Current working directory of the child process.</li>
+<li><code>env</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> Environment key-value pairs. <strong>Default:</strong> <code>process.env</code>.</li>
+<li><code>argv0</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Explicitly set the value of <code>argv[0]</code> sent to the child
+process. This will be set to <code>command</code> if not specified.</li>
+<li><code>stdio</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Child's stdio configuration (see
+<a href="#child_process_options_stdio"><code>options.stdio</code></a>).</li>
+<li><code>detached</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Prepare child to run independently of its parent
+process. Specific behavior depends on the platform, see
+<a href="#child_process_options_detached"><code>options.detached</code></a>).</li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the user identity of the process (see <a href="http://man7.org/linux/man-pages/man2/setuid.2.html"><code>setuid(2)</code></a>).</li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the group identity of the process (see <a href="http://man7.org/linux/man-pages/man2/setgid.2.html"><code>setgid(2)</code></a>).</li>
+<li><code>shell</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> If <code>true</code>, runs <code>command</code> inside of a shell. Uses
+<code>'/bin/sh'</code> on Unix, and <code>process.env.ComSpec</code> on Windows. A different
+shell can be specified as a string. See <a href="#child_process_shell_requirements">Shell Requirements</a> and
+<a href="#child_process_default_windows_shell">Default Windows Shell</a>. <strong>Default:</strong> <code>false</code> (no shell).</li>
+<li><code>windowsVerbatimArguments</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> No quoting or escaping of arguments is
+done on Windows. Ignored on Unix. This is set to <code>true</code> automatically
+when <code>shell</code> is specified and is CMD. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>windowsHide</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Hide the subprocess console window that would
+normally be created on Windows systems. <strong>Default:</strong> <code>false</code>.</li>
+</ul>
+</li>
+<li>Returns: <a href="https://nodejs.org/api/child_process.html#child_process_class_childprocess" class="type">&lt;ChildProcess&gt;</a></li>
+</ul>
+<p>The <code>child_process.spawn()</code> method spawns a new process using the given
+<code>command</code>, with command line arguments in <code>args</code>. If omitted, <code>args</code> defaults
+to an empty array.</p>
+<p><strong>If the <code>shell</code> option is enabled, do not pass unsanitized user input to this
+function. Any input containing shell metacharacters may be used to trigger
+arbitrary command execution.</strong></p>
+<p>A third argument may be used to specify additional options, with these defaults:</p>
+<pre><code class="language-js">const defaults = {
+  cwd: undefined,
+  env: process.env
+};
+</code></pre>
+<p>Use <code>cwd</code> to specify the working directory from which the process is spawned.
+If not given, the default is to inherit the current working directory.</p>
+<p>Use <code>env</code> to specify environment variables that will be visible to the new
+process, the default is <a href="https://nodejs.org/api/process.html#process_process_env"><code>process.env</code></a>.</p>
+<p><code>undefined</code> values in <code>env</code> will be ignored.</p>
+<p>Example of running <code>ls -lh /usr</code>, capturing <code>stdout</code>, <code>stderr</code>, and the
+exit code:</p>
+<pre><code class="language-js">const { spawn } = require('child_process');
+const ls = spawn('ls', ['-lh', '/usr']);
+
+ls.stdout.on('data', (data) =&gt; {
+  console.log(`stdout: ${data}`);
+});
+
+ls.stderr.on('data', (data) =&gt; {
+  console.error(`stderr: ${data}`);
+});
+
+ls.on('close', (code) =&gt; {
+  console.log(`child process exited with code ${code}`);
+});
+</code></pre>
+<p>Example: A very elaborate way to run <code>ps ax | grep ssh</code></p>
+<pre><code class="language-js">const { spawn } = require('child_process');
+const ps = spawn('ps', ['ax']);
+const grep = spawn('grep', ['ssh']);
+
+ps.stdout.on('data', (data) =&gt; {
+  grep.stdin.write(data);
+});
+
+ps.stderr.on('data', (data) =&gt; {
+  console.error(`ps stderr: ${data}`);
+});
+
+ps.on('close', (code) =&gt; {
+  if (code !== 0) {
+    console.log(`ps process exited with code ${code}`);
+  }
+  grep.stdin.end();
+});
+
+grep.stdout.on('data', (data) =&gt; {
+  console.log(data.toString());
+});
+
+grep.stderr.on('data', (data) =&gt; {
+  console.error(`grep stderr: ${data}`);
+});
+
+grep.on('close', (code) =&gt; {
+  if (code !== 0) {
+    console.log(`grep process exited with code ${code}`);
+  }
+});
+</code></pre>
+<p>Example of checking for failed <code>spawn</code>:</p>
+<pre><code class="language-js">const { spawn } = require('child_process');
+const subprocess = spawn('bad_command');
+
+subprocess.on('error', (err) =&gt; {
+  console.error('Failed to start subprocess.');
+});
+</code></pre>
+<p>Certain platforms (macOS, Linux) will use the value of <code>argv[0]</code> for the process
+title while others (Windows, SunOS) will use <code>command</code>.</p>
+<p>Node.js currently overwrites <code>argv[0]</code> with <code>process.execPath</code> on startup, so
+<code>process.argv[0]</code> in a Node.js child process will not match the <code>argv0</code>
+parameter passed to <code>spawn</code> from the parent, retrieve it with the
+<code>process.argv0</code> property instead.</p>
+<h4>options.detached<span><a class="mark" href="#child_process_options_detached" id="child_process_options_detached">#</a></span></h4>
+<div class="api_metadata">
+<span>Added in: v0.7.10</span>
+</div>
+<p>On Windows, setting <code>options.detached</code> to <code>true</code> makes it possible for the
+child process to continue running after the parent exits. The child will have
+its own console window. Once enabled for a child process, it cannot be
+disabled.</p>
+<p>On non-Windows platforms, if <code>options.detached</code> is set to <code>true</code>, the child
+process will be made the leader of a new process group and session. Child
+processes may continue running after the parent exits regardless of whether
+they are detached or not. See <a href="http://man7.org/linux/man-pages/man2/setsid.2.html"><code>setsid(2)</code></a> for more information.</p>
+<p>By default, the parent will wait for the detached child to exit. To prevent the
+parent from waiting for a given <code>subprocess</code> to exit, use the
+<code>subprocess.unref()</code> method. Doing so will cause the parent's event loop to not
+include the child in its reference count, allowing the parent to exit
+independently of the child, unless there is an established IPC channel between
+the child and the parent.</p>
+<p>When using the <code>detached</code> option to start a long-running process, the process
+will not stay running in the background after the parent exits unless it is
+provided with a <code>stdio</code> configuration that is not connected to the parent.
+If the parent's <code>stdio</code> is inherited, the child will remain attached to the
+controlling terminal.</p>
+<p>Example of a long-running process, by detaching and also ignoring its parent
+<code>stdio</code> file descriptors, in order to ignore the parent's termination:</p>
+<pre><code class="language-js">const { spawn } = require('child_process');
+
+const subprocess = spawn(process.argv[0], ['child_program.js'], {
+  detached: true,
+  stdio: 'ignore'
+});
+
+subprocess.unref();
+</code></pre>
+<p>Alternatively one can redirect the child process' output into files:</p>
+<pre><code class="language-js">const fs = require('fs');
+const { spawn } = require('child_process');
+const out = fs.openSync('./out.log', 'a');
+const err = fs.openSync('./out.log', 'a');
+
+const subprocess = spawn('prg', [], {
+  detached: true,
+  stdio: [ 'ignore', out, err ]
+});
+
+subprocess.unref();
+</code></pre>
+<h4>options.stdio<span><a class="mark" href="#child_process_options_stdio" id="child_process_options_stdio">#</a></span></h4>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v3.3.1</td>
+<td><p>The value <code>0</code> is now accepted as a file descriptor.</p></td></tr>
+<tr><td>v0.7.10</td>
+<td><p><span>Added in: v0.7.10</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>The <code>options.stdio</code> option is used to configure the pipes that are established
+between the parent and child process. By default, the child's stdin, stdout,
+and stderr are redirected to corresponding <a href="#child_process_subprocess_stdin"><code>subprocess.stdin</code></a>,
+<a href="#child_process_subprocess_stdout"><code>subprocess.stdout</code></a>, and <a href="#child_process_subprocess_stderr"><code>subprocess.stderr</code></a> streams on the
+<a href="#child_process_child_process"><code>ChildProcess</code></a> object. This is equivalent to setting the <code>options.stdio</code>
+equal to <code>['pipe', 'pipe', 'pipe']</code>.</p>
+<p>For convenience, <code>options.stdio</code> may be one of the following strings:</p>
+<ul>
+<li><code>'pipe'</code> - equivalent to <code>['pipe', 'pipe', 'pipe']</code> (the default)</li>
+<li><code>'ignore'</code> - equivalent to <code>['ignore', 'ignore', 'ignore']</code></li>
+<li><code>'inherit'</code> - equivalent to <code>['inherit', 'inherit', 'inherit']</code> or <code>[0, 1, 2]</code></li>
+</ul>
+<p>Otherwise, the value of <code>options.stdio</code> is an array where each index corresponds
+to an fd in the child. The fds 0, 1, and 2 correspond to stdin, stdout,
+and stderr, respectively. Additional fds can be specified to create additional
+pipes between the parent and child. The value is one of the following:</p>
+<ol>
+<li>
+<p><code>'pipe'</code> - Create a pipe between the child process and the parent process.
+The parent end of the pipe is exposed to the parent as a property on the
+<code>child_process</code> object as <a href="#child_process_subprocess_stdio"><code>subprocess.stdio[fd]</code></a>. Pipes
+created for fds 0 - 2 are also available as <a href="#child_process_subprocess_stdin"><code>subprocess.stdin</code></a>,
+<a href="#child_process_subprocess_stdout"><code>subprocess.stdout</code></a> and <a href="#child_process_subprocess_stderr"><code>subprocess.stderr</code></a>, respectively.</p>
+</li>
+<li>
+<p><code>'ipc'</code> - Create an IPC channel for passing messages/file descriptors
+between parent and child. A <a href="#child_process_child_process"><code>ChildProcess</code></a> may have at most one IPC
+stdio file descriptor. Setting this option enables the
+<a href="#child_process_subprocess_send_message_sendhandle_options_callback"><code>subprocess.send()</code></a> method. If the child is a Node.js process, the
+presence of an IPC channel will enable <a href="https://nodejs.org/api/process.html#process_process_send_message_sendhandle_options_callback"><code>process.send()</code></a> and
+<a href="https://nodejs.org/api/process.html#process_process_disconnect"><code>process.disconnect()</code></a> methods, as well as <a href="https://nodejs.org/api/process.html#process_event_disconnect"><code>'disconnect'</code></a> and
+<a href="https://nodejs.org/api/process.html#process_event_message"><code>'message'</code></a> events within the child.</p>
+<p>Accessing the IPC channel fd in any way other than <a href="https://nodejs.org/api/process.html#process_process_send_message_sendhandle_options_callback"><code>process.send()</code></a>
+or using the IPC channel with a child process that is not a Node.js instance
+is not supported.</p>
+</li>
+<li>
+<p><code>'ignore'</code> - Instructs Node.js to ignore the fd in the child. While Node.js
+will always open fds 0 - 2 for the processes it spawns, setting the fd to
+<code>'ignore'</code> will cause Node.js to open <code>/dev/null</code> and attach it to the
+child's fd.</p>
+</li>
+<li>
+<p><code>'inherit'</code> - Pass through the corresponding stdio stream to/from the
+parent process. In the first three positions, this is equivalent to
+<code>process.stdin</code>, <code>process.stdout</code>, and <code>process.stderr</code>, respectively. In
+any other position, equivalent to <code>'ignore'</code>.</p>
+</li>
+<li>
+<p><a href="https://nodejs.org/api/stream.html#stream_stream" class="type">&lt;Stream&gt;</a> object - Share a readable or writable stream that refers to a tty,
+file, socket, or a pipe with the child process. The stream's underlying
+file descriptor is duplicated in the child process to the fd that
+corresponds to the index in the <code>stdio</code> array. The stream must have an
+underlying descriptor (file streams do not until the <code>'open'</code> event has
+occurred).</p>
+</li>
+<li>
+<p>Positive integer - The integer value is interpreted as a file descriptor
+that is currently open in the parent process. It is shared with the child
+process, similar to how <a href="https://nodejs.org/api/stream.html#stream_stream" class="type">&lt;Stream&gt;</a> objects can be shared. Passing sockets
+is not supported on Windows.</p>
+</li>
+<li>
+<p><code>null</code>, <code>undefined</code> - Use default value. For stdio fds 0, 1, and 2 (in other
+words, stdin, stdout, and stderr) a pipe is created. For fd 3 and up, the
+default is <code>'ignore'</code>.</p>
+</li>
+</ol>
+<pre><code class="language-js">const { spawn } = require('child_process');
+
+// Child will use parent's stdios.
+spawn('prg', [], { stdio: 'inherit' });
+
+// Spawn child sharing only stderr.
+spawn('prg', [], { stdio: ['pipe', 'pipe', process.stderr] });
+
+// Open an extra fd=4, to interact with programs presenting a
+// startd-style interface.
+spawn('prg', [], { stdio: ['pipe', null, null, null, 'pipe'] });
+</code></pre>
+<p><em>It is worth noting that when an IPC channel is established between the
+parent and child processes, and the child is a Node.js process, the child
+is launched with the IPC channel unreferenced (using <code>unref()</code>) until the
+child registers an event handler for the <a href="https://nodejs.org/api/process.html#process_event_disconnect"><code>'disconnect'</code></a> event
+or the <a href="https://nodejs.org/api/process.html#process_event_message"><code>'message'</code></a> event. This allows the child to exit
+normally without the process being held open by the open IPC channel.</em></p>
+<p>On Unix-like operating systems, the <a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a> method
+performs memory operations synchronously before decoupling the event loop
+from the child. Applications with a large memory footprint may find frequent
+<a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a> calls to be a bottleneck. For more information,
+see <a href="https://bugs.chromium.org/p/v8/issues/detail?id=7381">V8 issue 7381</a>.</p>
+<p>See also: <a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a> and <a href="#child_process_child_process_fork_modulepath_args_options"><code>child_process.fork()</code></a>.</p>
+<h2>Synchronous Process Creation<span><a class="mark" href="#child_process_synchronous_process_creation" id="child_process_synchronous_process_creation">#</a></span></h2>
+<p>The <a href="#child_process_child_process_spawnsync_command_args_options"><code>child_process.spawnSync()</code></a>, <a href="#child_process_child_process_execsync_command_options"><code>child_process.execSync()</code></a>, and
+<a href="#child_process_child_process_execfilesync_file_args_options"><code>child_process.execFileSync()</code></a> methods are synchronous and will block the
+Node.js event loop, pausing execution of any additional code until the spawned
+process exits.</p>
+<p>Blocking calls like these are mostly useful for simplifying general-purpose
+scripting tasks and for simplifying the loading/processing of application
+configuration at startup.</p>
+<h3>child_process.execFileSync(file[, args][, options])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/child_process.js#L630">[src]</a><span><a class="mark" href="#child_process_child_process_execfilesync_file_args_options" id="child_process_child_process_execfilesync_file_args_options">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.10.0</td>
+<td><p>The <code>input</code> option can now be any <code>TypedArray</code> or a <code>DataView</code>.</p></td></tr>
+<tr><td>v8.8.0</td>
+<td><p>The <code>windowsHide</code> option is supported now.</p></td></tr>
+<tr><td>v8.0.0</td>
+<td><p>The <code>input</code> option can now be a <code>Uint8Array</code>.</p></td></tr>
+<tr><td>v6.2.1, v4.5.0</td>
+<td><p>The <code>encoding</code> option can now explicitly be set to <code>buffer</code>.</p></td></tr>
+<tr><td>v0.11.12</td>
+<td><p><span>Added in: v0.11.12</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>file</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The name or path of the executable file to run.</li>
+<li><code>args</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> List of string arguments.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>cwd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Current working directory of the child process.</li>
+<li><code>input</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" class="type">&lt;TypedArray&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView" class="type">&lt;DataView&gt;</a> The value which will be passed
+as stdin to the spawned process. Supplying this value will override
+<code>stdio[0]</code>.</li>
+<li><code>stdio</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a> Child's stdio configuration. <code>stderr</code> by default will
+be output to the parent process' stderr unless <code>stdio</code> is specified.
+<strong>Default:</strong> <code>'pipe'</code>.</li>
+<li><code>env</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> Environment key-value pairs.  <strong>Default:</strong> <code>process.env</code>.</li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the user identity of the process (see <a href="http://man7.org/linux/man-pages/man2/setuid.2.html"><code>setuid(2)</code></a>).</li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the group identity of the process (see <a href="http://man7.org/linux/man-pages/man2/setgid.2.html"><code>setgid(2)</code></a>).</li>
+<li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> In milliseconds the maximum amount of time the process
+is allowed to run. <strong>Default:</strong> <code>undefined</code>.</li>
+<li><code>killSignal</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> The signal value to be used when the spawned
+process will be killed. <strong>Default:</strong> <code>'SIGTERM'</code>.</li>
+<li><code>maxBuffer</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Largest amount of data in bytes allowed on stdout or
+stderr. If exceeded, the child process is terminated. See caveat at
+<a href="#child_process_maxbuffer_and_unicode"><code>maxBuffer</code> and Unicode</a>. <strong>Default:</strong> <code>1024 * 1024</code>.</li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The encoding used for all stdio inputs and outputs.
+<strong>Default:</strong> <code>'buffer'</code>.</li>
+<li><code>windowsHide</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Hide the subprocess console window that would
+normally be created on Windows systems. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>shell</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> If <code>true</code>, runs <code>command</code> inside of a shell. Uses
+<code>'/bin/sh'</code> on Unix, and <code>process.env.ComSpec</code> on Windows. A different
+shell can be specified as a string. See <a href="#child_process_shell_requirements">Shell Requirements</a> and
+<a href="#child_process_default_windows_shell">Default Windows Shell</a>. <strong>Default:</strong> <code>false</code> (no shell).</li>
+</ul>
+</li>
+<li>Returns: <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The stdout from the command.</li>
+</ul>
+<p>The <code>child_process.execFileSync()</code> method is generally identical to
+<a href="#child_process_child_process_execfile_file_args_options_callback"><code>child_process.execFile()</code></a> with the exception that the method will not
+return until the child process has fully closed. When a timeout has been
+encountered and <code>killSignal</code> is sent, the method won't return until the process
+has completely exited.</p>
+<p>If the child process intercepts and handles the <code>SIGTERM</code> signal and
+does not exit, the parent process will still wait until the child process has
+exited.</p>
+<p>If the process times out or has a non-zero exit code, this method will throw an
+<a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> that will include the full result of the underlying
+<a href="#child_process_child_process_spawnsync_command_args_options"><code>child_process.spawnSync()</code></a>.</p>
+<p><strong>If the <code>shell</code> option is enabled, do not pass unsanitized user input to this
+function. Any input containing shell metacharacters may be used to trigger
+arbitrary command execution.</strong></p>
+<h3>child_process.execSync(command[, options])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/child_process.js#L648">[src]</a><span><a class="mark" href="#child_process_child_process_execsync_command_options" id="child_process_child_process_execsync_command_options">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.10.0</td>
+<td><p>The <code>input</code> option can now be any <code>TypedArray</code> or a <code>DataView</code>.</p></td></tr>
+<tr><td>v8.8.0</td>
+<td><p>The <code>windowsHide</code> option is supported now.</p></td></tr>
+<tr><td>v8.0.0</td>
+<td><p>The <code>input</code> option can now be a <code>Uint8Array</code>.</p></td></tr>
+<tr><td>v0.11.12</td>
+<td><p><span>Added in: v0.11.12</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>command</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The command to run.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>cwd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Current working directory of the child process.</li>
+<li><code>input</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" class="type">&lt;TypedArray&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView" class="type">&lt;DataView&gt;</a> The value which will be passed
+as stdin to the spawned process. Supplying this value will override
+<code>stdio[0]</code>.</li>
+<li><code>stdio</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a> Child's stdio configuration. <code>stderr</code> by default will
+be output to the parent process' stderr unless <code>stdio</code> is specified.
+<strong>Default:</strong> <code>'pipe'</code>.</li>
+<li><code>env</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> Environment key-value pairs. <strong>Default:</strong> <code>process.env</code>.</li>
+<li><code>shell</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Shell to execute the command with. See
+<a href="#child_process_shell_requirements">Shell Requirements</a> and <a href="#child_process_default_windows_shell">Default Windows Shell</a>. <strong>Default:</strong>
+<code>'/bin/sh'</code> on Unix, <code>process.env.ComSpec</code> on Windows.</li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the user identity of the process. (See <a href="http://man7.org/linux/man-pages/man2/setuid.2.html"><code>setuid(2)</code></a>).</li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the group identity of the process. (See <a href="http://man7.org/linux/man-pages/man2/setgid.2.html"><code>setgid(2)</code></a>).</li>
+<li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> In milliseconds the maximum amount of time the process
+is allowed to run. <strong>Default:</strong> <code>undefined</code>.</li>
+<li><code>killSignal</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> The signal value to be used when the spawned
+process will be killed. <strong>Default:</strong> <code>'SIGTERM'</code>.</li>
+<li><code>maxBuffer</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Largest amount of data in bytes allowed on stdout or
+stderr. If exceeded, the child process is terminated and any output is
+truncated. See caveat at <a href="#child_process_maxbuffer_and_unicode"><code>maxBuffer</code> and Unicode</a>.
+<strong>Default:</strong> <code>1024 * 1024</code>.</li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The encoding used for all stdio inputs and outputs.
+<strong>Default:</strong> <code>'buffer'</code>.</li>
+<li><code>windowsHide</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Hide the subprocess console window that would
+normally be created on Windows systems. <strong>Default:</strong> <code>false</code>.</li>
+</ul>
+</li>
+<li>Returns: <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The stdout from the command.</li>
+</ul>
+<p>The <code>child_process.execSync()</code> method is generally identical to
+<a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a> with the exception that the method will not return
+until the child process has fully closed. When a timeout has been encountered
+and <code>killSignal</code> is sent, the method won't return until the process has
+completely exited. If the child process intercepts and handles the <code>SIGTERM</code>
+signal and doesn't exit, the parent process will wait until the child process
+has exited.</p>
+<p>If the process times out or has a non-zero exit code, this method will throw.
+The <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> object will contain the entire result from
+<a href="#child_process_child_process_spawnsync_command_args_options"><code>child_process.spawnSync()</code></a>.</p>
+<p><strong>Never pass unsanitized user input to this function. Any input containing shell
+metacharacters may be used to trigger arbitrary command execution.</strong></p>
+<h3>child_process.spawnSync(command[, args][, options])<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/child_process.js#L556">[src]</a><span><a class="mark" href="#child_process_child_process_spawnsync_command_args_options" id="child_process_child_process_spawnsync_command_args_options">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.10.0</td>
+<td><p>The <code>input</code> option can now be any <code>TypedArray</code> or a <code>DataView</code>.</p></td></tr>
+<tr><td>v8.8.0</td>
+<td><p>The <code>windowsHide</code> option is supported now.</p></td></tr>
+<tr><td>v8.0.0</td>
+<td><p>The <code>input</code> option can now be a <code>Uint8Array</code>.</p></td></tr>
+<tr><td>v6.2.1, v4.5.0</td>
+<td><p>The <code>encoding</code> option can now explicitly be set to <code>buffer</code>.</p></td></tr>
+<tr><td>v5.7.0</td>
+<td><p>The <code>shell</code> option is supported now.</p></td></tr>
+<tr><td>v0.11.12</td>
+<td><p><span>Added in: v0.11.12</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>command</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The command to run.</li>
+<li><code>args</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> List of string arguments.</li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>cwd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Current working directory of the child process.</li>
+<li><code>input</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" class="type">&lt;TypedArray&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView" class="type">&lt;DataView&gt;</a> The value which will be passed
+as stdin to the spawned process. Supplying this value will override
+<code>stdio[0]</code>.</li>
+<li><code>argv0</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Explicitly set the value of <code>argv[0]</code> sent to the child
+process. This will be set to <code>command</code> if not specified.</li>
+<li><code>stdio</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a> Child's stdio configuration.</li>
+<li><code>env</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> Environment key-value pairs.  <strong>Default:</strong> <code>process.env</code>.</li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the user identity of the process (see <a href="http://man7.org/linux/man-pages/man2/setuid.2.html"><code>setuid(2)</code></a>).</li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Sets the group identity of the process (see <a href="http://man7.org/linux/man-pages/man2/setgid.2.html"><code>setgid(2)</code></a>).</li>
+<li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> In milliseconds the maximum amount of time the process
+is allowed to run. <strong>Default:</strong> <code>undefined</code>.</li>
+<li><code>killSignal</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a> The signal value to be used when the spawned
+process will be killed. <strong>Default:</strong> <code>'SIGTERM'</code>.</li>
+<li><code>maxBuffer</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Largest amount of data in bytes allowed on stdout or
+stderr. If exceeded, the child process is terminated and any output is
+truncated. See caveat at <a href="#child_process_maxbuffer_and_unicode"><code>maxBuffer</code> and Unicode</a>.
+<strong>Default:</strong> <code>1024 * 1024</code>.</li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The encoding used for all stdio inputs and outputs.
+<strong>Default:</strong> <code>'buffer'</code>.</li>
+<li><code>shell</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> If <code>true</code>, runs <code>command</code> inside of a shell. Uses
+<code>'/bin/sh'</code> on Unix, and <code>process.env.ComSpec</code> on Windows. A different
+shell can be specified as a string. See <a href="#child_process_shell_requirements">Shell Requirements</a> and
+<a href="#child_process_default_windows_shell">Default Windows Shell</a>. <strong>Default:</strong> <code>false</code> (no shell).</li>
+<li><code>windowsVerbatimArguments</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> No quoting or escaping of arguments is
+done on Windows. Ignored on Unix. This is set to <code>true</code> automatically
+when <code>shell</code> is specified and is CMD. <strong>Default:</strong> <code>false</code>.</li>
+<li><code>windowsHide</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Hide the subprocess console window that would
+normally be created on Windows systems. <strong>Default:</strong> <code>false</code>.</li>
+</ul>
+</li>
+<li>
+<p>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></p>
+<ul>
+<li><code>pid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> Pid of the child process.</li>
+<li><code>output</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a> Array of results from stdio output.</li>
+<li><code>stdout</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The contents of <code>output[1]</code>.</li>
+<li><code>stderr</code> <a href="https://nodejs.org/api/buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The contents of <code>output[2]</code>.</li>
+<li><code>status</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type" class="type">&lt;null&gt;</a> The exit code of the subprocess, or <code>null</code> if the
+subprocess terminated due to a signal.</li>
+<li><code>signal</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type" class="type">&lt;null&gt;</a> The signal used to kill the subprocess, or <code>null</code> if
+the subprocess did not terminate due to a signal.</li>
+<li><code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> The error object if the child process failed or timed out.</li>
+</ul>
+</li>
+</ul>
+<p>The <code>child_process.spawnSync()</code> method is generally identical to
+<a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a> with the exception that the function will not return
+until the child process has fully closed. When a timeout has been encountered
+and <code>killSignal</code> is sent, the method won't return until the process has
+completely exited. If the process intercepts and handles the <code>SIGTERM</code> signal
+and doesn't exit, the parent process will wait until the child process has
+exited.</p>
+<p><strong>If the <code>shell</code> option is enabled, do not pass unsanitized user input to this
+function. Any input containing shell metacharacters may be used to trigger
+arbitrary command execution.</strong></p>
+<h2>Class: ChildProcess<span><a class="mark" href="#child_process_class_childprocess" id="child_process_class_childprocess">#</a></span></h2>
+<div class="api_metadata">
+<span>Added in: v2.2.0</span>
+</div>
+<ul>
+<li>Extends: <a href="https://nodejs.org/api/events.html#events_class_eventemitter" class="type">&lt;EventEmitter&gt;</a></li>
+</ul>
+<p>Instances of the <code>ChildProcess</code> represent spawned child processes.</p>
+<p>Instances of <code>ChildProcess</code> are not intended to be created directly. Rather,
+use the <a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a>, <a href="#child_process_child_process_exec_command_options_callback"><code>child_process.exec()</code></a>,
+<a href="#child_process_child_process_execfile_file_args_options_callback"><code>child_process.execFile()</code></a>, or <a href="#child_process_child_process_fork_modulepath_args_options"><code>child_process.fork()</code></a> methods to create
+instances of <code>ChildProcess</code>.</p>
+<h3>Event: 'close'<span><a class="mark" href="#child_process_event_close" id="child_process_event_close">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.7</span>
+</div>
+<ul>
+<li><code>code</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The exit code if the child exited on its own.</li>
+<li><code>signal</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The signal by which the child process was terminated.</li>
+</ul>
+<p>The <code>'close'</code> event is emitted when the stdio streams of a child process have
+been closed. This is distinct from the <a href="#child_process_event_exit"><code>'exit'</code></a> event, since multiple
+processes might share the same stdio streams.</p>
+<pre><code class="language-js">const { spawn } = require('child_process');
+const ls = spawn('ls', ['-lh', '/usr']);
+
+ls.stdout.on('data', (data) =&gt; {
+  console.log(`stdout: ${data}`);
+});
+
+ls.on('close', (code) =&gt; {
+  console.log(`child process close all stdio with code ${code}`);
+});
+
+ls.on('exit', (code) =&gt; {
+  console.log(`child process exited with code ${code}`);
+});
+</code></pre>
+<h3>Event: 'disconnect'<span><a class="mark" href="#child_process_event_disconnect" id="child_process_event_disconnect">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.2</span>
+</div>
+<p>The <code>'disconnect'</code> event is emitted after calling the
+<a href="#child_process_subprocess_disconnect"><code>subprocess.disconnect()</code></a> method in parent process or
+<a href="https://nodejs.org/api/process.html#process_process_disconnect"><code>process.disconnect()</code></a> in child process. After disconnecting it is no longer
+possible to send or receive messages, and the <a href="#child_process_subprocess_connected"><code>subprocess.connected</code></a>
+property is <code>false</code>.</p>
+<h3>Event: 'error'<span><a class="mark" href="#child_process_event_error" id="child_process_event_error">#</a></span></h3>
+<ul>
+<li><code>err</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> The error.</li>
+</ul>
+<p>The <code>'error'</code> event is emitted whenever:</p>
+<ol>
+<li>The process could not be spawned, or</li>
+<li>The process could not be killed, or</li>
+<li>Sending a message to the child process failed.</li>
+</ol>
+<p>The <code>'exit'</code> event may or may not fire after an error has occurred. When
+listening to both the <code>'exit'</code> and <code>'error'</code> events, it is important to guard
+against accidentally invoking handler functions multiple times.</p>
+<p>See also <a href="#child_process_subprocess_kill_signal"><code>subprocess.kill()</code></a> and <a href="#child_process_subprocess_send_message_sendhandle_options_callback"><code>subprocess.send()</code></a>.</p>
+<h3>Event: 'exit'<span><a class="mark" href="#child_process_event_exit" id="child_process_event_exit">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.90</span>
+</div>
+<ul>
+<li><code>code</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The exit code if the child exited on its own.</li>
+<li><code>signal</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The signal by which the child process was terminated.</li>
+</ul>
+<p>The <code>'exit'</code> event is emitted after the child process ends. If the process
+exited, <code>code</code> is the final exit code of the process, otherwise <code>null</code>. If the
+process terminated due to receipt of a signal, <code>signal</code> is the string name of
+the signal, otherwise <code>null</code>. One of the two will always be non-null.</p>
+<p>When the <code>'exit'</code> event is triggered, child process stdio streams might still be
+open.</p>
+<p>Node.js establishes signal handlers for <code>SIGINT</code> and <code>SIGTERM</code> and Node.js
+processes will not terminate immediately due to receipt of those signals.
+Rather, Node.js will perform a sequence of cleanup actions and then will
+re-raise the handled signal.</p>
+<p>See <a href="http://man7.org/linux/man-pages/man2/waitpid.2.html"><code>waitpid(2)</code></a>.</p>
+<h3>Event: 'message'<span><a class="mark" href="#child_process_event_message" id="child_process_event_message">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.5.9</span>
+</div>
+<ul>
+<li><code>message</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> A parsed JSON object or primitive value.</li>
+<li><code>sendHandle</code> <a href="https://nodejs.org/api/net.html#net_server_listen_handle_backlog_callback" class="type">&lt;Handle&gt;</a> A <a href="https://nodejs.org/api/net.html#net_class_net_socket"><code>net.Socket</code></a> or <a href="https://nodejs.org/api/net.html#net_class_net_server"><code>net.Server</code></a> object, or
+undefined.</li>
+</ul>
+<p>The <code>'message'</code> event is triggered when a child process uses
+<a href="https://nodejs.org/api/process.html#process_process_send_message_sendhandle_options_callback"><code>process.send()</code></a> to send messages.</p>
+<p>The message goes through serialization and parsing. The resulting
+message might not be the same as what is originally sent.</p>
+<h3>subprocess.channel<span><a class="mark" href="#child_process_subprocess_channel" id="child_process_subprocess_channel">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v7.1.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> A pipe representing the IPC channel to the child process.</li>
+</ul>
+<p>The <code>subprocess.channel</code> property is a reference to the child's IPC channel. If
+no IPC channel currently exists, this property is <code>undefined</code>.</p>
+<h3>subprocess.connected<span><a class="mark" href="#child_process_subprocess_connected" id="child_process_subprocess_connected">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.2</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Set to <code>false</code> after <code>subprocess.disconnect()</code> is called.</li>
+</ul>
+<p>The <code>subprocess.connected</code> property indicates whether it is still possible to
+send and receive messages from a child process. When <code>subprocess.connected</code> is
+<code>false</code>, it is no longer possible to send or receive messages.</p>
+<h3>subprocess.disconnect()<span><a class="mark" href="#child_process_subprocess_disconnect" id="child_process_subprocess_disconnect">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.2</span>
+</div>
+<p>Closes the IPC channel between parent and child, allowing the child to exit
+gracefully once there are no other connections keeping it alive. After calling
+this method the <code>subprocess.connected</code> and <code>process.connected</code> properties in
+both the parent and child (respectively) will be set to <code>false</code>, and it will be
+no longer possible to pass messages between the processes.</p>
+<p>The <code>'disconnect'</code> event will be emitted when there are no messages in the
+process of being received. This will most often be triggered immediately after
+calling <code>subprocess.disconnect()</code>.</p>
+<p>When the child process is a Node.js instance (e.g. spawned using
+<a href="#child_process_child_process_fork_modulepath_args_options"><code>child_process.fork()</code></a>), the <code>process.disconnect()</code> method can be invoked
+within the child process to close the IPC channel as well.</p>
+<h3>subprocess.kill([signal])<span><a class="mark" href="#child_process_subprocess_kill_signal" id="child_process_subprocess_kill_signal">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.90</span>
+</div>
+<ul>
+<li><code>signal</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>The <code>subprocess.kill()</code> method sends a signal to the child process. If no
+argument is given, the process will be sent the <code>'SIGTERM'</code> signal. See
+<a href="http://man7.org/linux/man-pages/man7/signal.7.html"><code>signal(7)</code></a> for a list of available signals.</p>
+<pre><code class="language-js">const { spawn } = require('child_process');
+const grep = spawn('grep', ['ssh']);
+
+grep.on('close', (code, signal) =&gt; {
+  console.log(
+    `child process terminated due to receipt of signal ${signal}`);
+});
+
+// Send SIGHUP to process.
+grep.kill('SIGHUP');
+</code></pre>
+<p>The <a href="#child_process_child_process"><code>ChildProcess</code></a> object may emit an <a href="#child_process_event_error"><code>'error'</code></a> event if the signal
+cannot be delivered. Sending a signal to a child process that has already exited
+is not an error but may have unforeseen consequences. Specifically, if the
+process identifier (PID) has been reassigned to another process, the signal will
+be delivered to that process instead which can have unexpected results.</p>
+<p>While the function is called <code>kill</code>, the signal delivered to the child process
+may not actually terminate the process.</p>
+<p>See <a href="http://man7.org/linux/man-pages/man2/kill.2.html"><code>kill(2)</code></a> for reference.</p>
+<p>On Linux, child processes of child processes will not be terminated
+when attempting to kill their parent. This is likely to happen when running a
+new process in a shell or with the use of the <code>shell</code> option of <code>ChildProcess</code>:</p>
+<pre><code class="language-js">'use strict';
+const { spawn } = require('child_process');
+
+const subprocess = spawn(
+  'sh',
+  [
+    '-c',
+    `node -e "setInterval(() =&gt; {
+      console.log(process.pid, 'is alive')
+    }, 500);"`
+  ], {
+    stdio: ['inherit', 'inherit', 'inherit']
+  }
+);
+
+setTimeout(() =&gt; {
+  subprocess.kill(); // Does not terminate the Node.js process in the shell.
+}, 2000);
+</code></pre>
+<h3>subprocess.killed<span><a class="mark" href="#child_process_subprocess_killed" id="child_process_subprocess_killed">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.5.10</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> Set to <code>true</code> after <code>subprocess.kill()</code> is used to successfully
+send a signal to the child process.</li>
+</ul>
+<p>The <code>subprocess.killed</code> property indicates whether the child process
+successfully received a signal from <code>subprocess.kill()</code>. The <code>killed</code> property
+does not indicate that the child process has been terminated.</p>
+<h3>subprocess.pid<span><a class="mark" href="#child_process_subprocess_pid" id="child_process_subprocess_pid">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.90</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;integer&gt;</a></li>
+</ul>
+<p>Returns the process identifier (PID) of the child process.</p>
+<pre><code class="language-js">const { spawn } = require('child_process');
+const grep = spawn('grep', ['ssh']);
+
+console.log(`Spawned child pid: ${grep.pid}`);
+grep.stdin.end();
+</code></pre>
+<h3>subprocess.ref()<span><a class="mark" href="#child_process_subprocess_ref" id="child_process_subprocess_ref">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.10</span>
+</div>
+<p>Calling <code>subprocess.ref()</code> after making a call to <code>subprocess.unref()</code> will
+restore the removed reference count for the child process, forcing the parent
+to wait for the child to exit before exiting itself.</p>
+<pre><code class="language-js">const { spawn } = require('child_process');
+
+const subprocess = spawn(process.argv[0], ['child_program.js'], {
+  detached: true,
+  stdio: 'ignore'
+});
+
+subprocess.unref();
+subprocess.ref();
+</code></pre>
+<h3>subprocess.send(message[, sendHandle[, options]][, callback])<span><a class="mark" href="#child_process_subprocess_send_message_sendhandle_options_callback" id="child_process_subprocess_send_message_sendhandle_options_callback">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v5.8.0</td>
+<td><p>The <code>options</code> parameter, and the <code>keepOpen</code> option in particular, is supported now.</p></td></tr>
+<tr><td>v5.0.0</td>
+<td><p>This method returns a boolean for flow control now.</p></td></tr>
+<tr><td>v4.0.0</td>
+<td><p>The <code>callback</code> parameter is supported now.</p></td></tr>
+<tr><td>v0.5.9</td>
+<td><p><span>Added in: v0.5.9</span></p></td></tr>
+</tbody></table>
+</details>
+</div>
+<ul>
+<li><code>message</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+<li><code>sendHandle</code> <a href="https://nodejs.org/api/net.html#net_server_listen_handle_backlog_callback" class="type">&lt;Handle&gt;</a></li>
+<li>
+<p><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> The <code>options</code> argument, if present, is an object used to
+parameterize the sending of certain types of handles. <code>options</code> supports
+the following properties:</p>
+<ul>
+<li><code>keepOpen</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> A value that can be used when passing instances of
+<code>net.Socket</code>. When <code>true</code>, the socket is kept open in the sending process.
+<strong>Default:</strong> <code>false</code>.</li>
+</ul>
+</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a></li>
+</ul>
+<p>When an IPC channel has been established between the parent and child (
+i.e. when using <a href="#child_process_child_process_fork_modulepath_args_options"><code>child_process.fork()</code></a>), the <code>subprocess.send()</code> method can
+be used to send messages to the child process. When the child process is a
+Node.js instance, these messages can be received via the <a href="https://nodejs.org/api/process.html#process_event_message"><code>'message'</code></a> event.</p>
+<p>The message goes through serialization and parsing. The resulting
+message might not be the same as what is originally sent.</p>
+<p>For example, in the parent script:</p>
+<pre><code class="language-js">const cp = require('child_process');
+const n = cp.fork(`${__dirname}/sub.js`);
+
+n.on('message', (m) =&gt; {
+  console.log('PARENT got message:', m);
+});
+
+// Causes the child to print: CHILD got message: { hello: 'world' }
+n.send({ hello: 'world' });
+</code></pre>
+<p>And then the child script, <code>'sub.js'</code> might look like this:</p>
+<pre><code class="language-js">process.on('message', (m) =&gt; {
+  console.log('CHILD got message:', m);
+});
+
+// Causes the parent to print: PARENT got message: { foo: 'bar', baz: null }
+process.send({ foo: 'bar', baz: NaN });
+</code></pre>
+<p>Child Node.js processes will have a <a href="https://nodejs.org/api/process.html#process_process_send_message_sendhandle_options_callback"><code>process.send()</code></a> method of their own
+that allows the child to send messages back to the parent.</p>
+<p>There is a special case when sending a <code>{cmd: 'NODE_foo'}</code> message. Messages
+containing a <code>NODE_</code> prefix in the <code>cmd</code> property are reserved for use within
+Node.js core and will not be emitted in the child's <a href="https://nodejs.org/api/process.html#process_event_message"><code>'message'</code></a>
+event. Rather, such messages are emitted using the
+<code>'internalMessage'</code> event and are consumed internally by Node.js.
+Applications should avoid using such messages or listening for
+<code>'internalMessage'</code> events as it is subject to change without notice.</p>
+<p>The optional <code>sendHandle</code> argument that may be passed to <code>subprocess.send()</code> is
+for passing a TCP server or socket object to the child process. The child will
+receive the object as the second argument passed to the callback function
+registered on the <a href="https://nodejs.org/api/process.html#process_event_message"><code>'message'</code></a> event. Any data that is received
+and buffered in the socket will not be sent to the child.</p>
+<p>The optional <code>callback</code> is a function that is invoked after the message is
+sent but before the child may have received it. The function is called with a
+single argument: <code>null</code> on success, or an <a href="https://nodejs.org/api/errors.html#errors_class_error"><code>Error</code></a> object on failure.</p>
+<p>If no <code>callback</code> function is provided and the message cannot be sent, an
+<code>'error'</code> event will be emitted by the <a href="#child_process_child_process"><code>ChildProcess</code></a> object. This can
+happen, for instance, when the child process has already exited.</p>
+<p><code>subprocess.send()</code> will return <code>false</code> if the channel has closed or when the
+backlog of unsent messages exceeds a threshold that makes it unwise to send
+more. Otherwise, the method returns <code>true</code>. The <code>callback</code> function can be
+used to implement flow control.</p>
+<h4>Example: sending a server object<span><a class="mark" href="#child_process_example_sending_a_server_object" id="child_process_example_sending_a_server_object">#</a></span></h4>
+<p>The <code>sendHandle</code> argument can be used, for instance, to pass the handle of
+a TCP server object to the child process as illustrated in the example below:</p>
+<pre><code class="language-js">const subprocess = require('child_process').fork('subprocess.js');
+
+// Open up the server object and send the handle.
+const server = require('net').createServer();
+server.on('connection', (socket) =&gt; {
+  socket.end('handled by parent');
+});
+server.listen(1337, () =&gt; {
+  subprocess.send('server', server);
+});
+</code></pre>
+<p>The child would then receive the server object as:</p>
+<pre><code class="language-js">process.on('message', (m, server) =&gt; {
+  if (m === 'server') {
+    server.on('connection', (socket) =&gt; {
+      socket.end('handled by child');
+    });
+  }
+});
+</code></pre>
+<p>Once the server is now shared between the parent and child, some connections
+can be handled by the parent and some by the child.</p>
+<p>While the example above uses a server created using the <code>net</code> module, <code>dgram</code>
+module servers use exactly the same workflow with the exceptions of listening on
+a <code>'message'</code> event instead of <code>'connection'</code> and using <code>server.bind()</code> instead
+of <code>server.listen()</code>. This is, however, currently only supported on Unix
+platforms.</p>
+<h4>Example: sending a socket object<span><a class="mark" href="#child_process_example_sending_a_socket_object" id="child_process_example_sending_a_socket_object">#</a></span></h4>
+<p>Similarly, the <code>sendHandler</code> argument can be used to pass the handle of a
+socket to the child process. The example below spawns two children that each
+handle connections with "normal" or "special" priority:</p>
+<pre><code class="language-js">const { fork } = require('child_process');
+const normal = fork('subprocess.js', ['normal']);
+const special = fork('subprocess.js', ['special']);
+
+// Open up the server and send sockets to child. Use pauseOnConnect to prevent
+// the sockets from being read before they are sent to the child process.
+const server = require('net').createServer({ pauseOnConnect: true });
+server.on('connection', (socket) =&gt; {
+
+  // If this is special priority...
+  if (socket.remoteAddress === '74.125.127.100') {
+    special.send('socket', socket);
+    return;
+  }
+  // This is normal priority.
+  normal.send('socket', socket);
+});
+server.listen(1337);
+</code></pre>
+<p>The <code>subprocess.js</code> would receive the socket handle as the second argument
+passed to the event callback function:</p>
+<pre><code class="language-js">process.on('message', (m, socket) =&gt; {
+  if (m === 'socket') {
+    if (socket) {
+      // Check that the client socket exists.
+      // It is possible for the socket to be closed between the time it is
+      // sent and the time it is received in the child process.
+      socket.end(`Request handled with ${process.argv[2]} priority`);
+    }
+  }
+});
+</code></pre>
+<p>Once a socket has been passed to a child, the parent is no longer capable of
+tracking when the socket is destroyed. To indicate this, the <code>.connections</code>
+property becomes <code>null</code>. It is recommended not to use <code>.maxConnections</code> when
+this occurs.</p>
+<p>It is also recommended that any <code>'message'</code> handlers in the child process
+verify that <code>socket</code> exists, as the connection may have been closed during the
+time it takes to send the connection to the child.</p>
+<h3>subprocess.stderr<span><a class="mark" href="#child_process_subprocess_stderr" id="child_process_subprocess_stderr">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.90</span>
+</div>
+<ul>
+<li><a href="https://nodejs.org/api/stream.html#stream_class_stream_readable" class="type">&lt;stream.Readable&gt;</a></li>
+</ul>
+<p>A <code>Readable Stream</code> that represents the child process's <code>stderr</code>.</p>
+<p>If the child was spawned with <code>stdio[2]</code> set to anything other than <code>'pipe'</code>,
+then this will be <code>null</code>.</p>
+<p><code>subprocess.stderr</code> is an alias for <code>subprocess.stdio[2]</code>. Both properties will
+refer to the same value.</p>
+<h3>subprocess.stdin<span><a class="mark" href="#child_process_subprocess_stdin" id="child_process_subprocess_stdin">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.90</span>
+</div>
+<ul>
+<li><a href="https://nodejs.org/api/stream.html#stream_class_stream_writable" class="type">&lt;stream.Writable&gt;</a></li>
+</ul>
+<p>A <code>Writable Stream</code> that represents the child process's <code>stdin</code>.</p>
+<p>If a child process waits to read all of its input, the child will not continue
+until this stream has been closed via <code>end()</code>.</p>
+<p>If the child was spawned with <code>stdio[0]</code> set to anything other than <code>'pipe'</code>,
+then this will be <code>null</code>.</p>
+<p><code>subprocess.stdin</code> is an alias for <code>subprocess.stdio[0]</code>. Both properties will
+refer to the same value.</p>
+<h3>subprocess.stdio<span><a class="mark" href="#child_process_subprocess_stdio" id="child_process_subprocess_stdio">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.10</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a></li>
+</ul>
+<p>A sparse array of pipes to the child process, corresponding with positions in
+the <a href="#child_process_options_stdio"><code>stdio</code></a> option passed to <a href="#child_process_child_process_spawn_command_args_options"><code>child_process.spawn()</code></a> that have been set
+to the value <code>'pipe'</code>. <code>subprocess.stdio[0]</code>, <code>subprocess.stdio[1]</code>, and
+<code>subprocess.stdio[2]</code> are also available as <code>subprocess.stdin</code>,
+<code>subprocess.stdout</code>, and <code>subprocess.stderr</code>, respectively.</p>
+<p>In the following example, only the child's fd <code>1</code> (stdout) is configured as a
+pipe, so only the parent's <code>subprocess.stdio[1]</code> is a stream, all other values
+in the array are <code>null</code>.</p>
+<pre><code class="language-js">const assert = require('assert');
+const fs = require('fs');
+const child_process = require('child_process');
+
+const subprocess = child_process.spawn('ls', {
+  stdio: [
+    0, // Use parent's stdin for child.
+    'pipe', // Pipe child's stdout to parent.
+    fs.openSync('err.out', 'w') // Direct child's stderr to a file.
+  ]
+});
+
+assert.strictEqual(subprocess.stdio[0], null);
+assert.strictEqual(subprocess.stdio[0], subprocess.stdin);
+
+assert(subprocess.stdout);
+assert.strictEqual(subprocess.stdio[1], subprocess.stdout);
+
+assert.strictEqual(subprocess.stdio[2], null);
+assert.strictEqual(subprocess.stdio[2], subprocess.stderr);
+</code></pre>
+<h3>subprocess.stdout<span><a class="mark" href="#child_process_subprocess_stdout" id="child_process_subprocess_stdout">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.1.90</span>
+</div>
+<ul>
+<li><a href="https://nodejs.org/api/stream.html#stream_class_stream_readable" class="type">&lt;stream.Readable&gt;</a></li>
+</ul>
+<p>A <code>Readable Stream</code> that represents the child process's <code>stdout</code>.</p>
+<p>If the child was spawned with <code>stdio[1]</code> set to anything other than <code>'pipe'</code>,
+then this will be <code>null</code>.</p>
+<p><code>subprocess.stdout</code> is an alias for <code>subprocess.stdio[1]</code>. Both properties will
+refer to the same value.</p>
+<pre><code class="language-js">const { spawn } = require('child_process');
+
+const subprocess = spawn('ls');
+
+subprocess.stdout.on('data', (data) =&gt; {
+  console.log(`Received chunk ${data}`);
+});
+</code></pre>
+<h3>subprocess.unref()<span><a class="mark" href="#child_process_subprocess_unref" id="child_process_subprocess_unref">#</a></span></h3>
+<div class="api_metadata">
+<span>Added in: v0.7.10</span>
+</div>
+<p>By default, the parent will wait for the detached child to exit. To prevent the
+parent from waiting for a given <code>subprocess</code> to exit, use the
+<code>subprocess.unref()</code> method. Doing so will cause the parent's event loop to not
+include the child in its reference count, allowing the parent to exit
+independently of the child, unless there is an established IPC channel between
+the child and the parent.</p>
+<pre><code class="language-js">const { spawn } = require('child_process');
+
+const subprocess = spawn(process.argv[0], ['child_program.js'], {
+  detached: true,
+  stdio: 'ignore'
+});
+
+subprocess.unref();
+</code></pre>
+<h2><code>maxBuffer</code> and Unicode<span><a class="mark" href="#child_process_maxbuffer_and_unicode" id="child_process_maxbuffer_and_unicode">#</a></span></h2>
+<p>The <code>maxBuffer</code> option specifies the largest number of bytes allowed on <code>stdout</code>
+or <code>stderr</code>. If this value is exceeded, then the child process is terminated.
+This impacts output that includes multibyte character encodings such as UTF-8 or
+UTF-16. For instance, <code>console.log('中文测试')</code> will send 13 UTF-8 encoded bytes
+to <code>stdout</code> although there are only 4 characters.</p>
+<h2>Shell Requirements<span><a class="mark" href="#child_process_shell_requirements" id="child_process_shell_requirements">#</a></span></h2>
+<p>The shell should understand the <code>-c</code> switch. If the shell is <code>'cmd.exe'</code>, it
+should understand the <code>/d /s /c</code> switches and command line parsing should be
+compatible.</p>
+<h2>Default Windows Shell<span><a class="mark" href="#child_process_default_windows_shell" id="child_process_default_windows_shell">#</a></span></h2>
+<p>Although Microsoft specifies <code>%COMSPEC%</code> must contain the path to
+<code>'cmd.exe'</code> in the root environment, child processes are not always subject to
+the same requirement. Thus, in <code>child_process</code> functions where a shell can be
+spawned, <code>'cmd.exe'</code> is used as a fallback if <code>process.env.ComSpec</code> is
+unavailable.</p>
+      </div>
+    </div>
+  </div>
+  <script src="data:application/javascript;base64,LyoKU0hKUyAtIFN5bnRheCBIaWdobGlnaHRpbmcgaW4gSmF2YVNjcmlwdApDb3B5cmlnaHQgKEMpIDIwMDcsIDIwMDggZ25vbWJhdEB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQKTGljZW5zZTogaHR0cDovL3NoanMuc291cmNlZm9yZ2UubmV0L2RvYy9ncGx2My5odG1sCiovCgppZiAoISB0aGlzLnNoX2xhbmd1YWdlcykgewogIHRoaXMuc2hfbGFuZ3VhZ2VzID0ge307Cn0KdmFyIHNoX3JlcXVlc3RzID0ge307CgpmdW5jdGlvbiBzaF9pc0VtYWlsQWRkcmVzcyh1cmwpIHsKICBpZiAoL15tYWlsdG86Ly50ZXN0KHVybCkpIHsKICAgIHJldHVybiBmYWxzZTsKICB9CiAgcmV0dXJuIHVybC5pbmRleE9mKCdAJykgIT09IC0xOwp9CgpmdW5jdGlvbiBzaF9zZXRIcmVmKHRhZ3MsIG51bVRhZ3MsIGlucHV0U3RyaW5nKSB7CiAgdmFyIHVybCA9IGlucHV0U3RyaW5nLnN1YnN0cmluZyh0YWdzW251bVRhZ3MgLSAyXS5wb3MsIHRhZ3NbbnVtVGFncyAtIDFdLnBvcyk7CiAgaWYgKHVybC5sZW5ndGggPj0gMiAmJiB1cmwuY2hhckF0KDApID09PSAnPCcgJiYgdXJsLmNoYXJBdCh1cmwubGVuZ3RoIC0gMSkgPT09ICc+JykgewogICAgdXJsID0gdXJsLnN1YnN0cigxLCB1cmwubGVuZ3RoIC0gMik7CiAgfQogIGlmIChzaF9pc0VtYWlsQWRkcmVzcyh1cmwpKSB7CiAgICB1cmwgPSAnbWFpbHRvOicgKyB1cmw7CiAgfQogIHRhZ3NbbnVtVGFncyAtIDJdLm5vZGUuaHJlZiA9IHVybDsKfQoKLyoKS29ucXVlcm9yIGhhcyBhIGJ1ZyB3aGVyZSB0aGUgcmVndWxhciBleHByZXNzaW9uIC8kL2cgd2lsbCBub3QgbWF0Y2ggYXQgdGhlIGVuZApvZiBhIGxpbmUgbW9yZSB0aGFuIG9uY2U6CgogIHZhciByZWdleCA9IC8kL2c7CiAgdmFyIG1hdGNoOwoKICB2YXIgbGluZSA9ICcxMjM0NTY3ODkwJzsKICByZWdleC5sYXN0SW5kZXggPSAxMDsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZSk7CgogIHZhciBsaW5lMiA9ICdhYmNkZSc7CiAgcmVnZXgubGFzdEluZGV4ID0gNTsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZTIpOyAgLy8gZmFpbHMKKi8KZnVuY3Rpb24gc2hfa29ucXVlcm9yRXhlYyhzKSB7CiAgdmFyIHJlc3VsdCA9IFsnJ107CiAgcmVzdWx0LmluZGV4ID0gcy5sZW5ndGg7CiAgcmVzdWx0LmlucHV0ID0gczsKICByZXR1cm4gcmVzdWx0Owp9CgovKioKSGlnaGxpZ2h0cyBhbGwgZWxlbWVudHMgY29udGFpbmluZyBzb3VyY2UgY29kZSBpbiBhIHRleHQgc3RyaW5nLiAgVGhlIHJldHVybgp2YWx1ZSBpcyBhbiBhcnJheSBvZiBvYmplY3RzLCBlYWNoIHJlcHJlc2VudGluZyBhbiBIVE1MIHN0YXJ0IG9yIGVuZCB0YWcuICBFYWNoCm9iamVjdCBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBwb3MsIHdoaWNoIGlzIGFuIGludGVnZXIgcmVwcmVzZW50aW5nIHRoZSB0ZXh0Cm9mZnNldCBvZiB0aGUgdGFnLiBFdmVyeSBzdGFydCB0YWcgYWxzbyBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBub2RlLCB3aGljaCBpcyB0aGUKRE9NIGVsZW1lbnQgc3RhcnRlZCBieSB0aGUgdGFnLiBFbmQgdGFncyBkbyBub3QgaGF2ZSB0aGlzIHByb3BlcnR5LgpAcGFyYW0gIGlucHV0U3RyaW5nICBhIHRleHQgc3RyaW5nCkBwYXJhbSAgbGFuZ3VhZ2UgIGEgbGFuZ3VhZ2UgZGVmaW5pdGlvbiBvYmplY3QKQHJldHVybiAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKKi8KZnVuY3Rpb24gc2hfaGlnaGxpZ2h0U3RyaW5nKGlucHV0U3RyaW5nLCBsYW5ndWFnZSkgewogIGlmICgvS29ucXVlcm9yLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICBpZiAoISBsYW5ndWFnZS5rb25xdWVyZWQpIHsKICAgICAgZm9yICh2YXIgcyA9IDA7IHMgPCBsYW5ndWFnZS5sZW5ndGg7IHMrKykgewogICAgICAgIGZvciAodmFyIHAgPSAwOyBwIDwgbGFuZ3VhZ2Vbc10ubGVuZ3RoOyBwKyspIHsKICAgICAgICAgIHZhciByID0gbGFuZ3VhZ2Vbc11bcF1bMF07CiAgICAgICAgICBpZiAoci5zb3VyY2UgPT09ICckJykgewogICAgICAgICAgICByLmV4ZWMgPSBzaF9rb25xdWVyb3JFeGVjOwogICAgICAgICAgfQogICAgICAgIH0KICAgICAgfQogICAgICBsYW5ndWFnZS5rb25xdWVyZWQgPSB0cnVlOwogICAgfQogIH0KCiAgdmFyIGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgdmFyIHNwYW4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJyk7CgogIC8vIHRoZSByZXN1bHQKICB2YXIgdGFncyA9IFtdOwogIHZhciBudW1UYWdzID0gMDsKCiAgLy8gZWFjaCBlbGVtZW50IGlzIGEgcGF0dGVybiBvYmplY3QgZnJvbSBsYW5ndWFnZQogIHZhciBwYXR0ZXJuU3RhY2sgPSBbXTsKCiAgLy8gdGhlIGN1cnJlbnQgcG9zaXRpb24gd2l0aGluIGlucHV0U3RyaW5nCiAgdmFyIHBvcyA9IDA7CgogIC8vIHRoZSBuYW1lIG9mIHRoZSBjdXJyZW50IHN0eWxlLCBvciBudWxsIGlmIHRoZXJlIGlzIG5vIGN1cnJlbnQgc3R5bGUKICB2YXIgY3VycmVudFN0eWxlID0gbnVsbDsKCiAgdmFyIG91dHB1dCA9IGZ1bmN0aW9uKHMsIHN0eWxlKSB7CiAgICB2YXIgbGVuZ3RoID0gcy5sZW5ndGg7CiAgICAvLyB0aGlzIGlzIG1vcmUgdGhhbiBqdXN0IGFuIG9wdGltaXphdGlvbiAtIHdlIGRvbid0IHdhbnQgdG8gb3V0cHV0IGVtcHR5IDxzcGFuPjwvc3Bhbj4gZWxlbWVudHMKICAgIGlmIChsZW5ndGggPT09IDApIHsKICAgICAgcmV0dXJuOwogICAgfQogICAgaWYgKCEgc3R5bGUpIHsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoICE9PSAwKSB7CiAgICAgICAgdmFyIHBhdHRlcm4gPSBwYXR0ZXJuU3RhY2tbc3RhY2tMZW5ndGggLSAxXTsKICAgICAgICAvLyBjaGVjayB3aGV0aGVyIHRoaXMgaXMgYSBzdGF0ZSBvciBhbiBlbnZpcm9ubWVudAogICAgICAgIGlmICghIHBhdHRlcm5bM10pIHsKICAgICAgICAgIC8vIGl0J3Mgbm90IGEgc3RhdGUgLSBpdCdzIGFuIGVudmlyb25tZW50OyB1c2UgdGhlIHN0eWxlIGZvciB0aGlzIGVudmlyb25tZW50CiAgICAgICAgICBzdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgfQogICAgICB9CiAgICB9CiAgICBpZiAoY3VycmVudFN0eWxlICE9PSBzdHlsZSkgewogICAgICBpZiAoY3VycmVudFN0eWxlKSB7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge3BvczogcG9zfTsKICAgICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgICAgc2hfc2V0SHJlZih0YWdzLCBudW1UYWdzLCBpbnB1dFN0cmluZyk7CiAgICAgICAgfQogICAgICB9CiAgICAgIGlmIChzdHlsZSkgewogICAgICAgIHZhciBjbG9uZTsKICAgICAgICBpZiAoc3R5bGUgPT09ICdzaF91cmwnKSB7CiAgICAgICAgICBjbG9uZSA9IGEuY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICBjbG9uZSA9IHNwYW4uY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgY2xvbmUuY2xhc3NOYW1lID0gc3R5bGU7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge25vZGU6IGNsb25lLCBwb3M6IHBvc307CiAgICAgIH0KICAgIH0KICAgIHBvcyArPSBsZW5ndGg7CiAgICBjdXJyZW50U3R5bGUgPSBzdHlsZTsKICB9OwoKICB2YXIgZW5kT2ZMaW5lUGF0dGVybiA9IC9cclxufFxyfFxuL2c7CiAgZW5kT2ZMaW5lUGF0dGVybi5sYXN0SW5kZXggPSAwOwogIHZhciBpbnB1dFN0cmluZ0xlbmd0aCA9IGlucHV0U3RyaW5nLmxlbmd0aDsKICB3aGlsZSAocG9zIDwgaW5wdXRTdHJpbmdMZW5ndGgpIHsKICAgIHZhciBzdGFydCA9IHBvczsKICAgIHZhciBlbmQ7CiAgICB2YXIgc3RhcnRPZk5leHRMaW5lOwogICAgdmFyIGVuZE9mTGluZU1hdGNoID0gZW5kT2ZMaW5lUGF0dGVybi5leGVjKGlucHV0U3RyaW5nKTsKICAgIGlmIChlbmRPZkxpbmVNYXRjaCA9PT0gbnVsbCkgewogICAgICBlbmQgPSBpbnB1dFN0cmluZ0xlbmd0aDsKICAgICAgc3RhcnRPZk5leHRMaW5lID0gaW5wdXRTdHJpbmdMZW5ndGg7CiAgICB9CiAgICBlbHNlIHsKICAgICAgZW5kID0gZW5kT2ZMaW5lTWF0Y2guaW5kZXg7CiAgICAgIHN0YXJ0T2ZOZXh0TGluZSA9IGVuZE9mTGluZVBhdHRlcm4ubGFzdEluZGV4OwogICAgfQoKICAgIHZhciBsaW5lID0gaW5wdXRTdHJpbmcuc3Vic3RyaW5nKHN0YXJ0LCBlbmQpOwoKICAgIHZhciBtYXRjaENhY2hlID0gW107CiAgICBmb3IgKDs7KSB7CiAgICAgIHZhciBwb3NXaXRoaW5MaW5lID0gcG9zIC0gc3RhcnQ7CgogICAgICB2YXIgc3RhdGVJbmRleDsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoID09PSAwKSB7CiAgICAgICAgc3RhdGVJbmRleCA9IDA7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gZ2V0IHRoZSBuZXh0IHN0YXRlCiAgICAgICAgc3RhdGVJbmRleCA9IHBhdHRlcm5TdGFja1tzdGFja0xlbmd0aCAtIDFdWzJdOwogICAgICB9CgogICAgICB2YXIgc3RhdGUgPSBsYW5ndWFnZVtzdGF0ZUluZGV4XTsKICAgICAgdmFyIG51bVBhdHRlcm5zID0gc3RhdGUubGVuZ3RoOwogICAgICB2YXIgbWMgPSBtYXRjaENhY2hlW3N0YXRlSW5kZXhdOwogICAgICBpZiAoISBtYykgewogICAgICAgIG1jID0gbWF0Y2hDYWNoZVtzdGF0ZUluZGV4XSA9IFtdOwogICAgICB9CiAgICAgIHZhciBiZXN0TWF0Y2ggPSBudWxsOwogICAgICB2YXIgYmVzdFBhdHRlcm5JbmRleCA9IC0xOwogICAgICBmb3IgKHZhciBpID0gMDsgaSA8IG51bVBhdHRlcm5zOyBpKyspIHsKICAgICAgICB2YXIgbWF0Y2g7CiAgICAgICAgaWYgKGkgPCBtYy5sZW5ndGggJiYgKG1jW2ldID09PSBudWxsIHx8IHBvc1dpdGhpbkxpbmUgPD0gbWNbaV0uaW5kZXgpKSB7CiAgICAgICAgICBtYXRjaCA9IG1jW2ldOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHZhciByZWdleCA9IHN0YXRlW2ldWzBdOwogICAgICAgICAgcmVnZXgubGFzdEluZGV4ID0gcG9zV2l0aGluTGluZTsKICAgICAgICAgIG1hdGNoID0gcmVnZXguZXhlYyhsaW5lKTsKICAgICAgICAgIG1jW2ldID0gbWF0Y2g7CiAgICAgICAgfQogICAgICAgIGlmIChtYXRjaCAhPT0gbnVsbCAmJiAoYmVzdE1hdGNoID09PSBudWxsIHx8IG1hdGNoLmluZGV4IDwgYmVzdE1hdGNoLmluZGV4KSkgewogICAgICAgICAgYmVzdE1hdGNoID0gbWF0Y2g7CiAgICAgICAgICBiZXN0UGF0dGVybkluZGV4ID0gaTsKICAgICAgICAgIGlmIChtYXRjaC5pbmRleCA9PT0gcG9zV2l0aGluTGluZSkgewogICAgICAgICAgICBicmVhazsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KCiAgICAgIGlmIChiZXN0TWF0Y2ggPT09IG51bGwpIHsKICAgICAgICBvdXRwdXQobGluZS5zdWJzdHJpbmcocG9zV2l0aGluTGluZSksIG51bGwpOwogICAgICAgIGJyZWFrOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGdvdCBhIG1hdGNoCiAgICAgICAgaWYgKGJlc3RNYXRjaC5pbmRleCA+IHBvc1dpdGhpbkxpbmUpIHsKICAgICAgICAgIG91dHB1dChsaW5lLnN1YnN0cmluZyhwb3NXaXRoaW5MaW5lLCBiZXN0TWF0Y2guaW5kZXgpLCBudWxsKTsKICAgICAgICB9CgogICAgICAgIHZhciBwYXR0ZXJuID0gc3RhdGVbYmVzdFBhdHRlcm5JbmRleF07CgogICAgICAgIHZhciBuZXdTdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgdmFyIG1hdGNoZWRTdHJpbmc7CiAgICAgICAgaWYgKG5ld1N0eWxlIGluc3RhbmNlb2YgQXJyYXkpIHsKICAgICAgICAgIGZvciAodmFyIHN1YmV4cHJlc3Npb24gPSAwOyBzdWJleHByZXNzaW9uIDwgbmV3U3R5bGUubGVuZ3RoOyBzdWJleHByZXNzaW9uKyspIHsKICAgICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFtzdWJleHByZXNzaW9uICsgMV07CiAgICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZVtzdWJleHByZXNzaW9uXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFswXTsKICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZSk7CiAgICAgICAgfQoKICAgICAgICBzd2l0Y2ggKHBhdHRlcm5bMl0pIHsKICAgICAgICBjYXNlIC0xOgogICAgICAgICAgLy8gZG8gbm90aGluZwogICAgICAgICAgYnJlYWs7CiAgICAgICAgY2FzZSAtMjoKICAgICAgICAgIC8vIGV4aXQKICAgICAgICAgIHBhdHRlcm5TdGFjay5wb3AoKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGNhc2UgLTM6CiAgICAgICAgICAvLyBleGl0YWxsCiAgICAgICAgICBwYXR0ZXJuU3RhY2subGVuZ3RoID0gMDsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGRlZmF1bHQ6CiAgICAgICAgICAvLyB0aGlzIHdhcyB0aGUgc3RhcnQgb2YgYSBkZWxpbWl0ZWQgcGF0dGVybiBvciBhIHN0YXRlL2Vudmlyb25tZW50CiAgICAgICAgICBwYXR0ZXJuU3RhY2sucHVzaChwYXR0ZXJuKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIH0KICAgICAgfQogICAgfQoKICAgIC8vIGVuZCBvZiB0aGUgbGluZQogICAgaWYgKGN1cnJlbnRTdHlsZSkgewogICAgICB0YWdzW251bVRhZ3MrK10gPSB7cG9zOiBwb3N9OwogICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgIHNoX3NldEhyZWYodGFncywgbnVtVGFncywgaW5wdXRTdHJpbmcpOwogICAgICB9CiAgICAgIGN1cnJlbnRTdHlsZSA9IG51bGw7CiAgICB9CiAgICBwb3MgPSBzdGFydE9mTmV4dExpbmU7CiAgfQoKICByZXR1cm4gdGFnczsKfQoKLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KLy8gRE9NLWRlcGVuZGVudCBmdW5jdGlvbnMKCmZ1bmN0aW9uIHNoX2dldENsYXNzZXMoZWxlbWVudCkgewogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgaHRtbENsYXNzID0gZWxlbWVudC5jbGFzc05hbWU7CiAgaWYgKGh0bWxDbGFzcyAmJiBodG1sQ2xhc3MubGVuZ3RoID4gMCkgewogICAgdmFyIGh0bWxDbGFzc2VzID0gaHRtbENsYXNzLnNwbGl0KCcgJyk7CiAgICBmb3IgKHZhciBpID0gMDsgaSA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaSsrKSB7CiAgICAgIGlmIChodG1sQ2xhc3Nlc1tpXS5sZW5ndGggPiAwKSB7CiAgICAgICAgcmVzdWx0LnB1c2goaHRtbENsYXNzZXNbaV0pOwogICAgICB9CiAgICB9CiAgfQogIHJldHVybiByZXN1bHQ7Cn0KCmZ1bmN0aW9uIHNoX2FkZENsYXNzKGVsZW1lbnQsIG5hbWUpIHsKICB2YXIgaHRtbENsYXNzZXMgPSBzaF9nZXRDbGFzc2VzKGVsZW1lbnQpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgaHRtbENsYXNzZXMubGVuZ3RoOyBpKyspIHsKICAgIGlmIChuYW1lLnRvTG93ZXJDYXNlKCkgPT09IGh0bWxDbGFzc2VzW2ldLnRvTG93ZXJDYXNlKCkpIHsKICAgICAgcmV0dXJuOwogICAgfQogIH0KICBodG1sQ2xhc3Nlcy5wdXNoKG5hbWUpOwogIGVsZW1lbnQuY2xhc3NOYW1lID0gaHRtbENsYXNzZXMuam9pbignICcpOwp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSBhbiBIVE1MIERPTSBOb2RlTGlzdC4KQHBhcmFtICBub2RlTGlzdCAgYSBET00gTm9kZUxpc3QKQHBhcmFtICByZXN1bHQgIGFuIG9iamVjdCB3aXRoIHRleHQsIHRhZ3MgYW5kIHBvcyBwcm9wZXJ0aWVzCiovCmZ1bmN0aW9uIHNoX2V4dHJhY3RUYWdzRnJvbU5vZGVMaXN0KG5vZGVMaXN0LCByZXN1bHQpIHsKICB2YXIgbGVuZ3RoID0gbm9kZUxpc3QubGVuZ3RoOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbGVuZ3RoOyBpKyspIHsKICAgIHZhciBub2RlID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHN3aXRjaCAobm9kZS5ub2RlVHlwZSkgewogICAgY2FzZSAxOgogICAgICBpZiAobm9kZS5ub2RlTmFtZS50b0xvd2VyQ2FzZSgpID09PSAnYnInKSB7CiAgICAgICAgdmFyIHRlcm1pbmF0b3I7CiAgICAgICAgaWYgKC9NU0lFLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xyJzsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xuJzsKICAgICAgICB9CiAgICAgICAgcmVzdWx0LnRleHQucHVzaCh0ZXJtaW5hdG9yKTsKICAgICAgICByZXN1bHQucG9zKys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7bm9kZTogbm9kZS5jbG9uZU5vZGUoZmFsc2UpLCBwb3M6IHJlc3VsdC5wb3N9KTsKICAgICAgICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChub2RlLmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7cG9zOiByZXN1bHQucG9zfSk7CiAgICAgIH0KICAgICAgYnJlYWs7CiAgICBjYXNlIDM6CiAgICBjYXNlIDQ6CiAgICAgIHJlc3VsdC50ZXh0LnB1c2gobm9kZS5kYXRhKTsKICAgICAgcmVzdWx0LnBvcyArPSBub2RlLmxlbmd0aDsKICAgICAgYnJlYWs7CiAgICB9CiAgfQp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSB0aGUgdGV4dCBvZiBhbiBIVE1MIGVsZW1lbnQuIFRoZSBleHRyYWN0ZWQgdGFncyB3aWxsIGJlCnJldHVybmVkIGFzIGFuIGFycmF5IG9mIHRhZyBvYmplY3RzLiBTZWUgc2hfaGlnaGxpZ2h0U3RyaW5nIGZvciB0aGUgZm9ybWF0IG9mCnRoZSB0YWcgb2JqZWN0cy4KQHBhcmFtICBlbGVtZW50ICBhIERPTSBlbGVtZW50CkBwYXJhbSAgdGFncyAgYW4gZW1wdHkgYXJyYXk7IHRoZSBleHRyYWN0ZWQgdGFnIG9iamVjdHMgd2lsbCBiZSByZXR1cm5lZCBpbiBpdApAcmV0dXJuICB0aGUgdGV4dCBvZiB0aGUgZWxlbWVudApAc2VlICBzaF9oaWdobGlnaHRTdHJpbmcKKi8KZnVuY3Rpb24gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgdGFncykgewogIHZhciByZXN1bHQgPSB7fTsKICByZXN1bHQudGV4dCA9IFtdOwogIHJlc3VsdC50YWdzID0gdGFnczsKICByZXN1bHQucG9zID0gMDsKICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChlbGVtZW50LmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgcmV0dXJuIHJlc3VsdC50ZXh0LmpvaW4oJycpOwp9CgovKioKTWVyZ2VzIHRoZSBvcmlnaW5hbCB0YWdzIGZyb20gYW4gZWxlbWVudCB3aXRoIHRoZSB0YWdzIHByb2R1Y2VkIGJ5IGhpZ2hsaWdodGluZy4KQHBhcmFtICBvcmlnaW5hbFRhZ3MgIGFuIGFycmF5IGNvbnRhaW5pbmcgdGhlIG9yaWdpbmFsIHRhZ3MKQHBhcmFtICBoaWdobGlnaHRUYWdzICBhbiBhcnJheSBjb250YWluaW5nIHRoZSBoaWdobGlnaHRpbmcgdGFncyAtIHRoZXNlIG11c3Qgbm90IG92ZXJsYXAKQHJlc3VsdCAgYW4gYXJyYXkgY29udGFpbmluZyB0aGUgbWVyZ2VkIHRhZ3MKKi8KZnVuY3Rpb24gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncykgewogIHZhciBudW1PcmlnaW5hbFRhZ3MgPSBvcmlnaW5hbFRhZ3MubGVuZ3RoOwogIGlmIChudW1PcmlnaW5hbFRhZ3MgPT09IDApIHsKICAgIHJldHVybiBoaWdobGlnaHRUYWdzOwogIH0KCiAgdmFyIG51bUhpZ2hsaWdodFRhZ3MgPSBoaWdobGlnaHRUYWdzLmxlbmd0aDsKICBpZiAobnVtSGlnaGxpZ2h0VGFncyA9PT0gMCkgewogICAgcmV0dXJuIG9yaWdpbmFsVGFnczsKICB9CgogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgb3JpZ2luYWxJbmRleCA9IDA7CiAgdmFyIGhpZ2hsaWdodEluZGV4ID0gMDsKCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MgJiYgaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICB2YXIgb3JpZ2luYWxUYWcgPSBvcmlnaW5hbFRhZ3Nbb3JpZ2luYWxJbmRleF07CiAgICB2YXIgaGlnaGxpZ2h0VGFnID0gaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF07CgogICAgaWYgKG9yaWdpbmFsVGFnLnBvcyA8PSBoaWdobGlnaHRUYWcucG9zKSB7CiAgICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnKTsKICAgICAgb3JpZ2luYWxJbmRleCsrOwogICAgfQogICAgZWxzZSB7CiAgICAgIHJlc3VsdC5wdXNoKGhpZ2hsaWdodFRhZyk7CiAgICAgIGlmIChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4ICsgMV0ucG9zIDw9IG9yaWdpbmFsVGFnLnBvcykgewogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgICAgcmVzdWx0LnB1c2goaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF0pOwogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gbmV3IGVuZCB0YWcKICAgICAgICByZXN1bHQucHVzaCh7cG9zOiBvcmlnaW5hbFRhZy5wb3N9KTsKCiAgICAgICAgLy8gbmV3IHN0YXJ0IHRhZwogICAgICAgIGhpZ2hsaWdodFRhZ3NbaGlnaGxpZ2h0SW5kZXhdID0ge25vZGU6IGhpZ2hsaWdodFRhZy5ub2RlLmNsb25lTm9kZShmYWxzZSksIHBvczogb3JpZ2luYWxUYWcucG9zfTsKICAgICAgfQogICAgfQogIH0KCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MpIHsKICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnc1tvcmlnaW5hbEluZGV4XSk7CiAgICBvcmlnaW5hbEluZGV4Kys7CiAgfQoKICB3aGlsZSAoaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICByZXN1bHQucHVzaChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4XSk7CiAgICBoaWdobGlnaHRJbmRleCsrOwogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkluc2VydHMgdGFncyBpbnRvIHRleHQuCkBwYXJhbSAgdGFncyAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKQHBhcmFtICB0ZXh0ICBhIHN0cmluZyByZXByZXNlbnRpbmcgdGhlIHRleHQKQHJldHVybiAgYSBET00gRG9jdW1lbnRGcmFnbWVudCByZXByZXNlbnRpbmcgdGhlIHJlc3VsdGluZyBIVE1MCiovCmZ1bmN0aW9uIHNoX2luc2VydFRhZ3ModGFncywgdGV4dCkgewogIHZhciBkb2MgPSBkb2N1bWVudDsKCiAgdmFyIHJlc3VsdCA9IGRvY3VtZW50LmNyZWF0ZURvY3VtZW50RnJhZ21lbnQoKTsKICB2YXIgdGFnSW5kZXggPSAwOwogIHZhciBudW1UYWdzID0gdGFncy5sZW5ndGg7CiAgdmFyIHRleHRQb3MgPSAwOwogIHZhciB0ZXh0TGVuZ3RoID0gdGV4dC5sZW5ndGg7CiAgdmFyIGN1cnJlbnROb2RlID0gcmVzdWx0OwoKICAvLyBvdXRwdXQgb25lIHRhZyBvciB0ZXh0IG5vZGUgZXZlcnkgaXRlcmF0aW9uCiAgd2hpbGUgKHRleHRQb3MgPCB0ZXh0TGVuZ3RoIHx8IHRhZ0luZGV4IDwgbnVtVGFncykgewogICAgdmFyIHRhZzsKICAgIHZhciB0YWdQb3M7CiAgICBpZiAodGFnSW5kZXggPCBudW1UYWdzKSB7CiAgICAgIHRhZyA9IHRhZ3NbdGFnSW5kZXhdOwogICAgICB0YWdQb3MgPSB0YWcucG9zOwogICAgfQogICAgZWxzZSB7CiAgICAgIHRhZ1BvcyA9IHRleHRMZW5ndGg7CiAgICB9CgogICAgaWYgKHRhZ1BvcyA8PSB0ZXh0UG9zKSB7CiAgICAgIC8vIG91dHB1dCB0aGUgdGFnCiAgICAgIGlmICh0YWcubm9kZSkgewogICAgICAgIC8vIHN0YXJ0IHRhZwogICAgICAgIHZhciBuZXdOb2RlID0gdGFnLm5vZGU7CiAgICAgICAgY3VycmVudE5vZGUuYXBwZW5kQ2hpbGQobmV3Tm9kZSk7CiAgICAgICAgY3VycmVudE5vZGUgPSBuZXdOb2RlOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGVuZCB0YWcKICAgICAgICBjdXJyZW50Tm9kZSA9IGN1cnJlbnROb2RlLnBhcmVudE5vZGU7CiAgICAgIH0KICAgICAgdGFnSW5kZXgrKzsKICAgIH0KICAgIGVsc2UgewogICAgICAvLyBvdXRwdXQgdGV4dAogICAgICBjdXJyZW50Tm9kZS5hcHBlbmRDaGlsZChkb2MuY3JlYXRlVGV4dE5vZGUodGV4dC5zdWJzdHJpbmcodGV4dFBvcywgdGFnUG9zKSkpOwogICAgICB0ZXh0UG9zID0gdGFnUG9zOwogICAgfQogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkhpZ2hsaWdodHMgYW4gZWxlbWVudCBjb250YWluaW5nIHNvdXJjZSBjb2RlLiAgVXBvbiBjb21wbGV0aW9uIG9mIHRoaXMgZnVuY3Rpb24sCnRoZSBlbGVtZW50IHdpbGwgaGF2ZSBiZWVuIHBsYWNlZCBpbiB0aGUgInNoX3NvdXJjZUNvZGUiIGNsYXNzLgpAcGFyYW0gIGVsZW1lbnQgIGEgRE9NIDxwcmU+IGVsZW1lbnQgY29udGFpbmluZyB0aGUgc291cmNlIGNvZGUgdG8gYmUgaGlnaGxpZ2h0ZWQKQHBhcmFtICBsYW5ndWFnZSAgYSBsYW5ndWFnZSBkZWZpbml0aW9uIG9iamVjdAoqLwpmdW5jdGlvbiBzaF9oaWdobGlnaHRFbGVtZW50KGVsZW1lbnQsIGxhbmd1YWdlKSB7CiAgc2hfYWRkQ2xhc3MoZWxlbWVudCwgJ3NoX3NvdXJjZUNvZGUnKTsKICB2YXIgb3JpZ2luYWxUYWdzID0gW107CiAgdmFyIGlucHV0U3RyaW5nID0gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgb3JpZ2luYWxUYWdzKTsKICB2YXIgaGlnaGxpZ2h0VGFncyA9IHNoX2hpZ2hsaWdodFN0cmluZyhpbnB1dFN0cmluZywgbGFuZ3VhZ2UpOwogIHZhciB0YWdzID0gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncyk7CiAgdmFyIGRvY3VtZW50RnJhZ21lbnQgPSBzaF9pbnNlcnRUYWdzKHRhZ3MsIGlucHV0U3RyaW5nKTsKICB3aGlsZSAoZWxlbWVudC5oYXNDaGlsZE5vZGVzKCkpIHsKICAgIGVsZW1lbnQucmVtb3ZlQ2hpbGQoZWxlbWVudC5maXJzdENoaWxkKTsKICB9CiAgZWxlbWVudC5hcHBlbmRDaGlsZChkb2N1bWVudEZyYWdtZW50KTsKfQoKZnVuY3Rpb24gc2hfZ2V0WE1MSHR0cFJlcXVlc3QoKSB7CiAgaWYgKHdpbmRvdy5BY3RpdmVYT2JqZWN0KSB7CiAgICByZXR1cm4gbmV3IEFjdGl2ZVhPYmplY3QoJ01zeG1sMi5YTUxIVFRQJyk7CiAgfQogIGVsc2UgaWYgKHdpbmRvdy5YTUxIdHRwUmVxdWVzdCkgewogICAgcmV0dXJuIG5ldyBYTUxIdHRwUmVxdWVzdCgpOwogIH0KICB0aHJvdyAnTm8gWE1MSHR0cFJlcXVlc3QgaW1wbGVtZW50YXRpb24gYXZhaWxhYmxlJzsKfQoKZnVuY3Rpb24gc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpIHsKICBpZiAobGFuZ3VhZ2UgaW4gc2hfcmVxdWVzdHMpIHsKICAgIHNoX3JlcXVlc3RzW2xhbmd1YWdlXS5wdXNoKGVsZW1lbnQpOwogICAgcmV0dXJuOwogIH0KICBzaF9yZXF1ZXN0c1tsYW5ndWFnZV0gPSBbZWxlbWVudF07CiAgdmFyIHJlcXVlc3QgPSBzaF9nZXRYTUxIdHRwUmVxdWVzdCgpOwogIHZhciB1cmwgPSBwcmVmaXggKyAnc2hfJyArIGxhbmd1YWdlICsgc3VmZml4OwogIHJlcXVlc3Qub3BlbignR0VUJywgdXJsLCB0cnVlKTsKICByZXF1ZXN0Lm9ucmVhZHlzdGF0ZWNoYW5nZSA9IGZ1bmN0aW9uICgpIHsKICAgIGlmIChyZXF1ZXN0LnJlYWR5U3RhdGUgPT09IDQpIHsKICAgICAgdHJ5IHsKICAgICAgICBpZiAoISByZXF1ZXN0LnN0YXR1cyB8fCByZXF1ZXN0LnN0YXR1cyA9PT0gMjAwKSB7CiAgICAgICAgICBldmFsKHJlcXVlc3QucmVzcG9uc2VUZXh0KTsKICAgICAgICAgIHZhciBlbGVtZW50cyA9IHNoX3JlcXVlc3RzW2xhbmd1YWdlXTsKICAgICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgZWxlbWVudHMubGVuZ3RoOyBpKyspIHsKICAgICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50c1tpXSwgc2hfbGFuZ3VhZ2VzW2xhbmd1YWdlXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgdGhyb3cgJ0hUVFAgZXJyb3I6IHN0YXR1cyAnICsgcmVxdWVzdC5zdGF0dXM7CiAgICAgICAgfQogICAgICB9CiAgICAgIGZpbmFsbHkgewogICAgICAgIHJlcXVlc3QgPSBudWxsOwogICAgICB9CiAgICB9CiAgfTsKICByZXF1ZXN0LnNlbmQobnVsbCk7Cn0KCi8qKgpIaWdobGlnaHRzIGFsbCBlbGVtZW50cyBjb250YWluaW5nIHNvdXJjZSBjb2RlIG9uIHRoZSBjdXJyZW50IHBhZ2UuIEVsZW1lbnRzCmNvbnRhaW5pbmcgc291cmNlIGNvZGUgbXVzdCBiZSAicHJlIiBlbGVtZW50cyB3aXRoIGEgImNsYXNzIiBhdHRyaWJ1dGUgb2YKInNoX0xBTkdVQUdFIiwgd2hlcmUgTEFOR1VBR0UgaXMgYSB2YWxpZCBsYW5ndWFnZSBpZGVudGlmaWVyOyBlLmcuLCAic2hfamF2YSIKaWRlbnRpZmllcyB0aGUgZWxlbWVudCBhcyBjb250YWluaW5nICJqYXZhIiBsYW5ndWFnZSBzb3VyY2UgY29kZS4KKi8KZnVuY3Rpb24gaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCB0YWcpIHsKICB2YXIgbm9kZUxpc3QgPSBkb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSh0YWcpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbm9kZUxpc3QubGVuZ3RoOyBpKyspIHsKICAgIHZhciBlbGVtZW50ID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHZhciBodG1sQ2xhc3NlcyA9IHNoX2dldENsYXNzZXMoZWxlbWVudCk7CiAgICB2YXIgaGlnaGxpZ2h0ZWQgPSBmYWxzZTsKICAgIHZhciBkb250aGlnaGxpZ2h0ID0gZmFsc2U7CiAgICBmb3IgKHZhciBqID0gMDsgaiA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaisrKSB7CiAgICAgIHZhciBodG1sQ2xhc3MgPSBodG1sQ2xhc3Nlc1tqXS50b0xvd2VyQ2FzZSgpOwogICAgICBpZiAoaHRtbENsYXNzID09PSAnc2hfbm9uZScpIHsKICAgICAgICBkb250aGlnaGxpZ2h0ID0gdHJ1ZQogICAgICAgIGNvbnRpbnVlOwogICAgICB9CiAgICAgIGlmIChodG1sQ2xhc3Muc3Vic3RyKDAsIDMpID09PSAnc2hfJykgewogICAgICAgIHZhciBsYW5ndWFnZSA9IGh0bWxDbGFzcy5zdWJzdHJpbmcoMyk7CiAgICAgICAgaWYgKGxhbmd1YWdlIGluIHNoX2xhbmd1YWdlcykgewogICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50LCBzaF9sYW5ndWFnZXNbbGFuZ3VhZ2VdKTsKICAgICAgICAgIGhpZ2hsaWdodGVkID0gdHJ1ZTsKICAgICAgICB9CiAgICAgICAgZWxzZSBpZiAodHlwZW9mKHByZWZpeCkgPT09ICdzdHJpbmcnICYmIHR5cGVvZihzdWZmaXgpID09PSAnc3RyaW5nJykgewogICAgICAgICAgc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHRocm93ICdGb3VuZCA8JyArIHRhZyArICc+IGVsZW1lbnQgd2l0aCBjbGFzcz0iJyArIGh0bWxDbGFzcyArICciLCBidXQgbm8gc3VjaCBsYW5ndWFnZSBleGlzdHMnOwogICAgICAgIH0KICAgICAgICBicmVhazsKICAgICAgfQogICAgfQogICAgaWYgKGhpZ2hsaWdodGVkID09PSBmYWxzZSAmJiBkb250aGlnaGxpZ2h0ID09IGZhbHNlKSB7CiAgICAgIHNoX2hpZ2hsaWdodEVsZW1lbnQoZWxlbWVudCwgc2hfbGFuZ3VhZ2VzWyJqYXZhc2NyaXB0Il0pOwogICAgfQogIH0KfQoKCgpmdW5jdGlvbiBzaF9oaWdobGlnaHREb2N1bWVudChwcmVmaXgsIHN1ZmZpeCkgewogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3R0Jyk7CiAgaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCAnY29kZScpOwogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3ByZScpOwp9Cg=="></script>
+  <script src="data:application/javascript;base64,aWYoIXRoaXMuc2hfbGFuZ3VhZ2VzKXt0aGlzLnNoX2xhbmd1YWdlcz17fX1zaF9sYW5ndWFnZXMuamF2YXNjcmlwdD1bW1svXC9cL1wvL2csInNoX2NvbW1lbnQiLDFdLFsvXC9cLy9nLCJzaF9jb21tZW50Iiw3XSxbL1wvXCpcKi9nLCJzaF9jb21tZW50Iiw4XSxbL1wvXCovZywic2hfY29tbWVudCIsOV0sWy9cYig/OmFic3RyYWN0fGJyZWFrfGNhc2V8Y2F0Y2h8Y2xhc3N8Y29uc3R8Y29udGludWV8ZGVidWdnZXJ8ZGVmYXVsdHxkZWxldGV8ZG98ZWxzZXxlbnVtfGV4cG9ydHxleHRlbmRzfGZhbHNlfGZpbmFsfGZpbmFsbHl8Zm9yfGZ1bmN0aW9ufGdvdG98aWZ8aW1wbGVtZW50c3xpbnxpbnN0YW5jZW9mfGludGVyZmFjZXxuYXRpdmV8bmV3fG51bGx8cHJpdmF0ZXxwcm90ZWN0ZWR8cHJvdG90eXBlfHB1YmxpY3xyZXR1cm58c3RhdGljfHN1cGVyfHN3aXRjaHxzeW5jaHJvbml6ZWR8dGhyb3d8dGhyb3dzfHRoaXN8dHJhbnNpZW50fHRydWV8dHJ5fHR5cGVvZnx2YXJ8dm9sYXRpbGV8d2hpbGV8d2l0aClcYi9nLCJzaF9rZXl3b3JkIiwtMV0sWy8oXCtcK3wtLXxcKXxcXSkoXHMqKShcLz0/KD8hWypcL10pKS9nLFsic2hfc3ltYm9sIiwic2hfbm9ybWFsIiwic2hfc3ltYm9sIl0sLTFdLFsvKDB4W0EtRmEtZjAtOV0rfCg/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykoXHMqKShcLyg/IVsqXC9dKSkvZyxbInNoX251bWJlciIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyhbQS1aYS16JF9dW0EtWmEtejAtOSRfXSpccyopKFwvPT8oPyFbKlwvXSkpL2csWyJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy9cLyg/OlxcLnxbXipcXFwvXSkoPzpcXC58W15cXFwvXSkqXC9bZ2ltXSovZywic2hfcmVnZXhwIiwtMV0sWy9cYlsrLV0/KD86KD86MHhbQS1GYS1mMC05XSspfCg/Oig/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykpdT8oPzooPzppbnQoPzo4fDE2fDMyfDY0KSl8TCk/XGIvZywic2hfbnVtYmVyIiwtMV0sWy8iL2csInNoX3N0cmluZyIsMTBdLFsvJy9nLCJzaF9zdHJpbmciLDExXSxbL358IXwlfFxefFwqfFwofFwpfC18XCt8PXxcW3xcXXxcXHw6fDt8LHxcLnxcL3xcP3wmfDx8PnxcfC9nLCJzaF9zeW1ib2wiLC0xXSxbL1x7fFx9L2csInNoX2NicmFja2V0IiwtMV0sWy9cYig/Ok1hdGh8SW5maW5pdHl8TmFOfHVuZGVmaW5lZHxhcmd1bWVudHMpXGIvZywic2hfcHJlZGVmX3ZhciIsLTFdLFsvXGIoPzpBcnJheXxCb29sZWFufERhdGV8RXJyb3J8RXZhbEVycm9yfEZ1bmN0aW9ufE51bWJlcnxPYmplY3R8UmFuZ2VFcnJvcnxSZWZlcmVuY2VFcnJvcnxSZWdFeHB8U3RyaW5nfFN5bnRheEVycm9yfFR5cGVFcnJvcnxVUklFcnJvcnxkZWNvZGVVUkl8ZGVjb2RlVVJJQ29tcG9uZW50fGVuY29kZVVSSXxlbmNvZGVVUklDb21wb25lbnR8ZXZhbHxpc0Zpbml0ZXxpc05hTnxwYXJzZUZsb2F0fHBhcnNlSW50KVxiL2csInNoX3ByZWRlZl9mdW5jIiwtMV0sWy8oPzpbQS1aYS16XXxfKVtBLVphLXowLTlfXSooPz1bIFx0XSpcKCkvZywic2hfZnVuY3Rpb24iLC0xXV0sW1svJC9nLG51bGwsLTJdLFsvKD86PD8pW0EtWmEtejAtOV9cLlwvXC1ffl0rQFtBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KXwoPzo8PylbQS1aYS16MC05X10rOlwvXC9bQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+PykvZywic2hfdXJsIiwtMV0sWy88XD94bWwvZywic2hfcHJlcHJvYyIsMiwxXSxbLzwhRE9DVFlQRS9nLCJzaF9wcmVwcm9jIiw0LDFdLFsvPCEtLS9nLCJzaF9jb21tZW50Iiw1XSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKSg/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKS9nLCJzaF9rZXl3b3JkIiw2LDFdLFsvJig/OltBLVphLXowLTldKyk7L2csInNoX3ByZXByb2MiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSooPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMV0sWy88KD86XC8pP1tBLVphLXpdW0EtWmEtejAtOV0qL2csInNoX2tleXdvcmQiLDYsMV0sWy9AW0EtWmEtel0rL2csInNoX3R5cGUiLC0xXSxbLyg/OlRPRE98RklYTUV8QlVHKSg/Ols6XT8pL2csInNoX3RvZG8iLC0xXV0sW1svXD8+L2csInNoX3ByZXByb2MiLC0yXSxbLyhbXj0iIFx0Pl0rKShbIFx0XSopKD0/KS9nLFsic2hfdHlwZSIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyIvZywic2hfc3RyaW5nIiwzXV0sW1svXFwoPzpcXHwiKS9nLG51bGwsLTFdLFsvIi9nLCJzaF9zdHJpbmciLC0yXV0sW1svPi9nLCJzaF9wcmVwcm9jIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLy0tPi9nLCJzaF9jb21tZW50IiwtMl0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdXSxbWy8oPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLyQvZyxudWxsLC0yXV0sW1svXCpcLy9nLCJzaF9jb21tZW50IiwtMl0sWy8oPzo8PylbQS1aYS16MC05X1wuXC9cLV9+XStAW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pfCg/Ojw/KVtBLVphLXowLTlfXSs6XC9cL1tBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KS9nLCJzaF91cmwiLC0xXSxbLzxcP3htbC9nLCJzaF9wcmVwcm9jIiwyLDFdLFsvPCFET0NUWVBFL2csInNoX3ByZXByb2MiLDQsMV0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopKD86XC8pPz4vZywic2hfa2V5d29yZCIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopL2csInNoX2tleXdvcmQiLDYsMV0sWy8mKD86W0EtWmEtejAtOV0rKTsvZywic2hfcHJlcHJvYyIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XVtBLVphLXowLTldKig/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSovZywic2hfa2V5d29yZCIsNiwxXSxbL0BbQS1aYS16XSsvZywic2hfdHlwZSIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy9cKlwvL2csInNoX2NvbW1lbnQiLC0yXSxbLyg/Ojw/KVtBLVphLXowLTlfXC5cL1wtX35dK0BbQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+Pyl8KD86PD8pW0EtWmEtejAtOV9dKzpcL1wvW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pL2csInNoX3VybCIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy8iL2csInNoX3N0cmluZyIsLTJdLFsvXFwuL2csInNoX3NwZWNpYWxjaGFyIiwtMV1dLFtbLycvZywic2hfc3RyaW5nIiwtMl0sWy9cXC4vZywic2hfc3BlY2lhbGNoYXIiLC0xXV1dOw=="></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+
+</body></html>

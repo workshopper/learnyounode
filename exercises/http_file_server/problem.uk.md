@@ -24,14 +24,14 @@ function callback (request, response) { /* ... */ }
 Типовий Node HTTP-сервер виглядає так:
 
 ```js
-var http = require('http')
-var server = http.createServer(function (req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // обробка запитів...
 })
 server.listen(8000)
 ```
 
 Документацію до модуля `http` Ви можете знайти, набравши в браузері:
-  {rootdir:/node_apidoc/http.html}
+  {rootdir:/docs-nodejs/http.html}
 
 Вбудований модуль `fs` також має потоковий АРІ для файлів. Ви можете використовувати метод `fs.createReadStream()` для створення потоку, що представлятиме файл, котрий Ви отримаєте у якості аргументу командного рядка. Цей метод повертає потоковий об’єкт (stream), який Ви можете використовувати як `src.pipe(dst)`, аби направляти данні з потоку `src` в потік `dst`. В нашому випадку Ви можете зв’язати потік файлової системи з потоком відповіді HTTP.

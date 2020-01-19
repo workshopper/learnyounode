@@ -1,2 +1,5 @@
+.jshintrc
+.travis.yml
 learnyounode.png
 test
+tools

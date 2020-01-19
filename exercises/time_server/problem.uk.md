@@ -28,8 +28,8 @@ function callback (socket) { /* ... */ }
 Типовий Node TCP-сервер виглядає так:
 
 ```js
-var net = require('net')
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
   // керування отриманими сокетами
 })
 server.listen(8000)
@@ -43,14 +43,14 @@ server.listen(8000)
 
 Документацію до модуля `net` можна знайти, перейшовши у браузері:
 
-  {rootdir:/node_apidoc/net.html}
+  {rootdir:/docs-nodejs/net.html}
 
 Для роботи з датами скористайтесь новим об’єктом `new Date()`, передавши йому необхідний формат. Наступні методи можуть бути корисними:
 
 ```js
 date.getFullYear()
-date.getMonth()     // починається із 0
-date.getDate()      // повертає день місяця
+date.getMonth() // починається із 0
+date.getDate() // повертає день місяця
 date.getHours()
 date.getMinutes()
 ```

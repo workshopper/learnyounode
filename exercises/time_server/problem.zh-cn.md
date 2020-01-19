@@ -30,8 +30,8 @@ function callback (socket) { /* ... */ }
 一个典型的 Node TCP 服务器将会如下所示：
 
 ```js
-var net = require('net')
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
   // socket 处理逻辑
 })
 server.listen(8000)
@@ -45,14 +45,14 @@ server.listen(8000)
 
 `net` 模块的文档可以通过浏览器访问如下连接来查看：
 
-  {rootdir:/node_apidoc/net.html}
+  {rootdir:/docs-nodejs/net.html}
 
 要创建一个日期，你需要使用 `new Date()` 并且自定义一个格式，这些方法将会很有用：
 
 ```js
 date.getFullYear()
-date.getMonth()     // 从 0 开始
-date.getDate()      // 返回当前月的日期
+date.getMonth() // 从 0 开始
+date.getDate() // 返回当前月的日期
 date.getHours()
 date.getMinutes()
 ```

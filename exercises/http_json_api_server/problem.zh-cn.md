@@ -28,16 +28,16 @@
 HTTP 服务器的 `request` 对象含有一个 `url` 属性，你可以通过它来决定具体需要走哪一条 _"路由"_。
 
 你可以使用 Node 的核心模块 'url' 来处理 URL 和 查询参数（query string）。
-`url.parse(request.url, true)` 方法会处理 request.url，它返回的对象中包含了一些很有帮助的属性，方便方便你处理 querystring。
+`new URL(request.url)` 方法会处理 request.url，它返回的对象中包含了一些很有帮助的属性，方便方便你处理 querystring。
 
 举个例子，你可以在命令行窗口输入以下命令试试：
 
 ```sh
-$ node -pe "require('url').parse('/test?q=1', true)"
+$ node -pe "new URL('/test?q=1', 'http://example.com')"
 ```
 
 关于 `url` 模块的文档，你可以使用浏览器访问如下路径来访问：
-  {rootdir:/node_apidoc/url.html}
+  {rootdir:/docs-nodejs/url.html}
 
 你的响应应该是一个 JSON 字符串的形式。请查看 `JSON.stringify()` 来获取更多信息。
 

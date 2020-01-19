@@ -11,7 +11,7 @@
 
 `http` モジュールのドキュメントは、このリンクをブラウザで見てください:
 
-  {rootdir:/node_apidoc/http.html}
+  {rootdir:/docs-nodejs/http.html}
 
 `http.get()` という関数は簡単に GET リクエストを送信するショートカットです。解決方法をシンプルするのに役に立つと思います。
 `http.get()` の1つ目の引数は、GET リクエストの URL です。2つ目はコールバック関数です。
@@ -31,7 +31,7 @@ Stream における大切な3つのイベントは： `data` 、 `error` と `en
 各イベント時にデータを受け取る為には、次のようにリスナを設定します。
 
 ```js
-response.on("data", function (data) { /* ... */ })
+response.on('data', function (data) { /* ... */ })
 ```
 
 `data` イベントは処理できるデータチャンク(※)が現れたときに発行されます。チャンクのサイズはデータによって変わります。

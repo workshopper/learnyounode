@@ -32,7 +32,7 @@ Chaque connexion reçue par votre serveur déclenche un appel à votre fonction
 de rappel.  Elle a la signature suivante :
 
 ```js
-function callback(socket) { /* ... */ }
+function callback (socket) { /* ... */ }
 ```
 
 `net.createServer()` renvoie également une instance de votre serveur. Vous
@@ -42,11 +42,11 @@ port particulier.
 Un serveur TCP Node ressemble classiquement à ceci :
 
 ```js
-var net = require('net');
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
   // logique de gestion de la socket
-});
-server.listen(8000);
+})
+server.listen(8000)
 ```
 
 Souvenez-vous que le numéro de port vous sera fourni comme premier argument
@@ -65,7 +65,7 @@ comme ceci : `socket.end(data)`.
 La documentation hors-ligne pour le module noyau `net` peut être consultée
 à l’adresse suivante :
 
-  {rootdir:/node_apidoc/net.html}
+  {rootdir:/docs-nodejs/net.html}
 
 Pour créer la date, vous aurez besoin de construire un format spécial à partir
 d’un objet obtenu par un appel à `new Date()`.  Les méthodes que vous pourrez
@@ -73,8 +73,8 @@ trouver utiles sont :
 
 ```js
 date.getFullYear()
-date.getMonth()     // démarre 0 !
-date.getDate()      // renvoie le jour du mois
+date.getMonth() // démarre 0 !
+date.getDate() // renvoie le jour du mois
 date.getHours()
 date.getMinutes()
 ```

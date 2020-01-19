@@ -1,0 +1,2485 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Deprecated APIs | Node.js v12.10.0 Documentation</title>
+  <link rel="stylesheet" href="data:text/css;base64,LyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogaXRhbGljOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBJdGFsaWMnKSwgbG9jYWwoJ0xhdG8tSXRhbGljJyksIHVybChodHRwczovL2ZvbnRzLmdzdGF0aWMuY29tL3MvbGF0by92MTYvUzZ1OHc0Qk1VVFBIanhzQVVpLXFOaVhnN2VVMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBpdGFsaWM7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEl0YWxpYycpLCBsb2NhbCgnTGF0by1JdGFsaWMnKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnU4dzRCTVVUUEhqeHNBWEMtcU5pWGc3US53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0KLyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogbm9ybWFsOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBSZWd1bGFyJyksIGxvY2FsKCdMYXRvLVJlZ3VsYXInKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnV5dzRCTVVUUEhqeEF3WGlXdEZDZlE3QS53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIFJlZ3VsYXInKSwgbG9jYWwoJ0xhdG8tUmVndWxhcicpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dXl3NEJNVVRQSGp4NHdYaVd0RkNjLndvZmYyKSBmb3JtYXQoJ3dvZmYyJyk7CiAgdW5pY29kZS1yYW5nZTogVSswMDAwLTAwRkYsIFUrMDEzMSwgVSswMTUyLTAxNTMsIFUrMDJCQi0wMkJDLCBVKzAyQzYsIFUrMDJEQSwgVSswMkRDLCBVKzIwMDAtMjA2RiwgVSsyMDc0LCBVKzIwQUMsIFUrMjEyMiwgVSsyMTkxLCBVKzIxOTMsIFUrMjIxMiwgVSsyMjE1LCBVK0ZFRkYsIFUrRkZGRDsKfQovKiBsYXRpbi1leHQgKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2FQR1EzcTVkME43dy53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2lQR1EzcTVkMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LyotLS0tLS0tLS0tLS0tLS0tLS0tLS0gTGF5b3V0IGFuZCBUeXBvZ3JhcGh5IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwpodG1sIHsKICBmb250LXNpemU6IDFyZW07CiAgb3ZlcmZsb3ctd3JhcDogYnJlYWstd29yZDsKICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDsKICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlOwogIC13ZWJraXQtZm9udC12YXJpYW50LWxpZ2F0dXJlczogbm9uZTsKICAgICAgICAgIGZvbnQtdmFyaWFudC1saWdhdHVyZXM6IG5vbmU7Cn0KCiogewogIGJveC1zaXppbmc6IGJvcmRlci1ib3g7Cn0KCmJvZHkgewogIGZvbnQtZmFtaWx5OiAiTGF0byIsICJMdWNpZGEgR3JhbmRlIiwgIkx1Y2lkYSBTYW5zIFVuaWNvZGUiLCAiTHVjaWRhIFNhbnMiLCBWZXJkYW5hLCBUYWhvbWEsIHNhbnMtc2VyaWY7CiAgbWFyZ2luOiAwOwogIHBhZGRpbmc6IDA7CiAgY29sb3I6ICMzMzM7CiAgYmFja2dyb3VuZDogI2ZmZjsKfQoKaDEgeyBmb250LXNpemU6IDIuNXJlbSB9CmgyIHsgZm9udC1zaXplOiAycmVtIH0KaDMgeyBmb250LXNpemU6IDEuNzVyZW0gfQpoNCB7IGZvbnQtc2l6ZTogMS41cmVtIH0KaDUgeyBmb250LXNpemU6IDEuMjVyZW0gfQpoNiB7IGZvbnQtc2l6ZTogMXJlbSB9CgpoMSwgaDIsIGgzLCBoNCwgaDUsIGg2IHsKICBtYXJnaW46IDEuNXJlbSAwIDFyZW07CiAgdGV4dC1yZW5kZXJpbmc6IG9wdGltaXplTGVnaWJpbGl0eTsKICBmb250LXdlaWdodDogNzAwOwogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKcHJlLCB0dCwgY29kZSwgLnByZSwgc3Bhbi50eXBlLCBhLnR5cGUgewogIGZvbnQtZmFtaWx5OiBTRk1vbm8tUmVndWxhciwgTWVubG8sIENvbnNvbGFzLCAiTGliZXJhdGlvbiBNb25vIiwgIkNvdXJpZXIgTmV3IiwgbW9ub3NwYWNlOwogIGZvbnQtc2l6ZTogLjllbTsKfQoKI2NvbnRlbnQgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKYSwgYTpsaW5rLCBhOmFjdGl2ZSB7CiAgY29sb3I6ICM0Mzg1M2Q7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGJvcmRlci1yYWRpdXM6IDJweDsKICBwYWRkaW5nOiAxcHggM3B4Owp9CgphOmhvdmVyLCBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDM4NTNkOwogIG91dGxpbmU6IG5vbmU7Cn0KCnN0cm9uZyB7CiAgZm9udC13ZWlnaHQ6IDcwMDsKfQoKY29kZSBhOmhvdmVyIHsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgplbSBjb2RlIHsKICBmb250LXN0eWxlOiBub3JtYWw7Cn0KCiNjaGFuZ2Vsb2cgI2d0b2MgewogIGRpc3BsYXk6IG5vbmU7Cn0KCiNndG9jIHsKICBtYXJnaW4tdG9wOiAuNXJlbTsKICBtYXJnaW4tYm90dG9tOiAxcmVtOwp9CgojZ3RvYyB1bCB7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBtYXJnaW4tbGVmdDogMDsKICBsaW5lLWhlaWdodDogMS41cmVtOwp9CgojZ3RvYyA+IHVsID4gbGkgewogIGRpc3BsYXk6IGlubGluZTsKICBib3JkZXItcmlnaHQ6IDFweCAjMDAwIHNvbGlkOwogIG1hcmdpbi1yaWdodDogMC40cmVtOwogIHBhZGRpbmctcmlnaHQ6IDAuNHJlbTsKfQoKI2d0b2MgPiB1bCA+IGxpOmxhc3QtY2hpbGQgewogIGJvcmRlci1yaWdodDogbm9uZTsKICBtYXJnaW4tcmlnaHQ6IDA7CiAgcGFkZGluZy1yaWdodDogMDsKfQoKbGkudmVyc2lvbi1waWNrZXIgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBhIHsKICBib3JkZXItcmFkaXVzOiAycHggMnB4IDAgMDsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBvbCB7CiAgZGlzcGxheTogYmxvY2s7CiAgei1pbmRleDogMTsKfQoKbGkudmVyc2lvbi1waWNrZXIgYSBzcGFuIHsKICBmb250LXNpemU6IC43cmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciB7CiAgYmFja2dyb3VuZDogI2ZmZjsKICBib3JkZXI6IDFweCAjNDM4NTNkIHNvbGlkOwogIGJvcmRlci1yYWRpdXM6IDAgMCAycHggMnB4OwogIGRpc3BsYXk6IG5vbmU7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgcmlnaHQ6IDA7CiAgdG9wOiAxLjI1cmVtOwogIHdpZHRoOiAxMDAlOwp9CgojZ3RvYyBvbC52ZXJzaW9uLXBpY2tlciBsaSB7CiAgZGlzcGxheTogYmxvY2s7CiAgYm9yZGVyLXJpZ2h0OiAwOwogIG1hcmdpbi1yaWdodDogMDsKfQoKb2wudmVyc2lvbi1waWNrZXIgbGkgYSB7CiAgYm9yZGVyLXJhZGl1czogMDsKICBkaXNwbGF5OiBibG9jazsKICBtYXJnaW46IDA7CiAgcGFkZGluZzogLjFyZW07CiAgcGFkZGluZy1sZWZ0OiAxcmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciBsaTpsYXN0LWNoaWxkIGEgewogIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAxcHg7CiAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMXB4Owp9CgoubGluZSB7CiAgd2lkdGg6IGNhbGMoMTAwJSAtIDFyZW0pOwogIGRpc3BsYXk6IGJsb2NrOwogIHBhZGRpbmctYm90dG9tOiAxcHg7Cn0KCi5hcGlfc3RhYmlsaXR5IHsKICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDsKICBtYXJnaW46IDAgMCAxcmVtIDA7CiAgZm9udC1mYW1pbHk6ICJMYXRvIiwgIkx1Y2lkYSBHcmFuZGUiLCAiTHVjaWRhIFNhbnMgVW5pY29kZSIsICJMdWNpZGEgU2FucyIsIFZlcmRhbmEsIFRhaG9tYSwgc2Fucy1zZXJpZjsKICBwYWRkaW5nOiAxcmVtOwogIGxpbmUtaGVpZ2h0OiAxLjU7Cn0KCi5hcGlfc3RhYmlsaXR5ICogewogIGNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50Owp9CgouYXBpX3N0YWJpbGl0eSBhIHsKICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsKfQoKLmFwaV9zdGFiaWxpdHkgYTpob3ZlciwgLmFwaV9zdGFiaWxpdHkgYTphY3RpdmUsIC5hcGlfc3RhYmlsaXR5IGE6Zm9jdXMgewogIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjQpOwp9CgouYXBpX3N0YWJpbGl0eSBhIGNvZGUgewogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCi5hcGlfc3RhYmlsaXR5XzAgewogIGJhY2tncm91bmQtY29sb3I6ICNENjAwMjc7Cn0KCi5hcGlfc3RhYmlsaXR5XzEgewogIGJhY2tncm91bmQtY29sb3I6ICNFQzUzMTU7Cn0KCi5hcGlfc3RhYmlsaXR5XzIgewogIGJhY2tncm91bmQtY29sb3I6ICM0RUJBMEY7Cn0KCi5hcGlfbWV0YWRhdGEgewogIGZvbnQtc2l6ZTogLjg1cmVtOwogIG1hcmdpbi1ib3R0b206IDFyZW07Cn0KCi5hcGlfbWV0YWRhdGEgc3BhbiB7CiAgbWFyZ2luLXJpZ2h0OiAxcmVtOwp9CgouYXBpX21ldGFkYXRhIHNwYW46bGFzdC1jaGlsZCB7CiAgbWFyZ2luLXJpZ2h0OiAwcHg7Cn0KCnVsLnBsYWluIHsKICBsaXN0LXN0eWxlOiBub25lOwp9CgphYmJyIHsKICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkICM0NTQ1NDU7Cn0KCnAgewogIHRleHQtcmVuZGVyaW5nOiBvcHRpbWl6ZUxlZ2liaWxpdHk7CiAgbWFyZ2luOiAwIDAgMS4xMjVyZW0gMDsKICBsaW5lLWhlaWdodDogMS41Owp9CgojYXBpY29udGVudCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKICBwYWRkaW5nLWJvdHRvbTogMnJlbTsKfQoKdGFibGUgewogIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7CiAgbWFyZ2luOiAwIDAgMS41cmVtIDA7Cn0KCnRoLCB0ZCB7CiAgYm9yZGVyOiAxcHggc29saWQgI2FhYTsKICBwYWRkaW5nOiAuNzVyZW0gMXJlbSAuNzVyZW0gMXJlbTsKICB2ZXJ0aWNhbC1hbGlnbjogdG9wOwp9Cgp0aCB7CiAgdGV4dC1hbGlnbjpsZWZ0Owp9CgpvbCwgdWwsIGRsIHsKICBtYXJnaW46IDAgMCAuNnJlbSAwOwogIHBhZGRpbmc6IDA7Cn0KCm9sIHVsLCBvbCBvbCwgb2wgZGwsIHVsIHVsLCB1bCBvbCwgdWwgZGwsIGRsIHVsLCBkbCBvbCwgZGwgZGwgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCnVsLCBvbCB7CiAgbWFyZ2luLWxlZnQ6IDJyZW07Cn0KCmRsIGR0IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgbWFyZ2luOiAxLjVyZW0gMCAwOwp9CgpkbCBkZCB7CiAgcG9zaXRpb246IHJlbGF0aXZlOwogIG1hcmdpbjogMCAxcmVtIDA7Cn0KCmRkICsgZHQucHJlIHsKICBtYXJnaW4tdG9wOiAxLjZyZW07Cn0KCiNhcGljb250ZW50IHsKICBwYWRkaW5nLXRvcDogMXJlbTsKfQoKI2FwaWNvbnRlbnQgLmxpbmUgewogIHdpZHRoOiBjYWxjKDUwJSAtIDFyZW0pOwogIG1hcmdpbjogMXJlbSAxcmVtIC45NXJlbTsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2NjOwp9CgpoMiArIGgyIHsKICBtYXJnaW46IDAgMCAuNXJlbTsKfQoKaDMgKyBoMyB7CiAgbWFyZ2luOiAwIDAgLjVyZW07Cn0KCmgyLCBoMywgaDQsIGg1IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgcGFkZGluZy1yaWdodDogNDBweDsKfQoKLnNyY2xpbmsgewogIGZsb2F0OiByaWdodDsKICBmb250LXNpemU6IHNtYWxsZXI7Cn0KCmgxIHNwYW4sIGgyIHNwYW4sIGgzIHNwYW4sIGg0IHNwYW4gewogIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICBkaXNwbGF5OiBibG9jazsKICB0b3A6IDA7CiAgcmlnaHQ6IDA7Cn0KCmgxIHNwYW46aG92ZXIsIGgyIHNwYW46aG92ZXIsIGgzIHNwYW46aG92ZXIsIGg0IHNwYW46aG92ZXIgewogIG9wYWNpdHk6IDE7Cn0KCmgxIHNwYW4gYSwgaDIgc3BhbiBhLCBoMyBzcGFuIGEsIGg0IHNwYW4gYSB7CiAgY29sb3I6ICMwMDA7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGZvbnQtd2VpZ2h0OiBib2xkOwp9CgpwcmUsIHR0LCBjb2RlIHsKICBsaW5lLWhlaWdodDogMS41cmVtOwogIG1hcmdpbjogMDsgcGFkZGluZzogMDsKfQoKLnByZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKcHJlIHsKICBwYWRkaW5nOiAxcmVtOwogIHZlcnRpY2FsLWFsaWduOiB0b3A7CiAgYmFja2dyb3VuZDogI2YyZjJmMjsKICBtYXJnaW46IDFyZW07CiAgb3ZlcmZsb3cteDogYXV0bzsKfQoKcHJlID4gY29kZSB7CiAgcGFkZGluZzogMDsKfQoKcHJlICsgaDMgewogIG1hcmdpbi10b3A6IDIuMjI1cmVtOwp9Cgpjb2RlLnByZSB7CiAgd2hpdGUtc3BhY2U6IHByZTsKfQoKI2ludHJvIHsKICBtYXJnaW4tdG9wOiAxLjI1cmVtOwogIG1hcmdpbi1sZWZ0OiAxcmVtOwp9CgojaW50cm8gYSB7CiAgY29sb3I6ICNkZGQ7CiAgZm9udC13ZWlnaHQ6IGJvbGQ7Cn0KCmhyIHsKICBiYWNrZ3JvdW5kOiBub25lOwogIGJvcmRlcjogbWVkaXVtIG5vbmU7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM3YTdhN2E7CiAgbWFyZ2luOiAwIDAgMXJlbSAwOwp9CgojdG9jIGgyIHsKICBtYXJnaW4tdG9wOiAwOwogIG1hcmdpbjogMS41cmVtIDA7Cn0KCiN0b2MgcCB7CiAgbWFyZ2luOiAwOwp9CgojdG9jIHVsIGEgewogIHRleHQtZGVjb3JhdGlvbjpub25lOwp9CgojdG9jIHVsIGxpIHsKICBtYXJnaW4tYm90dG9tOiAuNjY2cmVtOwogIGxpc3Qtc3R5bGU6IHNxdWFyZSBvdXRzaWRlOwp9CgojdG9jIGxpID4gdWwgewogIG1hcmdpbi10b3A6IC42NjZyZW07Cn0KCiN0b2MgLnN0YWJpbGl0eV8wOjphZnRlciB7CiAgYmFja2dyb3VuZC1jb2xvcjogI2Q1MDAyNzsKICBjb2xvcjogI2ZmZjsKICBjb250ZW50OiAiZGVwcmVjYXRlZCI7CiAgbWFyZ2luLWxlZnQ6IC4yNXJlbTsKICBwYWRkaW5nOiAxcHggM3B4OwogIGJvcmRlci1yYWRpdXM6IDNweDsKfQoKI2FwaWNvbnRlbnQgbGkgewogIG1hcmdpbi1ib3R0b206IC41cmVtOwp9CgojYXBpY29udGVudCBsaTpsYXN0LWNoaWxkIHsKICBtYXJnaW4tYm90dG9tOiAwOwp9Cgp0dCwgY29kZSB7CiAgY29sb3I6ICMwNDA0MDQ7CiAgYmFja2dyb3VuZC1jb2xvcjogI2YyZjJmMjsKICBib3JkZXItcmFkaXVzOiAycHg7CiAgcGFkZGluZzogMXB4IDNweDsKfQoKLmFwaV9zdGFiaWxpdHkgY29kZSB7CiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAuMSk7Cn0KCmEgY29kZSB7CiAgY29sb3I6IGluaGVyaXQ7CiAgYmFja2dyb3VuZDogaW5oZXJpdDsKICBwYWRkaW5nOiAwOwp9CgoudHlwZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKI2NvbHVtbjEuaW50ZXJpb3IgewogIG1hcmdpbi1sZWZ0OiAyMzRweDsKICBwYWRkaW5nOiAwIDJyZW07CiAgLXdlYmtpdC1wYWRkaW5nLXN0YXJ0OiAxLjVyZW07Cn0KCiNjb2x1bW4yLmludGVyaW9yIHsKICB3aWR0aDogMjM0cHg7CiAgYmFja2dyb3VuZDogIzMzMzsKICBwb3NpdGlvbjogZml4ZWQ7CiAgbGVmdDogMDsKICB0b3A6IDA7CiAgYm90dG9tOiAwOwogIG92ZXJmbG93LXg6IGhpZGRlbjsKICBvdmVyZmxvdy15OiBzY3JvbGw7Cn0KCiNjb2x1bW4yIHVsIHsKICBsaXN0LXN0eWxlOiBub25lOwogIG1hcmdpbjogLjlyZW0gMCAuNXJlbTsKICBiYWNrZ3JvdW5kOiAjMzMzOwp9CgojY29sdW1uMiA+IDpmaXJzdC1jaGlsZCB7CiAgbWFyZ2luOiAxLjI1cmVtOwogIGZvbnQtc2l6ZTogMS41cmVtOwp9CgojY29sdW1uMiA+IHVsOm50aC1jaGlsZCgyKSB7CiAgbWFyZ2luOiAxLjI1cmVtIDAgLjVyZW07Cn0KCiNjb2x1bW4yID4gdWw6bGFzdC1jaGlsZCB7CiAgbWFyZ2luOiAuOXJlbSAwIDEuMjVyZW07Cn0KCiNjb2x1bW4yIHVsIGxpIHsKICBwYWRkaW5nLWxlZnQ6IDEuMjVyZW07CiAgbWFyZ2luLWJvdHRvbTogLjVyZW07CiAgcGFkZGluZy1ib3R0b206IC41cmVtOwp9CgojY29sdW1uMiAubGluZSB7CiAgbWFyZ2luOiAwIC41cmVtOwogIGJhY2tncm91bmQtY29sb3I6ICM3MDcwNzA7Cn0KCiNjb2x1bW4yIHVsIGxpOmxhc3QtY2hpbGQgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEgewogIGNvbG9yOiAjY2NjOwogIGJvcmRlci1yYWRpdXM6IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEuYWN0aXZlLCAjY29sdW1uMiB1bCBsaSBhLmFjdGl2ZTpob3ZlciwKI2NvbHVtbjIgdWwgbGkgYS5hY3RpdmU6Zm9jdXMgewogIGNvbG9yOiAjNDM4NTNkOwogIGJvcmRlci1yYWRpdXM6IDA7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM0Mzg1M2Q7CiAgYmFja2dyb3VuZDogbm9uZTsKfQoKI2ludHJvIGE6aG92ZXIsICNpbnRybyBhOmZvY3VzLAojY29sdW1uMiB1bCBsaSBhOmhvdmVyLCAjY29sdW1uMiB1bCBsaSBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgpzcGFuID4gLm1hcmssIHNwYW4gPiAubWFyazp2aXNpdGVkIHsKICBjb2xvcjogIzcwNzA3MDsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgdG9wOiAwcHg7CiAgcmlnaHQ6IDBweDsKfQoKc3BhbiA+IC5tYXJrOmhvdmVyLCBzcGFuID4gLm1hcms6Zm9jdXMsIHNwYW4gPiAubWFyazphY3RpdmUgewogIGNvbG9yOiAjNDM4NTNkOwogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCnRoID4gKjpsYXN0LWNoaWxkLCB0ZCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKfQoKLmNoYW5nZWxvZyA+IHN1bW1hcnkgewogIG1hcmdpbjogLjVyZW0gMDsKICBwYWRkaW5nOiAuNXJlbSAwOwogIGN1cnNvcjogcG9pbnRlcjsKfQoKLyogc2ltcGxlciBjbGVhcmZpeCAqLwouY2xlYXJmaXg6YWZ0ZXIgewogIGNvbnRlbnQ6ICIuIjsKICBkaXNwbGF5OiBibG9jazsKICBoZWlnaHQ6IDA7CiAgY2xlYXI6IGJvdGg7CiAgdmlzaWJpbGl0eTogaGlkZGVuOwp9CgouZ2l0aHViX2ljb24gewogIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7CiAgbWFyZ2luOiAtMnB4IDNweCAwIDA7Cn0KCkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogMTAyNHB4KSB7CiAgI2NvbnRlbnQgewogICAgb3ZlcmZsb3c6IHZpc2libGU7CiAgfQogICNjb2x1bW4xLmludGVyaW9yIHsKICAgIG1hcmdpbi1sZWZ0OiAwOwogICAgcGFkZGluZy1sZWZ0OiAuNXJlbTsKICAgIHBhZGRpbmctcmlnaHQ6IC41cmVtOwogICAgd2lkdGg6IGF1dG87CiAgICBvdmVyZmxvdy15OiB2aXNpYmxlOwogIH0KICAjY29sdW1uMiB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KfQoKQG1lZGlhIHByaW50IHsKICBodG1sIHsKICAgIGhlaWdodDogYXV0bzsKICAgIGZvbnQtc2l6ZTogMC43NWVtOwogIH0KICAjY29sdW1uMi5pbnRlcmlvciB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KICAjY29sdW1uMS5pbnRlcmlvciB7CiAgICBtYXJnaW4tbGVmdDogMHB4OwogICAgcGFkZGluZzogMHB4OwogICAgb3ZlcmZsb3cteTogYXV0bzsKICB9CiAgLmFwaV9tZXRhZGF0YSwKICAjdG9jLAogIC5zcmNsaW5rLAogICNndG9jLAogIC5tYXJrIHsKICAgIGRpc3BsYXk6IG5vbmU7CiAgfQogIGgxIHsKICAgIGZvbnQtc2l6ZTogMnJlbTsKICB9CiAgaDIgewogICAgZm9udC1zaXplOiAxLjc1cmVtOwogIH0KICBoMyB7CiAgICBmb250LXNpemU6IDEuNXJlbTsKICB9CiAgaDQgewogICAgZm9udC1zaXplOiAxLjNyZW07CiAgfQogIGg1IHsKICAgIGZvbnQtc2l6ZTogMS4ycmVtOwogIH0KICBoNiB7CiAgICBmb250LXNpemU6IDEuMXJlbTsKICB9CiAgLmFwaV9zdGFiaWxpdHkgewogICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogIH0KICAuYXBpX3N0YWJpbGl0eSBhIHsKICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsKICB9CiAgYSB7CiAgICBjb2xvcjogaW5oZXJpdDsKICB9CiAgI2FwaWNvbnRlbnQgewogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICB9Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LnNoX3NvdXJjZUNvZGUgewogIGZvbnQtd2VpZ2h0OiBub3JtYWw7CiAgZm9udC1zdHlsZTogbm9ybWFsOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfc3ltYm9sLAouc2hfc291cmNlQ29kZSAuc2hfY2JyYWNrZXQgewogIGNvbG9yOiAjMzMzOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfa2V5d29yZCB7CiAgY29sb3I6ICMzMzg7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9zdHJpbmcsCi5zaF9zb3VyY2VDb2RlIC5zaF9yZWdleHAsCi5zaF9zb3VyY2VDb2RlIC5zaF9udW1iZXIsCi5zaF9zb3VyY2VDb2RlIC5zaF9zcGVjaWFsY2hhciB7CiAgY29sb3I6ICNFNTQzMDU7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9jb21tZW50IHsKICBjb2xvcjogIzY2NjsKICBmb250LXdlaWdodDogbGlnaHRlcjsKfQo=">
+  <link rel="canonical" href="https://nodejs.org/api/deprecations.html">
+</head>
+<body class="alt apidoc" id="api-section-deprecations">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="https://nodejs.org/" title="Go back to the home page">
+          Node.js
+        </a>
+      </div>
+      <ul>
+<li><a href="https://nodejs.org/api/documentation.html" class="nav-documentation">About these Docs</a></li>
+<li><a href="https://nodejs.org/api/synopsis.html" class="nav-synopsis">Usage &amp; Example</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://nodejs.org/api/assert.html" class="nav-assert">Assertion Testing</a></li>
+<li><a href="https://nodejs.org/api/async_hooks.html" class="nav-async_hooks">Async Hooks</a></li>
+<li><a href="https://nodejs.org/api/buffer.html" class="nav-buffer">Buffer</a></li>
+<li><a href="https://nodejs.org/api/addons.html" class="nav-addons">C++ Addons</a></li>
+<li><a href="https://nodejs.org/api/n-api.html" class="nav-n-api">C/C++ Addons - N-API</a></li>
+<li><a href="https://nodejs.org/api/child_process.html" class="nav-child_process">Child Processes</a></li>
+<li><a href="https://nodejs.org/api/cluster.html" class="nav-cluster">Cluster</a></li>
+<li><a href="https://nodejs.org/api/cli.html" class="nav-cli">Command Line Options</a></li>
+<li><a href="https://nodejs.org/api/console.html" class="nav-console">Console</a></li>
+<li><a href="https://nodejs.org/api/crypto.html" class="nav-crypto">Crypto</a></li>
+<li><a href="https://nodejs.org/api/debugger.html" class="nav-debugger">Debugger</a></li>
+<li><a href="https://nodejs.org/api/deprecations.html" class="nav-deprecations active">Deprecated APIs</a></li>
+<li><a href="https://nodejs.org/api/dns.html" class="nav-dns">DNS</a></li>
+<li><a href="https://nodejs.org/api/domain.html" class="nav-domain">Domain</a></li>
+<li><a href="https://nodejs.org/api/esm.html" class="nav-esm">ECMAScript Modules</a></li>
+<li><a href="https://nodejs.org/api/errors.html" class="nav-errors">Errors</a></li>
+<li><a href="https://nodejs.org/api/events.html" class="nav-events">Events</a></li>
+<li><a href="https://nodejs.org/api/fs.html" class="nav-fs">File System</a></li>
+<li><a href="https://nodejs.org/api/globals.html" class="nav-globals">Globals</a></li>
+<li><a href="https://nodejs.org/api/http.html" class="nav-http">HTTP</a></li>
+<li><a href="https://nodejs.org/api/http2.html" class="nav-http2">HTTP/2</a></li>
+<li><a href="https://nodejs.org/api/https.html" class="nav-https">HTTPS</a></li>
+<li><a href="https://nodejs.org/api/inspector.html" class="nav-inspector">Inspector</a></li>
+<li><a href="https://nodejs.org/api/intl.html" class="nav-intl">Internationalization</a></li>
+<li><a href="https://nodejs.org/api/modules.html" class="nav-modules">Modules</a></li>
+<li><a href="https://nodejs.org/api/net.html" class="nav-net">Net</a></li>
+<li><a href="https://nodejs.org/api/os.html" class="nav-os">OS</a></li>
+<li><a href="https://nodejs.org/api/path.html" class="nav-path">Path</a></li>
+<li><a href="https://nodejs.org/api/perf_hooks.html" class="nav-perf_hooks">Performance Hooks</a></li>
+<li><a href="https://nodejs.org/api/policy.html" class="nav-policy">Policies</a></li>
+<li><a href="https://nodejs.org/api/process.html" class="nav-process">Process</a></li>
+<li><a href="https://nodejs.org/api/punycode.html" class="nav-punycode">Punycode</a></li>
+<li><a href="https://nodejs.org/api/querystring.html" class="nav-querystring">Query Strings</a></li>
+<li><a href="https://nodejs.org/api/readline.html" class="nav-readline">Readline</a></li>
+<li><a href="https://nodejs.org/api/repl.html" class="nav-repl">REPL</a></li>
+<li><a href="https://nodejs.org/api/report.html" class="nav-report">Report</a></li>
+<li><a href="https://nodejs.org/api/stream.html" class="nav-stream">Stream</a></li>
+<li><a href="https://nodejs.org/api/string_decoder.html" class="nav-string_decoder">String Decoder</a></li>
+<li><a href="https://nodejs.org/api/timers.html" class="nav-timers">Timers</a></li>
+<li><a href="https://nodejs.org/api/tls.html" class="nav-tls">TLS/SSL</a></li>
+<li><a href="https://nodejs.org/api/tracing.html" class="nav-tracing">Trace Events</a></li>
+<li><a href="https://nodejs.org/api/tty.html" class="nav-tty">TTY</a></li>
+<li><a href="https://nodejs.org/api/dgram.html" class="nav-dgram">UDP/Datagram</a></li>
+<li><a href="https://nodejs.org/api/url.html" class="nav-url">URL</a></li>
+<li><a href="https://nodejs.org/api/util.html" class="nav-util">Utilities</a></li>
+<li><a href="https://nodejs.org/api/v8.html" class="nav-v8">V8</a></li>
+<li><a href="https://nodejs.org/api/vm.html" class="nav-vm">VM</a></li>
+<li><a href="https://nodejs.org/api/worker_threads.html" class="nav-worker_threads">Worker Threads</a></li>
+<li><a href="https://nodejs.org/api/zlib.html" class="nav-zlib">Zlib</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://github.com/nodejs/node" class="nav-https-github-com-nodejs-node">GitHub Repo &amp; Issue Tracker</a></li>
+</ul>
+    </div>
+
+    <div id="column1" data-id="deprecations" class="interior">
+      <header>
+        <h1>Node.js v12.10.0 Documentation</h1>
+        <div id="gtoc">
+          <ul>
+            <li>
+              <a href="https://nodejs.org/api/index.html" name="toc">Index</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/all.html">View on single page</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/deprecations.json">View as JSON</a>
+            </li>
+            
+    <li class="version-picker">
+      <a href="#">View another version <span>▼</span></a>
+      <ol class="version-picker"><li><a href="https://nodejs.org/docs/latest-v12.x/api/deprecations.html">12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v11.x/api/deprecations.html">11.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v10.x/api/deprecations.html">10.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v9.x/api/deprecations.html">9.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/deprecations.html">8.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v7.x/api/deprecations.html">7.x</a></li></ol>
+    </li>
+  
+            <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/deprecations.md"><span class="github_icon"><svg height="16" width="16" viewBox="0 0 16.1 16.1" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8z"></path></svg></span>Edit on GitHub</a></li>
+          </ul>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+<li>
+<p><a href="#deprecations_deprecated_apis">Deprecated APIs</a></p>
+<ul>
+<li><a href="#deprecations_revoking_deprecations">Revoking deprecations</a></li>
+<li>
+<p><a href="#deprecations_list_of_deprecated_apis">List of Deprecated APIs</a></p>
+<ul>
+<li><a href="#deprecations_dep0001_http_outgoingmessage_prototype_flush">DEP0001: http.OutgoingMessage.prototype.flush</a></li>
+<li><a href="#deprecations_dep0002_require_linklist">DEP0002: require('_linklist')</a></li>
+<li><a href="#deprecations_dep0003_writablestate_buffer">DEP0003: _writableState.buffer</a></li>
+<li><a href="#deprecations_dep0004_cryptostream_prototype_readystate">DEP0004: CryptoStream.prototype.readyState</a></li>
+<li><a href="#deprecations_dep0005_buffer_constructor">DEP0005: Buffer() constructor</a></li>
+<li><a href="#deprecations_dep0006_child_process_options_customfds">DEP0006: child_process options.customFds</a></li>
+<li><a href="#deprecations_dep0007_replace_cluster_worker_suicide_with_worker_exitedafterdisconnect">DEP0007: Replace cluster worker.suicide with worker.exitedAfterDisconnect</a></li>
+<li><a href="#deprecations_dep0008_require_constants">DEP0008: require('constants')</a></li>
+<li><a href="#deprecations_dep0009_crypto_pbkdf2_without_digest">DEP0009: crypto.pbkdf2 without digest</a></li>
+<li><a href="#deprecations_dep0010_crypto_createcredentials">DEP0010: crypto.createCredentials</a></li>
+<li><a href="#deprecations_dep0011_crypto_credentials">DEP0011: crypto.Credentials</a></li>
+<li><a href="#deprecations_dep0012_domain_dispose">DEP0012: Domain.dispose</a></li>
+<li><a href="#deprecations_dep0013_fs_asynchronous_function_without_callback">DEP0013: fs asynchronous function without callback</a></li>
+<li><a href="#deprecations_dep0014_fs_read_legacy_string_interface">DEP0014: fs.read legacy String interface</a></li>
+<li><a href="#deprecations_dep0015_fs_readsync_legacy_string_interface">DEP0015: fs.readSync legacy String interface</a></li>
+<li><a href="#deprecations_dep0016_global_root">DEP0016: GLOBAL/root</a></li>
+<li><a href="#deprecations_dep0017_intl_v8breakiterator">DEP0017: Intl.v8BreakIterator</a></li>
+<li><a href="#deprecations_dep0018_unhandled_promise_rejections">DEP0018: Unhandled promise rejections</a></li>
+<li><a href="#deprecations_dep0019_require_resolved_outside_directory">DEP0019: require('.') resolved outside directory</a></li>
+<li><a href="#deprecations_dep0020_server_connections">DEP0020: Server.connections</a></li>
+<li><a href="#deprecations_dep0021_server_listenfd">DEP0021: Server.listenFD</a></li>
+<li><a href="#deprecations_dep0022_os_tmpdir">DEP0022: os.tmpDir()</a></li>
+<li><a href="#deprecations_dep0023_os_getnetworkinterfaces">DEP0023: os.getNetworkInterfaces()</a></li>
+<li><a href="#deprecations_dep0024_replserver_prototype_converttocontext">DEP0024: REPLServer.prototype.convertToContext()</a></li>
+<li><a href="#deprecations_dep0025_require_sys">DEP0025: require('sys')</a></li>
+<li><a href="#deprecations_dep0026_util_print">DEP0026: util.print()</a></li>
+<li><a href="#deprecations_dep0027_util_puts">DEP0027: util.puts()</a></li>
+<li><a href="#deprecations_dep0028_util_debug">DEP0028: util.debug()</a></li>
+<li><a href="#deprecations_dep0029_util_error">DEP0029: util.error()</a></li>
+<li><a href="#deprecations_dep0030_slowbuffer">DEP0030: SlowBuffer</a></li>
+<li><a href="#deprecations_dep0031_ecdh_setpublickey">DEP0031: ecdh.setPublicKey()</a></li>
+<li><a href="#deprecations_dep0032_domain_module">DEP0032: domain module</a></li>
+<li><a href="#deprecations_dep0033_eventemitter_listenercount">DEP0033: EventEmitter.listenerCount()</a></li>
+<li><a href="#deprecations_dep0034_fs_exists_path_callback">DEP0034: fs.exists(path, callback)</a></li>
+<li><a href="#deprecations_dep0035_fs_lchmod_path_mode_callback">DEP0035: fs.lchmod(path, mode, callback)</a></li>
+<li><a href="#deprecations_dep0036_fs_lchmodsync_path_mode">DEP0036: fs.lchmodSync(path, mode)</a></li>
+<li><a href="#deprecations_dep0037_fs_lchown_path_uid_gid_callback">DEP0037: fs.lchown(path, uid, gid, callback)</a></li>
+<li><a href="#deprecations_dep0038_fs_lchownsync_path_uid_gid">DEP0038: fs.lchownSync(path, uid, gid)</a></li>
+<li><a href="#deprecations_dep0039_require_extensions">DEP0039: require.extensions</a></li>
+<li><a href="#deprecations_dep0040_punycode_module">DEP0040: punycode module</a></li>
+<li><a href="#deprecations_dep0041_node_repl_history_file_environment_variable">DEP0041: NODE_REPL_HISTORY_FILE environment variable</a></li>
+<li><a href="#deprecations_dep0042_tls_cryptostream">DEP0042: tls.CryptoStream</a></li>
+<li><a href="#deprecations_dep0043_tls_securepair">DEP0043: tls.SecurePair</a></li>
+<li><a href="#deprecations_dep0044_util_isarray">DEP0044: util.isArray()</a></li>
+<li><a href="#deprecations_dep0045_util_isboolean">DEP0045: util.isBoolean()</a></li>
+<li><a href="#deprecations_dep0046_util_isbuffer">DEP0046: util.isBuffer()</a></li>
+<li><a href="#deprecations_dep0047_util_isdate">DEP0047: util.isDate()</a></li>
+<li><a href="#deprecations_dep0048_util_iserror">DEP0048: util.isError()</a></li>
+<li><a href="#deprecations_dep0049_util_isfunction">DEP0049: util.isFunction()</a></li>
+<li><a href="#deprecations_dep0050_util_isnull">DEP0050: util.isNull()</a></li>
+<li><a href="#deprecations_dep0051_util_isnullorundefined">DEP0051: util.isNullOrUndefined()</a></li>
+<li><a href="#deprecations_dep0052_util_isnumber">DEP0052: util.isNumber()</a></li>
+<li><a href="#deprecations_dep0053_util_isobject">DEP0053 util.isObject()</a></li>
+<li><a href="#deprecations_dep0054_util_isprimitive">DEP0054: util.isPrimitive()</a></li>
+<li><a href="#deprecations_dep0055_util_isregexp">DEP0055: util.isRegExp()</a></li>
+<li><a href="#deprecations_dep0056_util_isstring">DEP0056: util.isString()</a></li>
+<li><a href="#deprecations_dep0057_util_issymbol">DEP0057: util.isSymbol()</a></li>
+<li><a href="#deprecations_dep0058_util_isundefined">DEP0058: util.isUndefined()</a></li>
+<li><a href="#deprecations_dep0059_util_log">DEP0059: util.log()</a></li>
+<li><a href="#deprecations_dep0060_util_extend">DEP0060: util._extend()</a></li>
+<li><a href="#deprecations_dep0061_fs_syncwritestream">DEP0061: fs.SyncWriteStream</a></li>
+<li><a href="#deprecations_dep0062_node_debug">DEP0062: node --debug</a></li>
+<li><a href="#deprecations_dep0063_serverresponse_prototype_writeheader">DEP0063: ServerResponse.prototype.writeHeader()</a></li>
+<li><a href="#deprecations_dep0064_tls_createsecurepair">DEP0064: tls.createSecurePair()</a></li>
+<li><a href="#deprecations_dep0065_repl_repl_mode_magic_and_node_repl_mode_magic">DEP0065: repl.REPL_MODE_MAGIC and NODE_REPL_MODE=magic</a></li>
+<li><a href="#deprecations_dep0066_outgoingmessage_prototype_headers_outgoingmessage_prototype_headernames">DEP0066: OutgoingMessage.prototype._headers, OutgoingMessage.prototype._headerNames</a></li>
+<li><a href="#deprecations_dep0067_outgoingmessage_prototype_renderheaders">DEP0067: OutgoingMessage.prototype._renderHeaders</a></li>
+<li><a href="#deprecations_dep0068_node_debug">DEP0068: node debug</a></li>
+<li><a href="#deprecations_dep0069_vm_runindebugcontext_string">DEP0069: vm.runInDebugContext(string)</a></li>
+<li><a href="#deprecations_dep0070_async_hooks_currentid">DEP0070: async_hooks.currentId()</a></li>
+<li><a href="#deprecations_dep0071_async_hooks_triggerid">DEP0071: async_hooks.triggerId()</a></li>
+<li><a href="#deprecations_dep0072_async_hooks_asyncresource_triggerid">DEP0072: async_hooks.AsyncResource.triggerId()</a></li>
+<li><a href="#deprecations_dep0073_several_internal_properties_of_net_server">DEP0073: Several internal properties of net.Server</a></li>
+<li><a href="#deprecations_dep0074_replserver_bufferedcommand">DEP0074: REPLServer.bufferedCommand</a></li>
+<li><a href="#deprecations_dep0075_replserver_parsereplkeyword">DEP0075: REPLServer.parseREPLKeyword()</a></li>
+<li><a href="#deprecations_dep0076_tls_parsecertstring">DEP0076: tls.parseCertString()</a></li>
+<li><a href="#deprecations_dep0077_module_debug">DEP0077: Module._debug()</a></li>
+<li><a href="#deprecations_dep0078_replserver_turnoffeditormode">DEP0078: REPLServer.turnOffEditorMode()</a></li>
+<li><a href="#deprecations_dep0079_custom_inspection_function_on_objects_via_inspect">DEP0079: Custom inspection function on Objects via .inspect()</a></li>
+<li><a href="#deprecations_dep0080_path_makelong">DEP0080: path._makeLong()</a></li>
+<li><a href="#deprecations_dep0081_fs_truncate_using_a_file_descriptor">DEP0081: fs.truncate() using a file descriptor</a></li>
+<li><a href="#deprecations_dep0082_replserver_prototype_memory">DEP0082: REPLServer.prototype.memory()</a></li>
+<li><a href="#deprecations_dep0083_disabling_ecdh_by_setting_ecdhcurve_to_false">DEP0083: Disabling ECDH by setting ecdhCurve to false</a></li>
+<li><a href="#deprecations_dep0084_requiring_bundled_internal_dependencies">DEP0084: requiring bundled internal dependencies</a></li>
+<li><a href="#deprecations_dep0085_asynchooks_sensitive_api">DEP0085: AsyncHooks Sensitive API</a></li>
+<li><a href="#deprecations_dep0086_remove_runinasyncidscope">DEP0086: Remove runInAsyncIdScope</a></li>
+<li><a href="#deprecations_dep0089_require_assert">DEP0089: require('assert')</a></li>
+<li><a href="#deprecations_dep0090_invalid_gcm_authentication_tag_lengths">DEP0090: Invalid GCM authentication tag lengths</a></li>
+<li><a href="#deprecations_dep0091_crypto_default_encoding">DEP0091: crypto.DEFAULT_ENCODING</a></li>
+<li><a href="#deprecations_dep0092_top_level_this_bound_to_module_exports">DEP0092: Top-level <code>this</code> bound to <code>module.exports</code></a></li>
+<li><a href="#deprecations_dep0093_crypto_fips_is_deprecated_and_replaced">DEP0093: crypto.fips is deprecated and replaced.</a></li>
+<li><a href="#deprecations_dep0094_using_assert_fail_with_more_than_one_argument">DEP0094: Using <code>assert.fail()</code> with more than one argument.</a></li>
+<li><a href="#deprecations_dep0095_timers_enroll">DEP0095: timers.enroll()</a></li>
+<li><a href="#deprecations_dep0096_timers_unenroll">DEP0096: timers.unenroll()</a></li>
+<li><a href="#deprecations_dep0097_makecallback_with_domain_property">DEP0097: MakeCallback with domain property</a></li>
+<li><a href="#deprecations_dep0098_asynchooks_embedder_asyncresource_emitbefore_and_asyncresource_emitafter_apis">DEP0098: AsyncHooks Embedder AsyncResource.emitBefore and AsyncResource.emitAfter APIs</a></li>
+<li><a href="#deprecations_dep0099_async_context_unaware_node_makecallback_c_apis">DEP0099: async context-unaware node::MakeCallback C++ APIs</a></li>
+<li><a href="#deprecations_dep0100_process_assert">DEP0100: process.assert()</a></li>
+<li><a href="#deprecations_dep0101_with_lttng">DEP0101: --with-lttng</a></li>
+<li><a href="#deprecations_dep0102_using_noassert_in_buffer_read_write_operations">DEP0102: Using <code>noAssert</code> in Buffer#(read|write) operations.</a></li>
+<li><a href="#deprecations_dep0103_process_binding_util_is_typechecks">DEP0103: process.binding('util').is[...] typechecks</a></li>
+<li><a href="#deprecations_dep0104_process_env_string_coercion">DEP0104: process.env string coercion</a></li>
+<li><a href="#deprecations_dep0105_decipher_finaltol">DEP0105: decipher.finaltol</a></li>
+<li><a href="#deprecations_dep0106_crypto_createcipher_and_crypto_createdecipher">DEP0106: crypto.createCipher and crypto.createDecipher</a></li>
+<li><a href="#deprecations_dep0107_tls_convertnpnprotocols">DEP0107: tls.convertNPNProtocols()</a></li>
+<li><a href="#deprecations_dep0108_zlib_bytesread">DEP0108: zlib.bytesRead</a></li>
+<li><a href="#deprecations_dep0109_http_https_and_tls_support_for_invalid_urls">DEP0109: http, https, and tls support for invalid URLs</a></li>
+<li><a href="#deprecations_dep0110_vm_script_cached_data">DEP0110: vm.Script cached data</a></li>
+<li><a href="#deprecations_dep0111_process_binding">DEP0111: process.binding()</a></li>
+<li><a href="#deprecations_dep0112_dgram_private_apis">DEP0112: dgram private APIs</a></li>
+<li><a href="#deprecations_dep0113_cipher_setauthtag_decipher_getauthtag">DEP0113: Cipher.setAuthTag(), Decipher.getAuthTag()</a></li>
+<li><a href="#deprecations_dep0114_crypto_tobuf">DEP0114: crypto._toBuf()</a></li>
+<li><a href="#deprecations_dep0115_crypto_prng_crypto_pseudorandombytes_crypto_rng">DEP0115: crypto.prng(), crypto.pseudoRandomBytes(), crypto.rng()</a></li>
+<li><a href="#deprecations_dep0116_legacy_url_api">DEP0116: Legacy URL API</a></li>
+<li><a href="#deprecations_dep0117_native_crypto_handles">DEP0117: Native crypto handles</a></li>
+<li><a href="#deprecations_dep0118_dns_lookup_support_for_a_falsy_hostname">DEP0118: dns.lookup() support for a falsy hostname</a></li>
+<li><a href="#deprecations_dep0119_process_binding_uv_errname_private_api">DEP0119: process.binding('uv').errname() private API</a></li>
+<li><a href="#deprecations_dep0120_windows_performance_counter_support">DEP0120: Windows Performance Counter Support</a></li>
+<li><a href="#deprecations_dep0121_net_setsimultaneousaccepts">DEP0121: net._setSimultaneousAccepts()</a></li>
+<li><a href="#deprecations_dep0122_tls_server_prototype_setoptions">DEP0122: tls Server.prototype.setOptions()</a></li>
+<li><a href="#deprecations_dep0123_setting_the_tls_servername_to_an_ip_address">DEP0123: setting the TLS ServerName to an IP address</a></li>
+<li><a href="#deprecations_dep0124_using_replserver_rli">DEP0124: using REPLServer.rli</a></li>
+<li><a href="#deprecations_dep0125_require_stream_wrap">DEP0125: require('_stream_wrap')</a></li>
+<li><a href="#deprecations_dep0126_timers_active">DEP0126: timers.active()</a></li>
+<li><a href="#deprecations_dep0127_timers_unrefactive">DEP0127: timers._unrefActive()</a></li>
+<li><a href="#deprecations_dep0128_modules_with_an_invalid_main_entry_and_an_index_js_file">DEP0128: modules with an invalid <code>main</code> entry and an <code>index.js</code> file</a></li>
+<li><a href="#deprecations_dep0129_childprocess_channel">DEP0129: ChildProcess._channel</a></li>
+<li><a href="#deprecations_dep0130_module_createrequirefrompath">DEP0130: Module.createRequireFromPath()</a></li>
+<li><a href="#deprecations_dep0131_legacy_http_parser">DEP0131: Legacy HTTP parser</a></li>
+<li><a href="#deprecations_dep0132_worker_terminate_with_callback">DEP0132: worker.terminate() with callback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+      </div>
+
+      <div id="apicontent">
+        <h1>Deprecated APIs<span><a class="mark" href="#deprecations_deprecated_apis" id="deprecations_deprecated_apis">#</a></span></h1>
+
+
+<p>Node.js may deprecate APIs for any of the following reasons:</p>
+<ul>
+<li>Use of the API is unsafe.</li>
+<li>An improved alternative API is available.</li>
+<li>Breaking changes to the API are expected in a future major release.</li>
+</ul>
+<p>Node.js utilizes three kinds of Deprecations:</p>
+<ul>
+<li>Documentation-only</li>
+<li>Runtime</li>
+<li>End-of-Life</li>
+</ul>
+<p>A Documentation-only deprecation is one that is expressed only within the
+Node.js API docs. These generate no side-effects while running Node.js.
+Some Documentation-only deprecations trigger a runtime warning when launched
+with <a href="https://nodejs.org/api/cli.html#cli_pending_deprecation"><code>--pending-deprecation</code></a> flag (or its alternative,
+<code>NODE_PENDING_DEPRECATION=1</code> environment variable), similarly to Runtime
+deprecations below. Documentation-only deprecations that support that flag
+are explicitly labeled as such in the
+<a href="#deprecations_list_of_deprecated_apis">list of Deprecated APIs</a>.</p>
+<p>A Runtime deprecation will, by default, generate a process warning that will
+be printed to <code>stderr</code> the first time the deprecated API is used. When the
+<a href="https://nodejs.org/api/cli.html#cli_throw_deprecation"><code>--throw-deprecation</code></a> command-line flag is used, a Runtime deprecation will
+cause an error to be thrown.</p>
+<p>An End-of-Life deprecation is used when functionality is or will soon be removed
+from Node.js.</p>
+<h2>Revoking deprecations<span><a class="mark" href="#deprecations_revoking_deprecations" id="deprecations_revoking_deprecations">#</a></span></h2>
+<p>Occasionally, the deprecation of an API may be reversed. In such situations,
+this document will be updated with information relevant to the decision.
+However, the deprecation identifier will not be modified.</p>
+<h2>List of Deprecated APIs<span><a class="mark" href="#deprecations_list_of_deprecated_apis" id="deprecations_list_of_deprecated_apis">#</a></span></h2>
+<p><a id="DEP0001"></a></p>
+<h3>DEP0001: http.OutgoingMessage.prototype.flush<span><a class="mark" href="#deprecations_dep0001_http_outgoingmessage_prototype_flush" id="deprecations_dep0001_http_outgoingmessage_prototype_flush">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v1.6.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The <code>OutgoingMessage.prototype.flush()</code> method is deprecated. Use
+<code>OutgoingMessage.prototype.flushHeaders()</code> instead.</p>
+<p><a id="DEP0002"></a></p>
+<h3>DEP0002: require('_linklist')<span><a class="mark" href="#deprecations_dep0002_require_linklist" id="deprecations_dep0002_require_linklist">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v5.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <code>_linklist</code> module is deprecated. Please use a userland alternative.</p>
+<p><a id="DEP0003"></a></p>
+<h3>DEP0003: _writableState.buffer<span><a class="mark" href="#deprecations_dep0003_writablestate_buffer" id="deprecations_dep0003_writablestate_buffer">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.11.15</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The <code>_writableState.buffer</code> property is deprecated. Use the
+<code>_writableState.getBuffer()</code> method instead.</p>
+<p><a id="DEP0004"></a></p>
+<h3>DEP0004: CryptoStream.prototype.readyState<span><a class="mark" href="#deprecations_dep0004_cryptostream_prototype_readystate" id="deprecations_dep0004_cryptostream_prototype_readystate">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>0.4.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <code>CryptoStream.prototype.readyState</code> property was removed.</p>
+<p><a id="DEP0005"></a></p>
+<h3>DEP0005: Buffer() constructor<span><a class="mark" href="#deprecations_dep0005_buffer_constructor" id="deprecations_dep0005_buffer_constructor">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v6.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime (supports <a href="https://nodejs.org/api/cli.html#cli_pending_deprecation"><code>--pending-deprecation</code></a>)</p>
+<p>The <code>Buffer()</code> function and <code>new Buffer()</code> constructor are deprecated due to
+API usability issues that can lead to accidental security issues.</p>
+<p>As an alternative, use one of the following methods of constructing <code>Buffer</code>
+objects:</p>
+<ul>
+<li><a href="https://nodejs.org/api/buffer.html#buffer_class_method_buffer_alloc_size_fill_encoding"><code>Buffer.alloc(size[, fill[, encoding]])</code></a> - Create a <code>Buffer</code> with
+<em>initialized</em> memory.</li>
+<li><a href="https://nodejs.org/api/buffer.html#buffer_class_method_buffer_allocunsafe_size"><code>Buffer.allocUnsafe(size)</code></a> - Create a <code>Buffer</code> with
+<em>uninitialized</em> memory.</li>
+<li><a href="https://nodejs.org/api/buffer.html#buffer_class_method_buffer_allocunsafeslow_size"><code>Buffer.allocUnsafeSlow(size)</code></a> - Create a <code>Buffer</code> with <em>uninitialized</em>
+memory.</li>
+<li><a href="https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_array"><code>Buffer.from(array)</code></a> - Create a <code>Buffer</code> with a copy of <code>array</code></li>
+<li><a href="https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_arraybuffer_byteoffset_length"><code>Buffer.from(arrayBuffer[, byteOffset[, length]])</code></a> -
+Create a <code>Buffer</code> that wraps the given <code>arrayBuffer</code>.</li>
+<li><a href="https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_buffer"><code>Buffer.from(buffer)</code></a> - Create a <code>Buffer</code> that copies <code>buffer</code>.</li>
+<li><a href="https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding"><code>Buffer.from(string[, encoding])</code></a> - Create a <code>Buffer</code>
+that copies <code>string</code>.</li>
+</ul>
+<p>As of v10.0.0, a deprecation warning is printed at runtime when
+<code>--pending-deprecation</code> is used or when the calling code is
+outside <code>node_modules</code> in order to better target developers, rather than users.</p>
+<p><a id="DEP0006"></a></p>
+<h3>DEP0006: child_process options.customFds<span><a class="mark" href="#deprecations_dep0006_child_process_options_customfds" id="deprecations_dep0006_child_process_options_customfds">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.11.14</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v0.5.11</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>Within the <a href="https://nodejs.org/api/child_process.html"><code>child_process</code></a> module's <code>spawn()</code>, <code>fork()</code>, and <code>exec()</code>
+methods, the <code>options.customFds</code> option is deprecated. The <code>options.stdio</code>
+option should be used instead.</p>
+<p><a id="DEP0007"></a></p>
+<h3>DEP0007: Replace cluster worker.suicide with worker.exitedAfterDisconnect<span><a class="mark" href="#deprecations_dep0007_replace_cluster_worker_suicide_with_worker_exitedafterdisconnect" id="deprecations_dep0007_replace_cluster_worker_suicide_with_worker_exitedafterdisconnect">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v7.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v6.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>In an earlier version of the Node.js <code>cluster</code>, a boolean property with the name
+<code>suicide</code> was added to the <code>Worker</code> object. The intent of this property was to
+provide an indication of how and why the <code>Worker</code> instance exited. In Node.js
+6.0.0, the old property was deprecated and replaced with a new
+<a href="https://nodejs.org/api/cluster.html#cluster_worker_exitedafterdisconnect"><code>worker.exitedAfterDisconnect</code></a> property. The old property name did not
+precisely describe the actual semantics and was unnecessarily emotion-laden.</p>
+<p><a id="DEP0008"></a></p>
+<h3>DEP0008: require('constants')<span><a class="mark" href="#deprecations_dep0008_require_constants" id="deprecations_dep0008_require_constants">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v6.3.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <code>constants</code> module is deprecated. When requiring access to constants
+relevant to specific Node.js builtin modules, developers should instead refer
+to the <code>constants</code> property exposed by the relevant module. For instance,
+<code>require('fs').constants</code> and <code>require('os').constants</code>.</p>
+<p><a id="DEP0009"></a></p>
+<h3>DEP0009: crypto.pbkdf2 without digest<span><a class="mark" href="#deprecations_dep0009_crypto_pbkdf2_without_digest" id="deprecations_dep0009_crypto_pbkdf2_without_digest">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>Runtime deprecation (for <code>digest === null</code>).</p></td></tr>
+<tr><td>v8.0.0</td>
+<td><p>End-of-Life (for <code>digest === undefined</code>).</p></td></tr>
+<tr><td>v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v6.0.0</td>
+<td><p>Runtime deprecation (for <code>digest === undefined</code>).</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>Use of the <a href="https://nodejs.org/api/crypto.html#crypto_crypto_pbkdf2_password_salt_iterations_keylen_digest_callback"><code>crypto.pbkdf2()</code></a> API without specifying a digest was deprecated
+in Node.js 6.0 because the method defaulted to using the non-recommended
+<code>'SHA1'</code> digest. Previously, a deprecation warning was printed. Starting in
+Node.js 8.0.0, calling <code>crypto.pbkdf2()</code> or <code>crypto.pbkdf2Sync()</code> with
+<code>digest</code> set to <code>undefined</code> will throw a <code>TypeError</code>.</p>
+<p>Beginning in Node.js v11.0.0, calling these functions with <code>digest</code> set to
+<code>null</code> will print a deprecation warning to align with the behavior when <code>digest</code>
+is <code>undefined</code>.</p>
+<p><a id="DEP0010"></a></p>
+<h3>DEP0010: crypto.createCredentials<span><a class="mark" href="#deprecations_dep0010_crypto_createcredentials" id="deprecations_dep0010_crypto_createcredentials">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.11.13</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <code>crypto.createCredentials()</code> API was removed. Please use
+<a href="https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options"><code>tls.createSecureContext()</code></a> instead.</p>
+<p><a id="DEP0011"></a></p>
+<h3>DEP0011: crypto.Credentials<span><a class="mark" href="#deprecations_dep0011_crypto_credentials" id="deprecations_dep0011_crypto_credentials">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.11.13</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <code>crypto.Credentials</code> class was removed. Please use <a href="https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options"><code>tls.SecureContext</code></a>
+instead.</p>
+<p><a id="DEP0012"></a></p>
+<h3>DEP0012: Domain.dispose<span><a class="mark" href="#deprecations_dep0012_domain_dispose" id="deprecations_dep0012_domain_dispose">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.11.7</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>Domain.dispose()</code> has been removed. Recover from failed I/O actions
+explicitly via error event handlers set on the domain instead.</p>
+<p><a id="DEP0013"></a></p>
+<h3>DEP0013: fs asynchronous function without callback<span><a class="mark" href="#deprecations_dep0013_fs_asynchronous_function_without_callback" id="deprecations_dep0013_fs_asynchronous_function_without_callback">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v7.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>Calling an asynchronous function without a callback throws a <code>TypeError</code>
+in Node.js 10.0.0 onwards. See <a href="https://github.com/nodejs/node/pull/12562">https://github.com/nodejs/node/pull/12562</a>.</p>
+<p><a id="DEP0014"></a></p>
+<h3>DEP0014: fs.read legacy String interface<span><a class="mark" href="#deprecations_dep0014_fs_read_legacy_string_interface" id="deprecations_dep0014_fs_read_legacy_string_interface">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v6.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.1.96</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <a href="https://nodejs.org/api/fs.html#fs_fs_read_fd_buffer_offset_length_position_callback"><code>fs.read()</code></a> legacy <code>String</code> interface is deprecated. Use the <code>Buffer</code>
+API as mentioned in the documentation instead.</p>
+<p><a id="DEP0015"></a></p>
+<h3>DEP0015: fs.readSync legacy String interface<span><a class="mark" href="#deprecations_dep0015_fs_readsync_legacy_string_interface" id="deprecations_dep0015_fs_readsync_legacy_string_interface">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v6.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.1.96</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <a href="https://nodejs.org/api/fs.html#fs_fs_readsync_fd_buffer_offset_length_position"><code>fs.readSync()</code></a> legacy <code>String</code> interface is deprecated. Use the
+<code>Buffer</code> API as mentioned in the documentation instead.</p>
+<p><a id="DEP0016"></a></p>
+<h3>DEP0016: GLOBAL/root<span><a class="mark" href="#deprecations_dep0016_global_root" id="deprecations_dep0016_global_root">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v6.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The <code>GLOBAL</code> and <code>root</code> aliases for the <code>global</code> property are deprecated
+and should no longer be used.</p>
+<p><a id="DEP0017"></a></p>
+<h3>DEP0017: Intl.v8BreakIterator<span><a class="mark" href="#deprecations_dep0017_intl_v8breakiterator" id="deprecations_dep0017_intl_v8breakiterator">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v7.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>Intl.v8BreakIterator</code> was a non-standard extension and has been removed.
+See <a href="https://github.com/tc39/proposal-intl-segmenter"><code>Intl.Segmenter</code></a>.</p>
+<p><a id="DEP0018"></a></p>
+<h3>DEP0018: Unhandled promise rejections<span><a class="mark" href="#deprecations_dep0018_unhandled_promise_rejections" id="deprecations_dep0018_unhandled_promise_rejections">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v7.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>Unhandled promise rejections are deprecated. In the future, promise rejections
+that are not handled will terminate the Node.js process with a non-zero exit
+code.</p>
+<p><a id="DEP0019"></a></p>
+<h3>DEP0019: require('.') resolved outside directory<span><a class="mark" href="#deprecations_dep0019_require_resolved_outside_directory" id="deprecations_dep0019_require_resolved_outside_directory">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>Removed functionality.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v1.8.1</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>In certain cases, <code>require('.')</code> could resolve outside the package directory.
+This behavior has been removed.</p>
+<p><a id="DEP0020"></a></p>
+<h3>DEP0020: Server.connections<span><a class="mark" href="#deprecations_dep0020_server_connections" id="deprecations_dep0020_server_connections">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.9.7</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The <a href="https://nodejs.org/api/net.html#net_server_connections"><code>Server.connections</code></a> property is deprecated. Please use the
+<a href="https://nodejs.org/api/net.html#net_server_getconnections_callback"><code>Server.getConnections()</code></a> method instead.</p>
+<p><a id="DEP0021"></a></p>
+<h3>DEP0021: Server.listenFD<span><a class="mark" href="#deprecations_dep0021_server_listenfd" id="deprecations_dep0021_server_listenfd">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.7.12</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <code>Server.listenFD()</code> method was deprecated and removed. Please use
+<a href="https://nodejs.org/api/net.html#net_server_listen_handle_backlog_callback"><code>Server.listen({fd: &lt;number&gt;})</code></a> instead.</p>
+<p><a id="DEP0022"></a></p>
+<h3>DEP0022: os.tmpDir()<span><a class="mark" href="#deprecations_dep0022_os_tmpdir" id="deprecations_dep0022_os_tmpdir">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v7.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The <code>os.tmpDir()</code> API is deprecated. Please use <a href="https://nodejs.org/api/os.html#os_os_tmpdir"><code>os.tmpdir()</code></a> instead.</p>
+<p><a id="DEP0023"></a></p>
+<h3>DEP0023: os.getNetworkInterfaces()<span><a class="mark" href="#deprecations_dep0023_os_getnetworkinterfaces" id="deprecations_dep0023_os_getnetworkinterfaces">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.6.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <code>os.getNetworkInterfaces()</code> method is deprecated. Please use the
+<a href="https://nodejs.org/api/os.html#os_os_networkinterfaces"><code>os.networkInterfaces()</code></a> method instead.</p>
+<p><a id="DEP0024"></a></p>
+<h3>DEP0024: REPLServer.prototype.convertToContext()<span><a class="mark" href="#deprecations_dep0024_replserver_prototype_converttocontext" id="deprecations_dep0024_replserver_prototype_converttocontext">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v7.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <code>REPLServer.prototype.convertToContext()</code> API has been removed.</p>
+<p><a id="DEP0025"></a></p>
+<h3>DEP0025: require('sys')<span><a class="mark" href="#deprecations_dep0025_require_sys" id="deprecations_dep0025_require_sys">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v1.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The <code>sys</code> module is deprecated. Please use the <a href="https://nodejs.org/api/util.html"><code>util</code></a> module instead.</p>
+<p><a id="DEP0026"></a></p>
+<h3>DEP0026: util.print()<span><a class="mark" href="#deprecations_dep0026_util_print" id="deprecations_dep0026_util_print">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.11.3</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>util.print()</code> has been removed. Please use <a href="https://nodejs.org/api/console.html#console_console_log_data_args"><code>console.log()</code></a> instead.</p>
+<p><a id="DEP0027"></a></p>
+<h3>DEP0027: util.puts()<span><a class="mark" href="#deprecations_dep0027_util_puts" id="deprecations_dep0027_util_puts">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.11.3</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>util.puts()</code> has been removed. Please use <a href="https://nodejs.org/api/console.html#console_console_log_data_args"><code>console.log()</code></a> instead.</p>
+<p><a id="DEP0028"></a></p>
+<h3>DEP0028: util.debug()<span><a class="mark" href="#deprecations_dep0028_util_debug" id="deprecations_dep0028_util_debug">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.11.3</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>util.debug()</code> has been removed. Please use <a href="https://nodejs.org/api/console.html#console_console_error_data_args"><code>console.error()</code></a> instead.</p>
+<p><a id="DEP0029"></a></p>
+<h3>DEP0029: util.error()<span><a class="mark" href="#deprecations_dep0029_util_error" id="deprecations_dep0029_util_error">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.11.3</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>util.error()</code> has been removed. Please use <a href="https://nodejs.org/api/console.html#console_console_error_data_args"><code>console.error()</code></a> instead.</p>
+<p><a id="DEP0030"></a></p>
+<h3>DEP0030: SlowBuffer<span><a class="mark" href="#deprecations_dep0030_slowbuffer" id="deprecations_dep0030_slowbuffer">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v6.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/buffer.html#buffer_class_slowbuffer"><code>SlowBuffer</code></a> class is deprecated. Please use
+<a href="https://nodejs.org/api/buffer.html#buffer_class_method_buffer_allocunsafeslow_size"><code>Buffer.allocUnsafeSlow(size)</code></a> instead.</p>
+<p><a id="DEP0031"></a></p>
+<h3>DEP0031: ecdh.setPublicKey()<span><a class="mark" href="#deprecations_dep0031_ecdh_setpublickey" id="deprecations_dep0031_ecdh_setpublickey">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v5.2.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/crypto.html#crypto_ecdh_setpublickey_publickey_encoding"><code>ecdh.setPublicKey()</code></a> method is now deprecated as its inclusion in the
+API is not useful.</p>
+<p><a id="DEP0032"></a></p>
+<h3>DEP0032: domain module<span><a class="mark" href="#deprecations_dep0032_domain_module" id="deprecations_dep0032_domain_module">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v1.4.2</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/domain.html"><code>domain</code></a> module is deprecated and should not be used.</p>
+<p><a id="DEP0033"></a></p>
+<h3>DEP0033: EventEmitter.listenerCount()<span><a class="mark" href="#deprecations_dep0033_eventemitter_listenercount" id="deprecations_dep0033_eventemitter_listenercount">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.2.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/events.html#events_eventemitter_listenercount_emitter_eventname"><code>EventEmitter.listenerCount(emitter, eventName)</code></a> API is
+deprecated. Please use <a href="https://nodejs.org/api/events.html#events_emitter_listenercount_eventname"><code>emitter.listenerCount(eventName)</code></a> instead.</p>
+<p><a id="DEP0034"></a></p>
+<h3>DEP0034: fs.exists(path, callback)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/fs.js#L209">[src]</a><span><a class="mark" href="#deprecations_dep0034_fs_exists_path_callback" id="deprecations_dep0034_fs_exists_path_callback">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v1.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/fs.html#fs_fs_exists_path_callback"><code>fs.exists(path, callback)</code></a> API is deprecated. Please use
+<a href="https://nodejs.org/api/fs.html#fs_fs_stat_path_options_callback"><code>fs.stat()</code></a> or <a href="https://nodejs.org/api/fs.html#fs_fs_access_path_mode_callback"><code>fs.access()</code></a> instead.</p>
+<p><a id="DEP0035"></a></p>
+<h3>DEP0035: fs.lchmod(path, mode, callback)<span><a class="mark" href="#deprecations_dep0035_fs_lchmod_path_mode_callback" id="deprecations_dep0035_fs_lchmod_path_mode_callback">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.4.7</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/fs.html#fs_fs_lchmod_path_mode_callback"><code>fs.lchmod(path, mode, callback)</code></a> API is deprecated.</p>
+<p><a id="DEP0036"></a></p>
+<h3>DEP0036: fs.lchmodSync(path, mode)<span><a class="mark" href="#deprecations_dep0036_fs_lchmodsync_path_mode" id="deprecations_dep0036_fs_lchmodsync_path_mode">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.4.7</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/fs.html#fs_fs_lchmodsync_path_mode"><code>fs.lchmodSync(path, mode)</code></a> API is deprecated.</p>
+<p><a id="DEP0037"></a></p>
+<h3>DEP0037: fs.lchown(path, uid, gid, callback)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/fs.js#L1118">[src]</a><span><a class="mark" href="#deprecations_dep0037_fs_lchown_path_uid_gid_callback" id="deprecations_dep0037_fs_lchown_path_uid_gid_callback">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.6.0</td>
+<td><p>Deprecation revoked.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.4.7</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Deprecation revoked</p>
+<p>The <a href="https://nodejs.org/api/fs.html#fs_fs_lchown_path_uid_gid_callback"><code>fs.lchown(path, uid, gid, callback)</code></a> API was deprecated. The
+deprecation was revoked because the requisite supporting APIs were added in
+libuv.</p>
+<p><a id="DEP0038"></a></p>
+<h3>DEP0038: fs.lchownSync(path, uid, gid)<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/fs.js#L1128">[src]</a><span><a class="mark" href="#deprecations_dep0038_fs_lchownsync_path_uid_gid" id="deprecations_dep0038_fs_lchownsync_path_uid_gid">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.6.0</td>
+<td><p>Deprecation revoked.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.4.7</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Deprecation revoked</p>
+<p>The <a href="https://nodejs.org/api/fs.html#fs_fs_lchownsync_path_uid_gid"><code>fs.lchownSync(path, uid, gid)</code></a> API was deprecated. The deprecation was
+revoked because the requisite supporting APIs were added in libuv.</p>
+<p><a id="DEP0039"></a></p>
+<h3>DEP0039: require.extensions<span><a class="mark" href="#deprecations_dep0039_require_extensions" id="deprecations_dep0039_require_extensions">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.10.6</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/modules.html#modules_require_extensions"><code>require.extensions</code></a> property is deprecated.</p>
+<p><a id="DEP0040"></a></p>
+<h3>DEP0040: punycode module<span><a class="mark" href="#deprecations_dep0040_punycode_module" id="deprecations_dep0040_punycode_module">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v7.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/punycode.html"><code>punycode</code></a> module is deprecated. Please use a userland alternative
+instead.</p>
+<p><a id="DEP0041"></a></p>
+<h3>DEP0041: NODE_REPL_HISTORY_FILE environment variable<span><a class="mark" href="#deprecations_dep0041_node_repl_history_file_environment_variable" id="deprecations_dep0041_node_repl_history_file_environment_variable">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <code>NODE_REPL_HISTORY_FILE</code> environment variable was removed. Please use
+<code>NODE_REPL_HISTORY</code> instead.</p>
+<p><a id="DEP0042"></a></p>
+<h3>DEP0042: tls.CryptoStream<span><a class="mark" href="#deprecations_dep0042_tls_cryptostream" id="deprecations_dep0042_tls_cryptostream">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v0.11.3</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <a href="https://nodejs.org/api/tls.html#tls_class_cryptostream"><code>tls.CryptoStream</code></a> class was removed. Please use
+<a href="https://nodejs.org/api/tls.html#tls_class_tls_tlssocket"><code>tls.TLSSocket</code></a> instead.</p>
+<p><a id="DEP0043"></a></p>
+<h3>DEP0043: tls.SecurePair<span><a class="mark" href="#deprecations_dep0043_tls_securepair" id="deprecations_dep0043_tls_securepair">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v6.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+<tr><td>v0.11.15</td>
+<td><p>Deprecation revoked.</p></td></tr>
+<tr><td>v0.11.3</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/tls.html#tls_class_securepair"><code>tls.SecurePair</code></a> class is deprecated. Please use
+<a href="https://nodejs.org/api/tls.html#tls_class_tls_tlssocket"><code>tls.TLSSocket</code></a> instead.</p>
+<p><a id="DEP0044"></a></p>
+<h3>DEP0044: util.isArray()<span><a class="mark" href="#deprecations_dep0044_util_isarray" id="deprecations_dep0044_util_isarray">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isarray_object"><code>util.isArray()</code></a> API is deprecated. Please use <code>Array.isArray()</code>
+instead.</p>
+<p><a id="DEP0045"></a></p>
+<h3>DEP0045: util.isBoolean()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L55">[src]</a><span><a class="mark" href="#deprecations_dep0045_util_isboolean" id="deprecations_dep0045_util_isboolean">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isboolean_object"><code>util.isBoolean()</code></a> API is deprecated.</p>
+<p><a id="DEP0046"></a></p>
+<h3>DEP0046: util.isBuffer()<span><a class="mark" href="#deprecations_dep0046_util_isbuffer" id="deprecations_dep0046_util_isbuffer">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isbuffer_object"><code>util.isBuffer()</code></a> API is deprecated. Please use
+<a href="https://nodejs.org/api/buffer.html#buffer_class_method_buffer_isbuffer_obj"><code>Buffer.isBuffer()</code></a> instead.</p>
+<p><a id="DEP0047"></a></p>
+<h3>DEP0047: util.isDate()<span><a class="mark" href="#deprecations_dep0047_util_isdate" id="deprecations_dep0047_util_isdate">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isdate_object"><code>util.isDate()</code></a> API is deprecated.</p>
+<p><a id="DEP0048"></a></p>
+<h3>DEP0048: util.isError()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L87">[src]</a><span><a class="mark" href="#deprecations_dep0048_util_iserror" id="deprecations_dep0048_util_iserror">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_iserror_object"><code>util.isError()</code></a> API is deprecated.</p>
+<p><a id="DEP0049"></a></p>
+<h3>DEP0049: util.isFunction()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L91">[src]</a><span><a class="mark" href="#deprecations_dep0049_util_isfunction" id="deprecations_dep0049_util_isfunction">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isfunction_object"><code>util.isFunction()</code></a> API is deprecated.</p>
+<p><a id="DEP0050"></a></p>
+<h3>DEP0050: util.isNull()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L59">[src]</a><span><a class="mark" href="#deprecations_dep0050_util_isnull" id="deprecations_dep0050_util_isnull">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isnull_object"><code>util.isNull()</code></a> API is deprecated.</p>
+<p><a id="DEP0051"></a></p>
+<h3>DEP0051: util.isNullOrUndefined()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L63">[src]</a><span><a class="mark" href="#deprecations_dep0051_util_isnullorundefined" id="deprecations_dep0051_util_isnullorundefined">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isnullorundefined_object"><code>util.isNullOrUndefined()</code></a> API is deprecated.</p>
+<p><a id="DEP0052"></a></p>
+<h3>DEP0052: util.isNumber()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L67">[src]</a><span><a class="mark" href="#deprecations_dep0052_util_isnumber" id="deprecations_dep0052_util_isnumber">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isnumber_object"><code>util.isNumber()</code></a> API is deprecated.</p>
+<p><a id="DEP0053"></a></p>
+<h3>DEP0053 util.isObject()<span><a class="mark" href="#deprecations_dep0053_util_isobject" id="deprecations_dep0053_util_isobject">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isobject_object"><code>util.isObject()</code></a> API is deprecated.</p>
+<p><a id="DEP0054"></a></p>
+<h3>DEP0054: util.isPrimitive()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L95">[src]</a><span><a class="mark" href="#deprecations_dep0054_util_isprimitive" id="deprecations_dep0054_util_isprimitive">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isprimitive_object"><code>util.isPrimitive()</code></a> API is deprecated.</p>
+<p><a id="DEP0055"></a></p>
+<h3>DEP0055: util.isRegExp()<span><a class="mark" href="#deprecations_dep0055_util_isregexp" id="deprecations_dep0055_util_isregexp">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isregexp_object"><code>util.isRegExp()</code></a> API is deprecated.</p>
+<p><a id="DEP0056"></a></p>
+<h3>DEP0056: util.isString()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L71">[src]</a><span><a class="mark" href="#deprecations_dep0056_util_isstring" id="deprecations_dep0056_util_isstring">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isstring_object"><code>util.isString()</code></a> API is deprecated.</p>
+<p><a id="DEP0057"></a></p>
+<h3>DEP0057: util.isSymbol()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L75">[src]</a><span><a class="mark" href="#deprecations_dep0057_util_issymbol" id="deprecations_dep0057_util_issymbol">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_issymbol_object"><code>util.isSymbol()</code></a> API is deprecated.</p>
+<p><a id="DEP0058"></a></p>
+<h3>DEP0058: util.isUndefined()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L79">[src]</a><span><a class="mark" href="#deprecations_dep0058_util_isundefined" id="deprecations_dep0058_util_isundefined">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v4.8.6, v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v3.3.1, v4.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_isundefined_object"><code>util.isUndefined()</code></a> API is deprecated.</p>
+<p><a id="DEP0059"></a></p>
+<h3>DEP0059: util.log()<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/util.js#L118">[src]</a><span><a class="mark" href="#deprecations_dep0059_util_log" id="deprecations_dep0059_util_log">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v6.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_log_string"><code>util.log()</code></a> API is deprecated.</p>
+<p><a id="DEP0060"></a></p>
+<h3>DEP0060: util._extend()<span><a class="mark" href="#deprecations_dep0060_util_extend" id="deprecations_dep0060_util_extend">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v6.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/util.html#util_util_extend_target_source"><code>util._extend()</code></a> API is deprecated.</p>
+<p><a id="DEP0061"></a></p>
+<h3>DEP0061: fs.SyncWriteStream<span><a class="mark" href="#deprecations_dep0061_fs_syncwritestream" id="deprecations_dep0061_fs_syncwritestream">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v8.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v7.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <code>fs.SyncWriteStream</code> class was never intended to be a publicly accessible
+API and has been removed. No alternative API is available. Please use a userland
+alternative.</p>
+<p><a id="DEP0062"></a></p>
+<h3>DEP0062: node --debug<span><a class="mark" href="#deprecations_dep0062_node_debug" id="deprecations_dep0062_node_debug">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v8.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>--debug</code> activates the legacy V8 debugger interface, which was removed as
+of V8 5.8. It is replaced by Inspector which is activated with <code>--inspect</code>
+instead.</p>
+<p><a id="DEP0063"></a></p>
+<h3>DEP0063: ServerResponse.prototype.writeHeader()<span><a class="mark" href="#deprecations_dep0063_serverresponse_prototype_writeheader" id="deprecations_dep0063_serverresponse_prototype_writeheader">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <code>http</code> module <code>ServerResponse.prototype.writeHeader()</code> API is
+deprecated. Please use <code>ServerResponse.prototype.writeHead()</code> instead.</p>
+<p>The <code>ServerResponse.prototype.writeHeader()</code> method was never documented as an
+officially supported API.</p>
+<p><a id="DEP0064"></a></p>
+<h3>DEP0064: tls.createSecurePair()<span><a class="mark" href="#deprecations_dep0064_tls_createsecurepair" id="deprecations_dep0064_tls_createsecurepair">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v6.12.0</td>
+<td><p>A deprecation code has been assigned.</p></td></tr>
+<tr><td>v6.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+<tr><td>v0.11.15</td>
+<td><p>Deprecation revoked.</p></td></tr>
+<tr><td>v0.11.3</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The <code>tls.createSecurePair()</code> API was deprecated in documentation in Node.js
+0.11.3. Users should use <code>tls.Socket</code> instead.</p>
+<p><a id="DEP0065"></a></p>
+<h3>DEP0065: repl.REPL_MODE_MAGIC and NODE_REPL_MODE=magic<span><a class="mark" href="#deprecations_dep0065_repl_repl_mode_magic_and_node_repl_mode_magic" id="deprecations_dep0065_repl_repl_mode_magic_and_node_repl_mode_magic">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v8.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <code>repl</code> module's <code>REPL_MODE_MAGIC</code> constant, used for <code>replMode</code> option, has
+been removed. Its behavior has been functionally identical to that of
+<code>REPL_MODE_SLOPPY</code> since Node.js 6.0.0, when V8 5.0 was imported. Please use
+<code>REPL_MODE_SLOPPY</code> instead.</p>
+<p>The <code>NODE_REPL_MODE</code> environment variable is used to set the underlying
+<code>replMode</code> of an interactive <code>node</code> session. Its value, <code>magic</code>, is also
+removed. Please use <code>sloppy</code> instead.</p>
+<p><a id="DEP0066"></a></p>
+<h3>DEP0066: OutgoingMessage.prototype._headers, OutgoingMessage.prototype._headerNames<span><a class="mark" href="#deprecations_dep0066_outgoingmessage_prototype_headers_outgoingmessage_prototype_headernames" id="deprecations_dep0066_outgoingmessage_prototype_headers_outgoingmessage_prototype_headernames">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v8.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The <code>http</code> module <code>OutgoingMessage.prototype._headers</code> and
+<code>OutgoingMessage.prototype._headerNames</code> properties are deprecated. Use one of
+the public methods (e.g. <code>OutgoingMessage.prototype.getHeader()</code>,
+<code>OutgoingMessage.prototype.getHeaders()</code>,
+<code>OutgoingMessage.prototype.getHeaderNames()</code>,
+<code>OutgoingMessage.prototype.hasHeader()</code>,
+<code>OutgoingMessage.prototype.removeHeader()</code>,
+<code>OutgoingMessage.prototype.setHeader()</code>) for working with outgoing headers.</p>
+<p>The <code>OutgoingMessage.prototype._headers</code> and
+<code>OutgoingMessage.prototype._headerNames</code> properties were never documented as
+officially supported properties.</p>
+<p><a id="DEP0067"></a></p>
+<h3>DEP0067: OutgoingMessage.prototype._renderHeaders<span><a class="mark" href="#deprecations_dep0067_outgoingmessage_prototype_renderheaders" id="deprecations_dep0067_outgoingmessage_prototype_renderheaders">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <code>http</code> module <code>OutgoingMessage.prototype._renderHeaders()</code> API is
+deprecated.</p>
+<p>The <code>OutgoingMessage.prototype._renderHeaders</code> property was never documented as
+an officially supported API.</p>
+<p><a id="DEP0068"></a></p>
+<h3>DEP0068: node debug<span><a class="mark" href="#deprecations_dep0068_node_debug" id="deprecations_dep0068_node_debug">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v8.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p><code>node debug</code> corresponds to the legacy CLI debugger which has been replaced with
+a V8-inspector based CLI debugger available through <code>node inspect</code>.</p>
+<p><a id="DEP0069"></a></p>
+<h3>DEP0069: vm.runInDebugContext(string)<span><a class="mark" href="#deprecations_dep0069_vm_runindebugcontext_string" id="deprecations_dep0069_vm_runindebugcontext_string">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v9.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v8.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>DebugContext has been removed in V8 and is not available in Node.js 10+.</p>
+<p>DebugContext was an experimental API.</p>
+<p><a id="DEP0070"></a></p>
+<h3>DEP0070: async_hooks.currentId()<span><a class="mark" href="#deprecations_dep0070_async_hooks_currentid" id="deprecations_dep0070_async_hooks_currentid">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v8.2.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>async_hooks.currentId()</code> was renamed to <code>async_hooks.executionAsyncId()</code> for
+clarity.</p>
+<p>This change was made while <code>async_hooks</code> was an experimental API.</p>
+<p><a id="DEP0071"></a></p>
+<h3>DEP0071: async_hooks.triggerId()<span><a class="mark" href="#deprecations_dep0071_async_hooks_triggerid" id="deprecations_dep0071_async_hooks_triggerid">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v8.2.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>async_hooks.triggerId()</code> was renamed to <code>async_hooks.triggerAsyncId()</code> for
+clarity.</p>
+<p>This change was made while <code>async_hooks</code> was an experimental API.</p>
+<p><a id="DEP0072"></a></p>
+<h3>DEP0072: async_hooks.AsyncResource.triggerId()<span><a class="mark" href="#deprecations_dep0072_async_hooks_asyncresource_triggerid" id="deprecations_dep0072_async_hooks_asyncresource_triggerid">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v8.2.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>async_hooks.AsyncResource.triggerId()</code> was renamed to
+<code>async_hooks.AsyncResource.triggerAsyncId()</code> for clarity.</p>
+<p>This change was made while <code>async_hooks</code> was an experimental API.</p>
+<p><a id="DEP0073"></a></p>
+<h3>DEP0073: Several internal properties of net.Server<span><a class="mark" href="#deprecations_dep0073_several_internal_properties_of_net_server" id="deprecations_dep0073_several_internal_properties_of_net_server">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v9.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>Accessing several internal, undocumented properties of <code>net.Server</code> instances
+with inappropriate names is deprecated.</p>
+<p>As the original API was undocumented and not generally useful for non-internal
+code, no replacement API is provided.</p>
+<p><a id="DEP0074"></a></p>
+<h3>DEP0074: REPLServer.bufferedCommand<span><a class="mark" href="#deprecations_dep0074_replserver_bufferedcommand" id="deprecations_dep0074_replserver_bufferedcommand">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The <code>REPLServer.bufferedCommand</code> property was deprecated in favor of
+<a href="https://nodejs.org/api/repl.html#repl_replserver_clearbufferedcommand"><code>REPLServer.clearBufferedCommand()</code></a>.</p>
+<p><a id="DEP0075"></a></p>
+<h3>DEP0075: REPLServer.parseREPLKeyword()<span><a class="mark" href="#deprecations_dep0075_replserver_parsereplkeyword" id="deprecations_dep0075_replserver_parsereplkeyword">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p><code>REPLServer.parseREPLKeyword()</code> was removed from userland visibility.</p>
+<p><a id="DEP0076"></a></p>
+<h3>DEP0076: tls.parseCertString()<span><a class="mark" href="#deprecations_dep0076_tls_parsecertstring" id="deprecations_dep0076_tls_parsecertstring">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v8.6.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p><code>tls.parseCertString()</code> is a trivial parsing helper that was made public by
+mistake. This function can usually be replaced with:</p>
+<pre><code class="language-js">const querystring = require('querystring');
+querystring.parse(str, '\n', '=');
+</code></pre>
+<p>This function is not completely equivalent to <code>querystring.parse()</code>. One
+difference is that <code>querystring.parse()</code> does url decoding:</p>
+<pre><code class="language-sh">&gt; querystring.parse('%E5%A5%BD=1', '\n', '=');
+{ '好': '1' }
+&gt; tls.parseCertString('%E5%A5%BD=1');
+{ '%E5%A5%BD': '1' }
+</code></pre>
+<p><a id="DEP0077"></a></p>
+<h3>DEP0077: Module._debug()<span><a class="mark" href="#deprecations_dep0077_module_debug" id="deprecations_dep0077_module_debug">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p><code>Module._debug()</code> is deprecated.</p>
+<p>The <code>Module._debug()</code> function was never documented as an officially
+supported API.</p>
+<p><a id="DEP0078"></a></p>
+<h3>DEP0078: REPLServer.turnOffEditorMode()<span><a class="mark" href="#deprecations_dep0078_replserver_turnoffeditormode" id="deprecations_dep0078_replserver_turnoffeditormode">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p><code>REPLServer.turnOffEditorMode()</code> was removed from userland visibility.</p>
+<p><a id="DEP0079"></a></p>
+<h3>DEP0079: Custom inspection function on Objects via .inspect()<span><a class="mark" href="#deprecations_dep0079_custom_inspection_function_on_objects_via_inspect" id="deprecations_dep0079_custom_inspection_function_on_objects_via_inspect">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v8.7.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>Using a property named <code>inspect</code> on an object to specify a custom inspection
+function for <a href="https://nodejs.org/api/util.html#util_util_inspect_object_options"><code>util.inspect()</code></a> is deprecated. Use <a href="https://nodejs.org/api/util.html#util_util_inspect_custom"><code>util.inspect.custom</code></a>
+instead. For backward compatibility with Node.js prior to version 6.4.0, both
+may be specified.</p>
+<p><a id="DEP0080"></a></p>
+<h3>DEP0080: path._makeLong()<span><a class="mark" href="#deprecations_dep0080_path_makelong" id="deprecations_dep0080_path_makelong">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The internal <code>path._makeLong()</code> was not intended for public use. However,
+userland modules have found it useful. The internal API is deprecated
+and replaced with an identical, public <code>path.toNamespacedPath()</code> method.</p>
+<p><a id="DEP0081"></a></p>
+<h3>DEP0081: fs.truncate() using a file descriptor<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/fs.js#L657">[src]</a><span><a class="mark" href="#deprecations_dep0081_fs_truncate_using_a_file_descriptor" id="deprecations_dep0081_fs_truncate_using_a_file_descriptor">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p><code>fs.truncate()</code> <code>fs.truncateSync()</code> usage with a file descriptor is
+deprecated. Please use <code>fs.ftruncate()</code> or <code>fs.ftruncateSync()</code> to work with
+file descriptors.</p>
+<p><a id="DEP0082"></a></p>
+<h3>DEP0082: REPLServer.prototype.memory()<span><a class="mark" href="#deprecations_dep0082_replserver_prototype_memory" id="deprecations_dep0082_replserver_prototype_memory">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v9.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p><code>REPLServer.prototype.memory()</code> is only necessary for the internal mechanics of
+the <code>REPLServer</code> itself. Do not use this function.</p>
+<p><a id="DEP0083"></a></p>
+<h3>DEP0083: Disabling ECDH by setting ecdhCurve to false<span><a class="mark" href="#deprecations_dep0083_disabling_ecdh_by_setting_ecdhcurve_to_false" id="deprecations_dep0083_disabling_ecdh_by_setting_ecdhcurve_to_false">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v9.2.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life.</p>
+<p>The <code>ecdhCurve</code> option to <code>tls.createSecureContext()</code> and <code>tls.TLSSocket</code> could
+be set to <code>false</code> to disable ECDH entirely on the server only. This mode was
+deprecated in preparation for migrating to OpenSSL 1.1.0 and consistency with
+the client and is now unsupported. Use the <code>ciphers</code> parameter instead.</p>
+<p><a id="DEP0084"></a></p>
+<h3>DEP0084: requiring bundled internal dependencies<span><a class="mark" href="#deprecations_dep0084_requiring_bundled_internal_dependencies" id="deprecations_dep0084_requiring_bundled_internal_dependencies">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>This functionality has been removed.</p></td></tr>
+<tr><td>v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>Since Node.js versions 4.4.0 and 5.2.0, several modules only intended for
+internal usage were mistakenly exposed to user code through <code>require()</code>. These
+modules were:</p>
+<ul>
+<li><code>v8/tools/codemap</code></li>
+<li><code>v8/tools/consarray</code></li>
+<li><code>v8/tools/csvparser</code></li>
+<li><code>v8/tools/logreader</code></li>
+<li><code>v8/tools/profile_view</code></li>
+<li><code>v8/tools/profile</code></li>
+<li><code>v8/tools/SourceMap</code></li>
+<li><code>v8/tools/splaytree</code></li>
+<li><code>v8/tools/tickprocessor-driver</code></li>
+<li><code>v8/tools/tickprocessor</code></li>
+<li><code>node-inspect/lib/_inspect</code> (from 7.6.0)</li>
+<li><code>node-inspect/lib/internal/inspect_client</code> (from 7.6.0)</li>
+<li><code>node-inspect/lib/internal/inspect_repl</code> (from 7.6.0)</li>
+</ul>
+<p>The <code>v8/*</code> modules do not have any exports, and if not imported in a specific
+order would in fact throw errors. As such there are virtually no legitimate use
+cases for importing them through <code>require()</code>.</p>
+<p>On the other hand, <code>node-inspect</code> may be installed locally through a package
+manager, as it is published on the npm registry under the same name. No source
+code modification is necessary if that is done.</p>
+<p><a id="DEP0085"></a></p>
+<h3>DEP0085: AsyncHooks Sensitive API<span><a class="mark" href="#deprecations_dep0085_asynchooks_sensitive_api" id="deprecations_dep0085_asynchooks_sensitive_api">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>10.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v8.10.0, v9.4.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The AsyncHooks Sensitive API was never documented and had various minor issues.
+Use the <code>AsyncResource</code> API instead. See
+<a href="https://github.com/nodejs/node/issues/15572">https://github.com/nodejs/node/issues/15572</a>.</p>
+<p><a id="DEP0086"></a></p>
+<h3>DEP0086: Remove runInAsyncIdScope<span><a class="mark" href="#deprecations_dep0086_remove_runinasyncidscope" id="deprecations_dep0086_remove_runinasyncidscope">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>10.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v8.10.0, v9.4.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>runInAsyncIdScope</code> doesn't emit the <code>'before'</code> or <code>'after'</code> event and can thus
+cause a lot of issues. See <a href="https://github.com/nodejs/node/issues/14328">https://github.com/nodejs/node/issues/14328</a>.</p>
+<p><a id="DEP0089"></a></p>
+<h3>DEP0089: require('assert')<span><a class="mark" href="#deprecations_dep0089_require_assert" id="deprecations_dep0089_require_assert">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.8.0</td>
+<td><p>Deprecation revoked.</p></td></tr>
+<tr><td>v9.9.0, v10.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Deprecation revoked</p>
+<p>Importing assert directly was not recommended as the exposed functions use
+loose equality checks. The deprecation was revoked because use of the <code>assert</code>
+module is not discouraged, and the deprecation caused end user confusion.</p>
+<p><a id="DEP0090"></a></p>
+<h3>DEP0090: Invalid GCM authentication tag lengths<span><a class="mark" href="#deprecations_dep0090_invalid_gcm_authentication_tag_lengths" id="deprecations_dep0090_invalid_gcm_authentication_tag_lengths">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>Node.js used to support all GCM authentication tag lengths which are accepted by
+OpenSSL when calling <a href="https://nodejs.org/api/crypto.html#crypto_decipher_setauthtag_buffer"><code>decipher.setAuthTag()</code></a>. Beginning with Node.js
+v11.0.0, only authentication tag lengths of 128, 120, 112, 104, 96, 64, and 32
+bits are allowed. Authentication tags of other lengths are invalid per
+<a href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf">NIST SP 800-38D</a>.</p>
+<p><a id="DEP0091"></a></p>
+<h3>DEP0091: crypto.DEFAULT_ENCODING<span><a class="mark" href="#deprecations_dep0091_crypto_default_encoding" id="deprecations_dep0091_crypto_default_encoding">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The <a href="https://nodejs.org/api/crypto.html#crypto_crypto_default_encoding"><code>crypto.DEFAULT_ENCODING</code></a> property is deprecated.</p>
+<p><a id="DEP0092"></a></p>
+<h3>DEP0092: Top-level <code>this</code> bound to <code>module.exports</code><span><a class="mark" href="#deprecations_dep0092_top_level_this_bound_to_module_exports" id="deprecations_dep0092_top_level_this_bound_to_module_exports">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>Assigning properties to the top-level <code>this</code> as an alternative
+to <code>module.exports</code> is deprecated. Developers should use <code>exports</code>
+or <code>module.exports</code> instead.</p>
+<p><a id="DEP0093"></a></p>
+<h3>DEP0093: crypto.fips is deprecated and replaced.<span><a class="mark" href="#deprecations_dep0093_crypto_fips_is_deprecated_and_replaced" id="deprecations_dep0093_crypto_fips_is_deprecated_and_replaced">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/crypto.html#crypto_crypto_fips"><code>crypto.fips</code></a> property is deprecated. Please use <code>crypto.setFips()</code>
+and <code>crypto.getFips()</code> instead.</p>
+<p><a id="DEP0094"></a></p>
+<h3>DEP0094: Using <code>assert.fail()</code> with more than one argument.<span><a class="mark" href="#deprecations_dep0094_using_assert_fail_with_more_than_one_argument" id="deprecations_dep0094_using_assert_fail_with_more_than_one_argument">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>Using <code>assert.fail()</code> with more than one argument is deprecated. Use
+<code>assert.fail()</code> with only one argument or use a different <code>assert</code> module
+method.</p>
+<p><a id="DEP0095"></a></p>
+<h3>DEP0095: timers.enroll()<span><a class="mark" href="#deprecations_dep0095_timers_enroll" id="deprecations_dep0095_timers_enroll">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p><code>timers.enroll()</code> is deprecated. Please use the publicly documented
+<a href="https://nodejs.org/api/timers.html#timers_settimeout_callback_delay_args"><code>setTimeout()</code></a> or <a href="https://nodejs.org/api/timers.html#timers_setinterval_callback_delay_args"><code>setInterval()</code></a> instead.</p>
+<p><a id="DEP0096"></a></p>
+<h3>DEP0096: timers.unenroll()<span><a class="mark" href="#deprecations_dep0096_timers_unenroll" id="deprecations_dep0096_timers_unenroll">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p><code>timers.unenroll()</code> is deprecated. Please use the publicly documented
+<a href="https://nodejs.org/api/timers.html#timers_cleartimeout_timeout"><code>clearTimeout()</code></a> or <a href="https://nodejs.org/api/timers.html#timers_clearinterval_timeout"><code>clearInterval()</code></a> instead.</p>
+<p><a id="DEP0097"></a></p>
+<h3>DEP0097: MakeCallback with domain property<span><a class="mark" href="#deprecations_dep0097_makecallback_with_domain_property" id="deprecations_dep0097_makecallback_with_domain_property">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>Users of <code>MakeCallback</code> that add the <code>domain</code> property to carry context,
+should start using the <code>async_context</code> variant of <code>MakeCallback</code> or
+<code>CallbackScope</code>, or the high-level <code>AsyncResource</code> class.</p>
+<p><a id="DEP0098"></a></p>
+<h3>DEP0098: AsyncHooks Embedder AsyncResource.emitBefore and AsyncResource.emitAfter APIs<span><a class="mark" href="#deprecations_dep0098_asynchooks_embedder_asyncresource_emitbefore_and_asyncresource_emitafter_apis" id="deprecations_dep0098_asynchooks_embedder_asyncresource_emitbefore_and_asyncresource_emitafter_apis">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life</p></td></tr>
+<tr><td>v8.12.0, v9.6.0, v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The embedded API provided by AsyncHooks exposes <code>.emitBefore()</code> and
+<code>.emitAfter()</code> methods which are very easy to use incorrectly which can lead
+to unrecoverable errors.</p>
+<p>Use <a href="https://nodejs.org/api/async_hooks.html#async_hooks_asyncresource_runinasyncscope_fn_thisarg_args"><code>asyncResource.runInAsyncScope()</code></a> API instead which provides a much
+safer, and more convenient, alternative. See
+<a href="https://github.com/nodejs/node/pull/18513">https://github.com/nodejs/node/pull/18513</a>.</p>
+<p><a id="DEP0099"></a></p>
+<h3>DEP0099: async context-unaware node::MakeCallback C++ APIs<span><a class="mark" href="#deprecations_dep0099_async_context_unaware_node_makecallback_c_apis" id="deprecations_dep0099_async_context_unaware_node_makecallback_c_apis">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Compile-time deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Compile-time</p>
+<p>Certain versions of <code>node::MakeCallback</code> APIs available to native modules are
+deprecated. Please use the versions of the API that accept an <code>async_context</code>
+parameter.</p>
+<p><a id="DEP0100"></a></p>
+<h3>DEP0100: process.assert()<span><a class="mark" href="#deprecations_dep0100_process_assert" id="deprecations_dep0100_process_assert">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v0.3.7</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p><code>process.assert()</code> is deprecated. Please use the <a href="https://nodejs.org/api/assert.html"><code>assert</code></a> module instead.</p>
+<p>This was never a documented feature.</p>
+<p><a id="DEP0101"></a></p>
+<h3>DEP0101: --with-lttng<span><a class="mark" href="#deprecations_dep0101_with_lttng" id="deprecations_dep0101_with_lttng">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <code>--with-lttng</code> compile-time option has been removed.</p>
+<p><a id="DEP0102"></a></p>
+<h3>DEP0102: Using <code>noAssert</code> in Buffer#(read|write) operations.<span><a class="mark" href="#deprecations_dep0102_using_noassert_in_buffer_read_write_operations" id="deprecations_dep0102_using_noassert_in_buffer_read_write_operations">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>Using the <code>noAssert</code> argument has no functionality anymore. All input is going
+to be verified, no matter if it is set to true or not. Skipping the verification
+could lead to hard to find errors and crashes.</p>
+<p><a id="DEP0103"></a></p>
+<h3>DEP0103: process.binding('util').is[...] typechecks<span><a class="mark" href="#deprecations_dep0103_process_binding_util_is_typechecks" id="deprecations_dep0103_process_binding_util_is_typechecks">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.9.0</td>
+<td><p>Superseded by <a href="#DEP0111">DEP0111</a>.</p></td></tr>
+<tr><td>v10.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only (supports <a href="https://nodejs.org/api/cli.html#cli_pending_deprecation"><code>--pending-deprecation</code></a>)</p>
+<p>Using <code>process.binding()</code> in general should be avoided. The type checking
+methods in particular can be replaced by using <a href="https://nodejs.org/api/util.html#util_util_types"><code>util.types</code></a>.</p>
+<p>This deprecation has been superseded by the deprecation of the
+<code>process.binding()</code> API (<a href="#DEP0111">DEP0111</a>).</p>
+<p><a id="DEP0104"></a></p>
+<h3>DEP0104: process.env string coercion<span><a class="mark" href="#deprecations_dep0104_process_env_string_coercion" id="deprecations_dep0104_process_env_string_coercion">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only (supports <a href="https://nodejs.org/api/cli.html#cli_pending_deprecation"><code>--pending-deprecation</code></a>)</p>
+<p>When assigning a non-string property to <a href="https://nodejs.org/api/process.html#process_process_env"><code>process.env</code></a>, the assigned value is
+implicitly converted to a string. This behavior is deprecated if the assigned
+value is not a string, boolean, or number. In the future, such assignment may
+result in a thrown error. Please convert the property to a string before
+assigning it to <code>process.env</code>.</p>
+<p><a id="DEP0105"></a></p>
+<h3>DEP0105: decipher.finaltol<span><a class="mark" href="#deprecations_dep0105_decipher_finaltol" id="deprecations_dep0105_decipher_finaltol">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>decipher.finaltol()</code> has never been documented and was an alias for
+<a href="https://nodejs.org/api/crypto.html#crypto_decipher_final_outputencoding"><code>decipher.final()</code></a>. This API has been removed, and it is recommended to use
+<a href="https://nodejs.org/api/crypto.html#crypto_decipher_final_outputencoding"><code>decipher.final()</code></a> instead.</p>
+<p><a id="DEP0106"></a></p>
+<h3>DEP0106: crypto.createCipher and crypto.createDecipher<span><a class="mark" href="#deprecations_dep0106_crypto_createcipher_and_crypto_createdecipher" id="deprecations_dep0106_crypto_createcipher_and_crypto_createdecipher">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v10.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>Using <a href="https://nodejs.org/api/crypto.html#crypto_crypto_createcipher_algorithm_password_options"><code>crypto.createCipher()</code></a> and <a href="https://nodejs.org/api/crypto.html#crypto_crypto_createdecipher_algorithm_password_options"><code>crypto.createDecipher()</code></a> should be
+avoided as they use a weak key derivation function (MD5 with no salt) and static
+initialization vectors. It is recommended to derive a key using
+<a href="https://nodejs.org/api/crypto.html#crypto_crypto_pbkdf2_password_salt_iterations_keylen_digest_callback"><code>crypto.pbkdf2()</code></a> or <a href="https://nodejs.org/api/crypto.html#crypto_crypto_scrypt_password_salt_keylen_options_callback"><code>crypto.scrypt()</code></a> and to use
+<a href="https://nodejs.org/api/crypto.html#crypto_crypto_createcipheriv_algorithm_key_iv_options"><code>crypto.createCipheriv()</code></a> and <a href="https://nodejs.org/api/crypto.html#crypto_crypto_createdecipheriv_algorithm_key_iv_options"><code>crypto.createDecipheriv()</code></a> to obtain the
+<a href="https://nodejs.org/api/crypto.html#crypto_class_cipher"><code>Cipher</code></a> and <a href="https://nodejs.org/api/crypto.html#crypto_class_decipher"><code>Decipher</code></a> objects respectively.</p>
+<p><a id="DEP0107"></a></p>
+<h3>DEP0107: tls.convertNPNProtocols()<span><a class="mark" href="#deprecations_dep0107_tls_convertnpnprotocols" id="deprecations_dep0107_tls_convertnpnprotocols">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v10.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>This was an undocumented helper function not intended for use outside Node.js
+core and obsoleted by the removal of NPN (Next Protocol Negotiation) support.</p>
+<p><a id="DEP0108"></a></p>
+<h3>DEP0108: zlib.bytesRead<span><a class="mark" href="#deprecations_dep0108_zlib_bytesread" id="deprecations_dep0108_zlib_bytesread">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+<tr><td>v10.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>Deprecated alias for <a href="https://nodejs.org/api/zlib.html#zlib_zlib_byteswritten"><code>zlib.bytesWritten</code></a>. This original name was chosen
+because it also made sense to interpret the value as the number of bytes
+read by the engine, but is inconsistent with other streams in Node.js that
+expose values under these names.</p>
+<p><a id="DEP0109"></a></p>
+<h3>DEP0109: http, https, and tls support for invalid URLs<span><a class="mark" href="#deprecations_dep0109_http_https_and_tls_support_for_invalid_urls" id="deprecations_dep0109_http_https_and_tls_support_for_invalid_urls">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>Some previously supported (but strictly invalid) URLs were accepted through the
+<a href="https://nodejs.org/api/http.html#http_http_request_options_callback"><code>http.request()</code></a>, <a href="https://nodejs.org/api/http.html#http_http_get_options_callback"><code>http.get()</code></a>, <a href="https://nodejs.org/api/https.html#https_https_request_options_callback"><code>https.request()</code></a>,
+<a href="https://nodejs.org/api/https.html#https_https_get_options_callback"><code>https.get()</code></a>, and <a href="https://nodejs.org/api/tls.html#tls_tls_checkserveridentity_hostname_cert"><code>tls.checkServerIdentity()</code></a> APIs because those were
+accepted by the legacy <code>url.parse()</code> API. The mentioned APIs now use the WHATWG
+URL parser that requires strictly valid URLs. Passing an invalid URL is
+deprecated and support will be removed in the future.</p>
+<p><a id="DEP0110"></a></p>
+<h3>DEP0110: vm.Script cached data<span><a class="mark" href="#deprecations_dep0110_vm_script_cached_data" id="deprecations_dep0110_vm_script_cached_data">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v10.6.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <code>produceCachedData</code> option is deprecated. Use
+<a href="https://nodejs.org/api/vm.html#vm_script_createcacheddata"><code>script.createCachedData()</code></a> instead.</p>
+<p><a id="DEP0111"></a></p>
+<h3>DEP0111: process.binding()<span><a class="mark" href="#deprecations_dep0111_process_binding" id="deprecations_dep0111_process_binding">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.12.0</td>
+<td><p>Added support for <code>--pending-deprecation</code>.</p></td></tr>
+<tr><td>v10.9.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only (supports <a href="https://nodejs.org/api/cli.html#cli_pending_deprecation"><code>--pending-deprecation</code></a>)</p>
+<p><code>process.binding()</code> is for use by Node.js internal code only.</p>
+<p><a id="DEP0112"></a></p>
+<h3>DEP0112: dgram private APIs<span><a class="mark" href="#deprecations_dep0112_dgram_private_apis" id="deprecations_dep0112_dgram_private_apis">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The <code>dgram</code> module previously contained several APIs that were never meant to
+accessed outside of Node.js core: <code>Socket.prototype._handle</code>,
+<code>Socket.prototype._receiving</code>, <code>Socket.prototype._bindState</code>,
+<code>Socket.prototype._queue</code>, <code>Socket.prototype._reuseAddr</code>,
+<code>Socket.prototype._healthCheck()</code>, <code>Socket.prototype._stopReceiving()</code>, and
+<code>dgram._createSocketHandle()</code>.</p>
+<p><a id="DEP0113"></a></p>
+<h3>DEP0113: Cipher.setAuthTag(), Decipher.getAuthTag()<span><a class="mark" href="#deprecations_dep0113_cipher_setauthtag_decipher_getauthtag" id="deprecations_dep0113_cipher_setauthtag_decipher_getauthtag">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v11.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p><code>Cipher.setAuthTag()</code> and <code>Decipher.getAuthTag()</code> are no longer available. They
+were never documented and would throw when called.</p>
+<p><a id="DEP0114"></a></p>
+<h3>DEP0114: crypto._toBuf()<span><a class="mark" href="#deprecations_dep0114_crypto_tobuf" id="deprecations_dep0114_crypto_tobuf">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v11.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>The <code>crypto._toBuf()</code> function was not designed to be used by modules outside
+of Node.js core and was removed.</p>
+<p><a id="DEP0115"></a></p>
+<h3>DEP0115: crypto.prng(), crypto.pseudoRandomBytes(), crypto.rng()<span><a class="mark" href="#deprecations_dep0115_crypto_prng_crypto_pseudorandombytes_crypto_rng" id="deprecations_dep0115_crypto_prng_crypto_pseudorandombytes_crypto_rng">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>Added documentation-only deprecation with <code>--pending-deprecation</code> support.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only (supports <a href="https://nodejs.org/api/cli.html#cli_pending_deprecation"><code>--pending-deprecation</code></a>)</p>
+<p>In recent versions of Node.js, there is no difference between
+<a href="https://nodejs.org/api/crypto.html#crypto_crypto_randombytes_size_callback"><code>crypto.randomBytes()</code></a> and <code>crypto.pseudoRandomBytes()</code>. The latter is
+deprecated along with the undocumented aliases <code>crypto.prng()</code> and
+<code>crypto.rng()</code> in favor of <a href="https://nodejs.org/api/crypto.html#crypto_crypto_randombytes_size_callback"><code>crypto.randomBytes()</code></a> and may be removed in a
+future release.</p>
+<p><a id="DEP0116"></a></p>
+<h3>DEP0116: Legacy URL API<span><a class="mark" href="#deprecations_dep0116_legacy_url_api" id="deprecations_dep0116_legacy_url_api">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <a href="https://nodejs.org/api/url.html#url_legacy_url_api">Legacy URL API</a> is deprecated. This includes <a href="https://nodejs.org/api/url.html#url_url_format_urlobject"><code>url.format()</code></a>,
+<a href="https://nodejs.org/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost"><code>url.parse()</code></a>, <a href="https://nodejs.org/api/url.html#url_url_resolve_from_to"><code>url.resolve()</code></a>, and the <a href="https://nodejs.org/api/url.html#url_legacy_urlobject">legacy <code>urlObject</code></a>. Please
+use the <a href="https://nodejs.org/api/url.html#url_the_whatwg_url_api">WHATWG URL API</a> instead.</p>
+<p><a id="DEP0117"></a></p>
+<h3>DEP0117: Native crypto handles<span><a class="mark" href="#deprecations_dep0117_native_crypto_handles" id="deprecations_dep0117_native_crypto_handles">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v11.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>Previous versions of Node.js exposed handles to internal native objects through
+the <code>_handle</code> property of the <code>Cipher</code>, <code>Decipher</code>, <code>DiffieHellman</code>,
+<code>DiffieHellmanGroup</code>, <code>ECDH</code>, <code>Hash</code>, <code>Hmac</code>, <code>Sign</code>, and <code>Verify</code> classes.
+The <code>_handle</code> property has been removed because improper use of the native
+object can lead to crashing the application.</p>
+<p><a id="DEP0118"></a></p>
+<h3>DEP0118: dns.lookup() support for a falsy hostname<a class="srclink" href="https://github.com/nodejs/node/blob/3a2e75d9a5c31d20e429d505b82dd182e33f459a/lib/dns.js#L90">[src]</a><span><a class="mark" href="#deprecations_dep0118_dns_lookup_support_for_a_falsy_hostname" id="deprecations_dep0118_dns_lookup_support_for_a_falsy_hostname">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>Previous versions of Node.js supported <code>dns.lookup()</code> with a falsy hostname
+like <code>dns.lookup(false)</code> due to backward compatibility.
+This behavior is undocumented and is thought to be unused in real world apps.
+It will become an error in future versions of Node.js.</p>
+<p><a id="DEP0119"></a></p>
+<h3>DEP0119: process.binding('uv').errname() private API<span><a class="mark" href="#deprecations_dep0119_process_binding_uv_errname_private_api" id="deprecations_dep0119_process_binding_uv_errname_private_api">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.0.0</td>
+<td><p>Documentation-only deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only (supports <a href="https://nodejs.org/api/cli.html#cli_pending_deprecation"><code>--pending-deprecation</code></a>)</p>
+<p><code>process.binding('uv').errname()</code> is deprecated. Please use
+<a href="https://nodejs.org/api/util.html#util_util_getsystemerrorname_err"><code>util.getSystemErrorName()</code></a> instead.</p>
+<p><a id="DEP0120"></a></p>
+<h3>DEP0120: Windows Performance Counter Support<span><a class="mark" href="#deprecations_dep0120_windows_performance_counter_support" id="deprecations_dep0120_windows_performance_counter_support">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>End-of-Life.</p></td></tr>
+<tr><td>v11.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: End-of-Life</p>
+<p>Windows Performance Counter support has been removed from Node.js. The
+undocumented <code>COUNTER_NET_SERVER_CONNECTION()</code>,
+<code>COUNTER_NET_SERVER_CONNECTION_CLOSE()</code>, <code>COUNTER_HTTP_SERVER_REQUEST()</code>,
+<code>COUNTER_HTTP_SERVER_RESPONSE()</code>, <code>COUNTER_HTTP_CLIENT_REQUEST()</code>, and
+<code>COUNTER_HTTP_CLIENT_RESPONSE()</code> functions have been deprecated.</p>
+<p><a id="DEP0121"></a></p>
+<h3>DEP0121: net._setSimultaneousAccepts()<span><a class="mark" href="#deprecations_dep0121_net_setsimultaneousaccepts" id="deprecations_dep0121_net_setsimultaneousaccepts">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The undocumented <code>net._setSimultaneousAccepts()</code> function was originally
+intended for debugging and performance tuning when using the <code>child_process</code>
+and <code>cluster</code> modules on Windows. The function is not generally useful and
+is being removed. See discussion here:
+<a href="https://github.com/nodejs/node/issues/18391">https://github.com/nodejs/node/issues/18391</a></p>
+<p><a id="DEP0122"></a></p>
+<h3>DEP0122: tls Server.prototype.setOptions()<span><a class="mark" href="#deprecations_dep0122_tls_server_prototype_setoptions" id="deprecations_dep0122_tls_server_prototype_setoptions">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>Please use <code>Server.prototype.setSecureContext()</code> instead.</p>
+<p><a id="DEP0123"></a></p>
+<h3>DEP0123: setting the TLS ServerName to an IP address<span><a class="mark" href="#deprecations_dep0123_setting_the_tls_servername_to_an_ip_address" id="deprecations_dep0123_setting_the_tls_servername_to_an_ip_address">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>Setting the TLS ServerName to an IP address is not permitted by
+<a href="https://tools.ietf.org/html/rfc6066#section-3">RFC 6066</a>. This will be ignored in a future version.</p>
+<p><a id="DEP0124"></a></p>
+<h3>DEP0124: using REPLServer.rli<span><a class="mark" href="#deprecations_dep0124_using_replserver_rli" id="deprecations_dep0124_using_replserver_rli">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>This property is a reference to the instance itself.</p>
+<p><a id="DEP0125"></a></p>
+<h3>DEP0125: require('_stream_wrap')<span><a class="mark" href="#deprecations_dep0125_require_stream_wrap" id="deprecations_dep0125_require_stream_wrap">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The <code>_stream_wrap</code> module is deprecated.</p>
+<p><a id="DEP0126"></a></p>
+<h3>DEP0126: timers.active()<span><a class="mark" href="#deprecations_dep0126_timers_active" id="deprecations_dep0126_timers_active">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.14.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The previously undocumented <code>timers.active()</code> is deprecated.
+Please use the publicly documented <a href="https://nodejs.org/api/timers.html#timers_timeout_refresh"><code>timeout.refresh()</code></a> instead.
+If re-referencing the timeout is necessary, <a href="https://nodejs.org/api/timers.html#timers_timeout_ref"><code>timeout.ref()</code></a> can be used
+with no performance impact since Node.js 10.</p>
+<p><a id="DEP0127"></a></p>
+<h3>DEP0127: timers._unrefActive()<span><a class="mark" href="#deprecations_dep0127_timers_unrefactive" id="deprecations_dep0127_timers_unrefactive">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.14.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>The previously undocumented and "private" <code>timers._unrefActive()</code> is deprecated.
+Please use the publicly documented <a href="https://nodejs.org/api/timers.html#timers_timeout_refresh"><code>timeout.refresh()</code></a> instead.
+If unreferencing the timeout is necessary, <a href="https://nodejs.org/api/timers.html#timers_timeout_unref"><code>timeout.unref()</code></a> can be used
+with no performance impact since Node.js 10.</p>
+<p><a id="DEP0128"></a></p>
+<h3>DEP0128: modules with an invalid <code>main</code> entry and an <code>index.js</code> file<span><a class="mark" href="#deprecations_dep0128_modules_with_an_invalid_main_entry_and_an_index_js_file" id="deprecations_dep0128_modules_with_an_invalid_main_entry_and_an_index_js_file">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.0.0</td>
+<td><p>Documentation-only.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only (supports <a href="https://nodejs.org/api/cli.html#cli_pending_deprecation"><code>--pending-deprecation</code></a>)</p>
+<p>Modules that have an invalid <code>main</code> entry (e.g., <code>./does-not-exist.js</code>) and
+also have an <code>index.js</code> file in the top level directory will resolve the
+<code>index.js</code> file. That is deprecated and is going to throw an error in future
+Node.js versions.</p>
+<p><a id="DEP0129"></a></p>
+<h3>DEP0129: ChildProcess._channel<span><a class="mark" href="#deprecations_dep0129_childprocess_channel" id="deprecations_dep0129_childprocess_channel">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v11.14.0</td>
+<td><p>Documentation-only.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The <code>_channel</code> property of child process objects returned by <code>spawn()</code> and
+similar functions is not intended for public use. Use <code>ChildProcess.channel</code>
+instead.</p>
+<p><a id="DEP0130"></a></p>
+<h3>DEP0130: Module.createRequireFromPath()<span><a class="mark" href="#deprecations_dep0130_module_createrequirefrompath" id="deprecations_dep0130_module_createrequirefrompath">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.2.0</td>
+<td><p>Documentation-only.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>Module.createRequireFromPath() is deprecated. Please use <a href="https://nodejs.org/api/modules.html#modules_module_createrequire_filename"><code>module.createRequire()</code></a> instead.</p>
+<p><a id="DEP0131"></a></p>
+<h3>DEP0131: Legacy HTTP parser<span><a class="mark" href="#deprecations_dep0131_legacy_http_parser" id="deprecations_dep0131_legacy_http_parser">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.3.0</td>
+<td><p>Documentation-only.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Documentation-only</p>
+<p>The legacy HTTP parser, used by default in versions of Node.js prior to 12.0.0,
+is deprecated. This deprecation applies to users of the
+<a href="https://nodejs.org/api/cli.html#cli_http_parser_library"><code>--http-parser=legacy</code></a> command-line flag.</p>
+<p><a id="DEP0132"></a></p>
+<h3>DEP0132: worker.terminate() with callback<span><a class="mark" href="#deprecations_dep0132_worker_terminate_with_callback" id="deprecations_dep0132_worker_terminate_with_callback">#</a></span></h3>
+<div class="api_metadata">
+<details class="changelog"><summary>History</summary>
+<table>
+<tbody><tr><th>Version</th><th>Changes</th></tr>
+<tr><td>v12.5.0</td>
+<td><p>Runtime deprecation.</p></td></tr>
+</tbody></table>
+</details>
+</div>
+<p>Type: Runtime</p>
+<p>Passing a callback to <a href="https://nodejs.org/api/worker_threads.html#worker_threads_worker_terminate"><code>worker.terminate()</code></a> is deprecated. Use the returned
+<code>Promise</code> instead, or a listener to the worker’s <code>'exit'</code> event.</p>
+      </div>
+    </div>
+  </div>
+  <script src="data:application/javascript;base64,LyoKU0hKUyAtIFN5bnRheCBIaWdobGlnaHRpbmcgaW4gSmF2YVNjcmlwdApDb3B5cmlnaHQgKEMpIDIwMDcsIDIwMDggZ25vbWJhdEB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQKTGljZW5zZTogaHR0cDovL3NoanMuc291cmNlZm9yZ2UubmV0L2RvYy9ncGx2My5odG1sCiovCgppZiAoISB0aGlzLnNoX2xhbmd1YWdlcykgewogIHRoaXMuc2hfbGFuZ3VhZ2VzID0ge307Cn0KdmFyIHNoX3JlcXVlc3RzID0ge307CgpmdW5jdGlvbiBzaF9pc0VtYWlsQWRkcmVzcyh1cmwpIHsKICBpZiAoL15tYWlsdG86Ly50ZXN0KHVybCkpIHsKICAgIHJldHVybiBmYWxzZTsKICB9CiAgcmV0dXJuIHVybC5pbmRleE9mKCdAJykgIT09IC0xOwp9CgpmdW5jdGlvbiBzaF9zZXRIcmVmKHRhZ3MsIG51bVRhZ3MsIGlucHV0U3RyaW5nKSB7CiAgdmFyIHVybCA9IGlucHV0U3RyaW5nLnN1YnN0cmluZyh0YWdzW251bVRhZ3MgLSAyXS5wb3MsIHRhZ3NbbnVtVGFncyAtIDFdLnBvcyk7CiAgaWYgKHVybC5sZW5ndGggPj0gMiAmJiB1cmwuY2hhckF0KDApID09PSAnPCcgJiYgdXJsLmNoYXJBdCh1cmwubGVuZ3RoIC0gMSkgPT09ICc+JykgewogICAgdXJsID0gdXJsLnN1YnN0cigxLCB1cmwubGVuZ3RoIC0gMik7CiAgfQogIGlmIChzaF9pc0VtYWlsQWRkcmVzcyh1cmwpKSB7CiAgICB1cmwgPSAnbWFpbHRvOicgKyB1cmw7CiAgfQogIHRhZ3NbbnVtVGFncyAtIDJdLm5vZGUuaHJlZiA9IHVybDsKfQoKLyoKS29ucXVlcm9yIGhhcyBhIGJ1ZyB3aGVyZSB0aGUgcmVndWxhciBleHByZXNzaW9uIC8kL2cgd2lsbCBub3QgbWF0Y2ggYXQgdGhlIGVuZApvZiBhIGxpbmUgbW9yZSB0aGFuIG9uY2U6CgogIHZhciByZWdleCA9IC8kL2c7CiAgdmFyIG1hdGNoOwoKICB2YXIgbGluZSA9ICcxMjM0NTY3ODkwJzsKICByZWdleC5sYXN0SW5kZXggPSAxMDsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZSk7CgogIHZhciBsaW5lMiA9ICdhYmNkZSc7CiAgcmVnZXgubGFzdEluZGV4ID0gNTsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZTIpOyAgLy8gZmFpbHMKKi8KZnVuY3Rpb24gc2hfa29ucXVlcm9yRXhlYyhzKSB7CiAgdmFyIHJlc3VsdCA9IFsnJ107CiAgcmVzdWx0LmluZGV4ID0gcy5sZW5ndGg7CiAgcmVzdWx0LmlucHV0ID0gczsKICByZXR1cm4gcmVzdWx0Owp9CgovKioKSGlnaGxpZ2h0cyBhbGwgZWxlbWVudHMgY29udGFpbmluZyBzb3VyY2UgY29kZSBpbiBhIHRleHQgc3RyaW5nLiAgVGhlIHJldHVybgp2YWx1ZSBpcyBhbiBhcnJheSBvZiBvYmplY3RzLCBlYWNoIHJlcHJlc2VudGluZyBhbiBIVE1MIHN0YXJ0IG9yIGVuZCB0YWcuICBFYWNoCm9iamVjdCBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBwb3MsIHdoaWNoIGlzIGFuIGludGVnZXIgcmVwcmVzZW50aW5nIHRoZSB0ZXh0Cm9mZnNldCBvZiB0aGUgdGFnLiBFdmVyeSBzdGFydCB0YWcgYWxzbyBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBub2RlLCB3aGljaCBpcyB0aGUKRE9NIGVsZW1lbnQgc3RhcnRlZCBieSB0aGUgdGFnLiBFbmQgdGFncyBkbyBub3QgaGF2ZSB0aGlzIHByb3BlcnR5LgpAcGFyYW0gIGlucHV0U3RyaW5nICBhIHRleHQgc3RyaW5nCkBwYXJhbSAgbGFuZ3VhZ2UgIGEgbGFuZ3VhZ2UgZGVmaW5pdGlvbiBvYmplY3QKQHJldHVybiAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKKi8KZnVuY3Rpb24gc2hfaGlnaGxpZ2h0U3RyaW5nKGlucHV0U3RyaW5nLCBsYW5ndWFnZSkgewogIGlmICgvS29ucXVlcm9yLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICBpZiAoISBsYW5ndWFnZS5rb25xdWVyZWQpIHsKICAgICAgZm9yICh2YXIgcyA9IDA7IHMgPCBsYW5ndWFnZS5sZW5ndGg7IHMrKykgewogICAgICAgIGZvciAodmFyIHAgPSAwOyBwIDwgbGFuZ3VhZ2Vbc10ubGVuZ3RoOyBwKyspIHsKICAgICAgICAgIHZhciByID0gbGFuZ3VhZ2Vbc11bcF1bMF07CiAgICAgICAgICBpZiAoci5zb3VyY2UgPT09ICckJykgewogICAgICAgICAgICByLmV4ZWMgPSBzaF9rb25xdWVyb3JFeGVjOwogICAgICAgICAgfQogICAgICAgIH0KICAgICAgfQogICAgICBsYW5ndWFnZS5rb25xdWVyZWQgPSB0cnVlOwogICAgfQogIH0KCiAgdmFyIGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgdmFyIHNwYW4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJyk7CgogIC8vIHRoZSByZXN1bHQKICB2YXIgdGFncyA9IFtdOwogIHZhciBudW1UYWdzID0gMDsKCiAgLy8gZWFjaCBlbGVtZW50IGlzIGEgcGF0dGVybiBvYmplY3QgZnJvbSBsYW5ndWFnZQogIHZhciBwYXR0ZXJuU3RhY2sgPSBbXTsKCiAgLy8gdGhlIGN1cnJlbnQgcG9zaXRpb24gd2l0aGluIGlucHV0U3RyaW5nCiAgdmFyIHBvcyA9IDA7CgogIC8vIHRoZSBuYW1lIG9mIHRoZSBjdXJyZW50IHN0eWxlLCBvciBudWxsIGlmIHRoZXJlIGlzIG5vIGN1cnJlbnQgc3R5bGUKICB2YXIgY3VycmVudFN0eWxlID0gbnVsbDsKCiAgdmFyIG91dHB1dCA9IGZ1bmN0aW9uKHMsIHN0eWxlKSB7CiAgICB2YXIgbGVuZ3RoID0gcy5sZW5ndGg7CiAgICAvLyB0aGlzIGlzIG1vcmUgdGhhbiBqdXN0IGFuIG9wdGltaXphdGlvbiAtIHdlIGRvbid0IHdhbnQgdG8gb3V0cHV0IGVtcHR5IDxzcGFuPjwvc3Bhbj4gZWxlbWVudHMKICAgIGlmIChsZW5ndGggPT09IDApIHsKICAgICAgcmV0dXJuOwogICAgfQogICAgaWYgKCEgc3R5bGUpIHsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoICE9PSAwKSB7CiAgICAgICAgdmFyIHBhdHRlcm4gPSBwYXR0ZXJuU3RhY2tbc3RhY2tMZW5ndGggLSAxXTsKICAgICAgICAvLyBjaGVjayB3aGV0aGVyIHRoaXMgaXMgYSBzdGF0ZSBvciBhbiBlbnZpcm9ubWVudAogICAgICAgIGlmICghIHBhdHRlcm5bM10pIHsKICAgICAgICAgIC8vIGl0J3Mgbm90IGEgc3RhdGUgLSBpdCdzIGFuIGVudmlyb25tZW50OyB1c2UgdGhlIHN0eWxlIGZvciB0aGlzIGVudmlyb25tZW50CiAgICAgICAgICBzdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgfQogICAgICB9CiAgICB9CiAgICBpZiAoY3VycmVudFN0eWxlICE9PSBzdHlsZSkgewogICAgICBpZiAoY3VycmVudFN0eWxlKSB7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge3BvczogcG9zfTsKICAgICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgICAgc2hfc2V0SHJlZih0YWdzLCBudW1UYWdzLCBpbnB1dFN0cmluZyk7CiAgICAgICAgfQogICAgICB9CiAgICAgIGlmIChzdHlsZSkgewogICAgICAgIHZhciBjbG9uZTsKICAgICAgICBpZiAoc3R5bGUgPT09ICdzaF91cmwnKSB7CiAgICAgICAgICBjbG9uZSA9IGEuY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICBjbG9uZSA9IHNwYW4uY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgY2xvbmUuY2xhc3NOYW1lID0gc3R5bGU7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge25vZGU6IGNsb25lLCBwb3M6IHBvc307CiAgICAgIH0KICAgIH0KICAgIHBvcyArPSBsZW5ndGg7CiAgICBjdXJyZW50U3R5bGUgPSBzdHlsZTsKICB9OwoKICB2YXIgZW5kT2ZMaW5lUGF0dGVybiA9IC9cclxufFxyfFxuL2c7CiAgZW5kT2ZMaW5lUGF0dGVybi5sYXN0SW5kZXggPSAwOwogIHZhciBpbnB1dFN0cmluZ0xlbmd0aCA9IGlucHV0U3RyaW5nLmxlbmd0aDsKICB3aGlsZSAocG9zIDwgaW5wdXRTdHJpbmdMZW5ndGgpIHsKICAgIHZhciBzdGFydCA9IHBvczsKICAgIHZhciBlbmQ7CiAgICB2YXIgc3RhcnRPZk5leHRMaW5lOwogICAgdmFyIGVuZE9mTGluZU1hdGNoID0gZW5kT2ZMaW5lUGF0dGVybi5leGVjKGlucHV0U3RyaW5nKTsKICAgIGlmIChlbmRPZkxpbmVNYXRjaCA9PT0gbnVsbCkgewogICAgICBlbmQgPSBpbnB1dFN0cmluZ0xlbmd0aDsKICAgICAgc3RhcnRPZk5leHRMaW5lID0gaW5wdXRTdHJpbmdMZW5ndGg7CiAgICB9CiAgICBlbHNlIHsKICAgICAgZW5kID0gZW5kT2ZMaW5lTWF0Y2guaW5kZXg7CiAgICAgIHN0YXJ0T2ZOZXh0TGluZSA9IGVuZE9mTGluZVBhdHRlcm4ubGFzdEluZGV4OwogICAgfQoKICAgIHZhciBsaW5lID0gaW5wdXRTdHJpbmcuc3Vic3RyaW5nKHN0YXJ0LCBlbmQpOwoKICAgIHZhciBtYXRjaENhY2hlID0gW107CiAgICBmb3IgKDs7KSB7CiAgICAgIHZhciBwb3NXaXRoaW5MaW5lID0gcG9zIC0gc3RhcnQ7CgogICAgICB2YXIgc3RhdGVJbmRleDsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoID09PSAwKSB7CiAgICAgICAgc3RhdGVJbmRleCA9IDA7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gZ2V0IHRoZSBuZXh0IHN0YXRlCiAgICAgICAgc3RhdGVJbmRleCA9IHBhdHRlcm5TdGFja1tzdGFja0xlbmd0aCAtIDFdWzJdOwogICAgICB9CgogICAgICB2YXIgc3RhdGUgPSBsYW5ndWFnZVtzdGF0ZUluZGV4XTsKICAgICAgdmFyIG51bVBhdHRlcm5zID0gc3RhdGUubGVuZ3RoOwogICAgICB2YXIgbWMgPSBtYXRjaENhY2hlW3N0YXRlSW5kZXhdOwogICAgICBpZiAoISBtYykgewogICAgICAgIG1jID0gbWF0Y2hDYWNoZVtzdGF0ZUluZGV4XSA9IFtdOwogICAgICB9CiAgICAgIHZhciBiZXN0TWF0Y2ggPSBudWxsOwogICAgICB2YXIgYmVzdFBhdHRlcm5JbmRleCA9IC0xOwogICAgICBmb3IgKHZhciBpID0gMDsgaSA8IG51bVBhdHRlcm5zOyBpKyspIHsKICAgICAgICB2YXIgbWF0Y2g7CiAgICAgICAgaWYgKGkgPCBtYy5sZW5ndGggJiYgKG1jW2ldID09PSBudWxsIHx8IHBvc1dpdGhpbkxpbmUgPD0gbWNbaV0uaW5kZXgpKSB7CiAgICAgICAgICBtYXRjaCA9IG1jW2ldOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHZhciByZWdleCA9IHN0YXRlW2ldWzBdOwogICAgICAgICAgcmVnZXgubGFzdEluZGV4ID0gcG9zV2l0aGluTGluZTsKICAgICAgICAgIG1hdGNoID0gcmVnZXguZXhlYyhsaW5lKTsKICAgICAgICAgIG1jW2ldID0gbWF0Y2g7CiAgICAgICAgfQogICAgICAgIGlmIChtYXRjaCAhPT0gbnVsbCAmJiAoYmVzdE1hdGNoID09PSBudWxsIHx8IG1hdGNoLmluZGV4IDwgYmVzdE1hdGNoLmluZGV4KSkgewogICAgICAgICAgYmVzdE1hdGNoID0gbWF0Y2g7CiAgICAgICAgICBiZXN0UGF0dGVybkluZGV4ID0gaTsKICAgICAgICAgIGlmIChtYXRjaC5pbmRleCA9PT0gcG9zV2l0aGluTGluZSkgewogICAgICAgICAgICBicmVhazsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KCiAgICAgIGlmIChiZXN0TWF0Y2ggPT09IG51bGwpIHsKICAgICAgICBvdXRwdXQobGluZS5zdWJzdHJpbmcocG9zV2l0aGluTGluZSksIG51bGwpOwogICAgICAgIGJyZWFrOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGdvdCBhIG1hdGNoCiAgICAgICAgaWYgKGJlc3RNYXRjaC5pbmRleCA+IHBvc1dpdGhpbkxpbmUpIHsKICAgICAgICAgIG91dHB1dChsaW5lLnN1YnN0cmluZyhwb3NXaXRoaW5MaW5lLCBiZXN0TWF0Y2guaW5kZXgpLCBudWxsKTsKICAgICAgICB9CgogICAgICAgIHZhciBwYXR0ZXJuID0gc3RhdGVbYmVzdFBhdHRlcm5JbmRleF07CgogICAgICAgIHZhciBuZXdTdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgdmFyIG1hdGNoZWRTdHJpbmc7CiAgICAgICAgaWYgKG5ld1N0eWxlIGluc3RhbmNlb2YgQXJyYXkpIHsKICAgICAgICAgIGZvciAodmFyIHN1YmV4cHJlc3Npb24gPSAwOyBzdWJleHByZXNzaW9uIDwgbmV3U3R5bGUubGVuZ3RoOyBzdWJleHByZXNzaW9uKyspIHsKICAgICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFtzdWJleHByZXNzaW9uICsgMV07CiAgICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZVtzdWJleHByZXNzaW9uXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFswXTsKICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZSk7CiAgICAgICAgfQoKICAgICAgICBzd2l0Y2ggKHBhdHRlcm5bMl0pIHsKICAgICAgICBjYXNlIC0xOgogICAgICAgICAgLy8gZG8gbm90aGluZwogICAgICAgICAgYnJlYWs7CiAgICAgICAgY2FzZSAtMjoKICAgICAgICAgIC8vIGV4aXQKICAgICAgICAgIHBhdHRlcm5TdGFjay5wb3AoKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGNhc2UgLTM6CiAgICAgICAgICAvLyBleGl0YWxsCiAgICAgICAgICBwYXR0ZXJuU3RhY2subGVuZ3RoID0gMDsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGRlZmF1bHQ6CiAgICAgICAgICAvLyB0aGlzIHdhcyB0aGUgc3RhcnQgb2YgYSBkZWxpbWl0ZWQgcGF0dGVybiBvciBhIHN0YXRlL2Vudmlyb25tZW50CiAgICAgICAgICBwYXR0ZXJuU3RhY2sucHVzaChwYXR0ZXJuKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIH0KICAgICAgfQogICAgfQoKICAgIC8vIGVuZCBvZiB0aGUgbGluZQogICAgaWYgKGN1cnJlbnRTdHlsZSkgewogICAgICB0YWdzW251bVRhZ3MrK10gPSB7cG9zOiBwb3N9OwogICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgIHNoX3NldEhyZWYodGFncywgbnVtVGFncywgaW5wdXRTdHJpbmcpOwogICAgICB9CiAgICAgIGN1cnJlbnRTdHlsZSA9IG51bGw7CiAgICB9CiAgICBwb3MgPSBzdGFydE9mTmV4dExpbmU7CiAgfQoKICByZXR1cm4gdGFnczsKfQoKLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KLy8gRE9NLWRlcGVuZGVudCBmdW5jdGlvbnMKCmZ1bmN0aW9uIHNoX2dldENsYXNzZXMoZWxlbWVudCkgewogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgaHRtbENsYXNzID0gZWxlbWVudC5jbGFzc05hbWU7CiAgaWYgKGh0bWxDbGFzcyAmJiBodG1sQ2xhc3MubGVuZ3RoID4gMCkgewogICAgdmFyIGh0bWxDbGFzc2VzID0gaHRtbENsYXNzLnNwbGl0KCcgJyk7CiAgICBmb3IgKHZhciBpID0gMDsgaSA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaSsrKSB7CiAgICAgIGlmIChodG1sQ2xhc3Nlc1tpXS5sZW5ndGggPiAwKSB7CiAgICAgICAgcmVzdWx0LnB1c2goaHRtbENsYXNzZXNbaV0pOwogICAgICB9CiAgICB9CiAgfQogIHJldHVybiByZXN1bHQ7Cn0KCmZ1bmN0aW9uIHNoX2FkZENsYXNzKGVsZW1lbnQsIG5hbWUpIHsKICB2YXIgaHRtbENsYXNzZXMgPSBzaF9nZXRDbGFzc2VzKGVsZW1lbnQpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgaHRtbENsYXNzZXMubGVuZ3RoOyBpKyspIHsKICAgIGlmIChuYW1lLnRvTG93ZXJDYXNlKCkgPT09IGh0bWxDbGFzc2VzW2ldLnRvTG93ZXJDYXNlKCkpIHsKICAgICAgcmV0dXJuOwogICAgfQogIH0KICBodG1sQ2xhc3Nlcy5wdXNoKG5hbWUpOwogIGVsZW1lbnQuY2xhc3NOYW1lID0gaHRtbENsYXNzZXMuam9pbignICcpOwp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSBhbiBIVE1MIERPTSBOb2RlTGlzdC4KQHBhcmFtICBub2RlTGlzdCAgYSBET00gTm9kZUxpc3QKQHBhcmFtICByZXN1bHQgIGFuIG9iamVjdCB3aXRoIHRleHQsIHRhZ3MgYW5kIHBvcyBwcm9wZXJ0aWVzCiovCmZ1bmN0aW9uIHNoX2V4dHJhY3RUYWdzRnJvbU5vZGVMaXN0KG5vZGVMaXN0LCByZXN1bHQpIHsKICB2YXIgbGVuZ3RoID0gbm9kZUxpc3QubGVuZ3RoOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbGVuZ3RoOyBpKyspIHsKICAgIHZhciBub2RlID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHN3aXRjaCAobm9kZS5ub2RlVHlwZSkgewogICAgY2FzZSAxOgogICAgICBpZiAobm9kZS5ub2RlTmFtZS50b0xvd2VyQ2FzZSgpID09PSAnYnInKSB7CiAgICAgICAgdmFyIHRlcm1pbmF0b3I7CiAgICAgICAgaWYgKC9NU0lFLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xyJzsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xuJzsKICAgICAgICB9CiAgICAgICAgcmVzdWx0LnRleHQucHVzaCh0ZXJtaW5hdG9yKTsKICAgICAgICByZXN1bHQucG9zKys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7bm9kZTogbm9kZS5jbG9uZU5vZGUoZmFsc2UpLCBwb3M6IHJlc3VsdC5wb3N9KTsKICAgICAgICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChub2RlLmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7cG9zOiByZXN1bHQucG9zfSk7CiAgICAgIH0KICAgICAgYnJlYWs7CiAgICBjYXNlIDM6CiAgICBjYXNlIDQ6CiAgICAgIHJlc3VsdC50ZXh0LnB1c2gobm9kZS5kYXRhKTsKICAgICAgcmVzdWx0LnBvcyArPSBub2RlLmxlbmd0aDsKICAgICAgYnJlYWs7CiAgICB9CiAgfQp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSB0aGUgdGV4dCBvZiBhbiBIVE1MIGVsZW1lbnQuIFRoZSBleHRyYWN0ZWQgdGFncyB3aWxsIGJlCnJldHVybmVkIGFzIGFuIGFycmF5IG9mIHRhZyBvYmplY3RzLiBTZWUgc2hfaGlnaGxpZ2h0U3RyaW5nIGZvciB0aGUgZm9ybWF0IG9mCnRoZSB0YWcgb2JqZWN0cy4KQHBhcmFtICBlbGVtZW50ICBhIERPTSBlbGVtZW50CkBwYXJhbSAgdGFncyAgYW4gZW1wdHkgYXJyYXk7IHRoZSBleHRyYWN0ZWQgdGFnIG9iamVjdHMgd2lsbCBiZSByZXR1cm5lZCBpbiBpdApAcmV0dXJuICB0aGUgdGV4dCBvZiB0aGUgZWxlbWVudApAc2VlICBzaF9oaWdobGlnaHRTdHJpbmcKKi8KZnVuY3Rpb24gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgdGFncykgewogIHZhciByZXN1bHQgPSB7fTsKICByZXN1bHQudGV4dCA9IFtdOwogIHJlc3VsdC50YWdzID0gdGFnczsKICByZXN1bHQucG9zID0gMDsKICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChlbGVtZW50LmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgcmV0dXJuIHJlc3VsdC50ZXh0LmpvaW4oJycpOwp9CgovKioKTWVyZ2VzIHRoZSBvcmlnaW5hbCB0YWdzIGZyb20gYW4gZWxlbWVudCB3aXRoIHRoZSB0YWdzIHByb2R1Y2VkIGJ5IGhpZ2hsaWdodGluZy4KQHBhcmFtICBvcmlnaW5hbFRhZ3MgIGFuIGFycmF5IGNvbnRhaW5pbmcgdGhlIG9yaWdpbmFsIHRhZ3MKQHBhcmFtICBoaWdobGlnaHRUYWdzICBhbiBhcnJheSBjb250YWluaW5nIHRoZSBoaWdobGlnaHRpbmcgdGFncyAtIHRoZXNlIG11c3Qgbm90IG92ZXJsYXAKQHJlc3VsdCAgYW4gYXJyYXkgY29udGFpbmluZyB0aGUgbWVyZ2VkIHRhZ3MKKi8KZnVuY3Rpb24gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncykgewogIHZhciBudW1PcmlnaW5hbFRhZ3MgPSBvcmlnaW5hbFRhZ3MubGVuZ3RoOwogIGlmIChudW1PcmlnaW5hbFRhZ3MgPT09IDApIHsKICAgIHJldHVybiBoaWdobGlnaHRUYWdzOwogIH0KCiAgdmFyIG51bUhpZ2hsaWdodFRhZ3MgPSBoaWdobGlnaHRUYWdzLmxlbmd0aDsKICBpZiAobnVtSGlnaGxpZ2h0VGFncyA9PT0gMCkgewogICAgcmV0dXJuIG9yaWdpbmFsVGFnczsKICB9CgogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgb3JpZ2luYWxJbmRleCA9IDA7CiAgdmFyIGhpZ2hsaWdodEluZGV4ID0gMDsKCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MgJiYgaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICB2YXIgb3JpZ2luYWxUYWcgPSBvcmlnaW5hbFRhZ3Nbb3JpZ2luYWxJbmRleF07CiAgICB2YXIgaGlnaGxpZ2h0VGFnID0gaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF07CgogICAgaWYgKG9yaWdpbmFsVGFnLnBvcyA8PSBoaWdobGlnaHRUYWcucG9zKSB7CiAgICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnKTsKICAgICAgb3JpZ2luYWxJbmRleCsrOwogICAgfQogICAgZWxzZSB7CiAgICAgIHJlc3VsdC5wdXNoKGhpZ2hsaWdodFRhZyk7CiAgICAgIGlmIChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4ICsgMV0ucG9zIDw9IG9yaWdpbmFsVGFnLnBvcykgewogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgICAgcmVzdWx0LnB1c2goaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF0pOwogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gbmV3IGVuZCB0YWcKICAgICAgICByZXN1bHQucHVzaCh7cG9zOiBvcmlnaW5hbFRhZy5wb3N9KTsKCiAgICAgICAgLy8gbmV3IHN0YXJ0IHRhZwogICAgICAgIGhpZ2hsaWdodFRhZ3NbaGlnaGxpZ2h0SW5kZXhdID0ge25vZGU6IGhpZ2hsaWdodFRhZy5ub2RlLmNsb25lTm9kZShmYWxzZSksIHBvczogb3JpZ2luYWxUYWcucG9zfTsKICAgICAgfQogICAgfQogIH0KCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MpIHsKICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnc1tvcmlnaW5hbEluZGV4XSk7CiAgICBvcmlnaW5hbEluZGV4Kys7CiAgfQoKICB3aGlsZSAoaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICByZXN1bHQucHVzaChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4XSk7CiAgICBoaWdobGlnaHRJbmRleCsrOwogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkluc2VydHMgdGFncyBpbnRvIHRleHQuCkBwYXJhbSAgdGFncyAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKQHBhcmFtICB0ZXh0ICBhIHN0cmluZyByZXByZXNlbnRpbmcgdGhlIHRleHQKQHJldHVybiAgYSBET00gRG9jdW1lbnRGcmFnbWVudCByZXByZXNlbnRpbmcgdGhlIHJlc3VsdGluZyBIVE1MCiovCmZ1bmN0aW9uIHNoX2luc2VydFRhZ3ModGFncywgdGV4dCkgewogIHZhciBkb2MgPSBkb2N1bWVudDsKCiAgdmFyIHJlc3VsdCA9IGRvY3VtZW50LmNyZWF0ZURvY3VtZW50RnJhZ21lbnQoKTsKICB2YXIgdGFnSW5kZXggPSAwOwogIHZhciBudW1UYWdzID0gdGFncy5sZW5ndGg7CiAgdmFyIHRleHRQb3MgPSAwOwogIHZhciB0ZXh0TGVuZ3RoID0gdGV4dC5sZW5ndGg7CiAgdmFyIGN1cnJlbnROb2RlID0gcmVzdWx0OwoKICAvLyBvdXRwdXQgb25lIHRhZyBvciB0ZXh0IG5vZGUgZXZlcnkgaXRlcmF0aW9uCiAgd2hpbGUgKHRleHRQb3MgPCB0ZXh0TGVuZ3RoIHx8IHRhZ0luZGV4IDwgbnVtVGFncykgewogICAgdmFyIHRhZzsKICAgIHZhciB0YWdQb3M7CiAgICBpZiAodGFnSW5kZXggPCBudW1UYWdzKSB7CiAgICAgIHRhZyA9IHRhZ3NbdGFnSW5kZXhdOwogICAgICB0YWdQb3MgPSB0YWcucG9zOwogICAgfQogICAgZWxzZSB7CiAgICAgIHRhZ1BvcyA9IHRleHRMZW5ndGg7CiAgICB9CgogICAgaWYgKHRhZ1BvcyA8PSB0ZXh0UG9zKSB7CiAgICAgIC8vIG91dHB1dCB0aGUgdGFnCiAgICAgIGlmICh0YWcubm9kZSkgewogICAgICAgIC8vIHN0YXJ0IHRhZwogICAgICAgIHZhciBuZXdOb2RlID0gdGFnLm5vZGU7CiAgICAgICAgY3VycmVudE5vZGUuYXBwZW5kQ2hpbGQobmV3Tm9kZSk7CiAgICAgICAgY3VycmVudE5vZGUgPSBuZXdOb2RlOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGVuZCB0YWcKICAgICAgICBjdXJyZW50Tm9kZSA9IGN1cnJlbnROb2RlLnBhcmVudE5vZGU7CiAgICAgIH0KICAgICAgdGFnSW5kZXgrKzsKICAgIH0KICAgIGVsc2UgewogICAgICAvLyBvdXRwdXQgdGV4dAogICAgICBjdXJyZW50Tm9kZS5hcHBlbmRDaGlsZChkb2MuY3JlYXRlVGV4dE5vZGUodGV4dC5zdWJzdHJpbmcodGV4dFBvcywgdGFnUG9zKSkpOwogICAgICB0ZXh0UG9zID0gdGFnUG9zOwogICAgfQogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkhpZ2hsaWdodHMgYW4gZWxlbWVudCBjb250YWluaW5nIHNvdXJjZSBjb2RlLiAgVXBvbiBjb21wbGV0aW9uIG9mIHRoaXMgZnVuY3Rpb24sCnRoZSBlbGVtZW50IHdpbGwgaGF2ZSBiZWVuIHBsYWNlZCBpbiB0aGUgInNoX3NvdXJjZUNvZGUiIGNsYXNzLgpAcGFyYW0gIGVsZW1lbnQgIGEgRE9NIDxwcmU+IGVsZW1lbnQgY29udGFpbmluZyB0aGUgc291cmNlIGNvZGUgdG8gYmUgaGlnaGxpZ2h0ZWQKQHBhcmFtICBsYW5ndWFnZSAgYSBsYW5ndWFnZSBkZWZpbml0aW9uIG9iamVjdAoqLwpmdW5jdGlvbiBzaF9oaWdobGlnaHRFbGVtZW50KGVsZW1lbnQsIGxhbmd1YWdlKSB7CiAgc2hfYWRkQ2xhc3MoZWxlbWVudCwgJ3NoX3NvdXJjZUNvZGUnKTsKICB2YXIgb3JpZ2luYWxUYWdzID0gW107CiAgdmFyIGlucHV0U3RyaW5nID0gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgb3JpZ2luYWxUYWdzKTsKICB2YXIgaGlnaGxpZ2h0VGFncyA9IHNoX2hpZ2hsaWdodFN0cmluZyhpbnB1dFN0cmluZywgbGFuZ3VhZ2UpOwogIHZhciB0YWdzID0gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncyk7CiAgdmFyIGRvY3VtZW50RnJhZ21lbnQgPSBzaF9pbnNlcnRUYWdzKHRhZ3MsIGlucHV0U3RyaW5nKTsKICB3aGlsZSAoZWxlbWVudC5oYXNDaGlsZE5vZGVzKCkpIHsKICAgIGVsZW1lbnQucmVtb3ZlQ2hpbGQoZWxlbWVudC5maXJzdENoaWxkKTsKICB9CiAgZWxlbWVudC5hcHBlbmRDaGlsZChkb2N1bWVudEZyYWdtZW50KTsKfQoKZnVuY3Rpb24gc2hfZ2V0WE1MSHR0cFJlcXVlc3QoKSB7CiAgaWYgKHdpbmRvdy5BY3RpdmVYT2JqZWN0KSB7CiAgICByZXR1cm4gbmV3IEFjdGl2ZVhPYmplY3QoJ01zeG1sMi5YTUxIVFRQJyk7CiAgfQogIGVsc2UgaWYgKHdpbmRvdy5YTUxIdHRwUmVxdWVzdCkgewogICAgcmV0dXJuIG5ldyBYTUxIdHRwUmVxdWVzdCgpOwogIH0KICB0aHJvdyAnTm8gWE1MSHR0cFJlcXVlc3QgaW1wbGVtZW50YXRpb24gYXZhaWxhYmxlJzsKfQoKZnVuY3Rpb24gc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpIHsKICBpZiAobGFuZ3VhZ2UgaW4gc2hfcmVxdWVzdHMpIHsKICAgIHNoX3JlcXVlc3RzW2xhbmd1YWdlXS5wdXNoKGVsZW1lbnQpOwogICAgcmV0dXJuOwogIH0KICBzaF9yZXF1ZXN0c1tsYW5ndWFnZV0gPSBbZWxlbWVudF07CiAgdmFyIHJlcXVlc3QgPSBzaF9nZXRYTUxIdHRwUmVxdWVzdCgpOwogIHZhciB1cmwgPSBwcmVmaXggKyAnc2hfJyArIGxhbmd1YWdlICsgc3VmZml4OwogIHJlcXVlc3Qub3BlbignR0VUJywgdXJsLCB0cnVlKTsKICByZXF1ZXN0Lm9ucmVhZHlzdGF0ZWNoYW5nZSA9IGZ1bmN0aW9uICgpIHsKICAgIGlmIChyZXF1ZXN0LnJlYWR5U3RhdGUgPT09IDQpIHsKICAgICAgdHJ5IHsKICAgICAgICBpZiAoISByZXF1ZXN0LnN0YXR1cyB8fCByZXF1ZXN0LnN0YXR1cyA9PT0gMjAwKSB7CiAgICAgICAgICBldmFsKHJlcXVlc3QucmVzcG9uc2VUZXh0KTsKICAgICAgICAgIHZhciBlbGVtZW50cyA9IHNoX3JlcXVlc3RzW2xhbmd1YWdlXTsKICAgICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgZWxlbWVudHMubGVuZ3RoOyBpKyspIHsKICAgICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50c1tpXSwgc2hfbGFuZ3VhZ2VzW2xhbmd1YWdlXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgdGhyb3cgJ0hUVFAgZXJyb3I6IHN0YXR1cyAnICsgcmVxdWVzdC5zdGF0dXM7CiAgICAgICAgfQogICAgICB9CiAgICAgIGZpbmFsbHkgewogICAgICAgIHJlcXVlc3QgPSBudWxsOwogICAgICB9CiAgICB9CiAgfTsKICByZXF1ZXN0LnNlbmQobnVsbCk7Cn0KCi8qKgpIaWdobGlnaHRzIGFsbCBlbGVtZW50cyBjb250YWluaW5nIHNvdXJjZSBjb2RlIG9uIHRoZSBjdXJyZW50IHBhZ2UuIEVsZW1lbnRzCmNvbnRhaW5pbmcgc291cmNlIGNvZGUgbXVzdCBiZSAicHJlIiBlbGVtZW50cyB3aXRoIGEgImNsYXNzIiBhdHRyaWJ1dGUgb2YKInNoX0xBTkdVQUdFIiwgd2hlcmUgTEFOR1VBR0UgaXMgYSB2YWxpZCBsYW5ndWFnZSBpZGVudGlmaWVyOyBlLmcuLCAic2hfamF2YSIKaWRlbnRpZmllcyB0aGUgZWxlbWVudCBhcyBjb250YWluaW5nICJqYXZhIiBsYW5ndWFnZSBzb3VyY2UgY29kZS4KKi8KZnVuY3Rpb24gaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCB0YWcpIHsKICB2YXIgbm9kZUxpc3QgPSBkb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSh0YWcpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbm9kZUxpc3QubGVuZ3RoOyBpKyspIHsKICAgIHZhciBlbGVtZW50ID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHZhciBodG1sQ2xhc3NlcyA9IHNoX2dldENsYXNzZXMoZWxlbWVudCk7CiAgICB2YXIgaGlnaGxpZ2h0ZWQgPSBmYWxzZTsKICAgIHZhciBkb250aGlnaGxpZ2h0ID0gZmFsc2U7CiAgICBmb3IgKHZhciBqID0gMDsgaiA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaisrKSB7CiAgICAgIHZhciBodG1sQ2xhc3MgPSBodG1sQ2xhc3Nlc1tqXS50b0xvd2VyQ2FzZSgpOwogICAgICBpZiAoaHRtbENsYXNzID09PSAnc2hfbm9uZScpIHsKICAgICAgICBkb250aGlnaGxpZ2h0ID0gdHJ1ZQogICAgICAgIGNvbnRpbnVlOwogICAgICB9CiAgICAgIGlmIChodG1sQ2xhc3Muc3Vic3RyKDAsIDMpID09PSAnc2hfJykgewogICAgICAgIHZhciBsYW5ndWFnZSA9IGh0bWxDbGFzcy5zdWJzdHJpbmcoMyk7CiAgICAgICAgaWYgKGxhbmd1YWdlIGluIHNoX2xhbmd1YWdlcykgewogICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50LCBzaF9sYW5ndWFnZXNbbGFuZ3VhZ2VdKTsKICAgICAgICAgIGhpZ2hsaWdodGVkID0gdHJ1ZTsKICAgICAgICB9CiAgICAgICAgZWxzZSBpZiAodHlwZW9mKHByZWZpeCkgPT09ICdzdHJpbmcnICYmIHR5cGVvZihzdWZmaXgpID09PSAnc3RyaW5nJykgewogICAgICAgICAgc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHRocm93ICdGb3VuZCA8JyArIHRhZyArICc+IGVsZW1lbnQgd2l0aCBjbGFzcz0iJyArIGh0bWxDbGFzcyArICciLCBidXQgbm8gc3VjaCBsYW5ndWFnZSBleGlzdHMnOwogICAgICAgIH0KICAgICAgICBicmVhazsKICAgICAgfQogICAgfQogICAgaWYgKGhpZ2hsaWdodGVkID09PSBmYWxzZSAmJiBkb250aGlnaGxpZ2h0ID09IGZhbHNlKSB7CiAgICAgIHNoX2hpZ2hsaWdodEVsZW1lbnQoZWxlbWVudCwgc2hfbGFuZ3VhZ2VzWyJqYXZhc2NyaXB0Il0pOwogICAgfQogIH0KfQoKCgpmdW5jdGlvbiBzaF9oaWdobGlnaHREb2N1bWVudChwcmVmaXgsIHN1ZmZpeCkgewogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3R0Jyk7CiAgaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCAnY29kZScpOwogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3ByZScpOwp9Cg=="></script>
+  <script src="data:application/javascript;base64,aWYoIXRoaXMuc2hfbGFuZ3VhZ2VzKXt0aGlzLnNoX2xhbmd1YWdlcz17fX1zaF9sYW5ndWFnZXMuamF2YXNjcmlwdD1bW1svXC9cL1wvL2csInNoX2NvbW1lbnQiLDFdLFsvXC9cLy9nLCJzaF9jb21tZW50Iiw3XSxbL1wvXCpcKi9nLCJzaF9jb21tZW50Iiw4XSxbL1wvXCovZywic2hfY29tbWVudCIsOV0sWy9cYig/OmFic3RyYWN0fGJyZWFrfGNhc2V8Y2F0Y2h8Y2xhc3N8Y29uc3R8Y29udGludWV8ZGVidWdnZXJ8ZGVmYXVsdHxkZWxldGV8ZG98ZWxzZXxlbnVtfGV4cG9ydHxleHRlbmRzfGZhbHNlfGZpbmFsfGZpbmFsbHl8Zm9yfGZ1bmN0aW9ufGdvdG98aWZ8aW1wbGVtZW50c3xpbnxpbnN0YW5jZW9mfGludGVyZmFjZXxuYXRpdmV8bmV3fG51bGx8cHJpdmF0ZXxwcm90ZWN0ZWR8cHJvdG90eXBlfHB1YmxpY3xyZXR1cm58c3RhdGljfHN1cGVyfHN3aXRjaHxzeW5jaHJvbml6ZWR8dGhyb3d8dGhyb3dzfHRoaXN8dHJhbnNpZW50fHRydWV8dHJ5fHR5cGVvZnx2YXJ8dm9sYXRpbGV8d2hpbGV8d2l0aClcYi9nLCJzaF9rZXl3b3JkIiwtMV0sWy8oXCtcK3wtLXxcKXxcXSkoXHMqKShcLz0/KD8hWypcL10pKS9nLFsic2hfc3ltYm9sIiwic2hfbm9ybWFsIiwic2hfc3ltYm9sIl0sLTFdLFsvKDB4W0EtRmEtZjAtOV0rfCg/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykoXHMqKShcLyg/IVsqXC9dKSkvZyxbInNoX251bWJlciIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyhbQS1aYS16JF9dW0EtWmEtejAtOSRfXSpccyopKFwvPT8oPyFbKlwvXSkpL2csWyJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy9cLyg/OlxcLnxbXipcXFwvXSkoPzpcXC58W15cXFwvXSkqXC9bZ2ltXSovZywic2hfcmVnZXhwIiwtMV0sWy9cYlsrLV0/KD86KD86MHhbQS1GYS1mMC05XSspfCg/Oig/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykpdT8oPzooPzppbnQoPzo4fDE2fDMyfDY0KSl8TCk/XGIvZywic2hfbnVtYmVyIiwtMV0sWy8iL2csInNoX3N0cmluZyIsMTBdLFsvJy9nLCJzaF9zdHJpbmciLDExXSxbL358IXwlfFxefFwqfFwofFwpfC18XCt8PXxcW3xcXXxcXHw6fDt8LHxcLnxcL3xcP3wmfDx8PnxcfC9nLCJzaF9zeW1ib2wiLC0xXSxbL1x7fFx9L2csInNoX2NicmFja2V0IiwtMV0sWy9cYig/Ok1hdGh8SW5maW5pdHl8TmFOfHVuZGVmaW5lZHxhcmd1bWVudHMpXGIvZywic2hfcHJlZGVmX3ZhciIsLTFdLFsvXGIoPzpBcnJheXxCb29sZWFufERhdGV8RXJyb3J8RXZhbEVycm9yfEZ1bmN0aW9ufE51bWJlcnxPYmplY3R8UmFuZ2VFcnJvcnxSZWZlcmVuY2VFcnJvcnxSZWdFeHB8U3RyaW5nfFN5bnRheEVycm9yfFR5cGVFcnJvcnxVUklFcnJvcnxkZWNvZGVVUkl8ZGVjb2RlVVJJQ29tcG9uZW50fGVuY29kZVVSSXxlbmNvZGVVUklDb21wb25lbnR8ZXZhbHxpc0Zpbml0ZXxpc05hTnxwYXJzZUZsb2F0fHBhcnNlSW50KVxiL2csInNoX3ByZWRlZl9mdW5jIiwtMV0sWy8oPzpbQS1aYS16XXxfKVtBLVphLXowLTlfXSooPz1bIFx0XSpcKCkvZywic2hfZnVuY3Rpb24iLC0xXV0sW1svJC9nLG51bGwsLTJdLFsvKD86PD8pW0EtWmEtejAtOV9cLlwvXC1ffl0rQFtBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KXwoPzo8PylbQS1aYS16MC05X10rOlwvXC9bQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+PykvZywic2hfdXJsIiwtMV0sWy88XD94bWwvZywic2hfcHJlcHJvYyIsMiwxXSxbLzwhRE9DVFlQRS9nLCJzaF9wcmVwcm9jIiw0LDFdLFsvPCEtLS9nLCJzaF9jb21tZW50Iiw1XSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKSg/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKS9nLCJzaF9rZXl3b3JkIiw2LDFdLFsvJig/OltBLVphLXowLTldKyk7L2csInNoX3ByZXByb2MiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSooPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMV0sWy88KD86XC8pP1tBLVphLXpdW0EtWmEtejAtOV0qL2csInNoX2tleXdvcmQiLDYsMV0sWy9AW0EtWmEtel0rL2csInNoX3R5cGUiLC0xXSxbLyg/OlRPRE98RklYTUV8QlVHKSg/Ols6XT8pL2csInNoX3RvZG8iLC0xXV0sW1svXD8+L2csInNoX3ByZXByb2MiLC0yXSxbLyhbXj0iIFx0Pl0rKShbIFx0XSopKD0/KS9nLFsic2hfdHlwZSIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyIvZywic2hfc3RyaW5nIiwzXV0sW1svXFwoPzpcXHwiKS9nLG51bGwsLTFdLFsvIi9nLCJzaF9zdHJpbmciLC0yXV0sW1svPi9nLCJzaF9wcmVwcm9jIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLy0tPi9nLCJzaF9jb21tZW50IiwtMl0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdXSxbWy8oPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLyQvZyxudWxsLC0yXV0sW1svXCpcLy9nLCJzaF9jb21tZW50IiwtMl0sWy8oPzo8PylbQS1aYS16MC05X1wuXC9cLV9+XStAW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pfCg/Ojw/KVtBLVphLXowLTlfXSs6XC9cL1tBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KS9nLCJzaF91cmwiLC0xXSxbLzxcP3htbC9nLCJzaF9wcmVwcm9jIiwyLDFdLFsvPCFET0NUWVBFL2csInNoX3ByZXByb2MiLDQsMV0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopKD86XC8pPz4vZywic2hfa2V5d29yZCIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopL2csInNoX2tleXdvcmQiLDYsMV0sWy8mKD86W0EtWmEtejAtOV0rKTsvZywic2hfcHJlcHJvYyIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XVtBLVphLXowLTldKig/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSovZywic2hfa2V5d29yZCIsNiwxXSxbL0BbQS1aYS16XSsvZywic2hfdHlwZSIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy9cKlwvL2csInNoX2NvbW1lbnQiLC0yXSxbLyg/Ojw/KVtBLVphLXowLTlfXC5cL1wtX35dK0BbQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+Pyl8KD86PD8pW0EtWmEtejAtOV9dKzpcL1wvW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pL2csInNoX3VybCIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy8iL2csInNoX3N0cmluZyIsLTJdLFsvXFwuL2csInNoX3NwZWNpYWxjaGFyIiwtMV1dLFtbLycvZywic2hfc3RyaW5nIiwtMl0sWy9cXC4vZywic2hfc3BlY2lhbGNoYXIiLC0xXV1dOw=="></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+
+</body></html>

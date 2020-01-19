@@ -23,15 +23,15 @@ Både `request` og `response` er Node streams. Dette betyr at du kan benytte deg
 Slik er et typisk oppsett for å lage en HTTP server i Node:
 
 ```js
-var http = require('http')
-var server = http.createServer(function (req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // Håndter forespørselen...
 })
 server.listen(8000)
 ```
 
 Dokumentasjonen til `http` finner du her:
-  {rootdir:/node_apidoc/http.html}
+  {rootdir:/docs-nodejs/http.html}
 
 
 `fs` modulen i Node har noen streaming APIer for filer. Når du benytter deg av `fs.createReadStream()` vil du få et stream objekt tilbake som representerer filen du vil lese. På et stream objekt kan du kalle på `src.pipe(dst)` for å pipe dataene fra en stream til en annen (Her fra `src` til `dst`). Du kan på den måte koble filsystem streamen med HTTP response streamen.

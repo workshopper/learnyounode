@@ -11,7 +11,7 @@ $ node program.js
 和浏览器一样，你可以在你的 Node.js 程序中书写 `console`：
 
 ```js
-console.log("text")
+console.log('text')
 ```
 
 当你写完后，你需要运行：

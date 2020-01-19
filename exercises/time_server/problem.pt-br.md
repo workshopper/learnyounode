@@ -28,8 +28,8 @@ function callback (socket) { /* ... */ }
 Um típico servidor TCP em Node se parece com isso:
 
 ```js
-var net = require('net')
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
   // socket handling logic
 })
 server.listen(8000)
@@ -43,14 +43,14 @@ Use `socket.write(data)` para escrever dados para o socket e `socket.end()` para
 
 Documentação do módulo `net` pode ser encontrada apontando seu navegador para:
 
-  {rootdir:/node_apidoc/net.html}
+  {rootdir:/docs-nodejs/net.html}
 
 Para criar uma data, você vai precisar de criar um formato customizado a partir do objeto `new Date()`. Os métodos que lhe serão úteis são:
 
 ```js
 date.getFullYear()
-date.getMonth()     // começa no 0
-date.getDate()      // retorna o dia do mês
+date.getMonth() // começa no 0
+date.getDate() // retorna o dia do mês
 date.getHours()
 date.getMinutes()
 ```

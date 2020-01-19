@@ -11,7 +11,7 @@
 `net` モジュールと同じく `http.createServer()` 関数があります。
 ただし、そのサーバが受信するのは `HTTP` リクエストです。
 
-`http.createServer()` の第1引数であるリスナー関数は、コネクションの度にに毎回呼ばれます。
+`http.createServer()` の第1引数であるリスナー関数は、コネクションの度に毎回呼ばれます。
 
 一般的なHTTPリクエストリスナー関数の例：
 
@@ -29,8 +29,8 @@ function listener (request, response) { /* ... */ }
 一般的な Node の HTTP サーバは次のように記述されています：
 
 ```js
-var http = require('http')
-var server = http.createServer(function (req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // request handling logic...
 })
 server.listen(8000)
@@ -38,7 +38,7 @@ server.listen(8000)
 
 `http` モジュールのドキュメントは、このリンクをブラウザで見てください:
 
-  {rootdir:/node_apidoc/http.html}
+  {rootdir:/docs-nodejs/http.html}
 
 `fs` と言う Node のコアモジュールには、ファイルを stream できる API があります。
 コマンドラインの第2引数（テキストファイルへのパス）を `fs.createReadStream()` に渡すとそのファイルを表す Stream オブジェクトがもらえます。

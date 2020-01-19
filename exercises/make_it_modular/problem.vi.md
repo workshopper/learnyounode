@@ -33,7 +33,7 @@ Hàm ví dụ trên không có tên nhưng bạn hoàn toàn có thể gắn tê
 Bạn cần sử dụng `require()` để nạp mô-đun bạn vừa tạo ra giống như cách ta nạp mô-đun `fs` bằng lệnh `require('fs')`. Ở đây chỉ có một điểm khác là file mô-đun cần phải được thêm tiền tố './' khi truyền cho phương thức `require()`. Giả sử file mô-đun của bạn là mymodule.js, thì ta sẽ nạp nó như sau:
 
 ```js
-var mymodule = require('./mymodule.js')
+const mymodule = require('./mymodule.js')
 ```
 
 Đuôi mở rộng '.js' là không bắt buộc nên bạn có thể bỏ nó đi cũng được.
@@ -45,8 +45,7 @@ Ngoài ra, bạn cũng nên tạo thói quen kiểm tra lỗi trước và nếu
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // có lỗi, ta trả ra sớm
+    if (err) { return callback(err) } // có lỗi, ta trả ra sớm
 
     // ... không có lỗi, ta tiếp tục xờ nắn `data`
 

@@ -1,0 +1,1137 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>ECMAScript Modules | Node.js v12.10.0 Documentation</title>
+  <link rel="stylesheet" href="data:text/css;base64,LyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogaXRhbGljOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBJdGFsaWMnKSwgbG9jYWwoJ0xhdG8tSXRhbGljJyksIHVybChodHRwczovL2ZvbnRzLmdzdGF0aWMuY29tL3MvbGF0by92MTYvUzZ1OHc0Qk1VVFBIanhzQVVpLXFOaVhnN2VVMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBpdGFsaWM7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEl0YWxpYycpLCBsb2NhbCgnTGF0by1JdGFsaWMnKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnU4dzRCTVVUUEhqeHNBWEMtcU5pWGc3US53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0KLyogbGF0aW4tZXh0ICovCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnTGF0byc7CiAgZm9udC1zdHlsZTogbm9ybWFsOwogIGZvbnQtd2VpZ2h0OiA0MDA7CiAgc3JjOiBsb2NhbCgnTGF0byBSZWd1bGFyJyksIGxvY2FsKCdMYXRvLVJlZ3VsYXInKSwgdXJsKGh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20vcy9sYXRvL3YxNi9TNnV5dzRCTVVUUEhqeEF3WGlXdEZDZlE3QS53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDQwMDsKICBzcmM6IGxvY2FsKCdMYXRvIFJlZ3VsYXInKSwgbG9jYWwoJ0xhdG8tUmVndWxhcicpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dXl3NEJNVVRQSGp4NHdYaVd0RkNjLndvZmYyKSBmb3JtYXQoJ3dvZmYyJyk7CiAgdW5pY29kZS1yYW5nZTogVSswMDAwLTAwRkYsIFUrMDEzMSwgVSswMTUyLTAxNTMsIFUrMDJCQi0wMkJDLCBVKzAyQzYsIFUrMDJEQSwgVSswMkRDLCBVKzIwMDAtMjA2RiwgVSsyMDc0LCBVKzIwQUMsIFUrMjEyMiwgVSsyMTkxLCBVKzIxOTMsIFUrMjIxMiwgVSsyMjE1LCBVK0ZFRkYsIFUrRkZGRDsKfQovKiBsYXRpbi1leHQgKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2FQR1EzcTVkME43dy53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDEwMC0wMjRGLCBVKzAyNTksIFUrMUUwMC0xRUZGLCBVKzIwMjAsIFUrMjBBMC0yMEFCLCBVKzIwQUQtMjBDRiwgVSsyMTEzLCBVKzJDNjAtMkM3RiwgVStBNzIwLUE3RkY7Cn0KLyogbGF0aW4gKi8KQGZvbnQtZmFjZSB7CiAgZm9udC1mYW1pbHk6ICdMYXRvJzsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBzcmM6IGxvY2FsKCdMYXRvIEJvbGQnKSwgbG9jYWwoJ0xhdG8tQm9sZCcpLCB1cmwoaHR0cHM6Ly9mb250cy5nc3RhdGljLmNvbS9zL2xhdG8vdjE2L1M2dTl3NEJNVVRQSGg2VVZTd2lQR1EzcTVkMC53b2ZmMikgZm9ybWF0KCd3b2ZmMicpOwogIHVuaWNvZGUtcmFuZ2U6IFUrMDAwMC0wMEZGLCBVKzAxMzEsIFUrMDE1Mi0wMTUzLCBVKzAyQkItMDJCQywgVSswMkM2LCBVKzAyREEsIFUrMDJEQywgVSsyMDAwLTIwNkYsIFUrMjA3NCwgVSsyMEFDLCBVKzIxMjIsIFUrMjE5MSwgVSsyMTkzLCBVKzIyMTIsIFUrMjIxNSwgVStGRUZGLCBVK0ZGRkQ7Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LyotLS0tLS0tLS0tLS0tLS0tLS0tLS0gTGF5b3V0IGFuZCBUeXBvZ3JhcGh5IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwpodG1sIHsKICBmb250LXNpemU6IDFyZW07CiAgb3ZlcmZsb3ctd3JhcDogYnJlYWstd29yZDsKICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDsKICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlOwogIC13ZWJraXQtZm9udC12YXJpYW50LWxpZ2F0dXJlczogbm9uZTsKICAgICAgICAgIGZvbnQtdmFyaWFudC1saWdhdHVyZXM6IG5vbmU7Cn0KCiogewogIGJveC1zaXppbmc6IGJvcmRlci1ib3g7Cn0KCmJvZHkgewogIGZvbnQtZmFtaWx5OiAiTGF0byIsICJMdWNpZGEgR3JhbmRlIiwgIkx1Y2lkYSBTYW5zIFVuaWNvZGUiLCAiTHVjaWRhIFNhbnMiLCBWZXJkYW5hLCBUYWhvbWEsIHNhbnMtc2VyaWY7CiAgbWFyZ2luOiAwOwogIHBhZGRpbmc6IDA7CiAgY29sb3I6ICMzMzM7CiAgYmFja2dyb3VuZDogI2ZmZjsKfQoKaDEgeyBmb250LXNpemU6IDIuNXJlbSB9CmgyIHsgZm9udC1zaXplOiAycmVtIH0KaDMgeyBmb250LXNpemU6IDEuNzVyZW0gfQpoNCB7IGZvbnQtc2l6ZTogMS41cmVtIH0KaDUgeyBmb250LXNpemU6IDEuMjVyZW0gfQpoNiB7IGZvbnQtc2l6ZTogMXJlbSB9CgpoMSwgaDIsIGgzLCBoNCwgaDUsIGg2IHsKICBtYXJnaW46IDEuNXJlbSAwIDFyZW07CiAgdGV4dC1yZW5kZXJpbmc6IG9wdGltaXplTGVnaWJpbGl0eTsKICBmb250LXdlaWdodDogNzAwOwogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKcHJlLCB0dCwgY29kZSwgLnByZSwgc3Bhbi50eXBlLCBhLnR5cGUgewogIGZvbnQtZmFtaWx5OiBTRk1vbm8tUmVndWxhciwgTWVubG8sIENvbnNvbGFzLCAiTGliZXJhdGlvbiBNb25vIiwgIkNvdXJpZXIgTmV3IiwgbW9ub3NwYWNlOwogIGZvbnQtc2l6ZTogLjllbTsKfQoKI2NvbnRlbnQgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKYSwgYTpsaW5rLCBhOmFjdGl2ZSB7CiAgY29sb3I6ICM0Mzg1M2Q7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGJvcmRlci1yYWRpdXM6IDJweDsKICBwYWRkaW5nOiAxcHggM3B4Owp9CgphOmhvdmVyLCBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDM4NTNkOwogIG91dGxpbmU6IG5vbmU7Cn0KCnN0cm9uZyB7CiAgZm9udC13ZWlnaHQ6IDcwMDsKfQoKY29kZSBhOmhvdmVyIHsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgplbSBjb2RlIHsKICBmb250LXN0eWxlOiBub3JtYWw7Cn0KCiNjaGFuZ2Vsb2cgI2d0b2MgewogIGRpc3BsYXk6IG5vbmU7Cn0KCiNndG9jIHsKICBtYXJnaW4tdG9wOiAuNXJlbTsKICBtYXJnaW4tYm90dG9tOiAxcmVtOwp9CgojZ3RvYyB1bCB7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBtYXJnaW4tbGVmdDogMDsKICBsaW5lLWhlaWdodDogMS41cmVtOwp9CgojZ3RvYyA+IHVsID4gbGkgewogIGRpc3BsYXk6IGlubGluZTsKICBib3JkZXItcmlnaHQ6IDFweCAjMDAwIHNvbGlkOwogIG1hcmdpbi1yaWdodDogMC40cmVtOwogIHBhZGRpbmctcmlnaHQ6IDAuNHJlbTsKfQoKI2d0b2MgPiB1bCA+IGxpOmxhc3QtY2hpbGQgewogIGJvcmRlci1yaWdodDogbm9uZTsKICBtYXJnaW4tcmlnaHQ6IDA7CiAgcGFkZGluZy1yaWdodDogMDsKfQoKbGkudmVyc2lvbi1waWNrZXIgewogIHBvc2l0aW9uOiByZWxhdGl2ZTsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBhIHsKICBib3JkZXItcmFkaXVzOiAycHggMnB4IDAgMDsKfQoKbGkudmVyc2lvbi1waWNrZXI6aG92ZXIgPiBvbCB7CiAgZGlzcGxheTogYmxvY2s7CiAgei1pbmRleDogMTsKfQoKbGkudmVyc2lvbi1waWNrZXIgYSBzcGFuIHsKICBmb250LXNpemU6IC43cmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciB7CiAgYmFja2dyb3VuZDogI2ZmZjsKICBib3JkZXI6IDFweCAjNDM4NTNkIHNvbGlkOwogIGJvcmRlci1yYWRpdXM6IDAgMCAycHggMnB4OwogIGRpc3BsYXk6IG5vbmU7CiAgbGlzdC1zdHlsZTogbm9uZTsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgcmlnaHQ6IDA7CiAgdG9wOiAxLjI1cmVtOwogIHdpZHRoOiAxMDAlOwp9CgojZ3RvYyBvbC52ZXJzaW9uLXBpY2tlciBsaSB7CiAgZGlzcGxheTogYmxvY2s7CiAgYm9yZGVyLXJpZ2h0OiAwOwogIG1hcmdpbi1yaWdodDogMDsKfQoKb2wudmVyc2lvbi1waWNrZXIgbGkgYSB7CiAgYm9yZGVyLXJhZGl1czogMDsKICBkaXNwbGF5OiBibG9jazsKICBtYXJnaW46IDA7CiAgcGFkZGluZzogLjFyZW07CiAgcGFkZGluZy1sZWZ0OiAxcmVtOwp9CgpvbC52ZXJzaW9uLXBpY2tlciBsaTpsYXN0LWNoaWxkIGEgewogIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAxcHg7CiAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMXB4Owp9CgoubGluZSB7CiAgd2lkdGg6IGNhbGMoMTAwJSAtIDFyZW0pOwogIGRpc3BsYXk6IGJsb2NrOwogIHBhZGRpbmctYm90dG9tOiAxcHg7Cn0KCi5hcGlfc3RhYmlsaXR5IHsKICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDsKICBtYXJnaW46IDAgMCAxcmVtIDA7CiAgZm9udC1mYW1pbHk6ICJMYXRvIiwgIkx1Y2lkYSBHcmFuZGUiLCAiTHVjaWRhIFNhbnMgVW5pY29kZSIsICJMdWNpZGEgU2FucyIsIFZlcmRhbmEsIFRhaG9tYSwgc2Fucy1zZXJpZjsKICBwYWRkaW5nOiAxcmVtOwogIGxpbmUtaGVpZ2h0OiAxLjU7Cn0KCi5hcGlfc3RhYmlsaXR5ICogewogIGNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50Owp9CgouYXBpX3N0YWJpbGl0eSBhIHsKICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsKfQoKLmFwaV9zdGFiaWxpdHkgYTpob3ZlciwgLmFwaV9zdGFiaWxpdHkgYTphY3RpdmUsIC5hcGlfc3RhYmlsaXR5IGE6Zm9jdXMgewogIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjQpOwp9CgouYXBpX3N0YWJpbGl0eSBhIGNvZGUgewogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCi5hcGlfc3RhYmlsaXR5XzAgewogIGJhY2tncm91bmQtY29sb3I6ICNENjAwMjc7Cn0KCi5hcGlfc3RhYmlsaXR5XzEgewogIGJhY2tncm91bmQtY29sb3I6ICNFQzUzMTU7Cn0KCi5hcGlfc3RhYmlsaXR5XzIgewogIGJhY2tncm91bmQtY29sb3I6ICM0RUJBMEY7Cn0KCi5hcGlfbWV0YWRhdGEgewogIGZvbnQtc2l6ZTogLjg1cmVtOwogIG1hcmdpbi1ib3R0b206IDFyZW07Cn0KCi5hcGlfbWV0YWRhdGEgc3BhbiB7CiAgbWFyZ2luLXJpZ2h0OiAxcmVtOwp9CgouYXBpX21ldGFkYXRhIHNwYW46bGFzdC1jaGlsZCB7CiAgbWFyZ2luLXJpZ2h0OiAwcHg7Cn0KCnVsLnBsYWluIHsKICBsaXN0LXN0eWxlOiBub25lOwp9CgphYmJyIHsKICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkICM0NTQ1NDU7Cn0KCnAgewogIHRleHQtcmVuZGVyaW5nOiBvcHRpbWl6ZUxlZ2liaWxpdHk7CiAgbWFyZ2luOiAwIDAgMS4xMjVyZW0gMDsKICBsaW5lLWhlaWdodDogMS41Owp9CgojYXBpY29udGVudCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKICBwYWRkaW5nLWJvdHRvbTogMnJlbTsKfQoKdGFibGUgewogIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7CiAgbWFyZ2luOiAwIDAgMS41cmVtIDA7Cn0KCnRoLCB0ZCB7CiAgYm9yZGVyOiAxcHggc29saWQgI2FhYTsKICBwYWRkaW5nOiAuNzVyZW0gMXJlbSAuNzVyZW0gMXJlbTsKICB2ZXJ0aWNhbC1hbGlnbjogdG9wOwp9Cgp0aCB7CiAgdGV4dC1hbGlnbjpsZWZ0Owp9CgpvbCwgdWwsIGRsIHsKICBtYXJnaW46IDAgMCAuNnJlbSAwOwogIHBhZGRpbmc6IDA7Cn0KCm9sIHVsLCBvbCBvbCwgb2wgZGwsIHVsIHVsLCB1bCBvbCwgdWwgZGwsIGRsIHVsLCBkbCBvbCwgZGwgZGwgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCnVsLCBvbCB7CiAgbWFyZ2luLWxlZnQ6IDJyZW07Cn0KCmRsIGR0IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgbWFyZ2luOiAxLjVyZW0gMCAwOwp9CgpkbCBkZCB7CiAgcG9zaXRpb246IHJlbGF0aXZlOwogIG1hcmdpbjogMCAxcmVtIDA7Cn0KCmRkICsgZHQucHJlIHsKICBtYXJnaW4tdG9wOiAxLjZyZW07Cn0KCiNhcGljb250ZW50IHsKICBwYWRkaW5nLXRvcDogMXJlbTsKfQoKI2FwaWNvbnRlbnQgLmxpbmUgewogIHdpZHRoOiBjYWxjKDUwJSAtIDFyZW0pOwogIG1hcmdpbjogMXJlbSAxcmVtIC45NXJlbTsKICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2NjOwp9CgpoMiArIGgyIHsKICBtYXJnaW46IDAgMCAuNXJlbTsKfQoKaDMgKyBoMyB7CiAgbWFyZ2luOiAwIDAgLjVyZW07Cn0KCmgyLCBoMywgaDQsIGg1IHsKICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgcGFkZGluZy1yaWdodDogNDBweDsKfQoKLnNyY2xpbmsgewogIGZsb2F0OiByaWdodDsKICBmb250LXNpemU6IHNtYWxsZXI7Cn0KCmgxIHNwYW4sIGgyIHNwYW4sIGgzIHNwYW4sIGg0IHNwYW4gewogIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICBkaXNwbGF5OiBibG9jazsKICB0b3A6IDA7CiAgcmlnaHQ6IDA7Cn0KCmgxIHNwYW46aG92ZXIsIGgyIHNwYW46aG92ZXIsIGgzIHNwYW46aG92ZXIsIGg0IHNwYW46aG92ZXIgewogIG9wYWNpdHk6IDE7Cn0KCmgxIHNwYW4gYSwgaDIgc3BhbiBhLCBoMyBzcGFuIGEsIGg0IHNwYW4gYSB7CiAgY29sb3I6ICMwMDA7CiAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogIGZvbnQtd2VpZ2h0OiBib2xkOwp9CgpwcmUsIHR0LCBjb2RlIHsKICBsaW5lLWhlaWdodDogMS41cmVtOwogIG1hcmdpbjogMDsgcGFkZGluZzogMDsKfQoKLnByZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKcHJlIHsKICBwYWRkaW5nOiAxcmVtOwogIHZlcnRpY2FsLWFsaWduOiB0b3A7CiAgYmFja2dyb3VuZDogI2YyZjJmMjsKICBtYXJnaW46IDFyZW07CiAgb3ZlcmZsb3cteDogYXV0bzsKfQoKcHJlID4gY29kZSB7CiAgcGFkZGluZzogMDsKfQoKcHJlICsgaDMgewogIG1hcmdpbi10b3A6IDIuMjI1cmVtOwp9Cgpjb2RlLnByZSB7CiAgd2hpdGUtc3BhY2U6IHByZTsKfQoKI2ludHJvIHsKICBtYXJnaW4tdG9wOiAxLjI1cmVtOwogIG1hcmdpbi1sZWZ0OiAxcmVtOwp9CgojaW50cm8gYSB7CiAgY29sb3I6ICNkZGQ7CiAgZm9udC13ZWlnaHQ6IGJvbGQ7Cn0KCmhyIHsKICBiYWNrZ3JvdW5kOiBub25lOwogIGJvcmRlcjogbWVkaXVtIG5vbmU7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM3YTdhN2E7CiAgbWFyZ2luOiAwIDAgMXJlbSAwOwp9CgojdG9jIGgyIHsKICBtYXJnaW4tdG9wOiAwOwogIG1hcmdpbjogMS41cmVtIDA7Cn0KCiN0b2MgcCB7CiAgbWFyZ2luOiAwOwp9CgojdG9jIHVsIGEgewogIHRleHQtZGVjb3JhdGlvbjpub25lOwp9CgojdG9jIHVsIGxpIHsKICBtYXJnaW4tYm90dG9tOiAuNjY2cmVtOwogIGxpc3Qtc3R5bGU6IHNxdWFyZSBvdXRzaWRlOwp9CgojdG9jIGxpID4gdWwgewogIG1hcmdpbi10b3A6IC42NjZyZW07Cn0KCiN0b2MgLnN0YWJpbGl0eV8wOjphZnRlciB7CiAgYmFja2dyb3VuZC1jb2xvcjogI2Q1MDAyNzsKICBjb2xvcjogI2ZmZjsKICBjb250ZW50OiAiZGVwcmVjYXRlZCI7CiAgbWFyZ2luLWxlZnQ6IC4yNXJlbTsKICBwYWRkaW5nOiAxcHggM3B4OwogIGJvcmRlci1yYWRpdXM6IDNweDsKfQoKI2FwaWNvbnRlbnQgbGkgewogIG1hcmdpbi1ib3R0b206IC41cmVtOwp9CgojYXBpY29udGVudCBsaTpsYXN0LWNoaWxkIHsKICBtYXJnaW4tYm90dG9tOiAwOwp9Cgp0dCwgY29kZSB7CiAgY29sb3I6ICMwNDA0MDQ7CiAgYmFja2dyb3VuZC1jb2xvcjogI2YyZjJmMjsKICBib3JkZXItcmFkaXVzOiAycHg7CiAgcGFkZGluZzogMXB4IDNweDsKfQoKLmFwaV9zdGFiaWxpdHkgY29kZSB7CiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAuMSk7Cn0KCmEgY29kZSB7CiAgY29sb3I6IGluaGVyaXQ7CiAgYmFja2dyb3VuZDogaW5oZXJpdDsKICBwYWRkaW5nOiAwOwp9CgoudHlwZSB7CiAgbGluZS1oZWlnaHQ6IDEuNXJlbTsKfQoKI2NvbHVtbjEuaW50ZXJpb3IgewogIG1hcmdpbi1sZWZ0OiAyMzRweDsKICBwYWRkaW5nOiAwIDJyZW07CiAgLXdlYmtpdC1wYWRkaW5nLXN0YXJ0OiAxLjVyZW07Cn0KCiNjb2x1bW4yLmludGVyaW9yIHsKICB3aWR0aDogMjM0cHg7CiAgYmFja2dyb3VuZDogIzMzMzsKICBwb3NpdGlvbjogZml4ZWQ7CiAgbGVmdDogMDsKICB0b3A6IDA7CiAgYm90dG9tOiAwOwogIG92ZXJmbG93LXg6IGhpZGRlbjsKICBvdmVyZmxvdy15OiBzY3JvbGw7Cn0KCiNjb2x1bW4yIHVsIHsKICBsaXN0LXN0eWxlOiBub25lOwogIG1hcmdpbjogLjlyZW0gMCAuNXJlbTsKICBiYWNrZ3JvdW5kOiAjMzMzOwp9CgojY29sdW1uMiA+IDpmaXJzdC1jaGlsZCB7CiAgbWFyZ2luOiAxLjI1cmVtOwogIGZvbnQtc2l6ZTogMS41cmVtOwp9CgojY29sdW1uMiA+IHVsOm50aC1jaGlsZCgyKSB7CiAgbWFyZ2luOiAxLjI1cmVtIDAgLjVyZW07Cn0KCiNjb2x1bW4yID4gdWw6bGFzdC1jaGlsZCB7CiAgbWFyZ2luOiAuOXJlbSAwIDEuMjVyZW07Cn0KCiNjb2x1bW4yIHVsIGxpIHsKICBwYWRkaW5nLWxlZnQ6IDEuMjVyZW07CiAgbWFyZ2luLWJvdHRvbTogLjVyZW07CiAgcGFkZGluZy1ib3R0b206IC41cmVtOwp9CgojY29sdW1uMiAubGluZSB7CiAgbWFyZ2luOiAwIC41cmVtOwogIGJhY2tncm91bmQtY29sb3I6ICM3MDcwNzA7Cn0KCiNjb2x1bW4yIHVsIGxpOmxhc3QtY2hpbGQgewogIG1hcmdpbi1ib3R0b206IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEgewogIGNvbG9yOiAjY2NjOwogIGJvcmRlci1yYWRpdXM6IDA7Cn0KCiNjb2x1bW4yIHVsIGxpIGEuYWN0aXZlLCAjY29sdW1uMiB1bCBsaSBhLmFjdGl2ZTpob3ZlciwKI2NvbHVtbjIgdWwgbGkgYS5hY3RpdmU6Zm9jdXMgewogIGNvbG9yOiAjNDM4NTNkOwogIGJvcmRlci1yYWRpdXM6IDA7CiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICM0Mzg1M2Q7CiAgYmFja2dyb3VuZDogbm9uZTsKfQoKI2ludHJvIGE6aG92ZXIsICNpbnRybyBhOmZvY3VzLAojY29sdW1uMiB1bCBsaSBhOmhvdmVyLCAjY29sdW1uMiB1bCBsaSBhOmZvY3VzIHsKICBjb2xvcjogI2ZmZjsKICBiYWNrZ3JvdW5kOiBub25lOwp9CgpzcGFuID4gLm1hcmssIHNwYW4gPiAubWFyazp2aXNpdGVkIHsKICBjb2xvcjogIzcwNzA3MDsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgdG9wOiAwcHg7CiAgcmlnaHQ6IDBweDsKfQoKc3BhbiA+IC5tYXJrOmhvdmVyLCBzcGFuID4gLm1hcms6Zm9jdXMsIHNwYW4gPiAubWFyazphY3RpdmUgewogIGNvbG9yOiAjNDM4NTNkOwogIGJhY2tncm91bmQ6IG5vbmU7Cn0KCnRoID4gKjpsYXN0LWNoaWxkLCB0ZCA+ICo6bGFzdC1jaGlsZCB7CiAgbWFyZ2luLWJvdHRvbTogMDsKfQoKLmNoYW5nZWxvZyA+IHN1bW1hcnkgewogIG1hcmdpbjogLjVyZW0gMDsKICBwYWRkaW5nOiAuNXJlbSAwOwogIGN1cnNvcjogcG9pbnRlcjsKfQoKLyogc2ltcGxlciBjbGVhcmZpeCAqLwouY2xlYXJmaXg6YWZ0ZXIgewogIGNvbnRlbnQ6ICIuIjsKICBkaXNwbGF5OiBibG9jazsKICBoZWlnaHQ6IDA7CiAgY2xlYXI6IGJvdGg7CiAgdmlzaWJpbGl0eTogaGlkZGVuOwp9CgouZ2l0aHViX2ljb24gewogIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7CiAgbWFyZ2luOiAtMnB4IDNweCAwIDA7Cn0KCkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogMTAyNHB4KSB7CiAgI2NvbnRlbnQgewogICAgb3ZlcmZsb3c6IHZpc2libGU7CiAgfQogICNjb2x1bW4xLmludGVyaW9yIHsKICAgIG1hcmdpbi1sZWZ0OiAwOwogICAgcGFkZGluZy1sZWZ0OiAuNXJlbTsKICAgIHBhZGRpbmctcmlnaHQ6IC41cmVtOwogICAgd2lkdGg6IGF1dG87CiAgICBvdmVyZmxvdy15OiB2aXNpYmxlOwogIH0KICAjY29sdW1uMiB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KfQoKQG1lZGlhIHByaW50IHsKICBodG1sIHsKICAgIGhlaWdodDogYXV0bzsKICAgIGZvbnQtc2l6ZTogMC43NWVtOwogIH0KICAjY29sdW1uMi5pbnRlcmlvciB7CiAgICBkaXNwbGF5OiBub25lOwogIH0KICAjY29sdW1uMS5pbnRlcmlvciB7CiAgICBtYXJnaW4tbGVmdDogMHB4OwogICAgcGFkZGluZzogMHB4OwogICAgb3ZlcmZsb3cteTogYXV0bzsKICB9CiAgLmFwaV9tZXRhZGF0YSwKICAjdG9jLAogIC5zcmNsaW5rLAogICNndG9jLAogIC5tYXJrIHsKICAgIGRpc3BsYXk6IG5vbmU7CiAgfQogIGgxIHsKICAgIGZvbnQtc2l6ZTogMnJlbTsKICB9CiAgaDIgewogICAgZm9udC1zaXplOiAxLjc1cmVtOwogIH0KICBoMyB7CiAgICBmb250LXNpemU6IDEuNXJlbTsKICB9CiAgaDQgewogICAgZm9udC1zaXplOiAxLjNyZW07CiAgfQogIGg1IHsKICAgIGZvbnQtc2l6ZTogMS4ycmVtOwogIH0KICBoNiB7CiAgICBmb250LXNpemU6IDEuMXJlbTsKICB9CiAgLmFwaV9zdGFiaWxpdHkgewogICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogIH0KICAuYXBpX3N0YWJpbGl0eSBhIHsKICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsKICB9CiAgYSB7CiAgICBjb2xvcjogaW5oZXJpdDsKICB9CiAgI2FwaWNvbnRlbnQgewogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICB9Cn0K">
+  <link rel="stylesheet" href="data:text/css;base64,LnNoX3NvdXJjZUNvZGUgewogIGZvbnQtd2VpZ2h0OiBub3JtYWw7CiAgZm9udC1zdHlsZTogbm9ybWFsOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfc3ltYm9sLAouc2hfc291cmNlQ29kZSAuc2hfY2JyYWNrZXQgewogIGNvbG9yOiAjMzMzOwp9Cgouc2hfc291cmNlQ29kZSAuc2hfa2V5d29yZCB7CiAgY29sb3I6ICMzMzg7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9zdHJpbmcsCi5zaF9zb3VyY2VDb2RlIC5zaF9yZWdleHAsCi5zaF9zb3VyY2VDb2RlIC5zaF9udW1iZXIsCi5zaF9zb3VyY2VDb2RlIC5zaF9zcGVjaWFsY2hhciB7CiAgY29sb3I6ICNFNTQzMDU7Cn0KCi5zaF9zb3VyY2VDb2RlIC5zaF9jb21tZW50IHsKICBjb2xvcjogIzY2NjsKICBmb250LXdlaWdodDogbGlnaHRlcjsKfQo=">
+  <link rel="canonical" href="https://nodejs.org/api/esm.html">
+</head>
+<body class="alt apidoc" id="api-section-esm">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="https://nodejs.org/" title="Go back to the home page">
+          Node.js
+        </a>
+      </div>
+      <ul>
+<li><a href="https://nodejs.org/api/documentation.html" class="nav-documentation">About these Docs</a></li>
+<li><a href="https://nodejs.org/api/synopsis.html" class="nav-synopsis">Usage &amp; Example</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://nodejs.org/api/assert.html" class="nav-assert">Assertion Testing</a></li>
+<li><a href="https://nodejs.org/api/async_hooks.html" class="nav-async_hooks">Async Hooks</a></li>
+<li><a href="https://nodejs.org/api/buffer.html" class="nav-buffer">Buffer</a></li>
+<li><a href="https://nodejs.org/api/addons.html" class="nav-addons">C++ Addons</a></li>
+<li><a href="https://nodejs.org/api/n-api.html" class="nav-n-api">C/C++ Addons - N-API</a></li>
+<li><a href="https://nodejs.org/api/child_process.html" class="nav-child_process">Child Processes</a></li>
+<li><a href="https://nodejs.org/api/cluster.html" class="nav-cluster">Cluster</a></li>
+<li><a href="https://nodejs.org/api/cli.html" class="nav-cli">Command Line Options</a></li>
+<li><a href="https://nodejs.org/api/console.html" class="nav-console">Console</a></li>
+<li><a href="https://nodejs.org/api/crypto.html" class="nav-crypto">Crypto</a></li>
+<li><a href="https://nodejs.org/api/debugger.html" class="nav-debugger">Debugger</a></li>
+<li><a href="https://nodejs.org/api/deprecations.html" class="nav-deprecations">Deprecated APIs</a></li>
+<li><a href="https://nodejs.org/api/dns.html" class="nav-dns">DNS</a></li>
+<li><a href="https://nodejs.org/api/domain.html" class="nav-domain">Domain</a></li>
+<li><a href="https://nodejs.org/api/esm.html" class="nav-esm active">ECMAScript Modules</a></li>
+<li><a href="https://nodejs.org/api/errors.html" class="nav-errors">Errors</a></li>
+<li><a href="https://nodejs.org/api/events.html" class="nav-events">Events</a></li>
+<li><a href="https://nodejs.org/api/fs.html" class="nav-fs">File System</a></li>
+<li><a href="https://nodejs.org/api/globals.html" class="nav-globals">Globals</a></li>
+<li><a href="https://nodejs.org/api/http.html" class="nav-http">HTTP</a></li>
+<li><a href="https://nodejs.org/api/http2.html" class="nav-http2">HTTP/2</a></li>
+<li><a href="https://nodejs.org/api/https.html" class="nav-https">HTTPS</a></li>
+<li><a href="https://nodejs.org/api/inspector.html" class="nav-inspector">Inspector</a></li>
+<li><a href="https://nodejs.org/api/intl.html" class="nav-intl">Internationalization</a></li>
+<li><a href="https://nodejs.org/api/modules.html" class="nav-modules">Modules</a></li>
+<li><a href="https://nodejs.org/api/net.html" class="nav-net">Net</a></li>
+<li><a href="https://nodejs.org/api/os.html" class="nav-os">OS</a></li>
+<li><a href="https://nodejs.org/api/path.html" class="nav-path">Path</a></li>
+<li><a href="https://nodejs.org/api/perf_hooks.html" class="nav-perf_hooks">Performance Hooks</a></li>
+<li><a href="https://nodejs.org/api/policy.html" class="nav-policy">Policies</a></li>
+<li><a href="https://nodejs.org/api/process.html" class="nav-process">Process</a></li>
+<li><a href="https://nodejs.org/api/punycode.html" class="nav-punycode">Punycode</a></li>
+<li><a href="https://nodejs.org/api/querystring.html" class="nav-querystring">Query Strings</a></li>
+<li><a href="https://nodejs.org/api/readline.html" class="nav-readline">Readline</a></li>
+<li><a href="https://nodejs.org/api/repl.html" class="nav-repl">REPL</a></li>
+<li><a href="https://nodejs.org/api/report.html" class="nav-report">Report</a></li>
+<li><a href="https://nodejs.org/api/stream.html" class="nav-stream">Stream</a></li>
+<li><a href="https://nodejs.org/api/string_decoder.html" class="nav-string_decoder">String Decoder</a></li>
+<li><a href="https://nodejs.org/api/timers.html" class="nav-timers">Timers</a></li>
+<li><a href="https://nodejs.org/api/tls.html" class="nav-tls">TLS/SSL</a></li>
+<li><a href="https://nodejs.org/api/tracing.html" class="nav-tracing">Trace Events</a></li>
+<li><a href="https://nodejs.org/api/tty.html" class="nav-tty">TTY</a></li>
+<li><a href="https://nodejs.org/api/dgram.html" class="nav-dgram">UDP/Datagram</a></li>
+<li><a href="https://nodejs.org/api/url.html" class="nav-url">URL</a></li>
+<li><a href="https://nodejs.org/api/util.html" class="nav-util">Utilities</a></li>
+<li><a href="https://nodejs.org/api/v8.html" class="nav-v8">V8</a></li>
+<li><a href="https://nodejs.org/api/vm.html" class="nav-vm">VM</a></li>
+<li><a href="https://nodejs.org/api/worker_threads.html" class="nav-worker_threads">Worker Threads</a></li>
+<li><a href="https://nodejs.org/api/zlib.html" class="nav-zlib">Zlib</a></li>
+</ul>
+<div class="line"></div>
+<ul>
+<li><a href="https://github.com/nodejs/node" class="nav-https-github-com-nodejs-node">GitHub Repo &amp; Issue Tracker</a></li>
+</ul>
+    </div>
+
+    <div id="column1" data-id="esm" class="interior">
+      <header>
+        <h1>Node.js v12.10.0 Documentation</h1>
+        <div id="gtoc">
+          <ul>
+            <li>
+              <a href="https://nodejs.org/api/index.html" name="toc">Index</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/all.html">View on single page</a>
+            </li>
+            <li>
+              <a href="https://nodejs.org/api/esm.json">View as JSON</a>
+            </li>
+            
+    <li class="version-picker">
+      <a href="#">View another version <span>▼</span></a>
+      <ol class="version-picker"><li><a href="https://nodejs.org/docs/latest-v12.x/api/esm.html">12.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v11.x/api/esm.html">11.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v10.x/api/esm.html">10.x <b>LTS</b></a></li>
+<li><a href="https://nodejs.org/docs/latest-v9.x/api/esm.html">9.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/esm.html">8.x <b>LTS</b></a></li></ol>
+    </li>
+  
+            <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/esm.md"><span class="github_icon"><svg height="16" width="16" viewBox="0 0 16.1 16.1" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.5 15.6c.4 0 .5-.2.5-.4v-1.5c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9 1 2.4.7 0-.5.2-.9.5-1-1.8-.3-3.7-1-3.7-4 0-.9.3-1.6.8-2.2 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 2 .1 2.1.5.6.8 1.3.8 2.2 0 3-1.9 3.7-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.1.5.5.4A8 8 0 0 0 16 8a8 8 0 0 0-8-8z"></path></svg></span>Edit on GitHub</a></li>
+          </ul>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+<li>
+<p><span class="stability_1"><a href="#esm_ecmascript_modules">ECMAScript Modules</a></span></p>
+<ul>
+<li><a href="#esm_introduction">Introduction</a></li>
+<li><a href="#esm_enabling">Enabling</a></li>
+<li><a href="#esm_code_package_json_code_code_type_code_field"><code>package.json</code> <code>"type"</code> field</a></li>
+<li><a href="#esm_package_scope_and_file_extensions">Package Scope and File Extensions</a></li>
+<li><a href="#esm_code_input_type_code_flag"><code>--input-type</code> flag</a></li>
+<li><a href="#esm_package_entry_points">Package Entry Points</a></li>
+<li><a href="#esm_package_exports">Package Exports</a></li>
+<li>
+<p><a href="#esm_code_import_code_specifiers"><code>import</code> Specifiers</a></p>
+<ul>
+<li>
+<p><a href="#esm_terminology">Terminology</a></p>
+<ul>
+<li><a href="#esm_data_imports"><code>data:</code> Imports</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#esm_import_meta">import.meta</a></li>
+<li>
+<p><a href="#esm_differences_between_es_modules_and_commonjs">Differences Between ES Modules and CommonJS</a></p>
+<ul>
+<li><a href="#esm_mandatory_file_extensions">Mandatory file extensions</a></li>
+<li><a href="#esm_no_code_node_path_code">No <code>NODE_PATH</code></a></li>
+<li><a href="#esm_no_code_require_code_code_exports_code_code_module_exports_code_code_filename_code_code_dirname_code">No <code>require</code>, <code>exports</code>, <code>module.exports</code>, <code>__filename</code>, <code>__dirname</code></a></li>
+<li><a href="#esm_no_code_require_extensions_code">No <code>require.extensions</code></a></li>
+<li><a href="#esm_no_code_require_cache_code">No <code>require.cache</code></a></li>
+<li><a href="#esm_url_based_paths">URL-based paths</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#esm_interoperability_with_commonjs">Interoperability with CommonJS</a></p>
+<ul>
+<li><a href="#esm_code_require_code"><code>require</code></a></li>
+<li><a href="#esm_code_import_code_statements"><code>import</code> statements</a></li>
+<li><a href="#esm_code_import_code_expressions"><code>import()</code> expressions</a></li>
+</ul>
+</li>
+<li><a href="#esm_commonjs_json_and_native_modules">CommonJS, JSON, and Native Modules</a></li>
+<li><a href="#esm_builtin_modules">Builtin modules</a></li>
+<li><a href="#esm_json_modules">JSON Modules</a></li>
+<li><a href="#esm_experimental_wasm_modules">Experimental Wasm Modules</a></li>
+<li>
+<p><a href="#esm_experimental_loader_hooks">Experimental Loader hooks</a></p>
+<ul>
+<li><a href="#esm_resolve_hook">Resolve hook</a></li>
+<li><a href="#esm_dynamic_instantiate_hook">Dynamic instantiate hook</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#esm_resolution_algorithm">Resolution Algorithm</a></p>
+<ul>
+<li><a href="#esm_features">Features</a></li>
+<li><a href="#esm_resolver_algorithm">Resolver Algorithm</a></li>
+<li><a href="#esm_customizing_esm_specifier_resolution_algorithm">Customizing ESM specifier resolution algorithm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+      </div>
+
+      <div id="apicontent">
+        <h1>ECMAScript Modules<span><a class="mark" href="#esm_ecmascript_modules" id="esm_ecmascript_modules">#</a></span></h1>
+
+
+<p></p><div class="api_stability api_stability_1"><a href="https://nodejs.org/api/documentation.html#documentation_stability_index">Stability: 1</a> - Experimental</div><p></p>
+<h2>Introduction<span><a class="mark" href="#esm_introduction" id="esm_introduction">#</a></span></h2>
+
+<p>ECMAScript modules are <a href="https://tc39.github.io/ecma262/#sec-modules">the official standard format</a> to package JavaScript
+code for reuse. Modules are defined using a variety of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import"><code>import</code></a> and
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export"><code>export</code></a> statements.</p>
+<p>Node.js fully supports ECMAScript modules as they are currently specified and
+provides limited interoperability between them and the existing module format,
+<a href="https://nodejs.org/api/modules.html">CommonJS</a>.</p>
+<p>Node.js contains support for ES Modules based upon the
+<a href="https://github.com/nodejs/node-eps/blob/master/002-es-modules.md">Node.js EP for ES Modules</a> and the <a href="https://github.com/nodejs/modules/blob/master/doc/plan-for-new-modules-implementation.md">ECMAScript-modules implementation</a>.</p>
+<p>Expect major changes in the implementation including interoperability support,
+specifier resolution, and default behavior.</p>
+<h2>Enabling<span><a class="mark" href="#esm_enabling" id="esm_enabling">#</a></span></h2>
+
+<p>The <code>--experimental-modules</code> flag can be used to enable support for
+ECMAScript modules (ES modules).</p>
+<p>Once enabled, Node.js will treat the following as ES modules when passed to
+<code>node</code> as the initial input, or when referenced by <code>import</code> statements within
+ES module code:</p>
+<ul>
+<li>
+<p>Files ending in <code>.mjs</code>.</p>
+</li>
+<li>
+<p>Files ending in <code>.js</code>, or extensionless files, when the nearest parent
+<code>package.json</code> file contains a top-level field <code>"type"</code> with a value of
+<code>"module"</code>.</p>
+</li>
+<li>
+<p>Strings passed in as an argument to <code>--eval</code> or <code>--print</code>, or piped to
+<code>node</code> via <code>STDIN</code>, with the flag <code>--input-type=module</code>.</p>
+</li>
+</ul>
+<p>Node.js will treat as CommonJS all other forms of input, such as <code>.js</code> files
+where the nearest parent <code>package.json</code> file contains no top-level <code>"type"</code>
+field, or string input without the flag <code>--input-type</code>. This behavior is to
+preserve backward compatibility. However, now that Node.js supports both
+CommonJS and ES modules, it is best to be explicit whenever possible. Node.js
+will treat the following as CommonJS when passed to <code>node</code> as the initial input,
+or when referenced by <code>import</code> statements within ES module code:</p>
+<ul>
+<li>
+<p>Files ending in <code>.cjs</code>.</p>
+</li>
+<li>
+<p>Files ending in <code>.js</code>, or extensionless files, when the nearest parent
+<code>package.json</code> file contains a top-level field <code>"type"</code> with a value of
+<code>"commonjs"</code>.</p>
+</li>
+<li>
+<p>Strings passed in as an argument to <code>--eval</code> or <code>--print</code>, or piped to
+<code>node</code> via <code>STDIN</code>, with the flag <code>--input-type=commonjs</code>.</p>
+</li>
+</ul>
+<h2><code>package.json</code> <code>"type"</code> field<span><a class="mark" href="#esm_code_package_json_code_code_type_code_field" id="esm_code_package_json_code_code_type_code_field">#</a></span></h2>
+<p>Files ending with <code>.js</code> or <code>.mjs</code>, or lacking any extension,
+will be loaded as ES modules when the nearest parent <code>package.json</code> file
+contains a top-level field <code>"type"</code> with a value of <code>"module"</code>.</p>
+<p>The nearest parent <code>package.json</code> is defined as the first <code>package.json</code> found
+when searching in the current folder, that folder’s parent, and so on up
+until the root of the volume is reached.</p>
+<!-- eslint-skip -->
+<pre><code class="language-js">// package.json
+{
+  "type": "module"
+}
+</code></pre>
+<pre><code class="language-sh"># In same folder as above package.json
+node --experimental-modules my-app.js # Runs as ES module
+</code></pre>
+<p>If the nearest parent <code>package.json</code> lacks a <code>"type"</code> field, or contains
+<code>"type": "commonjs"</code>, extensionless and <code>.js</code> files are treated as CommonJS.
+If the volume root is reached and no <code>package.json</code> is found,
+Node.js defers to the default, a <code>package.json</code> with no <code>"type"</code>
+field.</p>
+<p><code>import</code> statements of <code>.js</code> and extensionless files are treated as ES modules
+if the nearest parent <code>package.json</code> contains <code>"type": "module"</code>.</p>
+<pre><code class="language-js">// my-app.js, part of the same example as above
+import './startup.js'; // Loaded as ES module because of package.json
+</code></pre>
+<h2>Package Scope and File Extensions<span><a class="mark" href="#esm_package_scope_and_file_extensions" id="esm_package_scope_and_file_extensions">#</a></span></h2>
+<p>A folder containing a <code>package.json</code> file, and all subfolders below that
+folder down until the next folder containing another <code>package.json</code>, is
+considered a <em>package scope</em>. The <code>"type"</code> field defines how <code>.js</code> and
+extensionless files should be treated within a particular <code>package.json</code> file’s
+package scope. Every package in a project’s <code>node_modules</code> folder contains its
+own <code>package.json</code> file, so each project’s dependencies have their own package
+scopes. A <code>package.json</code> lacking a <code>"type"</code> field is treated as if it contained
+<code>"type": "commonjs"</code>.</p>
+<p>The package scope applies not only to initial entry points (<code>node --experimental-modules my-app.js</code>) but also to files referenced by <code>import</code>
+statements and <code>import()</code> expressions.</p>
+<pre><code class="language-js">// my-app.js, in an ES module package scope because there is a package.json
+// file in the same folder with "type": "module".
+
+import './startup/init.js';
+// Loaded as ES module since ./startup contains no package.json file,
+// and therefore inherits the ES module package scope from one level up.
+
+import 'commonjs-package';
+// Loaded as CommonJS since ./node_modules/commonjs-package/package.json
+// lacks a "type" field or contains "type": "commonjs".
+
+import './node_modules/commonjs-package/index.js';
+// Loaded as CommonJS since ./node_modules/commonjs-package/package.json
+// lacks a "type" field or contains "type": "commonjs".
+</code></pre>
+<p>Files ending with <code>.mjs</code> are always loaded as ES modules regardless of package
+scope.</p>
+<p>Files ending with <code>.cjs</code> are always loaded as CommonJS regardless of package
+scope.</p>
+<pre><code class="language-js">import './legacy-file.cjs';
+// Loaded as CommonJS since .cjs is always loaded as CommonJS.
+
+import 'commonjs-package/src/index.mjs';
+// Loaded as ES module since .mjs is always loaded as ES module.
+</code></pre>
+<p>The <code>.mjs</code> and <code>.cjs</code> extensions may be used to mix types within the same
+package scope:</p>
+<ul>
+<li>
+<p>Within a <code>"type": "module"</code> package scope, Node.js can be instructed to
+interpret a particular file as CommonJS by naming it with a <code>.cjs</code> extension
+(since both <code>.js</code> and <code>.mjs</code> files are treated as ES modules within a
+<code>"module"</code> package scope).</p>
+</li>
+<li>
+<p>Within a <code>"type": "commonjs"</code> package scope, Node.js can be instructed to
+interpret a particular file as an ES module by naming it with an <code>.mjs</code>
+extension (since both <code>.js</code> and <code>.cjs</code> files are treated as CommonJS within a
+<code>"commonjs"</code> package scope).</p>
+</li>
+</ul>
+<h2><code>--input-type</code> flag<span><a class="mark" href="#esm_code_input_type_code_flag" id="esm_code_input_type_code_flag">#</a></span></h2>
+<p>Strings passed in as an argument to <code>--eval</code> or <code>--print</code> (or <code>-e</code> or <code>-p</code>), or
+piped to <code>node</code> via <code>STDIN</code>, will be treated as ES modules when the
+<code>--input-type=module</code> flag is set.</p>
+<pre><code class="language-sh">node --experimental-modules --input-type=module --eval \
+  "import { sep } from 'path'; console.log(sep);"
+
+echo "import { sep } from 'path'; console.log(sep);" | \
+  node --experimental-modules --input-type=module
+</code></pre>
+<p>For completeness there is also <code>--input-type=commonjs</code>, for explicitly running
+string input as CommonJS. This is the default behavior if <code>--input-type</code> is
+unspecified.</p>
+<h2>Package Entry Points<span><a class="mark" href="#esm_package_entry_points" id="esm_package_entry_points">#</a></span></h2>
+<p>The <code>package.json</code> <code>"main"</code> field defines the entry point for a package,
+whether the package is included into CommonJS via <code>require</code> or into an ES
+module via <code>import</code>.</p>
+<!-- eslint-skip -->
+<pre><code class="language-js">// ./node_modules/es-module-package/package.json
+{
+  "type": "module",
+  "main": "./src/index.js"
+}
+</code></pre>
+<pre><code class="language-js">// ./my-app.mjs
+
+import { something } from 'es-module-package';
+// Loads from ./node_modules/es-module-package/src/index.js
+</code></pre>
+<p>An attempt to <code>require</code> the above <code>es-module-package</code> would attempt to load
+<code>./node_modules/es-module-package/src/index.js</code> as CommonJS, which would throw
+an error as Node.js would not be able to parse the <code>export</code> statement in
+CommonJS.</p>
+<p>As with <code>import</code> statements, for ES module usage the value of <code>"main"</code> must be
+a full path including extension: <code>"./index.mjs"</code>, not <code>"./index"</code>.</p>
+<p>If the <code>package.json</code> <code>"type"</code> field is omitted, a <code>.js</code> file in <code>"main"</code> will
+be interpreted as CommonJS.</p>
+<p>The <code>"main"</code> field can point to exactly one file, regardless of whether the
+package is referenced via <code>require</code> (in a CommonJS context) or <code>import</code> (in an
+ES module context). Package authors who want to publish a package to be used in
+both contexts can do so by setting <code>"main"</code> to point to the CommonJS entry point
+and informing the package’s users of the path to the ES module entry point. Such
+a package would be accessible like <code>require('pkg')</code> and <code>import 'pkg/module.mjs'</code>. Alternatively the package <code>"main"</code> could point to the ES
+module entry point and legacy users could be informed of the CommonJS entry
+point path, e.g. <code>require('pkg/commonjs')</code>.</p>
+<h2>Package Exports<span><a class="mark" href="#esm_package_exports" id="esm_package_exports">#</a></span></h2>
+<p>By default, all subpaths from a package can be imported (<code>import 'pkg/x.js'</code>).
+Custom subpath aliasing and encapsulation can be provided through the
+<code>"exports"</code> field.</p>
+<!-- eslint-skip -->
+<pre><code class="language-js">// ./node_modules/es-module-package/package.json
+{
+  "exports": {
+    "./submodule": "./src/submodule.js"
+  }
+}
+</code></pre>
+<pre><code class="language-js">import submodule from 'es-module-package/submodule';
+// Loads ./node_modules/es-module-package/src/submodule.js
+</code></pre>
+<p>In addition to defining an alias, subpaths not defined by <code>"exports"</code> will
+throw when an attempt is made to import them:</p>
+<pre><code class="language-js">import submodule from 'es-module-package/private-module.js';
+// Throws - Module not found
+</code></pre>
+<blockquote>
+<p>Note: this is not a strong encapsulation as any private modules can still be
+loaded by absolute paths.</p>
+</blockquote>
+<p>Folders can also be mapped with package exports:</p>
+<!-- eslint-skip -->
+<pre><code class="language-js">// ./node_modules/es-module-package/package.json
+{
+  "exports": {
+    "./features/": "./src/features/"
+  }
+}
+</code></pre>
+<pre><code class="language-js">import feature from 'es-module-package/features/x.js';
+// Loads ./node_modules/es-module-package/src/features/x.js
+</code></pre>
+<p>If a package has no exports, setting <code>"exports": false</code> can be used instead of
+<code>"exports": {}</code> to indicate the package does not intend for submodules to be
+exposed.</p>
+<p>Any invalid exports entries will be ignored. This includes exports not
+starting with <code>"./"</code> or a missing trailing <code>"/"</code> for directory exports.</p>
+<p>Array fallback support is provided for exports, similarly to import maps
+in order to be forward-compatible with fallback workflows in future:</p>
+<!-- eslint-skip -->
+<pre><code class="language-js">{
+  "exports": {
+    "./submodule": ["not:valid", "./submodule.js"]
+  }
+}
+</code></pre>
+<p>Since <code>"not:valid"</code> is not a supported target, <code>"./submodule.js"</code> is used
+instead as the fallback, as if it were the only target.</p>
+<h2><code>import</code> Specifiers<span><a class="mark" href="#esm_code_import_code_specifiers" id="esm_code_import_code_specifiers">#</a></span></h2>
+<h3>Terminology<span><a class="mark" href="#esm_terminology" id="esm_terminology">#</a></span></h3>
+<p>The <em>specifier</em> of an <code>import</code> statement is the string after the <code>from</code> keyword,
+e.g. <code>'path'</code> in <code>import { sep } from 'path'</code>. Specifiers are also used in
+<code>export from</code> statements, and as the argument to an <code>import()</code> expression.</p>
+<p>There are four types of specifiers:</p>
+<ul>
+<li>
+<p><em>Bare specifiers</em> like <code>'some-package'</code>. They refer to an entry point of a
+package by the package name.</p>
+</li>
+<li>
+<p><em>Deep import specifiers</em> like <code>'some-package/lib/shuffle.mjs'</code>. They refer to
+a path within a package prefixed by the package name.</p>
+</li>
+<li>
+<p><em>Relative specifiers</em> like <code>'./startup.js'</code> or <code>'../config.mjs'</code>. They refer
+to a path relative to the location of the importing file.</p>
+</li>
+<li>
+<p><em>Absolute specifiers</em> like <code>'file:///opt/nodejs/config.js'</code>. They refer
+directly and explicitly to a full path.</p>
+</li>
+</ul>
+<p>Bare specifiers, and the bare specifier portion of deep import specifiers, are
+strings; but everything else in a specifier is a URL.</p>
+<p>Only <code>file:</code> and <code>data:</code> URLs are supported. A specifier like
+<code>'https://example.com/app.js'</code> may be supported by browsers but it is not
+supported in Node.js.</p>
+<p>Specifiers may not begin with <code>/</code> or <code>//</code>. These are reserved for potential
+future use. The root of the current volume may be referenced via <code>file:///</code>.</p>
+<h4><code>data:</code> Imports<span><a class="mark" href="#esm_data_imports" id="esm_data_imports">#</a></span></h4>
+<div class="api_metadata">
+<span>Added in: v12.10.0</span>
+</div>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs"><code>data:</code> URLs</a> are supported for importing with the following MIME types:</p>
+<ul>
+<li><code>text/javascript</code> for ES Modules</li>
+<li><code>application/json</code> for JSON</li>
+<li><code>application/wasm</code> for WASM.</li>
+</ul>
+<p><code>data:</code> URLs only resolve <a href="#esm_terminology"><em>Bare specifiers</em></a> for builtin modules
+and <a href="#esm_terminology"><em>Absolute specifiers</em></a>. Resolving
+<a href="#esm_terminology"><em>Relative specifiers</em></a> will not work because <code>data:</code> is not a
+<a href="https://url.spec.whatwg.org/#special-scheme">special scheme</a>. For example, attempting to load <code>./foo</code>
+from <code>data:text/javascript,import "./foo";</code> will fail to resolve since there
+is no concept of relative resolution for <code>data:</code> URLs. An example of a <code>data:</code>
+URLs being used is:</p>
+<pre><code class="language-js">import 'data:text/javascript,console.log("hello!");';
+import _ from 'data:application/json,"world!"';
+</code></pre>
+<h2>import.meta<span><a class="mark" href="#esm_import_meta" id="esm_import_meta">#</a></span></h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>The <code>import.meta</code> metaproperty is an <code>Object</code> that contains the following
+property:</p>
+<ul>
+<li><code>url</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> The absolute <code>file:</code> URL of the module.</li>
+</ul>
+<h2>Differences Between ES Modules and CommonJS<span><a class="mark" href="#esm_differences_between_es_modules_and_commonjs" id="esm_differences_between_es_modules_and_commonjs">#</a></span></h2>
+<h3>Mandatory file extensions<span><a class="mark" href="#esm_mandatory_file_extensions" id="esm_mandatory_file_extensions">#</a></span></h3>
+<p>A file extension must be provided when using the <code>import</code> keyword. Directory
+indexes (e.g. <code>'./startup/index.js'</code>) must also be fully specified.</p>
+<p>This behavior matches how <code>import</code> behaves in browser environments, assuming a
+typically configured server.</p>
+<h3>No <code>NODE_PATH</code><span><a class="mark" href="#esm_no_code_node_path_code" id="esm_no_code_node_path_code">#</a></span></h3>
+<p><code>NODE_PATH</code> is not part of resolving <code>import</code> specifiers. Please use symlinks
+if this behavior is desired.</p>
+<h3>No <code>require</code>, <code>exports</code>, <code>module.exports</code>, <code>__filename</code>, <code>__dirname</code><span><a class="mark" href="#esm_no_code_require_code_code_exports_code_code_module_exports_code_code_filename_code_code_dirname_code" id="esm_no_code_require_code_code_exports_code_code_module_exports_code_code_filename_code_code_dirname_code">#</a></span></h3>
+<p>These CommonJS variables are not available in ES modules.</p>
+<p><code>require</code> can be imported into an ES module using <a href="https://nodejs.org/api/modules.html#modules_module_createrequire_filename"><code>module.createRequire()</code></a>.</p>
+<p>Equivalents of <code>__filename</code> and <code>__dirname</code> can be created inside of each file
+via <a href="#esm_import_meta"><code>import.meta.url</code></a>.</p>
+<pre><code class="language-js">import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+</code></pre>
+<h3>No <code>require.extensions</code><span><a class="mark" href="#esm_no_code_require_extensions_code" id="esm_no_code_require_extensions_code">#</a></span></h3>
+<p><code>require.extensions</code> is not used by <code>import</code>. The expectation is that loader
+hooks can provide this workflow in the future.</p>
+<h3>No <code>require.cache</code><span><a class="mark" href="#esm_no_code_require_cache_code" id="esm_no_code_require_cache_code">#</a></span></h3>
+<p><code>require.cache</code> is not used by <code>import</code>. It has a separate cache.</p>
+<h3>URL-based paths<span><a class="mark" href="#esm_url_based_paths" id="esm_url_based_paths">#</a></span></h3>
+<p>ES modules are resolved and cached based upon
+<a href="https://url.spec.whatwg.org/">URL</a> semantics. This means that files containing
+special characters such as <code>#</code> and <code>?</code> need to be escaped.</p>
+<p>Modules will be loaded multiple times if the <code>import</code> specifier used to resolve
+them have a different query or fragment.</p>
+<pre><code class="language-js">import './foo.mjs?query=1'; // loads ./foo.mjs with query of "?query=1"
+import './foo.mjs?query=2'; // loads ./foo.mjs with query of "?query=2"
+</code></pre>
+<p>For now, only modules using the <code>file:</code> protocol can be loaded.</p>
+<h2>Interoperability with CommonJS<span><a class="mark" href="#esm_interoperability_with_commonjs" id="esm_interoperability_with_commonjs">#</a></span></h2>
+<h3><code>require</code><span><a class="mark" href="#esm_code_require_code" id="esm_code_require_code">#</a></span></h3>
+<p><code>require</code> always treats the files it references as CommonJS. This applies
+whether <code>require</code> is used the traditional way within a CommonJS environment, or
+in an ES module environment using <a href="https://nodejs.org/api/modules.html#modules_module_createrequire_filename"><code>module.createRequire()</code></a>.</p>
+<p>To include an ES module into CommonJS, use <a href="#esm_import-expressions"><code>import()</code></a>.</p>
+<h3><code>import</code> statements<span><a class="mark" href="#esm_code_import_code_statements" id="esm_code_import_code_statements">#</a></span></h3>
+<p>An <code>import</code> statement can reference an ES module, a CommonJS module, or JSON.
+Other file types such as Native modules are not supported. For those,
+use <a href="https://nodejs.org/api/modules.html#modules_module_createrequire_filename"><code>module.createRequire()</code></a>.</p>
+<p><code>import</code> statements are permitted only in ES modules. For similar functionality
+in CommonJS, see <a href="#esm_import-expressions"><code>import()</code></a>.</p>
+<p>The <em>specifier</em> of an <code>import</code> statement (the string after the <code>from</code> keyword)
+can either be an URL-style relative path like <code>'./file.mjs'</code> or a package name
+like <code>'fs'</code>.</p>
+<p>Like in CommonJS, files within packages can be accessed by appending a path to
+the package name.</p>
+<pre><code class="language-js">import { sin, cos } from 'geometry/trigonometry-functions.mjs';
+</code></pre>
+<blockquote>
+<p>Currently only the “default export” is supported for CommonJS files or
+packages:</p>
+<!-- eslint-disable no-duplicate-imports -->
+<pre><code class="language-js">import packageMain from 'commonjs-package'; // Works
+
+import { method } from 'commonjs-package'; // Errors
+</code></pre>
+<p>There are ongoing efforts to make the latter code possible.</p>
+</blockquote>
+<h3><code>import()</code> expressions<span><a class="mark" href="#esm_code_import_code_expressions" id="esm_code_import_code_expressions">#</a></span></h3>
+<p>Dynamic <code>import()</code> is supported in both CommonJS and ES modules. It can be used
+to include ES module files from CommonJS code.</p>
+<pre><code class="language-js">(async () =&gt; {
+  await import('./my-app.mjs');
+})();
+</code></pre>
+<h2>CommonJS, JSON, and Native Modules<span><a class="mark" href="#esm_commonjs_json_and_native_modules" id="esm_commonjs_json_and_native_modules">#</a></span></h2>
+<p>CommonJS, JSON, and Native modules can be used with
+<a href="https://nodejs.org/api/modules.html#modules_module_createrequire_filename"><code>module.createRequire()</code></a>.</p>
+<pre><code class="language-js">// cjs.js
+module.exports = 'cjs';
+
+// esm.mjs
+import { createRequire } from 'module';
+import { fileURLToPath as fromURL } from 'url';
+
+const require = createRequire(fromURL(import.meta.url));
+
+const cjs = require('./cjs');
+cjs === 'cjs'; // true
+</code></pre>
+<h2>Builtin modules<span><a class="mark" href="#esm_builtin_modules" id="esm_builtin_modules">#</a></span></h2>
+<p>Builtin modules will provide named exports of their public API, as well as a
+default export which can be used for, among other things, modifying the named
+exports. Named exports of builtin modules are updated when the corresponding
+exports property is accessed, redefined, or deleted.</p>
+<pre><code class="language-js">import EventEmitter from 'events';
+const e = new EventEmitter();
+</code></pre>
+<pre><code class="language-js">import { readFile } from 'fs';
+readFile('./foo.txt', (err, source) =&gt; {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log(source);
+  }
+});
+</code></pre>
+<pre><code class="language-js">import fs, { readFileSync } from 'fs';
+
+fs.readFileSync = () =&gt; Buffer.from('Hello, ESM');
+
+fs.readFileSync === readFileSync;
+</code></pre>
+<h2>JSON Modules<span><a class="mark" href="#esm_json_modules" id="esm_json_modules">#</a></span></h2>
+<p>JSON modules follow the <a href="https://html.spec.whatwg.org/#creating-a-json-module-script">WHATWG JSON modules specification</a>.</p>
+<p>The imported JSON only exposes a <code>default</code>. There is no
+support for named exports. A cache entry is created in the CommonJS
+cache, to avoid duplication. The same object will be returned in
+CommonJS if the JSON module has already been imported from the
+same path.</p>
+<p>Assuming an <code>index.mjs</code> with</p>
+<!-- eslint-skip -->
+<pre><code class="language-js">import packageConfig from './package.json';
+</code></pre>
+<h2>Experimental Wasm Modules<span><a class="mark" href="#esm_experimental_wasm_modules" id="esm_experimental_wasm_modules">#</a></span></h2>
+<p>Importing Web Assembly modules is supported under the
+<code>--experimental-wasm-modules</code> flag, allowing any <code>.wasm</code> files to be
+imported as normal modules while also supporting their module imports.</p>
+<p>This integration is in line with the
+<a href="https://github.com/webassembly/esm-integration">ES Module Integration Proposal for Web Assembly</a>.</p>
+<p>For example, an <code>index.mjs</code> containing:</p>
+<pre><code class="language-js">import * as M from './module.wasm';
+console.log(M);
+</code></pre>
+<p>executed under:</p>
+<pre><code class="language-bash">node --experimental-modules --experimental-wasm-modules index.mjs
+</code></pre>
+<p>would provide the exports interface for the instantiation of <code>module.wasm</code>.</p>
+<h2>Experimental Loader hooks<span><a class="mark" href="#esm_experimental_loader_hooks" id="esm_experimental_loader_hooks">#</a></span></h2>
+<p><strong>Note: This API is currently being redesigned and will still change.</strong></p>
+
+<p>To customize the default module resolution, loader hooks can optionally be
+provided via a <code>--loader ./loader-name.mjs</code> argument to Node.js.</p>
+<p>When hooks are used they only apply to ES module loading and not to any
+CommonJS modules loaded.</p>
+<h3>Resolve hook<span><a class="mark" href="#esm_resolve_hook" id="esm_resolve_hook">#</a></span></h3>
+<p>The resolve hook returns the resolved file URL and module format for a
+given module specifier and parent file URL:</p>
+<pre><code class="language-js">const baseURL = new URL(`${process.cwd()}/`, 'file://');
+
+export async function resolve(specifier,
+                              parentModuleURL = baseURL,
+                              defaultResolver) {
+  return {
+    url: new URL(specifier, parentModuleURL).href,
+    format: 'module'
+  };
+}
+</code></pre>
+<p>The <code>parentModuleURL</code> is provided as <code>undefined</code> when performing main Node.js
+load itself.</p>
+<p>The default Node.js ES module resolution function is provided as a third
+argument to the resolver for easy compatibility workflows.</p>
+<p>In addition to returning the resolved file URL value, the resolve hook also
+returns a <code>format</code> property specifying the module format of the resolved
+module. This can be one of the following:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th><code>format</code></th><th>Description</th></tr></thead><tbody><tr><td><code>'builtin'</code></td><td>Load a Node.js builtin module</td></tr><tr><td><code>'commonjs'</code></td><td>Load a Node.js CommonJS module</td></tr><tr><td><code>'dynamic'</code></td><td>Use a <a href="#esm_dynamic_instantiate_hook">dynamic instantiate hook</a></td></tr><tr><td><code>'json'</code></td><td>Load a JSON file</td></tr><tr><td><code>'module'</code></td><td>Load a standard JavaScript module</td></tr><tr><td><code>'wasm'</code></td><td>Load a WebAssembly module</td></tr></tbody></table>
+<p>For example, a dummy loader to load JavaScript restricted to browser resolution
+rules with only JS file extension and Node.js builtin modules support could
+be written:</p>
+<pre><code class="language-js">import path from 'path';
+import process from 'process';
+import Module from 'module';
+
+const builtins = Module.builtinModules;
+const JS_EXTENSIONS = new Set(['.js', '.mjs']);
+
+const baseURL = new URL(`${process.cwd()}/`, 'file://');
+
+export function resolve(specifier, parentModuleURL = baseURL, defaultResolve) {
+  if (builtins.includes(specifier)) {
+    return {
+      url: specifier,
+      format: 'builtin'
+    };
+  }
+  if (/^\.{0,2}[/]/.test(specifier) !== true &amp;&amp; !specifier.startsWith('file:')) {
+    // For node_modules support:
+    // return defaultResolve(specifier, parentModuleURL);
+    throw new Error(
+      `imports must begin with '/', './', or '../'; '${specifier}' does not`);
+  }
+  const resolved = new URL(specifier, parentModuleURL);
+  const ext = path.extname(resolved.pathname);
+  if (!JS_EXTENSIONS.has(ext)) {
+    throw new Error(
+      `Cannot load file with non-JavaScript file extension ${ext}.`);
+  }
+  return {
+    url: resolved.href,
+    format: 'module'
+  };
+}
+</code></pre>
+<p>With this loader, running:</p>
+<pre><code class="language-console">NODE_OPTIONS='--experimental-modules --loader ./custom-loader.mjs' node x.js
+</code></pre>
+<p>would load the module <code>x.js</code> as an ES module with relative resolution support
+(with <code>node_modules</code> loading skipped in this example).</p>
+<h3>Dynamic instantiate hook<span><a class="mark" href="#esm_dynamic_instantiate_hook" id="esm_dynamic_instantiate_hook">#</a></span></h3>
+<p>To create a custom dynamic module that doesn't correspond to one of the
+existing <code>format</code> interpretations, the <code>dynamicInstantiate</code> hook can be used.
+This hook is called only for modules that return <code>format: 'dynamic'</code> from
+the <code>resolve</code> hook.</p>
+<pre><code class="language-js">export async function dynamicInstantiate(url) {
+  return {
+    exports: ['customExportName'],
+    execute: (exports) =&gt; {
+      // Get and set functions provided for pre-allocated export names
+      exports.customExportName.set('value');
+    }
+  };
+}
+</code></pre>
+<p>With the list of module exports provided upfront, the <code>execute</code> function will
+then be called at the exact point of module evaluation order for that module
+in the import tree.</p>
+<h2>Resolution Algorithm<span><a class="mark" href="#esm_resolution_algorithm" id="esm_resolution_algorithm">#</a></span></h2>
+<h3>Features<span><a class="mark" href="#esm_features" id="esm_features">#</a></span></h3>
+<p>The resolver has the following properties:</p>
+<ul>
+<li>FileURL-based resolution as is used by ES modules</li>
+<li>Support for builtin module loading</li>
+<li>Relative and absolute URL resolution</li>
+<li>No default extensions</li>
+<li>No folder mains</li>
+<li>Bare specifier package resolution lookup through node_modules</li>
+</ul>
+<h3>Resolver Algorithm<span><a class="mark" href="#esm_resolver_algorithm" id="esm_resolver_algorithm">#</a></span></h3>
+<p>The algorithm to load an ES module specifier is given through the
+<strong>ESM_RESOLVE</strong> method below. It returns the resolved URL for a
+module specifier relative to a parentURL, in addition to the unique module
+format for that resolved URL given by the <strong>ESM_FORMAT</strong> routine.</p>
+<p>The <em>"module"</em> format is returned for an ECMAScript Module, while the
+<em>"commonjs"</em> format is used to indicate loading through the legacy
+CommonJS loader. Additional formats such as <em>"addon"</em> can be extended in future
+updates.</p>
+<p>In the following algorithms, all subroutine errors are propagated as errors
+of these top-level routines unless stated otherwise.</p>
+<p><em>isMain</em> is <strong>true</strong> when resolving the Node.js application entry point.</p>
+<details>
+<summary>Resolver algorithm specification</summary>
+<p><strong>ESM_RESOLVE</strong>(<em>specifier</em>, <em>parentURL</em>, <em>isMain</em>)</p>
+<blockquote>
+<ol>
+<li>Let <em>resolvedURL</em> be <strong>undefined</strong>.</li>
+<li>
+<p>If <em>specifier</em> is a valid URL, then</p>
+<ol>
+<li>Set <em>resolvedURL</em> to the result of parsing and reserializing
+<em>specifier</em> as a URL.</li>
+</ol>
+</li>
+<li>
+<p>Otherwise, if <em>specifier</em> starts with <em>"/"</em>, then</p>
+<ol>
+<li>Throw an <em>Invalid Specifier</em> error.</li>
+</ol>
+</li>
+<li>
+<p>Otherwise, if <em>specifier</em> starts with <em>"./"</em> or <em>"../"</em>, then</p>
+<ol>
+<li>Set <em>resolvedURL</em> to the URL resolution of <em>specifier</em> relative to
+<em>parentURL</em>.</li>
+</ol>
+</li>
+<li>
+<p>Otherwise,</p>
+<ol>
+<li>Note: <em>specifier</em> is now a bare specifier.</li>
+<li>Set <em>resolvedURL</em> the result of
+<strong>PACKAGE_RESOLVE</strong>(<em>specifier</em>, <em>parentURL</em>).</li>
+</ol>
+</li>
+<li>
+<p>If <em>resolvedURL</em> contains any percent encodings of <em>"/"</em> or <em>"\"</em> (<em>"%2f"</em>
+and <em>"%5C"</em> respectively), then</p>
+<ol>
+<li>Throw an <em>Invalid Specifier</em> error.</li>
+</ol>
+</li>
+<li>
+<p>If the file at <em>resolvedURL</em> does not exist, then</p>
+<ol>
+<li>Throw a <em>Module Not Found</em> error.</li>
+</ol>
+</li>
+<li>Set <em>resolvedURL</em> to the real path of <em>resolvedURL</em>.</li>
+<li>Let <em>format</em> be the result of <strong>ESM_FORMAT</strong>(<em>resolvedURL</em>, <em>isMain</em>).</li>
+<li>Load <em>resolvedURL</em> as module format, <em>format</em>.</li>
+</ol>
+</blockquote>
+<p><strong>PACKAGE_RESOLVE</strong>(<em>packageSpecifier</em>, <em>parentURL</em>)</p>
+<blockquote>
+<ol>
+<li>Let <em>packageName</em> be <em>undefined</em>.</li>
+<li>Let <em>packageSubpath</em> be <em>undefined</em>.</li>
+<li>
+<p>If <em>packageSpecifier</em> is an empty string, then</p>
+<ol>
+<li>Throw an <em>Invalid Specifier</em> error.</li>
+</ol>
+</li>
+<li>
+<p>If <em>packageSpecifier</em> does not start with <em>"@"</em>, then</p>
+<ol>
+<li>Set <em>packageName</em> to the substring of <em>packageSpecifier</em> until the
+first <em>"/"</em> separator or the end of the string.</li>
+</ol>
+</li>
+<li>
+<p>Otherwise,</p>
+<ol>
+<li>
+<p>If <em>packageSpecifier</em> does not contain a <em>"/"</em> separator, then</p>
+<ol>
+<li>Throw an <em>Invalid Specifier</em> error.</li>
+</ol>
+</li>
+<li>Set <em>packageName</em> to the substring of <em>packageSpecifier</em>
+until the second <em>"/"</em> separator or the end of the string.</li>
+</ol>
+</li>
+<li>
+<p>If <em>packageName</em> starts with <em>"."</em> or contains <em>"\"</em> or <em>"%"</em>, then</p>
+<ol>
+<li>Throw an <em>Invalid Specifier</em> error.</li>
+</ol>
+</li>
+<li>Let <em>packageSubpath</em> be <em>undefined</em>.</li>
+<li>
+<p>If the length of <em>packageSpecifier</em> is greater than the length of
+<em>packageName</em>, then</p>
+<ol>
+<li>Set <em>packageSubpath</em> to <em>"."</em> concatenated with the substring of
+<em>packageSpecifier</em> from the position at the length of <em>packageName</em>.</li>
+</ol>
+</li>
+<li>
+<p>If <em>packageSubpath</em> contains any <em>"."</em> or <em>".."</em> segments or percent
+encoded strings for <em>"/"</em> or <em>"\"</em> then,</p>
+<ol>
+<li>Throw an <em>Invalid Specifier</em> error.</li>
+</ol>
+</li>
+<li>
+<p>If <em>packageSubpath</em> is <em>undefined</em> and <em>packageName</em> is a Node.js builtin
+module, then</p>
+<ol>
+<li>Return the string <em>"node:"</em> concatenated with <em>packageSpecifier</em>.</li>
+</ol>
+</li>
+<li>
+<p>While <em>parentURL</em> is not the file system root,</p>
+<ol>
+<li>Let <em>packageURL</em> be the URL resolution of <em>"node_modules/"</em>
+concatenated with <em>packageSpecifier</em>, relative to <em>parentURL</em>.</li>
+<li>Set <em>parentURL</em> to the parent folder URL of <em>parentURL</em>.</li>
+<li>
+<p>If the folder at <em>packageURL</em> does not exist, then</p>
+<ol>
+<li>Set <em>parentURL</em> to the parent URL path of <em>parentURL</em>.</li>
+<li>Continue the next loop iteration.</li>
+</ol>
+</li>
+<li>Let <em>pjson</em> be the result of <strong>READ_PACKAGE_JSON</strong>(<em>packageURL</em>).</li>
+<li>
+<p>If <em>packageSubpath</em> is _undefined__, then</p>
+<ol>
+<li>Return the result of <strong>PACKAGE_MAIN_RESOLVE</strong>(<em>packageURL</em>,
+<em>pjson</em>).</li>
+</ol>
+</li>
+<li>
+<p>Otherwise,</p>
+<ol>
+<li>
+<p>If <em>pjson</em> is not <strong>null</strong> and <em>pjson</em> has an <em>"exports"</em> key, then</p>
+<ol>
+<li>Let <em>exports</em> be <em>pjson.exports</em>.</li>
+<li>
+<p>If <em>exports</em> is not <strong>null</strong> or <strong>undefined</strong>, then</p>
+<ol>
+<li>Return <strong>PACKAGE_EXPORTS_RESOLVE</strong>(<em>packageURL</em>,
+<em>packageSubpath</em>, <em>pjson.exports</em>).</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Return the URL resolution of <em>packageSubpath</em> in <em>packageURL</em>.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Throw a <em>Module Not Found</em> error.</li>
+</ol>
+</blockquote>
+<p><strong>PACKAGE_MAIN_RESOLVE</strong>(<em>packageURL</em>, <em>pjson</em>)</p>
+<blockquote>
+<ol>
+<li>
+<p>If <em>pjson</em> is <strong>null</strong>, then</p>
+<ol>
+<li>Throw a <em>Module Not Found</em> error.</li>
+</ol>
+</li>
+<li>
+<p>If <em>pjson.main</em> is a String, then</p>
+<ol>
+<li>Let <em>resolvedMain</em> be the URL resolution of <em>packageURL</em>, "/", and
+<em>pjson.main</em>.</li>
+<li>
+<p>If the file at <em>resolvedMain</em> exists, then</p>
+<ol>
+<li>Return <em>resolvedMain</em>.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>If <em>pjson.type</em> is equal to <em>"module"</em>, then</p>
+<ol>
+<li>Throw a <em>Module Not Found</em> error.</li>
+</ol>
+</li>
+<li>Let <em>legacyMainURL</em> be the result applying the legacy
+<strong>LOAD_AS_DIRECTORY</strong> CommonJS resolver to <em>packageURL</em>, throwing a
+<em>Module Not Found</em> error for no resolution.</li>
+<li>Return <em>legacyMainURL</em>.</li>
+</ol>
+</blockquote>
+<p><strong>PACKAGE_EXPORTS_RESOLVE</strong>(<em>packageURL</em>, <em>packagePath</em>, <em>exports</em>)</p>
+<blockquote>
+<ol>
+<li>
+<p>If <em>exports</em> is an Object, then</p>
+<ol>
+<li>Set <em>packagePath</em> to <em>"./"</em> concatenated with <em>packagePath</em>.</li>
+<li>
+<p>If <em>packagePath</em> is a key of <em>exports</em>, then</p>
+<ol>
+<li>Let <em>target</em> be the value of <em>exports[packagePath]</em>.</li>
+<li>Return <strong>PACKAGE_EXPORTS_TARGET_RESOLVE</strong>(<em>packageURL</em>, <em>target</em>,
+<em>""</em>).</li>
+</ol>
+</li>
+<li>Let <em>directoryKeys</em> be the list of keys of <em>exports</em> ending in
+<em>"/"</em>, sorted by length descending.</li>
+<li>
+<p>For each key <em>directory</em> in <em>directoryKeys</em>, do</p>
+<ol>
+<li>
+<p>If <em>packagePath</em> starts with <em>directory</em>, then</p>
+<ol>
+<li>Let <em>target</em> be the value of <em>exports[directory]</em>.</li>
+<li>Let <em>subpath</em> be the substring of <em>target</em> starting at the index
+of the length of <em>directory</em>.</li>
+<li>Return <strong>PACKAGE_EXPORTS_TARGET_RESOLVE</strong>(<em>packageURL</em>, <em>target</em>,
+<em>subpath</em>).</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Throw a <em>Module Not Found</em> error.</li>
+</ol>
+</blockquote>
+<p><strong>PACKAGE_EXPORTS_TARGET_RESOLVE</strong>(<em>packageURL</em>, <em>target</em>, <em>subpath</em>)</p>
+<blockquote>
+<ol>
+<li>
+<p>If <em>target</em> is a String, then</p>
+<ol>
+<li>If <em>target</em> does not start with <em>"./"</em>, throw a <em>Module Not Found</em>
+error.</li>
+<li>If <em>subpath</em> has non-zero length and <em>target</em> does not end with <em>"/"</em>,
+throw a <em>Module Not Found</em> error.</li>
+<li>If <em>target</em> or <em>subpath</em> contain any <em>"node_modules"</em> segments including
+<em>"node_modules"</em> percent-encoding, throw a <em>Module Not Found</em> error.</li>
+<li>Let <em>resolvedTarget</em> be the URL resolution of the concatenation of
+<em>packageURL</em> and <em>target</em>.</li>
+<li>
+<p>If <em>resolvedTarget</em> is contained in <em>packageURL</em>, then</p>
+<ol>
+<li>Let <em>resolved</em> be the URL resolution of the concatenation of
+<em>subpath</em> and <em>resolvedTarget</em>.</li>
+<li>
+<p>If <em>resolved</em> is contained in <em>resolvedTarget</em>, then</p>
+<ol>
+<li>Return <em>resolved</em>.</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>Otherwise, if <em>target</em> is an Array, then</p>
+<ol>
+<li>
+<p>For each item <em>targetValue</em> in <em>target</em>, do</p>
+<ol>
+<li>If <em>targetValue</em> is not a String, continue the loop.</li>
+<li>Let <em>resolved</em> be the result of
+<strong>PACKAGE_EXPORTS_TARGET_RESOLVE</strong>(<em>packageURL</em>, <em>targetValue</em>,
+<em>subpath</em>), continuing the loop on abrupt completion.</li>
+<li>Assert: <em>resolved</em> is a String.</li>
+<li>Return <em>resolved</em>.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Throw a <em>Module Not Found</em> error.</li>
+</ol>
+</blockquote>
+<p><strong>ESM_FORMAT</strong>(<em>url</em>, <em>isMain</em>)</p>
+<blockquote>
+<ol>
+<li>Assert: <em>url</em> corresponds to an existing file.</li>
+<li>Let <em>pjson</em> be the result of <strong>READ_PACKAGE_SCOPE</strong>(<em>url</em>).</li>
+<li>
+<p>If <em>url</em> ends in <em>".mjs"</em>, then</p>
+<ol>
+<li>Return <em>"module"</em>.</li>
+</ol>
+</li>
+<li>
+<p>If <em>url</em> ends in <em>".cjs"</em>, then</p>
+<ol>
+<li>Return <em>"commonjs"</em>.</li>
+</ol>
+</li>
+<li>
+<p>If <em>pjson?.type</em> exists and is <em>"module"</em>, then</p>
+<ol>
+<li>
+<p>If <em>isMain</em> is <strong>true</strong> or <em>url</em> ends in <em>".js"</em>, then</p>
+<ol>
+<li>Return <em>"module"</em>.</li>
+</ol>
+</li>
+<li>Throw an <em>Unsupported File Extension</em> error.</li>
+</ol>
+</li>
+<li>
+<p>Otherwise,</p>
+<ol>
+<li>
+<p>If <em>isMain</em> is <strong>true</strong> or <em>url</em> ends in <em>".js"</em>, <em>".json"</em> or
+<em>".node"</em>, then</p>
+<ol>
+<li>Return <em>"commonjs"</em>.</li>
+</ol>
+</li>
+<li>Throw an <em>Unsupported File Extension</em> error.</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p><strong>READ_PACKAGE_SCOPE</strong>(<em>url</em>)</p>
+<blockquote>
+<ol>
+<li>Let <em>scopeURL</em> be <em>url</em>.</li>
+<li>
+<p>While <em>scopeURL</em> is not the file system root,</p>
+<ol>
+<li>If <em>scopeURL</em> ends in a <em>"node_modules"</em> path segment, return <strong>null</strong>.</li>
+<li>Let <em>pjson</em> be the result of <strong>READ_PACKAGE_JSON</strong>(<em>scopeURL</em>).</li>
+<li>
+<p>If <em>pjson</em> is not <strong>null</strong>, then</p>
+<ol>
+<li>Return <em>pjson</em>.</li>
+</ol>
+</li>
+<li>Set <em>scopeURL</em> to the parent URL of <em>scopeURL</em>.</li>
+</ol>
+</li>
+<li>Return <strong>null</strong>.</li>
+</ol>
+</blockquote>
+<p><strong>READ_PACKAGE_JSON</strong>(<em>packageURL</em>)</p>
+<blockquote>
+<ol>
+<li>Let <em>pjsonURL</em> be the resolution of <em>"package.json"</em> within <em>packageURL</em>.</li>
+<li>
+<p>If the file at <em>pjsonURL</em> does not exist, then</p>
+<ol>
+<li>Return <strong>null</strong>.</li>
+</ol>
+</li>
+<li>
+<p>If the file at <em>packageURL</em> does not parse as valid JSON, then</p>
+<ol>
+<li>Throw an <em>Invalid Package Configuration</em> error.</li>
+</ol>
+</li>
+<li>Return the parsed JSON source of the file at <em>pjsonURL</em>.</li>
+</ol>
+</blockquote>
+</details>
+<h3>Customizing ESM specifier resolution algorithm<span><a class="mark" href="#esm_customizing_esm_specifier_resolution_algorithm" id="esm_customizing_esm_specifier_resolution_algorithm">#</a></span></h3>
+<p>The current specifier resolution does not support all default behavior of
+the CommonJS loader. One of the behavior differences is automatic resolution
+of file extensions and the ability to import directories that have an index
+file.</p>
+<p>The <code>--es-module-specifier-resolution=[mode]</code> flag can be used to customize
+the extension resolution algorithm. The default mode is <code>explicit</code>, which
+requires the full path to a module be provided to the loader. To enable the
+automatic extension resolution and importing from directories that include an
+index file use the <code>node</code> mode.</p>
+<pre><code class="language-bash">$ node --experimental-modules index.mjs
+success!
+$ node --experimental-modules index #Failure!
+Error: Cannot find module
+$ node --experimental-modules --es-module-specifier-resolution=node index
+success!
+</code></pre>
+      </div>
+    </div>
+  </div>
+  <script src="data:application/javascript;base64,LyoKU0hKUyAtIFN5bnRheCBIaWdobGlnaHRpbmcgaW4gSmF2YVNjcmlwdApDb3B5cmlnaHQgKEMpIDIwMDcsIDIwMDggZ25vbWJhdEB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQKTGljZW5zZTogaHR0cDovL3NoanMuc291cmNlZm9yZ2UubmV0L2RvYy9ncGx2My5odG1sCiovCgppZiAoISB0aGlzLnNoX2xhbmd1YWdlcykgewogIHRoaXMuc2hfbGFuZ3VhZ2VzID0ge307Cn0KdmFyIHNoX3JlcXVlc3RzID0ge307CgpmdW5jdGlvbiBzaF9pc0VtYWlsQWRkcmVzcyh1cmwpIHsKICBpZiAoL15tYWlsdG86Ly50ZXN0KHVybCkpIHsKICAgIHJldHVybiBmYWxzZTsKICB9CiAgcmV0dXJuIHVybC5pbmRleE9mKCdAJykgIT09IC0xOwp9CgpmdW5jdGlvbiBzaF9zZXRIcmVmKHRhZ3MsIG51bVRhZ3MsIGlucHV0U3RyaW5nKSB7CiAgdmFyIHVybCA9IGlucHV0U3RyaW5nLnN1YnN0cmluZyh0YWdzW251bVRhZ3MgLSAyXS5wb3MsIHRhZ3NbbnVtVGFncyAtIDFdLnBvcyk7CiAgaWYgKHVybC5sZW5ndGggPj0gMiAmJiB1cmwuY2hhckF0KDApID09PSAnPCcgJiYgdXJsLmNoYXJBdCh1cmwubGVuZ3RoIC0gMSkgPT09ICc+JykgewogICAgdXJsID0gdXJsLnN1YnN0cigxLCB1cmwubGVuZ3RoIC0gMik7CiAgfQogIGlmIChzaF9pc0VtYWlsQWRkcmVzcyh1cmwpKSB7CiAgICB1cmwgPSAnbWFpbHRvOicgKyB1cmw7CiAgfQogIHRhZ3NbbnVtVGFncyAtIDJdLm5vZGUuaHJlZiA9IHVybDsKfQoKLyoKS29ucXVlcm9yIGhhcyBhIGJ1ZyB3aGVyZSB0aGUgcmVndWxhciBleHByZXNzaW9uIC8kL2cgd2lsbCBub3QgbWF0Y2ggYXQgdGhlIGVuZApvZiBhIGxpbmUgbW9yZSB0aGFuIG9uY2U6CgogIHZhciByZWdleCA9IC8kL2c7CiAgdmFyIG1hdGNoOwoKICB2YXIgbGluZSA9ICcxMjM0NTY3ODkwJzsKICByZWdleC5sYXN0SW5kZXggPSAxMDsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZSk7CgogIHZhciBsaW5lMiA9ICdhYmNkZSc7CiAgcmVnZXgubGFzdEluZGV4ID0gNTsKICBtYXRjaCA9IHJlZ2V4LmV4ZWMobGluZTIpOyAgLy8gZmFpbHMKKi8KZnVuY3Rpb24gc2hfa29ucXVlcm9yRXhlYyhzKSB7CiAgdmFyIHJlc3VsdCA9IFsnJ107CiAgcmVzdWx0LmluZGV4ID0gcy5sZW5ndGg7CiAgcmVzdWx0LmlucHV0ID0gczsKICByZXR1cm4gcmVzdWx0Owp9CgovKioKSGlnaGxpZ2h0cyBhbGwgZWxlbWVudHMgY29udGFpbmluZyBzb3VyY2UgY29kZSBpbiBhIHRleHQgc3RyaW5nLiAgVGhlIHJldHVybgp2YWx1ZSBpcyBhbiBhcnJheSBvZiBvYmplY3RzLCBlYWNoIHJlcHJlc2VudGluZyBhbiBIVE1MIHN0YXJ0IG9yIGVuZCB0YWcuICBFYWNoCm9iamVjdCBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBwb3MsIHdoaWNoIGlzIGFuIGludGVnZXIgcmVwcmVzZW50aW5nIHRoZSB0ZXh0Cm9mZnNldCBvZiB0aGUgdGFnLiBFdmVyeSBzdGFydCB0YWcgYWxzbyBoYXMgYSBwcm9wZXJ0eSBuYW1lZCBub2RlLCB3aGljaCBpcyB0aGUKRE9NIGVsZW1lbnQgc3RhcnRlZCBieSB0aGUgdGFnLiBFbmQgdGFncyBkbyBub3QgaGF2ZSB0aGlzIHByb3BlcnR5LgpAcGFyYW0gIGlucHV0U3RyaW5nICBhIHRleHQgc3RyaW5nCkBwYXJhbSAgbGFuZ3VhZ2UgIGEgbGFuZ3VhZ2UgZGVmaW5pdGlvbiBvYmplY3QKQHJldHVybiAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKKi8KZnVuY3Rpb24gc2hfaGlnaGxpZ2h0U3RyaW5nKGlucHV0U3RyaW5nLCBsYW5ndWFnZSkgewogIGlmICgvS29ucXVlcm9yLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICBpZiAoISBsYW5ndWFnZS5rb25xdWVyZWQpIHsKICAgICAgZm9yICh2YXIgcyA9IDA7IHMgPCBsYW5ndWFnZS5sZW5ndGg7IHMrKykgewogICAgICAgIGZvciAodmFyIHAgPSAwOyBwIDwgbGFuZ3VhZ2Vbc10ubGVuZ3RoOyBwKyspIHsKICAgICAgICAgIHZhciByID0gbGFuZ3VhZ2Vbc11bcF1bMF07CiAgICAgICAgICBpZiAoci5zb3VyY2UgPT09ICckJykgewogICAgICAgICAgICByLmV4ZWMgPSBzaF9rb25xdWVyb3JFeGVjOwogICAgICAgICAgfQogICAgICAgIH0KICAgICAgfQogICAgICBsYW5ndWFnZS5rb25xdWVyZWQgPSB0cnVlOwogICAgfQogIH0KCiAgdmFyIGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgdmFyIHNwYW4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJyk7CgogIC8vIHRoZSByZXN1bHQKICB2YXIgdGFncyA9IFtdOwogIHZhciBudW1UYWdzID0gMDsKCiAgLy8gZWFjaCBlbGVtZW50IGlzIGEgcGF0dGVybiBvYmplY3QgZnJvbSBsYW5ndWFnZQogIHZhciBwYXR0ZXJuU3RhY2sgPSBbXTsKCiAgLy8gdGhlIGN1cnJlbnQgcG9zaXRpb24gd2l0aGluIGlucHV0U3RyaW5nCiAgdmFyIHBvcyA9IDA7CgogIC8vIHRoZSBuYW1lIG9mIHRoZSBjdXJyZW50IHN0eWxlLCBvciBudWxsIGlmIHRoZXJlIGlzIG5vIGN1cnJlbnQgc3R5bGUKICB2YXIgY3VycmVudFN0eWxlID0gbnVsbDsKCiAgdmFyIG91dHB1dCA9IGZ1bmN0aW9uKHMsIHN0eWxlKSB7CiAgICB2YXIgbGVuZ3RoID0gcy5sZW5ndGg7CiAgICAvLyB0aGlzIGlzIG1vcmUgdGhhbiBqdXN0IGFuIG9wdGltaXphdGlvbiAtIHdlIGRvbid0IHdhbnQgdG8gb3V0cHV0IGVtcHR5IDxzcGFuPjwvc3Bhbj4gZWxlbWVudHMKICAgIGlmIChsZW5ndGggPT09IDApIHsKICAgICAgcmV0dXJuOwogICAgfQogICAgaWYgKCEgc3R5bGUpIHsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoICE9PSAwKSB7CiAgICAgICAgdmFyIHBhdHRlcm4gPSBwYXR0ZXJuU3RhY2tbc3RhY2tMZW5ndGggLSAxXTsKICAgICAgICAvLyBjaGVjayB3aGV0aGVyIHRoaXMgaXMgYSBzdGF0ZSBvciBhbiBlbnZpcm9ubWVudAogICAgICAgIGlmICghIHBhdHRlcm5bM10pIHsKICAgICAgICAgIC8vIGl0J3Mgbm90IGEgc3RhdGUgLSBpdCdzIGFuIGVudmlyb25tZW50OyB1c2UgdGhlIHN0eWxlIGZvciB0aGlzIGVudmlyb25tZW50CiAgICAgICAgICBzdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgfQogICAgICB9CiAgICB9CiAgICBpZiAoY3VycmVudFN0eWxlICE9PSBzdHlsZSkgewogICAgICBpZiAoY3VycmVudFN0eWxlKSB7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge3BvczogcG9zfTsKICAgICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgICAgc2hfc2V0SHJlZih0YWdzLCBudW1UYWdzLCBpbnB1dFN0cmluZyk7CiAgICAgICAgfQogICAgICB9CiAgICAgIGlmIChzdHlsZSkgewogICAgICAgIHZhciBjbG9uZTsKICAgICAgICBpZiAoc3R5bGUgPT09ICdzaF91cmwnKSB7CiAgICAgICAgICBjbG9uZSA9IGEuY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICBjbG9uZSA9IHNwYW4uY2xvbmVOb2RlKGZhbHNlKTsKICAgICAgICB9CiAgICAgICAgY2xvbmUuY2xhc3NOYW1lID0gc3R5bGU7CiAgICAgICAgdGFnc1tudW1UYWdzKytdID0ge25vZGU6IGNsb25lLCBwb3M6IHBvc307CiAgICAgIH0KICAgIH0KICAgIHBvcyArPSBsZW5ndGg7CiAgICBjdXJyZW50U3R5bGUgPSBzdHlsZTsKICB9OwoKICB2YXIgZW5kT2ZMaW5lUGF0dGVybiA9IC9cclxufFxyfFxuL2c7CiAgZW5kT2ZMaW5lUGF0dGVybi5sYXN0SW5kZXggPSAwOwogIHZhciBpbnB1dFN0cmluZ0xlbmd0aCA9IGlucHV0U3RyaW5nLmxlbmd0aDsKICB3aGlsZSAocG9zIDwgaW5wdXRTdHJpbmdMZW5ndGgpIHsKICAgIHZhciBzdGFydCA9IHBvczsKICAgIHZhciBlbmQ7CiAgICB2YXIgc3RhcnRPZk5leHRMaW5lOwogICAgdmFyIGVuZE9mTGluZU1hdGNoID0gZW5kT2ZMaW5lUGF0dGVybi5leGVjKGlucHV0U3RyaW5nKTsKICAgIGlmIChlbmRPZkxpbmVNYXRjaCA9PT0gbnVsbCkgewogICAgICBlbmQgPSBpbnB1dFN0cmluZ0xlbmd0aDsKICAgICAgc3RhcnRPZk5leHRMaW5lID0gaW5wdXRTdHJpbmdMZW5ndGg7CiAgICB9CiAgICBlbHNlIHsKICAgICAgZW5kID0gZW5kT2ZMaW5lTWF0Y2guaW5kZXg7CiAgICAgIHN0YXJ0T2ZOZXh0TGluZSA9IGVuZE9mTGluZVBhdHRlcm4ubGFzdEluZGV4OwogICAgfQoKICAgIHZhciBsaW5lID0gaW5wdXRTdHJpbmcuc3Vic3RyaW5nKHN0YXJ0LCBlbmQpOwoKICAgIHZhciBtYXRjaENhY2hlID0gW107CiAgICBmb3IgKDs7KSB7CiAgICAgIHZhciBwb3NXaXRoaW5MaW5lID0gcG9zIC0gc3RhcnQ7CgogICAgICB2YXIgc3RhdGVJbmRleDsKICAgICAgdmFyIHN0YWNrTGVuZ3RoID0gcGF0dGVyblN0YWNrLmxlbmd0aDsKICAgICAgaWYgKHN0YWNrTGVuZ3RoID09PSAwKSB7CiAgICAgICAgc3RhdGVJbmRleCA9IDA7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gZ2V0IHRoZSBuZXh0IHN0YXRlCiAgICAgICAgc3RhdGVJbmRleCA9IHBhdHRlcm5TdGFja1tzdGFja0xlbmd0aCAtIDFdWzJdOwogICAgICB9CgogICAgICB2YXIgc3RhdGUgPSBsYW5ndWFnZVtzdGF0ZUluZGV4XTsKICAgICAgdmFyIG51bVBhdHRlcm5zID0gc3RhdGUubGVuZ3RoOwogICAgICB2YXIgbWMgPSBtYXRjaENhY2hlW3N0YXRlSW5kZXhdOwogICAgICBpZiAoISBtYykgewogICAgICAgIG1jID0gbWF0Y2hDYWNoZVtzdGF0ZUluZGV4XSA9IFtdOwogICAgICB9CiAgICAgIHZhciBiZXN0TWF0Y2ggPSBudWxsOwogICAgICB2YXIgYmVzdFBhdHRlcm5JbmRleCA9IC0xOwogICAgICBmb3IgKHZhciBpID0gMDsgaSA8IG51bVBhdHRlcm5zOyBpKyspIHsKICAgICAgICB2YXIgbWF0Y2g7CiAgICAgICAgaWYgKGkgPCBtYy5sZW5ndGggJiYgKG1jW2ldID09PSBudWxsIHx8IHBvc1dpdGhpbkxpbmUgPD0gbWNbaV0uaW5kZXgpKSB7CiAgICAgICAgICBtYXRjaCA9IG1jW2ldOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHZhciByZWdleCA9IHN0YXRlW2ldWzBdOwogICAgICAgICAgcmVnZXgubGFzdEluZGV4ID0gcG9zV2l0aGluTGluZTsKICAgICAgICAgIG1hdGNoID0gcmVnZXguZXhlYyhsaW5lKTsKICAgICAgICAgIG1jW2ldID0gbWF0Y2g7CiAgICAgICAgfQogICAgICAgIGlmIChtYXRjaCAhPT0gbnVsbCAmJiAoYmVzdE1hdGNoID09PSBudWxsIHx8IG1hdGNoLmluZGV4IDwgYmVzdE1hdGNoLmluZGV4KSkgewogICAgICAgICAgYmVzdE1hdGNoID0gbWF0Y2g7CiAgICAgICAgICBiZXN0UGF0dGVybkluZGV4ID0gaTsKICAgICAgICAgIGlmIChtYXRjaC5pbmRleCA9PT0gcG9zV2l0aGluTGluZSkgewogICAgICAgICAgICBicmVhazsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KCiAgICAgIGlmIChiZXN0TWF0Y2ggPT09IG51bGwpIHsKICAgICAgICBvdXRwdXQobGluZS5zdWJzdHJpbmcocG9zV2l0aGluTGluZSksIG51bGwpOwogICAgICAgIGJyZWFrOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGdvdCBhIG1hdGNoCiAgICAgICAgaWYgKGJlc3RNYXRjaC5pbmRleCA+IHBvc1dpdGhpbkxpbmUpIHsKICAgICAgICAgIG91dHB1dChsaW5lLnN1YnN0cmluZyhwb3NXaXRoaW5MaW5lLCBiZXN0TWF0Y2guaW5kZXgpLCBudWxsKTsKICAgICAgICB9CgogICAgICAgIHZhciBwYXR0ZXJuID0gc3RhdGVbYmVzdFBhdHRlcm5JbmRleF07CgogICAgICAgIHZhciBuZXdTdHlsZSA9IHBhdHRlcm5bMV07CiAgICAgICAgdmFyIG1hdGNoZWRTdHJpbmc7CiAgICAgICAgaWYgKG5ld1N0eWxlIGluc3RhbmNlb2YgQXJyYXkpIHsKICAgICAgICAgIGZvciAodmFyIHN1YmV4cHJlc3Npb24gPSAwOyBzdWJleHByZXNzaW9uIDwgbmV3U3R5bGUubGVuZ3RoOyBzdWJleHByZXNzaW9uKyspIHsKICAgICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFtzdWJleHByZXNzaW9uICsgMV07CiAgICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZVtzdWJleHByZXNzaW9uXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgbWF0Y2hlZFN0cmluZyA9IGJlc3RNYXRjaFswXTsKICAgICAgICAgIG91dHB1dChtYXRjaGVkU3RyaW5nLCBuZXdTdHlsZSk7CiAgICAgICAgfQoKICAgICAgICBzd2l0Y2ggKHBhdHRlcm5bMl0pIHsKICAgICAgICBjYXNlIC0xOgogICAgICAgICAgLy8gZG8gbm90aGluZwogICAgICAgICAgYnJlYWs7CiAgICAgICAgY2FzZSAtMjoKICAgICAgICAgIC8vIGV4aXQKICAgICAgICAgIHBhdHRlcm5TdGFjay5wb3AoKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGNhc2UgLTM6CiAgICAgICAgICAvLyBleGl0YWxsCiAgICAgICAgICBwYXR0ZXJuU3RhY2subGVuZ3RoID0gMDsKICAgICAgICAgIGJyZWFrOwogICAgICAgIGRlZmF1bHQ6CiAgICAgICAgICAvLyB0aGlzIHdhcyB0aGUgc3RhcnQgb2YgYSBkZWxpbWl0ZWQgcGF0dGVybiBvciBhIHN0YXRlL2Vudmlyb25tZW50CiAgICAgICAgICBwYXR0ZXJuU3RhY2sucHVzaChwYXR0ZXJuKTsKICAgICAgICAgIGJyZWFrOwogICAgICAgIH0KICAgICAgfQogICAgfQoKICAgIC8vIGVuZCBvZiB0aGUgbGluZQogICAgaWYgKGN1cnJlbnRTdHlsZSkgewogICAgICB0YWdzW251bVRhZ3MrK10gPSB7cG9zOiBwb3N9OwogICAgICBpZiAoY3VycmVudFN0eWxlID09PSAnc2hfdXJsJykgewogICAgICAgIHNoX3NldEhyZWYodGFncywgbnVtVGFncywgaW5wdXRTdHJpbmcpOwogICAgICB9CiAgICAgIGN1cnJlbnRTdHlsZSA9IG51bGw7CiAgICB9CiAgICBwb3MgPSBzdGFydE9mTmV4dExpbmU7CiAgfQoKICByZXR1cm4gdGFnczsKfQoKLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8KLy8gRE9NLWRlcGVuZGVudCBmdW5jdGlvbnMKCmZ1bmN0aW9uIHNoX2dldENsYXNzZXMoZWxlbWVudCkgewogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgaHRtbENsYXNzID0gZWxlbWVudC5jbGFzc05hbWU7CiAgaWYgKGh0bWxDbGFzcyAmJiBodG1sQ2xhc3MubGVuZ3RoID4gMCkgewogICAgdmFyIGh0bWxDbGFzc2VzID0gaHRtbENsYXNzLnNwbGl0KCcgJyk7CiAgICBmb3IgKHZhciBpID0gMDsgaSA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaSsrKSB7CiAgICAgIGlmIChodG1sQ2xhc3Nlc1tpXS5sZW5ndGggPiAwKSB7CiAgICAgICAgcmVzdWx0LnB1c2goaHRtbENsYXNzZXNbaV0pOwogICAgICB9CiAgICB9CiAgfQogIHJldHVybiByZXN1bHQ7Cn0KCmZ1bmN0aW9uIHNoX2FkZENsYXNzKGVsZW1lbnQsIG5hbWUpIHsKICB2YXIgaHRtbENsYXNzZXMgPSBzaF9nZXRDbGFzc2VzKGVsZW1lbnQpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgaHRtbENsYXNzZXMubGVuZ3RoOyBpKyspIHsKICAgIGlmIChuYW1lLnRvTG93ZXJDYXNlKCkgPT09IGh0bWxDbGFzc2VzW2ldLnRvTG93ZXJDYXNlKCkpIHsKICAgICAgcmV0dXJuOwogICAgfQogIH0KICBodG1sQ2xhc3Nlcy5wdXNoKG5hbWUpOwogIGVsZW1lbnQuY2xhc3NOYW1lID0gaHRtbENsYXNzZXMuam9pbignICcpOwp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSBhbiBIVE1MIERPTSBOb2RlTGlzdC4KQHBhcmFtICBub2RlTGlzdCAgYSBET00gTm9kZUxpc3QKQHBhcmFtICByZXN1bHQgIGFuIG9iamVjdCB3aXRoIHRleHQsIHRhZ3MgYW5kIHBvcyBwcm9wZXJ0aWVzCiovCmZ1bmN0aW9uIHNoX2V4dHJhY3RUYWdzRnJvbU5vZGVMaXN0KG5vZGVMaXN0LCByZXN1bHQpIHsKICB2YXIgbGVuZ3RoID0gbm9kZUxpc3QubGVuZ3RoOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbGVuZ3RoOyBpKyspIHsKICAgIHZhciBub2RlID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHN3aXRjaCAobm9kZS5ub2RlVHlwZSkgewogICAgY2FzZSAxOgogICAgICBpZiAobm9kZS5ub2RlTmFtZS50b0xvd2VyQ2FzZSgpID09PSAnYnInKSB7CiAgICAgICAgdmFyIHRlcm1pbmF0b3I7CiAgICAgICAgaWYgKC9NU0lFLy50ZXN0KG5hdmlnYXRvci51c2VyQWdlbnQpKSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xyJzsKICAgICAgICB9CiAgICAgICAgZWxzZSB7CiAgICAgICAgICB0ZXJtaW5hdG9yID0gJ1xuJzsKICAgICAgICB9CiAgICAgICAgcmVzdWx0LnRleHQucHVzaCh0ZXJtaW5hdG9yKTsKICAgICAgICByZXN1bHQucG9zKys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7bm9kZTogbm9kZS5jbG9uZU5vZGUoZmFsc2UpLCBwb3M6IHJlc3VsdC5wb3N9KTsKICAgICAgICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChub2RlLmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgICAgICAgcmVzdWx0LnRhZ3MucHVzaCh7cG9zOiByZXN1bHQucG9zfSk7CiAgICAgIH0KICAgICAgYnJlYWs7CiAgICBjYXNlIDM6CiAgICBjYXNlIDQ6CiAgICAgIHJlc3VsdC50ZXh0LnB1c2gobm9kZS5kYXRhKTsKICAgICAgcmVzdWx0LnBvcyArPSBub2RlLmxlbmd0aDsKICAgICAgYnJlYWs7CiAgICB9CiAgfQp9CgovKioKRXh0cmFjdHMgdGhlIHRhZ3MgZnJvbSB0aGUgdGV4dCBvZiBhbiBIVE1MIGVsZW1lbnQuIFRoZSBleHRyYWN0ZWQgdGFncyB3aWxsIGJlCnJldHVybmVkIGFzIGFuIGFycmF5IG9mIHRhZyBvYmplY3RzLiBTZWUgc2hfaGlnaGxpZ2h0U3RyaW5nIGZvciB0aGUgZm9ybWF0IG9mCnRoZSB0YWcgb2JqZWN0cy4KQHBhcmFtICBlbGVtZW50ICBhIERPTSBlbGVtZW50CkBwYXJhbSAgdGFncyAgYW4gZW1wdHkgYXJyYXk7IHRoZSBleHRyYWN0ZWQgdGFnIG9iamVjdHMgd2lsbCBiZSByZXR1cm5lZCBpbiBpdApAcmV0dXJuICB0aGUgdGV4dCBvZiB0aGUgZWxlbWVudApAc2VlICBzaF9oaWdobGlnaHRTdHJpbmcKKi8KZnVuY3Rpb24gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgdGFncykgewogIHZhciByZXN1bHQgPSB7fTsKICByZXN1bHQudGV4dCA9IFtdOwogIHJlc3VsdC50YWdzID0gdGFnczsKICByZXN1bHQucG9zID0gMDsKICBzaF9leHRyYWN0VGFnc0Zyb21Ob2RlTGlzdChlbGVtZW50LmNoaWxkTm9kZXMsIHJlc3VsdCk7CiAgcmV0dXJuIHJlc3VsdC50ZXh0LmpvaW4oJycpOwp9CgovKioKTWVyZ2VzIHRoZSBvcmlnaW5hbCB0YWdzIGZyb20gYW4gZWxlbWVudCB3aXRoIHRoZSB0YWdzIHByb2R1Y2VkIGJ5IGhpZ2hsaWdodGluZy4KQHBhcmFtICBvcmlnaW5hbFRhZ3MgIGFuIGFycmF5IGNvbnRhaW5pbmcgdGhlIG9yaWdpbmFsIHRhZ3MKQHBhcmFtICBoaWdobGlnaHRUYWdzICBhbiBhcnJheSBjb250YWluaW5nIHRoZSBoaWdobGlnaHRpbmcgdGFncyAtIHRoZXNlIG11c3Qgbm90IG92ZXJsYXAKQHJlc3VsdCAgYW4gYXJyYXkgY29udGFpbmluZyB0aGUgbWVyZ2VkIHRhZ3MKKi8KZnVuY3Rpb24gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncykgewogIHZhciBudW1PcmlnaW5hbFRhZ3MgPSBvcmlnaW5hbFRhZ3MubGVuZ3RoOwogIGlmIChudW1PcmlnaW5hbFRhZ3MgPT09IDApIHsKICAgIHJldHVybiBoaWdobGlnaHRUYWdzOwogIH0KCiAgdmFyIG51bUhpZ2hsaWdodFRhZ3MgPSBoaWdobGlnaHRUYWdzLmxlbmd0aDsKICBpZiAobnVtSGlnaGxpZ2h0VGFncyA9PT0gMCkgewogICAgcmV0dXJuIG9yaWdpbmFsVGFnczsKICB9CgogIHZhciByZXN1bHQgPSBbXTsKICB2YXIgb3JpZ2luYWxJbmRleCA9IDA7CiAgdmFyIGhpZ2hsaWdodEluZGV4ID0gMDsKCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MgJiYgaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICB2YXIgb3JpZ2luYWxUYWcgPSBvcmlnaW5hbFRhZ3Nbb3JpZ2luYWxJbmRleF07CiAgICB2YXIgaGlnaGxpZ2h0VGFnID0gaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF07CgogICAgaWYgKG9yaWdpbmFsVGFnLnBvcyA8PSBoaWdobGlnaHRUYWcucG9zKSB7CiAgICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnKTsKICAgICAgb3JpZ2luYWxJbmRleCsrOwogICAgfQogICAgZWxzZSB7CiAgICAgIHJlc3VsdC5wdXNoKGhpZ2hsaWdodFRhZyk7CiAgICAgIGlmIChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4ICsgMV0ucG9zIDw9IG9yaWdpbmFsVGFnLnBvcykgewogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgICAgcmVzdWx0LnB1c2goaGlnaGxpZ2h0VGFnc1toaWdobGlnaHRJbmRleF0pOwogICAgICAgIGhpZ2hsaWdodEluZGV4Kys7CiAgICAgIH0KICAgICAgZWxzZSB7CiAgICAgICAgLy8gbmV3IGVuZCB0YWcKICAgICAgICByZXN1bHQucHVzaCh7cG9zOiBvcmlnaW5hbFRhZy5wb3N9KTsKCiAgICAgICAgLy8gbmV3IHN0YXJ0IHRhZwogICAgICAgIGhpZ2hsaWdodFRhZ3NbaGlnaGxpZ2h0SW5kZXhdID0ge25vZGU6IGhpZ2hsaWdodFRhZy5ub2RlLmNsb25lTm9kZShmYWxzZSksIHBvczogb3JpZ2luYWxUYWcucG9zfTsKICAgICAgfQogICAgfQogIH0KCiAgd2hpbGUgKG9yaWdpbmFsSW5kZXggPCBudW1PcmlnaW5hbFRhZ3MpIHsKICAgIHJlc3VsdC5wdXNoKG9yaWdpbmFsVGFnc1tvcmlnaW5hbEluZGV4XSk7CiAgICBvcmlnaW5hbEluZGV4Kys7CiAgfQoKICB3aGlsZSAoaGlnaGxpZ2h0SW5kZXggPCBudW1IaWdobGlnaHRUYWdzKSB7CiAgICByZXN1bHQucHVzaChoaWdobGlnaHRUYWdzW2hpZ2hsaWdodEluZGV4XSk7CiAgICBoaWdobGlnaHRJbmRleCsrOwogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkluc2VydHMgdGFncyBpbnRvIHRleHQuCkBwYXJhbSAgdGFncyAgYW4gYXJyYXkgb2YgdGFnIG9iamVjdHMKQHBhcmFtICB0ZXh0ICBhIHN0cmluZyByZXByZXNlbnRpbmcgdGhlIHRleHQKQHJldHVybiAgYSBET00gRG9jdW1lbnRGcmFnbWVudCByZXByZXNlbnRpbmcgdGhlIHJlc3VsdGluZyBIVE1MCiovCmZ1bmN0aW9uIHNoX2luc2VydFRhZ3ModGFncywgdGV4dCkgewogIHZhciBkb2MgPSBkb2N1bWVudDsKCiAgdmFyIHJlc3VsdCA9IGRvY3VtZW50LmNyZWF0ZURvY3VtZW50RnJhZ21lbnQoKTsKICB2YXIgdGFnSW5kZXggPSAwOwogIHZhciBudW1UYWdzID0gdGFncy5sZW5ndGg7CiAgdmFyIHRleHRQb3MgPSAwOwogIHZhciB0ZXh0TGVuZ3RoID0gdGV4dC5sZW5ndGg7CiAgdmFyIGN1cnJlbnROb2RlID0gcmVzdWx0OwoKICAvLyBvdXRwdXQgb25lIHRhZyBvciB0ZXh0IG5vZGUgZXZlcnkgaXRlcmF0aW9uCiAgd2hpbGUgKHRleHRQb3MgPCB0ZXh0TGVuZ3RoIHx8IHRhZ0luZGV4IDwgbnVtVGFncykgewogICAgdmFyIHRhZzsKICAgIHZhciB0YWdQb3M7CiAgICBpZiAodGFnSW5kZXggPCBudW1UYWdzKSB7CiAgICAgIHRhZyA9IHRhZ3NbdGFnSW5kZXhdOwogICAgICB0YWdQb3MgPSB0YWcucG9zOwogICAgfQogICAgZWxzZSB7CiAgICAgIHRhZ1BvcyA9IHRleHRMZW5ndGg7CiAgICB9CgogICAgaWYgKHRhZ1BvcyA8PSB0ZXh0UG9zKSB7CiAgICAgIC8vIG91dHB1dCB0aGUgdGFnCiAgICAgIGlmICh0YWcubm9kZSkgewogICAgICAgIC8vIHN0YXJ0IHRhZwogICAgICAgIHZhciBuZXdOb2RlID0gdGFnLm5vZGU7CiAgICAgICAgY3VycmVudE5vZGUuYXBwZW5kQ2hpbGQobmV3Tm9kZSk7CiAgICAgICAgY3VycmVudE5vZGUgPSBuZXdOb2RlOwogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIC8vIGVuZCB0YWcKICAgICAgICBjdXJyZW50Tm9kZSA9IGN1cnJlbnROb2RlLnBhcmVudE5vZGU7CiAgICAgIH0KICAgICAgdGFnSW5kZXgrKzsKICAgIH0KICAgIGVsc2UgewogICAgICAvLyBvdXRwdXQgdGV4dAogICAgICBjdXJyZW50Tm9kZS5hcHBlbmRDaGlsZChkb2MuY3JlYXRlVGV4dE5vZGUodGV4dC5zdWJzdHJpbmcodGV4dFBvcywgdGFnUG9zKSkpOwogICAgICB0ZXh0UG9zID0gdGFnUG9zOwogICAgfQogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQoKLyoqCkhpZ2hsaWdodHMgYW4gZWxlbWVudCBjb250YWluaW5nIHNvdXJjZSBjb2RlLiAgVXBvbiBjb21wbGV0aW9uIG9mIHRoaXMgZnVuY3Rpb24sCnRoZSBlbGVtZW50IHdpbGwgaGF2ZSBiZWVuIHBsYWNlZCBpbiB0aGUgInNoX3NvdXJjZUNvZGUiIGNsYXNzLgpAcGFyYW0gIGVsZW1lbnQgIGEgRE9NIDxwcmU+IGVsZW1lbnQgY29udGFpbmluZyB0aGUgc291cmNlIGNvZGUgdG8gYmUgaGlnaGxpZ2h0ZWQKQHBhcmFtICBsYW5ndWFnZSAgYSBsYW5ndWFnZSBkZWZpbml0aW9uIG9iamVjdAoqLwpmdW5jdGlvbiBzaF9oaWdobGlnaHRFbGVtZW50KGVsZW1lbnQsIGxhbmd1YWdlKSB7CiAgc2hfYWRkQ2xhc3MoZWxlbWVudCwgJ3NoX3NvdXJjZUNvZGUnKTsKICB2YXIgb3JpZ2luYWxUYWdzID0gW107CiAgdmFyIGlucHV0U3RyaW5nID0gc2hfZXh0cmFjdFRhZ3MoZWxlbWVudCwgb3JpZ2luYWxUYWdzKTsKICB2YXIgaGlnaGxpZ2h0VGFncyA9IHNoX2hpZ2hsaWdodFN0cmluZyhpbnB1dFN0cmluZywgbGFuZ3VhZ2UpOwogIHZhciB0YWdzID0gc2hfbWVyZ2VUYWdzKG9yaWdpbmFsVGFncywgaGlnaGxpZ2h0VGFncyk7CiAgdmFyIGRvY3VtZW50RnJhZ21lbnQgPSBzaF9pbnNlcnRUYWdzKHRhZ3MsIGlucHV0U3RyaW5nKTsKICB3aGlsZSAoZWxlbWVudC5oYXNDaGlsZE5vZGVzKCkpIHsKICAgIGVsZW1lbnQucmVtb3ZlQ2hpbGQoZWxlbWVudC5maXJzdENoaWxkKTsKICB9CiAgZWxlbWVudC5hcHBlbmRDaGlsZChkb2N1bWVudEZyYWdtZW50KTsKfQoKZnVuY3Rpb24gc2hfZ2V0WE1MSHR0cFJlcXVlc3QoKSB7CiAgaWYgKHdpbmRvdy5BY3RpdmVYT2JqZWN0KSB7CiAgICByZXR1cm4gbmV3IEFjdGl2ZVhPYmplY3QoJ01zeG1sMi5YTUxIVFRQJyk7CiAgfQogIGVsc2UgaWYgKHdpbmRvdy5YTUxIdHRwUmVxdWVzdCkgewogICAgcmV0dXJuIG5ldyBYTUxIdHRwUmVxdWVzdCgpOwogIH0KICB0aHJvdyAnTm8gWE1MSHR0cFJlcXVlc3QgaW1wbGVtZW50YXRpb24gYXZhaWxhYmxlJzsKfQoKZnVuY3Rpb24gc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpIHsKICBpZiAobGFuZ3VhZ2UgaW4gc2hfcmVxdWVzdHMpIHsKICAgIHNoX3JlcXVlc3RzW2xhbmd1YWdlXS5wdXNoKGVsZW1lbnQpOwogICAgcmV0dXJuOwogIH0KICBzaF9yZXF1ZXN0c1tsYW5ndWFnZV0gPSBbZWxlbWVudF07CiAgdmFyIHJlcXVlc3QgPSBzaF9nZXRYTUxIdHRwUmVxdWVzdCgpOwogIHZhciB1cmwgPSBwcmVmaXggKyAnc2hfJyArIGxhbmd1YWdlICsgc3VmZml4OwogIHJlcXVlc3Qub3BlbignR0VUJywgdXJsLCB0cnVlKTsKICByZXF1ZXN0Lm9ucmVhZHlzdGF0ZWNoYW5nZSA9IGZ1bmN0aW9uICgpIHsKICAgIGlmIChyZXF1ZXN0LnJlYWR5U3RhdGUgPT09IDQpIHsKICAgICAgdHJ5IHsKICAgICAgICBpZiAoISByZXF1ZXN0LnN0YXR1cyB8fCByZXF1ZXN0LnN0YXR1cyA9PT0gMjAwKSB7CiAgICAgICAgICBldmFsKHJlcXVlc3QucmVzcG9uc2VUZXh0KTsKICAgICAgICAgIHZhciBlbGVtZW50cyA9IHNoX3JlcXVlc3RzW2xhbmd1YWdlXTsKICAgICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgZWxlbWVudHMubGVuZ3RoOyBpKyspIHsKICAgICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50c1tpXSwgc2hfbGFuZ3VhZ2VzW2xhbmd1YWdlXSk7CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIGVsc2UgewogICAgICAgICAgdGhyb3cgJ0hUVFAgZXJyb3I6IHN0YXR1cyAnICsgcmVxdWVzdC5zdGF0dXM7CiAgICAgICAgfQogICAgICB9CiAgICAgIGZpbmFsbHkgewogICAgICAgIHJlcXVlc3QgPSBudWxsOwogICAgICB9CiAgICB9CiAgfTsKICByZXF1ZXN0LnNlbmQobnVsbCk7Cn0KCi8qKgpIaWdobGlnaHRzIGFsbCBlbGVtZW50cyBjb250YWluaW5nIHNvdXJjZSBjb2RlIG9uIHRoZSBjdXJyZW50IHBhZ2UuIEVsZW1lbnRzCmNvbnRhaW5pbmcgc291cmNlIGNvZGUgbXVzdCBiZSAicHJlIiBlbGVtZW50cyB3aXRoIGEgImNsYXNzIiBhdHRyaWJ1dGUgb2YKInNoX0xBTkdVQUdFIiwgd2hlcmUgTEFOR1VBR0UgaXMgYSB2YWxpZCBsYW5ndWFnZSBpZGVudGlmaWVyOyBlLmcuLCAic2hfamF2YSIKaWRlbnRpZmllcyB0aGUgZWxlbWVudCBhcyBjb250YWluaW5nICJqYXZhIiBsYW5ndWFnZSBzb3VyY2UgY29kZS4KKi8KZnVuY3Rpb24gaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCB0YWcpIHsKICB2YXIgbm9kZUxpc3QgPSBkb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSh0YWcpOwogIGZvciAodmFyIGkgPSAwOyBpIDwgbm9kZUxpc3QubGVuZ3RoOyBpKyspIHsKICAgIHZhciBlbGVtZW50ID0gbm9kZUxpc3QuaXRlbShpKTsKICAgIHZhciBodG1sQ2xhc3NlcyA9IHNoX2dldENsYXNzZXMoZWxlbWVudCk7CiAgICB2YXIgaGlnaGxpZ2h0ZWQgPSBmYWxzZTsKICAgIHZhciBkb250aGlnaGxpZ2h0ID0gZmFsc2U7CiAgICBmb3IgKHZhciBqID0gMDsgaiA8IGh0bWxDbGFzc2VzLmxlbmd0aDsgaisrKSB7CiAgICAgIHZhciBodG1sQ2xhc3MgPSBodG1sQ2xhc3Nlc1tqXS50b0xvd2VyQ2FzZSgpOwogICAgICBpZiAoaHRtbENsYXNzID09PSAnc2hfbm9uZScpIHsKICAgICAgICBkb250aGlnaGxpZ2h0ID0gdHJ1ZQogICAgICAgIGNvbnRpbnVlOwogICAgICB9CiAgICAgIGlmIChodG1sQ2xhc3Muc3Vic3RyKDAsIDMpID09PSAnc2hfJykgewogICAgICAgIHZhciBsYW5ndWFnZSA9IGh0bWxDbGFzcy5zdWJzdHJpbmcoMyk7CiAgICAgICAgaWYgKGxhbmd1YWdlIGluIHNoX2xhbmd1YWdlcykgewogICAgICAgICAgc2hfaGlnaGxpZ2h0RWxlbWVudChlbGVtZW50LCBzaF9sYW5ndWFnZXNbbGFuZ3VhZ2VdKTsKICAgICAgICAgIGhpZ2hsaWdodGVkID0gdHJ1ZTsKICAgICAgICB9CiAgICAgICAgZWxzZSBpZiAodHlwZW9mKHByZWZpeCkgPT09ICdzdHJpbmcnICYmIHR5cGVvZihzdWZmaXgpID09PSAnc3RyaW5nJykgewogICAgICAgICAgc2hfbG9hZChsYW5ndWFnZSwgZWxlbWVudCwgcHJlZml4LCBzdWZmaXgpOwogICAgICAgIH0KICAgICAgICBlbHNlIHsKICAgICAgICAgIHRocm93ICdGb3VuZCA8JyArIHRhZyArICc+IGVsZW1lbnQgd2l0aCBjbGFzcz0iJyArIGh0bWxDbGFzcyArICciLCBidXQgbm8gc3VjaCBsYW5ndWFnZSBleGlzdHMnOwogICAgICAgIH0KICAgICAgICBicmVhazsKICAgICAgfQogICAgfQogICAgaWYgKGhpZ2hsaWdodGVkID09PSBmYWxzZSAmJiBkb250aGlnaGxpZ2h0ID09IGZhbHNlKSB7CiAgICAgIHNoX2hpZ2hsaWdodEVsZW1lbnQoZWxlbWVudCwgc2hfbGFuZ3VhZ2VzWyJqYXZhc2NyaXB0Il0pOwogICAgfQogIH0KfQoKCgpmdW5jdGlvbiBzaF9oaWdobGlnaHREb2N1bWVudChwcmVmaXgsIHN1ZmZpeCkgewogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3R0Jyk7CiAgaGlnaGxpZ2h0KHByZWZpeCwgc3VmZml4LCAnY29kZScpOwogIGhpZ2hsaWdodChwcmVmaXgsIHN1ZmZpeCwgJ3ByZScpOwp9Cg=="></script>
+  <script src="data:application/javascript;base64,aWYoIXRoaXMuc2hfbGFuZ3VhZ2VzKXt0aGlzLnNoX2xhbmd1YWdlcz17fX1zaF9sYW5ndWFnZXMuamF2YXNjcmlwdD1bW1svXC9cL1wvL2csInNoX2NvbW1lbnQiLDFdLFsvXC9cLy9nLCJzaF9jb21tZW50Iiw3XSxbL1wvXCpcKi9nLCJzaF9jb21tZW50Iiw4XSxbL1wvXCovZywic2hfY29tbWVudCIsOV0sWy9cYig/OmFic3RyYWN0fGJyZWFrfGNhc2V8Y2F0Y2h8Y2xhc3N8Y29uc3R8Y29udGludWV8ZGVidWdnZXJ8ZGVmYXVsdHxkZWxldGV8ZG98ZWxzZXxlbnVtfGV4cG9ydHxleHRlbmRzfGZhbHNlfGZpbmFsfGZpbmFsbHl8Zm9yfGZ1bmN0aW9ufGdvdG98aWZ8aW1wbGVtZW50c3xpbnxpbnN0YW5jZW9mfGludGVyZmFjZXxuYXRpdmV8bmV3fG51bGx8cHJpdmF0ZXxwcm90ZWN0ZWR8cHJvdG90eXBlfHB1YmxpY3xyZXR1cm58c3RhdGljfHN1cGVyfHN3aXRjaHxzeW5jaHJvbml6ZWR8dGhyb3d8dGhyb3dzfHRoaXN8dHJhbnNpZW50fHRydWV8dHJ5fHR5cGVvZnx2YXJ8dm9sYXRpbGV8d2hpbGV8d2l0aClcYi9nLCJzaF9rZXl3b3JkIiwtMV0sWy8oXCtcK3wtLXxcKXxcXSkoXHMqKShcLz0/KD8hWypcL10pKS9nLFsic2hfc3ltYm9sIiwic2hfbm9ybWFsIiwic2hfc3ltYm9sIl0sLTFdLFsvKDB4W0EtRmEtZjAtOV0rfCg/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykoXHMqKShcLyg/IVsqXC9dKSkvZyxbInNoX251bWJlciIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyhbQS1aYS16JF9dW0EtWmEtejAtOSRfXSpccyopKFwvPT8oPyFbKlwvXSkpL2csWyJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy9cLyg/OlxcLnxbXipcXFwvXSkoPzpcXC58W15cXFwvXSkqXC9bZ2ltXSovZywic2hfcmVnZXhwIiwtMV0sWy9cYlsrLV0/KD86KD86MHhbQS1GYS1mMC05XSspfCg/Oig/OltcZF0qXC4pP1tcZF0rKD86W2VFXVsrLV0/W1xkXSspPykpdT8oPzooPzppbnQoPzo4fDE2fDMyfDY0KSl8TCk/XGIvZywic2hfbnVtYmVyIiwtMV0sWy8iL2csInNoX3N0cmluZyIsMTBdLFsvJy9nLCJzaF9zdHJpbmciLDExXSxbL358IXwlfFxefFwqfFwofFwpfC18XCt8PXxcW3xcXXxcXHw6fDt8LHxcLnxcL3xcP3wmfDx8PnxcfC9nLCJzaF9zeW1ib2wiLC0xXSxbL1x7fFx9L2csInNoX2NicmFja2V0IiwtMV0sWy9cYig/Ok1hdGh8SW5maW5pdHl8TmFOfHVuZGVmaW5lZHxhcmd1bWVudHMpXGIvZywic2hfcHJlZGVmX3ZhciIsLTFdLFsvXGIoPzpBcnJheXxCb29sZWFufERhdGV8RXJyb3J8RXZhbEVycm9yfEZ1bmN0aW9ufE51bWJlcnxPYmplY3R8UmFuZ2VFcnJvcnxSZWZlcmVuY2VFcnJvcnxSZWdFeHB8U3RyaW5nfFN5bnRheEVycm9yfFR5cGVFcnJvcnxVUklFcnJvcnxkZWNvZGVVUkl8ZGVjb2RlVVJJQ29tcG9uZW50fGVuY29kZVVSSXxlbmNvZGVVUklDb21wb25lbnR8ZXZhbHxpc0Zpbml0ZXxpc05hTnxwYXJzZUZsb2F0fHBhcnNlSW50KVxiL2csInNoX3ByZWRlZl9mdW5jIiwtMV0sWy8oPzpbQS1aYS16XXxfKVtBLVphLXowLTlfXSooPz1bIFx0XSpcKCkvZywic2hfZnVuY3Rpb24iLC0xXV0sW1svJC9nLG51bGwsLTJdLFsvKD86PD8pW0EtWmEtejAtOV9cLlwvXC1ffl0rQFtBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KXwoPzo8PylbQS1aYS16MC05X10rOlwvXC9bQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+PykvZywic2hfdXJsIiwtMV0sWy88XD94bWwvZywic2hfcHJlcHJvYyIsMiwxXSxbLzwhRE9DVFlQRS9nLCJzaF9wcmVwcm9jIiw0LDFdLFsvPCEtLS9nLCJzaF9jb21tZW50Iiw1XSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKSg/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel0oPzpbQS1aYS16MC05XzouLV0qKS9nLCJzaF9rZXl3b3JkIiw2LDFdLFsvJig/OltBLVphLXowLTldKyk7L2csInNoX3ByZXByb2MiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSooPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMV0sWy88KD86XC8pP1tBLVphLXpdW0EtWmEtejAtOV0qL2csInNoX2tleXdvcmQiLDYsMV0sWy9AW0EtWmEtel0rL2csInNoX3R5cGUiLC0xXSxbLyg/OlRPRE98RklYTUV8QlVHKSg/Ols6XT8pL2csInNoX3RvZG8iLC0xXV0sW1svXD8+L2csInNoX3ByZXByb2MiLC0yXSxbLyhbXj0iIFx0Pl0rKShbIFx0XSopKD0/KS9nLFsic2hfdHlwZSIsInNoX25vcm1hbCIsInNoX3N5bWJvbCJdLC0xXSxbLyIvZywic2hfc3RyaW5nIiwzXV0sW1svXFwoPzpcXHwiKS9nLG51bGwsLTFdLFsvIi9nLCJzaF9zdHJpbmciLC0yXV0sW1svPi9nLCJzaF9wcmVwcm9jIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLy0tPi9nLCJzaF9jb21tZW50IiwtMl0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdXSxbWy8oPzpcLyk/Pi9nLCJzaF9rZXl3b3JkIiwtMl0sWy8oW149IiBcdD5dKykoWyBcdF0qKSg9PykvZyxbInNoX3R5cGUiLCJzaF9ub3JtYWwiLCJzaF9zeW1ib2wiXSwtMV0sWy8iL2csInNoX3N0cmluZyIsM11dLFtbLyQvZyxudWxsLC0yXV0sW1svXCpcLy9nLCJzaF9jb21tZW50IiwtMl0sWy8oPzo8PylbQS1aYS16MC05X1wuXC9cLV9+XStAW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pfCg/Ojw/KVtBLVphLXowLTlfXSs6XC9cL1tBLVphLXowLTlfXC5cL1wtX35dKyg/Oj4/KS9nLCJzaF91cmwiLC0xXSxbLzxcP3htbC9nLCJzaF9wcmVwcm9jIiwyLDFdLFsvPCFET0NUWVBFL2csInNoX3ByZXByb2MiLDQsMV0sWy88IS0tL2csInNoX2NvbW1lbnQiLDVdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopKD86XC8pPz4vZywic2hfa2V5d29yZCIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XSg/OltBLVphLXowLTlfOi4tXSopL2csInNoX2tleXdvcmQiLDYsMV0sWy8mKD86W0EtWmEtejAtOV0rKTsvZywic2hfcHJlcHJvYyIsLTFdLFsvPCg/OlwvKT9bQS1aYS16XVtBLVphLXowLTldKig/OlwvKT8+L2csInNoX2tleXdvcmQiLC0xXSxbLzwoPzpcLyk/W0EtWmEtel1bQS1aYS16MC05XSovZywic2hfa2V5d29yZCIsNiwxXSxbL0BbQS1aYS16XSsvZywic2hfdHlwZSIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy9cKlwvL2csInNoX2NvbW1lbnQiLC0yXSxbLyg/Ojw/KVtBLVphLXowLTlfXC5cL1wtX35dK0BbQS1aYS16MC05X1wuXC9cLV9+XSsoPzo+Pyl8KD86PD8pW0EtWmEtejAtOV9dKzpcL1wvW0EtWmEtejAtOV9cLlwvXC1ffl0rKD86Pj8pL2csInNoX3VybCIsLTFdLFsvKD86VE9ET3xGSVhNRXxCVUcpKD86WzpdPykvZywic2hfdG9kbyIsLTFdXSxbWy8iL2csInNoX3N0cmluZyIsLTJdLFsvXFwuL2csInNoX3NwZWNpYWxjaGFyIiwtMV1dLFtbLycvZywic2hfc3RyaW5nIiwtMl0sWy9cXC4vZywic2hfc3BlY2lhbGNoYXIiLC0xXV1dOw=="></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+
+</body></html>

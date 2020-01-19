@@ -28,8 +28,8 @@ function callback (socket) { /* ... */ }
 일반적인 Node TCP 서버는 이렇게 생겼습니다.
 
 ```js
-var net = require('net')
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
   // socket handling logic
 })
 server.listen(8000)
@@ -43,14 +43,14 @@ server.listen(8000)
 
 `net` 모듈의 문서는 브라우저에 이 주소를 넣으면 볼 수 있습니다.
 
-  {rootdir:/node_apidoc/net.html}
+  {rootdir:/docs-nodejs/net.html}
 
 날짜를 만드려면, `new Date()` 객체에서 사용자 정의 형식을 만들 필요가 있습니다. 이 메소드가 유용할 것입니다.
 
 ```js
 date.getFullYear()
-date.getMonth()     // starts at 0
-date.getDate()      // returns the day of month
+date.getMonth() // starts at 0
+date.getDate() // returns the day of month
 date.getHours()
 date.getMinutes()
 ```

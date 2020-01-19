@@ -9,7 +9,7 @@
 モジュールをロードするには以下のようにします:
 
 ```js
-var fs = require('fs')
+const fs = require('fs')
 ```
 
 その後は `fs` という変数で `fs` というモジュールを利用出来ます。
@@ -18,15 +18,15 @@ var fs = require('fs')
 この関数は `Buffer` オブジェクトを返します。この `Buffer` を使うことで全てのファイルコンテンツにアクセスできます。
 
 `fs` モジュールのドキュメントは以下のリンクをブラウザでご覧ください:
-  {rootdir:/node_apidoc/fs.html}
+  {rootdir:/docs-nodejs/fs.html}
 
 `Buffer` オブジェクトは、ASCIIやバイナリ、その他のフォーマットを扱う際の Nodeの効率的な方法です。エンコーディングは関係ありません。
 `Buffer` のオブジェクトは `toString()` をつかって String に変換できます。
 
-例えば `var str = buf.toString()`.
+例えば `const str = buf.toString()`.
 
 `Buffer` モジュールのドキュメントは、このリンクをブラウザで見てください:
-  {rootdir:/node_apidoc/buffer.html}
+  {rootdir:/docs-nodejs/buffer.html}
 
 簡単に改行を数える方法を探しているのなら、このヒントは役に立つでしょう：
 

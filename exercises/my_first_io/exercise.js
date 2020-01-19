@@ -1,15 +1,16 @@
-var fs = require('fs')
-var path = require('path')
-var os = require('os')
-var rimraf = require('rimraf')
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
-var wrappedexec = require('workshopper-wrappedexec')
-var boganipsum = require('boganipsum')
+'use strict'
+const fs = require('fs')
+const path = require('path')
+const os = require('os')
+const rimraf = require('rimraf')
+let exercise = require('workshopper-exercise')()
+const filecheck = require('workshopper-exercise/filecheck')
+const execute = require('workshopper-exercise/execute')
+const comparestdout = require('workshopper-exercise/comparestdout')
+const wrappedexec = require('workshopper-wrappedexec')
+const boganipsum = require('boganipsum')
 
-var testFile = path.join(os.tmpdir(), '_learnyounode_' + process.pid + '.txt')
+const testFile = path.join(os.tmpdir(), '_learnyounode_' + process.pid + '.txt')
 
 // checks that the submission file actually exists
 exercise = filecheck(exercise)
@@ -32,8 +33,8 @@ exercise.wrapModule(require.resolve('./wrap'))
 exercise.addSetup(function (mode, callback) {
   // mode == 'run' || 'verify'
 
-  var lines = Math.ceil(Math.random() * 50)
-  var txt = boganipsum({ paragraphs: lines })
+  const lines = Math.ceil(Math.random() * 50)
+  const txt = boganipsum({ paragraphs: lines })
 
   // supply the file as an arg to the 'execute' processor for both
   // solution and submission spawn()
@@ -48,16 +49,16 @@ exercise.addSetup(function (mode, callback) {
 
 // add a processor only for 'verify' calls
 exercise.addVerifyProcessor(function (callback) {
-  var usedSync = false
-  var usedAsync = false
+  let usedSync = false
+  let usedAsync = false
 
   Object.keys(exercise.wrapData.fsCalls || {}).forEach(function (m) {
     if (/Sync$/.test(m)) {
       usedSync = true
-      this.emit('pass', this.__('pass.sync', {method: 'fs.' + m + '()'}))
+      this.emit('pass', this.__('pass.sync', { method: 'fs.' + m + '()' }))
     } else {
       usedAsync = true
-      this.emit('fail', this.__('fail.async', {method: 'fs.' + m + '()'}))
+      this.emit('fail', this.__('fail.async', { method: 'fs.' + m + '()' }))
     }
   }.bind(this))
 

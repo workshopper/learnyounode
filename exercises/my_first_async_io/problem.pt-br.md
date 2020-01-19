@@ -18,4 +18,4 @@ function callback (err, data) { /* ... */ }
 então você pode checar se um erro ocorreu checando se o primeiro argumento é verdadeiro. Se não houver nenhum erro, você deve ter seu objeto `Buffer` como segundo argumento. Assim como `readFileSync()`, você pode fornecer 'utf8' como segundo argumento e colocar o callback como terceiro argumento, assim você terá uma `String` ao invés de um `Buffer`.
 
 Documentação sobre o módulo `fs` pode ser encontrada apontando seu navegador para esse endereço:
-  {rootdir:/node_apidoc/fs.html}
+  {rootdir:/docs-nodejs/fs.html}

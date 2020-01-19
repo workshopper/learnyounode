@@ -24,14 +24,14 @@ function callback (request, response) { /* ... */ }
 一個標準的 Node HTTP 伺服器看起來像這樣：
 
 ```js
-var http = require('http')
-var server = http.createServer(function (req, res) {
+const http = require('http')
+const server = http.createServer(function (req, res) {
   // request handling logic...
 })
 server.listen(8000)
 ```
 
 要閱讀 `http` 模組的文件，可以在瀏覽器中打開這個頁面：
-  {rootdir:/node_apidoc/http.html}
+  {rootdir:/docs-nodejs/http.html}
 
 `fs` 核心模組也有一些針對檔案的串流 API 可以用。您將會需要用 `fs.createReadStream()` 把第一個參數給予的檔案建立成串流。這個方法會返回一個可以使用 `src.pipe(dst)` 方法在 `src` 和 `dst` 串流之間傳遞資料的串流物件。用這個方法就可以把檔案系統串流和 HTTP 回應串流連在一起。

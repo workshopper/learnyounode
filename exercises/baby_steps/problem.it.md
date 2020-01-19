@@ -20,7 +20,7 @@ $ node program.js 1 2 3
 In tal caso il programma stamperebbe un array come il seguente:
 
 ```js
-[ 'node', '/path/to/your/program.js', '1', '2', '3' ]
+['node', '/path/to/your/program.js', '1', '2', '3']
 ```
 
 Dovrai pensare a come iterare sugli argomenti numerici in maniera da produrne la somma. Il primo elemento dell'array `process.argv` è sempre 'node', e il secondo elemento è sempre il percorso al tuo file `program.js`, perciò dovrai cominciare dal terzo elemento (indice 2), aggiungendo ciascun elemento al totale fino a raggiungere la fine dell'array.

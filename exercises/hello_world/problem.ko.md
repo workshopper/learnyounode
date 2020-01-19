@@ -12,7 +12,7 @@ $ node program.js
 브라우저에서 하던 것처럼 콘솔에서 짤 수 있습니다.
 
 ```js
-console.log("text")
+console.log('text')
 ```
 
 다 하면 다음을 실행하세요.

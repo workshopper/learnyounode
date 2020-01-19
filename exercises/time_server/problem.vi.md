@@ -28,8 +28,8 @@ function callback (socket) { /* ... */ }
 Thường thì một máy chủ TCP đơn giản sẽ được thực hiện như sau:
 
 ```js
-var net = require('net')
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
   // Xử lý logic của socket
 })
 server.listen(8000)
@@ -43,14 +43,14 @@ Sử dụng `socket.write(data)` để viết dữ liệu cho socket và `socket
 
 Tài liệu cho mô-đun `net` có thể xem tại:
 
-  {rootdir:/node_apidoc/net.html}
+  {rootdir:/docs-nodejs/net.html}
 
 Để tạo thời gian, bạn có thể sử dụng đối tượng `new Date()`, sau đó dùng các phương thức hữu dụng như:
 
 ```js
 date.getFullYear()
-date.getMonth()     // bắt đầu từ 0
-date.getDate()      // trả ra ngày của tháng
+date.getMonth() // bắt đầu từ 0
+date.getDate() // trả ra ngày của tháng
 date.getHours()
 date.getMinutes()
 ```

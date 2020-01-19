@@ -1,10 +1,11 @@
-var net = require('net')
-var exercise = require('workshopper-exercise')()
-var filecheck = require('workshopper-exercise/filecheck')
-var execute = require('workshopper-exercise/execute')
-var comparestdout = require('workshopper-exercise/comparestdout')
-var through2 = require('through2')
-var rndport = require('../../lib/rndport')
+'use strict'
+const net = require('net')
+let exercise = require('workshopper-exercise')()
+const filecheck = require('workshopper-exercise/filecheck')
+const execute = require('workshopper-exercise/execute')
+const comparestdout = require('workshopper-exercise/comparestdout')
+const through2 = require('through2')
+const rndport = require('../../lib/rndport')
 
 // checks that the submission file actually exists
 exercise = filecheck(exercise)
@@ -18,8 +19,8 @@ exercise.addSetup(function (mode, callback) {
   this.solutionPort = this.submissionPort + 1
 
   // set child process arguments
-  this.submissionArgs = [ this.submissionPort ]
-  this.solutionArgs = [ this.solutionPort ]
+  this.submissionArgs = [this.submissionPort]
+  this.solutionArgs = [this.solutionPort]
 
   process.nextTick(callback)
 })
@@ -48,7 +49,7 @@ exercise = comparestdout(exercise)
 // delayed for 500ms to wait for servers to start so we can start
 // playing with them
 function query (mode) {
-  var exercise = this
+  const exercise = this
 
   // on error, write to the stream so that'll also be verified
 
@@ -60,7 +61,7 @@ function query (mode) {
         setImmediate(function () {
           exercise.emit(
             'fail'
-            , exercise.__('fail.connection', {port: port, message: err.message})
+            , exercise.__('fail.connection', { port: port, message: err.message })
           )
         })
       })

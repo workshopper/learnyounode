@@ -34,7 +34,7 @@ Dette kalles å eksportere eller tilgjengeliggjøre funksjonen på modulen.
 For å kunne benytte den nye modulen i hovedprogrammet må du kalle på `require()` funksjonen på samme måte som når du lastet inn `fs` modulen `require('fs')`. Den eneste forskjellen er at lokale moduler må starte med './'. Hvis filen din heter minmodul.js blir require() kallet slik:
 
 ```js
-var minmodul = require('./minmodul.js')
+const minmodul = require('./minmodul.js')
 ```
 
 '.js' er valgfritt og du vil ofte se at den er utelatt.
@@ -46,8 +46,7 @@ Husk at man burde sjekke etter feil og kalle på callback funksjoner så tidlig 
 ```js
 function bar (callback) {
   foo(function (err, data) {
-    if (err)
-      return callback(err) // returner tidlig
+    if (err) { return callback(err) } // returner tidlig
 
     // ... ingen feil, fortsett å gjøre kule ting med `data`
 

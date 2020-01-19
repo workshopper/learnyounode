@@ -1,4 +1,4 @@
-var fs = require('fs')
+const fs = require('fs')
 
 countNewLines(fs.readFileSync(process.argv[2]))
 

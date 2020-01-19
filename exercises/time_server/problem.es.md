@@ -28,8 +28,8 @@ function callback (socket) { /* ... */ }
 Un ejemplo de un servidor Node típico es como sigue:
 
 ```js
-var net = require('net')
-var server = net.createServer(function (socket) {
+const net = require('net')
+const server = net.createServer(function (socket) {
   // manejo del socket
 })
 server.listen(8000)
@@ -43,14 +43,14 @@ Puedes usar `socket.write(data)` para escribir en el socket y luego `socket.end(
 
 La documentación del módulo `net` puede verse en:
 
-  {rootdir:/node_apidoc/net.html}
+  {rootdir:/docs-nodejs/net.html}
 
 Para calcular la fecha puedes usar `new Date()` y luego llamar a algunos métodos específicos:
 
 ```js
 date.getFullYear()
-date.getMonth()     // empieza en 0
-date.getDate()      // devuelve día del mes, empieza en 1
+date.getMonth() // empieza en 0
+date.getDate() // devuelve día del mes, empieza en 1
 date.getHours()
 date.getMinutes()
 ```

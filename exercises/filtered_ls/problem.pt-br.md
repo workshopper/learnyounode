@@ -16,9 +16,9 @@ function callback (err, list) { /* ... */ }
 onde `list` é um array de Strings contendo nomes de arquivos.
 
 Documentação relativa ao módulo `fs` pode ser encontrada apontando seu navegador para este endereço:
-  {rootdir:/node_apidoc/fs.html}
+  {rootdir:/docs-nodejs/fs.html}
 
 Você também pode achar o módulo `path` do node muito útil, especialmente o método `extname`.
 
 A documentação do módulo `path` pode ser encontrada apontando seu navegador para este endereço:
-  {rootdir:/node_apidoc/path.html}
+  {rootdir:/docs-nodejs/path.html}
