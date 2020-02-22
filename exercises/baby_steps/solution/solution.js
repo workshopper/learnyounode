@@ -1,9 +1,11 @@
 'use strict'
 
-let result = 0
-
-for (let i = 2; i < process.argv.length; i++) {
-  result += Number(process.argv[i])
+function myArgs(args){
+  let sum=0
+  for(let i=0;i<args.length;i++){
+     sum=sum+parseInt(args[i])
+  }
+  console.log(sum)
 }
 
-console.log(result)
+myArgs(process.argv.slice(2))
