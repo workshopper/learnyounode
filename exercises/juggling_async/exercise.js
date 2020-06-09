@@ -1,9 +1,6 @@
 'use strict'
 const http = require('http')
-let exercise = require('workshopper-exercise')()
-const filecheck = require('workshopper-exercise/filecheck')
-const execute = require('workshopper-exercise/execute')
-const comparestdout = require('workshopper-exercise/comparestdout')
+const exercise = require('workshopper-exercise/basic')
 const bogan = require('boganipsum')
 const after = require('after')
 
@@ -16,15 +13,6 @@ const words = [
 
 // the output will be long lines so make the comparison take that into account
 exercise.longCompareOutput = true
-
-// checks that the submission file actually exists
-exercise = filecheck(exercise)
-
-// execute the solution and submission in parallel with spawn()
-exercise = execute(exercise)
-
-// compare stdout of solution and submission
-exercise = comparestdout(exercise)
 
 // write the words out to the client for this server, do it slowly
 // and wait for `delay` until we start to make async handling a pain

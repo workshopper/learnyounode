@@ -1,23 +1,11 @@
 'use strict'
 const http = require('http')
-let exercise = require('workshopper-exercise')()
-const filecheck = require('workshopper-exercise/filecheck')
-const execute = require('workshopper-exercise/execute')
-const comparestdout = require('workshopper-exercise/comparestdout')
+const exercise = require('workshopper-exercise/basic')
 
 const words = require('boganipsum')({ paragraphs: 2, sentenceMax: 1 }).split(' ')
 
 // the output will be long lines so make the comparison take that into account
 exercise.longCompareOutput = true
-
-// checks that the submission file actually exists
-exercise = filecheck(exercise)
-
-// execute the solution and submission in parallel with spawn()
-exercise = execute(exercise)
-
-// compare stdout of solution and submission
-exercise = comparestdout(exercise)
 
 // set up the data file to be passed to the submission
 exercise.addSetup(function (mode, callback) {
