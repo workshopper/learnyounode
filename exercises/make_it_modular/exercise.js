@@ -2,10 +2,7 @@
 const fs = require('fs')
 const path = require('path')
 const os = require('os')
-let exercise = require('workshopper-exercise')()
-const filecheck = require('workshopper-exercise/filecheck')
-const execute = require('workshopper-exercise/execute')
-const comparestdout = require('workshopper-exercise/comparestdout')
+let exercise = require('workshopper-exercise/basic')
 const wrappedexec = require('workshopper-wrappedexec')
 const after = require('after')
 const rimraf = require('rimraf')
@@ -13,15 +10,6 @@ const verify = require('./verify')
 const files = require('../filtered_ls/file-list')
 
 const testDir = path.join(os.tmpdir(), '_learnyounode_' + process.pid)
-
-// checks that the submission file actually exists
-exercise = filecheck(exercise)
-
-// execute the solution and submission in parallel with spawn()
-exercise = execute(exercise)
-
-// compare stdout of solution and submission
-exercise = comparestdout(exercise)
 
 // wrap up the child process in a phantom wrapper that can
 // mess with the global environment and inspect execution
