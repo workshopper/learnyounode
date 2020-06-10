@@ -5,9 +5,7 @@ const filecheck = require('workshopper-exercise/filecheck')
 const execute = require('workshopper-exercise/execute')
 const comparestdout = require('workshopper-exercise/comparestdout')
 const rndport = require('../../lib/rndport')
-const words = require('boganipsum/clean_words')
-  .sort(function () { return 0.5 - Math.random() })
-  .slice(0, 10)
+const words = require('../../lib/words')
 
 // checks that the submission file actually exists
 exercise = filecheck(exercise)
