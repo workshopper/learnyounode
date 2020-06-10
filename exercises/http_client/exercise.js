@@ -2,9 +2,7 @@
 const http = require('http')
 const exercise = require('workshopper-exercise/basic')
 
-const words = require('boganipsum/clean_words')
-  .sort(function () { return 0.5 - Math.random() })
-  .slice(0, 10)
+const words = require('../../lib/words')
 
 // set up the data file to be passed to the submission
 exercise.addSetup(function (mode, callback) {
