@@ -1,7 +1,7 @@
-const fs = require('fs')
 const path = require('path')
 const util = require('util')
 const files = require('../filtered_ls/file-list')
+const proxyquire = require('proxyquire')
 
 function validateModule (modFile, callback) {
   const exercise = this
@@ -48,12 +48,14 @@ function validateModule (modFile, callback) {
   exercise.emit('pass', __n('pass.arguments', mod.length))
 
   // ---- Mock `fs.readdir` and check that an error bubbles back up through the cb
-
-  fs.$readdir = fs.readdir
-  fs.readdir = function (dir, optionalEncoding, callback) {
-    callback = callback || optionalEncoding
-    callback(error)
-  }
+  const mockMod = proxyquire(modFile, {
+    fs: {
+      readdir: function (dir, optionalEncoding, callback) {
+        callback = callback || optionalEncoding
+        callback(error)
+      }
+    }
+  })
 
   function noerr () {
     return modFileError(__('fail.mod.missing_error'))
@@ -61,7 +63,7 @@ function validateModule (modFile, callback) {
 
   callbackUsed = false
   try {
-    mod('/foo/bar/', 'wheee', function (err) {
+    mockMod('/foo/bar/', 'wheee', function (err) {
       if (err !== error) {
         return noerr()
       }
@@ -88,9 +90,6 @@ function validateModule (modFile, callback) {
     }
 
     exercise.emit('pass', __('pass.callback'))
-
-    // replace the mock readdir
-    fs.readdir = fs.$readdir
 
     callbackUsed = false
 
