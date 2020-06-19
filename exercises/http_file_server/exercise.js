@@ -87,6 +87,22 @@ function query (mode) {
           , exercise.__('fail.connection', { address: url, message: err.message })
         )
       })
+      .on('response', function(res) {
+        if(res.statusCode != 200) {
+          exercise.emit(
+            'fail',
+            exercise.__('fail.status_code', {status: res.statusCode}))
+        }
+        if(res.headers['content-type'] === undefined) {
+          exercise.emit(
+            'fail',
+            exercise.__('fail.missing_content_type'))
+        } else if(res.headers['content-type'] != 'text/plain') {
+          exercise.emit(
+            'fail',
+            exercise.__('fail.content_type', {header: res.headers['content-type']}))
+        }
+      })
     req.pipe(stream)
     setTimeout(function () {
       stream.unpipe(req)
