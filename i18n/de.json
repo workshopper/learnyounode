@@ -1,0 +1,63 @@
+{
+  "title": "LERNE NODE.JS FOR MUCH WIN!",
+  "common": {
+    "exercise": {
+      "pass": {
+        "sync": "Benutzte synchrone Methode: {{{method}}}",
+        "async": "Benutzte asynchrone Methode: {{{method}}}"
+      },
+      "fail": {
+        "sync": "Benutzte synchrone Methode: {{{method}}}",
+        "async": "Benutzte asynchrone Methode: {{{method}}}",
+        "unused": "Asynchrone Methode aus dem `fs`-Modul benutzt.",
+        "unexpected_error": "Unerwarteter Fehler vom HTTP-Server: {{{message}}}",
+        "connection": "Fehler beim Verbinden mit {{{address}}}: {{{message}}}"
+      }
+    }
+  },
+  "exercises": {
+    "MAKE IT MODULAR": {
+      "fail": {
+        "missing_module": "Keine zusätzliche Moduldatei benutzt, du musst mit require() ein Modul einbinden, um diese Aufgabe zu lösen",
+        "loadError": "Fehler beim Laden der Moduldatei [{{path}}]: {{{message}}}",
+        "mod": {
+          "_base": "Deine zusätzliche Moduldatei [{{path}}] {{{message}}}",
+          "no_export": "exportiert keine **einzelne Funktion**. Du musst das `module.exports = function () {}`-Muster verwenden.",
+          "arguments": "exportiert eine Funktion, die weniger als **drei** Argumente erwartet. Du musst ein Verzeichnis, einen Filter und einen **Callback** erwarten.",
+          "missing_callback": "hat den Callback nach einem Fehler von `fs.readdir()` nicht aufgerufen",
+          "missing_error": "scheint einen von `fs.readdir()` empfangenen Fehler nicht zurückzugeben.\n  Benutze das folgende idiomatische Node.js-Schema in deinem Callback zu `fs.readdir()`:\n\tif (err)\n\t  return callback(err)",
+          "callback_arguments": "hat nicht zwei Argumente an die Callback-Funktion zurückgegeben (erwartete `null` und ein Array von Dateinamen)",
+          "dont_use_dot": "scheint eine Erweiterung mit '.'-Präfix zu erwarten. Sie sollte das zweite Kommandozeilenargument ohne einen zusätzlichen '.' erwarten",
+          "array_wrong_size": "hat kein Array mit der korrekten Anzahl von Elementen als zweites Argument an den Callback übergeben",
+          "dotExt": "matcht eventuell \"ext\" statt \".ext\"",
+          "array_comparison": "hat nicht die korrekte Dateiliste als das zweite Argument des Callbacks übergeben",
+          "missing_array_argument": "hat kein Array-Objekt als das zweite Argument des Callbacks übergeben",
+          "callback_error": "hat einen Fehler auf ihrem Callback übergeben:\n\t{{{error}}}",
+          "timeout": "hat das Callback-Argument nicht aufgerufen",
+          "unexpected": "hat einen Fehler erzeugt:\n\t{{{error}}}"
+        }
+      },
+      "pass": {
+        "singleFunction": "Zusätzliche Moduldatei exportiert eine einzelne Funktion",
+        "arguments": "Zusätzliche Moduldatei exportiert eine Funktion, die {{{count}}} Argumente erwartet",
+        "error": "Zusätzliche Moduldatei behandelt Fehler korrekt",
+        "callback": "Zusätzliche Moduldatei behandelt das Callback-Argument",
+        "callback_arguments": "Zusätzliche Moduldatei übergab zwei Argumente an die Callback-Funktion",
+        "array_argument": "Zusätzliche Moduldatei übergab ein Array als zweites Argument des Callbacks",
+        "dont_use_dot": "Zusätzliche Moduldatei geht korrekt mit Erweiterungen mit '.'-Präfix um",
+        "array_size": "Zusätzliche Moduldatei übergab die richtige Anzahl an Elementen als zweites Argument des Callbacks",
+        "final": "Zusätzliche Moduldatei übergab die korrekte Liste von Dateien als zweites Argument des Callbacks"
+      }
+    },
+    "TIME SERVER": {
+      "fail": {
+        "connection": "Fehler beim Verbinden mit localhost:{{port}}: {{{message}}}"
+      }
+    },
+    "HTTP FILE SERVER": {
+      "fail": {
+        "no_createReadStream": "Andere Methode aus fs als fs.createReadStream() benutzt: {{{method}}}"
+      }
+    }
+  }
+}
